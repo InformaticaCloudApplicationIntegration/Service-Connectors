@@ -1,0 +1,3687 @@
+{
+    "swagger":"2.0",
+    "info":{
+        "title":"REST API for Oracle Social Cloud",
+        "version":"2019.07.12",
+        "description":"<font color=\"#ff0000\">Last Updated July 2019</font><br><br><font color=\"#ff0000\"><i>The REST APIs for Oracle Social Cloud are under controlled availability.</i></font><br><br><p>You can use Oracle REST APIs to view and manage data stored in Oracle Social Cloud.</p><p>Whether you're experienced with or new to REST, use this guide to find what you need, including:</p><ul><li>A quick start that walks you through a simple request example.</li><li>Use cases that provide real-world solutions with code examples.</li><li>Detailed descriptions for each REST API resource.</li></ul>",
+        "x-summary":"Last Updated July 2019 The REST APIs for Oracle Social Cloud are under controlled availability."
+    },
+    "paths":{
+        "/publish/v1/posts":{
+            "get":{
+                "summary":"Get all posts",
+                "operationId":"get /publish/v1/posts",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/posts"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"limit",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Positive integer value that specifies the maximum number of items returned by the server."
+                    },
+                    {
+                        "name":"states",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Filter by states"
+                    },
+                    {
+                        "name":"resourceIds",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Filter by SRMA resource id(s)"
+                    },
+                    {
+                        "name":"offset",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection."
+                    },
+                    {
+                        "name":"searchKeyword",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Search term for content or title"
+                    },
+                    {
+                        "name":"ids",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Filter by dispatches"
+                    },
+                    {
+                        "name":"bundleId",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"ID of the bundle account for the message (required)"
+                    },
+                    {
+                        "name":"totalResults",
+                        "in":"query",
+                        "type":"boolean",
+                        "description":"Boolean value that specifies whether to calculate the totalResults property. By default, this value is set to false indicating that totalResults is not calculated."
+                    },
+                    {
+                        "name":"statuses",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Filter by statuses"
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=collection"
+                ],
+                "tags":[
+                    "Posts"
+                ],
+                "x-internal-id":"publish-v1-posts-get",
+                "x-filename-id":"publish-v1-posts-get"
+            },
+            "post":{
+                "summary":"Create a post",
+                "operationId":"post /publish/v1/posts",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/post"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"body",
+                        "in":"body",
+                        "schema":{
+                            "type":"object",
+                            "properties":{
+                                "bundleId":{
+                                    "type":"integer",
+                                    "description":"Bundle ID of interest (required); can also be specified as a query parameter."
+                                },
+                                "content":{
+                                    "$ref":"#/definitions/postCreate"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "x-relation":[
+                    "create"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Posts"
+                ],
+                "x-internal-id":"publish-v1-posts-post",
+                "x-filename-id":"publish-v1-posts-post"
+            }
+        },
+        "/publish/v1/posts/{id}":{
+            "get":{
+                "summary":"Get a post",
+                "operationId":"get /publish/v1/posts/{id}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/post"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of the post.",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"bundleId",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Bundle ID of interest (required)"
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Posts"
+                ],
+                "x-internal-id":"publish-v1-posts-{id}-get",
+                "x-filename-id":"publish-v1-posts-id-get"
+            },
+            "put":{
+                "summary":"Update a post",
+                "operationId":"put /publish/v1/posts/{id}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/post"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of the post.",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"body",
+                        "in":"body",
+                        "schema":{
+                            "type":"object",
+                            "properties":{
+                                "bundleId":{
+                                    "type":"integer",
+                                    "description":"Bundle ID of interest (required)"
+                                },
+                                "content":{
+                                    "$ref":"#/definitions/postUpdate"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "x-relation":[
+                    "edit"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Posts"
+                ],
+                "x-internal-id":"publish-v1-posts-{id}-put",
+                "x-filename-id":"publish-v1-posts-id-put"
+            },
+            "delete":{
+                "summary":"Delete a post",
+                "operationId":"delete /publish/v1/posts/{id}",
+                "responses":{
+                    "default":{
+                        "description":""
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of the post.",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"body",
+                        "in":"body",
+                        "schema":{
+                            "type":"object",
+                            "properties":{
+                                "bundleId":{
+                                    "type":"integer",
+                                    "description":"Bundle ID of interest (required)"
+                                },
+                                "removeFromNetwork":{
+                                    "type":"boolean",
+                                    "description":"Whether to remove the post from the network as well if it is published"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "x-relation":[
+                    "delete"
+                ],
+                "tags":[
+                    "Posts"
+                ],
+                "x-internal-id":"publish-v1-posts-{id}-delete",
+                "x-filename-id":"publish-v1-posts-id-delete"
+            }
+        },
+        "/admin/v1/accounts":{
+            "get":{
+                "summary":"Get all accounts",
+                "operationId":"get /admin/v1/accounts",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/accounts"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"limit",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Positive integer value that specifies the maximum number of items returned by the server."
+                    },
+                    {
+                        "name":"offset",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection."
+                    },
+                    {
+                        "name":"totalResults",
+                        "in":"query",
+                        "type":"boolean",
+                        "description":"Boolean value that specifies whether to calculate the totalResults property. By default, this value is set to false indicating that totalResults is not calculated."
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=collection"
+                ],
+                "tags":[
+                    "Accounts"
+                ],
+                "x-internal-id":"admin-v1-accounts-get",
+                "x-filename-id":"admin-v1-accounts-get"
+            }
+        },
+        "/admin/v1/bundles/{bundleId}":{
+            "get":{
+                "summary":"Get an account",
+                "operationId":"get /admin/v1/bundles/{bundleId}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/account"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"bundleId",
+                        "in":"path",
+                        "description":"The bundle ID for this account.",
+                        "type":"integer",
+                        "required":true
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Accounts"
+                ],
+                "x-internal-id":"admin-v1-bundles-{bundleId}-get",
+                "x-filename-id":"admin-v1-bundles-bundleid-get"
+            }
+        },
+        "/listen/v1/activityTimelineReports/{activityTimelineReportId}/reportValues":{
+            "get":{
+                "summary":"Get all activity timeline report values",
+                "operationId":"get /listen/v1/activityTimelineReports/{activityTimelineReportId}/reportValues",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/reportValues"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"activityTimelineReportId",
+                        "in":"path",
+                        "description":"Identifier for the activity timeline report.",
+                        "type":"string",
+                        "required":true
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=collection"
+                ],
+                "tags":[
+                    "Activity Timeline Report Values"
+                ],
+                "x-internal-id":"listen-v1-activityTimelineReports-{activityTimelineReportId}-reportValues-get",
+                "x-filename-id":"listen-v1-activitytimelinereports-activitytimelinereportid-reportvalues-get"
+            }
+        },
+        "/analytics/v1/metricReports":{
+            "post":{
+                "summary":"Create a metric report",
+                "operationId":"post /analytics/v1/metricReports",
+                "responses":{
+                    "default":{
+                        "description":""
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"body",
+                        "in":"body",
+                        "schema":{
+                            "$ref":"#/definitions/requestPayload"
+                        }
+                    }
+                ],
+                "x-relation":[
+                    "create"
+                ],
+                "tags":[
+                    "Metric Reports"
+                ],
+                "x-internal-id":"analytics-v1-metricReports-post",
+                "x-filename-id":"analytics-v1-metricreports-post"
+            }
+        },
+        "/analytics/v1/metricReports/{reportId}":{
+            "get":{
+                "summary":"Get a metric report",
+                "operationId":"get /analytics/v1/metricReports/{reportId}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/metricReport"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"reportId",
+                        "in":"path",
+                        "description":"ID of the report",
+                        "type":"string",
+                        "required":true
+                    },
+                    {
+                        "name":"expand",
+                        "in":"query",
+                        "type":"string",
+                        "description":"If set to reportValues, the report values will be included in the response."
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Metric Reports"
+                ],
+                "x-internal-id":"analytics-v1-metricReports-{reportId}-get",
+                "x-filename-id":"analytics-v1-metricreports-reportid-get"
+            }
+        },
+        "/analytics/v1/metricReports/{reportId}/status":{
+            "get":{
+                "summary":"Get a metric report generation status",
+                "operationId":"get /analytics/v1/metricReports/{reportId}/status",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "title":"Job Status",
+                            "description":"It is used to describe a long running job's status",
+                            "type":"object",
+                            "properties":{
+                                "progress":{
+                                    "type":"string",
+                                    "enum":[
+                                        "succeeded",
+                                        "failed",
+                                        "processing",
+                                        "pending",
+                                        "aborted",
+                                        "paused",
+                                        "blocked"
+                                    ],
+                                    "description":"The current progress of the job. These values indicate that the job has ended: 'succeeded', 'failed', 'aborted'. The value 'blocked' means that the job requires action, such as waiting for a human to approve something. The values that indicate the job is in process are: 'pending', 'processing', 'paused'"
+                                },
+                                "completed":{
+                                    "type":"boolean",
+                                    "description":"Whether the job is completed or not"
+                                },
+                                "requestStatus":{
+                                    "type":"number",
+                                    "description":"HTTP status code of the original request. This is not the polling request's status. Value is available only after the request is completed."
+                                },
+                                "message":{
+                                    "type":"string",
+                                    "description":"Human readable message about the current processing status. This is something can be used to communicate to the end user."
+                                }
+                            },
+                            "required":[
+                                "progress"
+                            ]
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"reportId",
+                        "in":"path",
+                        "description":"ID of the report",
+                        "type":"string",
+                        "required":true
+                    }
+                ],
+                "x-relation":[
+                    "status"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=status"
+                ],
+                "tags":[
+                    "Metric Reports"
+                ],
+                "x-internal-id":"analytics-v1-metricReports-{reportId}-status-get",
+                "x-filename-id":"analytics-v1-metricreports-reportid-status-get"
+            }
+        },
+        "/admin/v1/accounts/{accountId}/bundles":{
+            "get":{
+                "summary":"Get all bundles",
+                "operationId":"get /admin/v1/accounts/{accountId}/bundles",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/bundles"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"accountId",
+                        "in":"path",
+                        "description":"The ID for the account.",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"limit",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Positive integer value that specifies the maximum number of items returned by the server."
+                    },
+                    {
+                        "name":"offset",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection."
+                    },
+                    {
+                        "name":"totalResults",
+                        "in":"query",
+                        "type":"boolean",
+                        "description":"Boolean value that specifies whether to calculate the totalResults property. By default, this value is set to false indicating that totalResults is not calculated."
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=collection"
+                ],
+                "tags":[
+                    "Bundles"
+                ],
+                "x-internal-id":"admin-v1-accounts-{accountId}-bundles-get",
+                "x-filename-id":"admin-v1-accounts-accountid-bundles-get"
+            }
+        },
+        "/admin/v1/bundles/{id}":{
+            "get":{
+                "summary":"Get a bundle",
+                "operationId":"get /admin/v1/bundles/{id}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/bundle"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"The id for this bundle.",
+                        "type":"integer",
+                        "required":true
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Bundles"
+                ],
+                "x-internal-id":"admin-v1-bundles-{id}-get",
+                "x-filename-id":"admin-v1-bundles-id-get"
+            }
+        },
+        "/engage/v1/messages":{
+            "get":{
+                "summary":"Get all messages",
+                "operationId":"get /engage/v1/messages",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/messages"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"labels",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Labels attached to this message"
+                    },
+                    {
+                        "name":"postedAtStart",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Start date stamp used to filter results.  Must be in ISO 8601 date format.  Time defaults to midnight if it is not specified.  May be used alone or in conjunction with postedAtEnd.  Note that when activities are requested the postedAtStart/postedAtEnd query parameters are ignored."
+                    },
+                    {
+                        "name":"messageFilter",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Filter for owned Facebook, Twitter, and Sina Weibo properties. Works only when resource_id is provided and the resource is an authorized resource within SRM. Accepted values: Facebook: posts, direct_messages, Twitter: home, mentions, direct_messages, statuses, Sina Weibo: sw_weibo, LinkedIn: li_update, Instagram: in_media"
+                    },
+                    {
+                        "name":"limit",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Positive integer value that specifies the maximum number of items returned by the server."
+                    },
+                    {
+                        "name":"offset",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection."
+                    },
+                    {
+                        "name":"folder",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Filter messages by folder. Accepts: active, archived, hidden, deleted"
+                    },
+                    {
+                        "name":"assigneeId",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"User ID of assignee to filter by"
+                    },
+                    {
+                        "name":"activityCreatedAtEnd",
+                        "in":"query",
+                        "type":"string",
+                        "description":"End date timestamp used to filter results specifically for activities. Must be in ISO 8601 date format. The date range, i.e., the time between the activity created at start and activity created at end should be no longer than 30 days. This will only be used if activityType is supplied."
+                    },
+                    {
+                        "name":"bundleId",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"ID of the bundle account for the message."
+                    },
+                    {
+                        "name":"resourceId",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"ID of the resource for the message."
+                    },
+                    {
+                        "name":"activityType",
+                        "in":"query",
+                        "type":"string",
+                        "description":"The type of activity to include in the response. Must be either of respond or label.  The activityCreatedAtStart and activityCreatedAtEnd parameters will only be used if this parameter is supplied. Note that when activities are requested the postedAtStart/postedAtEnd query parameters are ignored."
+                    },
+                    {
+                        "name":"totalResults",
+                        "in":"query",
+                        "type":"boolean",
+                        "description":"Boolean value that specifies whether to calculate the totalResults property. By default, this value is set to false indicating that totalResults is not calculated."
+                    },
+                    {
+                        "name":"resourceFilter",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Type of resource to filter messages by. Accepts: facebook, twitter, google_plus, instagram, linkedin, sina_weibo, you_tube, blog_site, news, consumer_review, message_board"
+                    },
+                    {
+                        "name":"userIds",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Comma separated list of userIds to filter the message response.  E.g., 12,3224,1144885,5684857. If userIds is not provided, it will return all messages with wanting activity from any user in the provided bundle"
+                    },
+                    {
+                        "name":"activityCreatedAtStart",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Start date timestamp used to filter results specifically for activities. Must be in ISO 8601 date format.  This will only be used if activityType is supplied.  Note that when activities are requested the postedAtStart/postedAtEnd query parameters are ignored."
+                    },
+                    {
+                        "name":"postedAtEnd",
+                        "in":"query",
+                        "type":"string",
+                        "description":"End date stamp used to filter results.  Must be in ISO 8601 date format.  Time defaults to midnight if it is not specified.  May be used alone or in conjunction with postedAtStart.  Note that when activities are requested the postedAtStart/postedAtEnd query parameters are ignored."
+                    },
+                    {
+                        "name":"expand",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Comma-delimited string of child resource names that you want to expand so that the contents return with the parent in the same GET request."
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=collection"
+                ],
+                "tags":[
+                    "Messages"
+                ],
+                "x-internal-id":"engage-v1-messages-get",
+                "x-filename-id":"engage-v1-messages-get"
+            }
+        },
+        "/engage/v1/messages/{id}":{
+            "get":{
+                "summary":"Get a message",
+                "operationId":"get /engage/v1/messages/{id}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/message"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of the message.",
+                        "type":"string",
+                        "required":true
+                    },
+                    {
+                        "name":"bundleId",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"ID of the bundle account for the message (required)"
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Messages"
+                ],
+                "x-internal-id":"engage-v1-messages-{id}-get",
+                "x-filename-id":"engage-v1-messages-id-get"
+            },
+            "put":{
+                "summary":"Update a message",
+                "operationId":"put /engage/v1/messages/{id}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/message"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of the message.",
+                        "type":"string",
+                        "required":true
+                    },
+                    {
+                        "name":"bundleId",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"ID of the bundle account for the message (required)"
+                    },
+                    {
+                        "name":"status",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Update status of a message to active, archived, or hidden. Note that hidden is only applicable to Facebook posts"
+                    },
+                    {
+                        "name":"liked",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Like a message (boolean). Only accepted for Facebook and if the resource is authorized in SRM"
+                    },
+                    {
+                        "name":"labels",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Comma-separated string of labels to update associated labels for message"
+                    },
+                    {
+                        "name":"body",
+                        "in":"body",
+                        "schema":{
+                            "type":"object",
+                            "properties":{
+                                "bundleId":{
+                                    "type":"integer",
+                                    "description":"ID of the bundle account for the message (required)"
+                                },
+                                "status":{
+                                    "type":"string",
+                                    "description":"Update status of a message to active, archived, or hidden. Note that hidden is only applicable to Facebook posts"
+                                },
+                                "liked":{
+                                    "type":"string",
+                                    "description":"Like a message (boolean). Only accepted for Facebook and if the resource is authorized in SRM"
+                                },
+                                "labels":{
+                                    "type":"string",
+                                    "description":"Comma-separated string of labels to update associated labels for message"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "x-relation":[
+                    "edit"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Messages"
+                ],
+                "x-internal-id":"engage-v1-messages-{id}-put",
+                "x-filename-id":"engage-v1-messages-id-put"
+            },
+            "delete":{
+                "summary":"Delete a message",
+                "operationId":"delete /engage/v1/messages/{id}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/message"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of the message.",
+                        "type":"string",
+                        "required":true
+                    }
+                ],
+                "x-relation":[
+                    "delete"
+                ],
+                "tags":[
+                    "Messages"
+                ],
+                "x-internal-id":"engage-v1-messages-{id}-delete",
+                "x-filename-id":"engage-v1-messages-id-delete"
+            }
+        },
+        "/listen/v1/activityTimelineReports":{
+            "post":{
+                "summary":"Create an activity timeline report",
+                "operationId":"post /listen/v1/activityTimelineReports",
+                "responses":{
+                    "default":{
+                        "description":""
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"body",
+                        "in":"body",
+                        "schema":{
+                            "$ref":"#/definitions/reportParameters"
+                        }
+                    }
+                ],
+                "x-relation":[
+                    "create"
+                ],
+                "tags":[
+                    "Activity Timeline Reports"
+                ],
+                "x-internal-id":"listen-v1-activityTimelineReports-post",
+                "x-filename-id":"listen-v1-activitytimelinereports-post"
+            }
+        },
+        "/listen/v1/activityTimelineReports/{id}":{
+            "get":{
+                "summary":"Get an activity timeline report",
+                "operationId":"get /listen/v1/activityTimelineReports/{id}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/activityTimelineReport"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of the report",
+                        "type":"string",
+                        "required":true
+                    },
+                    {
+                        "name":"expand",
+                        "in":"query",
+                        "type":"string",
+                        "description":"If set to reportValues, the report values will be included in the response."
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Activity Timeline Reports"
+                ],
+                "x-internal-id":"listen-v1-activityTimelineReports-{id}-get",
+                "x-filename-id":"listen-v1-activitytimelinereports-id-get"
+            }
+        },
+        "/listen/v1/activityTimelineReports/{id}/status":{
+            "get":{
+                "summary":"Get an activity timeline report generation status",
+                "operationId":"get /listen/v1/activityTimelineReports/{id}/status",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "title":"Job Status",
+                            "description":"It is used to describe a long running job's status",
+                            "type":"object",
+                            "properties":{
+                                "message":{
+                                    "type":"string",
+                                    "description":"Human readable message about the current processing status. This is something can be used to communicate to the end user."
+                                },
+                                "progress":{
+                                    "type":"string",
+                                    "enum":[
+                                        "succeeded",
+                                        "failed",
+                                        "processing",
+                                        "pending",
+                                        "aborted",
+                                        "paused",
+                                        "blocked"
+                                    ],
+                                    "description":"The current progress of the job. These values indicate that the job has ended: 'succeeded', 'failed', 'aborted'. The value 'blocked' means that the job requires action, such as waiting for a human to approve something. The values that indicate the job is in process are: 'pending', 'processing', 'paused'"
+                                },
+                                "completedPercentage":{
+                                    "type":"number",
+                                    "description":"A number between 0 and 100, capturing how much of the process has been completed."
+                                },
+                                "error":{
+                                    "$ref":"#/definitions/exceptionDetailType",
+                                    "description":"contains error detail of the original request. This is only available when the original request is processed and failed."
+                                },
+                                "completed":{
+                                    "type":"boolean",
+                                    "description":"Whether the job is completed or not"
+                                },
+                                "requestStatus":{
+                                    "type":"number",
+                                    "description":"HTTP status code of the original request. This is not the polling request's status. Value is available only after the request is completed."
+                                },
+                                "startTime":{
+                                    "type":"string",
+                                    "format":"date-time",
+                                    "description":"Time when the job started"
+                                },
+                                "endTime":{
+                                    "type":"string",
+                                    "format":"date-time",
+                                    "description":"Time when the job finished"
+                                },
+                                "intervalToPoll":{
+                                    "type":"number",
+                                    "description":"A number in milliseconds, as a hint to the client on how long the client should wait before checking the status again"
+                                }
+                            },
+                            "required":[
+                                "progress"
+                            ]
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of the report",
+                        "type":"string",
+                        "required":true
+                    }
+                ],
+                "x-relation":[
+                    "status"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=status"
+                ],
+                "tags":[
+                    "Activity Timeline Reports"
+                ],
+                "x-internal-id":"listen-v1-activityTimelineReports-{id}-status-get",
+                "x-filename-id":"listen-v1-activitytimelinereports-id-status-get"
+            }
+        },
+        "/engage/v1/messages/{messageId}/activities":{
+            "get":{
+                "summary":"Get all activities",
+                "operationId":"get /engage/v1/messages/{messageId}/activities",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/activities"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"messageId",
+                        "in":"path",
+                        "description":"The ID for the message of this reply.",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"userIds",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Comma separated list of userIds to filter the message response.  E.g., 12,3224,1144885,37456384. If userIds is not provided, it will return all messages with wanting activity from any user in the provided bundle"
+                    },
+                    {
+                        "name":"createdAtStart",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Start date timestamp used to filter results. Must be in ISO 8601 date format."
+                    },
+                    {
+                        "name":"createdAtEnd",
+                        "in":"query",
+                        "type":"string",
+                        "description":"End date timestamp used to filter results. Must be in ISO 8601 date format.  The date range, i.e., the time between the activity created at start and activity created at end should be no longer than 30 days."
+                    },
+                    {
+                        "name":"type",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Specify to report messages on which user action. support 'response' and 'label' activity for now"
+                    },
+                    {
+                        "name":"labels",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Filter activities only if any of the activity's associated message/reply has one of the labels"
+                    },
+                    {
+                        "name":"limit",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Positive integer value that specifies the maximum number of items returned by the server."
+                    },
+                    {
+                        "name":"offset",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection."
+                    },
+                    {
+                        "name":"totalResults",
+                        "in":"query",
+                        "type":"boolean",
+                        "description":"Boolean value that specifies whether to calculate the totalResults property. By default, this value is set to false indicating that totalResults is not calculated."
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=collection"
+                ],
+                "tags":[
+                    "Activities"
+                ],
+                "x-internal-id":"engage-v1-messages-{messageId}-activities-get",
+                "x-filename-id":"engage-v1-messages-messageid-activities-get"
+            }
+        },
+        "/engage/v1/messages/{messageId}/activities/{id}":{
+            "get":{
+                "summary":"Get an activity",
+                "operationId":"get /engage/v1/messages/{messageId}/activities/{id}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/activity"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"messageId",
+                        "in":"path",
+                        "description":"The ID for the message of this reply.",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of the activity",
+                        "type":"integer",
+                        "required":true
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Activities"
+                ],
+                "x-internal-id":"engage-v1-messages-{messageId}-activities-{id}-get",
+                "x-filename-id":"engage-v1-messages-messageid-activities-id-get"
+            }
+        },
+        "/analytics/v1/metrics":{
+            "get":{
+                "summary":"Get all metrics",
+                "operationId":"get /analytics/v1/metrics",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/metrics"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"limit",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Positive integer value that specifies the maximum number of items returned by the server."
+                    },
+                    {
+                        "name":"offset",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection."
+                    },
+                    {
+                        "name":"totalResults",
+                        "in":"query",
+                        "type":"boolean",
+                        "description":"Boolean value that specifies whether to calculate the totalResults property. By default, this value is set to false indicating that totalResults is not calculated."
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=collection"
+                ],
+                "tags":[
+                    "Metrics"
+                ],
+                "x-internal-id":"analytics-v1-metrics-get",
+                "x-filename-id":"analytics-v1-metrics-get"
+            }
+        },
+        "/admin/v1/accounts/{accountId}/users":{
+            "get":{
+                "summary":"Get all users",
+                "operationId":"get /admin/v1/accounts/{accountId}/users",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/users"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"accountId",
+                        "in":"path",
+                        "description":"The ID for the account.",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"limit",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Positive integer value that specifies the maximum number of items returned by the server."
+                    },
+                    {
+                        "name":"offset",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection."
+                    },
+                    {
+                        "name":"totalResults",
+                        "in":"query",
+                        "type":"boolean",
+                        "description":"Boolean value that specifies whether to calculate the totalResults property. By default, this value is set to false indicating that totalResults is not calculated."
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=collection"
+                ],
+                "tags":[
+                    "Users"
+                ],
+                "x-internal-id":"admin-v1-accounts-{accountId}-users-get",
+                "x-filename-id":"admin-v1-accounts-accountid-users-get"
+            }
+        },
+        "/admin/v1/accounts/{accountId}/users/{id}":{
+            "get":{
+                "summary":"Get a user",
+                "operationId":"get /admin/v1/accounts/{accountId}/users/{id}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/user"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"accountId",
+                        "in":"path",
+                        "description":"The ID for the account.",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"The ID for the user.",
+                        "type":"integer",
+                        "required":true
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Users"
+                ],
+                "x-internal-id":"admin-v1-accounts-{accountId}-users-{id}-get",
+                "x-filename-id":"admin-v1-accounts-accountid-users-id-get"
+            }
+        },
+        "/analytics/v1/campaigns":{
+            "get":{
+                "summary":"Get all campaigns",
+                "operationId":"get /analytics/v1/campaigns",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/campaigns"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"bundleId",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"The bundle id of this campaign."
+                    },
+                    {
+                        "name":"limit",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Positive integer value that specifies the maximum number of items returned by the server."
+                    },
+                    {
+                        "name":"offset",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection."
+                    },
+                    {
+                        "name":"totalResults",
+                        "in":"query",
+                        "type":"boolean",
+                        "description":"Boolean value that specifies whether to calculate the totalResults property. By default, this value is set to false indicating that totalResults is not calculated."
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=collection"
+                ],
+                "tags":[
+                    "Campaigns"
+                ],
+                "x-internal-id":"analytics-v1-campaigns-get",
+                "x-filename-id":"analytics-v1-campaigns-get"
+            }
+        },
+        "/listen/v1/sentimentReports":{
+            "post":{
+                "summary":"Create a sentiment report",
+                "operationId":"post /listen/v1/sentimentReports",
+                "responses":{
+                    "default":{
+                        "description":""
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"body",
+                        "in":"body",
+                        "schema":{
+                            "$ref":"#/definitions/sentimentReportParameters"
+                        }
+                    }
+                ],
+                "x-relation":[
+                    "create"
+                ],
+                "tags":[
+                    "Sentiment Reports"
+                ],
+                "x-internal-id":"listen-v1-sentimentReports-post",
+                "x-filename-id":"listen-v1-sentimentreports-post"
+            }
+        },
+        "/listen/v1/sentimentReports/{id}":{
+            "get":{
+                "summary":"Get a sentiment report",
+                "operationId":"get /listen/v1/sentimentReports/{id}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/sentimentReport"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of the report",
+                        "type":"string",
+                        "required":true
+                    },
+                    {
+                        "name":"expand",
+                        "in":"query",
+                        "type":"string",
+                        "description":"If set to reportValues, the report values will be included in the response."
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Sentiment Reports"
+                ],
+                "x-internal-id":"listen-v1-sentimentReports-{id}-get",
+                "x-filename-id":"listen-v1-sentimentreports-id-get"
+            }
+        },
+        "/listen/v1/sentimentReports/{id}/status":{
+            "get":{
+                "summary":"Get a sentiment report generation status",
+                "operationId":"get /listen/v1/sentimentReports/{id}/status",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "title":"Job Status",
+                            "description":"It is used to describe a long running job's status",
+                            "type":"object",
+                            "properties":{
+                                "message":{
+                                    "type":"string",
+                                    "description":"Human readable message about the current processing status. This is something can be used to communicate to the end user."
+                                },
+                                "progress":{
+                                    "type":"string",
+                                    "enum":[
+                                        "succeeded",
+                                        "failed",
+                                        "processing",
+                                        "pending",
+                                        "aborted",
+                                        "paused",
+                                        "blocked"
+                                    ],
+                                    "description":"The current progress of the job. These values indicate that the job has ended: 'succeeded', 'failed', 'aborted'. The value 'blocked' means that the job requires action, such as waiting for a human to approve something. The values that indicate the job is in process are: 'pending', 'processing', 'paused'"
+                                },
+                                "completedPercentage":{
+                                    "type":"number",
+                                    "description":"A number between 0 and 100, capturing how much of the process has been completed."
+                                },
+                                "error":{
+                                    "$ref":"#/definitions/exceptionDetailType",
+                                    "description":"contains error detail of the original request. This is only available when the original request is processed and failed."
+                                },
+                                "completed":{
+                                    "type":"boolean",
+                                    "description":"Whether the job is completed or not"
+                                },
+                                "requestStatus":{
+                                    "type":"number",
+                                    "description":"HTTP status code of the original request. This is not the polling request's status. Value is available only after the request is completed."
+                                },
+                                "startTime":{
+                                    "type":"string",
+                                    "format":"date-time",
+                                    "description":"Time when the job started"
+                                },
+                                "endTime":{
+                                    "type":"string",
+                                    "format":"date-time",
+                                    "description":"Time when the job finished"
+                                },
+                                "intervalToPoll":{
+                                    "type":"number",
+                                    "description":"A number in milliseconds, as a hint to the client on how long the client should wait before checking the status again"
+                                }
+                            },
+                            "required":[
+                                "progress"
+                            ]
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of the report",
+                        "type":"string",
+                        "required":true
+                    }
+                ],
+                "x-relation":[
+                    "status"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=status"
+                ],
+                "tags":[
+                    "Sentiment Reports"
+                ],
+                "x-internal-id":"listen-v1-sentimentReports-{id}-status-get",
+                "x-filename-id":"listen-v1-sentimentreports-id-status-get"
+            }
+        },
+        "/admin/v1/accounts/{accountId}/resources":{
+            "get":{
+                "summary":"Get all resources",
+                "operationId":"get /admin/v1/accounts/{accountId}/resources",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/resources"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"accountId",
+                        "in":"path",
+                        "description":"The ID for the account.",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"limit",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Positive integer value that specifies the maximum number of items returned by the server."
+                    },
+                    {
+                        "name":"offset",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection."
+                    },
+                    {
+                        "name":"totalResults",
+                        "in":"query",
+                        "type":"boolean",
+                        "description":"Boolean value that specifies whether to calculate the totalResults property. By default, this value is set to false indicating that totalResults is not calculated."
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=collection"
+                ],
+                "tags":[
+                    "Resources"
+                ],
+                "x-internal-id":"admin-v1-accounts-{accountId}-resources-get",
+                "x-filename-id":"admin-v1-accounts-accountid-resources-get"
+            }
+        },
+        "/admin/v1/resources/{id}":{
+            "get":{
+                "summary":"Get a resource",
+                "operationId":"get /admin/v1/resources/{id}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/resource"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"The id for this resource.",
+                        "type":"integer",
+                        "required":true
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Resources"
+                ],
+                "x-internal-id":"admin-v1-resources-{id}-get",
+                "x-filename-id":"admin-v1-resources-id-get"
+            }
+        },
+        "/analytics/v1/metricReports/{reportId}/reportValues":{
+            "get":{
+                "summary":"Get metric report values for a report",
+                "operationId":"get /analytics/v1/metricReports/{reportId}/reportValues",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/metricReportValues"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"reportId",
+                        "in":"path",
+                        "description":"Identifier for the metric report.",
+                        "type":"string",
+                        "required":true
+                    },
+                    {
+                        "name":"limit",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Positive integer value that specifies the maximum number of items returned by the server."
+                    },
+                    {
+                        "name":"offset",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection."
+                    },
+                    {
+                        "name":"totalResults",
+                        "in":"query",
+                        "type":"boolean",
+                        "description":"Boolean value that specifies whether to calculate the totalResults property. By default, this value is set to false indicating that totalResults is not calculated."
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=collection"
+                ],
+                "tags":[
+                    "Metric Report Values"
+                ],
+                "x-internal-id":"analytics-v1-metricReports-{reportId}-reportValues-get",
+                "x-filename-id":"analytics-v1-metricreports-reportid-reportvalues-get"
+            }
+        },
+        "/listen/v1/sentimentReports/{sentimentReportId}/reportValues":{
+            "get":{
+                "summary":"Get all sentiment report values",
+                "operationId":"get /listen/v1/sentimentReports/{sentimentReportId}/reportValues",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/sentimentReportValues"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"sentimentReportId",
+                        "in":"path",
+                        "description":"Identifier for the sentiment report.",
+                        "type":"string",
+                        "required":true
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=collection"
+                ],
+                "tags":[
+                    "Sentiment Report Values"
+                ],
+                "x-internal-id":"listen-v1-sentimentReports-{sentimentReportId}-reportValues-get",
+                "x-filename-id":"listen-v1-sentimentreports-sentimentreportid-reportvalues-get"
+            }
+        },
+        "/engage/v1/messages/{messageId}/replies":{
+            "get":{
+                "summary":"Get all replies",
+                "operationId":"get /engage/v1/messages/{messageId}/replies",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/replies"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"messageId",
+                        "in":"path",
+                        "description":"The ID for the message of this reply.",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"bundleId",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"ID of the bundle account for the message (required)"
+                    },
+                    {
+                        "name":"limit",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Positive integer value that specifies the maximum number of items returned by the server."
+                    },
+                    {
+                        "name":"offset",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection."
+                    },
+                    {
+                        "name":"totalResults",
+                        "in":"query",
+                        "type":"boolean",
+                        "description":"Boolean value that specifies whether to calculate the totalResults property. By default, this value is set to false indicating that totalResults is not calculated."
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=collection"
+                ],
+                "tags":[
+                    "Replies"
+                ],
+                "x-internal-id":"engage-v1-messages-{messageId}-replies-get",
+                "x-filename-id":"engage-v1-messages-messageid-replies-get"
+            },
+            "post":{
+                "summary":"Create a reply",
+                "operationId":"post /engage/v1/messages/{messageId}/replies",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/reply"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"messageId",
+                        "in":"path",
+                        "description":"The ID for the message of this reply.",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"body",
+                        "in":"body",
+                        "schema":{
+                            "type":"object",
+                            "properties":{
+                                "bundleId":{
+                                    "type":"integer",
+                                    "description":"Bundle ID of interest (required); can also be specified as a query parameter."
+                                },
+                                "body":{
+                                    "type":"string",
+                                    "description":"The reply body."
+                                }
+                            }
+                        }
+                    }
+                ],
+                "x-relation":[
+                    "create"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Replies"
+                ],
+                "x-internal-id":"engage-v1-messages-{messageId}-replies-post",
+                "x-filename-id":"engage-v1-messages-messageid-replies-post"
+            }
+        },
+        "/engage/v1/messages/{messageId}/replies/{id}":{
+            "get":{
+                "summary":"Get a reply",
+                "operationId":"get /engage/v1/messages/{messageId}/replies/{id}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/reply"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"messageId",
+                        "in":"path",
+                        "description":"The ID for the message of this reply.",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of the reply",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"bundleId",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"ID of the bundle account for the message (required)"
+                    }
+                ],
+                "x-relation":[
+                    "self"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Replies"
+                ],
+                "x-internal-id":"engage-v1-messages-{messageId}-replies-{id}-get",
+                "x-filename-id":"engage-v1-messages-messageid-replies-id-get"
+            },
+            "put":{
+                "summary":"Update a reply",
+                "operationId":"put /engage/v1/messages/{messageId}/replies/{id}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/reply"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"messageId",
+                        "in":"path",
+                        "description":"The ID for the message of this reply.",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of the reply",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"bundleId",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"ID of the bundle account for the message (required)"
+                    },
+                    {
+                        "name":"liked",
+                        "in":"query",
+                        "type":"boolean",
+                        "description":"Like a message on behalf of owning channel (boolean)"
+                    },
+                    {
+                        "name":"labels",
+                        "in":"query",
+                        "type":"string",
+                        "description":"Comma-separated string of labels to update associated labels for message"
+                    },
+                    {
+                        "name":"body",
+                        "in":"body",
+                        "schema":{
+                            "type":"object",
+                            "properties":{
+                                "bundleId":{
+                                    "type":"integer",
+                                    "description":"ID of the bundle account for the message (required)"
+                                },
+                                "liked":{
+                                    "type":"boolean",
+                                    "description":"Like a message on behalf of owning channel (boolean)"
+                                },
+                                "labels":{
+                                    "type":"string",
+                                    "description":"Comma-separated string of labels to update associated labels for message"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "x-relation":[
+                    "edit"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces":[
+                    "application/vnd.oracle.resource+json;type=singular"
+                ],
+                "tags":[
+                    "Replies"
+                ],
+                "x-internal-id":"engage-v1-messages-{messageId}-replies-{id}-put",
+                "x-filename-id":"engage-v1-messages-messageid-replies-id-put"
+            },
+            "delete":{
+                "summary":"Delete a reply",
+                "operationId":"delete /engage/v1/messages/{messageId}/replies/{id}",
+                "responses":{
+                    "default":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/reply"
+                        }
+                    }
+                },
+                "parameters":[
+                    {
+                        "name":"messageId",
+                        "in":"path",
+                        "description":"The ID for the message of this reply.",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of the reply",
+                        "type":"integer",
+                        "required":true
+                    },
+                    {
+                        "name":"bundleId",
+                        "in":"query",
+                        "type":"integer",
+                        "description":"ID of the bundle account for the message (required)"
+                    },
+                    {
+                        "name":"body",
+                        "in":"body",
+                        "schema":{
+                            "type":"object",
+                            "properties":{
+                                "bundleId":{
+                                    "type":"integer",
+                                    "description":"ID of the bundle account for the message (required)"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "x-relation":[
+                    "delete"
+                ],
+                "consumes":[
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags":[
+                    "Replies"
+                ],
+                "x-internal-id":"engage-v1-messages-{messageId}-replies-{id}-delete",
+                "x-filename-id":"engage-v1-messages-messageid-replies-id-delete"
+            }
+        }
+    },
+    "definitions":{
+        "limitProp":{
+            "type":"integer",
+            "description":"Actual paging size used by the server."
+        },
+        "totalResultsProp":{
+            "type":"integer",
+            "description":"Total count of the resource instances, including both the instances in the current range and the instances on the server that satisfy the request."
+        },
+        "postUpdate":{
+            "properties":{
+                "reportName":{
+                    "description":"The report name of the post.",
+                    "type":"string"
+                },
+                "message":{
+                    "description":"The text to be published",
+                    "type":"string"
+                },
+                "time":{
+                    "description":"If scheduling, the time when the post should be published",
+                    "type":"string"
+                },
+                "timeZone":{
+                    "description":"If scheduling, the time zone of the scheduled time. The value should be a time zone name in tz database such as 'Africa/Abidjan' or 'America/Detroit'",
+                    "type":"string"
+                },
+                "keepState":{
+                    "description":"Whether keep the current state of the post. If the value is false and the scheduled time and time_zone are provided, a draft post will be scheduled.",
+                    "type":"string"
+                }
+            }
+        },
+        "resource":{
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "id":{
+                    "description":"The id for this resource.",
+                    "type":"integer"
+                },
+                "name":{
+                    "description":"The name of this resource.",
+                    "type":"string"
+                },
+                "resourceType":{
+                    "description":"The type of resource.",
+                    "type":"string"
+                },
+                "accountId":{
+                    "$ref":"#/definitions/accountId"
+                }
+            }
+        },
+        "collectionBaseResource":{
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "title":"Base Collection Resource",
+            "description":"Oracle base collection resource schema definition. ",
+            "properties":{
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "type":"object"
+                    }
+                }
+            }
+        },
+        "qQueryParam":{
+            "type":"string",
+            "description":"Filter (a ?????????where?????????clause) to restrict the items returned in the collection. By default, no filtering is applied."
+        },
+        "accountId":{
+            "type":"integer",
+            "description":"The ID for the account."
+        },
+        "expandQueryParam":{
+            "description":"Comma-delimited string of child resource names that you want to expand so that the contents return with the parent in the same GET request.",
+            "type":"string"
+        },
+        "fieldsQueryParam":{
+            "description":"Comma-delimited string of field names that you wanted returned in a GET request.",
+            "type":"string"
+        },
+        "countProp":{
+            "type":"integer",
+            "description":"Number of resource instances returned in the current range."
+        },
+        "resourceIds":{
+            "type":"object",
+            "properties":{
+                "id":{
+                    "description":"The ID for this resource",
+                    "type":"integer"
+                }
+            },
+            "description":"A resource id value"
+        },
+        "collectionPagedResource":{
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionBaseResource"
+                }
+            ],
+            "title":"Collection Paging Resource",
+            "description":"Oracle base collection resource schema definition. ",
+            "properties":{
+                "hasMore":{
+                    "$ref":"#/definitions/hasMoreProp"
+                },
+                "totalResults":{
+                    "$ref":"#/definitions/totalResultsProp"
+                },
+                "limit":{
+                    "$ref":"#/definitions/limitProp"
+                },
+                "count":{
+                    "$ref":"#/definitions/countProp"
+                },
+                "offset":{
+                    "$ref":"#/definitions/offsetProp"
+                }
+            }
+        },
+        "totalResultsQueryParam":{
+            "description":"Boolean value that specifies whether to calculate the totalResults property. By default, this value is set to false indicating that totalResults is not calculated.",
+            "type":"boolean",
+            "default":false
+        },
+        "hasMoreProp":{
+            "type":"boolean",
+            "description":"Boolean value that is set to true if more resources are available on the server than the subset returned in current page."
+        },
+        "orderByQueryParam":{
+            "description":"Comma-separated string of field names, each optionally followed by asc or desc, that specifies the order of items returned in the response payload.",
+            "type":"string"
+        },
+        "fromIdQueryParam":{
+            "type":"integer",
+            "description":"Integer value that instructs the server to return items with IDs that are greater than the specified value."
+        },
+        "post":{
+            "title":"Post",
+            "description":"Posts are made to your fans and followers on social. Think of posts as an outbound effort by you to interact with users on social. If you are interested in creating conversation on Facebook, Twitter, and other destinations, use the posts methods.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "resource":{
+                    "$ref":"#/definitions/resource",
+                    "description":"Info about the social network resource."
+                },
+                "body":{
+                    "description":"The body of the post.",
+                    "type":"string"
+                },
+                "publishAt":{
+                    "format":"date-time",
+                    "description":"Date and time the posted was posted.",
+                    "type":"string"
+                },
+                "createdAt":{
+                    "format":"date-time",
+                    "description":"Date and time the post was created.",
+                    "type":"string"
+                },
+                "id":{
+                    "description":"ID of the post.",
+                    "type":"integer"
+                },
+                "reportName":{
+                    "description":"The report name of the post.",
+                    "type":"string"
+                },
+                "status":{
+                    "description":"The status of the post.",
+                    "type":"string"
+                },
+                "authoredBy":{
+                    "$ref":"#/definitions/postUser",
+                    "description":"Information about the user that wrote this post."
+                },
+                "postedAt":{
+                    "format":"date-time",
+                    "description":"Date and time the post was published.",
+                    "type":"string"
+                },
+                "link":{
+                    "description":"Link to the post.",
+                    "type":"string"
+                },
+                "attachments":{
+                    "description":"Array of pictures, videos, or other items attached to this reply.",
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/attachment"
+                    }
+                }
+            }
+        },
+        "instanceLink":{
+            "type":"object",
+            "description":"Metadata describing link description objects that MAY appear in the JSON instance representation.",
+            "properties":{
+                "href":{
+                    "description":"URI [RFC3986] or URI Template [RFC6570]. If the value is set to URI Template, then the \"templated\" property must be set to true.",
+                    "type":"string"
+                },
+                "rel":{
+                    "description":"Name of the link relation that, in addition to the type property, can be used to retrieve link details. For example, href or profile.",
+                    "type":"string"
+                },
+                "templated":{
+                    "description":"Boolean flag that specifies that \"href\" property is a URI or URI Template. If the property is a URI template, set this value to true. By default, this value is false.",
+                    "type":"boolean"
+                },
+                "mediaType":{
+                    "description":"Media type, as defined by RFC 2046, describing the link target.",
+                    "type":"string"
+                },
+                "method":{
+                    "description":"HTTP method for requesting the target of the link.",
+                    "type":"string"
+                },
+                "profile":{
+                    "description":"Link to the metadata of the resource, such as JSON-schema, that describes the resource expected when dereferencing the target resource..",
+                    "type":"string"
+                }
+            },
+            "required":[
+                "href",
+                "rel"
+            ]
+        },
+        "postCreate":{
+            "properties":{
+                "message":{
+                    "description":"The text to be published",
+                    "type":"string"
+                },
+                "tags":{
+                    "description":"An array of tag hashes",
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/tag"
+                    }
+                },
+                "timeZone":{
+                    "description":"If scheduling, the time zone of the scheduled time. The value should be a time zone name in tz database such as 'Africa/Abidjan' or 'America/Detroit'",
+                    "type":"string"
+                },
+                "reportName":{
+                    "description":"The report name of the post.",
+                    "type":"string"
+                },
+                "action":{
+                    "description":"A hash that indicates what action is to be taken. If not provided, the defaults to publishing immediately",
+                    "type":"string"
+                },
+                "time":{
+                    "description":"If scheduling, the time when the post should be published",
+                    "type":"string"
+                },
+                "type":{
+                    "description":"The type of the post, either 'text' for pure text post or 'photo' for post with media",
+                    "type":"string"
+                },
+                "attachments":{
+                    "description":"An array of attachment hashes. Behavior depends on type and the included attachments. Only the first attachment is taken by the product for API requests",
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/attachment"
+                    }
+                },
+                "resources":{
+                    "description":"A resource Id to publish this post against (required)",
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/resourceIds"
+                    }
+                },
+                "actionType":{
+                    "description":"Identifies the type of action. One of publish, draft, schedule. Defaults to publish",
+                    "enum":[
+                        "publish",
+                        "draft",
+                        "schedule"
+                    ],
+                    "type":"string"
+                }
+            },
+            "description":"A hash that contains information identifying what to publish"
+        },
+        "attachment":{
+            "type":"object",
+            "properties":{
+                "type":{
+                    "description":"Type of attachment. Can be: photo or video.",
+                    "type":"string"
+                },
+                "url":{
+                    "description":"Link to the attachment.",
+                    "type":"string"
+                },
+                "thumbnailUrl":{
+                    "description":"Link to the thumbnail version of the attachment.",
+                    "type":"string"
+                },
+                "title":{
+                    "description":"Title of the attachment.",
+                    "type":"string"
+                },
+                "description":{
+                    "description":"Description of the attachment.",
+                    "type":"string"
+                }
+            }
+        },
+        "queryParams":{
+            "description":"Metadata describing common schema properties of an API (for example, Query Parameters). Each property can be individually referred to by its 'id' property, using JSON References (http://tools.ietf.org/html/draft-pbryan-zyp-json-ref-00).",
+            "type":"object",
+            "properties":{
+                "since":{
+                    "$ref":"#/definitions/sinceQueryParam"
+                },
+                "totalResults":{
+                    "$ref":"#/definitions/totalResultsQueryParam"
+                },
+                "offset":{
+                    "$ref":"#/definitions/offsetQueryParam"
+                },
+                "toId":{
+                    "$ref":"#/definitions/toIdQueryParam"
+                },
+                "q":{
+                    "$ref":"#/definitions/qQueryParam"
+                },
+                "expand":{
+                    "$ref":"#/definitions/expandQueryParam"
+                },
+                "limit":{
+                    "$ref":"#/definitions/limitQueryParam"
+                },
+                "orderBy":{
+                    "$ref":"#/definitions/orderByQueryParam"
+                },
+                "until":{
+                    "$ref":"#/definitions/untilQueryParam"
+                },
+                "links":{
+                    "$ref":"#/definitions/linksQueryParam"
+                },
+                "fields":{
+                    "$ref":"#/definitions/fieldsQueryParam"
+                },
+                "fromId":{
+                    "$ref":"#/definitions/fromIdQueryParam"
+                }
+            }
+        },
+        "tag":{
+            "type":"string",
+            "description":"A simple string representing a tag."
+        },
+        "posts":{
+            "title":"Posts",
+            "description":"Posts are made to your fans and followers on social. Think of posts as an outbound effort by you to interact with users on social. If you are interested in creating conversation on Facebook, Twitter, and other destinations, use the posts methods.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionPagedResource"
+                }
+            ],
+            "properties":{
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/post"
+                    }
+                }
+            }
+        },
+        "singularResource":{
+            "title":"Singular Resource",
+            "description":"Oracle base singular resource schema definition.",
+            "type":"object",
+            "properties":{
+                "links":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/instanceLink"
+                    }
+                }
+            }
+        },
+        "offsetProp":{
+            "type":"integer",
+            "description":"Offset value used in the current page. "
+        },
+        "toIdQueryParam":{
+            "type":"integer",
+            "description":"Integer value that instructs the server to return items with IDs that are less than the specified value."
+        },
+        "untilQueryParam":{
+            "type":"string",
+            "format":"date-time",
+            "description":"Timestamp value that specifies that only items that were created or updated before the specified time be returned."
+        },
+        "postUser":{
+            "title":"User",
+            "type":"object",
+            "properties":{
+                "id":{
+                    "description":"SRM User ID.",
+                    "type":"integer"
+                },
+                "name":{
+                    "description":"Fullname of the SRM user.",
+                    "type":"string"
+                }
+            }
+        },
+        "sinceQueryParam":{
+            "type":"string",
+            "format":"date-time",
+            "description":"Timestamp value that specifies that only items that were created or updated after the specified time be returned."
+        },
+        "linksQueryParam":{
+            "type":"string",
+            "description":"Comma-separated list of relation types that are returned in a GET request. By default, all links are returned."
+        },
+        "limitQueryParam":{
+            "type":"integer",
+            "description":"Positive integer value that specifies the maximum number of items returned by the server."
+        },
+        "offsetQueryParam":{
+            "type":"integer",
+            "description":"Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection.",
+            "minimum":0,
+            "default":0
+        },
+        "accounts":{
+            "title":"Accounts",
+            "description":"Accounts are your top-level organization in SRM. You may or may not have more than one account depending on your needs.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionPagedResource"
+                }
+            ],
+            "properties":{
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/account"
+                    }
+                }
+            }
+        },
+        "bundleId":{
+            "type":"integer",
+            "description":"The bundle ID for this account."
+        },
+        "account":{
+            "title":"Account",
+            "description":"Accounts are your top-level organization in SRM. You may or may not have more than one account depending on your needs.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "bundleId":{
+                    "$ref":"#/definitions/bundleId"
+                },
+                "name":{
+                    "description":"The name of this account.",
+                    "type":"string"
+                },
+                "description":{
+                    "description":"The description of this account.",
+                    "type":"string"
+                }
+            }
+        },
+        "postedAtType":{
+            "type":"object",
+            "properties":{
+                "value":{
+                    "format":"date",
+                    "description":"The date of the datapoint",
+                    "type":"string"
+                },
+                "description":{
+                    "description":"Description of the postedAt value.",
+                    "type":"string"
+                }
+            }
+        },
+        "activityTimelineReportId":{
+            "type":"string",
+            "description":"Identifier for the activity timeline report."
+        },
+        "reportValues":{
+            "title":"ActivityTimelineReportValues",
+            "description":"An instance of a metric value for an activity timeline report.  This endpoint is available from the listen api scope.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionBaseResource"
+                }
+            ],
+            "properties":{
+                "activityTimelineReportId":{
+                    "$ref":"#/definitions/activityTimelineReportId"
+                },
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/reportValue"
+                    }
+                }
+            }
+        },
+        "reportValue":{
+            "title":"ActivityTimelineReportValue",
+            "description":"An instance of a metric value for an activity timeline report.  This endpoint is available from the listen api scope.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "resourceId":{
+                    "description":"ID of the datapoint.",
+                    "type":"integer"
+                },
+                "postedAt":{
+                    "$ref":"#/definitions/postedAtType"
+                },
+                "metricType":{
+                    "description":"the name of the metric, generally snippet_count",
+                    "type":"string"
+                },
+                "value":{
+                    "description":"Total number of snippet present in this data point.",
+                    "type":"integer"
+                }
+            }
+        },
+        "metricReportResources":{
+            "title":"Resources",
+            "type":"array",
+            "description":"An array of resource IDs",
+            "items":{
+                "$ref":"#/definitions/metricReportResource"
+            }
+        },
+        "singularMetricReportValue":{
+            "title":"Report Value",
+            "type":"object",
+            "properties":{
+                "resourceId":{
+                    "description":"ID of the datapoint.",
+                    "type":"integer"
+                },
+                "date":{
+                    "format":"date",
+                    "description":"The date of the datapoint, e.g., 2016-01-02",
+                    "type":"string"
+                },
+                "metric":{
+                    "description":"the name of the metric, e.g. page_fans",
+                    "type":"string"
+                },
+                "value":{
+                    "description":"Metric count for this data point.",
+                    "type":"integer"
+                }
+            }
+        },
+        "singularMetricReportValues":{
+            "title":"Report Values",
+            "type":"object",
+            "properties":{
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/singularMetricReportValue"
+                    }
+                }
+            }
+        },
+        "exceptionDetailType":{
+            "title":"Error Detail",
+            "description":"Complex type that contains error details for a REST call.",
+            "type":"object",
+            "properties":{
+                "type":{
+                    "description":"Absolute URI [RFC3986] that identifies the problem type.  When dereferenced, it SHOULD provide a human-readable summary of the problem (for example, using HTML).",
+                    "type":"string"
+                },
+                "title":{
+                    "description":"Short, human-readable summary of the problem.  The summary SHOULD NOT change for subsequent occurrences of the problem, except for purposes of localization.",
+                    "type":"string"
+                },
+                "status":{
+                    "description":"HTTP status code for this occurrence of the problem, set by the origin server.",
+                    "type":"integer"
+                },
+                "detail":{
+                    "description":"Human-readable description specific to this occurrence of the problem.",
+                    "type":"string"
+                },
+                "instance":{
+                    "description":"Absolute URI that identifies the specific occurrence of the problem.  It may or may not provide additional information if dereferenced.",
+                    "type":"string"
+                },
+                "o:errorCode":{
+                    "description":"Application error code, which is different from HTTP error code.",
+                    "type":"string"
+                },
+                "o:errorPath":{
+                    "description":"Path to the problem at the resource or property level.",
+                    "type":"string"
+                },
+                "o:errorDetails":{
+                    "description":"Details of the error message, consisting of a hierarchical tree structure of exceptionDetailType instances, not strings.",
+                    "type":"string"
+                }
+            },
+            "required":[
+                "type",
+                "title"
+            ]
+        },
+        "metricReports":{
+            "title":"MetricReports",
+            "description":"Provides measurement of social resources for many different metrics, e.g., page_impressions, over a given date range.  The metrics can be aggregated for a set of resources, e.g., to find the page impressions for all a brands Facebook properties.  The resource is available from the analytics API scope.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionBaseResource"
+                }
+            ],
+            "properties":{
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/metricReport"
+                    }
+                }
+            }
+        },
+        "metricReportNames":{
+            "title":"Metrics",
+            "type":"array",
+            "description":"An array of internal metric names",
+            "items":{
+                "$ref":"#/definitions/metricReportName"
+            }
+        },
+        "metricReportName":{
+            "title":"Metric",
+            "type":"object",
+            "description":"The internal name of a metric.",
+            "properties":{
+                "metric":{
+                    "description":"The internal metric name, e.g., page_impressions",
+                    "type":"string"
+                }
+            }
+        },
+        "metricReport":{
+            "title":"MetricReport",
+            "description":"Provides measurement of social resources for many different metrics, e.g., page_impressions, over a given date range.  The metrics can be aggregated for a set of resources, e.g., to find the page impressions for all a brands Facebook properties.  The resource is available from the analytics API scope.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "reportId":{
+                    "description":"ID of the report",
+                    "type":"string"
+                },
+                "reportValues":{
+                    "$ref":"#/definitions/singularMetricReportValues"
+                }
+            }
+        },
+        "metricReportResource":{
+            "title":"Resource",
+            "type":"object",
+            "description":"The id of a resource.",
+            "properties":{
+                "id":{
+                    "description":"The resource id",
+                    "type":"integer"
+                }
+            }
+        },
+        "requestPayload":{
+            "title":"Report parameters",
+            "description":"Parameters needed to create a metric report",
+            "properties":{
+                "reportType":{
+                    "description":"Required. This can specify either 'aggregate' (aggregate by resource) or 'discrete' (which returns all your data as individual items providing reporting flexibilty)",
+                    "type":"string"
+                },
+                "bundleId":{
+                    "description":"Required. This is a single bundle within your account. It can be the root bundle or any child bundle.",
+                    "type":"string"
+                },
+                "resources":{
+                    "$ref":"#/definitions/metricReportResources"
+                },
+                "metrics":{
+                    "$ref":"#/definitions/metricReportNames"
+                },
+                "reportAtStart":{
+                    "format":"date",
+                    "description":"Required. Date range used to filter results. Must be in ISO 8601 date format.",
+                    "type":"string"
+                },
+                "reportAtEnd":{
+                    "format":"date",
+                    "description":"Required. Date range used to filter results. Must be in ISO 8601 date format. The range should be no larger than 90 days.",
+                    "type":"string"
+                }
+            }
+        },
+        "bundle":{
+            "title":"Bundle",
+            "description":"Bundles are sub-accounts. Very similar to a folder system in common computer operating systems, you may have bundles nested within bundles. There is no limit to nesting bundles within each other. However, the Accounts API returns a flat list of bundles and their relationship to one-another should not effect your implementations.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "id":{
+                    "description":"The id for this bundle.",
+                    "type":"integer"
+                },
+                "name":{
+                    "description":"The name of this bundle.",
+                    "type":"string"
+                },
+                "description":{
+                    "description":"The description of this bundle.",
+                    "type":"string"
+                }
+            }
+        },
+        "bundles":{
+            "title":"Bundles",
+            "description":"Bundles are sub-accounts. Very similar to a folder system in common computer operating systems, you may have bundles nested within bundles. There is no limit to nesting bundles within each other. However, the Accounts API returns a flat list of bundles and their relationship to one-another should not effect your implementations.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionPagedResource"
+                }
+            ],
+            "properties":{
+                "accountId":{
+                    "$ref":"#/definitions/accountId"
+                },
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/bundle"
+                    }
+                }
+            }
+        },
+        "message":{
+            "title":"Message",
+            "description":"Messages methods allow you to interact with messages from your fans and followers on social. Messages can be thought of as any conversation from your fans, followers, and users on different properties on the web. These properties can be social like Facebook and Twitter, and can also be sources like review sites, message boards, and blogs.<br><br> The message response will be different for Twitter messages that are received from accounts that you own, i.e., Twitter accounts that you have added to your SRM account in W&A, and Twitter messages that are earned, i.e., received via Listen Topics.  Due to restrictions in the Twitter agreement the earned messages will not include author data or the message body of the tweet.  The JSON structure of the message will remain the same, it is only the data that is removed.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "resource":{
+                    "$ref":"#/definitions/resource",
+                    "description":"Info about the social network resource."
+                },
+                "body":{
+                    "description":"The body of the message.",
+                    "type":"string"
+                },
+                "threadPostedAt":{
+                    "format":"date-time",
+                    "description":"Date and time the of original post for the thread in which this message is included.",
+                    "type":"string"
+                },
+                "favoriteCount":{
+                    "description":"The number of favorites this message has received.",
+                    "type":"integer"
+                },
+                "repliesCount":{
+                    "description":"The number of replies this message has.",
+                    "type":"integer"
+                },
+                "author":{
+                    "$ref":"#/definitions/author",
+                    "description":"Info about the author of the message."
+                },
+                "favorited":{
+                    "description":"Indicates whether or not this message is favorited by the owning account.",
+                    "type":"integer"
+                },
+                "id":{
+                    "description":"ID of the message.",
+                    "type":"string"
+                },
+                "assignment":{
+                    "$ref":"#/definitions/assignment",
+                    "description":"The current assignment to this message."
+                },
+                "liked":{
+                    "description":"Indicates whether or not this message is liked by the owning account.",
+                    "type":"boolean"
+                },
+                "labels":{
+                    "description":"Labels that have been attached manually or automatically to this message.",
+                    "type":"array",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "likesCount":{
+                    "description":"The number of likes this message has received.",
+                    "type":"integer"
+                },
+                "status":{
+                    "description":"The Engage status of this message. Can be: active, archived, hidden, deleted.",
+                    "type":"string"
+                },
+                "bundleId":{
+                    "description":"ID of the root bundle account.",
+                    "type":"integer"
+                },
+                "postedAt":{
+                    "format":"date-time",
+                    "description":"Date and time the message was posted.",
+                    "type":"string"
+                },
+                "repostCount":{
+                    "description":"The number of times this message has been reposted/retweeted.",
+                    "type":"integer"
+                },
+                "type":{
+                    "description":"Type of message. [post|mention|direct_message]",
+                    "type":"string"
+                },
+                "replies":{
+                    "$ref":"#/definitions/replies"
+                },
+                "originalAuthor":{
+                    "$ref":"#/definitions/author",
+                    "description":"Info about the original author of the message or message thread."
+                },
+                "attachments":{
+                    "description":"Array of pictures, videos, or other items attached to this message.",
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/attachment"
+                    }
+                },
+                "externalId":{
+                    "description":"External ID of the message.",
+                    "type":"string"
+                }
+            }
+        },
+        "unassigner":{
+            "type":"object",
+            "properties":{
+                "id":{
+                    "description":"The user ID of the unassigner.",
+                    "type":"integer"
+                },
+                "name":{
+                    "description":"The name of the unassigner.",
+                    "type":"string"
+                }
+            }
+        },
+        "messageUserIds":{
+            "type":"string",
+            "title":"List of User Ids separated with comma."
+        },
+        "reply":{
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "parentCommentId":{
+                    "description":"External ID of the comment this is in reply to.",
+                    "type":"string"
+                },
+                "body":{
+                    "description":"The body of the reply.",
+                    "type":"string"
+                },
+                "author":{
+                    "$ref":"#/definitions/author",
+                    "description":"Info about the author of the reply."
+                },
+                "id":{
+                    "description":"ID of the reply",
+                    "type":"integer"
+                },
+                "liked":{
+                    "description":"Indicates whether or not this reply is liked by the owning account.",
+                    "type":"boolean"
+                },
+                "labels":{
+                    "description":"Labels that have been attached manually or automatically to this reply.",
+                    "type":"array",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "likesCount":{
+                    "description":"The number of likes this reply has received.",
+                    "type":"integer"
+                },
+                "parentReplyId":{
+                    "description":"ID of the comment this is in reply to.",
+                    "type":"integer"
+                },
+                "status":{
+                    "description":"The Engage status of this reply. [active|deleted]",
+                    "type":"string"
+                },
+                "postedAt":{
+                    "format":"date-time",
+                    "description":"Date and time the message was posted.",
+                    "type":"string"
+                },
+                "messageId":{
+                    "$ref":"#/definitions/messageId"
+                },
+                "type":{
+                    "description":"The type of reply. [comment|direct_message]",
+                    "type":"string"
+                },
+                "attachments":{
+                    "description":"Array of pictures, videos, or other items attached to this reply.",
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/attachment"
+                    }
+                },
+                "externalId":{
+                    "description":"External ID of the reply",
+                    "type":"string"
+                }
+            }
+        },
+        "author":{
+            "type":"object",
+            "properties":{
+                "name":{
+                    "description":"Full name of the author.",
+                    "type":"string"
+                },
+                "authorImage":{
+                    "description":"Link to an image of the author.",
+                    "type":"string"
+                },
+                "authorProfileUrl":{
+                    "description":"Link to the profile of the author.",
+                    "type":"string"
+                },
+                "authorExternalId":{
+                    "description":"External network ID of the author.",
+                    "type":"string"
+                },
+                "authorFollowersCount":{
+                    "description":"If the network supports this, the number of followers for the author.",
+                    "type":"integer"
+                },
+                "authorKlout":{
+                    "description":"Klout score of the author.",
+                    "type":"integer"
+                }
+            }
+        },
+        "assigner":{
+            "type":"object",
+            "properties":{
+                "id":{
+                    "description":"The user or automation ID of the assigner.",
+                    "type":"integer"
+                },
+                "type":{
+                    "description":"Indicates the type of assigner, either user or automation.",
+                    "type":"string"
+                },
+                "name":{
+                    "description":"The name of the assigner.",
+                    "type":"string"
+                }
+            }
+        },
+        "assignment":{
+            "type":"object",
+            "properties":{
+                "id":{
+                    "description":"ID for the assignment.",
+                    "type":"integer"
+                },
+                "description":{
+                    "description":"ID for the assignment.",
+                    "type":"string"
+                },
+                "assignee":{
+                    "$ref":"#/definitions/assignee"
+                },
+                "assigner":{
+                    "$ref":"#/definitions/assigner"
+                },
+                "unassigner":{
+                    "$ref":"#/definitions/unassigner"
+                },
+                "createdAt":{
+                    "format":"date-time",
+                    "description":"Date and time the assignment was created.",
+                    "type":"string"
+                },
+                "completedAt":{
+                    "format":"date-time",
+                    "description":"Date and time the assignment was completed.",
+                    "type":"string"
+                }
+            }
+        },
+        "assignee":{
+            "type":"object",
+            "properties":{
+                "id":{
+                    "description":"The user or team ID of the assignee.",
+                    "type":"integer"
+                },
+                "type":{
+                    "description":"Indicates the type of assignee, either user or team.",
+                    "type":"string"
+                },
+                "name":{
+                    "description":"The name of the assignee.",
+                    "type":"string"
+                }
+            }
+        },
+        "messageId":{
+            "type":"integer",
+            "description":"The ID for the message of this reply."
+        },
+        "replies":{
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionPagedResource"
+                }
+            ],
+            "properties":{
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/reply"
+                    }
+                }
+            }
+        },
+        "messages":{
+            "title":"Messages",
+            "description":"Messages methods allow you to interact with messages from your fans and followers on social. Messages can be thought of as any conversation from your fans, followers, and users on different properties on the web. These properties can be social like Facebook and Twitter, and can also be sources like review sites, message boards, and blogs.<br><br> The message response will be different for Twitter messages that are received from accounts that you own, i.e., Twitter accounts that you have added to your SRM account in W&A, and Twitter messages that are earned, i.e., received via Listen Topics.  Due to restrictions in the Twitter agreement the earned messages will not include author data or the message body of the tweet.  The JSON structure of the message will remain the same, it is only the data that is removed.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionPagedResource"
+                }
+            ],
+            "properties":{
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/message"
+                    }
+                }
+            }
+        },
+        "reportParameters":{
+            "title":"Report parameters",
+            "description":"Paramters needed to create an activity timeline report",
+            "properties":{
+                "resourceIds":{
+                    "description":"Comma separated array of SRM resource ids",
+                    "type":"string"
+                },
+                "startDate":{
+                    "format":"date",
+                    "description":"Start date of a activity time line report, string",
+                    "type":"string"
+                },
+                "endDate":{
+                    "format":"date",
+                    "description":"End date of a activity time line report, string",
+                    "type":"string"
+                },
+                "indicatorId":{
+                    "description":"ID of the indicator that you want to use if any. This is optional.",
+                    "type":"integer"
+                }
+            }
+        },
+        "activityTimelineReports":{
+            "title":"ActivityTimelineReports",
+            "description":"An activity Timeline Report returns the number of mentions per day for a Listen topic given a date range. You must determine the resource id of the Listen topic or topics, for example using the Resources endpoint, for which you want a report and then format the report values as desired.  This endpoint is available from the listen api scope.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionBaseResource"
+                }
+            ],
+            "properties":{
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/activityTimelineReport"
+                    }
+                }
+            }
+        },
+        "activityTimelineReport":{
+            "title":"ActivityTimelineReport",
+            "description":"An activity Timeline Report returns the number of mentions per day for a Listen topic given a date range. You must determine the resource id of the Listen topic or topics, for example using the Resources endpoint, for which you want a report and then format the report values as desired.  This endpoint is available from the listen api scope.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "id":{
+                    "description":"ID of the report",
+                    "type":"string"
+                },
+                "expiresAt":{
+                    "format":"date-time",
+                    "description":"Date and time when the report will no longer be available",
+                    "type":"string"
+                },
+                "description":{
+                    "description":"Explanation of the expiresAt property.",
+                    "type":"string"
+                },
+                "reportValues":{
+                    "$ref":"#/definitions/reportValues"
+                }
+            }
+        },
+        "activity":{
+            "title":"Activity",
+            "description":"A action taken on a message",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "createdAt":{
+                    "format":"date-time",
+                    "description":"Date and time the activity was created.",
+                    "type":"string"
+                },
+                "reply":{
+                    "$ref":"#/definitions/reply"
+                },
+                "parentReply":{
+                    "$ref":"#/definitions/reply"
+                },
+                "id":{
+                    "description":"ID of the activity",
+                    "type":"integer"
+                },
+                "sub_type":{
+                    "description":"The specific type of the activity. Can be: reply, reply_without_original_mention, add_label..",
+                    "type":"string"
+                },
+                "messageId":{
+                    "$ref":"#/definitions/messageId"
+                },
+                "type":{
+                    "description":"The generic type of the activity. Can be: respond, label..",
+                    "type":"string"
+                },
+                "actor":{
+                    "$ref":"#/definitions/actor",
+                    "description":"Info about the actor of the activity."
+                },
+                "description":{
+                    "description":"The extra description of the activity.",
+                    "type":"string"
+                }
+            }
+        },
+        "activities":{
+            "title":"Activities",
+            "description":"A action taken on a message",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionPagedResource"
+                }
+            ],
+            "properties":{
+                "messageId":{
+                    "$ref":"#/definitions/messageId"
+                },
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/activity"
+                    }
+                }
+            }
+        },
+        "actor":{
+            "type":"object",
+            "properties":{
+                "id":{
+                    "description":"ID of the actor.",
+                    "type":"integer"
+                },
+                "type":{
+                    "description":"The type of the actor.",
+                    "type":"string"
+                },
+                "firstName":{
+                    "description":"The first name of the actor.",
+                    "type":"string"
+                },
+                "lastName":{
+                    "description":"The last name of the actor.",
+                    "type":"string"
+                },
+                "email":{
+                    "description":"The email of the actor.",
+                    "type":"string"
+                }
+            }
+        },
+        "metric":{
+            "title":"Metric",
+            "description":"A metric is a standard measurement.  For example, this might be the number of likes of a facebook page, or the number of matching terms in the comments of a facebook post, or Fans by age and gender.  These methods provide the list of possible measures available for analysis of social data.  The metric endpoints are available from the analytics scope.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "metric":{
+                    "description":"Metric value pertaining to a specific resource.",
+                    "type":"string"
+                },
+                "metricDescription":{
+                    "description":"A brief about the metric and what it conveys.",
+                    "type":"string"
+                }
+            }
+        },
+        "metrics":{
+            "title":"Metrics",
+            "description":"A metric is a standard measurement.  For example, this might be the number of likes of a facebook page, or the number of matching terms in the comments of a facebook post, or Fans by age and gender.  These methods provide the list of possible measures available for analysis of social data.  The metric endpoints are available from the analytics scope.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionPagedResource"
+                }
+            ],
+            "properties":{
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/metric"
+                    }
+                }
+            }
+        },
+        "user":{
+            "title":"User",
+            "description":"A user associated with an account or bundle.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "id":{
+                    "description":"The ID for the user.",
+                    "type":"integer"
+                },
+                "accountId":{
+                    "$ref":"#/definitions/accountId"
+                },
+                "email":{
+                    "description":"The email of this user.",
+                    "type":"string"
+                },
+                "firstName":{
+                    "description":"The first name of the user.",
+                    "type":"string"
+                },
+                "lastName":{
+                    "description":"The last name of the user.",
+                    "type":"string"
+                }
+            }
+        },
+        "users":{
+            "title":"Users",
+            "description":"A user associated with an account or bundle.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionPagedResource"
+                }
+            ],
+            "properties":{
+                "accountId":{
+                    "$ref":"#/definitions/accountId"
+                },
+                "bundleId":{
+                    "$ref":"#/definitions/bundleId"
+                },
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/user"
+                    }
+                }
+            },
+            "x-links":[
+                {
+                    "encType":"application/x-www-form-urlencoded",
+                    "method":"GET",
+                    "schema":{
+                        "type":"object",
+                        "properties":{
+                            "limit":{
+                                "type":"integer",
+                                "description":"Positive integer value that specifies the maximum number of items returned by the server."
+                            },
+                            "offset":{
+                                "type":"integer",
+                                "description":"Non-negative integer values that specifies the index of the first item to be returned. The offset index begins at 0. By default, the offset is 0, which returns all items starting from the first item in the collection.",
+                                "minimum":0,
+                                "default":0
+                            },
+                            "totalResults":{
+                                "description":"Boolean value that specifies whether to calculate the totalResults property. By default, this value is set to false indicating that totalResults is not calculated.",
+                                "type":"boolean",
+                                "default":false
+                            }
+                        }
+                    },
+                    "href":"http://srm-api.slc05hqd.oracle.com:80/admin/v1/accounts/{accountId}/bundle/{bundleId}/users",
+                    "title":"Get all users",
+                    "rel":"bundleusers",
+                    "mediaType":"application/vnd.oracle.resource+json;type=collection",
+                    "targetSchema":{
+                        "$ref":"#/definitions/users"
+                    },
+                    "description":"Supplies the collection of users for a bundle associated with an account."
+                }
+            ]
+        },
+        "campaigns":{
+            "title":"Campaigns",
+            "description":"A campaign is part of a marketing program.  Campaigns are surfaced in Social Relationship Management as tags, and can be used to group social messages to facilitate campaign effectiveness analysis.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionPagedResource"
+                }
+            ],
+            "properties":{
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/campaign"
+                    }
+                }
+            }
+        },
+        "campaign":{
+            "title":"Campaign",
+            "description":"A campaign is part of a marketing program.  Campaigns are surfaced in Social Relationship Management as tags, and can be used to group social messages to facilitate campaign effectiveness analysis.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "id":{
+                    "description":"The id for this campaign.",
+                    "type":"integer"
+                },
+                "name":{
+                    "description":"The name of this campaign.",
+                    "type":"string"
+                },
+                "type":{
+                    "description":"The type of this campaign.",
+                    "type":"string"
+                },
+                "bundleId":{
+                    "description":"The bundle id of this campaign.",
+                    "type":"integer"
+                }
+            }
+        },
+        "sentimentReportValue":{
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "resourceId":{
+                    "description":"ID of the datapoint.",
+                    "type":"integer"
+                },
+                "metric":{
+                    "description":"the name of the metric, generally snippet_count",
+                    "type":"string"
+                },
+                "sentiment":{
+                    "description":"Sentiment value of datapoint, (ie: positive, negative, neutral).",
+                    "type":"string"
+                },
+                "value":{
+                    "description":"Total number of snippet present in this data point.",
+                    "type":"integer"
+                }
+            }
+        },
+        "sentimentReportParameters":{
+            "title":"Sentiment Report parameters",
+            "description":"Paramters needed to create a sentiment report",
+            "properties":{
+                "resourceIds":{
+                    "description":"Comma separated array of SRM resource ids",
+                    "type":"string"
+                },
+                "startDate":{
+                    "format":"date",
+                    "description":"Start date of a sentiment report, string",
+                    "type":"string"
+                },
+                "endDate":{
+                    "format":"date",
+                    "description":"End date of a sentiment report, string",
+                    "type":"string"
+                }
+            }
+        },
+        "sentimentReportValues":{
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionBaseResource"
+                }
+            ],
+            "properties":{
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/sentimentReportValue"
+                    }
+                }
+            }
+        },
+        "sentimentReport":{
+            "title":"SentimentReport",
+            "description":"The sentiment report returns the number of Listen snippets (mentions) which have positive, negative, or neutral sentiment for a given date range. Snippets are chunks of text extracted from a social media post. When a Listen topic matches a search term, the section of a social media post is extracted and becomes a \"snippet\" in Listen.  This endpoint is available from the listen api scope.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "id":{
+                    "description":"ID of the report",
+                    "type":"string"
+                },
+                "expiresAt":{
+                    "format":"date-time",
+                    "description":"Date and time when the report will no longer be available",
+                    "type":"string"
+                },
+                "reportValues":{
+                    "$ref":"#/definitions/sentimentReportValues"
+                }
+            }
+        },
+        "sentimentReports":{
+            "title":"SentimentReports",
+            "description":"The sentiment report returns the number of Listen snippets (mentions) which have positive, negative, or neutral sentiment for a given date range. Snippets are chunks of text extracted from a social media post. When a Listen topic matches a search term, the section of a social media post is extracted and becomes a \"snippet\" in Listen.  This endpoint is available from the listen api scope.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionPagedResource"
+                }
+            ],
+            "properties":{
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/sentimentReport"
+                    }
+                }
+            }
+        },
+        "resources":{
+            "title":"Resources",
+            "description":"Resources are any social network channels. Examples of resources include a Facebook Page, a Twitter account, or a Sina Weibo account.  Resources can also include topics that have been setup in Listen.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionPagedResource"
+                }
+            ],
+            "properties":{
+                "accountId":{
+                    "$ref":"#/definitions/accountId"
+                },
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/resource"
+                    }
+                }
+            }
+        },
+        "metricReportValue":{
+            "title":"MetricReportValue",
+            "description":"An instance of a metric report value for a metric report.  For example, this might correspond to the number of page fans for a particular facebook page for a particular day.  This endpoint is available from the analytics api scope.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/singularResource"
+                }
+            ],
+            "properties":{
+                "resourceId":{
+                    "description":"ID of the datapoint.",
+                    "type":"integer"
+                },
+                "metric":{
+                    "description":"the name of the metric, e.g. page_fans",
+                    "type":"string"
+                },
+                "date":{
+                    "format":"date",
+                    "description":"The date of the datapoint, e.g., 2016-01-02",
+                    "type":"string"
+                },
+                "value":{
+                    "description":"Metric count for this data point.",
+                    "type":"integer"
+                }
+            }
+        },
+        "reportId":{
+            "type":"string",
+            "description":"Identifier for the metric report."
+        },
+        "metricReportValues":{
+            "title":"MetricReportValues",
+            "description":"An instance of a metric report value for a metric report.  For example, this might correspond to the number of page fans for a particular facebook page for a particular day.  This endpoint is available from the analytics api scope.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/collectionPagedResource"
+                }
+            ],
+            "properties":{
+                "reportId":{
+                    "$ref":"#/definitions/reportId"
+                },
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/metricReportValue"
+                    }
+                }
+            }
+        },
+        "sentimentReportId":{
+            "type":"string",
+            "description":"Identifier for the sentiment report."
+        }
+    },
+    "tags":[
+        {
+            "name":"Accounts",
+            "description":"Accounts are your top-level organization in SRM. You may or may not have more than one account depending on your needs."
+        },
+        {
+            "name":"Activities",
+            "description":"Collection of activities taken on one or more messages by a user."
+        },
+        {
+            "name":"Activity Timeline Report Values",
+            "description":"An instance of a metric value for an activity timeline report.  This endpoint is available from the listen api scope."
+        },
+        {
+            "name":"Activity Timeline Reports",
+            "description":"An activity Timeline Report returns the number of mentions per day for a Listen topic given a date range. You must determine the resource id of the Listen topic or topics, for example using the Resources endpoint, for which you want a report and then format the report values as desired.  This endpoint is available from the listen api scope."
+        },
+        {
+            "name":"Bundles",
+            "description":"Bundles are sub-accounts. Very similar to a folder system in common computer operating systems, you may have bundles nested within bundles. There is no limit to nesting bundles within each other. However, the Accounts API returns a flat list of bundles and their relationship to one-another should not effect your implementations."
+        },
+        {
+            "name":"Campaigns",
+            "description":"A campaign is part of a marketing program.  Campaigns are surfaced in Social Relationship Management as tags, and can be used to group social messages to facilitate campaign effectiveness analysis."
+        },
+        {
+            "name":"Messages",
+            "description":"Messages methods allow you to interact with messages from your fans and followers on social. Messages can be thought of as any conversation from your fans, followers, and users on different properties on the web. These properties can be social like Facebook and Twitter, and can also be sources like review sites, message boards, and blogs.<br><br>\nThe message response will be different for Twitter messages that are received from accounts that you own, i.e., Twitter accounts that you have added to your SRM account in W&A, and Twitter messages that are earned, i.e., received via Listen Topics.  Due to restrictions in the Twitter agreement the earned messages will not include author data or the message body of the tweet.   The JSON structure of the message will remain the same, it is only the data that is removed."
+        },
+        {
+            "name":"Metric Report Values",
+            "description":"An instance of a metric report value for a metric report.  For example, this might correspond to the number of page fans for a particular facebook page for a particular day.  This endpoint is available from the analytics api scope."
+        },
+        {
+            "name":"Metric Reports",
+            "description":"Provides measurement of social resources for many different metrics, e.g., page_impressions, over a given date range.  The metrics can be aggregated for a set of resources, e.g., to find the page impressions for all a brands Facebook properties.  The resource is available from the analytics API scope."
+        },
+        {
+            "name":"Metrics",
+            "description":"A metric is a standard measurement.  For example, this might be the number of likes of a facebook page, or the number of matching terms in the comments of a facebook post, or Fans by age and gender.  These methods provide the list of possible measures available for analysis of social data.  The metric endpoints are available from the analytics scope."
+        },
+        {
+            "name":"Posts",
+            "description":"Posts are made to your fans and followers on social. Think of posts as an outbound effort by you to interact with users on social. If you are interested in creating conversation on Facebook, Twitter, and other destinations, use the posts methods."
+        },
+        {
+            "name":"Replies",
+            "description":"Replies are second-level conversation to messages. Any \"message of a message\" becomes a reply. These endpoints are how you will interact with replies."
+        },
+        {
+            "name":"Resources",
+            "description":"Resources are any social network channels. Examples of resources include a Facebook Page, a Twitter account, or a Sina Weibo account.  Resources can also include topics that have been setup in Listen."
+        },
+        {
+            "name":"Sentiment Report Values",
+            "description":"An instance of a sentiment snippet value for a sentiment report.  This endpoint is available from the listen api scope."
+        },
+        {
+            "name":"Sentiment Reports",
+            "description":"The sentiment report returns the number of Listen snippets (mentions) which have positive, negative, or neutral sentiment for a given date range. Snippets are chunks of text extracted from a social media post. When a Listen topic matches a search term, the section of a social media post is extracted and becomes a \"snippet\" in Listen.  This endpoint is available from the listen api scope."
+        },
+        {
+            "name":"Users",
+            "description":"Users associated with an account or bundle."
+        }
+    ]
+}
