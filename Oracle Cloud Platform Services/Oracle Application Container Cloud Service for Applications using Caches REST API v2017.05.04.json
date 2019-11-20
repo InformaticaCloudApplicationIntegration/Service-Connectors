@@ -1,0 +1,308 @@
+
+{
+    "swagger":"2.0",
+    "info":{
+        "version":"2017.05.04",
+        "title":"REST API for Using Caches in Applications",
+        "description":"Describes the REST API for Oracle Application Container Cloud Service applications that use caches.",
+        "x-summary":"Describes the REST API for Oracle Application Container Cloud Service applications that use caches."
+    },
+    "basePath":"/ccs",
+    "paths":{
+        "/{cacheName}":{
+            "get":{
+                "summary":"Return Cache Metrics",
+                "description":"Returns the server-side metrics for the specified cache.",
+                "produces":[
+                    "application/json"
+                ],
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"cacheName",
+                        "description":"Name of cache",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Successful response",
+                        "schema":{
+                            "title":"ServerCacheMetrics",
+                            "type":"object",
+                            "properties":{
+                                "count":{
+                                    "type":"integer",
+                                    "format":"int64"
+                                },
+                                "size":{
+                                    "type":"integer",
+                                    "format":"int64"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags":[
+                    "Use Caches"
+                ],
+                "x-internal-id":"{cacheName}-get"
+            },
+            "delete":{
+                "summary":"Clear Cache",
+                "description":"Clears the specified cache.",
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"cacheName",
+                        "description":"Name of cache",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "204":{
+                        "description":"Successful response"
+                    }
+                },
+                "tags":[
+                    "Use Caches"
+                ],
+                "x-internal-id":"{cacheName}-delete"
+            }
+        },
+        "/{cacheName}/{key}":{
+            "get":{
+                "summary":"Retrieve Value",
+                "description":"Retrieves the value associated with the specified key.",
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"cacheName",
+                        "description":"Name of cache",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"path",
+                        "name":"key",
+                        "description":"Key for the value to be fetched",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Successful response",
+                        "schema":{
+                            "title":"value",
+                            "type":"string",
+                            "format":"binary"
+                        }
+                    },
+                    "404":{
+                        "description":"Not found"
+                    }
+                },
+                "tags":[
+                    "Use Caches"
+                ],
+                "x-internal-id":"{cacheName}-{key}-get"
+            },
+            "put":{
+                "summary":"Store Value",
+                "description":"Stores the value and associates it with the specified key.",
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"cacheName",
+                        "description":"Name of cache",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"path",
+                        "name":"key",
+                        "description":"Key for the key/value pair to be stored",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"query",
+                        "name":"ttl",
+                        "description":"Time to live of entry in milliseconds",
+                        "required":false,
+                        "type":"integer",
+                        "format":"int64"
+                    },
+                    {
+                        "in":"query",
+                        "name":"returnOld",
+                        "description":"Specifies whether the old value should be returned",
+                        "required":false,
+                        "type":"boolean"
+                    },
+                    {
+                        "in":"body",
+                        "name":"value",
+                        "description":"New value to be associated with the key",
+                        "required":true,
+                        "schema":{
+                            "type":"string",
+                            "format":"binary"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Successful response",
+                        "schema":{
+                            "title":"value",
+                            "description":"Sent if returnOld = true",
+                            "type":"string",
+                            "format":"binary"
+                        }
+                    },
+                    "204":{
+                        "description":"Sent if returnOld = false (or missing) or if returnOld = true and no old value exists"
+                    }
+                },
+                "tags":[
+                    "Use Caches"
+                ],
+                "x-internal-id":"{cacheName}-{key}-put"
+            },
+            "post":{
+                "summary":"Store, Replace, or Remove Value",
+                "description":"Issues one of the following: putIfAbsent, replace, removeValue, or replaceValue.",
+                "consumes":[
+                    "application/octet-stream"
+                ],
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"cacheName",
+                        "description":"Name of cache",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"path",
+                        "name":"key",
+                        "description":"Key for the key/value pair to be put, replaced, or removed",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"header",
+                        "name":"X-Method",
+                        "description":"Method to invoke - \"putIfAbsent\", \"replace\", \"removeValue\", or \"replaceValue\"",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"query",
+                        "name":"ttl",
+                        "description":"Time to live of entry in milliseconds",
+                        "required":false,
+                        "type":"integer",
+                        "format":"int64"
+                    },
+                    {
+                        "in":"query",
+                        "name":"returnOld",
+                        "description":"Specifies whether the old value should be returned. Not applicable for replaceValue.",
+                        "required":false,
+                        "type":"boolean"
+                    },
+                    {
+                        "in":"body",
+                        "name":"value",
+                        "description":"Value to be associated with the key. If the method is replaceValue, then the value is of type MultiValue. A MultiValue is a byte array that encodes an arbitrary number of serialized objects. The first 4 bytes are an encoded unsigned int32 (hi byte first) that gives the number of elements in the MultiValue. Each element consists of an encoded unsigned int32, followed by the serialized byte stream of the data item itself.",
+                        "required":true,
+                        "schema":{
+                            "type":"string",
+                            "format":"binary"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Successful response",
+                        "schema":{
+                            "description":"Sent if returnOld = true; not applicable for replaceValue",
+                            "title":"value",
+                            "type":"string",
+                            "format":"binary"
+                        }
+                    },
+                    "204":{
+                        "description":"Sent if returnOld = false (or missing) or if returnOld = true and no old value exists"
+                    },
+                    "404":{
+                        "description":"Specified method not found"
+                    },
+                    "409":{
+                        "description":"Conflict error, returned if putIfAbsent requested and old value exists"
+                    }
+                },
+                "tags":[
+                    "Use Caches"
+                ],
+                "x-internal-id":"{cacheName}-{key}-post"
+            },
+            "delete":{
+                "summary":"Delete Key/Value Pair",
+                "description":"Deletes a key/value pair from a cache.",
+                "parameters":[
+                    {
+                        "in":"path",
+                        "name":"cacheName",
+                        "description":"Name of cache",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"path",
+                        "name":"key",
+                        "description":"Key for the key/value pair to be deleted",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"query",
+                        "name":"returnOld",
+                        "description":"Specifies whether the old value should be returned",
+                        "required":false,
+                        "type":"boolean"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Successful response",
+                        "schema":{
+                            "description":"If old value requested",
+                            "title":"value",
+                            "type":"string",
+                            "format":"binary"
+                        }
+                    },
+                    "204":{
+                        "description":"Sent if returnOld = true, but no old value exists"
+                    }
+                },
+                "tags":[
+                    "Use Caches"
+                ],
+                "x-internal-id":"{cacheName}-{key}-delete"
+            }
+        }
+    },
+    "tags":[
+        {
+            "name":"Use Caches",
+            "description":"Describes the REST API for Oracle Application Container Cloud Service applications that use caches."
+        }
+    ]
+}
