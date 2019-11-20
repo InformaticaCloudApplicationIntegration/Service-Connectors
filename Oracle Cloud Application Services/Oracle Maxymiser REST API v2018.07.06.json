@@ -1,0 +1,3300 @@
+{
+    "swagger":"2.0",
+    "info":{
+        "title":"Oracle Maxymiser REST API",
+        "description":"<p>Oracle Maxymiser REST API makes it possible to access Maxymiser&#39;s platform functionality with code. You can use it to manage campaign entities, such as Elements, Variants, Actions and Scripts programmatically. It is built with REST principles in mind and the entities can be reached via resource-oriented URLs. The API makes use of HTTP features like HTTP authentication, verbs and response codes.</p>",
+        "version":"2018.07.06",
+        "x-summary":"Oracle Maxymiser REST API makes it possible to access Maxymiser's platform functionality with code."
+    },
+    "schemes":[
+        "https"
+    ],
+    "consumes":[
+        "application/json"
+    ],
+    "basePath":"/v1",
+    "produces":[
+        "application/json"
+    ],
+    "securityDefinitions":{
+        "token":{
+            "type":"apiKey",
+            "in":"header",
+            "name":"Authorization"
+        }
+    },
+    "parameters":{
+        "site-id":{
+            "name":"site-id",
+            "in":"path",
+            "description":"Unique site identifier",
+            "type":"string",
+            "required":true
+        },
+        "configuration":{
+            "name":"configuration",
+            "in":"path",
+            "description":"Either sandbox or production configuration of the site. Production is only supported in GET endpoints.",
+            "type":"string",
+            "required":true
+        },
+        "action-id":{
+            "name":"action-id",
+            "in":"path",
+            "description":"Unique action identifier",
+            "type":"string",
+            "required":true
+        },
+        "script-id":{
+            "name":"script-id",
+            "in":"path",
+            "description":"Unique script identifier",
+            "type":"string",
+            "required":true
+        },
+        "campaign-id":{
+            "name":"campaign-id",
+            "in":"path",
+            "description":"Unique campaign identifier",
+            "type":"string",
+            "required":true
+        },
+        "element-id":{
+            "name":"element-id",
+            "in":"path",
+            "description":"Unique element identifier",
+            "type":"string",
+            "required":true
+        },
+        "variant-id":{
+            "name":"variant-id",
+            "in":"path",
+            "description":"Unique variant identifier",
+            "type":"string",
+            "required":true
+        },
+        "campaign-targeting-rule-id":{
+            "name":"campaign-targeting-rule-id",
+            "in":"path",
+            "description":"Unique campaign targeting rule identifier",
+            "type":"string",
+            "required":true
+        },
+        "content-targeting-rule-id":{
+            "name":"content-targeting-rule-id",
+            "in":"path",
+            "description":"Unique content targeting rule identifier",
+            "type":"string",
+            "required":true
+        },
+        "action-campaign-content":{
+            "name":"request body",
+            "in":"body",
+            "description":"Action settings",
+            "schema":{
+                "title":"action",
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string",
+                        "description":"Display name of an action"
+                    },
+                    "description":{
+                        "type":"string",
+                        "description":"Description of an action"
+                    },
+                    "type":{
+                        "type":"string",
+                        "description":"Action type",
+                        "enum":[
+                            "Click_through",
+                            "Page_Impressions",
+                            "Sales_Amount",
+                            "Sales_Quantity",
+                            "Sign_up",
+                            "Content_seen"
+                        ]
+                    },
+                    "currency":{
+                        "type":"string",
+                        "description":"Currency - only applicable to <b>Sales_Amount</b> type of action",
+                        "enum":[
+                            "USD",
+                            "GBP",
+                            "EUR",
+                            "   "
+                        ]
+                    },
+                    "multiplier":{
+                        "type":"number",
+                        "description":"Action value multiplier - applicable only to <b>Sales_Amount</b> type of action; action value is stored as Integer, so the multiplier is used to restore the original values in reports",
+                        "enum":[
+                            1,
+                            0.01,
+                            1.0E-4
+                        ]
+                    },
+                    "isPrimary":{
+                        "type":"boolean",
+                        "description":"Indicates whether the action is The primary action is included in campaign reports by default; Optional, set to *false* by default. At least one action in a campaign must be primary"
+                    },
+                    "scriptContent":{
+                        "type":"string",
+                        "description":"Content of the JavaScript that captures the action (not applicable to server-side campaigns)"
+                    },
+                    "scriptUrl":{
+                        "type":"object",
+                        "description":"The Script URL contains details about where on the site the script would (not) run (not applicable to server-side campaigns)"
+                    },
+                    "scriptUrl.preview":{
+                        "type":"string",
+                        "description":"Preview URL for the action JavaScript"
+                    },
+                    "scriptUrl.includes":{
+                        "type":"string",
+                        "description":"URL masks for the pages where the action JavaScript should fire"
+                    },
+                    "scriptUrl.excludes":{
+                        "type":"string",
+                        "description":"URL masks for the pages where the action JavaScript not to fire. Excluded URLs have higher priority than the included ones"
+                    }
+                },
+                "required":[
+                    "name",
+                    "type"
+                ],
+                "example":{
+                    "name":"Action1",
+                    "description":"My first action",
+                    "type":"Click_through",
+                    "isPrimary":true,
+                    "scriptContent":"actions.send( 'Action1', '1' )",
+                    "scriptUrl":{
+                        "preview":"https://site.com/",
+                        "includes":[
+                            "http://site.com/*"
+                        ],
+                        "excludes":[
+                            "https://site.com/basket/*",
+                            "https://site.com/confirmation/*"
+                        ]
+                    }
+                }
+            }
+        },
+        "script-content":{
+            "name":"request body",
+            "in":"body",
+            "description":"Script settings",
+            "schema":{
+                "title":"script",
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string",
+                        "description":"Display name of a script"
+                    },
+                    "description":{
+                        "type":"string",
+                        "description":"Description for the script"
+                    },
+                    "content":{
+                        "type":"string",
+                        "description":"Content of the script"
+                    }
+                },
+                "required":[
+                    "name"
+                ],
+                "example":{
+                    "name":"Script 1",
+                    "description":"My first script",
+                    "content":"var pageViews = visitor.getData( 'Page viewed' );\nconsole.log( 'Number of page views: ' + pageViews);"
+                }
+            },
+            "required":true
+        },
+        "campaign-targeting-rules-content":{
+            "name":"request body",
+            "in":"body",
+            "description":"An array of conditions under which the campaigns gets generated",
+            "schema":{
+                "title":"Campaign targeting rules",
+                "type":"object",
+                "properties":{
+                    "conditions":{
+                        "type":"array",
+                        "items":{
+                            "$ref":"#/definitions/condition"
+                        },
+                        "description":"A list of conditions which describe the targeted audience"
+                    }
+                },
+                "required":[
+                    "conditions"
+                ],
+                "example":{
+                    "conditions":[
+                        {
+                            "attribute":"Device Type",
+                            "operator":"Is",
+                            "values":[
+                                "Tablet"
+                            ]
+                        },
+                        {
+                            "attribute":"New vs Returning",
+                            "operator":"IsNot",
+                            "values":[
+                                "new visitor"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "required":true
+        },
+        "content-targeting-rules-content":{
+            "name":"request body",
+            "in":"body",
+            "description":"List of targeting rules applied to the campaign variants",
+            "schema":{
+                "title":"content targeting rules",
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string",
+                        "description":"Name of a content targeting rule"
+                    },
+                    "isEnabled":{
+                        "type":"boolean",
+                        "description":"Indicates whether the rule is active. New rules are always created as enabled."
+                    },
+                    "calculateOnce":{
+                        "type":"boolean",
+                        "description":"*true* means that the rule is evaluated only once, *false* means that the rule will be evaluated on every campaign view. Defaults to *false* if not specified. "
+                    },
+                    "conditions":{
+                        "type":"array",
+                        "items":{
+                            "$ref":"#/definitions/condition"
+                        },
+                        "description":"An array of conditions which describe the targeted audience"
+                    },
+                    "content":{
+                        "type":"array",
+                        "items":{
+                            "$ref":"#/definitions/targetedContent"
+                        },
+                        "description":"An array of element variants to be generated if the conditions are met. Note that if *no* content is specified (empty array or omitted in the request) all variants will be included with weights: 100. If a variant exists for the campaign but is not specified in the request it will be included with a weight of 100. For example, given an element 'Menu' with variants 'Default' and 'Highlighted', in order to target 'Highlighted' only, you must include both variants in the request with weights 0 and 100, respectively."
+                    },
+                    "content.variantId":{
+                        "type":"string",
+                        "description":"Unique variant identifier of the variant to be displayed if the conditions are met. Must be a valid variant for the campaign."
+                    },
+                    "content.isControl":{
+                        "type":"boolean",
+                        "description":"Indicates whether the variant is control. Control variant is used as a baseline for performance tracking in the reports. Defaults to *true* for default variants and to *false* to all others. Must have at least one control variant."
+                    },
+                    "content.weight":{
+                        "type":"number",
+                        "description":"Weight is used to control the variant generation frequency - the value is specified as a percentage. Must have at least one variant within an element with a weight different from 0.",
+                        "minimum":0,
+                        "maximum":100
+                    }
+                },
+                "required":[
+                    "name",
+                    "conditions"
+                ],
+                "example":{
+                    "name":"Tablets w_o purchases",
+                    "calculateOnce":false,
+                    "conditions":[
+                        {
+                            "attribute":"Device Type",
+                            "operator":"Is",
+                            "values":[
+                                "Tablet"
+                            ]
+                        },
+                        {
+                            "attribute":"total_purchases_value",
+                            "operator":"Is",
+                            "values":[
+                                "0"
+                            ]
+                        }
+                    ],
+                    "content":[
+                        {
+                            "variantId":"NDMyNDMy",
+                            "isControl":true,
+                            "weight":70
+                        },
+                        {
+                            "variantId":"NDMyNDQ0",
+                            "isControl":false,
+                            "weight":30
+                        }
+                    ]
+                }
+            },
+            "required":true
+        },
+        "element-content":{
+            "name":"request body",
+            "in":"body",
+            "description":"Element settings",
+            "schema":{
+                "title":"element",
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string",
+                        "description":"Display name of the campaign element"
+                    },
+                    "description":{
+                        "type":"string",
+                        "description":"Description for the element"
+                    },
+                    "elementId":{
+                        "type":"string",
+                        "description":"HTML node id attribute to be used for the element's content"
+                    },
+                    "url":{
+                        "type":"object",
+                        "description":"The url contains details about where on the site the element is (not) present (not applicable to server-side campaigns)"
+                    },
+                    "url.preview":{
+                        "type":"string",
+                        "description":"Preview URL for the campaign element"
+                    },
+                    "url.includes":{
+                        "type":"string",
+                        "description":"URL masks for the pages where the campaign element should be located"
+                    },
+                    "url.excludes":{
+                        "type":"string",
+                        "description":"URL masks for the pages where the campaign element should not be located. Excluded URLs have higher priority than the included ones"
+                    }
+                },
+                "required":[
+                    "name"
+                ],
+                "example":{
+                    "name":"Element1",
+                    "description":"My first element",
+                    "elementId":"search-box",
+                    "url":{
+                        "preview":"http://site.com/",
+                        "includes":[
+                            "http://site.com/",
+                            "http://site.com/?*"
+                        ],
+                        "excludes":[
+                        ]
+                    }
+                }
+            },
+            "required":true
+        },
+        "variant-content":{
+            "name":"request body",
+            "in":"body",
+            "description":"Variant settings",
+            "schema":{
+                "title":"variant",
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string",
+                        "description":"Name of a campaign variant"
+                    },
+                    "content":{
+                        "type":"object",
+                        "description":"HTML content of a campaign variant (not applicable to Default variants and server-side campaigns)"
+                    },
+                    "isDefault":{
+                        "type":"boolean",
+                        "description":"Indicates whether the variant is the default variant of the element - the original page variant. HTML content cannot be set for Default variants. There can only be one default variant in an element. There must be at least one default variant in an element."
+                    },
+                    "isControl":{
+                        "type":"boolean",
+                        "description":"Indicates whether the variant is the control variant of the element. Control variants are used as a baseline for performance tracking in the reports. There can only be one control variant in an element. There must be at least one control variant in an element."
+                    },
+                    "weight":{
+                        "type":"number",
+                        "format":"integer",
+                        "description":"Weight is used to control the variant generation frequency - the value is specified as a percentage.",
+                        "minimum":0,
+                        "maximum":100
+                    }
+                },
+                "required":[
+                    "name",
+                    "isControl",
+                    "weight"
+                ],
+                "example":{
+                    "name":"Variant2",
+                    "content":"<span>Search</search>",
+                    "isControl":true,
+                    "weight":100
+                }
+            },
+            "required":true
+        }
+    },
+    "definitions":{
+        "condition":{
+            "type":"object",
+            "required":[
+                "condition.attribute",
+                "condition.operator",
+                "condition.values"
+            ],
+            "properties":{
+                "condition.attribute":{
+                    "type":"string",
+                    "description":"Name of the standard or custom attribute in the condition. A full list of standard attributes names can be found here: <a href='https://help-eu.maxymiser.com/Data/docs/mmHelp/Content/Personalization/setting_targeting_rules_REST_API.htm'>EMEA</a>; <a href='https://help-us.maxymiser.com/Data/docs/mmHelp/Content/Personalization/setting_targeting_rules_REST_API.htm' target='_blank'>US</a>"
+                },
+                "condition.operator":{
+                    "type":"string",
+                    "description":"Operator to be applied against the values in the condition. Freetext custom attributes work with the 'Is', 'IsNot', and 'Contains' operators. Pre-set ones work with 'Is' and 'IsNot'. A full list of operators which can be applied to standard attributes can be found here: <a href='https://help-eu.maxymiser.com/Data/docs/mmHelp/Content/Personalization/setting_targeting_rules_REST_API.htm'>EMEA</a>, <a href='https://help-us.maxymiser.com/Data/docs/mmHelp/Content/Personalization/setting_targeting_rules_REST_API.htm' target='_blank'>US</a>.",
+                    "enum":[
+                        "Is",
+                        "Contains",
+                        "IsNot",
+                        "StartsWith",
+                        "DoesNotStartWith"
+                    ]
+                },
+                "condition.values":{
+                    "type":"string",
+                    "description":"Attribute values in the condition"
+                }
+            }
+        },
+        "targetedContent":{
+            "type":"object",
+            "properties":{
+                "content.variantId":{
+                    "type":"string",
+                    "description":"Unique variant identifier of the variant to be displayed if the conditions are met. Must be a valid variant for the campaign."
+                },
+                "content.isControl":{
+                    "type":"boolean",
+                    "description":"Indicates whether the variant is control. Control variant is used as a baseline for performance tracking in the reports. Defaults to *true* for default variants and to *false* to all others. Must have at least one control variant."
+                },
+                "content.weight":{
+                    "type":"number",
+                    "description":"Weight is used to control the variant generation frequency - the value is specified as a percentage. Must have at least one variant within an element with a weight different from 0.",
+                    "minimum":0,
+                    "maximum":100
+                }
+            }
+        }
+    },
+    "paths":{
+        "/sites":{
+            "get":{
+                "summary":"Read Sites",
+                "operationId":"getSites",
+                "description":"The *Sites* endpoint returns the list of sites according to the access priviligees of the authenticated user.",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Site Settings"
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Sites",
+                        "schema":{
+                            "title":"sites",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "description":"Unique identifier of a site",
+                                    "type":"string"
+                                },
+                                "name":{
+                                    "description":"Display name of a site",
+                                    "type":"string"
+                                }
+                            },
+                            "example":{
+                                "items":[
+                                    {
+                                        "id":"MzIxMzM",
+                                        "name":"www.test.com"
+                                    },
+                                    {
+                                        "id":"MzIxMzI=",
+                                        "name":"m.test.com"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-get",
+                "x-filename-id":"sites-get"
+            }
+        },
+        "/sites/{site-id}":{
+            "get":{
+                "summary":"Read Site",
+                "operationId":"getSite",
+                "description":"The *Sites* endpoint returns a site",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Site Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Site",
+                        "schema":{
+                            "title":"site",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "description":"Unique identifier of a site",
+                                    "type":"string"
+                                },
+                                "name":{
+                                    "description":"Display name of a site",
+                                    "type":"string"
+                                },
+                                "lastIterationPublishDate":{
+                                    "description":"Latest production publish date and time in UTC format",
+                                    "type":"string"
+                                },
+                                "lastIterationPublishHash":{
+                                    "description":"Latest production publish identifier hash",
+                                    "type":"string"
+                                }
+                            },
+                            "example":{
+                                "id":"MzIxMzM",
+                                "name":"www.test.com",
+                                "lastIterationPublishDate":"2016-03-17T17:20:34.0000000Z",
+                                "lastIterationPublishHash":"PFhWBOh_hVlzcx_qg-Ifq5OS0vw"
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-get",
+                "x-filename-id":"sites-site-id-get"
+            }
+        },
+        "/sites/{site-id}/sandbox/publish":{
+            "put":{
+                "summary":"Publish to Sandbox",
+                "operationId":"putPublishSandbox",
+                "description":"The *Sandbox Publish* endpoint pushes all the changes made with the REST API to the Sandbox server",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Publishing"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Published successfully"
+                    },
+                    "429":{
+                        "description":"Sandbox publish rate limit is exceeded."
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-publish-put",
+                "x-filename-id":"sites-site-id-sandbox-publish-put"
+            }
+        },
+        "/sites/{site-id}/sandbox/actions":{
+            "get":{
+                "summary":"Read Actions",
+                "operationId":"getActions",
+                "description":"The *Site Actions* endpoint returns the list of all the shared (cross-campaign) actions for a site",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Site Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Site actions",
+                        "schema":{
+                            "title":"actions",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of an action"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of an action"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description of an action"
+                                },
+                                "type":{
+                                    "type":"string",
+                                    "description":"Action type",
+                                    "enum":[
+                                        "Click_through",
+                                        "Page_Impressions",
+                                        "Sales_Amount",
+                                        "Sales_Quantity",
+                                        "Sign_up",
+                                        "Content_seen"
+                                    ]
+                                },
+                                "currency":{
+                                    "type":"string",
+                                    "description":"Currency - only applicable to <b>Sales_Amount</b> type of action",
+                                    "enum":[
+                                        "USD",
+                                        "GBP",
+                                        "EUR",
+                                        "   "
+                                    ]
+                                },
+                                "multiplier":{
+                                    "type":"number",
+                                    "description":"Action value multiplier - applicable only to <b>Sales_Amount</b> type of action; action value is stored as Integer, so the multiplier is used to restore the original values in reports",
+                                    "enum":[
+                                        1,
+                                        0.01,
+                                        1.0E-4
+                                    ]
+                                }
+                            },
+                            "required":[
+                                "id",
+                                "name",
+                                "type"
+                            ],
+                            "example":{
+                                "items":[
+                                    {
+                                        "id":"NDMyNDMy",
+                                        "name":"Action1",
+                                        "description":"My first action",
+                                        "type":"Click_through"
+                                    },
+                                    {
+                                        "id":"NDMyNDQ0",
+                                        "name":"Action2",
+                                        "description":"My second action",
+                                        "type":"Page_Impressions"
+                                    },
+                                    {
+                                        "id":"NDQ0NDMy",
+                                        "name":"Action3",
+                                        "description":"My third action",
+                                        "type":"Sales_Amount",
+                                        "currency":"GBP",
+                                        "multiplier":1
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-actions-get",
+                "x-filename-id":"sites-site-id-sandbox-actions-get"
+            }
+        },
+        "/sites/{site-id}/{configuration}/scripts":{
+            "get":{
+                "summary":"Read Scripts",
+                "operationId":"getScripts",
+                "description":"The *Site Scripts* endpoint returns the list of all the existing site scripts for a site",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Site Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/configuration"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Site scripts",
+                        "schema":{
+                            "title":"scripts",
+                            "type":"object",
+                            "properties":{
+                                "apiVersion":{
+                                    "type":"string",
+                                    "description":"Script's JavaScript API version (mmcore or *.*)"
+                                },
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a site script"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of a site script"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description for the script"
+                                },
+                                "content":{
+                                    "type":"string",
+                                    "description":"Content of the script"
+                                }
+                            },
+                            "example":{
+                                "items":[
+                                    {
+                                        "apiVersion":"1.12",
+                                        "id":"NDMyNDMy",
+                                        "name":"Script 1",
+                                        "description":"My first script",
+                                        "content":"var pageViews = visitor.getData( 'Page viewed' );\nconsole.log( 'Number of page views: ' + pageViews);"
+                                    },
+                                    {
+                                        "apiVersion":"mmcore",
+                                        "id":"NDMyNDQ0",
+                                        "name":"Script 2",
+                                        "description":"My second script",
+                                        "content":"console.log( 'test' );"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-{configuration}-scripts-get",
+                "x-filename-id":"sites-site-id-configuration-scripts-get"
+            }
+        },
+        "/sites/{site-id}/sandbox/scripts/{script-id}":{
+            "put":{
+                "summary":"Update Script",
+                "operationId":"putScript",
+                "description":"The *Site Scripts* endpoint updates a site script. You can do partial updates by providing the properties you want to update in the request body. Any properties which are not specified will remain unchanged",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Site Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/script-id"
+                    },
+                    {
+                        "$ref":"#/parameters/script-content"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Site script",
+                        "schema":{
+                            "title":"script",
+                            "type":"object",
+                            "properties":{
+                                "apiVersion":{
+                                    "type":"string",
+                                    "description":"Script's JavaScript API version used within the script (mmcore or *.*, e.g. 1.10 - the version of CD API)"
+                                },
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a site script"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of a site script"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description for the script"
+                                },
+                                "content":{
+                                    "type":"string",
+                                    "description":"Content of the script"
+                                }
+                            },
+                            "example":{
+                                "apiVersion":"1.8",
+                                "id":"NDMyNDMy",
+                                "name":"Script 1",
+                                "description":"My first script",
+                                "content":"var pageViews = visitor.getData( 'Page viewed' );\nconsole.log( 'Number of page views: ' + pageViews);"
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-scripts-{script-id}-put",
+                "x-filename-id":"sites-site-id-sandbox-scripts-script-id-put"
+            }
+        },
+        "/sites/{site-id}/{configuration}/custom-attributes/":{
+            "get":{
+                "summary":"Read Custom Attributes",
+                "operationId":"getCustomAttributes",
+                "description":"The *Custom Attributes* endpoint returns the list of all the published custom attributes for a site",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Site Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/configuration"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Custom attributes",
+                        "schema":{
+                            "title":"attributes",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a custom attribute"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of a custom attribute"
+                                },
+                                "type":{
+                                    "type":"string",
+                                    "description":"Either `preset` or `freetext` type of a custom attribute"
+                                }
+                            },
+                            "example":{
+                                "items":[
+                                    {
+                                        "id":"MDAwMTU0",
+                                        "name":"AdSeen",
+                                        "type":"preset"
+                                    },
+                                    {
+                                        "id":"MDAwMTU2",
+                                        "name":"ProductCat",
+                                        "type":"freetext"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-{configuration}-custom-attributes--get",
+                "x-filename-id":"sites-site-id-configuration-custom-attributes-get"
+            }
+        },
+        "/sites/{site-id}/sandbox/campaigns":{
+            "get":{
+                "summary":"Read Campaigns",
+                "operationId":"getCampaigns",
+                "description":"The *Campaigns* endpoint returns the collection of all the existing campaigns for a site",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Campaigns",
+                        "schema":{
+                            "title":"campaigns",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a campaign"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of a campaign"
+                                },
+                                "createdAt":{
+                                    "type":"string",
+                                    "description":"Creation date and time in UTC format"
+                                },
+                                "updatedAt":{
+                                    "type":"string",
+                                    "description":"Latest update date and time in UTC format"
+                                },
+                                "createdBy":{
+                                    "type":"string",
+                                    "description":"Name of the user who has created the campaign"
+                                },
+                                "state":{
+                                    "type":"string",
+                                    "description":"Campaign's state; new campaigns have it set to *Implementing* by default",
+                                    "enum":[
+                                        "Implementing",
+                                        "NotCollectingData",
+                                        "Live",
+                                        "Paused",
+                                        "Stopped"
+                                    ]
+                                },
+                                "publishTo":{
+                                    "type":"string",
+                                    "description":"Campaign's target state updated with its publish; possible state transitions: *Implementing* > *Live*, *Live* > *Paused*, *Live* > *NotCollectingData*, *{Any}* > *Stopped*",
+                                    "enum":[
+                                        "Live",
+                                        "NotCollectingData",
+                                        "Paused",
+                                        "Stopped"
+                                    ]
+                                },
+                                "isServerSide":{
+                                    "type":"boolean",
+                                    "description":"A flag that indicates whether the campaign is a server-side one"
+                                }
+                            },
+                            "example":{
+                                "items":[
+                                    {
+                                        "id":"MDA2MjYx",
+                                        "name":"Homepage Banner",
+                                        "createdAt":"2016-03-17T17:20:34.0000000Z",
+                                        "updatedAt":"2016-03-17T17:25:22.0000000Z",
+                                        "createdBy":"John Smith",
+                                        "state":"Live",
+                                        "isServerSide":false
+                                    },
+                                    {
+                                        "id":"MDA2MzM3",
+                                        "name":"Nav Color",
+                                        "createdAt":"2016-02-19T17:20:34.0000000Z",
+                                        "updatedAt":"2016-03-14T17:25:22.0000000Z",
+                                        "createdBy":"Jason White",
+                                        "state":"Implementing",
+                                        "isServerSide":true
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-get",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-get"
+            },
+            "post":{
+                "summary":"Create Campaign",
+                "operationId":"postCampaign",
+                "description":"The *Campaigns* endpoint creates a campaign for a site",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "name":"campaign configuration",
+                        "in":"body",
+                        "description":"Campaign name and description",
+                        "required":true,
+                        "schema":{
+                            "title":"campaign",
+                            "type":"object",
+                            "properties":{
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of a campaign"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description for the campaign"
+                                },
+                                "isServerSide":{
+                                    "type":"boolean",
+                                    "description":"Optional flag that indicates whether the campaign is a server-side one"
+                                }
+                            },
+                            "example":{
+                                "name":"My first campaign",
+                                "description":"This is my first campaign"
+                            },
+                            "required":[
+                                "name"
+                            ]
+                        }
+                    }
+                ],
+                "responses":{
+                    "201":{
+                        "description":"Campaign",
+                        "headers":{
+                            "Location":{
+                                "type":"string",
+                                "description":"Path to the created campaign resource"
+                            }
+                        },
+                        "schema":{
+                            "title":"campaign",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a campaign"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of the campaign"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description for the campaign"
+                                },
+                                "createdAt":{
+                                    "type":"string",
+                                    "description":"Creation date and time in UTC format"
+                                },
+                                "updatedAt":{
+                                    "type":"string",
+                                    "description":"Latest update date and time in UTC format"
+                                },
+                                "createdBy":{
+                                    "type":"string",
+                                    "description":"Name of the user who has created the campaign"
+                                },
+                                "state":{
+                                    "type":"string",
+                                    "description":"Campaign's state. New campaigns' state is set to *Implementing* by default",
+                                    "enum":[
+                                        "Implementing",
+                                        "Live",
+                                        "NotCollectingData",
+                                        "Paused",
+                                        "Stopped"
+                                    ]
+                                },
+                                "isServerSide":{
+                                    "type":"boolean",
+                                    "description":"Optional flag that indicates whether the campaign is a server-side one"
+                                }
+                            },
+                            "example":{
+                                "id":"MDA2MjYx",
+                                "name":"My first campaign",
+                                "description":"This is my first campaign",
+                                "createdAt":"2016-03-17T17:20:34.0000000Z",
+                                "updatedAt":"2016-03-17T17:25:22.0000000Z",
+                                "createdBy":"John Smith",
+                                "state":"Implementing",
+                                "isServerSide":false
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-post",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-post"
+            }
+        },
+        "/sites/{site-id}/sandbox/campaigns/{campaign-id}":{
+            "get":{
+                "summary":"Read Campaign",
+                "operationId":"getCampaign",
+                "description":"The *Campaigns* endpoint returns a campaign for a site",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Campaign",
+                        "schema":{
+                            "title":"campaigns",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a campaign"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of a campaign"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description for the campaign"
+                                },
+                                "createdAt":{
+                                    "type":"string",
+                                    "description":"Creation date and time in UTC format"
+                                },
+                                "updatedAt":{
+                                    "type":"string",
+                                    "description":"Latest update date and time in UTC format"
+                                },
+                                "createdBy":{
+                                    "type":"string",
+                                    "description":"Name of the user who has created the campaign"
+                                },
+                                "state":{
+                                    "type":"string",
+                                    "description":"Campaign's state; new campaigns have it set to *Implementing* by default",
+                                    "enum":[
+                                        "Implementing",
+                                        "Live",
+                                        "NotCollectingData",
+                                        "Paused",
+                                        "Stopped"
+                                    ]
+                                },
+                                "publishTo":{
+                                    "type":"string",
+                                    "description":"Campaign's target state updated with its publish; possible state transitions: *Implementing* > *Live*, *Live* > *Paused*, *Live* > *NotCollectingData*, *{Any}* > *Stopped*",
+                                    "enum":[
+                                        "Live",
+                                        "NotCollectingData",
+                                        "Paused",
+                                        "Stopped"
+                                    ]
+                                },
+                                "isServerSide":{
+                                    "type":"boolean",
+                                    "description":"A flag that indicates whether the campaign is a server-side one"
+                                }
+                            },
+                            "example":{
+                                "id":"MDA2MjYx",
+                                "name":"Homepage Banner",
+                                "createdAt":"2016-03-17T17:20:34.0000000Z",
+                                "updatedAt":"2016-03-17T17:25:22.0000000Z",
+                                "createdBy":"John Smith",
+                                "state":"Live",
+                                "isServerSide":false
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-get",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-get"
+            },
+            "put":{
+                "summary":"Update Campaign",
+                "operationId":"putCampaign",
+                "description":"The *Campaigns* endpoint updates a campaign for a site. You can do partial updates by providing the properties you want to update in the request body. Any properties which are not specified will remain unchanged",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "name":"campaign configuration",
+                        "in":"body",
+                        "description":"Campaign name and description",
+                        "required":true,
+                        "schema":{
+                            "title":"campaign",
+                            "type":"object",
+                            "properties":{
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of the campaign"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description for the campaign"
+                                },
+                                "publishTo":{
+                                    "type":"string",
+                                    "description":"Campaign's target state updated with its publish; possible state transitions: *Implementing* > *Live*, *Live* > *Paused*, *Live* > *NotCollectingData*, *{Any}* > *Stopped*",
+                                    "enum":[
+                                        "Live",
+                                        "NotCollectingData",
+                                        "Paused",
+                                        "Stopped"
+                                    ]
+                                }
+                            },
+                            "example":{
+                                "publishTo":"Live"
+                            }
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Campaign",
+                        "schema":{
+                            "title":"campaign",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a campaign"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of the campaign"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description for the campaign"
+                                },
+                                "createdAt":{
+                                    "type":"string",
+                                    "description":"Creation date and time in UTC format"
+                                },
+                                "updatedAt":{
+                                    "type":"string",
+                                    "description":"Latest update date and time in UTC format"
+                                },
+                                "createdBy":{
+                                    "type":"string",
+                                    "description":"Name of the user who has created the campaign"
+                                },
+                                "state":{
+                                    "type":"string",
+                                    "description":"Campaign's state. New campaigns' state is set to *Implementing* by default",
+                                    "enum":[
+                                        "Implementing",
+                                        "Live",
+                                        "NotCollectingData",
+                                        "Paused",
+                                        "Stopped"
+                                    ]
+                                },
+                                "publishTo":{
+                                    "type":"string",
+                                    "description":"Campaign's target state updated with its publish; possible state transitions: *Implementing* > *Live*, *Live* > *Paused*, *Live* > *NotCollectingData*, *{Any}* > *Stopped*",
+                                    "enum":[
+                                        "Live",
+                                        "NotCollectingData",
+                                        "Paused",
+                                        "Stopped"
+                                    ]
+                                },
+                                "isServerSide":{
+                                    "type":"boolean",
+                                    "description":"Optional flag that indicates whether the campaign is a server-side one"
+                                }
+                            },
+                            "example":{
+                                "id":"MDA2MjYx",
+                                "name":"My first campaign",
+                                "description":"This is my first campaign",
+                                "createdAt":"2016-03-17T17:20:34.0000000Z",
+                                "updatedAt":"2016-03-17T17:25:22.0000000Z",
+                                "createdBy":"John Smith",
+                                "state":"Implementing",
+                                "publishTo":"Live",
+                                "isServerSide":false
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-put",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-put"
+            },
+            "delete":{
+                "summary":"Delete Campaign",
+                "operationId":"deleteCampaign",
+                "description":"The *Campaigns* endpoint deletes the campaign from the site",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Deleted successfully"
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-delete",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-delete"
+            }
+        },
+        "/sites/{site-id}/sandbox/campaigns/{campaign-id}/actions":{
+            "get":{
+                "summary":"Read Campaign Actions",
+                "operationId":"getCampaignActions",
+                "description":"The *Campaign Actions* endpoint returns the collection of all the actions associated with a campaign",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Campaign actions",
+                        "schema":{
+                            "title":"actions",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of an action"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of an action"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Optional description of an action"
+                                },
+                                "type":{
+                                    "type":"string",
+                                    "description":"Action tracking type",
+                                    "enum":[
+                                        "Click_through",
+                                        "Page_Impressions",
+                                        "Sales_Amount",
+                                        "Sales_Quantity",
+                                        "Sign_up",
+                                        "Content_seen"
+                                    ]
+                                },
+                                "currency":{
+                                    "type":"string",
+                                    "description":"Optional currency applicable only to <b>Sales_Amount</b> type of action",
+                                    "enum":[
+                                        "USD",
+                                        "GBP",
+                                        "EUR",
+                                        "   "
+                                    ]
+                                },
+                                "multiplier":{
+                                    "type":"number",
+                                    "description":"Optional action value multiplier applicable only to <b>Sales_Amount</b> type of action; action value is stored as Integer, so multiplier is used to restore original values in reports",
+                                    "enum":[
+                                        1,
+                                        0.01,
+                                        1.0E-4
+                                    ]
+                                },
+                                "isPrimary":{
+                                    "type":"boolean",
+                                    "description":"Primary action is selected by default in campaign reports"
+                                },
+                                "isShared":{
+                                    "type":"boolean",
+                                    "description":"Shared actions are independent of a specific campaign and can be assigned to several campaigns at the same time"
+                                },
+                                "scriptContent":{
+                                    "type":"string",
+                                    "description":"Optional content of the JavaScript that captures the action (not applicable to server-side campaigns)"
+                                },
+                                "scriptUrl":{
+                                    "type":"object",
+                                    "description":"The Script URL contains details about where on the site the script would (not) run (not applicable to server-side campaigns)"
+                                },
+                                "scriptUrl.preview":{
+                                    "type":"string",
+                                    "description":"Preview URL for the action JavaScript"
+                                },
+                                "scriptUrl.includes":{
+                                    "type":"string",
+                                    "description":"URL masks for the pages where the action JavaScript should fire"
+                                },
+                                "scriptUrl.excludes":{
+                                    "type":"string",
+                                    "description":"URL masks for the pages where the action JavaScript not to fire. Excluded URLs have higher priority than the included ones"
+                                }
+                            },
+                            "example":{
+                                "items":[
+                                    {
+                                        "id":"MDYzNDM4",
+                                        "isPrimary":true,
+                                        "isShared":false,
+                                        "scriptContent":"actions.send( 'Action1', '1' )",
+                                        "scriptUrl":{
+                                            "preview":"https://site.com/",
+                                            "includes":[
+                                                "http://site.com/*"
+                                            ],
+                                            "excludes":[
+                                                "https://site.com/basket/*",
+                                                "https://site.com/confirmation/*"
+                                            ]
+                                        },
+                                        "name":"Action1",
+                                        "description":"My first action",
+                                        "type":"Click_through",
+                                        "currency":""
+                                    },
+                                    {
+                                        "id":"NDMyNDQ0",
+                                        "isPrimary":false,
+                                        "isShared":true,
+                                        "scriptContent":"actions.send( 'Sales Amount', purchase_value )",
+                                        "scriptUrl":{
+                                            "preview":"http://site.com/confirmation/",
+                                            "includes":[
+                                                "http://site.com/confirmation/*"
+                                            ],
+                                            "excludes":[
+                                            ]
+                                        },
+                                        "name":"Sales Amount",
+                                        "description":"",
+                                        "type":"Sales_Amount",
+                                        "currency":"GBP"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-actions-get",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-actions-get"
+            },
+            "post":{
+                "summary":"Create Campaign Action",
+                "operationId":"postCampaignAction",
+                "description":"The *Campaign Actions* endpoint creates a campaign-level action. Unlike site-level actions, which are shared, these belong to the campaign and cannot be associated with other campaigns",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/action-campaign-content"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Campaign actions",
+                        "schema":{
+                            "title":"actions",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of an action"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of an action"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description of an action"
+                                },
+                                "type":{
+                                    "type":"string",
+                                    "description":"Action tracking type",
+                                    "enum":[
+                                        "Click_through",
+                                        "Page_Impressions",
+                                        "Sales_Amount",
+                                        "Sales_Quantity",
+                                        "Sign_up",
+                                        "Content_seen"
+                                    ]
+                                },
+                                "currency":{
+                                    "type":"string",
+                                    "description":"Currency - applicable only to <b>Sales_Amount</b> type of action",
+                                    "enum":[
+                                        "USD",
+                                        "GBP",
+                                        "EUR",
+                                        "   "
+                                    ]
+                                },
+                                "multiplier":{
+                                    "type":"number",
+                                    "description":"Action value multiplier - applicable only to <b>Sales_Amount</b> type of action; action value is stored as an Integer, so the multiplier is used to restore original values in reports",
+                                    "enum":[
+                                        1,
+                                        0.01,
+                                        1.0E-4
+                                    ]
+                                },
+                                "isPrimary":{
+                                    "type":"boolean",
+                                    "description":"Indicates whether the action is primary. Primary actions are selected and shown in campaign reports by default"
+                                },
+                                "isShared":{
+                                    "type":"boolean",
+                                    "description":"Indicates whether the action is shared. Shared actions belong to the site and can be assigned to multiple campaigns"
+                                },
+                                "scriptContent":{
+                                    "type":"string",
+                                    "description":"Content of the JavaScript that captures the action (not applicable to server-side campaigns)"
+                                },
+                                "scriptUrl":{
+                                    "type":"object",
+                                    "description":"The Script URL contains details about where on the site the script would (not) run (not applicable to server-side campaigns)"
+                                },
+                                "scriptUrl.preview":{
+                                    "type":"string",
+                                    "description":"Preview URL for the action JavaScript"
+                                },
+                                "scriptUrl.includes":{
+                                    "type":"string",
+                                    "description":"URL masks for the pages where the action JavaScript should fire"
+                                },
+                                "scriptUrl.excludes":{
+                                    "type":"string",
+                                    "description":"URL masks for the pages where the action JavaScript not to fire. Excluded URLs have higher priority than the included ones"
+                                }
+                            },
+                            "example":{
+                                "id":"MDYzNDM4",
+                                "isPrimary":true,
+                                "isShared":false,
+                                "scriptContent":"actions.send( 'Action1', '1' )",
+                                "scriptUrl":{
+                                    "preview":"https://site.com/",
+                                    "includes":[
+                                        "http://site.com/*"
+                                    ],
+                                    "excludes":[
+                                        "https://site.com/basket/*",
+                                        "https://site.com/confirmation/*"
+                                    ]
+                                },
+                                "name":"Action1",
+                                "description":"My first action",
+                                "type":"Click_through"
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-actions-post",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-actions-post"
+            }
+        },
+        "/sites/{site-id}/sandbox/campaigns/{campaign-id}/actions/{action-id}":{
+            "put":{
+                "summary":"Update Campaign Action",
+                "operationId":"putCampaignAction",
+                "description":"The *Campaign Actions* endpoint allows you to update campaign actions. You can either associate a shared site action with the campaign or update a campaign-specific action. To retrieve available shared actions for a site use _Site Settings_ - _Read Actions_. You can associate a site action by sending a request to this endpoint and providing the action id in the URL. A shared action can be made primary by specifying the *isPrimary* property in the request body. Note that this is the only property you can use in such request. The example below shows how to update a campaign-specific action and its properties. You can do partial update by only specifying particular properties.",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/action-id"
+                    },
+                    {
+                        "$ref":"#/parameters/action-campaign-content"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Action",
+                        "schema":{
+                            "title":"action",
+                            "type":"object",
+                            "properties":{
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of the action"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description of the action"
+                                },
+                                "type":{
+                                    "type":"string",
+                                    "description":"Action tracking type",
+                                    "enum":[
+                                        "Click_through",
+                                        "Page_Impressions",
+                                        "Sales_Amount",
+                                        "Sales_Quantity",
+                                        "Sign_up",
+                                        "Content_seen"
+                                    ]
+                                },
+                                "currency":{
+                                    "type":"string",
+                                    "description":"Currency - applicable only to <b>Sales_Amount</b> type of action",
+                                    "enum":[
+                                        "USD",
+                                        "GBP",
+                                        "EUR",
+                                        "   "
+                                    ]
+                                },
+                                "multiplier":{
+                                    "type":"number",
+                                    "description":"Action value multiplier - applicable only to <b>Sales_Amount</b> type of action; action value is stored as an Integer, so the multiplier is used to restore original values in reports",
+                                    "enum":[
+                                        1,
+                                        0.01,
+                                        1.0E-4
+                                    ]
+                                },
+                                "isPrimary":{
+                                    "type":"boolean",
+                                    "description":"Indicates whether the action is primary. Primary actions are selected and shown in campaign reports by default"
+                                },
+                                "isShared":{
+                                    "type":"boolean",
+                                    "description":"Indicates whether the action is shared. Shared actions belong to the site and can be assigned to multiple campaigns"
+                                },
+                                "scriptContent":{
+                                    "type":"string",
+                                    "description":"Content of the JavaScript that captures the action (not applicable to server-side campaigns)"
+                                },
+                                "scriptUrl":{
+                                    "type":"object",
+                                    "description":"The Script URL contains details about where on the site the script would (not) run (not applicable to server-side campaigns)"
+                                },
+                                "scriptUrl.preview":{
+                                    "type":"string",
+                                    "description":"Preview URL for the action JavaScript"
+                                },
+                                "scriptUrl.includes":{
+                                    "type":"string",
+                                    "description":"URL masks for the pages where the action JavaScript should fire"
+                                },
+                                "scriptUrl.excludes":{
+                                    "type":"string",
+                                    "description":"URL masks for the pages where the action JavaScript not to fire. Excluded URLs have higher priority than the included ones"
+                                }
+                            },
+                            "example":{
+                                "id":"MDYzNDM4",
+                                "isPrimary":true,
+                                "isShared":false,
+                                "scriptContent":"actions.send( 'Action1', '1' )",
+                                "scriptUrl":{
+                                    "preview":"https://site.com/",
+                                    "includes":[
+                                        "http://site.com/*"
+                                    ],
+                                    "excludes":[
+                                        "https://site.com/basket/*",
+                                        "https://site.com/confirmation/*"
+                                    ]
+                                },
+                                "name":"Action1",
+                                "description":"My first action",
+                                "type":"Click_through"
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-actions-{action-id}-put",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-actions-action-id-put"
+            },
+            "delete":{
+                "summary":"Delete Campaign Action",
+                "operationId":"deleteCampaignAction",
+                "description":"The *Campaign Actions* endpoint updates campaign actions by removing a shared site action from the campaign or completely deleting a campaign action (depending on whether the action is shared)",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/action-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Deleted successfully"
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-actions-{action-id}-delete",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-actions-action-id-delete"
+            }
+        },
+        "/sites/{site-id}/sandbox/campaigns/{campaign-id}/targeting-rules":{
+            "get":{
+                "summary":"Read Campaign Targeting Rules",
+                "operationId":"getCampaignTargetingRules",
+                "description":"The *Campaign Targeting Rules* endpoint returns the list of rules under which the campaign would generate. Campaign targeting rules can be used to target the whole campaign to a customer segment which meets the specified conditions.",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Campaign targeting rules",
+                        "schema":{
+                            "title":"targeting rules",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of the campaign targeting rule"
+                                },
+                                "conditions":{
+                                    "type":"array",
+                                    "items":{
+                                        "$ref":"#/definitions/condition"
+                                    },
+                                    "description":"A list of conditions which describe the targeted audience"
+                                }
+                            },
+                            "example":{
+                                "items":[
+                                    {
+                                        "id":"FDFK34",
+                                        "conditions":[
+                                            {
+                                                "attribute":"Device Type",
+                                                "operator":"IsNot",
+                                                "values":[
+                                                    "Tablet"
+                                                ]
+                                            },
+                                            {
+                                                "attribute":"New vs Returning",
+                                                "operator":"Is",
+                                                "values":[
+                                                    "new visitor"
+                                                ]
+                                            },
+                                            {
+                                                "attribute":"Logged In",
+                                                "operator":"Is",
+                                                "values":[
+                                                    "no"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-targeting-rules-get",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-targeting-rules-get"
+            },
+            "post":{
+                "summary":"Create Campaign Targeting Rules",
+                "operationId":"postCampaignTargetingRules",
+                "description":"The *Campaign Targeting Rules* endpoint creates a list of conditions under which the campaign should be generated (when all the conditions are met at the same time)",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-targeting-rules-content"
+                    }
+                ],
+                "responses":{
+                    "201":{
+                        "description":"Campaign targeting rules",
+                        "schema":{
+                            "title":"targeting rules",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of the campaign targeting rule"
+                                },
+                                "conditions":{
+                                    "type":"array",
+                                    "items":{
+                                        "$ref":"#/definitions/condition"
+                                    },
+                                    "description":"A list of conditions which describe the targeted audience"
+                                }
+                            },
+                            "example":{
+                                "id":"NjUzNDI",
+                                "conditions":[
+                                    {
+                                        "attribute":"Device Type",
+                                        "operator":"Is",
+                                        "values":[
+                                            "Tablet"
+                                        ]
+                                    },
+                                    {
+                                        "attribute":"New vs Returning",
+                                        "operator":"IsNot",
+                                        "values":[
+                                            "new visitor"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-targeting-rules-post",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-targeting-rules-post"
+            }
+        },
+        "/sites/{site-id}/sandbox/campaigns/{campaign-id}/targeting-rules/{campaign-targeting-rule-id}":{
+            "delete":{
+                "summary":"Delete Campaign Targeting Rules",
+                "operationId":"deleteCampaignTargetingRules",
+                "description":"The *Campaign Targeting Rules* endpoint deletes a rule under which the campaign would generate",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-targeting-rule-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Deleted successfully"
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-targeting-rules-{campaign-targeting-rule-id}-delete",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-targeting-rules-campaign-targeting-rule-id-delete"
+            },
+            "put":{
+                "summary":"Update Campaign Targeting Rules",
+                "operationId":"putCampaignTargetingRules",
+                "description":"The *Campaign Targeting Rules* endpoint updates a list of conditions under which the campaign should be generated (when all the conditions are met at the same time)",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-targeting-rule-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-targeting-rules-content"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Campaign targeting rules",
+                        "schema":{
+                            "title":"targeting rules",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of the campaign targeting rule"
+                                },
+                                "conditions":{
+                                    "type":"array",
+                                    "items":{
+                                        "$ref":"#/definitions/condition"
+                                    },
+                                    "description":"A list of conditions which describe the targeted audience"
+                                }
+                            },
+                            "example":{
+                                "id":"NjUzNDI",
+                                "conditions":[
+                                    {
+                                        "attribute":"Device Type",
+                                        "operator":"Is",
+                                        "values":[
+                                            "Tablet"
+                                        ]
+                                    },
+                                    {
+                                        "attribute":"New vs Returning",
+                                        "operator":"IsNot",
+                                        "values":[
+                                            "new visitor"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-targeting-rules-{campaign-targeting-rule-id}-put",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-targeting-rules-campaign-targeting-rule-id-put"
+            }
+        },
+        "/sites/{site-id}/{configuration}/campaigns/{campaign-id}/scripts":{
+            "get":{
+                "summary":"Read Campaign Scripts",
+                "operationId":"getCampaignScripts",
+                "description":"The *Campaign Scripts* endpoint returns the list of campaign scripts previously added to the campaign (not supported for server-side campaigns)",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/configuration"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Campaign scripts",
+                        "schema":{
+                            "title":"campaign scripts",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a campaign script"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of a script"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description for the script"
+                                },
+                                "content":{
+                                    "type":"string",
+                                    "description":"Content of the script"
+                                }
+                            },
+                            "required":[
+                                "id",
+                                "name"
+                            ],
+                            "example":{
+                                "items":[
+                                    {
+                                        "id":"NDMyNDMy",
+                                        "name":"Script 1",
+                                        "description":"My first script",
+                                        "content":"var pageViews = visitor.getData( 'Page viewed' );\nconsole.log( 'Number of page views: ' + pageViews);"
+                                    },
+                                    {
+                                        "id":"NDMyNDQ0",
+                                        "name":"Script 2",
+                                        "description":"My second script",
+                                        "content":"console.log( 'test' );"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-{configuration}-campaigns-{campaign-id}-scripts-get",
+                "x-filename-id":"sites-site-id-configuration-campaigns-campaign-id-scripts-get"
+            },
+            "post":{
+                "summary":"Create Campaign Script",
+                "operationId":"postCampaignScript",
+                "description":"The *Campaign Scripts* endpoint creates a script to run within a campaign (not supported for server-side campaigns)",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/configuration"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/script-content"
+                    }
+                ],
+                "responses":{
+                    "201":{
+                        "description":"Campaign script",
+                        "schema":{
+                            "title":"script",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a campaign script"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of a script"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description for the script"
+                                },
+                                "content":{
+                                    "type":"string",
+                                    "description":"Content of the script"
+                                }
+                            },
+                            "example":{
+                                "id":"NDMyNDQ0",
+                                "name":"Script 1",
+                                "description":"My first script",
+                                "content":"var pageViews = visitor.getData( 'Page viewed' );\nconsole.log( 'Number of page views: ' + pageViews);"
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-{configuration}-campaigns-{campaign-id}-scripts-post",
+                "x-filename-id":"sites-site-id-configuration-campaigns-campaign-id-scripts-post"
+            }
+        },
+        "/sites/{site-id}/sandbox/campaigns/{campaign-id}/scripts/{script-id}":{
+            "put":{
+                "summary":"Update Campaign Script",
+                "operationId":"putCampaignScript",
+                "description":"The *Campaign Scripts* endpoint updates a campaign script. You can do partial updates by providing the properties you want to update in the request body. Any properties which are not specified will remain unchanged",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/script-id"
+                    },
+                    {
+                        "$ref":"#/parameters/script-content"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Campaign script",
+                        "schema":{
+                            "title":"script",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a campaign script"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of a script"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description for the script"
+                                },
+                                "content":{
+                                    "type":"string",
+                                    "description":"Content of the script"
+                                }
+                            },
+                            "example":{
+                                "id":"NDMyNDQ0",
+                                "name":"Script 1",
+                                "description":"My first script",
+                                "content":"var pageViews = visitor.getData( 'Page viewed' );\nconsole.log( 'Number of page views: ' + pageViews);"
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-scripts-{script-id}-put",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-scripts-script-id-put"
+            }
+        },
+        "/sites/{site-id}/{configuration}/campaigns/{campaign-id}/elements":{
+            "get":{
+                "summary":"Read Campaign Elements",
+                "operationId":"getCampaignElements",
+                "description":"The *Campaign Elements* endpoint returns the list of all elements under test within a campaign",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/configuration"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Campaign elements",
+                        "schema":{
+                            "title":"elements",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a campaign element"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Display name of the campaign element"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description for the element"
+                                },
+                                "elementId":{
+                                    "type":"string",
+                                    "description":"HTML node id attribute to be used for the element's content"
+                                },
+                                "url":{
+                                    "type":"object",
+                                    "description":"The url contains details about where on the site the element is (not) present (not applicable to server-side campaigns)"
+                                },
+                                "url.preview":{
+                                    "type":"string",
+                                    "description":"Preview URL for the campaign element"
+                                },
+                                "url.includes":{
+                                    "type":"string",
+                                    "description":"URL masks for the pages where the campaign element should be located"
+                                },
+                                "url.excludes":{
+                                    "type":"string",
+                                    "description":"URL masks for the pages where the campaign element should not be located. Excluded URLs have higher priority than the included ones"
+                                }
+                            },
+                            "example":{
+                                "items":[
+                                    {
+                                        "id":"NDMyNDMy",
+                                        "name":"Element1",
+                                        "description":"My first element",
+                                        "elementId":"",
+                                        "url":{
+                                            "preview":"http://site.com/",
+                                            "includes":[
+                                                "http://site.com/",
+                                                "http://site.com/?*"
+                                            ],
+                                            "excludes":[
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "id":"NDMyNDQ0",
+                                        "name":"Element2",
+                                        "description":"My second element",
+                                        "elementId":"",
+                                        "url":{
+                                            "preview":"http://site.com/",
+                                            "includes":[
+                                                "http://site.com/",
+                                                "http://site.com/?*"
+                                            ],
+                                            "excludes":[
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-{configuration}-campaigns-{campaign-id}-elements-get",
+                "x-filename-id":"sites-site-id-configuration-campaigns-campaign-id-elements-get"
+            },
+            "post":{
+                "summary":"Create Campaign Element",
+                "operationId":"postCampaignElement",
+                "description":"The *Campaigns Elements* endpoint creates an element to be tested within a campaign",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/configuration"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/element-content"
+                    }
+                ],
+                "responses":{
+                    "201":{
+                        "description":"Campaign element",
+                        "schema":{
+                            "title":"element",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a campaign element"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Name of the campaign element"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description for the element"
+                                },
+                                "elementId":{
+                                    "type":"string",
+                                    "description":"HTML node id attribute to be used for the element's content"
+                                },
+                                "url":{
+                                    "type":"object",
+                                    "description":"The url contains details about where on the site the element is (not) present (not applicable to server-side campaigns)"
+                                },
+                                "url.preview":{
+                                    "type":"string",
+                                    "description":"Preview URL for the campaign element"
+                                },
+                                "url.includes":{
+                                    "type":"string",
+                                    "description":"URL masks for the pages where the campaign element should be located"
+                                },
+                                "url.excludes":{
+                                    "type":"string",
+                                    "description":"URL masks for the pages where the campaign element should not be located. Excluded URLs have higher priority than the included ones"
+                                }
+                            },
+                            "example":{
+                                "id":"NDMyNDQ0",
+                                "name":"Element1",
+                                "description":"My first element",
+                                "elementId":"search-box",
+                                "url":{
+                                    "preview":"http://site.com/",
+                                    "includes":[
+                                        "http://site.com/",
+                                        "http://site.com/?*"
+                                    ],
+                                    "excludes":[
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-{configuration}-campaigns-{campaign-id}-elements-post",
+                "x-filename-id":"sites-site-id-configuration-campaigns-campaign-id-elements-post"
+            }
+        },
+        "/sites/{site-id}/{configuration}/campaigns/{campaign-id}/elements/{element-id}":{
+            "delete":{
+                "summary":"Delete Element",
+                "operationId":"deleteElement",
+                "description":"The *Campaign Elements* endpoint deletes the element from the campaign",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/configuration"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/element-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Deleted successfully"
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-{configuration}-campaigns-{campaign-id}-elements-{element-id}-delete",
+                "x-filename-id":"sites-site-id-configuration-campaigns-campaign-id-elements-element-id-delete"
+            },
+            "put":{
+                "summary":"Update Element",
+                "operationId":"updateElement",
+                "description":"The *Campaign Elements* endpoint updates an existing element from the campaign",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/configuration"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/element-id"
+                    },
+                    {
+                        "$ref":"#/parameters/element-content"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Campaign element",
+                        "schema":{
+                            "title":"element",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a campaign element"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Name of the campaign element"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description":"Description for the element"
+                                },
+                                "elementId":{
+                                    "type":"string",
+                                    "description":"HTML node id attribute to be used for the element's content"
+                                },
+                                "url":{
+                                    "type":"object",
+                                    "description":"The url contains details about where on the site the element is (not) present (not applicable to server-side campaigns)"
+                                },
+                                "url.preview":{
+                                    "type":"string",
+                                    "description":"Preview URL for the campaign element"
+                                },
+                                "url.includes":{
+                                    "type":"string",
+                                    "description":"URL masks for the pages where the campaign element should be located"
+                                },
+                                "url.excludes":{
+                                    "type":"string",
+                                    "description":"URL masks for the pages where the campaign element should not be located. Excluded URLs have higher priority than the included ones"
+                                }
+                            },
+                            "example":{
+                                "id":"NDMyNDQ0",
+                                "name":"Element1",
+                                "description":"My first element",
+                                "elementId":"search-box",
+                                "url":{
+                                    "preview":"http://site.com/",
+                                    "includes":[
+                                        "http://site.com/",
+                                        "http://site.com/?*"
+                                    ],
+                                    "excludes":[
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-{configuration}-campaigns-{campaign-id}-elements-{element-id}-put",
+                "x-filename-id":"sites-site-id-configuration-campaigns-campaign-id-elements-element-id-put"
+            }
+        },
+        "/sites/{site-id}/{configuration}/campaigns/{campaign-id}/elements/{element-id}/variants":{
+            "get":{
+                "summary":"Read Campaign Element Variants",
+                "operationId":"getCampaignVariants",
+                "description":"The *Campaign Element Variants* endpoint returns the collection of all variants within a campaign element",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/configuration"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/element-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Campaign element variants",
+                        "schema":{
+                            "title":"variants",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a campaign variant"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Name of a campaign variant"
+                                },
+                                "content":{
+                                    "type":"string",
+                                    "description":"HTML content of a campaign variant (not applicable to Default variants and server-side campaigns)"
+                                },
+                                "isDefault":{
+                                    "type":"boolean",
+                                    "description":"Indicates whether the variant is the default variant of the element - the original page variant. HTML content cannot be set for Default variants. There can only be one default variant in an element. There must be at least one default variant in an element."
+                                },
+                                "isControl":{
+                                    "type":"boolean",
+                                    "description":"Indicates whether the variant is the control variant of the element. Control variants are used as a baseline for performance tracking in the reports. There can only be one control variant in an element. There must be at least one control variant in an element."
+                                },
+                                "weight":{
+                                    "type":"number",
+                                    "format":"integer",
+                                    "description":"Weight is used to control the variant generation frequency - the value is specified as a percentage.",
+                                    "minimum":0,
+                                    "maximum":100
+                                }
+                            },
+                            "example":{
+                                "items":[
+                                    {
+                                        "id":"NDMyNDMy",
+                                        "name":"Default",
+                                        "content":"",
+                                        "isDefault":true,
+                                        "isControl":false,
+                                        "weight":60
+                                    },
+                                    {
+                                        "id":"NDMyNDQ0",
+                                        "name":"Variant2",
+                                        "content":"<span>Search</search>",
+                                        "isDefault":false,
+                                        "isControl":true,
+                                        "weight":40
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-{configuration}-campaigns-{campaign-id}-elements-{element-id}-variants-get",
+                "x-filename-id":"sites-site-id-configuration-campaigns-campaign-id-elements-element-id-variants-get"
+            }
+        },
+        "/sites/{site-id}/sandbox/campaigns/{campaign-id}/elements/{element-id}/variants":{
+            "post":{
+                "summary":"Create Campaign Element Variant",
+                "operationId":"getCampaignVariant",
+                "description":"The *Campaign Element Variants* endpoint creates a variant for a specific campaign element",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/element-id"
+                    },
+                    {
+                        "$ref":"#/parameters/variant-content"
+                    }
+                ],
+                "responses":{
+                    "201":{
+                        "description":"Campaign element variant",
+                        "schema":{
+                            "title":"variants",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a campaign variant"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Name of a campaign variant"
+                                },
+                                "content":{
+                                    "type":"string",
+                                    "description":"HTML content of a campaign variant (not applicable to Default variants and server-side campaigns)"
+                                },
+                                "isDefault":{
+                                    "type":"boolean",
+                                    "description":"Indicates whether the variant is the default variant of the element - the original page variant. HTML content cannot be set for Default variants. There can only be one default variant in an element. There must be at least one default variant in an element."
+                                },
+                                "isControl":{
+                                    "type":"boolean",
+                                    "description":"Indicates whether the variant is the control variant of the element. Control variants are used as a baseline for performance tracking in the reports. There can only be one control variant in an element. There must be at least one control variant in an element."
+                                },
+                                "weight":{
+                                    "type":"number",
+                                    "format":"integer",
+                                    "description":"Weight is used to control the variant generation frequency - the value is specified as a percentage.",
+                                    "minimum":0,
+                                    "maximum":100
+                                }
+                            },
+                            "example":{
+                                "id":"NDMyNDQ0",
+                                "name":"Variant2",
+                                "content":"<span>Search</search>",
+                                "isDefault":false,
+                                "isControl":true,
+                                "weight":100
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-elements-{element-id}-variants-post",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-elements-element-id-variants-post"
+            }
+        },
+        "/sites/{site-id}/sandbox/campaigns/{campaign-id}/elements/{element-id}/variants/{variant-id}":{
+            "put":{
+                "summary":"Update Campaign Element Variant",
+                "operationId":"putCampaignVariant",
+                "description":"The *Campaign Element Variants* endpoint updates a variant. You can do partial updates by providing the properties you want to update in the request body. Any properties which are not specified will remain unchanged",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/element-id"
+                    },
+                    {
+                        "$ref":"#/parameters/variant-id"
+                    },
+                    {
+                        "$ref":"#/parameters/variant-content"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Campaign element variant",
+                        "schema":{
+                            "title":"variant",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a campaign variant"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Name of a campaign variant"
+                                },
+                                "content":{
+                                    "type":"string",
+                                    "description":"HTML content of a campaign variant (not applicable to Default variants and server-side campaigns)"
+                                },
+                                "isDefault":{
+                                    "type":"boolean",
+                                    "description":"Indicates whether the variant is the default variant of the element - the original page variant. HTML content cannot be set for Default variants. There can only be one default variant in an element. There must be at least one default variant in an element."
+                                },
+                                "isControl":{
+                                    "type":"boolean",
+                                    "description":"Indicates whether the variant is the control variant of the element. Control variants are used as a baseline for performance tracking in the reports. There can only be one control variant in an element. There must be at least one control variant in an element."
+                                },
+                                "weight":{
+                                    "type":"number",
+                                    "format":"integer",
+                                    "description":"Weight is used to control the variant generation frequency - the value is specified as a percentage.",
+                                    "minimum":0,
+                                    "maximum":100
+                                }
+                            },
+                            "example":{
+                                "id":"NDMyNDQ0",
+                                "name":"Variant2",
+                                "content":"<span>Search</search>",
+                                "isDefault":false,
+                                "isControl":true,
+                                "weight":100
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-elements-{element-id}-variants-{variant-id}-put",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-elements-element-id-variants-variant-id-put"
+            },
+            "delete":{
+                "summary":"Delete Campaign Element Variant",
+                "operationId":"deleteCampaignVariant",
+                "description":"The *Campaign Elements* endpoint deletes the variant from the element",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/element-id"
+                    },
+                    {
+                        "$ref":"#/parameters/variant-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Deleted successfully"
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-elements-{element-id}-variants-{variant-id}-delete",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-elements-element-id-variants-variant-id-delete"
+            }
+        },
+        "/sites/{site-id}/sandbox/campaigns/{campaign-id}/content-targeting-rules":{
+            "get":{
+                "summary":"Read Content Targeting Rules",
+                "operationId":"getContentTargetingRules",
+                "description":"The *Content Targeting Rules* endpoint returns the list of rules under which specific campaign content would generate. Content targeting rules can be used to target specific campaign content to a customer segment which meets the specified conditions. If there are multiple rules, they are executed in the same order as in this list.",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Content targeting rules",
+                        "schema":{
+                            "title":"content targeting rules",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a content targeting rule"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Name of a content targeting rule"
+                                },
+                                "isEnabled":{
+                                    "type":"boolean",
+                                    "description":"Indicated whether the rule is active"
+                                },
+                                "calculateOnce":{
+                                    "type":"boolean",
+                                    "description":"*true* means that the rule is evaluated only once, *false* means that the rule will be evaluated on every campaign view"
+                                },
+                                "conditions":{
+                                    "type":"array",
+                                    "items":{
+                                        "$ref":"#/definitions/condition"
+                                    },
+                                    "description":"An array of conditions which describe the targeted audience"
+                                },
+                                "content":{
+                                    "type":"array",
+                                    "items":{
+                                        "$ref":"#/definitions/targetedContent"
+                                    },
+                                    "description":"An array of element variants to be generated if the conditions are met. Note that if *no* content is specified (empty array or omitted in the request) all variants will be included with weights: 100. If a variant exists for the campaign but is not specified in the request it will be included with a weight of 100. For example, given an element 'Menu' with variants 'Default' and 'Highlighted', in order to target 'Highlighted' only, you must include both variants in the request with weights 0 and 100, respectively."
+                                }
+                            },
+                            "example":{
+                                "items":[
+                                    {
+                                        "id":"FDFK34",
+                                        "name":"Tablets w_o purchases",
+                                        "isEnabled":true,
+                                        "calculateOnce":false,
+                                        "conditions":[
+                                            {
+                                                "attribute":"Device Type",
+                                                "operator":"Is",
+                                                "values":[
+                                                    "Tablet"
+                                                ]
+                                            },
+                                            {
+                                                "attribute":"New vs Returning",
+                                                "operator":"Is",
+                                                "values":[
+                                                    "new visitor"
+                                                ]
+                                            },
+                                            {
+                                                "attribute":"total_purchases_value",
+                                                "operator":"Is",
+                                                "values":[
+                                                    "0"
+                                                ]
+                                            }
+                                        ],
+                                        "content":[
+                                            {
+                                                "variantId":"NDMyNDMy",
+                                                "isControl":true,
+                                                "weight":70
+                                            },
+                                            {
+                                                "variantId":"NDMyNDQ0",
+                                                "isControl":false,
+                                                "weight":30
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-content-targeting-rules-get",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-content-targeting-rules-get"
+            },
+            "post":{
+                "summary":"Create Content Targeting Rules",
+                "operationId":"postContentTargetingRules",
+                "description":"The *Content Targeting Rules* endpoint creates a rule within the collections under which specific campaign content would generate. Content targeting rules can be used to target specific campaign content to a customer segment which meets the specified conditions.",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/content-targeting-rules-content"
+                    }
+                ],
+                "responses":{
+                    "201":{
+                        "description":"Content targeting rules",
+                        "schema":{
+                            "title":"content targeting rules",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a content targeting rule"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Name of a content targeting rule"
+                                },
+                                "isEnabled":{
+                                    "type":"boolean",
+                                    "description":"Indicates whether the rule is active. New rules are always created as enabled."
+                                },
+                                "calculateOnce":{
+                                    "type":"boolean",
+                                    "description":"*true* means that the rule is evaluated only once, *false* means that the rule will be evaluated on every campaign view. Defaults to *false* if not specified. "
+                                },
+                                "conditions":{
+                                    "type":"array",
+                                    "items":{
+                                        "$ref":"#/definitions/condition"
+                                    },
+                                    "description":"An array of conditions which describe the targeted audience"
+                                },
+                                "content":{
+                                    "type":"array",
+                                    "items":{
+                                        "$ref":"#/definitions/targetedContent"
+                                    },
+                                    "description":"An array of element variants to be generated if the conditions are met. Note that if *no* content is specified (empty array or omitted in the request) all variants will be included with weights: 100. If a variant exists for the campaign but is not specified in the request it will be included with a weight of 100. For example, given an element 'Menu' with variants 'Default' and 'Highlighted', in order to target 'Highlighted' only, you must include both variants in the request with weights 0 and 100, respectively."
+                                }
+                            },
+                            "example":{
+                                "id":"FDFK34",
+                                "name":"Tablets w_o purchases",
+                                "isEnabled":true,
+                                "calculateOnce":false,
+                                "conditions":[
+                                    {
+                                        "attribute":"Device Type",
+                                        "operator":"Is",
+                                        "values":[
+                                            "Tablet"
+                                        ]
+                                    },
+                                    {
+                                        "attribute":"New vs Returning",
+                                        "operator":"Is",
+                                        "values":[
+                                            "new visitor"
+                                        ]
+                                    },
+                                    {
+                                        "attribute":"total_purchases_value",
+                                        "operator":"Is",
+                                        "values":[
+                                            "0"
+                                        ]
+                                    }
+                                ],
+                                "content":[
+                                    {
+                                        "variantId":"NDMyNDMy",
+                                        "isControl":true,
+                                        "weight":70
+                                    },
+                                    {
+                                        "variantId":"NDMyNDQ0",
+                                        "isControl":false,
+                                        "weight":30
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-content-targeting-rules-post",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-content-targeting-rules-post"
+            }
+        },
+        "/sites/{site-id}/sandbox/campaigns/{campaign-id}/content-targeting-rules/{content-targeting-rule-id}":{
+            "delete":{
+                "summary":"Delete Content Targeting Rules",
+                "operationId":"deleteContentTargetingRules",
+                "description":"The *Content Targeting Rules* endpoint deletes a rule from the content targeting rules collection.",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/content-targeting-rule-id"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Deleted successfully"
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-content-targeting-rules-{content-targeting-rule-id}-delete",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-content-targeting-rules-content-targeting-rule-id-delete"
+            },
+            "put":{
+                "summary":"Update Content Targeting Rules",
+                "operationId":"putContentTargetingRules",
+                "description":"The *Content Targeting Rules* endpoint updates a rule within the collections under which specific campaign content would generate. Content targeting rules can be used to target specific campaign content to a customer segment which meets the specified conditions.",
+                "security":[
+                    {
+                        "token":[
+                        ]
+                    }
+                ],
+                "tags":[
+                    "Campaign Settings"
+                ],
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/site-id"
+                    },
+                    {
+                        "$ref":"#/parameters/campaign-id"
+                    },
+                    {
+                        "$ref":"#/parameters/content-targeting-rules-content"
+                    },
+                    {
+                        "$ref":"#/parameters/content-targeting-rule-id"
+                    }
+                ],
+                "responses":{
+                    "201":{
+                        "description":"Content targeting rules",
+                        "schema":{
+                            "title":"content targeting rules",
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string",
+                                    "description":"Unique identifier of a content targeting rule"
+                                },
+                                "name":{
+                                    "type":"string",
+                                    "description":"Name of a content targeting rule"
+                                },
+                                "isEnabled":{
+                                    "type":"boolean",
+                                    "description":"Indicates whether the rule is active. New rules are always created as enabled."
+                                },
+                                "calculateOnce":{
+                                    "type":"boolean",
+                                    "description":"*true* means that the rule is evaluated only once, *false* means that the rule will be evaluated on every campaign view. Defaults to *false* if not specified. "
+                                },
+                                "conditions":{
+                                    "type":"array",
+                                    "items":{
+                                        "$ref":"#/definitions/condition"
+                                    },
+                                    "description":"An array of conditions which describe the targeted audience"
+                                },
+                                "content":{
+                                    "type":"array",
+                                    "items":{
+                                        "$ref":"#/definitions/targetedContent"
+                                    },
+                                    "description":"An array of element variants to be generated if the conditions are met. Note that if *no* content is specified (empty array or omitted in the request) all variants will be included with weights: 100. If a variant exists for the campaign but is not specified in the request it will be included with a weight of 100. For example, given an element 'Menu' with variants 'Default' and 'Highlighted', in order to target 'Highlighted' only, you must include both variants in the request with weights 0 and 100, respectively."
+                                }
+                            },
+                            "example":{
+                                "id":"FDFK34",
+                                "name":"Tablets w_o purchases",
+                                "isEnabled":true,
+                                "calculateOnce":false,
+                                "conditions":[
+                                    {
+                                        "attribute":"Device Type",
+                                        "operator":"Is",
+                                        "values":[
+                                            "Tablet"
+                                        ]
+                                    },
+                                    {
+                                        "attribute":"New vs Returning",
+                                        "operator":"Is",
+                                        "values":[
+                                            "new visitor"
+                                        ]
+                                    },
+                                    {
+                                        "attribute":"total_purchases_value",
+                                        "operator":"Is",
+                                        "values":[
+                                            "0"
+                                        ]
+                                    }
+                                ],
+                                "content":[
+                                    {
+                                        "variantId":"NDMyNDMy",
+                                        "isControl":true,
+                                        "weight":70
+                                    },
+                                    {
+                                        "variantId":"NDMyNDQ0",
+                                        "isControl":false,
+                                        "weight":30
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-internal-id":"sites-{site-id}-sandbox-campaigns-{campaign-id}-content-targeting-rules-{content-targeting-rule-id}-put",
+                "x-filename-id":"sites-site-id-sandbox-campaigns-campaign-id-content-targeting-rules-content-targeting-rule-id-put"
+            }
+        }
+    },
+    "tags":[
+        {
+            "name":"Campaign Settings",
+            "description":"The operations from the Campaign Settings category."
+        },
+        {
+            "name":"Publishing",
+            "description":"The operations from the Publishing category."
+        },
+        {
+            "name":"Site Settings",
+            "description":"The operations from the Site Settings category."
+        }
+    ]
+}
