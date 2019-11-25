@@ -1,0 +1,2560 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1.3",
+    "title": "Dynamics 365 CE Admin API",
+    "description": "Provides the ability to manage the instances in a Dynamics 365 Customer Engagement Tenant."
+  },
+  "host": "admin.services.crm.dynamics.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/api/v1.3/Currencies": {
+      "get": {
+        "tags": [
+          "Currencies"
+        ],
+        "summary": "Get Customer Engagement Currencies",
+        "operationId": "GetCurrencies",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Available Currencies",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Region"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.3/Flights": {
+      "get": {
+        "tags": [
+          "Flights"
+        ],
+        "summary": "Get all public flights",
+        "operationId": "Flights_Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all flights",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Flight"
+              }
+            }
+          },
+          "404": {
+            "description": "No public flight was found"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Flights/{id}/AddAudience/{instanceId}": {
+      "post": {
+        "tags": [
+          "Flights"
+        ],
+        "summary": "Adds an audience to a flight",
+        "operationId": "Flights_AddAudience",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the flight",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Id of the tenant's instance",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Added the audience to the flight"
+          },
+          "400": {
+            "description": "There was an issue with the parameters validation"
+          },
+          "409": {
+            "description": "The audience is already in the flight"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Flights/{id}/RemoveAudience/{instanceId}": {
+      "post": {
+        "tags": [
+          "Flights"
+        ],
+        "summary": "Removes an audience from a flight",
+        "operationId": "Flights_RemoveAudience",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the flight",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "Id of the tenant's instance",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "Removed the audience from the flight"
+          },
+          "400": {
+            "description": "There was an issue with the parameters validation"
+          },
+          "404": {
+            "description": "The audience is not in the flight"
+          }
+        }
+      }
+    },
+    "/api/v1.3/InstanceBackups": {
+      "get": {
+        "tags": [
+          "InstanceBackups"
+        ],
+        "summary": "Get Customer Engagement Instance Backups",
+        "operationId": "GetInstanceBackups",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "instanceId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available Instance Backups",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InstanceBackup"
+              }
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "InstanceBackups"
+        ],
+        "summary": "Backup Customer Engagement Instance",
+        "operationId": "BackupInstance",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "backupInfo",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewInstanceBackup"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Backup operation started",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "400": {
+            "description": "There was an issue either validating or starting the backup operation",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.3/InstanceBackups/{instanceId}/{restorePointId}": {
+      "get": {
+        "tags": [
+          "InstanceBackups"
+        ],
+        "summary": "Get Customer Engagement Instance Backup",
+        "operationId": "GetInstanceBackup",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The instance id of an instance from which to retrieve the backup",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "restorePointId",
+            "in": "path",
+            "description": "The restore point of an existing instance backup",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An Instance Backup",
+            "schema": {
+              "$ref": "#/definitions/InstanceBackup"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Instances": {
+      "get": {
+        "tags": [
+          "Instances"
+        ],
+        "summary": "Get Customer Engagement Instances",
+        "operationId": "GetInstances",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Instances",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Instance"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.3/Instances/{id}": {
+      "get": {
+        "tags": [
+          "Instances"
+        ],
+        "summary": "Get Customer Engagement Instance",
+        "operationId": "GetInstance",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of an instance",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instance",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Instances/GetProtectedInstances": {
+      "get": {
+        "tags": [
+          "Instances"
+        ],
+        "summary": "Retrieve Tenant Protected instances",
+        "operationId": "Instances_GetProtectedInstances",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "GetProtectedInstances",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Instance"
+              }
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Instances/Provision": {
+      "put": {
+        "tags": [
+          "Instances"
+        ],
+        "summary": "Create Customer Engagement Instance",
+        "operationId": "ProvisionInstance",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "newInstance",
+            "in": "body",
+            "description": "The allowed state for the new instance",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewInstance"
+            }
+          },
+          {
+            "name": "validate",
+            "in": "query",
+            "description": "True/False to validate or create",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If validate was set, validation was successful.  If validation was not set, the instance was provisioned without requiring an operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "operationId": "00000000-0000-0000-0000-000000000000",
+                  "status": "Succeeded",
+                  "errors": [],
+                  "information": [],
+                  "operationLocation": null,
+                  "resourceLocation": null,
+                  "context": {
+                    "items": {
+                      "instanceState": "Pending",
+                      "admin.InstanceId": "5adcd060-695e-4ea7-91d7-bac1c653ce44"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "202": {
+            "description": "Provision operation started",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "operationId": "cbbbc4b2-7bbf-4f9e-be67-6c54618105f9",
+                  "status": "NotStarted",
+                  "errors": [],
+                  "information": [],
+                  "operationLocation": null,
+                  "resourceLocation": null,
+                  "context": {
+                    "items": {
+                      "instanceState": "Pending",
+                      "admin.InstanceId": "ed9d674a-2ab6-4502-9622-b3e090a9e0b8"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "There was an issue either validating or starting the provision operation",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "operationId": "00000000-0000-0000-0000-000000000000",
+                  "status": "FailedToCreate",
+                  "errors": [
+                    {
+                      "subject": "ProvisioningJobCreation",
+                      "description": "There was an error creating the provisioning job.",
+                      "code": null
+                    }
+                  ],
+                  "information": [],
+                  "operationLocation": null,
+                  "resourceLocation": null,
+                  "context": {
+                    "items": {
+                      "instanceState": "FailedProvisioning"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.3/Instances/Lock": {
+      "post": {
+        "tags": [
+          "Instances"
+        ],
+        "summary": "Lock all the instances associated with the tenant",
+        "operationId": "Instances_LockTenantProtectedInstances",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "lockTenantKeyData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LockTenantKeyData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lock tenant protected instances Operation executed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "lock tenant protected instances Operation Started",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "400": {
+            "description": "There was an error when starting the lock operation",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Instances/{id}/Unlock": {
+      "post": {
+        "tags": [
+          "Instances"
+        ],
+        "summary": "Unlock the instance using instanceId",
+        "operationId": "Instances_UnlockTenantProtectedInstances",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the instance to unlock",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Unlock tenant protected instances Operation executed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Unlock tenant protected instances Operation Started",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "400": {
+            "description": "There was an error when starting the unlock operation",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Instances/{targetInstanceId}/Reset": {
+      "post": {
+        "tags": [
+          "Instances"
+        ],
+        "summary": "Reset Instance",
+        "operationId": "ResetInstance",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "targetInstanceId",
+            "in": "path",
+            "description": "The id of the target instance",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resetRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sandbox Operation completed",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Reset Instance Operation Started",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "400": {
+            "description": "There was an issue either validating or starting the reset operation",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Instances/{id}/ProtectWithTenantKey": {
+      "post": {
+        "tags": [
+          "Instances"
+        ],
+        "summary": "Protects an instance with the tenant's key",
+        "operationId": "Instances_ProtectWithTenantKey",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the instance to protect",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Protect Instance with tenant key Operation executed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Protect Instance with tenant key Operation Started",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "400": {
+            "description": "There was an error when starting the protect operation",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Instances/{targetInstanceId}/Restore": {
+      "post": {
+        "tags": [
+          "Instances"
+        ],
+        "summary": "Restore Customer Engagement Instance",
+        "operationId": "RestoreInstance",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "targetInstanceId",
+            "in": "path",
+            "description": "The id of the target instance",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "instanceRestorePoint",
+            "in": "body",
+            "description": "The restore point of an existing instance backup",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InstanceRestorePoint"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Restore Instance Operation Started",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "400": {
+            "description": "There was an issue either validating or starting the restore operation",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Instances/{id}/ProtectWithMicrosoftKey": {
+      "post": {
+        "tags": [
+          "Instances"
+        ],
+        "summary": "Protects an Instance with default Microsoft key",
+        "operationId": "Instances_ProtectWithMicrosoftKey",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the instance to protect",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Protect Instance with Microsoft key Operation executed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Protect Instance with Microsoft key Operation Started",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "400": {
+            "description": "There was an error when starting the protect operation",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Instances/{id}/UpdateAdminMode": {
+      "post": {
+        "tags": [
+          "Instances"
+        ],
+        "summary": "Update Customer Engagement Instance Admin Mode Settings",
+        "operationId": "UpdateInstanceAdminMode",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the target instance",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "adminModeSettings",
+            "in": "body",
+            "description": "The admin mode settings to update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InstanceAdminModeSettings"
+            }
+          },
+          {
+            "name": "validate",
+            "in": "query",
+            "description": "True/False to validate or update",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Instance Admin Mode Operation Executed",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "400": {
+            "description": "There was an issue either validating or executing the update admin mode update operation",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Instances/{id}/Delete": {
+      "delete": {
+        "tags": [
+          "Instances"
+        ],
+        "summary": "Delete Customer Engagement Instance",
+        "operationId": "DeleteInstance",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the instance to delete",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "validate",
+            "in": "query",
+            "description": "True/False to validate or delete",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If validate was set, validation was executed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Delete Instance Operation Started",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "400": {
+            "description": "There was an issue either validating or starting the delete operation",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/InstanceTypeInfo": {
+      "get": {
+        "tags": [
+          "InstanceTypeInfo"
+        ],
+        "summary": "Get Customer Engagement Instance Types Information",
+        "operationId": "GetInstanceTypesInfo",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Instance Types Information",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InstanceTypeInfo"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.3/InstanceTypeInfo/{type}": {
+      "get": {
+        "tags": [
+          "InstanceTypeInfo"
+        ],
+        "summary": "Get Customer Engagement Instance Type Information",
+        "operationId": "GetInstanceTypeInfo",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "description": "An instance type",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "None",
+              "Production",
+              "Sandbox",
+              "Support",
+              "Preview",
+              "Trial",
+              "Default",
+              "Developer"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instance Type Information",
+            "schema": {
+              "$ref": "#/definitions/InstanceTypeInfo"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Keys": {
+      "get": {
+        "tags": [
+          "Keys"
+        ],
+        "summary": "Retrieve Available Tenant Protection Keys",
+        "operationId": "Keys_RetrieveAvailableTenantProtectionKeys",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "RetrieveAvailableTenantProtectionKeys",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Key"
+              }
+            },
+            "examples": {
+              "application/json": [
+                [
+                  {
+                    "tenantId": "2d145c60-ff50-4fd0-a3a6-87ae8a750cec",
+                    "keyName": "exampleKey",
+                    "keyState": 3,
+                    "createdOn": "2019-04-02T00:00:00+00:00",
+                    "lockedOn": null
+                  },
+                  {
+                    "tenantId": "7065a84e-f4c0-4578-94d6-e1aba81bb1cc",
+                    "keyName": "exampleKey",
+                    "keyState": 3,
+                    "createdOn": "2019-04-02T00:00:00+00:00",
+                    "lockedOn": null
+                  },
+                  {
+                    "tenantId": "88226c35-d98c-40ab-8894-8c2b7f7c4f06",
+                    "keyName": "exampleKey",
+                    "keyState": 3,
+                    "createdOn": "2019-04-02T00:00:00+00:00",
+                    "lockedOn": null
+                  }
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.3/Keys/RetrieveTenantKey": {
+      "get": {
+        "tags": [
+          "Keys"
+        ],
+        "summary": "Retrieve current Tenant Protection Key",
+        "operationId": "Keys_RetrieveTenantProtectionKey",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "RetrieveTenantProtectionKey",
+            "schema": {
+              "$ref": "#/definitions/Key"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Keys/Import": {
+      "post": {
+        "tags": [
+          "Keys"
+        ],
+        "summary": "Import Key",
+        "operationId": "Keys_Import",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "importKeyData",
+            "in": "body",
+            "description": "keyName:     The name of the key to import\r\nkeyType:     The type of the key to import\r\nkeyPassword: The password of the key\r\nrawData:     The raw data of the key's certificate as a byte array",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportKeyData"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Import Key Operation Started",
+            "schema": {
+              "enum": [
+                "NotStarted",
+                "Pending",
+                "InProgress",
+                "InputRequired",
+                "Canceled",
+                "Failed",
+                "Completed",
+                "Scheduled"
+              ],
+              "type": "string"
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "operationId": "e18bdbf7-65e6-4648-b54e-6189a11c4d4e",
+                  "status": "NotStarted",
+                  "errors": [],
+                  "information": [],
+                  "operationLocation": null,
+                  "resourceLocation": null,
+                  "context": {
+                    "items": {
+                      "importKeyState": "Pending",
+                      "admin.InstanceId": "d4049674-4962-4226-a5c9-4e8086f96b4a"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "There was an issue when either validating or starting importing the key",
+            "schema": {
+              "enum": [
+                "NotStarted",
+                "Pending",
+                "InProgress",
+                "InputRequired",
+                "Canceled",
+                "Failed",
+                "Completed",
+                "Scheduled"
+              ],
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.3/Keys/Generate": {
+      "post": {
+        "tags": [
+          "Keys"
+        ],
+        "summary": "Generate Key.",
+        "operationId": "Keys_Generate",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "generateKeyData",
+            "in": "body",
+            "description": "Class that contains the required information for generating the key",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateKeyData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Key generated",
+            "schema": {
+              "format": "byte",
+              "type": "string"
+            },
+            "examples": {
+              "application/json": [
+                "Qnl0ZUFycmF5Q29udGVudEV4YW1wbGU="
+              ]
+            }
+          },
+          "400": {
+            "description": "There was an issue when either validating or generating the key",
+            "schema": {
+              "format": "byte",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.3/Keys/{keyName}/SetTenantProtectionKey": {
+      "post": {
+        "tags": [
+          "Keys"
+        ],
+        "summary": "Set Tenant Protection Key",
+        "operationId": "Keys_SetTenantProtectionKey",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key being set",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Set Tenant Protection Key Operation Started",
+            "schema": {
+              "enum": [
+                "NotStarted",
+                "Pending",
+                "InProgress",
+                "InputRequired",
+                "Canceled",
+                "Failed",
+                "Completed",
+                "Scheduled"
+              ],
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "There was an issue when either validating or setting the tenant protection key",
+            "schema": {
+              "enum": [
+                "NotStarted",
+                "Pending",
+                "InProgress",
+                "InputRequired",
+                "Canceled",
+                "Failed",
+                "Completed",
+                "Scheduled"
+              ],
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.3/Languages": {
+      "get": {
+        "tags": [
+          "Languages"
+        ],
+        "summary": "Get Customer Engagement Languages",
+        "operationId": "GetLanguages",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "releaseId",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available Languages",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Language"
+              }
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Notifications/{tenantId}/{userObjectId}": {
+      "get": {
+        "tags": [
+          "Notification"
+        ],
+        "summary": "Get all Notifications From Notification Service",
+        "operationId": "GetAllNotifications",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "userObjectId",
+            "in": "path",
+            "description": "The userObjectId which is the same as the adminId.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The id of the tenant.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "environments",
+            "in": "query",
+            "description": "The ids of the environments you want notifications for.",
+            "required": true,
+            "type": "array",
+            "items": {},
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Notifications",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UserNotification"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.3/Notifications": {
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "summary": "Post UserNotification to the Notification Service.",
+        "operationId": "PostUserNotification",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "userNotification",
+            "in": "body",
+            "description": "The userNotification to be posted",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserNotification"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "PostUserNotification Operation Started",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "400": {
+            "description": "There was an issue either validating or starting the PostUserNotification operation",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Operation/{id}": {
+      "get": {
+        "tags": [
+          "OperationStatus"
+        ],
+        "summary": "Get Customer Engagement Operation Status",
+        "operationId": "GetOperationStatus",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OperationStatus",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/Operation": {
+      "get": {
+        "tags": [
+          "OperationStatus"
+        ],
+        "summary": "Get Customer Engagement Operation Status",
+        "operationId": "GetOperationStatusByQuery",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "query.operationProvider",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "query.instanceId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OperationStatus",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      }
+    },
+    "/api/v1.3/ServiceVersions": {
+      "get": {
+        "tags": [
+          "ServiceVersions"
+        ],
+        "summary": "Get Customer Engagement Service Versions",
+        "operationId": "GetServiceVersions",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Available Service Versions",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ServiceVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.3/TenantApplicationIdentities": {
+      "get": {
+        "tags": [
+          "TenantApplicationIdentities"
+        ],
+        "summary": "Retrieves all TenantApplicationIdentities for a tenant.",
+        "operationId": "GetTenantApplicationIdentities",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "TenantApplicationIdentities",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TenantApplicationIdentity"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TenantApplicationIdentities"
+        ],
+        "summary": "Creates a new TenantApplicationIdentity.",
+        "operationId": "CreateTenantApplicationIdentity",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "tenantApplicationIdentity",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TenantApplicationIdentity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "New TenantApplicationIdentity created",
+            "schema": {
+              "$ref": "#/definitions/TenantApplicationIdentity"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.3/TenantApplicationIdentities/{id}": {
+      "get": {
+        "tags": [
+          "TenantApplicationIdentities"
+        ],
+        "summary": "Retrieves a TenantApplicationIdentity",
+        "operationId": "GetTenantApplicationIdentity",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of a TenantApplicationIdentity",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TenantApplicationIdentity",
+            "schema": {
+              "$ref": "#/definitions/TenantApplicationIdentity"
+            }
+          },
+          "404": {
+            "description": "NotFound"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TenantApplicationIdentities"
+        ],
+        "summary": "Deletes an existing TenantApplicationIdentity.",
+        "operationId": "DeleteTenantApplicationIdentity",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TenantApplicationIdentity is deleted."
+          }
+        }
+      }
+    },
+    "/api/v1.3/TenantApplicationIdentities/{id}/Enable": {
+      "post": {
+        "tags": [
+          "TenantApplicationIdentities"
+        ],
+        "summary": "Enables an existing TenantApplicationIdentity.",
+        "operationId": "EnableTenantApplicationIdentity",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TenantApplicationIdentity is enabled."
+          }
+        }
+      }
+    },
+    "/api/v1.3/TenantApplicationIdentities/{id}/Disable": {
+      "post": {
+        "tags": [
+          "TenantApplicationIdentities"
+        ],
+        "summary": "Disables an existing TenantApplicationIdentity.",
+        "operationId": "DisableTenantApplicationIdentity",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TenantApplicationIdentity is disabled."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Region": {
+      "required": [
+        "RegionCode",
+        "Name",
+        "Currencies"
+      ],
+      "type": "object",
+      "properties": {
+        "RegionCode": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Currencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Currency"
+          }
+        }
+      }
+    },
+    "Currency": {
+      "type": "object",
+      "properties": {
+        "Code": {
+          "maxLength": 3,
+          "minLength": 3,
+          "type": "string"
+        },
+        "Precision": {
+          "format": "int32",
+          "maximum": 4,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "Symbol": {
+          "maxLength": 4,
+          "minLength": 0,
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        }
+      }
+    },
+    "Flight": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "PublisherId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "PublisherName": {
+          "type": "string"
+        },
+        "UniqueName": {
+          "type": "string"
+        },
+        "DisplayName": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Public": {
+          "type": "boolean"
+        }
+      }
+    },
+    "InstanceBackup": {
+      "required": [
+        "Id",
+        "Status",
+        "CreatedBy",
+        "CreatedOn",
+        "ExpiresOn",
+        "Version",
+        "Label"
+      ],
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "CreatedBy": {
+          "type": "string"
+        },
+        "CreatedOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ExpiresOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        },
+        "Notes": {
+          "type": "string"
+        },
+        "Label": {
+          "type": "string"
+        },
+        "IsAzureBackup": {
+          "type": "boolean"
+        },
+        "AzureStorageInformation": {
+          "$ref": "#/definitions/AzureStorage"
+        }
+      }
+    },
+    "AzureStorage": {
+      "required": [
+        "ContainerName",
+        "StorageAccountKey",
+        "StorageAccountName"
+      ],
+      "type": "object",
+      "properties": {
+        "ContainerName": {
+          "type": "string"
+        },
+        "StorageAccountKey": {
+          "type": "string"
+        },
+        "StorageAccountName": {
+          "type": "string"
+        }
+      }
+    },
+    "NewInstanceBackup": {
+      "required": [
+        "InstanceId",
+        "Label"
+      ],
+      "type": "object",
+      "properties": {
+        "InstanceId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "Label": {
+          "type": "string"
+        },
+        "Notes": {
+          "type": "string"
+        },
+        "IsAzureBackup": {
+          "type": "boolean"
+        },
+        "AzureStorageInformation": {
+          "$ref": "#/definitions/AzureStorage"
+        }
+      }
+    },
+    "OperationStatus": {
+      "required": [
+        "OperationId",
+        "Status"
+      ],
+      "type": "object",
+      "properties": {
+        "OperationId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "Status": {
+          "enum": [
+            "None",
+            "FailedToCreate",
+            "NotStarted",
+            "Ready",
+            "Pending",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Cancelling",
+            "Cancelled",
+            "Aborting",
+            "Aborted",
+            "Tombstone",
+            "Deleting",
+            "Deleted",
+            "NotFound",
+            "Conflict"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationState"
+          }
+        },
+        "Errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemDescription"
+          }
+        },
+        "Information": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemDescription"
+          },
+          "readOnly": true
+        },
+        "OperationLocation": {
+          "type": "string"
+        },
+        "ResourceLocation": {
+          "type": "string"
+        },
+        "Context": {
+          "$ref": "#/definitions/OperationContext",
+          "readOnly": true
+        }
+      }
+    },
+    "ItemDescription": {
+      "type": "object",
+      "properties": {
+        "Subject": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Code": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationContext": {
+      "type": "object",
+      "properties": {
+        "Items": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Instance": {
+      "description": "A representation of an organization",
+      "required": [
+        "Id",
+        "UniqueName",
+        "Version",
+        "ApplicationUrl",
+        "ApiUrl",
+        "State",
+        "Type",
+        "FriendlyName",
+        "DomainName"
+      ],
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "uuid",
+          "description": "The id of the instance",
+          "type": "string"
+        },
+        "UniqueName": {
+          "description": "The unique name of the instance",
+          "type": "string"
+        },
+        "Version": {
+          "description": "The version of the instance",
+          "type": "string"
+        },
+        "ApplicationUrl": {
+          "description": "The url to the web application of the instance",
+          "type": "string"
+        },
+        "ApiUrl": {
+          "description": "The url of the web api for the instance",
+          "type": "string"
+        },
+        "State": {
+          "description": "The state of the instance",
+          "enum": [
+            "None",
+            "Ready",
+            "Pending",
+            "Inactive",
+            "Disabled",
+            "FailedProvisioning",
+            "PreparingInstance",
+            "ReadyToConfigure",
+            "Locked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InstanceState"
+          }
+        },
+        "InitialUserPrincipalName": {
+          "description": "UserPrincipalName of the initial user",
+          "type": "string"
+        },
+        "StateIsSupportedForDelete": {
+          "description": "Indicates whether the instance can be deleted",
+          "type": "boolean"
+        },
+        "AdminMode": {
+          "description": "Whether the instance is in admin mode",
+          "type": "boolean"
+        },
+        "Type": {
+          "description": "The type of the instance",
+          "enum": [
+            "None",
+            "Production",
+            "Sandbox",
+            "Support",
+            "Preview",
+            "Trial",
+            "Default",
+            "Developer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InstanceType"
+          }
+        },
+        "Purpose": {
+          "description": "The purpose of the instance",
+          "type": "string"
+        },
+        "FriendlyName": {
+          "description": "The friendly name of the instance",
+          "type": "string"
+        },
+        "DomainName": {
+          "description": "The public domain name of the instance.",
+          "type": "string"
+        },
+        "BaseLanguage": {
+          "format": "int32",
+          "description": "The base language code for the instance",
+          "type": "integer"
+        },
+        "InitialUserEmail": {
+          "description": "The object id of the user that created the instance",
+          "type": "string"
+        },
+        "SecurityGroupId": {
+          "format": "uuid",
+          "description": "The (optional) security group set for the instance.",
+          "type": "string"
+        },
+        "AdditionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NewInstance": {
+      "description": "The set of instance values that will be used to create a new instance",
+      "required": [
+        "ServiceVersionId",
+        "Type",
+        "FriendlyName",
+        "DomainName"
+      ],
+      "type": "object",
+      "properties": {
+        "Currency": {
+          "$ref": "#/definitions/Currency",
+          "description": "The Currency settings for the instance"
+        },
+        "ServiceVersionId": {
+          "format": "uuid",
+          "description": "The id of the available CRM service to use for the new instance",
+          "type": "string"
+        },
+        "Templates": {
+          "description": "The set of templates to be used when creating a new instance",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Type": {
+          "description": "The type of the instance",
+          "enum": [
+            "None",
+            "Production",
+            "Sandbox",
+            "Support",
+            "Preview",
+            "Trial",
+            "Default",
+            "Developer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InstanceType"
+          }
+        },
+        "Purpose": {
+          "description": "The purpose of the instance",
+          "type": "string"
+        },
+        "FriendlyName": {
+          "description": "The friendly name of the instance",
+          "type": "string"
+        },
+        "DomainName": {
+          "description": "The public domain name of the instance.",
+          "type": "string"
+        },
+        "BaseLanguage": {
+          "format": "int32",
+          "description": "The base language code for the instance",
+          "type": "integer"
+        },
+        "InitialUserEmail": {
+          "description": "The object id of the user that created the instance",
+          "type": "string"
+        },
+        "SecurityGroupId": {
+          "format": "uuid",
+          "description": "The (optional) security group set for the instance.",
+          "type": "string"
+        },
+        "AdditionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LockTenantKeyData": {
+      "type": "object",
+      "properties": {
+        "KeyName": {
+          "type": "string"
+        },
+        "KeyType": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "KeyPassword": {
+          "type": "string"
+        },
+        "Key": {
+          "format": "byte",
+          "type": "string"
+        }
+      }
+    },
+    "ResetRequest": {
+      "type": "object",
+      "properties": {
+        "FriendlyName": {
+          "description": "Friendly name of the instance.\r\nThis value is from the required \"Name\" input of the Reset UI and is mapped to OrganizationLifecycle.OrganizationFriendlyName in Geo config db.",
+          "type": "string"
+        },
+        "DomainName": {
+          "description": "The domain name portion for the org in the org URL, such as \"contoso\".\r\nThis value is from the required \"URL\" input of the Reset UI and is mapped to OrganizationLifecycle.DomainName in Geo config db.",
+          "type": "string"
+        },
+        "Purpose": {
+          "description": "Purpose specified for this instance in the Rest UI.\r\nThis value is from the optional \"Purpose\" input of the Reset UI and is mapped to OrganizationLifecycle.Purpose in Geo config db.",
+          "type": "string"
+        },
+        "SecurityGroupId": {
+          "format": "uuid",
+          "description": "Guid of the security group for which members will sync to this instance\r\nThis value is from the optional Security Group input of the Reset UI and is mapped to OrganizationLifecycle.SecurityGroup in Geo config db.",
+          "type": "string"
+        },
+        "TargetRelease": {
+          "description": "The name of the target release.\r\nThis is mapped a specific ReleaseName defined in ScaleGroupReleases table.",
+          "type": "string"
+        },
+        "BaseLanguageCode": {
+          "format": "int32",
+          "description": "Base language code LCID of the new instance\r\nFor example, 1033 for English.",
+          "type": "integer"
+        },
+        "Currency": {
+          "$ref": "#/definitions/Currency",
+          "description": "Gets or sets the currency."
+        },
+        "ApplicationNames": {
+          "description": "Applications to have installed initially for the new instance.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "PreferredCulture": {
+          "format": "int32",
+          "description": "Indicates if the customer prefers a certain culture for formatting for the new instance.",
+          "type": "integer"
+        },
+        "AdditionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "InstanceRestorePoint": {
+      "required": [
+        "SourceInstanceId"
+      ],
+      "type": "object",
+      "properties": {
+        "SourceInstanceId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "InstanceBackupId": {
+          "format": "uuid",
+          "description": "The Id of a legacy instance backup to use.  If set, this will be used instead of Label or RestorePoint.",
+          "type": "string"
+        },
+        "Label": {
+          "description": "The label of an existing instance backup to use.  If set, this will be used instead of RestorePoint.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "CreatedOn": {
+          "format": "date-time",
+          "description": "The CreatedOn DateTime of an existing instance backup to use.",
+          "type": "string"
+        }
+      }
+    },
+    "InformationContainer": {
+      "type": "object",
+      "properties": {
+        "Errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemDescription"
+          },
+          "readOnly": true
+        },
+        "Information": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemDescription"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "InstanceAdminModeSettings": {
+      "type": "object",
+      "properties": {
+        "OverrideUserObjectId": {
+          "format": "uuid",
+          "description": "If set, will be used instead of the user object id of the calling user.",
+          "type": "string"
+        },
+        "AdminMode": {
+          "type": "boolean"
+        },
+        "BackgroundOperationsEnabled": {
+          "type": "boolean"
+        },
+        "NotificationText": {
+          "type": "string"
+        }
+      }
+    },
+    "InstanceTypeInfo": {
+      "required": [
+        "Type",
+        "Total",
+        "Consumed"
+      ],
+      "type": "object",
+      "properties": {
+        "Type": {
+          "enum": [
+            "None",
+            "Production",
+            "Sandbox",
+            "Support",
+            "Preview",
+            "Trial",
+            "Default",
+            "Developer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InstanceType"
+          }
+        },
+        "Total": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Consumed": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "Key": {
+      "required": [
+        "TenantId"
+      ],
+      "type": "object",
+      "properties": {
+        "TenantId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "KeyName": {
+          "type": "string"
+        },
+        "KeyState": {
+          "enum": [
+            "Imported",
+            "Installing",
+            "Available",
+            "Active",
+            "Locked",
+            "InstallationFailed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Nullable`1"
+          }
+        },
+        "CreatedOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "LockedOn": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "ImportKeyData": {
+      "type": "object",
+      "properties": {
+        "KeyName": {
+          "type": "string"
+        },
+        "KeyType": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "KeyPassword": {
+          "type": "string"
+        },
+        "Key": {
+          "format": "byte",
+          "type": "string"
+        }
+      }
+    },
+    "GenerateKeyData": {
+      "type": "object",
+      "properties": {
+        "SubjectName": {
+          "type": "string"
+        },
+        "KeyPassword": {
+          "type": "string"
+        }
+      }
+    },
+    "Language": {
+      "required": [
+        "LCID",
+        "Name",
+        "LocalizedName"
+      ],
+      "type": "object",
+      "properties": {
+        "LCID": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "LocalizedName": {
+          "type": "string"
+        }
+      }
+    },
+    "EnvironmentMetadata": {
+      "description": "A representation of an EnvironmentMetadata of an UserNotification.",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "uuid",
+          "description": "The id of the EnvironmentMetadata.",
+          "type": "string"
+        },
+        "Name": {
+          "description": "The name of the EnvironmentMetadata.",
+          "type": "string"
+        },
+        "Geo": {
+          "description": "The geo of the EnvironmentMetadata.",
+          "type": "string"
+        }
+      }
+    },
+    "UserNotification": {
+      "description": "A representation of a notification that has been retrieved from/already exists in the Notification Service.",
+      "type": "object",
+      "properties": {
+        "NotificationId": {
+          "format": "uuid",
+          "description": "The id of the current notification.",
+          "type": "string"
+        },
+        "AdminId": {
+          "format": "uuid",
+          "description": "The id of the admin associated with the notification.",
+          "type": "string"
+        },
+        "TenantId": {
+          "format": "uuid",
+          "description": "The id of the tenant associated with the notification.",
+          "type": "string"
+        },
+        "CreatedAt": {
+          "format": "date-time",
+          "description": "The date and time of when the notification was created.",
+          "type": "string"
+        },
+        "Environments": {
+          "description": "The environments associated with the notification.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentMetadata"
+          }
+        },
+        "State": {
+          "description": "The state of the notification.",
+          "enum": [
+            "None",
+            "Ready",
+            "Unread",
+            "Read",
+            "Pending",
+            "Inactive",
+            "Disabled",
+            "FailedProvisioning",
+            "ReadyToConfigure",
+            "Locked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NotificationState"
+          }
+        },
+        "Priority": {
+          "description": "The priority of the notification.",
+          "enum": [
+            "Unknown",
+            "High",
+            "Low"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NotificationPriority"
+          }
+        },
+        "OrgId": {
+          "format": "uuid",
+          "description": "The id of the org associated with the notification.",
+          "type": "string"
+        },
+        "Content": {
+          "$ref": "#/definitions/NotificationContent",
+          "description": "The content associated with the notification."
+        }
+      }
+    },
+    "NotificationContent": {
+      "description": "A representation of the content associated with a notification.",
+      "type": "object",
+      "properties": {
+        "TemplateId": {
+          "description": "The id of the template associated with this NotificationContent.",
+          "type": "string"
+        },
+        "TemplateType": {
+          "description": "The type of the template associated with this NotificationContent.",
+          "type": "string"
+        },
+        "Slugs": {
+          "description": "The slugs to be populated into the NotificationContent.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "QueryOptions": {
+      "type": "object",
+      "properties": {
+        "OperationProvider": {
+          "type": "string"
+        },
+        "InstanceId": {
+          "type": "string"
+        }
+      }
+    },
+    "ServiceVersion": {
+      "required": [
+        "LocalizedName",
+        "LCID",
+        "Version",
+        "Id",
+        "Name"
+      ],
+      "type": "object",
+      "properties": {
+        "LocalizedName": {
+          "type": "string"
+        },
+        "LCID": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Version": {
+          "type": "string"
+        },
+        "Id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        }
+      }
+    },
+    "TenantApplicationIdentity": {
+      "required": [
+        "AadApplicationId",
+        "TenantId",
+        "Enabled"
+      ],
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "AadApplicationId": {
+          "format": "uuid",
+          "description": "AAD application Id",
+          "type": "string"
+        },
+        "TenantId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "Enabled": {
+          "type": "boolean"
+        },
+        "CreatedOn": {
+          "format": "date-time",
+          "description": "Entity created on",
+          "type": "string"
+        },
+        "ModifiedOn": {
+          "format": "date-time",
+          "description": "Entity last modified on",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "oauth2": {
+      "type": "oauth2",
+      "description": "",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.windows.net/common/oauth2/authorize",
+      "tokenUrl": "https://login.windows.net/common/oauth2/token",
+      "scopes": {}
+    }
+  }
+}
