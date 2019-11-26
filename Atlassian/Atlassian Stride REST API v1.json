@@ -1,0 +1,6159 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Stride API",
+    "description": "This service provides public API for the Stride.",
+    "contact": {}
+  },
+  "host": "api.atlassian.com",
+  "basePath": "/",
+  "securityDefinitions": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "application",
+      "tokenUrl": "https://api.atlassian.com/oauth/token",
+      "scopes": {
+        "manage:conversation": "Required to create, update, archive or unarchive conversations",
+        "participate:conversation": "Enables your app to perform most operations via the API"
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/site/": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Get list of sites",
+        "tags": [
+          "Site"
+        ],
+        "operationId": "SiteGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "SitesResponse",
+            "schema": {
+              "$ref": "#/definitions/SitesResponseisalistofsites."
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation",
+              "manage:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation": {
+      "get": {
+        "description": "The API returns the list of conversations the app has access to\n\nAuthentication required, with scope participate:conversation",
+        "summary": "Get a list of conversations",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationByCloudIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "include-private",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Include private conversations into response. Default to 'true'."
+          },
+          {
+            "name": "include-archived",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Include archived conversations into response. Default to 'false'."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "A maximum number of conversations to return per call. Valid length range: 1 - 75. Default value is 75."
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "A string containing full or part of conversation's name. May be empty."
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The cursor is a string, that you can use to scroll through the data set to get more results."
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "pattern": "^(asc|desc)$",
+            "description": "A sort order of the conversations lists. Supported values: asc or desc."
+          },
+          {
+            "name": "exclude-direct",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Exclude direct messages from a response. Default to 'false'"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GetConversationsListResponse",
+            "schema": {
+              "$ref": "#/definitions/GetConversationsListResponseisalistofnon-archivedconversationsforthiscloud."
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "description": "Authentication required, with scope manage:conversation",
+        "summary": "Create conversation",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationByCloudIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreateConversationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "CreateConversationResponse returns a successful response for the create conversation api.",
+            "schema": {
+              "$ref": "#/definitions/ConversationID"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {}
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "manage:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/user/{userId}": {
+      "get": {
+        "description": "\nGet a direct conversation of a user.",
+        "summary": "Get a direct conversation of a user",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationUserByCloudIdAndUserIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The user Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GetConversationDirectResponse",
+            "schema": {
+              "$ref": "#/definitions/GetConversationDirectResponsecontainsthedirectconversationid."
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "manage:conversation"
+            ]
+          }
+        ],
+        "externalDocs": {
+          "url": "https://developer.atlassian.com/cloud/stride/learning/sending-direct-messages-to-users/",
+          "description": "Guide: Sending direct messages to users"
+        }
+      }
+    },
+    "/site/{cloudId}/conversation/user/{userId}/message": {
+      "post": {
+        "description": "Send message to a user.",
+        "summary": "Send message to a user",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationUserMessageByCloudIdAndUserIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The user Id"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The method by default accepts the JSON with the Atlassian document structure (https://developer.atlassian.com/cloud/stride/apis/document/structure/).\nIf you want to send a plain text then you can set header \"Content-type\" = \"text/plain\" and put a plain text string into the request body.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "MessageSendResponse is a message send response.",
+            "schema": {
+              "$ref": "#/definitions/MessageIDisanobjectthatcontainsaresponsewithamessageid."
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ],
+        "externalDocs": {
+          "url": "https://developer.atlassian.com/cloud/stride/learning/sending-messages/",
+          "description": "Guide: Sending messages"
+        }
+      }
+    },
+    "/site/{cloudId}/conversation/user/{userId}/message/{messageId}": {
+      "put": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Edit a message in a direct conversation",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationUserMessageMessageIdByCloudIdAndUserIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The user Id"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the message."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The method by default accepts the JSON with the Atlassian document structure (https://developer.atlassian.com/cloud/stride/apis/document/structure/).\nIf you want to send a plain text then you can set header \"Content-type\" = \"text/plain\" and put a plain text string into the request body.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MessageEditResponse is a message edit response.",
+            "schema": {
+              "$ref": "#/definitions/MessageIDisanobjectthatcontainsaresponsewithamessageid."
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Delete a message in a direct conversation",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationUserMessageMessageIdByCloudIdAndUserIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The user Id"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the message."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Get conversation details",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Conversation",
+            "schema": {
+              "$ref": "#/definitions/Conversation"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "description": "Authentication required, with scope manage:conversation",
+        "summary": "Update conversation",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationByCloudIdAndConversationIdPatch",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ConversationUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "manage:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/archive": {
+      "put": {
+        "description": "Authentication required, with scope manage:conversation",
+        "summary": "Archive conversation",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationArchiveByCloudIdAndConversationIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "manage:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/media": {
+      "post": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Upload a file",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationMediaByCloudIdAndConversationIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Cloud ID"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Conversation ID"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "File name"
+          },
+          {
+            "name": "body",
+            "in": "formData",
+            "required": false,
+            "type": "file",
+            "format": "file",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "MediaUploadResponse",
+            "schema": {
+              "$ref": "#/definitions/MediaUploadResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/media/{mediaId}": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Get a file",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationMediaMediaIdByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Cloud ID"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Conversation ID"
+          },
+          {
+            "name": "mediaId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Media ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GetAFileResponse",
+            "schema": {
+              "$ref": "#/definitions/GetAFileResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Delete a file",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationMediaMediaIdByCloudIdAndConversationIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Cloud ID"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Conversation ID"
+          },
+          {
+            "name": "mediaId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Media ID"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/message": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation\n\nThis method returns messages after/before a given messageIDs or/and timestamps.\nIf these parameters are omitted the method returns conversation’s latest messages.\nMax number of messages returned is 75.",
+        "summary": "Get conversation history",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationMessageByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "beforeMessage",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Returns at most 75 messages before a provided messageID"
+          },
+          {
+            "name": "beforeTimestamp",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Returns at most 75 messages before a provided RFC3339 timestamp (2006-01-02T15:04:05+07:00)"
+          },
+          {
+            "name": "afterMessage",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Returns at most 75 latest messages after a provided messageID"
+          },
+          {
+            "name": "afterTimestamp",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Returns at most 75 latest messages after a provided RFC3339 timestamp (2006-01-02T15:04:05+07:00)"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The maximum number of results. Default value is 75"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MessageListResponse is a response that contains a list of messages.",
+            "schema": {
+              "$ref": "#/definitions/SiteConversationMessageResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "description": "\nSend a message to a conversation.",
+        "summary": "Send a message to a conversation",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationMessageByCloudIdAndConversationIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The method by default accepts the JSON with the Atlassian document structure (https://developer.atlassian.com/cloud/stride/apis/document/structure/).\nIf you want to send a plain text then you can set header \"Content-type\" = \"text/plain\" and put a plain text string into the request body.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "MessageSendResponse is a message send response.",
+            "schema": {
+              "$ref": "#/definitions/MessageIDisanobjectthatcontainsaresponsewithamessageid."
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ],
+        "externalDocs": {
+          "url": "https://developer.atlassian.com/cloud/stride/learning/sending-messages/",
+          "description": "Guide: Sending messages"
+        }
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/message/recent": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation\n\nMax number of messages returned is 75.",
+        "summary": "Get latest messages for conversation",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationMessageRecentByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The maximum number of results. Default value is 75."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MessageListResponse is a response that contains a list of messages.",
+            "schema": {
+              "$ref": "#/definitions/SiteConversationMessageRecentResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/message/{messageId}": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Get Message by id",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationMessageMessageIdByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Message to retrieve."
+          },
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MessageResponse is a successful response with a single message.",
+            "schema": {
+              "$ref": "#/definitions/SiteConversationMessageMessageIdResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Edit a message in a conversation",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationMessageMessageIdByCloudIdAndConversationIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the message."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The method by default accepts the JSON with the Atlassian document structure (https://developer.atlassian.com/cloud/stride/apis/document/structure/).\nIf you want to send a plain text then you can set header \"Content-type\" = \"text/plain\" and put a plain text string into the request body.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MessageEditResponse is a message edit response.",
+            "schema": {
+              "$ref": "#/definitions/MessageIDisanobjectthatcontainsaresponsewithamessageid."
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Delete a message in a conversation",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationMessageMessageIdByCloudIdAndConversationIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the message."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/message/{messageId}/context": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation\n\nThis method returns messages after and/or before a given messageID including the message itself.\nDefault value for 'after' and 'before' query parameters is 0.\nMax number of messages returned is 75.",
+        "summary": "Get conversation history contextually",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationMessageMessageIdContextByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Message to retrieve."
+          },
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "A number of messages to return before the Message."
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "A number of messages to return after the Message."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MessageListResponse is a response that contains a list of messages.",
+            "schema": {
+              "$ref": "#/definitions/SiteConversationMessageMessageIdContextResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/roster": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Get conversation roster",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationRosterByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ConversationRosterResponse",
+            "schema": {
+              "$ref": "#/definitions/ConversationRosterResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "description": "Authentication required, with scope manage:conversation",
+        "summary": "Update a conversation roster",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationRosterByCloudIdAndConversationIdPatch",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PatchRosterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "PatchRosterResponse",
+            "schema": {
+              "$ref": "#/definitions/PatchRosterResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "manage:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/unarchive": {
+      "put": {
+        "description": "Authentication required, with scope manage:conversation",
+        "summary": "Unarchive conversation",
+        "tags": [
+          "Conversation"
+        ],
+        "operationId": "SiteConversationUnarchiveByCloudIdAndConversationIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "manage:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:actionTarget": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Get a list of chat:actionTarget modules",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatActionTargetByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Offset for the query."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "A maximum number of modules to return per call. Valid length range: 1 - 75. Default value is 75."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ChatActionTargetListResponse",
+            "schema": {
+              "$ref": "#/definitions/ChatActionTargetListResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:actionTarget/{key}": {
+      "put": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Create or update a chat:actionTarget module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatActionTargetKeyByCloudIdAndConversationIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Delete a chat:actionTarget module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatActionTargetKeyByCloudIdAndConversationIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:bot": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Get a list of chat:bot modules",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatBotByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Offset for the query."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "A maximum number of modules to return per call. Valid length range: 1 - 75. Default value is 75."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ChatBotModulesListResponse",
+            "schema": {
+              "$ref": "#/definitions/ChatBotModulesListResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:bot/{key}": {
+      "put": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Create or update a chat:bot module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatBotKeyByCloudIdAndConversationIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ChatBotModuleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Delete a chat:bot module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatBotKeyByCloudIdAndConversationIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:bot:messages": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Get a list of chat:bot:messages modules",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatBotMessagesByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Offset for the query."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "A maximum number of modules to return per call. Valid length range: 1 - 75. Default value is 75."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ChatBotMessagesListResponse",
+            "schema": {
+              "$ref": "#/definitions/ChatBotMessagesListResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:bot:messages/{key}": {
+      "put": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Create or update a chat:bot:messages module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatBotMessagesKeyByCloudIdAndConversationIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ChatBotMessagesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Delete a chat:bot:messages module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatBotMessagesKeyByCloudIdAndConversationIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:configuration/{key}/state": {
+      "put": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Update the chat:configuration state",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatConfigurationKeyStateByCloudIdAndConversationIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Key of the configuration module"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The body of the request",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:dialog": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Get a list of chat:dialog modules",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatDialogByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Offset for the query."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "A maximum number of modules to return per call. Valid length range: 1 - 75. Default value is 75."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ChatDialogListResponse",
+            "schema": {
+              "$ref": "#/definitions/ChatDialogListResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:dialog/{key}": {
+      "put": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Create or update a chat:dialog module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatDialogKeyByCloudIdAndConversationIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ChatDialogModule"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Delete a chat:dialog module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatDialogKeyByCloudIdAndConversationIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:externalPage": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Get a list of chat:externalPage modules",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatExternalPageByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Offset for the query."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "A maximum number of modules to return per call. Valid length range: 1 - 75. Default value is 75."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ChatExternalPageGetAllResponse",
+            "schema": {
+              "$ref": "#/definitions/ChatExternalPageGetAllResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:externalPage/{key}": {
+      "put": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Create or update a chat:externalPage module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatExternalPageKeyByCloudIdAndConversationIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ChatExternalPageModuleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Delete a chat:externalPage module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatExternalPageKeyByCloudIdAndConversationIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:glance": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Get a list of chat:glance modules",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatGlanceByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Offset for the query."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "A maximum number of modules to return per call. Valid length range: 1 - 75. Default value is 75."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ChatGlanceListResponse",
+            "schema": {
+              "$ref": "#/definitions/ChatGlanceListResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:glance/{key}": {
+      "put": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Create or update a chat:glance module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatGlanceKeyByCloudIdAndConversationIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ChatGlanceModule"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Delete a chat:glance module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatGlanceKeyByCloudIdAndConversationIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:glance/{key}/state": {
+      "put": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Update the chat:glance state",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatGlanceKeyStateByCloudIdAndConversationIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Key of the glance"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The body of the request",
+            "schema": {
+              "$ref": "#/definitions/GlanceStateUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:sidebar": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Get a list of chat:sidebar modules",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatSidebarByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Offset for the query."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "A maximum number of modules to return per call. Valid length range: 1 - 75. Default value is 75."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ChatSidebarGetAllResponse",
+            "schema": {
+              "$ref": "#/definitions/ChatSidebarGetAllResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:sidebar/{key}": {
+      "put": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Create or update a chat:sidebar module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatSidebarKeyByCloudIdAndConversationIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ChatSidebarModuleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Delete a chat:sidebar module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatSidebarKeyByCloudIdAndConversationIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:webhook": {
+      "get": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Get a list of chat:webhook modules",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatWebhookByCloudIdAndConversationIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Offset for the query."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "A maximum number of modules to return per call. Valid length range: 1 - 75. Default value is 75."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ChatWebhookListResponse",
+            "schema": {
+              "$ref": "#/definitions/ChatWebhookListResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    },
+    "/site/{cloudId}/conversation/{conversationId}/app/module/chat:webhook/{key}": {
+      "put": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Create or update a chat:webhook module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatWebhookKeyByCloudIdAndConversationIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ChatWebhookRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "description": "Authentication required, with scope participate:conversation",
+        "summary": "Delete a chat:webhook module",
+        "tags": [
+          "App"
+        ],
+        "operationId": "SiteConversationAppModuleChatWebhookKeyByCloudIdAndConversationIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cloudId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the site (cloudId)"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The conversation id"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key to identify the resource"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {}
+          },
+          "400": {
+            "description": "A request validation error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {}
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "503": {
+            "description": "ServiceUnavailable Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": [
+              "participate:conversation"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ActionCallService": {
+      "title": "ActionCallService",
+      "description": "ActionCallService is an action for making a service call",
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "ActionName": {
+      "title": "ActionName",
+      "description": "ActionName defines the name of the action",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The string that will be displayed on the action button",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ActionOpenConfiguration": {
+      "title": "ActionOpenConfiguration",
+      "description": "ActionOpenConfiguration is an action for opening a configuration",
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ActionOpenDialog": {
+      "title": "ActionOpenDialog",
+      "description": "ActionOpenDialog is an action for opening a dialog",
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ActionOpenExternalPage": {
+      "title": "ActionOpenExternalPage",
+      "description": "ActionOpenExternalPage is an action for opening an external page",
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ActionOpenSidebar": {
+      "title": "ActionOpenSidebar",
+      "description": "ActionOpenSidebar is an action for opening a sidebar",
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ActionTarget": {
+      "title": "ActionTarget",
+      "description": "ActionTarget describes actionTargetModule",
+      "type": "object",
+      "properties": {
+        "callService": {
+          "$ref": "#/definitions/ActionCallService"
+        },
+        "key": {
+          "type": "string"
+        },
+        "openConfiguration": {
+          "$ref": "#/definitions/ActionOpenConfiguration"
+        },
+        "openDialog": {
+          "$ref": "#/definitions/ActionOpenDialog"
+        },
+        "openExternalPage": {
+          "$ref": "#/definitions/ActionOpenExternalPage"
+        },
+        "openSidebar": {
+          "$ref": "#/definitions/ActionOpenSidebar"
+        }
+      }
+    },
+    "ChatActionTargetListResponse": {
+      "title": "ChatActionTargetListResponse",
+      "description": "ChatActionTargetListResponse is the response for list chat:actionTarget modules",
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActionTarget"
+          }
+        }
+      }
+    },
+    "ChatBotDirectMessage": {
+      "title": "ChatBotDirectMessage",
+      "description": "ChatBotDirectMessage is the URL where to send 1:1 bot mention events",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "URL for the endpoint to call when a user sends a direct message to a bot",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "ChatBotMention": {
+      "title": "ChatBotMention",
+      "description": "ChatBotMention is the URL where to send bot mention events",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "URL for the endpoint to call when the bot is mentioned in a conversation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "ChatBotMessagesListResponse": {
+      "title": "ChatBotMessagesListResponse",
+      "description": "ChatBotMessagesListResponse is the response for the list chat:bot:messages modules request",
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "The list of registered modules",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatBotMessagesModule"
+          }
+        }
+      }
+    },
+    "ChatBotMessagesModule": {
+      "title": "ChatBotMessagesModule",
+      "description": "ChatBotMessagesModule is the part of the response that describes a particular chat:bot:messages module",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "The identificator for module",
+          "type": "string"
+        },
+        "pattern": {
+          "description": "Pattern to match messages against (regular expression)",
+          "type": "string"
+        },
+        "url": {
+          "description": "URL for the endpoint to call when a message is sent to a conversation and matches the pattern",
+          "type": "string"
+        }
+      }
+    },
+    "ChatBotMessagesRequest": {
+      "title": "ChatBotMessagesRequest",
+      "description": "ChatBotMessagesRequest is the part of the response that describes a particular chat:bot:messages module",
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "description": "Pattern to match messages against (regular expression)",
+          "type": "string"
+        },
+        "url": {
+          "description": "URL for the endpoint to call when a message is sent to a conversation and matches the pattern",
+          "type": "string"
+        }
+      }
+    },
+    "ChatBotModule": {
+      "title": "ChatBotModule",
+      "description": "ChatBotModule is the part of the response that describes a particular chat:bot module",
+      "type": "object",
+      "properties": {
+        "directMessage": {
+          "$ref": "#/definitions/ChatBotDirectMessage"
+        },
+        "key": {
+          "type": "string"
+        },
+        "mention": {
+          "$ref": "#/definitions/ChatBotMention"
+        }
+      }
+    },
+    "ChatBotModuleRequest": {
+      "title": "ChatBotModuleRequest",
+      "description": "ChatBotModuleRequest is a payload for chat:bot module",
+      "type": "object",
+      "properties": {
+        "directMessage": {
+          "$ref": "#/definitions/ChatBotDirectMessage"
+        },
+        "mention": {
+          "$ref": "#/definitions/ChatBotMention"
+        }
+      }
+    },
+    "ChatBotModulesListResponse": {
+      "title": "ChatBotModulesListResponse",
+      "description": "ChatBotModulesListResponse is the response for the list chat:bot modules request",
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatBotModule"
+          }
+        }
+      }
+    },
+    "ChatDialogListResponse": {
+      "title": "ChatDialogListResponse",
+      "description": "ChatDialogListResponse is the response for chat:dialog modules list",
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatDialogModule"
+          }
+        }
+      }
+    },
+    "ChatDialogModule": {
+      "title": "ChatDialogModule",
+      "description": "ChatDialogModule is the chat:dialog module",
+      "type": "object",
+      "properties": {
+        "authentication": {
+          "description": "Type of the authentication used in requests to the service",
+          "type": "string",
+          "pattern": "(jwt|none)"
+        },
+        "key": {
+          "description": "A key to identify the dialog",
+          "type": "string"
+        },
+        "options": {
+          "$ref": "#/definitions/DialogOptions"
+        },
+        "title": {
+          "$ref": "#/definitions/DialogTitle"
+        },
+        "url": {
+          "description": "The URL where the request will be made to load the content of the dialog",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "title",
+        "url"
+      ]
+    },
+    "ChatDialogModuleRequest": {
+      "title": "ChatDialogModuleRequest",
+      "description": "ChatDialogModuleRequest describes the request parameters",
+      "type": "object",
+      "properties": {
+        "Body": {
+          "$ref": "#/definitions/ChatDialogModule"
+        }
+      }
+    },
+    "ChatExternalPageGetAllResponse": {
+      "title": "ChatExternalPageGetAllResponse",
+      "description": "ChatExternalPageGetAllResponse is the response for chat:externalPage modules list",
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatExternalPageModule"
+          }
+        }
+      }
+    },
+    "ChatExternalPageModule": {
+      "title": "ChatExternalPageModule",
+      "description": "ChatExternalPageModule is the chat:externalPage module",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "The identificator of the module",
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/definitions/ExternalPageName"
+        },
+        "url": {
+          "description": "The URL of the external page.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "url"
+      ]
+    },
+    "ChatExternalPageModuleRequest": {
+      "title": "ChatExternalPageModuleRequest",
+      "description": "ChatExternalPageModuleRequest is the request body for creating/updating a chat:externalPage module",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/ExternalPageName"
+        },
+        "url": {
+          "description": "The URL of the external page.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "ChatExternalPageModuleRequestParameters": {
+      "title": "ChatExternalPageModuleRequestParameters",
+      "description": "ChatExternalPageModuleRequestParameters describes the request parameters",
+      "type": "object",
+      "properties": {
+        "Body": {
+          "$ref": "#/definitions/ChatExternalPageModuleRequest"
+        }
+      }
+    },
+    "ChatGlanceListResponse": {
+      "title": "ChatGlanceListResponse",
+      "description": "ChatGlanceListResponse is the response for chat:glance modules list",
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatGlanceModule"
+          }
+        }
+      }
+    },
+    "ChatGlanceModule": {
+      "title": "ChatGlanceModule",
+      "description": "ChatGlanceModule is the chat:glance module",
+      "type": "object",
+      "properties": {
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "icon": {
+          "$ref": "#/definitions/GlanceIcon"
+        },
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/definitions/GlanceName"
+        },
+        "queryUrl": {
+          "type": "string"
+        },
+        "target": {
+          "type": "object"
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ChatSidebarGetAllResponse": {
+      "title": "ChatSidebarGetAllResponse",
+      "description": "ChatSidebarGetAllResponse is the response for chat:sidebar modules list",
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatSidebarModule"
+          }
+        }
+      }
+    },
+    "ChatSidebarModule": {
+      "title": "ChatSidebarModule",
+      "description": "ChatSidebarModule is the chat:sidebar module",
+      "type": "object",
+      "properties": {
+        "authentication": {
+          "type": "object"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "icon": {
+          "$ref": "#/definitions/SidebarIcon"
+        },
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/definitions/SidebarName"
+        },
+        "url": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ChatSidebarModuleRequest": {
+      "title": "ChatSidebarModuleRequest",
+      "description": "ChatSidebarModuleRequest is the request body for creating/updating a chat:sidebar module",
+      "type": "object",
+      "properties": {
+        "authentication": {
+          "type": "object"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "icon": {
+          "$ref": "#/definitions/SidebarIcon"
+        },
+        "name": {
+          "$ref": "#/definitions/SidebarName"
+        },
+        "url": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ChatSidebarModuleRequestParameters": {
+      "title": "ChatSidebarModuleRequestParameters",
+      "description": "ChatSidebarModuleRequestParameters describes the request parameters",
+      "type": "object",
+      "properties": {
+        "Body": {
+          "$ref": "#/definitions/ChatSidebarModuleRequest"
+        }
+      }
+    },
+    "ChatWebhookListResponse": {
+      "title": "ChatWebhookListResponse",
+      "description": "ChatWebhookListResponse is the response for the list chat:webhook modules request",
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatWebhookModule"
+          }
+        }
+      }
+    },
+    "ChatWebhookModule": {
+      "title": "ChatWebhookModule",
+      "description": "ChatWebhookModule is the part of the response that describes a particular chat:webhook module",
+      "type": "object",
+      "properties": {
+        "event": {
+          "description": "The event that is to trigger a webhook invocation;",
+          "type": "string"
+        },
+        "key": {
+          "description": "The identificator for module",
+          "type": "string"
+        },
+        "url": {
+          "description": "URL that Stride will POST to (including a JWT token)",
+          "type": "string"
+        }
+      }
+    },
+    "ChatWebhookRequest": {
+      "title": "ChatWebhookRequest",
+      "description": "ChatWebhookRequest is the payload to create a new chat:webhook webhook",
+      "type": "object",
+      "properties": {
+        "event": {
+          "description": "The event that is to trigger a webhook invocation",
+          "type": "string",
+          "pattern": "(conversation:updates|roster:updates)"
+        },
+        "url": {
+          "description": "URL that Stride will POST to (including a JWT token)",
+          "type": "string"
+        }
+      }
+    },
+    "Configuration": {
+      "title": "Configuration",
+      "description": "Configuration is the main payload containing a configuration update",
+      "type": "object",
+      "properties": {
+        "configured": {
+          "description": "Configured is the flag saying whether the app is configured or not",
+          "type": "boolean"
+        },
+        "context": {
+          "$ref": "#/definitions/ConfigurationContextrepresentscontextinwhichtheconfigurationshouldbeupdated."
+        }
+      },
+      "required": [
+        "configured",
+        "context"
+      ]
+    },
+    "ConfigurationContextrepresentscontextinwhichtheconfigurationshouldbeupdated.": {
+      "title": "ConfigurationContextrepresentscontextinwhichtheconfigurationshouldbeupdated.",
+      "type": "object",
+      "properties": {
+        "cloudId": {
+          "description": "CloudID is the site the app is installed to.",
+          "type": "string"
+        },
+        "conversationId": {
+          "description": "ConversationID id for the conversation the app is installed to.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cloudId",
+        "conversationId"
+      ]
+    },
+    "ConfigurationUpdateRequest": {
+      "title": "ConfigurationUpdateRequest",
+      "description": "ConfigurationUpdateRequest is the request body for the configuration update endpoint",
+      "type": "object",
+      "properties": {
+        "configured": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "Conversation represents conversation object",
+      "type": "object",
+      "properties": {
+        "_links": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "avatarUrl": {
+          "description": "The url to the avatar",
+          "type": "string"
+        },
+        "cloudId": {
+          "description": "The cloudId",
+          "type": "string"
+        },
+        "created": {
+          "description": "When the conversation was created",
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "description": "The backend conversation id",
+          "type": "string"
+        },
+        "isArchived": {
+          "description": "True if the conversation is archived",
+          "type": "boolean"
+        },
+        "modified": {
+          "description": "When the conversation was last modified",
+          "type": "string",
+          "format": "date-time"
+        },
+        "name": {
+          "description": "The channel display name",
+          "type": "string"
+        },
+        "privacy": {
+          "description": "Public or Private",
+          "type": "string"
+        },
+        "topic": {
+          "description": "The topic for the conversation",
+          "type": "string"
+        },
+        "type": {
+          "description": "direct or cloud",
+          "type": "string"
+        }
+      },
+      "required": [
+        "avatarUrl",
+        "cloudId",
+        "created",
+        "id",
+        "isArchived",
+        "modified",
+        "name",
+        "privacy",
+        "topic",
+        "type"
+      ]
+    },
+    "ConversationID": {
+      "title": "ConversationID",
+      "description": "ConversationID is a object that contains a conversation id",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "A conversation id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ConversationRosterResponse": {
+      "title": "ConversationRosterResponse",
+      "description": "ConversationRosterResponse is a conversation roster response",
+      "type": "object",
+      "properties": {
+        "_links": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "values": {
+          "description": "An array of the participants.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "values"
+      ]
+    },
+    "ConversationUpdateRequest": {
+      "title": "ConversationUpdateRequest",
+      "description": "ConversationUpdateRequest body for update conversation request",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The conversation name",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "privacy": {
+          "description": "The conversation privacy setting (“public” or “private”)",
+          "type": "string",
+          "pattern": "(public|private)"
+        },
+        "topic": {
+          "description": "The conversation topic",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 250
+        }
+      }
+    },
+    "CreateChatBotMessagesModuleRequest": {
+      "title": "CreateChatBotMessagesModuleRequest",
+      "description": "CreateChatBotMessagesModuleRequest is a payload for webhook create",
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/ChatBotMessagesRequest"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "CreateChatBotModuleRequest": {
+      "title": "CreateChatBotModuleRequest",
+      "description": "CreateChatBotModuleRequest is a payload for chat:bot webhook create",
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/ChatBotModuleRequest"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "CreateChatWebhookRequest": {
+      "title": "CreateChatWebhookRequest",
+      "description": "CreateChatWebhookRequest is a payload for chat:webhook webhook create",
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/ChatWebhookRequest"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "CreateConversation": {
+      "title": "CreateConversation",
+      "description": "CreateConversation describes request body for \"Create conversation\" endpoint",
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/CreateConversationRequest"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "CreateConversationRequest": {
+      "title": "CreateConversationRequest",
+      "description": "CreateConversationRequest is a payload to create a new conversation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the conversation",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "privacy": {
+          "description": "The conversation privacy setting (“public” or “private”). Default value is 'public'",
+          "type": "string",
+          "pattern": "(public|private)"
+        },
+        "topic": {
+          "description": "The conversation topic. May be empty",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "CreateConversationResponsereturnsasuccessfulresponseforthecreateconversationapi.": {
+      "title": "CreateConversationResponsereturnsasuccessfulresponseforthecreateconversationapi.",
+      "type": "object",
+      "properties": {
+        "Body": {
+          "$ref": "#/definitions/ConversationID"
+        }
+      }
+    },
+    "DialogFilter": {
+      "title": "DialogFilter",
+      "description": "DialogFilter defines the placeholder for the dialog",
+      "type": "object",
+      "properties": {
+        "placeholder": {
+          "$ref": "#/definitions/Placeholder"
+        }
+      }
+    },
+    "DialogOptions": {
+      "title": "DialogOptions",
+      "description": "DialogOptions describes the options for chat:dialog module",
+      "type": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/DialogFilter"
+        },
+        "hint": {
+          "$ref": "#/definitions/Hint"
+        },
+        "primaryAction": {
+          "$ref": "#/definitions/DialogPrimaryAction"
+        },
+        "secondaryActions": {
+          "description": "The secondary actions of the dialog",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DialogSecondaryAction"
+          }
+        },
+        "size": {
+          "description": "Size of the dialog",
+          "type": "object"
+        }
+      }
+    },
+    "DialogPrimaryAction": {
+      "title": "DialogPrimaryAction",
+      "description": "DialogPrimaryAction defines the primary action of the dialog",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Is enabled",
+          "type": "boolean"
+        },
+        "key": {
+          "description": "Key to identify the primary action of the dialog",
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/definitions/ActionName"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "DialogSecondaryAction": {
+      "title": "DialogSecondaryAction",
+      "description": "DialogSecondaryAction defines the secondary action of the dialog",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Is enabled",
+          "type": "boolean"
+        },
+        "key": {
+          "description": "Key to identify the primary action of the dialog",
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/definitions/ActionName"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "DialogSize": {
+      "title": "DialogSize",
+      "description": "DialogSize defines the size of the dialog",
+      "type": "object",
+      "properties": {
+        "height": {
+          "description": "Height of the dialog",
+          "type": "string"
+        },
+        "width": {
+          "description": "Width of the dialog",
+          "type": "string"
+        }
+      },
+      "required": [
+        "height",
+        "width"
+      ]
+    },
+    "DialogTitle": {
+      "title": "DialogTitle",
+      "description": "DialogTitle define the title of the dialog",
+      "type": "object",
+      "properties": {
+        "i18n": {
+          "description": "The I18n key for localization",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "value": {
+          "description": "The string that will be displayed in the title",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ErrorResponse": {
+      "title": "ErrorResponse",
+      "description": "ErrorResponse is the standard error format",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "meta": {
+          "type": "object"
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ExternalPageName": {
+      "title": "ExternalPageName",
+      "description": "ExternalPageName represents the name of the externalPage module",
+      "type": "object",
+      "properties": {
+        "i18n": {
+          "description": "The optional localization key, used to look up the localized value.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "value": {
+          "description": "The default text.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GetAFileResponse": {
+      "title": "GetAFileResponse",
+      "description": "GetAFileResponse represents the response with file content",
+      "type": "object",
+      "properties": {
+        "File": {
+          "description": "File content\ntype:string\nformat:binary",
+          "type": "object"
+        }
+      }
+    },
+    "GetConversationDirectResponsecontainsthedirectconversationid.": {
+      "title": "GetConversationDirectResponsecontainsthedirectconversationid.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "direct conversation id\nin: body",
+          "type": "string"
+        }
+      }
+    },
+    "GetConversationsListRequestistheConversationGetAllqueryparameters.": {
+      "title": "GetConversationsListRequestistheConversationGetAllqueryparameters.",
+      "type": "object",
+      "properties": {
+        "cursor": {
+          "description": "The cursor is a string, that you can use to scroll through the data set to get more results.\nin: query",
+          "type": "string"
+        },
+        "exclude-direct": {
+          "description": "Exclude direct messages from a response. Default to 'false'\nin: query",
+          "type": "boolean"
+        },
+        "include-archived": {
+          "description": "Include archived conversations into response. Default to 'false'.\nin: query",
+          "type": "boolean"
+        },
+        "include-private": {
+          "description": "Include private conversations into response. Default to 'true'.\nin: query",
+          "type": "boolean"
+        },
+        "limit": {
+          "description": "A maximum number of conversations to return per call. Valid length range: 1 - 75. Default value is 75.\nin: query",
+          "type": "integer",
+          "format": "int64"
+        },
+        "query": {
+          "description": "A string containing full or part of conversation's name. May be empty.\nin: query",
+          "type": "string"
+        },
+        "sort": {
+          "description": "A sort order of the conversations lists. Supported values: asc or desc.\nin: query",
+          "type": "string",
+          "pattern": "^(asc|desc)$"
+        }
+      }
+    },
+    "GetConversationsListResponseisalistofnon-archivedconversationsforthiscloud.": {
+      "title": "GetConversationsListResponseisalistofnon-archivedconversationsforthiscloud.",
+      "type": "object",
+      "properties": {
+        "_links": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "cursor": {
+          "description": "Page token to retrieve a specific page of results in the list.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "The maximum number of results returned.\nValid length range: 1 - 100.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "size": {
+          "description": "Size of the whole dataset.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "sort": {
+          "description": "A sorting performed",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SortFieldrepresentadatastructurethatincludesthefieldnameandsortingorder."
+          }
+        },
+        "values": {
+          "description": "ConversationsList list of conversations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Conversation"
+          }
+        }
+      },
+      "required": [
+        "cursor",
+        "limit",
+        "size",
+        "sort",
+        "values"
+      ]
+    },
+    "GlanceBody": {
+      "title": "GlanceBody",
+      "description": "GlanceBody is the main payload containing a glance update",
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/GlanceContextrepresentscontextinwhichtheglanceshouldbeupdated."
+        },
+        "label": {
+          "description": "Text label to be displayed in the glance",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "metadata": {
+          "description": "Arbitrary metadata",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "context",
+        "label"
+      ]
+    },
+    "GlanceContextrepresentscontextinwhichtheglanceshouldbeupdated.": {
+      "title": "GlanceContextrepresentscontextinwhichtheglanceshouldbeupdated.",
+      "description": "Specifying conversation and/or user narrows down which clients will get the update accordingly.",
+      "type": "object",
+      "properties": {
+        "cloudId": {
+          "description": "CloudID is the site this glance belongs to.",
+          "type": "string"
+        },
+        "conversationId": {
+          "description": "ConversationID id for the conversation.",
+          "type": "string"
+        },
+        "userId": {
+          "description": "UserID id for the user.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cloudId"
+      ]
+    },
+    "GlanceIcon": {
+      "title": "GlanceIcon",
+      "description": "GlanceIcon is the icon for the glance",
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "url@2x": {
+          "type": "string"
+        }
+      }
+    },
+    "GlanceName": {
+      "title": "GlanceName",
+      "description": "GlanceName is the name of the glance",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "GlanceStateUpdateRequest": {
+      "title": "GlanceStateUpdateRequest",
+      "description": "GlanceStateUpdateRequest is the request body for the glance update endpoint",
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "Label is the text that will appear on glance hover on",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata for the glance",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "label"
+      ]
+    },
+    "Handler": {
+      "title": "Handler",
+      "description": "A Handler implements the sites api",
+      "type": "object",
+      "properties": {
+        "APIKillSwitchEnabledFlagDefault": {
+          "type": "boolean"
+        },
+        "Analytics": {
+          "description": "Dispatcher is an interface for dispatching analytics events",
+          "type": "object"
+        },
+        "AppCanAddAppToConversationEnabledFlagDefault": {
+          "type": "boolean"
+        },
+        "BaseURL": {
+          "type": "string"
+        },
+        "Permissions": {
+          "description": "PermsChecker is an interface that composes the perms client's Checker and BulkChecker interfaces",
+          "type": "object"
+        },
+        "Stat": {
+          "$ref": "#/definitions/XStaterisawrapperaroundaSendertoinjectenvtagswithinallobservations."
+        }
+      }
+    },
+    "Hint": {
+      "title": "Hint",
+      "description": "Hint defines the hint for the dialog",
+      "type": "object",
+      "properties": {
+        "i18n": {
+          "description": "The I18n key for localization",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "value": {
+          "description": "The string that will be displayed for the hint",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Media": {
+      "title": "Media",
+      "description": "Media is a media upload details",
+      "type": "object",
+      "properties": {
+        "artifacts": {
+          "type": "object"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "mediaType": {
+          "type": "string"
+        },
+        "mimeType": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "processingStatus": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "artifacts",
+        "id",
+        "mediaType",
+        "mimeType",
+        "name",
+        "processingStatus",
+        "size"
+      ]
+    },
+    "MediaUploadParams": {
+      "title": "MediaUploadParams",
+      "description": "MediaUploadParams is a media upload api params",
+      "type": "object",
+      "properties": {
+        "Binary Data": {
+          "description": "in: body",
+          "type": "object"
+        },
+        "cloudId": {
+          "description": "Cloud ID\nin:path",
+          "type": "string"
+        },
+        "conversationId": {
+          "description": "Conversation ID\nin:path",
+          "type": "string"
+        },
+        "name": {
+          "description": "File name",
+          "type": "string"
+        }
+      }
+    },
+    "MediaUploadResponse": {
+      "title": "MediaUploadResponse",
+      "description": "MediaUploadResponse is a media upload api response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Media"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "MessageisasingleStridemessage.": {
+      "title": "MessageisasingleStridemessage.",
+      "type": "object",
+      "properties": {
+        "body": {
+          "description": "An Atlassian document that defines the Message body.",
+          "type": "object"
+        },
+        "conversationId": {
+          "description": "A conversation Id.",
+          "type": "string"
+        },
+        "id": {
+          "description": "A Message Id.",
+          "type": "string"
+        },
+        "isDeleted": {
+          "description": "Boolean indicating if the message has been deleted or not.",
+          "type": "boolean"
+        },
+        "onBehalfOfUserId": {
+          "description": "OnBehalfOf user Id",
+          "type": "string"
+        },
+        "revisionId": {
+          "description": "A unique Id for the current revision of the message, equal to the \"id\" if there have been no revisions.",
+          "type": "string"
+        },
+        "senderId": {
+          "description": "A sender user Id.",
+          "type": "string"
+        },
+        "ts": {
+          "description": "Time when Message was sent.",
+          "type": "string"
+        },
+        "updatedTs": {
+          "description": "Timestamp of the current revision in RFC3339 representation. Equal to the \"ts\" if there have been no revisions.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "body",
+        "conversationId",
+        "id",
+        "isDeleted",
+        "revisionId",
+        "senderId",
+        "ts",
+        "updatedTs"
+      ]
+    },
+    "MessageIDisanobjectthatcontainsaresponsewithamessageid.": {
+      "title": "MessageIDisanobjectthatcontainsaresponsewithamessageid.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "A message id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "PatchRoster": {
+      "title": "PatchRoster",
+      "description": "PatchRoster is a payload for the add users to conversation api",
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/PatchRosterRequest"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "PatchRosterError": {
+      "title": "PatchRosterError",
+      "description": "PatchRosterError returns an error message with metadata",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "meta": {
+          "$ref": "#/definitions/PatchRosterErrorMeta"
+        }
+      }
+    },
+    "PatchRosterErrorMeta": {
+      "title": "PatchRosterErrorMeta",
+      "description": "PatchRosterErrorMeta error metadata include operation and list of users affected by an error",
+      "type": "object",
+      "properties": {
+        "add": {
+          "description": "Users list of users to add to the conversation",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PatchRosterRequest": {
+      "title": "PatchRosterRequest",
+      "description": "PatchRosterRequest body for patch conversation request",
+      "type": "object",
+      "properties": {
+        "add": {
+          "description": "Users list of users to add to the conversation",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PatchRosterResponse": {
+      "title": "PatchRosterResponse",
+      "description": "PatchRosterResponse is a result of adding users to the conversation",
+      "type": "object",
+      "properties": {
+        "_links": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "add": {
+          "description": "Users list of users to add to the conversation",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "error": {
+          "$ref": "#/definitions/PatchRosterError"
+        }
+      }
+    },
+    "Placeholder": {
+      "title": "Placeholder",
+      "description": "Placeholder defines the placeholder for the dialog filter",
+      "type": "object",
+      "properties": {
+        "i18n": {
+          "description": "The string that will be displayed in the placeholder",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "value": {
+          "description": "The I18n key for localization",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SidebarIcon": {
+      "title": "SidebarIcon",
+      "description": "SidebarIcon is the icon for the sidebar",
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "url@2x": {
+          "type": "string"
+        }
+      }
+    },
+    "SidebarName": {
+      "title": "SidebarName",
+      "description": "SidebarName is the name of the sidebar",
+      "type": "object",
+      "properties": {
+        "i18n": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "SitesResponseisalistofsites.": {
+      "title": "SitesResponseisalistofsites.",
+      "type": "object",
+      "properties": {
+        "_links": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "size": {
+          "description": "Size of the whole dataset.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "values": {
+          "description": "An array of the sites",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/siteEntry"
+          }
+        }
+      },
+      "required": [
+        "size",
+        "values"
+      ]
+    },
+    "SortFieldrepresentadatastructurethatincludesthefieldnameandsortingorder.": {
+      "title": "SortFieldrepresentadatastructurethatincludesthefieldnameandsortingorder.",
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "order": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateConfigurationPostRequest": {
+      "title": "UpdateConfigurationPostRequest",
+      "description": "UpdateConfigurationPostRequest describes request body for the configuration update endpoint",
+      "type": "object",
+      "properties": {
+        "Body": {
+          "$ref": "#/definitions/Configuration"
+        },
+        "key": {
+          "description": "Key of the configuration",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        }
+      },
+      "required": [
+        "Body",
+        "key"
+      ]
+    },
+    "UpdateConversation": {
+      "title": "UpdateConversation",
+      "description": "UpdateConversation is a payload for the conversation update",
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/ConversationUpdateRequest"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "UpdateGlancePostRequest": {
+      "title": "UpdateGlancePostRequest",
+      "description": "UpdateGlancePostRequest describes request body for the glance update endpoint",
+      "type": "object",
+      "properties": {
+        "Body": {
+          "$ref": "#/definitions/GlanceBody"
+        },
+        "key": {
+          "description": "Key of the glance",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        }
+      },
+      "required": [
+        "Body",
+        "key"
+      ]
+    },
+    "XStaterisawrapperaroundaSendertoinjectenvtagswithinallobservations.": {
+      "title": "XStaterisawrapperaroundaSendertoinjectenvtagswithinallobservations.",
+      "type": "object",
+      "properties": {
+        "GetTags": {
+          "description": "GetTags returns the tags associated with the XStater, all the tags that\nwill be sent along with all the stats queries.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "siteEntry": {
+      "title": "siteEntry",
+      "type": "object",
+      "properties": {
+        "avatarUrl": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SiteConversationMessageMessageIdContextResponse": {
+      "title": "SiteConversationMessageMessageIdContextResponse",
+      "type": "object",
+      "properties": {
+        "_links": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "limit": {
+          "description": "The maximum number of results returned.\nValid length range: 1 - 75.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageisasingleStridemessage."
+          }
+        },
+        "size": {
+          "description": "A number of messages in the page.",
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "_links",
+        "limit",
+        "size"
+      ]
+    },
+    "SiteConversationMessageMessageIdResponse": {
+      "title": "SiteConversationMessageMessageIdResponse",
+      "type": "object",
+      "properties": {
+        "_links": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "$ref": "#/definitions/MessageisasingleStridemessage."
+        }
+      }
+    },
+    "SiteConversationMessageRecentResponse": {
+      "title": "SiteConversationMessageRecentResponse",
+      "type": "object",
+      "properties": {
+        "_links": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "limit": {
+          "description": "The maximum number of results returned.\nValid length range: 1 - 75.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageisasingleStridemessage."
+          }
+        },
+        "size": {
+          "description": "A number of messages in the page.",
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "_links",
+        "limit",
+        "size"
+      ]
+    },
+    "SiteConversationMessageResponse": {
+      "title": "SiteConversationMessageResponse",
+      "type": "object",
+      "properties": {
+        "_links": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "limit": {
+          "description": "The maximum number of results returned.\nValid length range: 1 - 75.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageisasingleStridemessage."
+          }
+        },
+        "size": {
+          "description": "A number of messages in the page.",
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "_links",
+        "limit",
+        "size"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Site",
+      "description": ""
+    },
+    {
+      "name": "Conversation",
+      "description": ""
+    },
+    {
+      "name": "App",
+      "description": ""
+    }
+  ]
+}

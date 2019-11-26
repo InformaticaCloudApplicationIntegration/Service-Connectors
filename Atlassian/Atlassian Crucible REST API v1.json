@@ -1,0 +1,3068 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "API",
+    "description": "This is the reference section of the Crucible REST API.\r\nFor information about Crucible Plugin Development, visit the\r\nThis documentation was automatically generated from the",
+    "contact": {}
+  },
+  "host": "host:port",
+  "basePath": "/context/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/rest-service/users-v1": {
+      "get": {
+        "description": "Get a list of all the users. You can also ask for a set of users.",
+        "summary": "getUsers",
+        "operationId": "RestServiceUsersV1Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "a username (or a few) to limit the number of returned entries. It will return only existing users."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/users-v1/{repository}/{username}": {
+      "get": {
+        "description": "Returns the user details of the user mapped to a committer in a repository.",
+        "summary": "getMappedUser",
+        "operationId": "RestServiceUsersV1ByRepositoryAndUsernameGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the name of the committer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "",
+            "schema": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/users-v1/{username}": {
+      "get": {
+        "description": "Returns the user's profile details.",
+        "summary": "getUserProfile",
+        "operationId": "RestServiceUsersV1ByUsernameGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the username of the user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "",
+            "schema": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/search-v1/reviews": {
+      "get": {
+        "description": "Search for reviews where the name, description, state or permaId contain the specified term.",
+        "summary": "getReviewsForTerm",
+        "operationId": "RestServiceSearchV1ReviewsGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "term",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "a search term."
+          },
+          {
+            "name": "maxReturn",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "the maximum number of reviews to return."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/search-v1/reviewsForIssue": {
+      "get": {
+        "description": "Get a list of all reviews that have been linked to the specified JIRA issue key.",
+        "summary": "getReviewsForIssueKey",
+        "operationId": "RestServiceSearchV1ReviewsForIssueGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "jiraKey",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "a Jira issue key (e.g. \"FOO-3453\")"
+          },
+          {
+            "name": "maxReturn",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "the maximum number of reviews to return."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/repositories-v1": {
+      "get": {
+        "description": "Returns a list of all repositories. This includes plugin provided repositories",
+        "summary": "getAllRepositories",
+        "operationId": "RestServiceRepositoriesV1Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "filter repositories by the repository key, only repositories of keys containing this value\n would be returned if value was provided.  Case insensitive."
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "filter repositories by enabled flag.  Only enabled/disabled repositories would be returned\n accordingly if value was provided."
+          },
+          {
+            "name": "available",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "filter repositories by its availability.  Only available/unavailable repositories would be returned\n accordingly if value was provided."
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "filter repositories by type.  Allowed values: cvs, svn, p4, git, hg, plugin (for light SCM repositories).\n Parameter can be specified more than once."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "default": 10000,
+            "type": "integer",
+            "format": "int32",
+            "description": "maximum number of repositories to be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/repositories-v1/change/{repository}/{revision}": {
+      "get": {
+        "description": "Represents a particular changeset.",
+        "summary": "change",
+        "operationId": "RestServiceRepositoriesV1ChangeByRepositoryAndRevisionGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the Crucible SCM plugin repository."
+          },
+          {
+            "name": "revision",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the SCM revision string."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/repositories-v1/content/{repository}/{revision}/{path:.*$}": {
+      "get": {
+        "description": "Returns the raw content of the specified file revision as a binary\n stream. No attempt is made to identify the content type and no mime\n type is provided.",
+        "summary": "getContents",
+        "operationId": "RestServiceRepositoriesV1ContentPathAPIAPIByRepositoryAndRevisionGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the Crucible SCM plugin repository."
+          },
+          {
+            "name": "revision",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the SCM revision string."
+          },
+          {
+            "name": "path:.*$",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/repositories-v1/{repository}/{revision}/{path:.*$}": {
+      "get": {
+        "description": "",
+        "summary": "details",
+        "operationId": "RestServiceRepositoriesV1PathAPIAPIByRepositoryAndRevisionGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the Crucible SCM plugin repository."
+          },
+          {
+            "name": "revision",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the SCM revision string."
+          },
+          {
+            "name": "path:.*$",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "a description of the specified file revision.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/repositories-v1/changes/{repository}/{path:.*$}": {
+      "get": {
+        "description": "Represents a sorted list of changesets, newest first.",
+        "summary": "changes",
+        "operationId": "RestServiceRepositoriesV1ChangesPathAPIAPIByRepositoryGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the Crucible SCM plugin repository."
+          },
+          {
+            "name": "path:.*$",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "oldestCsid",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "only return change sets after this change set. If omitted there is no restriction."
+          },
+          {
+            "name": "includeOldest",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "include the change set with id \"from\" in the change sets returned."
+          },
+          {
+            "name": "newestCsid",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "only return change sets before this change set. If omitted there is no restriction."
+          },
+          {
+            "name": "includeNewest",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "include the change set with id \"to\" in the change sets returned."
+          },
+          {
+            "name": "max",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "return only the newest change sets, to a maximum of maxChangesets."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/repositories-v1/{repository}/svn": {
+      "get": {
+        "description": "For backward compatibility we provide this method, but repositories should be referred to just by their key.",
+        "summary": "getSvnRepositoryDetails",
+        "operationId": "RestServiceRepositoriesV1SvnByRepositoryGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of a FishEye or Crucible SCM plugin repository"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/repositories-v1/{repository}": {
+      "get": {
+        "description": "",
+        "summary": "getRepositoryDetails",
+        "operationId": "RestServiceRepositoriesV1ByRepositoryGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the Crucible SCM plugin repository."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/repositories-v1/browse/{repository}/{path:.*$}": {
+      "get": {
+        "description": "Lists the contents of the specified directory.",
+        "summary": "browse",
+        "operationId": "RestServiceRepositoriesV1BrowsePathAPIAPIByRepositoryGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the Crucible SCM plugin repository."
+          },
+          {
+            "name": "path:.*$",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/repositories-v1/history/{repository}/{revision}/{path:.*$}": {
+      "get": {
+        "description": "Represents the history of a versioned entity.",
+        "summary": "history",
+        "operationId": "RestServiceRepositoriesV1HistoryPathAPIAPIByRepositoryAndRevisionGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the Crucible SCM plugin repository."
+          },
+          {
+            "name": "revision",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the SCM revision string."
+          },
+          {
+            "name": "path:.*$",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1": {
+      "get": {
+        "description": "",
+        "summary": "getAllReviews",
+        "operationId": "RestServiceReviewsV1Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "only return reviews that are in these states."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "summary": "createReview",
+        "operationId": "RestServiceReviewsV1Post",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "the newly created review, with the permaId field set to the perma id of the newly created review.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/comments/{cId}": {
+      "get": {
+        "description": "Gets the given comment.",
+        "summary": "getComment",
+        "operationId": "RestServiceReviewsV1CommentsByIdAndCIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma id"
+          },
+          {
+            "name": "cId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the comment perma id"
+          },
+          {
+            "name": "render",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "true if the wiki text should be rendered into html, into the field <messageAsHtml>."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "the requested comment.",
+            "schema": {}
+          },
+          "403": {
+            "description": "the requested comment.",
+            "schema": {}
+          },
+          "404": {
+            "description": "the requested comment.",
+            "schema": {}
+          }
+        }
+      },
+      "post": {
+        "description": "Updates the comment given by the perma id to the new comment posted.",
+        "summary": "updateComment",
+        "operationId": "RestServiceReviewsV1CommentsByIdAndCIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma id"
+          },
+          {
+            "name": "cId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the comment perma id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes the given comment.",
+        "summary": "removeComment",
+        "operationId": "RestServiceReviewsV1CommentsByIdAndCIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma id"
+          },
+          {
+            "name": "cId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the comment perma id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/addFile": {
+      "post": {
+        "description": "",
+        "summary": "addFile",
+        "operationId": "RestServiceReviewsV1AddFileByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma id to add the file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "the ReviewData document on success.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/versionInfo": {
+      "get": {
+        "description": "Returns Crucible version information.",
+        "summary": "getVersionInfo",
+        "operationId": "RestServiceReviewsV1VersionInfoGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/details": {
+      "get": {
+        "description": "Retrieves all reviews that are in one of the the specified states. For each review all details are included (review items + comments). The\n wiki rendered comments will be available via the <messageAsHtml> element",
+        "summary": "getAllDetailedReviews",
+        "operationId": "RestServiceReviewsV1DetailsGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "the review states to match."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/filter/{filter}": {
+      "get": {
+        "description": "Get all the reviews which match the given filter, for the current user.",
+        "summary": "getFilteredReviewsForUser",
+        "operationId": "RestServiceReviewsV1FilterByFilterGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "a predefined filter type."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/filter/{filter}/details": {
+      "get": {
+        "description": "Gets a list of all the reviews that match the specified filter criteria.",
+        "summary": "getDetailedFilteredReviewsForUser",
+        "operationId": "RestServiceReviewsV1FilterDetailsByFilterGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "a predefined filter type."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/filter": {
+      "get": {
+        "description": "",
+        "summary": "getCustomFilterReviews",
+        "operationId": "RestServiceReviewsV1FilterGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "a string that will be searched for in review titles."
+          },
+          {
+            "name": "author",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "reviews authored by this user."
+          },
+          {
+            "name": "moderator",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "reviews moderated by this user."
+          },
+          {
+            "name": "creator",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "reviews created by this user."
+          },
+          {
+            "name": "states",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "comma-separated list of amy of the following strings: (Draft,\n Approval, Review, Summarize, Closed, Dead, Rejected, Unknown)."
+          },
+          {
+            "name": "reviewer",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "reviews reviewed by this user."
+          },
+          {
+            "name": "orRoles",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "whether the value of"
+          },
+          {
+            "name": "complete",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "reviews that the specified reviewer has completed."
+          },
+          {
+            "name": "allReviewersComplete",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Reviews that all reviewers have completed."
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "reviews for the specified project."
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "reviews with last activity date after the specified timestamp, in milliseconds. Inclusive."
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "reviews with last activity date before the specified timestamp, in milliseconds. Inclusive."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "post": {
+        "description": "This method should no longer be used, as it uses a POST for a read-only\n retrieval operation and is provided for backward compatibility only.",
+        "summary": "postCustomFilterReviews",
+        "operationId": "RestServiceReviewsV1FilterPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/reviewers": {
+      "get": {
+        "description": "Get a list of reviewers in the review given by the permaid id.",
+        "summary": "getReviewers",
+        "operationId": "RestServiceReviewsV1ReviewersByIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the id of the review to add to"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "post": {
+        "description": "Adds the given list of reviewers to the review.",
+        "summary": "addReviewers",
+        "operationId": "RestServiceReviewsV1ReviewersByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the id of the review to add to"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/reviewers/completed": {
+      "get": {
+        "description": "Gets a list of completed reviewers.",
+        "summary": "getCompletedReviewers",
+        "operationId": "RestServiceReviewsV1ReviewersCompletedByIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma id to retrieve reviewers"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/reviewers/uncompleted": {
+      "get": {
+        "description": "Gets a list of reviewers that have not completed the review.",
+        "summary": "getUncompletedReviewers",
+        "operationId": "RestServiceReviewsV1ReviewersUncompletedByIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma id to retrieve reviewers"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/reviewers/{username}": {
+      "delete": {
+        "description": "Removes the reviewer from the review.",
+        "summary": "removeReviewer",
+        "operationId": "RestServiceReviewsV1ReviewersByIdAndUsernameDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the perma id of the review"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the name of the reviewer."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/reviewitems": {
+      "get": {
+        "description": "Returns a list of all the items in a review.",
+        "summary": "getReviewItemsForReview",
+        "operationId": "RestServiceReviewsV1ReviewitemsByIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the id of the review (e.g. \"CR-362\")."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "post": {
+        "description": "Add the changes between two files in a fisheye repository to the review.",
+        "summary": "addFisheyeReviewItem",
+        "operationId": "RestServiceReviewsV1ReviewitemsByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the id of the review (e.g. \"CR-362\")."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "the added review item. see {@link com.atlassian.crucible.spi.rpc.ReviewExampleDocuments#EXAMPLE_REVIEWITEM_RESPONSE}",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/reviewitems/revisions": {
+      "post": {
+        "description": "Adds a review item for each of the supplied crucibleRevisionData elements.",
+        "summary": "addReviewItems",
+        "operationId": "RestServiceReviewsV1ReviewitemsRevisionsByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the id of the review (e.g. \"CR-362\")."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "schema": {}
+          },
+          "401": {
+            "description": "",
+            "schema": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/reviewitems/details": {
+      "post": {
+        "description": "Adds the given review item to the review. This will always create a new review item, even if there is an existing\n one with the same data in the review (in which case the existing item will be replaced).",
+        "summary": "addReviewItem",
+        "operationId": "RestServiceReviewsV1ReviewitemsDetailsByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the id of the review (e.g. \"CR-362\")."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/reviewitems/{riId}/details": {
+      "put": {
+        "description": "Sets the review item specified by itemId with the given reviewItem. The old review item is discarded. Can only\n perform this operation if the old review item specified by itemId can be deleted. The old review item's permId is\n not changed.",
+        "summary": "setReviewItem",
+        "operationId": "RestServiceReviewsV1ReviewitemsDetailsByIdAndRiIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "riId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "a valid review item id (e.g. \"CFR-5622\")."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "a valid review id (e.g. \"CR-345\")."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "the newly created review item, with its itemId set to the new ID.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/reviewitems/{riId}": {
+      "delete": {
+        "description": "Removes an item from a review.",
+        "summary": "removeReviewItem",
+        "operationId": "RestServiceReviewsV1ReviewitemsByIdAndRiIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "riId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "review item id (e.g. \"CFR-6312\")."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "review id (e.g. \"CR-345\")."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "description": "Returns detailed information for a specific review item.",
+        "summary": "getReviewItem",
+        "operationId": "RestServiceReviewsV1ReviewitemsByIdAndRiIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "riId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "review item id (e.g. \"CFR-6312\")."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "review id (e.g. \"CR-345\")."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/addChangeset": {
+      "post": {
+        "description": "",
+        "summary": "addChangesetToReview",
+        "operationId": "RestServiceReviewsV1AddChangesetByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the perm id of the review to add the changeset to"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "the review with the changeset added",
+            "schema": {}
+          },
+          "409": {
+            "description": "the review with the changeset added",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/patch": {
+      "post": {
+        "description": "Add the revisions in a patch to an existing review.",
+        "summary": "addPatchToReview",
+        "operationId": "RestServiceReviewsV1PatchByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addPatchToReviewRequest"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review id to get the patches for"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "the review with the patch added. It will not have details, such as comments.",
+            "schema": {}
+          }
+        }
+      },
+      "get": {
+        "description": "Get a list of patches and their details for the given review",
+        "summary": "getReviewPatches",
+        "operationId": "RestServiceReviewsV1PatchByIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review id to get the patches for"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/patch/{patchId}": {
+      "delete": {
+        "description": "Removes the patch with the given id from the review. All of the revisions provided by the patch will be removed as well.",
+        "summary": "removePatch",
+        "operationId": "RestServiceReviewsV1PatchByIdAndPatchIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "patchId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "the id of the patch (as returned by the '{id}/patch' resource)"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the permaId of the review"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/addPatch": {
+      "post": {
+        "description": "Old, non-restful name. Kept for backwards compatibility. Exactly the same as POSTing to /{id}/patch",
+        "summary": "addPatchReview0",
+        "operationId": "RestServiceReviewsV1AddPatchByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addPatchReview0Request"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/reviewitems/{riId}/comments": {
+      "post": {
+        "description": "This call includes the",
+        "summary": "addVersionedComment",
+        "operationId": "RestServiceReviewsV1ReviewitemsCommentsByIdAndRiIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "riId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "review iten perma-id"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "review perma-id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "summary": "getReviewItemsComments",
+        "operationId": "RestServiceReviewsV1ReviewitemsCommentsByIdAndRiIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "riId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "review iten perma-id"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "review perma-id"
+          },
+          {
+            "name": "render",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "indicate whether to render the wiki text in the returned comments. If set to \"true\", the comments will contain a\n <messageAsHtml> element containing the wiki rendered html."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "all the comments for the review item, given by the review perma id, and the review item perma id.",
+            "schema": {}
+          },
+          "403": {
+            "description": "all the comments for the review item, given by the review perma id, and the review item perma id.",
+            "schema": {}
+          },
+          "404": {
+            "description": "all the comments for the review item, given by the review perma id, and the review item perma id.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/comments/{cId}/replies": {
+      "get": {
+        "description": "Gets the replies to the given comment.",
+        "summary": "getReplies",
+        "operationId": "RestServiceReviewsV1CommentsRepliesByIdAndCIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma-id (e.g. \"CR-45\")."
+          },
+          {
+            "name": "cId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the comment to reply to"
+          },
+          {
+            "name": "render",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "true if the comments should also be rendered into html, into the element <messageAsHtml>"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "a list of comments that are replies top the given comment id.",
+            "schema": {}
+          },
+          "403": {
+            "description": "a list of comments that are replies top the given comment id.",
+            "schema": {}
+          },
+          "404": {
+            "description": "a list of comments that are replies top the given comment id.",
+            "schema": {}
+          }
+        }
+      },
+      "post": {
+        "description": "Adds a reply to the given comment. This call includes the",
+        "summary": "addReply",
+        "operationId": "RestServiceReviewsV1CommentsRepliesByIdAndCIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma-id (e.g. \"CR-45\")."
+          },
+          {
+            "name": "cId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the comment to reply to"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/comments/markAllAsRead": {
+      "post": {
+        "description": "For the effective user, mark all comments in a review as read (except\n those marked as leave unread).",
+        "summary": "markAllCommentsAsRead",
+        "operationId": "RestServiceReviewsV1CommentsMarkAllAsReadByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma-id (e.g. \"CR-45\")."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/comments/{cId}/markAsRead": {
+      "post": {
+        "description": "Mark the given comment as read for the user used to make this POST.",
+        "summary": "markCommentAsRead",
+        "operationId": "RestServiceReviewsV1CommentsMarkAsReadByIdAndCIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma id"
+          },
+          {
+            "name": "cId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the comment perma id."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/comments/{cId}/markAsLeaveUnread": {
+      "post": {
+        "description": "Marks the comment as leave unread to the current user - it will not automatically be marked as read by crucible.",
+        "summary": "markCommentAsLeaveUnread",
+        "operationId": "RestServiceReviewsV1CommentsMarkAsLeaveUnreadByIdAndCIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma id for the comment"
+          },
+          {
+            "name": "cId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the comment perma id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/comments/{cId}/replies/{rId}": {
+      "post": {
+        "description": "Updates a reply with the given newComment.",
+        "summary": "updateReply",
+        "operationId": "RestServiceReviewsV1CommentsRepliesRIdByIdAndCIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The review perma id"
+          },
+          {
+            "name": "rId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the perma id of the reply to delete"
+          },
+          {
+            "name": "cId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the reply's parent comment perma id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes the reply.",
+        "summary": "removeReply",
+        "operationId": "RestServiceReviewsV1CommentsRepliesRIdByIdAndCIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The review perma id"
+          },
+          {
+            "name": "rId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the perma id of the reply to delete"
+          },
+          {
+            "name": "cId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the reply's parent comment perma id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/publish": {
+      "post": {
+        "description": "Publishes all the draft comments of the current user.",
+        "summary": "publishAllComments",
+        "operationId": "RestServiceReviewsV1PublishByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma id to look for draft comments"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/publish/{cId}": {
+      "post": {
+        "description": "publishes the given draft comment.",
+        "summary": "publishComment",
+        "operationId": "RestServiceReviewsV1PublishByIdAndCIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma id"
+          },
+          {
+            "name": "cId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the comment perma id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/complete": {
+      "post": {
+        "description": "Completes the review for the current user",
+        "summary": "completeReview",
+        "operationId": "RestServiceReviewsV1CompleteByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma id"
+          },
+          {
+            "name": "ignoreWarnings",
+            "in": "query",
+            "required": false,
+            "default": true,
+            "type": "boolean",
+            "description": "if {@code ignoreWarnings==true} then condition failure warnings will be ignored"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/uncomplete": {
+      "post": {
+        "description": "Uncompletes the review for the current user.",
+        "summary": "uncompleteReview",
+        "operationId": "RestServiceReviewsV1UncompleteByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma id"
+          },
+          {
+            "name": "ignoreWarnings",
+            "in": "query",
+            "required": false,
+            "default": true,
+            "type": "boolean",
+            "description": "if {@code ignoreWarnings==true} then condition failure warnings will be ignored"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/transition": {
+      "post": {
+        "description": "Change the state of a review by performing an action on it.",
+        "summary": "changeState",
+        "operationId": "RestServiceReviewsV1TransitionByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma-id (e.g. \"CR-45\")."
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "the string representation of the action to perform. Valid actions are:"
+          },
+          {
+            "name": "ignoreWarnings",
+            "in": "query",
+            "required": false,
+            "default": true,
+            "type": "boolean",
+            "description": "if"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/close": {
+      "post": {
+        "description": "Closes the given review with the summary given.",
+        "summary": "closeReviewWithComment",
+        "operationId": "RestServiceReviewsV1CloseByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma id to close. it should be in the open state."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/remind": {
+      "post": {
+        "description": "Immediately send a reminder to incomplete reviewers about the given review.",
+        "summary": "remindIncompleteReviewers",
+        "operationId": "RestServiceReviewsV1RemindByIdPost",
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/remindIncompleteReviewersRequest"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma id to remind about. it should be in the open state."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/filter/details": {
+      "get": {
+        "description": "",
+        "summary": "getDetailedCustomFilterReviews",
+        "operationId": "RestServiceReviewsV1FilterDetailsGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "a string that will be searched for in review titles."
+          },
+          {
+            "name": "author",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "reviews authored by this user."
+          },
+          {
+            "name": "moderator",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "reviews moderated by this user."
+          },
+          {
+            "name": "creator",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "reviews created by this user."
+          },
+          {
+            "name": "states",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "comma-separated list of amy of the following strings: (Draft,\n Approval, Review, Summarize, Closed, Dead, Rejected, Unknown)."
+          },
+          {
+            "name": "reviewer",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "reviews reviewed by this user."
+          },
+          {
+            "name": "orRoles",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "whether the value of"
+          },
+          {
+            "name": "complete",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "reviews that the specified reviewer has completed."
+          },
+          {
+            "name": "allReviewersComplete",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Reviews that all reviewers have completed."
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "reviews for the specified project."
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "reviews with last activity date after the specified timestamp, in milliseconds. Inclusive."
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "reviews with last activity date before the specified timestamp, in milliseconds. Inclusive."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/search/{repository}": {
+      "get": {
+        "description": "Return a list of Reviews which include a particular file.",
+        "summary": "getReviewsForPath",
+        "operationId": "RestServiceReviewsV1SearchByRepositoryGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to search for file"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "path to find in reviews"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/search/{repository}/details": {
+      "get": {
+        "description": "Return a list of Reviews which include a particular file.",
+        "summary": "getReviewsDetailsForPath",
+        "operationId": "RestServiceReviewsV1SearchDetailsByRepositoryGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to search for file."
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "path to find in reviews."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}": {
+      "get": {
+        "description": "Get a single review by its permId (e.g. \"CR-45\").\n If the review does not exist, a 404 is returned.",
+        "summary": "getReview",
+        "operationId": "RestServiceReviewsV1ByIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the permId of the review to delete (e.g. \"CR-45\")."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "a ReviewData instance containing the attributes of the review. Does not contain the details of the review.",
+            "schema": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Permanently deletes the specified review.\n The review must have been abandoned.",
+        "summary": "deleteReview",
+        "operationId": "RestServiceReviewsV1ByIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the permId of the review to delete (e.g. \"CR-45\")."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/details": {
+      "get": {
+        "description": "Returns the specified review.",
+        "summary": "getDetailedReview",
+        "operationId": "RestServiceReviewsV1DetailsByIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the permId of the review (e.g. \"CR-45\")."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/actions": {
+      "get": {
+        "description": "Get a list of the actions which the current user is allowed to perform\n on the review.",
+        "summary": "getAvailableActions",
+        "operationId": "RestServiceReviewsV1ActionsByIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the permId of the a review (e.g. \"CR-45\")."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/transitions": {
+      "get": {
+        "description": "Get a list of the actions which the current user can perform on this\n review, given its current state and the user's permissions.",
+        "summary": "getAvailableTransitions",
+        "operationId": "RestServiceReviewsV1TransitionsByIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the permId of the a review (e.g. \"CR-45\")."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/reviewitems/{riId}/revisions": {
+      "post": {
+        "description": "Adds the given list of revisions to the supplied review item, merging if required. For example, if the review\n item for",
+        "summary": "addReviewItemRevisions",
+        "operationId": "RestServiceReviewsV1ReviewitemsRevisionsByIdAndRiIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "riId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the id of the review item from which to remove the list of revisions (e.g. \"CFR-5622\")."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the PermId of the review to remove the item from (e.g. \"CR-345\")."
+          },
+          {
+            "name": "rev",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "a list of revisions to remove. If the revision does not exist in the review item, it is ignored."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "the review item with the added list of revisions.",
+            "schema": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Removes the revisions given from the review item in the review specified by the id. If the review item has no\n more revisions left, it is automatically deleted.",
+        "summary": "removeReviewItemRevisions",
+        "operationId": "RestServiceReviewsV1ReviewitemsRevisionsByIdAndRiIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "riId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the id of the review item from which to remove the list of revisions (e.g. \"CFR-5622\")."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the PermId of the review to remove the item from (e.g. \"CR-345\")."
+          },
+          {
+            "name": "rev",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "a list of revisions to remove. If the revision does not exist in the review item, it is ignored."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/comments": {
+      "get": {
+        "description": "Return all the comments visible to the requesting user for the review.",
+        "summary": "getAllComments",
+        "operationId": "RestServiceReviewsV1CommentsByIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma-id"
+          },
+          {
+            "name": "render",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "indicate whether to render the wiki text in the returned comments. If set to \"true\", the comments will contain a\n <messageAsHtml> element containing the wiki rendered html."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "schema": {}
+          },
+          "403": {
+            "description": "",
+            "schema": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      },
+      "post": {
+        "description": "Add a general comment to the review.",
+        "summary": "addGeneralComment",
+        "operationId": "RestServiceReviewsV1CommentsByIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addGeneralCommentRequest"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the review perma-id"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "schema": {}
+          },
+          "403": {
+            "description": "",
+            "schema": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/comments/general": {
+      "get": {
+        "description": "",
+        "summary": "getGeneralComments",
+        "operationId": "RestServiceReviewsV1CommentsGeneralByIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "review perma-id"
+          },
+          {
+            "name": "render",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "indicate whether to render the wiki text in the returned comments. If set to \"true\", the comments will contain a\n <messageAsHtml> element containing the wiki rendered html."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "all the general comments for the review given by id.",
+            "schema": {}
+          },
+          "403": {
+            "description": "all the general comments for the review given by id.",
+            "schema": {}
+          },
+          "404": {
+            "description": "all the general comments for the review given by id.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/{id}/comments/versioned": {
+      "get": {
+        "description": "",
+        "summary": "getVersionedComments",
+        "operationId": "RestServiceReviewsV1CommentsVersionedByIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "review perma-id"
+          },
+          {
+            "name": "render",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "indicate whether to render the wiki text in the returned comments. If set to \"true\", the comments will contain a\n <messageAsHtml> element containing the wiki rendered html."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "all the revision comments for the review given by id. A revision comment is a comment made to a revision of a file.",
+            "schema": {}
+          },
+          "403": {
+            "description": "all the revision comments for the review given by id. A revision comment is a comment made to a revision of a file.",
+            "schema": {}
+          },
+          "404": {
+            "description": "all the revision comments for the review given by id. A revision comment is a comment made to a revision of a file.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/reviews-v1/metrics/{version}": {
+      "get": {
+        "description": "Get comment metrics metadata for the specified metrics version.",
+        "summary": "getMetrics",
+        "operationId": "RestServiceReviewsV1MetricsByVersionGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "a metrics version."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/projects-v1": {
+      "get": {
+        "description": "",
+        "summary": "getAllProjects",
+        "operationId": "RestServiceProjectsV1Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "excludeAllowedReviewers",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "if set to true, user data (e.g. allowedReviewers) which is expensive\n to compute, will not be included in the response data. Defaults to false so allowedReviewers are included in the response."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service/projects-v1/{key}": {
+      "get": {
+        "description": "",
+        "summary": "getProject",
+        "operationId": "RestServiceProjectsV1ByKeyGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of a Crucible project."
+          },
+          {
+            "name": "excludeAllowedReviewers",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "a detailed description of a Crucible project.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service/auth-v1/login": {
+      "post": {
+        "description": "",
+        "summary": "loginPost",
+        "operationId": "RestServiceAuthV1LoginPost",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "the username of the user to get the token for"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "the password for the user to get the token for"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "summary": "login",
+        "operationId": "RestServiceAuthV1LoginGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "the username of the user to get the token for"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "the password for the user to get the token for"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "addPatchToReviewRequest": {
+      "title": "addPatchToReviewRequest",
+      "description": "",
+      "type": "object"
+    },
+    "addPatchReview0Request": {
+      "title": "addPatchReview0Request",
+      "description": "",
+      "type": "object"
+    },
+    "remindIncompleteReviewersRequest": {
+      "title": "remindIncompleteReviewersRequest",
+      "description": "",
+      "type": "object"
+    },
+    "addGeneralCommentRequest": {
+      "title": "addGeneralCommentRequest",
+      "description": "",
+      "type": "object"
+    }
+  },
+  "tags": []
+}

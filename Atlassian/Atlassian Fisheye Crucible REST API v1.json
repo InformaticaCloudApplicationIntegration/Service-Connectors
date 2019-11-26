@@ -1,0 +1,3969 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "API",
+    "description": "This is the reference section of the Fisheye Crucible common REST API.\r\nFor information about Fisheye Crucible Plugin Development, visit the\r\nThis documentation was automatically generated from the\r\nSome endpoints (with no -v1 suffix) produce and consume payload in JSON format only.",
+    "contact": {}
+  },
+  "host": "host:port",
+  "basePath": "/context/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/rest-service-fecru/admin/groups/": {
+      "post": {
+        "description": "Creates a new user group.",
+        "summary": "create",
+        "operationId": "RestServiceFecruAdminGroupsPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/createRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "created group",
+            "schema": {}
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve a page of groups.",
+        "summary": "list",
+        "operationId": "RestServiceFecruAdminGroupsGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "prefix",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "filter groups by name prefix"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/groups//{name}/users": {
+      "put": {
+        "description": "Adds user to group",
+        "summary": "addUserToGroup",
+        "operationId": "RestServiceFecruAdminGroupsUsersByNamePut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addUserToGroupRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "group name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Removes user from group",
+        "summary": "removeUserFromGroup",
+        "operationId": "RestServiceFecruAdminGroupsUsersByNameDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/removeUserFromGroupRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "group name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      },
+      "get": {
+        "description": "Lists group's user names",
+        "summary": "listGroupUsers",
+        "operationId": "RestServiceFecruAdminGroupsUsersByNameGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "group name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/groups//{name}": {
+      "get": {
+        "description": "Retrieve a group by name.",
+        "summary": "get",
+        "operationId": "RestServiceFecruAdminGroupsByNameGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "group name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "group",
+            "schema": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Updates an existing group.",
+        "summary": "update",
+        "operationId": "RestServiceFecruAdminGroupsByNamePut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updateRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "group name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "updated group",
+            "schema": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a group by name",
+        "summary": "delete",
+        "operationId": "RestServiceFecruAdminGroupsByNameDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "group name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1": {
+      "post": {
+        "description": "",
+        "summary": "addRepository",
+        "operationId": "RestServiceFecruAdminRepositoriesV1Post",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "default": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1/{repository}/scan": {
+      "post": {
+        "description": "",
+        "summary": "scan",
+        "operationId": "RestServiceFecruAdminRepositoriesV1ScanByRepositoryPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to run scan for"
+          },
+          {
+            "name": "synchronous",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "if true will wait for the indexing to finish before returning"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1/{repository}": {
+      "get": {
+        "description": "Returns information about the status of the repository and the current indexing status",
+        "summary": "getStatus",
+        "operationId": "RestServiceFecruAdminRepositoriesV1ByRepositoryGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1/{repository}/enable": {
+      "post": {
+        "description": "",
+        "summary": "enableRepository",
+        "operationId": "RestServiceFecruAdminRepositoriesV1EnableByRepositoryPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to enable"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "default": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1/{repository}/disable": {
+      "post": {
+        "description": "",
+        "summary": "disableRepository",
+        "operationId": "RestServiceFecruAdminRepositoriesV1DisableByRepositoryPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to disable"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "default": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1/{repository}/": {
+      "delete": {
+        "description": "",
+        "summary": "deleteRepository",
+        "operationId": "RestServiceFecruAdminRepositoriesV1ByRepositoryDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "default": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1/{repository}/reindex-source": {
+      "post": {
+        "description": "",
+        "summary": "reindexSource",
+        "operationId": "RestServiceFecruAdminRepositoriesV1ReindexSourceByRepositoryPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to reindex"
+          },
+          {
+            "name": "clone",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "if true and the repository is a dvcs repository (git or mercurial) it will re-clone the repository\n before re-indexing"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "409": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1/{repository}/reindex-reviews": {
+      "post": {
+        "description": "",
+        "summary": "doReviewRevisionReindex",
+        "operationId": "RestServiceFecruAdminRepositoriesV1ReindexReviewsByRepositoryPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to reindex"
+          },
+          {
+            "name": "synchronous",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "if true will wait for the indexing to finish before returning"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "409": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1/{repository}/reindex-linecount": {
+      "post": {
+        "description": "",
+        "summary": "reindexLinecount",
+        "operationId": "RestServiceFecruAdminRepositoriesV1ReindexLinecountByRepositoryPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to re-index"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "409": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1/{repository}/reindex-search": {
+      "post": {
+        "description": "",
+        "summary": "rebuildSearchIndex",
+        "operationId": "RestServiceFecruAdminRepositoriesV1ReindexSearchByRepositoryPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to re-index."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "409": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1/{repository}/reindex-discussions": {
+      "post": {
+        "description": "",
+        "summary": "reindexChangesetComments",
+        "operationId": "RestServiceFecruAdminRepositoriesV1ReindexDiscussionsByRepositoryPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to perform the operation for"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "409": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1/{repository}/scan-cvs": {
+      "post": {
+        "description": "",
+        "summary": "scanCvs",
+        "operationId": "RestServiceFecruAdminRepositoriesV1ScanCvsByRepositoryPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to scan"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "409": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1/{repository}/rescan-metadata": {
+      "post": {
+        "description": "",
+        "summary": "rescanMetadata",
+        "operationId": "RestServiceFecruAdminRepositoriesV1RescanMetadataByRepositoryPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to re-scan"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "the revision number to start at"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "description": "the revision number to end at"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "404": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "409": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1/{repository}/start": {
+      "post": {
+        "description": "",
+        "summary": "startRepository",
+        "operationId": "RestServiceFecruAdminRepositoriesV1StartByRepositoryPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to start"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "409": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "default": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories-v1/{repository}/stop": {
+      "post": {
+        "description": "",
+        "summary": "stopRepository",
+        "operationId": "RestServiceFecruAdminRepositoriesV1StopByRepositoryPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to stop"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          },
+          "409": {
+            "description": "information about the state of the repository",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/users/": {
+      "post": {
+        "description": "Creates a new user. Tries to add the user to fisheye-users and crucible-users groups if those exist.",
+        "summary": "create1",
+        "operationId": "RestServiceFecruAdminUsersPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/createRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "created user",
+            "schema": {}
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve a page of users.",
+        "summary": "list",
+        "operationId": "RestServiceFecruAdminUsersGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/users//{name}/groups": {
+      "put": {
+        "description": "Adds user to group",
+        "summary": "addUserToGroup1",
+        "operationId": "RestServiceFecruAdminUsersGroupsByNamePut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addUserToGroupRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "user name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "schema": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Removes user from group",
+        "summary": "removeUserFromGroup1",
+        "operationId": "RestServiceFecruAdminUsersGroupsByNameDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/removeUserFromGroupRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "user name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "schema": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      },
+      "get": {
+        "description": "Lists user's group names",
+        "summary": "listUserGroups",
+        "operationId": "RestServiceFecruAdminUsersGroupsByNameGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "user name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/users//{name}": {
+      "get": {
+        "description": "Retrieve a user by name.",
+        "summary": "get1",
+        "operationId": "RestServiceFecruAdminUsersByNameGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "user name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "user",
+            "schema": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Updates an existing user.",
+        "summary": "update1",
+        "operationId": "RestServiceFecruAdminUsersByNamePut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updateRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "user name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "updated user",
+            "schema": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a user by name",
+        "summary": "delete1",
+        "operationId": "RestServiceFecruAdminUsersByNameDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "user name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/projects": {
+      "post": {
+        "description": "Creates a new project.",
+        "summary": "create2",
+        "operationId": "RestServiceFecruAdminProjectsPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/createRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "created project",
+            "schema": {}
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve a page of projects.",
+        "summary": "list",
+        "operationId": "RestServiceFecruAdminProjectsGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "project's name part filter, optional"
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "project's key part filter, optional"
+          },
+          {
+            "name": "defaultRepositoryName",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "project's default repository key part filter, optional"
+          },
+          {
+            "name": "permissionSchemeName",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "project's permission scheme pare name filter, optional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/projects/{key}/default-reviewer-users": {
+      "get": {
+        "description": "Retrieves project's default reviewer users",
+        "summary": "listDefaultReviewerUsers",
+        "operationId": "RestServiceFecruAdminProjectsDefaultReviewerUsersByKeyGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Add user to project's default reviewer users list",
+        "summary": "addDefaultReviewerUser",
+        "operationId": "RestServiceFecruAdminProjectsDefaultReviewerUsersByKeyPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addDefaultReviewerUserRequest"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Remove user from project's default reviewer users list",
+        "summary": "deleteDefaultReviewerUser",
+        "operationId": "RestServiceFecruAdminProjectsDefaultReviewerUsersByKeyDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/deleteDefaultReviewerUserRequest"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/projects/{sourceProjectKey}/move-reviews/{destinationProjectKey}": {
+      "put": {
+        "description": "Move reviews and snippets from source project to destination project",
+        "summary": "moveAllReviews",
+        "operationId": "RestServiceFecruAdminProjectsMoveReviewsBySourceProjectKeyAndDestinationProjectKeyPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "sourceProjectKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key of reviews and snippets source project"
+          },
+          {
+            "name": "destinationProjectKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key of reviews and snippets destination project"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/projects/{key}/default-reviewer-groups": {
+      "get": {
+        "description": "Retrieves project's default reviewer groups",
+        "summary": "defaultReviewerGroups",
+        "operationId": "RestServiceFecruAdminProjectsDefaultReviewerGroupsByKeyGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Add group to project's default reviewer group list",
+        "summary": "addDefaultReviewerGroup",
+        "operationId": "RestServiceFecruAdminProjectsDefaultReviewerGroupsByKeyPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addDefaultReviewerGroupRequest"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete group from project's default reviewer group list",
+        "summary": "deleteDefaultReviewerGroup",
+        "operationId": "RestServiceFecruAdminProjectsDefaultReviewerGroupsByKeyDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/deleteDefaultReviewerGroupRequest"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/projects/{key}/allowed-reviewer-users": {
+      "get": {
+        "description": "Retrieves project's allowed reviewer users",
+        "summary": "allowedReviewerUsers",
+        "operationId": "RestServiceFecruAdminProjectsAllowedReviewerUsersByKeyGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Add user to project's allowed reviewer users list",
+        "summary": "addAllowedReviewerUser",
+        "operationId": "RestServiceFecruAdminProjectsAllowedReviewerUsersByKeyPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addAllowedReviewerUserRequest"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Remove user from project's allowed reviewer users list",
+        "summary": "deleteAllowedReviewerUser",
+        "operationId": "RestServiceFecruAdminProjectsAllowedReviewerUsersByKeyDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/deleteAllowedReviewerUserRequest"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/projects/{key}/allowed-reviewer-groups": {
+      "get": {
+        "description": "Retrieves project's allowed reviewer groups",
+        "summary": "allowedReviewerGroups",
+        "operationId": "RestServiceFecruAdminProjectsAllowedReviewerGroupsByKeyGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Add group to project's allowed reviewer group list",
+        "summary": "addAllowedReviewerGroup",
+        "operationId": "RestServiceFecruAdminProjectsAllowedReviewerGroupsByKeyPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addAllowedReviewerGroupRequest"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete group from project's allowed reviewer group list",
+        "summary": "deleteAllowedReviewerGroup",
+        "operationId": "RestServiceFecruAdminProjectsAllowedReviewerGroupsByKeyDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/deleteAllowedReviewerGroupRequest"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/projects/{key}": {
+      "get": {
+        "description": "Retrieve a project by key.",
+        "summary": "get",
+        "operationId": "RestServiceFecruAdminProjectsByKeyGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "project",
+            "schema": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Updates an existing project.",
+        "summary": "update",
+        "operationId": "RestServiceFecruAdminProjectsByKeyPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updateRequest"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "updated project",
+            "schema": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a project by key (including all reviews in this project).\n Use",
+        "summary": "delete",
+        "operationId": "RestServiceFecruAdminProjectsByKeyDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "project key"
+          },
+          {
+            "name": "deleteProjectReviews",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "if true deletes reviews in project"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/recently-visited-v1": {
+      "get": {
+        "description": "Get a list of recently visited items for the currently logged in user.",
+        "summary": "getRecent",
+        "operationId": "RestServiceFecruRecentlyVisitedV1Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/recently-visited-v1/repositories": {
+      "get": {
+        "description": "Get a list of recently visited repositories for the currently logged in user.",
+        "summary": "getRecentRepositories",
+        "operationId": "RestServiceFecruRecentlyVisitedV1RepositoriesGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/recently-visited-v1/repositories/detailed": {
+      "get": {
+        "description": "Get a list of recently visited repositories for the currently logged in user, including the detailed entities.",
+        "summary": "getRecentRepositoriesDetailed",
+        "operationId": "RestServiceFecruRecentlyVisitedV1RepositoriesDetailedGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/recently-visited-v1/detailed": {
+      "get": {
+        "description": "Get a list of recently visisted items for the currently logged in user, including the detailed entities.",
+        "summary": "getRecentDetailed",
+        "operationId": "RestServiceFecruRecentlyVisitedV1DetailedGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/recently-visited-v1/users": {
+      "get": {
+        "description": "Get a list of recently visited users for the currently logged in user.",
+        "summary": "getRecentUsers",
+        "operationId": "RestServiceFecruRecentlyVisitedV1UsersGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/recently-visited-v1/users/detailed": {
+      "get": {
+        "description": "Get a list of recently visited users for the currently logged in user, including the detailed entities.",
+        "summary": "getRecentUsersDetailed",
+        "operationId": "RestServiceFecruRecentlyVisitedV1UsersDetailedGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/recently-visited-v1/projects": {
+      "get": {
+        "description": "Get a list of recently visited projects for the currently logged in user.",
+        "summary": "getRecentProjects",
+        "operationId": "RestServiceFecruRecentlyVisitedV1ProjectsGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/recently-visited-v1/projects/detailed": {
+      "get": {
+        "description": "Get a list of recently visited projects for the currently logged in Project, including the detailed entities.",
+        "summary": "getRecentProjectsDetailed",
+        "operationId": "RestServiceFecruRecentlyVisitedV1ProjectsDetailedGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/recently-visited-v1/reviews": {
+      "get": {
+        "description": "Get a list of recently visited reviews for the currently logged in user.",
+        "summary": "getRecentReviews",
+        "operationId": "RestServiceFecruRecentlyVisitedV1ReviewsGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/recently-visited-v1/reviews/detailed": {
+      "get": {
+        "description": "Get a list of recently visited reviews for the currently logged in user, including the detailed entities.",
+        "summary": "getRecentReviewsDetailed",
+        "operationId": "RestServiceFecruRecentlyVisitedV1ReviewsDetailedGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/recently-visited-v1/snippets": {
+      "get": {
+        "description": "Get a list of recently visited snippets for the currently logged in user.",
+        "summary": "getRecentSnippets",
+        "operationId": "RestServiceFecruRecentlyVisitedV1SnippetsGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/recently-visited-v1/snippets/detailed": {
+      "get": {
+        "description": "Get a list of recently visited snippets for the currently logged in user, including the detailed entities.",
+        "summary": "getRecentSnippetsDetailed",
+        "operationId": "RestServiceFecruRecentlyVisitedV1SnippetsDetailedGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/permission-schemes": {
+      "post": {
+        "description": "Creates a new permission scheme. The new permission scheme is blank or can be created from another existing permission scheme.",
+        "summary": "create",
+        "operationId": "RestServiceFecruAdminPermissionSchemesPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/createRequest"
+            }
+          },
+          {
+            "name": "copyFrom",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "if set, the new permission scheme will be a copy of permissionSchemeName"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "created permission scheme",
+            "schema": {}
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve a page of permission schemes.",
+        "summary": "list",
+        "operationId": "RestServiceFecruAdminPermissionSchemesGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "permission scheme name part filter, case insensitive, optional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/permission-schemes/{name}/projects": {
+      "get": {
+        "description": "Retrieve a page of projects for given permission scheme.",
+        "summary": "listProjects",
+        "operationId": "RestServiceFecruAdminPermissionSchemesProjectsByNameGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/permission-schemes/{name}/groups": {
+      "put": {
+        "description": "Add group permission [group name, action name] to given permission scheme\n List of available action names:",
+        "summary": "addPermissionSchemeGroup",
+        "operationId": "RestServiceFecruAdminPermissionSchemesGroupsByNamePut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addPermissionSchemeGroupRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "group name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Removes group permission [group name, action name] from given permission scheme",
+        "summary": "deletePermissionSchemeGroup",
+        "operationId": "RestServiceFecruAdminPermissionSchemesGroupsByNameDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/deletePermissionSchemeGroupRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "group name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve a page of group permissions [group name, action name] for given permission scheme.",
+        "summary": "listGroupPrincipalAssociation",
+        "operationId": "RestServiceFecruAdminPermissionSchemesGroupsByNameGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "group name"
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "action name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/permission-schemes/{name}/review-roles": {
+      "get": {
+        "description": "Retrieve a page of review-roles permissions [role name, action name] for given permission scheme.",
+        "summary": "listRolesPrincipalAssociation",
+        "operationId": "RestServiceFecruAdminPermissionSchemesReviewRolesByNameGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "role name"
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "action name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Add review-role permission [role name, action name] to given permission scheme\n List of available action names:",
+        "summary": "addPermissionSchemeReviewRole",
+        "operationId": "RestServiceFecruAdminPermissionSchemesReviewRolesByNamePut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addPermissionSchemeReviewRoleRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Removes review-role permission [role name, action name] from given permission scheme",
+        "summary": "deletePermissionSchemeRole",
+        "operationId": "RestServiceFecruAdminPermissionSchemesReviewRolesByNameDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/deletePermissionSchemeRoleRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/permission-schemes/{name}/logged-in-users": {
+      "get": {
+        "description": "Retrieve a page of logged in users permissions [action name] for given permission scheme.",
+        "summary": "listLoggedUsersPrincipalAssociation",
+        "operationId": "RestServiceFecruAdminPermissionSchemesLoggedInUsersByNameGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "action name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Add logged-in-users permission [action name] to given permission scheme\n List of available action names:",
+        "summary": "addPermissionSchemeLoggedUsers",
+        "operationId": "RestServiceFecruAdminPermissionSchemesLoggedInUsersByNamePut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addPermissionSchemeLoggedUsersRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Removes logged-in-users permission [action name] from given permission scheme",
+        "summary": "deletePermissionSchemeLoggedUsers",
+        "operationId": "RestServiceFecruAdminPermissionSchemesLoggedInUsersByNameDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/deletePermissionSchemeLoggedUsersRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/permission-schemes/{name}/anonymous-users": {
+      "get": {
+        "description": "Retrieve a page of anonymous users permissions [action name] for given permission scheme.",
+        "summary": "listAnonymousUsersPrincipalAssociation",
+        "operationId": "RestServiceFecruAdminPermissionSchemesAnonymousUsersByNameGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "action name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Add anonymous-user permission [action name] to given permission scheme\n List of available action names:",
+        "summary": "addPermissionSchemeAnonymousUsers",
+        "operationId": "RestServiceFecruAdminPermissionSchemesAnonymousUsersByNamePut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addPermissionSchemeAnonymousUsersRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Removes anonymous-user permission [action name] from given permission scheme",
+        "summary": "deletePermissionSchemeAnonymousUsers",
+        "operationId": "RestServiceFecruAdminPermissionSchemesAnonymousUsersByNameDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/deletePermissionSchemeAnonymousUsersRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/permission-schemes/{name}/users": {
+      "get": {
+        "description": "Retrieve a page of user permissions [username, action name] for given permission scheme.",
+        "summary": "listUserPrincipalAssociation",
+        "operationId": "RestServiceFecruAdminPermissionSchemesUsersByNameGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "action name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Add user permission [username, action name] to given permission scheme\n List of available action names:",
+        "summary": "addPermissionSchemeUser",
+        "operationId": "RestServiceFecruAdminPermissionSchemesUsersByNamePut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addPermissionSchemeUserRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Removes user permission [username, action name] from given permission scheme",
+        "summary": "deletePermissionSchemeUser",
+        "operationId": "RestServiceFecruAdminPermissionSchemesUsersByNameDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/deletePermissionSchemeUserRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/permission-schemes/{name}": {
+      "get": {
+        "description": "Retrieve a permission scheme by name",
+        "summary": "get2",
+        "operationId": "RestServiceFecruAdminPermissionSchemesByNameGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "permission scheme",
+            "schema": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Updates an existing permission scheme.",
+        "summary": "update2",
+        "operationId": "RestServiceFecruAdminPermissionSchemesByNamePut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updateRequest"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "updated permission scheme",
+            "schema": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a permission scheme by name",
+        "summary": "delete2",
+        "operationId": "RestServiceFecruAdminPermissionSchemesByNameDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "permission scheme name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/user-prefs-v1": {
+      "post": {
+        "description": "Using POST method to set a user preference.\n If repo is not set, the preference will be recognised as a global preference.",
+        "summary": "setPref",
+        "operationId": "RestServiceFecruUserPrefsV1Post",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/setPrefRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/user-prefs-v1/{property}": {
+      "get": {
+        "description": "Getting user's global preference",
+        "summary": "getGlobalPref",
+        "operationId": "RestServiceFecruUserPrefsV1ByPropertyGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "property",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the property(preference) name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/user-prefs-v1/{repository}/{property}": {
+      "get": {
+        "description": "Getting user's preference related to a certain repository",
+        "summary": "getRepoPref",
+        "operationId": "RestServiceFecruUserPrefsV1ByRepositoryAndPropertyGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "property",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the property(preference) name"
+          },
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/auth/login": {
+      "post": {
+        "description": "Get the user authentication token.",
+        "summary": "login",
+        "operationId": "RestServiceFecruAuthLoginPost",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "the username of the user to get the token for"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "the password for the user to get the token for"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/server-v1": {
+      "get": {
+        "description": "Provides general information about the server's configuration.",
+        "summary": "getInfo",
+        "operationId": "RestServiceFecruServerV1Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/indexing-status-v1/status/{repository}": {
+      "get": {
+        "description": "Returns indexing status of given repository.",
+        "summary": "getStatus1",
+        "operationId": "RestServiceFecruIndexingStatusV1StatusByRepositoryGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to get status of"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/share-content-v1/share": {
+      "post": {
+        "description": "",
+        "summary": "doShareContent",
+        "operationId": "RestServiceFecruShareContentV1SharePost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories": {
+      "post": {
+        "description": "Creates a repository.",
+        "summary": "create3",
+        "operationId": "RestServiceFecruAdminRepositoriesPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/createRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "created repository",
+            "schema": {}
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve a page of repositories. Repository properties with default values may not be returned.",
+        "summary": "list",
+        "operationId": "RestServiceFecruAdminRepositoriesGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "filter repositories by repository type: svn, git, hg, cvs, p4, ..."
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "filter repositories by enabled flag"
+          },
+          {
+            "name": "started",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "filter repositories by started flag"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/{repository}/incremental-index": {
+      "put": {
+        "description": "Runs an incremental repository index.  This is the same operation as triggered by scheduled indexing.\n Can be called using the REST API Token to authorize.",
+        "summary": "incrementalIndex",
+        "operationId": "RestServiceFecruAdminRepositoriesIncrementalIndexByRepositoryPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to stop"
+          },
+          {
+            "name": "wait",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "if true will wait for the indexing to finish before returning"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/{repository}/full-incremental-index": {
+      "put": {
+        "description": "Runs an full incremental repository index.\n For CVS: scans the whole CVS repository for any changes since the last scan.\n For other repository types will trigger an incremental index.",
+        "summary": "fullIncrementalIndex",
+        "operationId": "RestServiceFecruAdminRepositoriesFullIncrementalIndexByRepositoryPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to scan"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/{repository}/reindex-reviews": {
+      "put": {
+        "description": "Re-indexes all the Crucible revision data (which revisions have been reviewed)",
+        "summary": "reindexReviews",
+        "operationId": "RestServiceFecruAdminRepositoriesReindexReviewsByRepositoryPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to reindex"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/{repository}/reindex-search": {
+      "put": {
+        "description": "Rebuilds the search index data for the given repository. This will rebuild the data used to search by path,\n commit message and committer, also used for activity streams and JIRA integration.",
+        "summary": "reindexSearch",
+        "operationId": "RestServiceFecruAdminRepositoriesReindexSearchByRepositoryPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to re-index."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/{repository}/reindex-changeset-discussion": {
+      "put": {
+        "description": "Rebuilds the changeset discussion index for the specified repository. The index is used to display changeset\n discussions in activity streams.",
+        "summary": "reindexChangesetDiscussion",
+        "operationId": "RestServiceFecruAdminRepositoriesReindexChangesetDiscussionByRepositoryPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to perform the operation for"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/~defaults/permissions": {
+      "get": {
+        "description": "Retrieve default repository permissions properties.",
+        "summary": "defaultPermissions",
+        "operationId": "RestServiceFecruAdminRepositoriesDefaultsPermissionsGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Updates default repository permissions properties.\n\n Valid permission settings: any combination of allowAnonymous, allowLoggedIn",
+        "summary": "updateDefaultPermissions",
+        "operationId": "RestServiceFecruAdminRepositoriesDefaultsPermissionsPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updateDefaultPermissionsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/{repository}/permissions": {
+      "put": {
+        "description": "Updates repository permissions properties.\n\n Valid permission settings: any combination of useDefaults, allowAnonymous, allowLoggedIn.",
+        "summary": "updatePermissions",
+        "operationId": "RestServiceFecruAdminRepositoriesPermissionsByRepositoryPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updatePermissionsRequest"
+            }
+          },
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "updated repository permissions properties",
+            "schema": {}
+          },
+          "404": {
+            "description": "updated repository permissions properties",
+            "schema": {}
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve repository permissions properties.",
+        "summary": "permissions",
+        "operationId": "RestServiceFecruAdminRepositoriesPermissionsByRepositoryGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "repository permissions properties",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/{repository}/permissions/groups": {
+      "get": {
+        "description": "Note: use /rest-service-fecru/admin/repository-permissions/ endpoint for full repository permission administration functionality\n Lists groups allowed to access repository.",
+        "summary": "permissionsGroups",
+        "operationId": "RestServiceFecruAdminRepositoriesPermissionsGroupsByRepositoryGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "schema": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Note: use /rest-service-fecru/admin/repository-permissions/ endpoint for full repository permission administration functionality\n Adds group to repository allowed groups",
+        "summary": "addGroupToPermissions",
+        "operationId": "RestServiceFecruAdminRepositoriesPermissionsGroupsByRepositoryPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/addGroupToPermissionsRequest"
+            }
+          },
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "schema": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete group from repository allowed groups",
+        "summary": "removeGroupToPermissions",
+        "operationId": "RestServiceFecruAdminRepositoriesPermissionsGroupsByRepositoryDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/removeGroupToPermissionsRequest"
+            }
+          },
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "schema": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/{repository}/updates": {
+      "get": {
+        "description": "Retrieves repository updates properties.",
+        "summary": "repositoryUpdates",
+        "operationId": "RestServiceFecruAdminRepositoriesUpdatesByRepositoryGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "repository key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "repository updates properties",
+            "schema": {}
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "summary": "updateRepositoryUpdates",
+        "operationId": "RestServiceFecruAdminRepositoriesUpdatesByRepositoryPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updateRepositoryUpdatesRequest"
+            }
+          },
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "repository key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "updated repository permissions properties",
+            "schema": {}
+          },
+          "404": {
+            "description": "updated repository permissions properties",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/{repository}/reindex-source": {
+      "put": {
+        "description": "Deletes the existing cache and re-indexes the repository from scratch.\n For large or slow repositories this may take some time, during which some functionality will be unavailable.\n This action will also restart the repository.",
+        "summary": "reindexSource",
+        "operationId": "RestServiceFecruAdminRepositoriesReindexSourceByRepositoryPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to reindex"
+          },
+          {
+            "name": "clone",
+            "in": "query",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "description": "if true and the repository is a dvcs repository (git or mercurial) it will re-clone the repository before re-indexing"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/{repository}/reindex-linecount": {
+      "put": {
+        "description": "Re-indexes the linecount data used to generate the LOC graphs. The linecount data will be recalculated in daily\n buckets based on the server timezone.",
+        "summary": "reindexLinecount",
+        "operationId": "RestServiceFecruAdminRepositoriesReindexLinecountByRepositoryPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to re-index"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/{repository}/rescan-metadata": {
+      "put": {
+        "description": "Re-scans the repository metadata. Only valid for Perforce and SVN repositories.",
+        "summary": "rescanMetadata",
+        "operationId": "RestServiceFecruAdminRepositoriesRescanMetadataByRepositoryPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to re-scan"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "the revision number to start at"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "the revision number to end at"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "",
+            "schema": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          },
+          "409": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/{repository}": {
+      "get": {
+        "description": "Retrieve a repository by key. Repository properties with default values may not be returned.",
+        "summary": "get",
+        "operationId": "RestServiceFecruAdminRepositoriesByRepositoryGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "repository",
+            "schema": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Updates an existing repository.",
+        "summary": "update",
+        "operationId": "RestServiceFecruAdminRepositoriesByRepositoryPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/updateRequest"
+            }
+          },
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "updated repository",
+            "schema": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a repository by key",
+        "summary": "delete",
+        "operationId": "RestServiceFecruAdminRepositoriesByRepositoryDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/{repository}/start": {
+      "put": {
+        "description": "Starts repository. Does not wait for the repository to start before returning.",
+        "summary": "start",
+        "operationId": "RestServiceFecruAdminRepositoriesStartByRepositoryPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to start"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/rest-service-fecru/admin/repositories/{repository}/stop": {
+      "put": {
+        "description": "Stops repository. Does not wait for the repository to stop before returning.",
+        "summary": "stop",
+        "operationId": "RestServiceFecruAdminRepositoriesStopByRepositoryPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repository",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "the key of the repository to stop"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "createRequest": {
+      "title": "createRequest",
+      "description": "",
+      "type": "object"
+    },
+    "addUserToGroupRequest": {
+      "title": "addUserToGroupRequest",
+      "description": "",
+      "type": "object"
+    },
+    "removeUserFromGroupRequest": {
+      "title": "removeUserFromGroupRequest",
+      "description": "",
+      "type": "object"
+    },
+    "updateRequest": {
+      "title": "updateRequest",
+      "description": "",
+      "type": "object"
+    },
+    "addDefaultReviewerUserRequest": {
+      "title": "addDefaultReviewerUserRequest",
+      "description": "",
+      "type": "object"
+    },
+    "deleteDefaultReviewerUserRequest": {
+      "title": "deleteDefaultReviewerUserRequest",
+      "description": "",
+      "type": "object"
+    },
+    "addDefaultReviewerGroupRequest": {
+      "title": "addDefaultReviewerGroupRequest",
+      "description": "",
+      "type": "object"
+    },
+    "deleteDefaultReviewerGroupRequest": {
+      "title": "deleteDefaultReviewerGroupRequest",
+      "description": "",
+      "type": "object"
+    },
+    "addAllowedReviewerUserRequest": {
+      "title": "addAllowedReviewerUserRequest",
+      "description": "",
+      "type": "object"
+    },
+    "deleteAllowedReviewerUserRequest": {
+      "title": "deleteAllowedReviewerUserRequest",
+      "description": "",
+      "type": "object"
+    },
+    "addAllowedReviewerGroupRequest": {
+      "title": "addAllowedReviewerGroupRequest",
+      "description": "",
+      "type": "object"
+    },
+    "deleteAllowedReviewerGroupRequest": {
+      "title": "deleteAllowedReviewerGroupRequest",
+      "description": "",
+      "type": "object"
+    },
+    "addPermissionSchemeGroupRequest": {
+      "title": "addPermissionSchemeGroupRequest",
+      "description": "",
+      "type": "object"
+    },
+    "deletePermissionSchemeGroupRequest": {
+      "title": "deletePermissionSchemeGroupRequest",
+      "description": "",
+      "type": "object"
+    },
+    "addPermissionSchemeReviewRoleRequest": {
+      "title": "addPermissionSchemeReviewRoleRequest",
+      "description": "",
+      "type": "object"
+    },
+    "deletePermissionSchemeRoleRequest": {
+      "title": "deletePermissionSchemeRoleRequest",
+      "description": "",
+      "type": "object"
+    },
+    "addPermissionSchemeLoggedUsersRequest": {
+      "title": "addPermissionSchemeLoggedUsersRequest",
+      "description": "",
+      "type": "object"
+    },
+    "deletePermissionSchemeLoggedUsersRequest": {
+      "title": "deletePermissionSchemeLoggedUsersRequest",
+      "description": "",
+      "type": "object"
+    },
+    "addPermissionSchemeAnonymousUsersRequest": {
+      "title": "addPermissionSchemeAnonymousUsersRequest",
+      "description": "",
+      "type": "object"
+    },
+    "deletePermissionSchemeAnonymousUsersRequest": {
+      "title": "deletePermissionSchemeAnonymousUsersRequest",
+      "description": "",
+      "type": "object"
+    },
+    "addPermissionSchemeUserRequest": {
+      "title": "addPermissionSchemeUserRequest",
+      "description": "",
+      "type": "object"
+    },
+    "deletePermissionSchemeUserRequest": {
+      "title": "deletePermissionSchemeUserRequest",
+      "description": "",
+      "type": "object"
+    },
+    "setPrefRequest": {
+      "title": "setPrefRequest",
+      "description": "",
+      "type": "object"
+    },
+    "updateDefaultPermissionsRequest": {
+      "title": "updateDefaultPermissionsRequest",
+      "description": "",
+      "type": "object"
+    },
+    "updatePermissionsRequest": {
+      "title": "updatePermissionsRequest",
+      "description": "",
+      "type": "object"
+    },
+    "addGroupToPermissionsRequest": {
+      "title": "addGroupToPermissionsRequest",
+      "description": "",
+      "type": "object"
+    },
+    "removeGroupToPermissionsRequest": {
+      "title": "removeGroupToPermissionsRequest",
+      "description": "",
+      "type": "object"
+    },
+    "updateRepositoryUpdatesRequest": {
+      "title": "updateRepositoryUpdatesRequest",
+      "description": "",
+      "type": "object"
+    }
+  },
+  "tags": []
+}
