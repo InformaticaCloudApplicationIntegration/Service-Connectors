@@ -1,0 +1,3166 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Tax Agency Notices",
+    "description": "The Tax Agency Notices APIs can be used to request a list of tax agency notices for the organization or to retrieve a specific tax agency notice. API metadata is also available.",
+    "contact": {
+      "email": "Isabel.Espina.Carvajal@adp.com",
+      "name": "Isabel Espina Carvajal"
+    }
+  },
+  "host": "test-api.adp.com",
+  "basePath": "/",
+  "schemes": [],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/tax/v1/organizations/{orgoid}/tax-agency-notices/{tax-agency-notice-id}/meta": {
+      "get": {
+        "description": "Returns a meta",
+        "summary": "24d2e35b-95d4-436b-83e1-244c6776a08b",
+        "tags": [
+          "Tax Agency Notices"
+        ],
+        "operationId": "TaxV1OrganizationsTaxAgencyNoticesMetaByOrgoidAndTaxAgencyNoticeIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tax-agency-notice-id",
+            "in": "path",
+            "required": true,
+            "default": "123",
+            "type": "string",
+            "description": "Tax Agency Notice ID"
+          },
+          {
+            "name": "roleCode",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The role the user is playing during the transaction.  Possible values: employee,manager,practitioner,administrator,supervisor.  The roleCode header will be passed in all calls. When coming from Myself capabilities rolecode=employee. When coming from Team capabilities roleCode=manager. When coming from Practitioner capabilities roleCode=practitioner."
+          },
+          {
+            "name": "orgoid",
+            "in": "path",
+            "required": true,
+            "default": "A12312312321",
+            "type": "string",
+            "description": "Associate OID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a meta",
+            "schema": {
+              "$ref": "#/definitions/taxAgencyNoticesMetaType"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/taxAgencyNotices_meta_sample_v01_00_rev001.json"
+              }
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              },
+              "Cache-Control": {
+                "type": "string"
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified",
+            "schema": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/TaxV1OrganizationsTaxAgencyNoticesMeta400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/TaxV1OrganizationsTaxAgencyNoticesMeta400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/TaxV1OrganizationsTaxAgencyNoticesMeta400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/TaxV1OrganizationsTaxAgencyNoticesMeta400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/TaxV1OrganizationsTaxAgencyNoticesMeta400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/TaxV1OrganizationsTaxAgencyNoticesMeta400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "413": {
+            "description": "Request Entity Too Large",
+            "schema": {
+              "$ref": "#/definitions/TaxV1OrganizationsTaxAgencyNoticesMeta400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/TaxV1OrganizationsTaxAgencyNoticesMeta400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "default": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/TaxV1OrganizationsTaxAgencyNoticesMeta400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/TaxV1OrganizationsTaxAgencyNoticesMeta400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "taxAgencyNoticesMetaType": {
+      "title": "taxAgencyNoticesMetaType",
+      "description": "The list of an organizations Tax Agency Notices - Meta",
+      "example": {
+        "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/taxAgencyNotices_meta_sample_v01_00_rev001.json"
+      },
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/taxAgencyNoticesMeta"
+        }
+      }
+    },
+    "taxAgencyNoticesMeta": {
+      "title": "taxAgencyNoticesMeta",
+      "description": "taxAgencyNotices meta schema for - taxAgencyNotices_schema_v01_00_rev001.json",
+      "type": "object",
+      "properties": {
+        "queryCriteria": {
+          "description": "A collection of query criteria",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/taxAgencyNoticesQueryCriterion"
+          }
+        },
+        "/taxAgencyNotices": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/jurisdiction": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/jurisdiction/jurisdictionCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/jurisdiction/jurisdictionCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdiction/jurisdictionCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdiction/jurisdictionCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdiction/jurisdictionTypeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/jurisdiction/jurisdictionTypeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdiction/jurisdictionTypeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdiction/jurisdictionTypeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/typeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/typeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/typeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/typeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/governmentIDs": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/governmentIDs/idValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/governmentIDs/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/governmentIDs/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/governmentIDs/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/governmentIDs/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/governmentIDs/countryCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/governmentIDs/statusCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/governmentIDs/statusCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/governmentIDs/statusCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/governmentIDs/statusCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/governmentIDs/statusCode/effectiveDate": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/governmentIDs/expirationDate": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/landlines": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/landlines/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/landlines/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/landlines/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/landlines/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/landlines/countryDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/landlines/areaDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/landlines/dialNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/landlines/extension": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/landlines/access": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/landlines/formattedNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/landlines/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/landlines/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/mobiles": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/mobiles/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/mobiles/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/mobiles/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/mobiles/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/mobiles/countryDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/mobiles/areaDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/mobiles/dialNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/mobiles/extension": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/mobiles/access": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/mobiles/formattedNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/mobiles/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/mobiles/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/emails": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/emails/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/emails/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/emails/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/emails/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/emails/emailUri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/emails/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/emails/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/socialNetworks": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/socialNetworks/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/socialNetworks/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/socialNetworks/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/socialNetworks/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/socialNetworks/uri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/socialNetworks/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/socialNetworks/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/faxes": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/faxes/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/faxes/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/faxes/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/faxes/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/faxes/countryDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/faxes/areaDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/faxes/dialNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/faxes/extension": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/faxes/access": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/faxes/formattedNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/faxes/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/faxes/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/pagers": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/pagers/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/pagers/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/pagers/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/pagers/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/pagers/countryDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/pagers/areaDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/pagers/dialNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/pagers/extension": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/pagers/access": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/pagers/formattedNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/pagers/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/pagers/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/internetAddresses": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/internetAddresses/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/internetAddresses/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/internetAddresses/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/internetAddresses/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/internetAddresses/uri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/internetAddresses/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/instantMessages": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/instantMessages/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/instantMessages/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/instantMessages/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/instantMessages/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/instantMessages/uri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/instantMessages/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/communication/instantMessages/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/attentionOfName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/careOfName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/lineOne": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/lineTwo": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/lineThree": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/cityName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/countrySubdivisionLevel1": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/countrySubdivisionLevel1/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/countrySubdivisionLevel1/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/countrySubdivisionLevel1/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/countrySubdivisionLevel1/subdivisionType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/countryCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/postalCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/geoCoordinate": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/geoCoordinate/latitude": {
+          "$ref": "#/definitions/numberType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/geoCoordinate/longitude": {
+          "$ref": "#/definitions/numberType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/scriptCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/scriptCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/scriptCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/scriptCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/lineFour": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/lineFive": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/buildingNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/buildingName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/blockName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/streetName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/streetTypeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/streetTypeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/streetTypeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/streetTypeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/unit": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/floor": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/stairCase": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/door": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/postOfficeBox": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/deliveryPoint": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/plotID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/countrySubdivisionLevel2": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/countrySubdivisionLevel2/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/countrySubdivisionLevel2/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/countrySubdivisionLevel2/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/countrySubdivisionLevel2/subdivisionType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/addresses/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/locations/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/typeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/typeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/typeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/typeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/governmentIDs": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/governmentIDs/idValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/governmentIDs/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/governmentIDs/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/governmentIDs/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/governmentIDs/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/governmentIDs/countryCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/governmentIDs/statusCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/governmentIDs/statusCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/governmentIDs/statusCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/governmentIDs/statusCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/governmentIDs/statusCode/effectiveDate": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/governmentIDs/expirationDate": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/landlines": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/landlines/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/landlines/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/landlines/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/landlines/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/landlines/countryDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/landlines/areaDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/landlines/dialNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/landlines/extension": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/landlines/access": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/landlines/formattedNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/landlines/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/landlines/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/mobiles": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/mobiles/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/mobiles/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/mobiles/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/mobiles/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/mobiles/countryDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/mobiles/areaDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/mobiles/dialNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/mobiles/extension": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/mobiles/access": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/mobiles/formattedNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/mobiles/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/mobiles/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/emails": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/emails/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/emails/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/emails/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/emails/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/emails/emailUri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/emails/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/emails/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/socialNetworks": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/socialNetworks/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/socialNetworks/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/socialNetworks/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/socialNetworks/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/socialNetworks/uri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/socialNetworks/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/socialNetworks/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/faxes": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/faxes/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/faxes/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/faxes/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/faxes/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/faxes/countryDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/faxes/areaDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/faxes/dialNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/faxes/extension": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/faxes/access": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/faxes/formattedNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/faxes/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/faxes/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/pagers": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/pagers/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/pagers/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/pagers/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/pagers/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/pagers/countryDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/pagers/areaDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/pagers/dialNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/pagers/extension": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/pagers/access": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/pagers/formattedNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/pagers/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/pagers/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/internetAddresses": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/internetAddresses/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/internetAddresses/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/internetAddresses/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/internetAddresses/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/internetAddresses/uri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/internetAddresses/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/instantMessages": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/instantMessages/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/instantMessages/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/instantMessages/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/instantMessages/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/instantMessages/uri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/instantMessages/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/communication/instantMessages/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/attentionOfName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/careOfName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/lineOne": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/lineTwo": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/lineThree": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/cityName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/countrySubdivisionLevel1": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/countrySubdivisionLevel1/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/countrySubdivisionLevel1/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/countrySubdivisionLevel1/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/countrySubdivisionLevel1/subdivisionType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/countryCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/postalCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/geoCoordinate": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/geoCoordinate/latitude": {
+          "$ref": "#/definitions/numberType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/geoCoordinate/longitude": {
+          "$ref": "#/definitions/numberType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/scriptCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/scriptCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/scriptCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/scriptCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/lineFour": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/lineFive": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/buildingNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/buildingName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/blockName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/streetName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/streetTypeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/streetTypeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/streetTypeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/streetTypeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/unit": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/floor": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/stairCase": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/door": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/postOfficeBox": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/deliveryPoint": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/plotID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/countrySubdivisionLevel2": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/countrySubdivisionLevel2/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/countrySubdivisionLevel2/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/countrySubdivisionLevel2/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/countrySubdivisionLevel2/subdivisionType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/addresses/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/locations/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/parentOrganizationalUnit/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/typeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/typeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/typeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/typeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/governmentIDs": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/governmentIDs/idValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/governmentIDs/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/governmentIDs/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/governmentIDs/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/governmentIDs/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/governmentIDs/countryCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/governmentIDs/statusCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/governmentIDs/statusCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/governmentIDs/statusCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/governmentIDs/statusCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/governmentIDs/statusCode/effectiveDate": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/governmentIDs/expirationDate": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/landlines": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/landlines/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/landlines/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/landlines/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/landlines/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/landlines/countryDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/landlines/areaDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/landlines/dialNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/landlines/extension": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/landlines/access": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/landlines/formattedNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/landlines/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/landlines/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/mobiles": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/mobiles/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/mobiles/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/mobiles/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/mobiles/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/mobiles/countryDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/mobiles/areaDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/mobiles/dialNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/mobiles/extension": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/mobiles/access": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/mobiles/formattedNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/mobiles/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/mobiles/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/emails": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/emails/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/emails/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/emails/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/emails/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/emails/emailUri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/emails/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/emails/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/socialNetworks": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/socialNetworks/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/socialNetworks/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/socialNetworks/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/socialNetworks/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/socialNetworks/uri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/socialNetworks/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/socialNetworks/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/faxes": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/faxes/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/faxes/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/faxes/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/faxes/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/faxes/countryDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/faxes/areaDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/faxes/dialNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/faxes/extension": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/faxes/access": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/faxes/formattedNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/faxes/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/faxes/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/pagers": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/pagers/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/pagers/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/pagers/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/pagers/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/pagers/countryDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/pagers/areaDialing": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/pagers/dialNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/pagers/extension": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/pagers/access": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/pagers/formattedNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/pagers/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/pagers/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/internetAddresses": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/internetAddresses/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/internetAddresses/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/internetAddresses/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/internetAddresses/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/internetAddresses/uri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/internetAddresses/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/instantMessages": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/instantMessages/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/instantMessages/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/instantMessages/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/instantMessages/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/instantMessages/uri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/instantMessages/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/communication/instantMessages/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/attentionOfName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/careOfName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/lineOne": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/lineTwo": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/lineThree": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/cityName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/countrySubdivisionLevel1": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/countrySubdivisionLevel1/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/countrySubdivisionLevel1/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/countrySubdivisionLevel1/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/countrySubdivisionLevel1/subdivisionType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/countryCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/postalCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/geoCoordinate": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/geoCoordinate/latitude": {
+          "$ref": "#/definitions/numberType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/geoCoordinate/longitude": {
+          "$ref": "#/definitions/numberType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/scriptCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/scriptCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/scriptCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/scriptCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/lineFour": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/lineFive": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/buildingNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/buildingName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/blockName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/streetName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/streetTypeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/streetTypeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/streetTypeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/streetTypeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/unit": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/floor": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/stairCase": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/door": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/postOfficeBox": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/deliveryPoint": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/plotID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/countrySubdivisionLevel2": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/countrySubdivisionLevel2/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/countrySubdivisionLevel2/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/countrySubdivisionLevel2/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/countrySubdivisionLevel2/subdivisionType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/addresses/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/locations/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/organizationalUnits/childOrganizationalUnits/hasChildrenIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/taxIDs": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/taxIDs/idValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/taxIDs/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/taxIDs/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/taxIDs/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/taxIDs/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/taxIDs/countryCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/taxIDs/statusCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/taxIDs/statusCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/taxIDs/statusCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/taxIDs/statusCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/taxIDs/statusCode/effectiveDate": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/taxIDs/expirationDate": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/taxIDs/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/agencyCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/agencyCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/agencyCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/agencyCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/noticeReceivedDate": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/noticeStatus": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/noticeStatus/statusCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/noticeStatus/statusCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/noticeStatus/statusCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/noticeStatus/statusCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/noticeStatus/reasonCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/noticeStatus/reasonCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/noticeStatus/reasonCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/noticeStatus/reasonCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/noticeStatus/effectiveDate": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/noticeAmount": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/noticeAmount/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/noticeAmount/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/noticeAmount/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/noticeAmount/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/noticeAmount/amountValue": {
+          "$ref": "#/definitions/ContextNumberAmountValueType"
+        },
+        "/taxAgencyNotices/noticeAmount/currencyCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/payableAmount": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/payableAmount/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/payableAmount/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/payableAmount/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/payableAmount/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/payableAmount/amountValue": {
+          "$ref": "#/definitions/ContextNumberAmountValueType"
+        },
+        "/taxAgencyNotices/payableAmount/currencyCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/paidAmount": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/paidAmount/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/paidAmount/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/paidAmount/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/paidAmount/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/paidAmount/amountValue": {
+          "$ref": "#/definitions/ContextNumberAmountValueType"
+        },
+        "/taxAgencyNotices/paidAmount/currencyCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/jurisdiction": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/jurisdiction/jurisdictionCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/jurisdiction/jurisdictionCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/jurisdiction/jurisdictionCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/jurisdiction/jurisdictionCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/jurisdiction/jurisdictionTypeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/jurisdiction/jurisdictionTypeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/jurisdiction/jurisdictionTypeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/jurisdiction/jurisdictionTypeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/primaryIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/taxTypeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/taxTypeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/taxTypeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/taxTypeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/paidAmount": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/paidAmount/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/paidAmount/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/paidAmount/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/paidAmount/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/paidAmount/amountValue": {
+          "$ref": "#/definitions/ContextNumberAmountValueType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/paidAmount/currencyCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/noticeYear": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/noticeQuarterCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/noticeQuarterCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/noticeQuarterCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/noticeQuarterCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/reasonCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/reasonCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/reasonCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/noticeDetails/reasonCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/links": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/links/href": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/links/rel": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/links/canonicalUri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/links/title": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/links/targetSchema": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/links/mediaType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/links/method": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/links/encType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/links/schema": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/links/payLoadArguments": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/links/payLoadArguments/argumentPath": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/jurisdictionalNoticeDetails/links/payLoadArguments/argumentValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/comments": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/comments/textValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/comments/authorAssociateOID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/comments/authorRoleCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/taxAgencyNotices/comments/authorRoleCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/comments/authorRoleCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/comments/authorRoleCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/comments/authorFormattedName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/comments/entryDateTime": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/comments/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/links": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/links/href": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/links/rel": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/links/canonicalUri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/links/title": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/links/targetSchema": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/links/mediaType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/links/method": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/links/encType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/links/schema": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/links/payLoadArguments": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/taxAgencyNotices/links/payLoadArguments/argumentPath": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/links/payLoadArguments/argumentValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/taxAgencyNotices/itemID": {
+          "$ref": "#/definitions/stringType"
+        }
+      }
+    },
+    "taxAgencyNoticesQueryCriterion": {
+      "title": "taxAgencyNoticesQueryCriterion",
+      "description": "A single query parameter",
+      "type": "object",
+      "properties": {
+        "queryOptionCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "obligationCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "queryOptionTypeCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "defaultNumberValue": {
+          "description": "The default number value",
+          "type": "number",
+          "format": "double"
+        },
+        "defaultStringValue": {
+          "description": "The default string value",
+          "type": "string"
+        },
+        "resourcePathMax": {
+          "description": "Maximum number of resource paths supported",
+          "type": "integer",
+          "format": "int32"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "resourcePaths": {
+          "description": "A collection of acceptable resource paths to pass to the query option",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludedResourcePaths": {
+          "description": "A collection of resource paths which may not be passed to the query option.  An example use of this is where you allow all paths except 1 or 2.  You would want to only specify those which are excluded",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "queryValueCodeList": {
+          "$ref": "#/definitions/codeListType_v03"
+        },
+        "logicalOperators": {
+          "description": "A collection of logical operators",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogicalOperator"
+          }
+        },
+        "itemID": {
+          "description": "The simple (string) identifier of an object",
+          "type": "string"
+        }
+      }
+    },
+    "codeListType_v03": {
+      "title": "codeListType_v03",
+      "type": "object",
+      "properties": {
+        "codeListTitle": {
+          "description": "Code list title",
+          "type": "string"
+        },
+        "exclusiveIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        },
+        "listItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/codeListItemType_v02"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "codeListItemType_v02": {
+      "title": "codeListItemType_v02",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "itemID": {
+          "description": "The simple (string) identifier of an object",
+          "type": "string"
+        },
+        "valueDescription": {
+          "description": "Additional list item description",
+          "type": "string"
+        },
+        "foreignKey": {
+          "description": "Allows for filtering the code list",
+          "type": "string"
+        },
+        "inactiveIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        },
+        "defaultIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        }
+      }
+    },
+    "linkType_v02": {
+      "title": "linkType_v02",
+      "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links",
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "rel": {
+          "$ref": "#/definitions/Rel"
+        },
+        "canonicalUri": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "title": {
+          "description": "This property defines a title for the link.  The value must be a string. User agents MAY use this title when presenting the link to the user",
+          "type": "string"
+        },
+        "targetSchema": {
+          "description": "This property is a schema that defines the expected structure of the JSON representation of the target of the link, if the target of the link is returned using JSON representation",
+          "type": "string"
+        },
+        "mediaType": {
+          "$ref": "#/definitions/MediaType"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "encType": {
+          "$ref": "#/definitions/EncType"
+        },
+        "schema": {
+          "description": "This property contains a schema which defines the acceptable structure of the submitted request.  For a GET request, this schema would define the properties for the query string and for a POST request, this would define the body",
+          "type": "string"
+        },
+        "payLoadArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayLoadArgument"
+          }
+        }
+      }
+    },
+    "Rel": {
+      "title": "Rel",
+      "description": "Indicates the nature of the relationship of the related resource to the resource that generated this representation",
+      "example": "alternate",
+      "type": "string",
+      "enum": [
+        "alternate",
+        "create",
+        "canonical",
+        "describedby",
+        "edit-form",
+        "enclosure",
+        "full",
+        "related",
+        "root",
+        "self",
+        "up",
+        "search",
+        "first",
+        "last",
+        "next",
+        "previous",
+        "/adp/invoke",
+        "/adp/image",
+        "/adp/confirm-message",
+        "/adp/status-monitor",
+        "/adp/codelist",
+        "/adp/template",
+        "/adp/externalLink",
+        "/adp/validation",
+        "/adp/deeplink",
+        "/adp/attachment",
+        "/adp/workflow"
+      ]
+    },
+    "MediaType": {
+      "title": "MediaType",
+      "description": "The media type that the linked resource will return (Response)",
+      "example": "application/gzip",
+      "type": "string",
+      "enum": [
+        "application/gzip",
+        "application/json",
+        "application/msword",
+        "application/pdf",
+        "application/postscript",
+        "application/vnd.ms-excel",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/xml",
+        "application/x-www-form-urlencoded",
+        "image/gif",
+        "image/jpeg",
+        "image/png",
+        "image/tiff",
+        "multipart/mixed",
+        "text/html",
+        "text/plain",
+        "application/vnd.visio",
+        "image/bmp",
+        "image/x-ms-bmp",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-powerpoint",
+        "video/mp4",
+        "audio/mpeg",
+        "video/x-msvideo",
+        "video/x-ms-wmv",
+        "application/rtf",
+        "application/vnd.ms-outlook",
+        "text/csv",
+        "video/quicktime",
+        "application/zip",
+        "application/illustrator",
+        "text/xml"
+      ]
+    },
+    "Method": {
+      "title": "Method",
+      "description": "The HTTP method code (HTTP Verb) traverse the link (GET, POST, PUT or DELETE)",
+      "example": "GET",
+      "type": "string",
+      "enum": [
+        "GET",
+        "POST",
+        "DELETE",
+        "PUT"
+      ]
+    },
+    "EncType": {
+      "title": "EncType",
+      "description": "If present, this property indicates a query media type format that the server supports for querying or posting to the collection of instances at the target resource.  The query can be suffixed to the target URI to query the collection with property-based constraints on the resources that SHOULD be returned from the server or used to post data to the resource (depending on the method). (Request)",
+      "example": "application/json",
+      "type": "string",
+      "enum": [
+        "application/json",
+        "application/x-www-form-urlencoded"
+      ]
+    },
+    "PayLoadArgument": {
+      "title": "PayLoadArgument",
+      "type": "object",
+      "properties": {
+        "argumentPath": {
+          "description": "Code value (typically a key field) of the code list item",
+          "type": "string"
+        },
+        "argumentValue": {
+          "description": "Code value (typically a key field) of the code list item",
+          "type": "string"
+        }
+      }
+    },
+    "LogicalOperator": {
+      "title": "LogicalOperator",
+      "description": "A logical operation",
+      "type": "object",
+      "properties": {
+        "logicalOperatorCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "mutuallyExclusiveIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        },
+        "mutuallyExclusiveLogicalOperatorCodes": {
+          "description": "A list of mutually exclusive operator codes.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "arrayType": {
+      "title": "arrayType",
+      "type": "object",
+      "properties": {
+        "minItems": {
+          "description": "Indicates the minimum items required for an array type.  This is only relevant if the given property is an array.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxItems": {
+          "description": "Indicates the maximum items supported for an array type.  This is only relevant if the given property is an array.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sameValueProperties": {
+          "description": "A list of properties which must have the exact same value within the array",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uniqueProperties": {
+          "description": "A list of properties which together must be unique",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uniqueItems": {
+          "type": "boolean"
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "helperMessageType": {
+      "title": "helperMessageType",
+      "description": "Helper text provided to the user when they take an action to affirm to be correct, true, or genuine.",
+      "type": "object",
+      "properties": {
+        "messageTxt": {
+          "description": "Message to present to the user.",
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "metaDataType": {
+      "title": "metaDataType",
+      "example": "string",
+      "type": "string",
+      "enum": [
+        "string",
+        "number",
+        "integer",
+        "boolean",
+        "object",
+        "array",
+        "null",
+        "any",
+        "string[date-time]",
+        "string[date]",
+        "string[time]",
+        "string[duration]",
+        "string[regex]",
+        "string[phone]",
+        "string[uri]",
+        "string[email]",
+        "string[ip-address]",
+        "string[ipv6]",
+        "string[host-name]",
+        "integer[regex]",
+        "integer[utc-millisec]",
+        "number[regex]",
+        "number[utc-millisec]"
+      ]
+    },
+    "objectType": {
+      "title": "objectType",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "description": "True indicates that the property is marked read only in the given context",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "optional": {
+          "description": "True indicates that this property does not need to be valued",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "hidden": {
+          "description": "True indicates that the property is carried in the message - to and from the System of Record, but is not exposed in the UI",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "disallowItemType": {
+      "title": "disallowItemType",
+      "type": "object",
+      "properties": {
+        "itemID": {
+          "description": "A unique identifier of an object within the collection",
+          "type": "string"
+        }
+      }
+    },
+    "stringCodeListType": {
+      "title": "stringCodeListType",
+      "type": "object",
+      "properties": {
+        "codeList": {
+          "$ref": "#/definitions/codeListType_v03"
+        },
+        "readOnly": {
+          "type": "boolean"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property.",
+          "type": "string"
+        },
+        "minLength": {
+          "description": "Indicates the minimum length required for a property.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxLength": {
+          "description": "Indicates the maximum length supported for a property",
+          "type": "integer",
+          "format": "int32"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "string"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "masking": {
+          "$ref": "#/definitions/maskingRuleType"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "greaterThan": {
+          "description": "The value of the related property must be greater than the value of  all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lessThan": {
+          "description": "The value of the related property must be less than the value of all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "valueSet": {
+          "$ref": "#/definitions/valueSetType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "maskingRuleType": {
+      "title": "maskingRuleType",
+      "type": "object",
+      "properties": {
+        "authorizationRequiredIndicator": {
+          "type": "boolean"
+        },
+        "authorizationResourceID": {
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "valueSetType": {
+      "title": "valueSetType",
+      "description": "A reference to the codelist extended with values",
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/ValueSetMeta"
+        },
+        "valueSetListItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/valueSetItemType"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "ValueSetMeta": {
+      "title": "ValueSetMeta",
+      "type": "object",
+      "properties": {
+        "idValuePath": {
+          "description": "Code value (typically a key field) of the code list item",
+          "type": "string"
+        },
+        "itemDescriptionPath": {
+          "description": "Short name field of the code list item",
+          "type": "string"
+        }
+      }
+    },
+    "valueSetItemType": {
+      "title": "valueSetItemType",
+      "description": "The value set item type",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "itemDescription": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "defaultIndicator": {
+          "description": "Indicates if the current value is a default (pre-selected)",
+          "type": "boolean"
+        }
+      }
+    },
+    "stringType": {
+      "title": "stringType",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "type": "boolean"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property.",
+          "type": "string"
+        },
+        "minLength": {
+          "description": "Indicates the minimum length required for a property.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxLength": {
+          "description": "Indicates the maximum length supported for a property",
+          "type": "integer",
+          "format": "int32"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "string"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "masking": {
+          "$ref": "#/definitions/maskingRuleType"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "greaterThan": {
+          "description": "The value of the related property must be greater than the value of  all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lessThan": {
+          "description": "The value of the related property must be less than the value of all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "valueSet": {
+          "$ref": "#/definitions/valueSetType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "booleanType": {
+      "title": "booleanType",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "description": "True indicates that the property is marked read only in the given context",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "optional": {
+          "description": "True indicates that this property does not need to be valued",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "hidden": {
+          "description": "True indicates that the property is carried in the message - to and from the System of Record, but is not exposed in the UI",
+          "type": "boolean"
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property",
+          "type": "string"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "boolean"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/DataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "DataType": {
+      "title": "DataType",
+      "description": "Data type of the attribute",
+      "example": "string",
+      "type": "string",
+      "enum": [
+        "string",
+        "number",
+        "integer",
+        "boolean",
+        "object",
+        "array",
+        "null",
+        "any",
+        "string[date-time]",
+        "string[date]",
+        "string[time]",
+        "string[regex]",
+        "string[phone]",
+        "string[uri]",
+        "string[email]",
+        "string[ip-address]",
+        "string[ipv6]",
+        "string[host-name]",
+        "integer[regex]",
+        "integer[utc-millisec]",
+        "number[regex]",
+        "number[utc-millisec]"
+      ]
+    },
+    "numberType": {
+      "title": "numberType",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "description": "True indicates that the property is marked read only in the given context",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "optional": {
+          "description": "True indicates that this property does not need to be valued",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "hidden": {
+          "description": "True indicates that the property is carried in the message - to and from the System of Record, but is not exposed in the UI",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property.",
+          "type": "string"
+        },
+        "minLength": {
+          "description": "Indicates the minimum length required for a property.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxLength": {
+          "description": "Indicates the maximum length supported for a property",
+          "type": "integer",
+          "format": "int32"
+        },
+        "minValue": {
+          "description": "Indicates the minimum value required for a property.",
+          "type": "number",
+          "format": "double"
+        },
+        "maxValue": {
+          "description": "Indicates the maximum value supported for a property",
+          "type": "number",
+          "format": "double"
+        },
+        "multipleOf": {
+          "description": "Indicates that the value must be a multiple of this value or divisible by this value.",
+          "type": "number",
+          "format": "double"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "number",
+          "format": "double"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "masking": {
+          "$ref": "#/definitions/maskingRuleType"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "greaterThan": {
+          "description": "The value of the related property must be greater than the value of  all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lessThan": {
+          "description": "The value of the related property must be less than the value of all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "ContextNumberAmountValueType": {
+      "title": "ContextNumberAmountValueType",
+      "description": "Context rules for a given object",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "description": "True indicates that the property is marked read only in the given context",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "optional": {
+          "description": "True indicates that this property does not need to be valued",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "hidden": {
+          "description": "True indicates that the property is carried in the message - to and from the System of Record, but is not exposed in the UI",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property.",
+          "type": "string"
+        },
+        "minLength": {
+          "description": "Indicates the minimum length required for a property.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxLength": {
+          "description": "Indicates the maximum length supported for a property",
+          "type": "integer",
+          "format": "int32"
+        },
+        "minAmountValue": {
+          "description": "Indicates the minimum amout value required for a property.",
+          "type": "number",
+          "format": "double"
+        },
+        "maxAmountValue": {
+          "description": "Indicates the maximum amount value supported for a property",
+          "type": "number",
+          "format": "double"
+        },
+        "minValue": {
+          "description": "Indicates the minimum value required for a property.",
+          "type": "number",
+          "format": "double"
+        },
+        "maxValue": {
+          "description": "Indicates the maximum value supported for a property",
+          "type": "number",
+          "format": "double"
+        },
+        "multipleOf": {
+          "description": "Indicates that the value must be a multiple of this value or divisible by this value.",
+          "type": "number",
+          "format": "double"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "number",
+          "format": "double"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "masking": {
+          "$ref": "#/definitions/maskingRuleType"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "greaterThan": {
+          "description": "The value of the related property must be greater than the value of  all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lessThan": {
+          "description": "The value of the related property must be less than the value of all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/DataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "TaxV1OrganizationsTaxAgencyNoticesMeta400Error": {
+      "title": "TaxV1OrganizationsTaxAgencyNoticesMeta400Error",
+      "example": {
+        "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+      },
+      "type": "object",
+      "properties": {
+        "externalValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "externalValue"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Tax Agency Notices",
+      "description": "List all tax agency notices"
+    }
+  ]
+}

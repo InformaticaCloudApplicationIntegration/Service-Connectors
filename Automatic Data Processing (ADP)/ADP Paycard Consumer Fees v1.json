@@ -1,0 +1,2253 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Paycard Consumer Fees",
+    "description": "The API returns consumer fees that must be agreed to before using certain features of the Aline Paycard",
+    "contact": {
+      "email": "Boris.Vernoff@adp.com",
+      "name": "Boris Vernoff"
+    }
+  },
+  "host": "test-api.adp.com",
+  "basePath": "/",
+  "schemes": [],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/payroll/v1/paycard/consumer-fees": {
+      "get": {
+        "description": "The API displays consumer fees that must be agreed to before enrollment or making any changes",
+        "summary": "185e2483-4cb5-4886-9293-3c12bd793f71",
+        "tags": [
+          "Paycard Consumer Fees"
+        ],
+        "operationId": "PayrollV1PaycardConsumerFeesGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "roleCode",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The role the user is playing during the transaction.  Possible values: employee,manager,practitioner,administrator,supervisor.  The roleCode header will be passed in all calls. When coming from Myself capabilities rolecode=employee. When coming from Team capabilities roleCode=manager. When coming from Practitioner capabilities roleCode=practitioner."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The API displays consumer fees that must be agreed to before enrollment or making any changes",
+            "schema": {
+              "$ref": "#/definitions/ConsumerFees"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/consumerFees_sample_v01_00_rev001.json"
+              }
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              },
+              "Cache-Control": {
+                "type": "string"
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified",
+            "schema": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "413": {
+            "description": "Request Entity Too Large",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "default": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payroll/v1/paycard/consumer-fees/meta": {
+      "get": {
+        "description": "Returns a meta",
+        "summary": "50603a8a-7aac-4820-86f1-968428cded88",
+        "tags": [
+          "Paycard Consumer Fees"
+        ],
+        "operationId": "PayrollV1PaycardConsumerFeesMetaGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "roleCode",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The role the user is playing during the transaction.  Possible values: employee,manager,practitioner,administrator,supervisor.  The roleCode header will be passed in all calls. When coming from Myself capabilities rolecode=employee. When coming from Team capabilities roleCode=manager. When coming from Practitioner capabilities roleCode=practitioner."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a meta",
+            "schema": {
+              "$ref": "#/definitions/consumerFeesMetaType"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/consumerFees_meta_sample_v01_00_rev001.json"
+              }
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              },
+              "Cache-Control": {
+                "type": "string"
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified",
+            "schema": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "413": {
+            "description": "Request Entity Too Large",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "default": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1PaycardConsumerFees400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConsumerFees": {
+      "title": "ConsumerFees",
+      "description": "A list of consumer fees",
+      "example": {
+        "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/consumerFees_sample_v01_00_rev001.json"
+      },
+      "type": "object",
+      "properties": {
+        "consumerFees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConsumerFees1"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        },
+        "confirmMessage": {
+          "$ref": "#/definitions/ConfirmMessage"
+        }
+      }
+    },
+    "ConsumerFees1": {
+      "title": "ConsumerFees1",
+      "type": "object",
+      "properties": {
+        "nameCode": {
+          "$ref": "#/definitions/NameCode"
+        },
+        "percentage": {
+          "description": "An percentage representation as per a lien",
+          "type": "number",
+          "format": "double"
+        },
+        "percentageBasisCode": {
+          "$ref": "#/definitions/PercentageBasisCode"
+        },
+        "amountValue": {
+          "description": "The monetary value of the object in which the amount is associated",
+          "type": "number",
+          "format": "double"
+        },
+        "currencyCode": {
+          "description": "Standard currency code as per ISO 4212",
+          "type": "string"
+        },
+        "unitTimeCode": {
+          "$ref": "#/definitions/UnitTimeCode"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "itemID": {
+          "description": "A unique fee ID within the collection",
+          "type": "string"
+        }
+      }
+    },
+    "NameCode": {
+      "title": "NameCode",
+      "description": "The type of fee",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "PercentageBasisCode": {
+      "title": "PercentageBasisCode",
+      "description": "A code representation of the basis amount on which the associated percentage should be based, e.g. gross earnings, net earnings, etc",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "UnitTimeCode": {
+      "title": "UnitTimeCode",
+      "description": "The unit of time, the amount applies to",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "Link": {
+      "title": "Link",
+      "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links",
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "rel": {
+          "$ref": "#/definitions/Rel"
+        },
+        "canonicalUri": {
+          "description": "A unique identifier of the feature/function/operation, the link poins to",
+          "type": "string"
+        },
+        "title": {
+          "description": "This property defines a title for the link.  The value must be a string. User agents MAY use this title when presenting the link to the user",
+          "type": "string"
+        },
+        "targetSchema": {
+          "description": "This property is a schema that defines the expected structure of the JSON representation of the target of the link, if the target of the link is returned using JSON representation",
+          "type": "string"
+        },
+        "mediaType": {
+          "$ref": "#/definitions/MediaType"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "encType": {
+          "$ref": "#/definitions/EncType"
+        },
+        "schema": {
+          "description": "This property contains a schema which defines the acceptable structure of the submitted request.  For a GET request, this schema would define the properties for the query string and for a POST request, this would define the body",
+          "type": "string"
+        },
+        "payLoadArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayLoadArgument"
+          }
+        }
+      }
+    },
+    "Rel": {
+      "title": "Rel",
+      "description": "Indicates the nature of the relationship of the related resource to the resource that generated this representation",
+      "example": "alternate",
+      "type": "string",
+      "enum": [
+        "alternate",
+        "create",
+        "canonical",
+        "describedby",
+        "edit-form",
+        "enclosure",
+        "full",
+        "related",
+        "root",
+        "self",
+        "up",
+        "search",
+        "first",
+        "last",
+        "next",
+        "previous",
+        "/adp/invoke",
+        "/adp/image",
+        "/adp/confirm-message",
+        "/adp/status-monitor",
+        "/adp/codelist",
+        "/adp/template",
+        "/adp/externalLink",
+        "/adp/validation",
+        "/adp/deeplink",
+        "/adp/attachment",
+        "/adp/workflow"
+      ]
+    },
+    "MediaType": {
+      "title": "MediaType",
+      "description": "The media type that the linked resource will return (Response)",
+      "example": "application/gzip",
+      "type": "string",
+      "enum": [
+        "application/gzip",
+        "application/json",
+        "application/msword",
+        "application/pdf",
+        "application/postscript",
+        "application/vnd.ms-excel",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/xml",
+        "application/x-www-form-urlencoded",
+        "image/gif",
+        "image/jpeg",
+        "image/png",
+        "image/tiff",
+        "multipart/mixed",
+        "text/html",
+        "text/plain",
+        "application/vnd.visio",
+        "image/bmp",
+        "image/x-ms-bmp",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-powerpoint",
+        "video/mp4",
+        "audio/mpeg",
+        "video/x-msvideo",
+        "video/x-ms-wmv",
+        "application/rtf",
+        "application/vnd.ms-outlook",
+        "text/csv",
+        "video/quicktime",
+        "application/zip",
+        "application/illustrator",
+        "text/xml"
+      ]
+    },
+    "Method": {
+      "title": "Method",
+      "description": "The HTTP method code (HTTP Verb) traverse the link (GET, POST, PUT or DELETE)",
+      "example": "GET",
+      "type": "string",
+      "enum": [
+        "GET",
+        "POST",
+        "DELETE",
+        "PUT"
+      ]
+    },
+    "EncType": {
+      "title": "EncType",
+      "description": "If present, this property indicates a query media type format that the server supports for querying or posting to the collection of instances at the target resource.  The query can be suffixed to the target URI to query the collection with property-based constraints on the resources that SHOULD be returned from the server or used to post data to the resource (depending on the method). (Request)",
+      "example": "application/json",
+      "type": "string",
+      "enum": [
+        "application/json",
+        "application/x-www-form-urlencoded"
+      ]
+    },
+    "PayLoadArgument": {
+      "title": "PayLoadArgument",
+      "type": "object",
+      "properties": {
+        "argumentPath": {
+          "description": "Code value (typically a key field) of the code list item",
+          "type": "string"
+        },
+        "argumentValue": {
+          "description": "Code value (typically a key field) of the code list item",
+          "type": "string"
+        }
+      }
+    },
+    "Meta": {
+      "title": "Meta",
+      "description": "Meta contains the metadata associated with a response.  A GET response may include metadata to support pagination",
+      "type": "object",
+      "properties": {
+        "startSequence": {
+          "description": "The instance resource sequence (number) identifying the first resource returned in the response. The server generates this sequence.  It is used by the client to determine the start sequence of the subsequent Get request",
+          "type": "integer",
+          "format": "int32"
+        },
+        "completeIndicator": {
+          "description": "Indicates whether the response completes the return of all of the resources of the instance resource set to the requesting system",
+          "type": "boolean"
+        },
+        "totalNumber": {
+          "description": "Number of total instance resources in an instance resource set. Note: An instance resource set is a set of instance resources that is determined by a server to satisfy the sets membership criteria (i.e., selection, filter, expansion and search criteria) of a resource management operation (e.g. GET request) upon a collection resource",
+          "type": "integer",
+          "format": "int32"
+        },
+        "resourceSetID": {
+          "description": "Unique identifier of the instance resource set.  It is generated by the server as a result of the original Get request",
+          "type": "string"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "ConfirmMessage": {
+      "title": "ConfirmMessage",
+      "description": "The ConfirmMessage contains the processing results for the corresponding request.  A request may have its processing reported as: succeeded, partially failed, or failed.",
+      "type": "object",
+      "properties": {
+        "confirmMessageID": {
+          "$ref": "#/definitions/ConfirmMessageID"
+        },
+        "createDateTime": {
+          "description": "The date & time that the message instance was generated.; follows the ISO-8601:2000 format: 2008-05-11T15:30:00-06:00.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "requestReceiptDateTime": {
+          "description": "The date & time that the request submitted by the client was received. Note, this timestamp may not be the same as the time the client actually submitted the request if there is a queuing mechanism between the client and server processing the request; it follows the ISO-8601:2000 format: 2008-05-11T15:30:00-06:00.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "protocolStatusCode": {
+          "$ref": "#/definitions/ProtocolStatusCode"
+        },
+        "protocolCode": {
+          "$ref": "#/definitions/ProtocolCode"
+        },
+        "requestID": {
+          "$ref": "#/definitions/RequestID"
+        },
+        "requestStatusCode": {
+          "$ref": "#/definitions/RequestStatusCode"
+        },
+        "requestMethodCode": {
+          "$ref": "#/definitions/RequestMethodCode"
+        },
+        "sessionID": {
+          "$ref": "#/definitions/SessionID"
+        },
+        "requestETag": {
+          "description": "The entity tag of the entity in the request.",
+          "type": "string"
+        },
+        "requestLink": {
+          "$ref": "#/definitions/RequestLink"
+        },
+        "processingStatusCode": {
+          "$ref": "#/definitions/ProcessingStatusCode"
+        },
+        "processMessages": {
+          "description": "processMessage is optional and contains processing information for either the request (at the ConfirmMessage level) or a resource being managed in the request (at the ResourceMessage level).  Most often there will be a single instance for an associated request or resource, but this structure allows for more than one if needed, for example, if multiple errors exist for a single resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessMessage"
+          }
+        },
+        "resourceMessages": {
+          "description": "resource Message contains the resource-specific processing results for resources being managed in the request.  A resource may have its processing reported as:  succeeded or failed.  It must be used to represent resource-specific messages.  In the case of a request managing multiple resources and resource-specific messages are to be returned, then this array will contain one object for each such resource of the request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceMessage"
+          }
+        }
+      }
+    },
+    "ConfirmMessageID": {
+      "title": "ConfirmMessageID",
+      "description": "An identifier for the instance of the confirm message.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "ProtocolStatusCode": {
+      "title": "ProtocolStatusCode",
+      "description": "Protocol-specific response status code.",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity.",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code not to exceed 25 characters",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "ProtocolCode": {
+      "title": "ProtocolCode",
+      "description": "Code that identifies the protocol used for the request.",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity.",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code not to exceed 25 characters",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "RequestID": {
+      "title": "RequestID",
+      "description": "The identifier of the request that generated this response.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "RequestStatusCode": {
+      "title": "RequestStatusCode",
+      "description": "The process results status code for the request.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue"
+        }
+      }
+    },
+    "CodeValue": {
+      "title": "CodeValue",
+      "description": "The code for the related entity.",
+      "example": "succeeded",
+      "type": "string",
+      "enum": [
+        "succeeded",
+        "partiallyFailed",
+        "failed"
+      ]
+    },
+    "RequestMethodCode": {
+      "title": "RequestMethodCode",
+      "description": "The method that was used on the request corresponding to this message instance.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue1"
+        }
+      }
+    },
+    "CodeValue1": {
+      "title": "CodeValue1",
+      "description": "The code for the related entity.",
+      "example": "GET",
+      "type": "string",
+      "enum": [
+        "GET",
+        "PUT",
+        "POST",
+        "PATCH",
+        "DELETE"
+      ]
+    },
+    "SessionID": {
+      "title": "SessionID",
+      "description": "A session identifier if one is available.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "RequestLink": {
+      "title": "RequestLink",
+      "description": "The link of the request that generated this response.",
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "rel": {
+          "$ref": "#/definitions/Rel"
+        },
+        "canonicalUri": {
+          "description": "A unique identifier of the feature/function/operation, the link poins to",
+          "type": "string"
+        },
+        "title": {
+          "description": "This property defines a title for the link.  The value must be a string. User agents MAY use this title when presenting the link to the user",
+          "type": "string"
+        },
+        "targetSchema": {
+          "description": "This property is a schema that defines the expected structure of the JSON representation of the target of the link, if the target of the link is returned using JSON representation",
+          "type": "string"
+        },
+        "mediaType": {
+          "$ref": "#/definitions/MediaType"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "encType": {
+          "$ref": "#/definitions/EncType"
+        },
+        "schema": {
+          "description": "This property contains a schema which defines the acceptable structure of the submitted request.  For a GET request, this schema would define the properties for the query string and for a POST request, this would define the body",
+          "type": "string"
+        },
+        "payLoadArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayLoadArgument"
+          }
+        }
+      }
+    },
+    "ProcessingStatusCode": {
+      "title": "ProcessingStatusCode",
+      "description": "Processing status of the related request message.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue2"
+        }
+      }
+    },
+    "CodeValue2": {
+      "title": "CodeValue2",
+      "description": "The code for the related entity.",
+      "example": "received",
+      "type": "string",
+      "enum": [
+        "received",
+        "validated",
+        "started",
+        "completed"
+      ]
+    },
+    "ProcessMessage": {
+      "title": "ProcessMessage",
+      "description": "Each object contains processing information for either the request (at the ConfirmMessage level) or a resource being managed in the request (at the ResourceMessage level).",
+      "type": "object",
+      "properties": {
+        "processMessageID": {
+          "$ref": "#/definitions/ProcessMessageID"
+        },
+        "messageTypeCode": {
+          "$ref": "#/definitions/MessageTypeCode"
+        },
+        "sourceLocationExpression": {
+          "description": "Expression that provides the location (or source) of content in a message instance that is associated with a process message. Examples of expression languages include: XPath, XQuery, JSON Pointer.",
+          "type": "string"
+        },
+        "expressionLanguageCode": {
+          "$ref": "#/definitions/ExpressionLanguageCode"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "userMessage": {
+          "$ref": "#/definitions/UserMessage"
+        },
+        "developerMessage": {
+          "$ref": "#/definitions/DeveloperMessage"
+        }
+      }
+    },
+    "ProcessMessageID": {
+      "title": "ProcessMessageID",
+      "description": "An identifier for the instance of the process message.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "MessageTypeCode": {
+      "title": "MessageTypeCode",
+      "description": "Process Message instances may be of type: success, warning, error, or info.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue3"
+        }
+      }
+    },
+    "CodeValue3": {
+      "title": "CodeValue3",
+      "description": "The code for the related entity.",
+      "example": "success",
+      "type": "string",
+      "enum": [
+        "success",
+        "warning",
+        "error",
+        "info"
+      ]
+    },
+    "ExpressionLanguageCode": {
+      "title": "ExpressionLanguageCode",
+      "description": "Identifies the language used for expressions communicated in this message.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue4"
+        }
+      }
+    },
+    "CodeValue4": {
+      "title": "CodeValue4",
+      "description": "The code for the related entity.",
+      "example": "jPath",
+      "type": "string",
+      "enum": [
+        "jPath"
+      ]
+    },
+    "UserMessage": {
+      "title": "UserMessage",
+      "description": "Message returned to the user",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code associated with the message description.",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the message description.",
+          "type": "string"
+        },
+        "messageTxt": {
+          "description": "The value/content of the message description.",
+          "type": "string"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "DeveloperMessage": {
+      "title": "DeveloperMessage",
+      "description": "Message returned to the user",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code associated with the message description.",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the message description.",
+          "type": "string"
+        },
+        "messageTxt": {
+          "description": "The value/content of the message description.",
+          "type": "string"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "ResourceMessage": {
+      "title": "ResourceMessage",
+      "description": "Each object contains detailed information for a resource referenced in the original request.",
+      "type": "object",
+      "properties": {
+        "resourceMessageID": {
+          "$ref": "#/definitions/ResourceMessageID"
+        },
+        "resourceStatusCode": {
+          "$ref": "#/definitions/ResourceMessageResourceStatus"
+        },
+        "resourceLink": {
+          "$ref": "#/definitions/ResourceLink"
+        },
+        "processMessages": {
+          "description": "processMessage is optional and contains processing information for either the request (at the ConfirmMessage level) or a resource being managed in the request (at the ResourceMessage level).  Most often there will be a single instance for an associated request or resource, but this structure allows for more than one if needed, for example, if multiple errors exist for a single resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessMessageWithResourceStatusCode"
+          }
+        }
+      }
+    },
+    "ResourceMessageID": {
+      "title": "ResourceMessageID",
+      "description": "An identifier for the instance of the resource message.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceMessageResourceStatus": {
+      "title": "ResourceMessageResourceStatus",
+      "description": "The processing results status code of the resource of the request.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue5"
+        }
+      }
+    },
+    "CodeValue5": {
+      "title": "CodeValue5",
+      "description": "The code for the related entity.",
+      "example": "succeeded",
+      "type": "string",
+      "enum": [
+        "succeeded",
+        "failed",
+        "warning"
+      ]
+    },
+    "ResourceLink": {
+      "title": "ResourceLink",
+      "description": "The link of the request that generated this response.",
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "rel": {
+          "$ref": "#/definitions/Rel"
+        },
+        "canonicalUri": {
+          "description": "A unique identifier of the feature/function/operation, the link poins to",
+          "type": "string"
+        },
+        "title": {
+          "description": "This property defines a title for the link.  The value must be a string. User agents MAY use this title when presenting the link to the user",
+          "type": "string"
+        },
+        "targetSchema": {
+          "description": "This property is a schema that defines the expected structure of the JSON representation of the target of the link, if the target of the link is returned using JSON representation",
+          "type": "string"
+        },
+        "mediaType": {
+          "$ref": "#/definitions/MediaType"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "encType": {
+          "$ref": "#/definitions/EncType"
+        },
+        "schema": {
+          "description": "This property contains a schema which defines the acceptable structure of the submitted request.  For a GET request, this schema would define the properties for the query string and for a POST request, this would define the body",
+          "type": "string"
+        },
+        "payLoadArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayLoadArgument"
+          }
+        }
+      }
+    },
+    "ProcessMessageWithResourceStatusCode": {
+      "title": "ProcessMessageWithResourceStatusCode",
+      "description": "Each object contains processing information for either the request (at the ConfirmMessage level) or a resource being managed in the request (at the ResourceMessage level).",
+      "type": "object",
+      "properties": {
+        "processMessageID": {
+          "$ref": "#/definitions/ProcessMessageID"
+        },
+        "messageTypeCode": {
+          "$ref": "#/definitions/MessageTypeCode"
+        },
+        "sourceLocationExpression": {
+          "description": "Expression that provides the location (or source) of content in a message instance that is associated with a process message. Examples of expression languages include: XPath, XQuery, JSON Pointer.",
+          "type": "string"
+        },
+        "expressionLanguageCode": {
+          "$ref": "#/definitions/ExpressionLanguageCode"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "userMessage": {
+          "$ref": "#/definitions/UserMessage"
+        },
+        "developerMessage": {
+          "$ref": "#/definitions/DeveloperMessage"
+        },
+        "resourceStatusCode": {
+          "$ref": "#/definitions/ResourceStatusCode"
+        }
+      }
+    },
+    "ResourceStatusCode": {
+      "title": "ResourceStatusCode",
+      "description": "DEPRECATED - Use messageTypeCode instead. The processing results status code of the resource of the request.",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity.",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code not to exceed 25 characters",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "PayrollV1PaycardConsumerFees400Error": {
+      "title": "PayrollV1PaycardConsumerFees400Error",
+      "example": {
+        "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+      },
+      "type": "object",
+      "properties": {
+        "externalValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "externalValue"
+      ]
+    },
+    "consumerFeesMetaType": {
+      "title": "consumerFeesMetaType",
+      "description": "A list of consumer fees - Meta",
+      "example": {
+        "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/consumerFees_meta_sample_v01_00_rev001.json"
+      },
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/consumerFeesMeta"
+        }
+      }
+    },
+    "consumerFeesMeta": {
+      "title": "consumerFeesMeta",
+      "description": "consumerFees meta schema for - consumerFees_schema_v01_00_rev001.json",
+      "type": "object",
+      "properties": {
+        "queryCriteria": {
+          "description": "A collection of query criteria",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/consumerFeesQueryCriterion"
+          }
+        },
+        "/consumerFees": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/consumerFees/amountValue": {
+          "$ref": "#/definitions/ContextNumberAmountValueType"
+        },
+        "/consumerFees/currencyCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/consumerFees/unitTimeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/consumerFees/unitTimeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/unitTimeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/unitTimeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/consumerFees/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/percentage": {
+          "$ref": "#/definitions/numberType"
+        },
+        "/consumerFees/percentageBasisCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/consumerFees/percentageBasisCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/percentageBasisCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/percentageBasisCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/links": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/consumerFees/links/href": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/links/rel": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/links/canonicalUri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/links/title": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/links/targetSchema": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/links/mediaType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/links/method": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/links/encType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/links/schema": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/links/payLoadArguments": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/consumerFees/links/payLoadArguments/argumentPath": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/links/payLoadArguments/argumentValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/consumerFees/itemID": {
+          "$ref": "#/definitions/stringType"
+        }
+      }
+    },
+    "consumerFeesQueryCriterion": {
+      "title": "consumerFeesQueryCriterion",
+      "description": "A single query parameter",
+      "type": "object",
+      "properties": {
+        "queryOptionCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "obligationCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "queryOptionTypeCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "defaultNumberValue": {
+          "description": "The default number value",
+          "type": "number",
+          "format": "double"
+        },
+        "defaultStringValue": {
+          "description": "The default string value",
+          "type": "string"
+        },
+        "resourcePathMax": {
+          "description": "Maximum number of resource paths supported",
+          "type": "integer",
+          "format": "int32"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "resourcePaths": {
+          "description": "A collection of acceptable resource paths to pass to the query option",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludedResourcePaths": {
+          "description": "A collection of resource paths which may not be passed to the query option.  An example use of this is where you allow all paths except 1 or 2.  You would want to only specify those which are excluded",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "queryValueCodeList": {
+          "$ref": "#/definitions/codeListType_v03"
+        },
+        "logicalOperators": {
+          "description": "A collection of logical operators",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogicalOperator"
+          }
+        },
+        "itemID": {
+          "description": "The simple (string) identifier of an object",
+          "type": "string"
+        }
+      }
+    },
+    "codeListType_v03": {
+      "title": "codeListType_v03",
+      "type": "object",
+      "properties": {
+        "codeListTitle": {
+          "description": "Code list title",
+          "type": "string"
+        },
+        "exclusiveIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        },
+        "listItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/codeListItemType_v02"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "codeListItemType_v02": {
+      "title": "codeListItemType_v02",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "itemID": {
+          "description": "The simple (string) identifier of an object",
+          "type": "string"
+        },
+        "valueDescription": {
+          "description": "Additional list item description",
+          "type": "string"
+        },
+        "foreignKey": {
+          "description": "Allows for filtering the code list",
+          "type": "string"
+        },
+        "inactiveIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        },
+        "defaultIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        }
+      }
+    },
+    "linkType_v02": {
+      "title": "linkType_v02",
+      "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links",
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "rel": {
+          "$ref": "#/definitions/Rel"
+        },
+        "canonicalUri": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "title": {
+          "description": "This property defines a title for the link.  The value must be a string. User agents MAY use this title when presenting the link to the user",
+          "type": "string"
+        },
+        "targetSchema": {
+          "description": "This property is a schema that defines the expected structure of the JSON representation of the target of the link, if the target of the link is returned using JSON representation",
+          "type": "string"
+        },
+        "mediaType": {
+          "$ref": "#/definitions/MediaType"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "encType": {
+          "$ref": "#/definitions/EncType"
+        },
+        "schema": {
+          "description": "This property contains a schema which defines the acceptable structure of the submitted request.  For a GET request, this schema would define the properties for the query string and for a POST request, this would define the body",
+          "type": "string"
+        },
+        "payLoadArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayLoadArgument"
+          }
+        }
+      }
+    },
+    "LogicalOperator": {
+      "title": "LogicalOperator",
+      "description": "A logical operation",
+      "type": "object",
+      "properties": {
+        "logicalOperatorCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "mutuallyExclusiveIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        },
+        "mutuallyExclusiveLogicalOperatorCodes": {
+          "description": "A list of mutually exclusive operator codes.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "arrayType": {
+      "title": "arrayType",
+      "type": "object",
+      "properties": {
+        "minItems": {
+          "description": "Indicates the minimum items required for an array type.  This is only relevant if the given property is an array.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxItems": {
+          "description": "Indicates the maximum items supported for an array type.  This is only relevant if the given property is an array.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sameValueProperties": {
+          "description": "A list of properties which must have the exact same value within the array",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uniqueProperties": {
+          "description": "A list of properties which together must be unique",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uniqueItems": {
+          "type": "boolean"
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "helperMessageType": {
+      "title": "helperMessageType",
+      "description": "Helper text provided to the user when they take an action to affirm to be correct, true, or genuine.",
+      "type": "object",
+      "properties": {
+        "messageTxt": {
+          "description": "Message to present to the user.",
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "metaDataType": {
+      "title": "metaDataType",
+      "example": "string",
+      "type": "string",
+      "enum": [
+        "string",
+        "number",
+        "integer",
+        "boolean",
+        "object",
+        "array",
+        "null",
+        "any",
+        "string[date-time]",
+        "string[date]",
+        "string[time]",
+        "string[duration]",
+        "string[regex]",
+        "string[phone]",
+        "string[uri]",
+        "string[email]",
+        "string[ip-address]",
+        "string[ipv6]",
+        "string[host-name]",
+        "integer[regex]",
+        "integer[utc-millisec]",
+        "number[regex]",
+        "number[utc-millisec]"
+      ]
+    },
+    "ContextNumberAmountValueType": {
+      "title": "ContextNumberAmountValueType",
+      "description": "Context rules for a given object",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "description": "True indicates that the property is marked read only in the given context",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "optional": {
+          "description": "True indicates that this property does not need to be valued",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "hidden": {
+          "description": "True indicates that the property is carried in the message - to and from the System of Record, but is not exposed in the UI",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property.",
+          "type": "string"
+        },
+        "minLength": {
+          "description": "Indicates the minimum length required for a property.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxLength": {
+          "description": "Indicates the maximum length supported for a property",
+          "type": "integer",
+          "format": "int32"
+        },
+        "minAmountValue": {
+          "description": "Indicates the minimum amout value required for a property.",
+          "type": "number",
+          "format": "double"
+        },
+        "maxAmountValue": {
+          "description": "Indicates the maximum amount value supported for a property",
+          "type": "number",
+          "format": "double"
+        },
+        "minValue": {
+          "description": "Indicates the minimum value required for a property.",
+          "type": "number",
+          "format": "double"
+        },
+        "maxValue": {
+          "description": "Indicates the maximum value supported for a property",
+          "type": "number",
+          "format": "double"
+        },
+        "multipleOf": {
+          "description": "Indicates that the value must be a multiple of this value or divisible by this value.",
+          "type": "number",
+          "format": "double"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "number",
+          "format": "double"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "masking": {
+          "$ref": "#/definitions/maskingRuleType"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "greaterThan": {
+          "description": "The value of the related property must be greater than the value of  all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lessThan": {
+          "description": "The value of the related property must be less than the value of all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/DataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "disallowItemType": {
+      "title": "disallowItemType",
+      "type": "object",
+      "properties": {
+        "itemID": {
+          "description": "A unique identifier of an object within the collection",
+          "type": "string"
+        }
+      }
+    },
+    "maskingRuleType": {
+      "title": "maskingRuleType",
+      "type": "object",
+      "properties": {
+        "authorizationRequiredIndicator": {
+          "type": "boolean"
+        },
+        "authorizationResourceID": {
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "DataType": {
+      "title": "DataType",
+      "description": "Data type of the attribute",
+      "example": "string",
+      "type": "string",
+      "enum": [
+        "string",
+        "number",
+        "integer",
+        "boolean",
+        "object",
+        "array",
+        "null",
+        "any",
+        "string[date-time]",
+        "string[date]",
+        "string[time]",
+        "string[regex]",
+        "string[phone]",
+        "string[uri]",
+        "string[email]",
+        "string[ip-address]",
+        "string[ipv6]",
+        "string[host-name]",
+        "integer[regex]",
+        "integer[utc-millisec]",
+        "number[regex]",
+        "number[utc-millisec]"
+      ]
+    },
+    "stringCodeListType": {
+      "title": "stringCodeListType",
+      "type": "object",
+      "properties": {
+        "codeList": {
+          "$ref": "#/definitions/codeListType_v03"
+        },
+        "readOnly": {
+          "type": "boolean"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property.",
+          "type": "string"
+        },
+        "minLength": {
+          "description": "Indicates the minimum length required for a property.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxLength": {
+          "description": "Indicates the maximum length supported for a property",
+          "type": "integer",
+          "format": "int32"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "string"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "masking": {
+          "$ref": "#/definitions/maskingRuleType"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "greaterThan": {
+          "description": "The value of the related property must be greater than the value of  all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lessThan": {
+          "description": "The value of the related property must be less than the value of all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "valueSet": {
+          "$ref": "#/definitions/valueSetType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "valueSetType": {
+      "title": "valueSetType",
+      "description": "A reference to the codelist extended with values",
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/ValueSetMeta"
+        },
+        "valueSetListItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/valueSetItemType"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "ValueSetMeta": {
+      "title": "ValueSetMeta",
+      "type": "object",
+      "properties": {
+        "idValuePath": {
+          "description": "Code value (typically a key field) of the code list item",
+          "type": "string"
+        },
+        "itemDescriptionPath": {
+          "description": "Short name field of the code list item",
+          "type": "string"
+        }
+      }
+    },
+    "valueSetItemType": {
+      "title": "valueSetItemType",
+      "description": "The value set item type",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "itemDescription": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "defaultIndicator": {
+          "description": "Indicates if the current value is a default (pre-selected)",
+          "type": "boolean"
+        }
+      }
+    },
+    "stringType": {
+      "title": "stringType",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "type": "boolean"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property.",
+          "type": "string"
+        },
+        "minLength": {
+          "description": "Indicates the minimum length required for a property.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxLength": {
+          "description": "Indicates the maximum length supported for a property",
+          "type": "integer",
+          "format": "int32"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "string"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "masking": {
+          "$ref": "#/definitions/maskingRuleType"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "greaterThan": {
+          "description": "The value of the related property must be greater than the value of  all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lessThan": {
+          "description": "The value of the related property must be less than the value of all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "valueSet": {
+          "$ref": "#/definitions/valueSetType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "numberType": {
+      "title": "numberType",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "description": "True indicates that the property is marked read only in the given context",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "optional": {
+          "description": "True indicates that this property does not need to be valued",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "hidden": {
+          "description": "True indicates that the property is carried in the message - to and from the System of Record, but is not exposed in the UI",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property.",
+          "type": "string"
+        },
+        "minLength": {
+          "description": "Indicates the minimum length required for a property.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxLength": {
+          "description": "Indicates the maximum length supported for a property",
+          "type": "integer",
+          "format": "int32"
+        },
+        "minValue": {
+          "description": "Indicates the minimum value required for a property.",
+          "type": "number",
+          "format": "double"
+        },
+        "maxValue": {
+          "description": "Indicates the maximum value supported for a property",
+          "type": "number",
+          "format": "double"
+        },
+        "multipleOf": {
+          "description": "Indicates that the value must be a multiple of this value or divisible by this value.",
+          "type": "number",
+          "format": "double"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "number",
+          "format": "double"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "masking": {
+          "$ref": "#/definitions/maskingRuleType"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "greaterThan": {
+          "description": "The value of the related property must be greater than the value of  all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lessThan": {
+          "description": "The value of the related property must be less than the value of all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Paycard Consumer Fees",
+      "description": "Returns user consumer fees that must be accepted"
+    }
+  ]
+}

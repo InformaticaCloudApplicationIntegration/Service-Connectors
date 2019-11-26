@@ -1,0 +1,2985 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Organizational Asset Assignments",
+    "description": "Organizational Asset Assignments APIs return a list of organization asset assignments, detailed information about a specific asset assignment, or API metadata.",
+    "contact": {
+      "email": "Isabel.Espina.Carvajal@adp.com",
+      "name": "Isabel Espina Carvajal"
+    }
+  },
+  "host": "test-api.adp.com",
+  "basePath": "/",
+  "schemes": [],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/hr/v1/organizational-asset-assignments": {
+      "get": {
+        "description": "Request the list of all available organizational assets that the requester is authorized to view",
+        "summary": "77899839-e697-49e3-b9b2-48ee01003e2c",
+        "tags": [
+          "Organizational Asset Assignments"
+        ],
+        "operationId": "HrV1OrganizationalAssetAssignmentsGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "roleCode",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The role the user is playing during the transaction.  Possible values: employee,manager,practitioner,administrator,supervisor.  The roleCode header will be passed in all calls. When coming from Myself capabilities rolecode=employee. When coming from Team capabilities roleCode=manager. When coming from Practitioner capabilities roleCode=practitioner."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "$filter"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Used to indicate that particular server behaviors are preferred by the client.Required in Asynchronous call."
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "“Accept” “: ” ( “*/*” | (type“/” “*”) | (type“/”subtype)) [“; ” “q” “=”qvalue]. Describes media type(s) and subtype(s) that are acceptable for the response. The optional qvalue represents an acceptable quality level for acceptable types."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request the list of all available organizational assets that the requester is authorized to view",
+            "schema": {
+              "$ref": "#/definitions/OrganizationalAssetAssignments"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/organizationalAssetAssignments_sample_v01_00_rev002.json"
+              }
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              },
+              "Cache-Control": {
+                "type": "string"
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified",
+            "schema": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "413": {
+            "description": "Request Entity Too Large",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "default": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hr/v1/organizational-asset-assignments/{assignment-id}": {
+      "get": {
+        "description": "Request the organizational asset that the requester is authorized to view",
+        "summary": "ed51687d-bf53-46cd-aedd-c2bf611b2201",
+        "tags": [
+          "Organizational Asset Assignments"
+        ],
+        "operationId": "HrV1OrganizationalAssetAssignmentsByAssignmentIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "assignment-id",
+            "in": "path",
+            "required": true,
+            "default": "ORG-ASSET-123",
+            "type": "string",
+            "description": "Organizational Aasset ID"
+          },
+          {
+            "name": "roleCode",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The role the user is playing during the transaction.  Possible values: employee,manager,practitioner,administrator,supervisor.  The roleCode header will be passed in all calls. When coming from Myself capabilities rolecode=employee. When coming from Team capabilities roleCode=manager. When coming from Practitioner capabilities roleCode=practitioner."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request the organizational asset that the requester is authorized to view",
+            "schema": {
+              "$ref": "#/definitions/OrganizationalAssetAssignments"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/organizationalAssetAssignments_sample_v01_00_rev002.json"
+              }
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              },
+              "Cache-Control": {
+                "type": "string"
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified",
+            "schema": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "413": {
+            "description": "Request Entity Too Large",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "default": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hr/v1/organizational-asset-assignments/meta": {
+      "get": {
+        "description": "Returns a meta",
+        "summary": "b21ff1bb-d1b4-4b2b-92af-6c3053fda8ef",
+        "tags": [
+          "Organizational Asset Assignments"
+        ],
+        "operationId": "HrV1OrganizationalAssetAssignmentsMetaGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "roleCode",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The role the user is playing during the transaction.  Possible values: employee,manager,practitioner,administrator,supervisor.  The roleCode header will be passed in all calls. When coming from Myself capabilities rolecode=employee. When coming from Team capabilities roleCode=manager. When coming from Practitioner capabilities roleCode=practitioner."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a meta",
+            "schema": {
+              "$ref": "#/definitions/organizationalAssetAssignmentsMetaType"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/organizationalAssetAssignments_meta_sample_v01_00_rev002.json"
+              }
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              },
+              "Cache-Control": {
+                "type": "string"
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified",
+            "schema": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "413": {
+            "description": "Request Entity Too Large",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "default": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/HrV1OrganizationalAssetAssignments400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OrganizationalAssetAssignments": {
+      "title": "OrganizationalAssetAssignments",
+      "description": "The list of Assets assigned for an Organization",
+      "example": {
+        "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/organizationalAssetAssignments_sample_v01_00_rev002.json"
+      },
+      "type": "object",
+      "properties": {
+        "organizationalAssetAssignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/workerAssetAssignment"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        },
+        "confirmMessage": {
+          "$ref": "#/definitions/ConfirmMessage"
+        }
+      }
+    },
+    "workerAssetAssignment": {
+      "title": "workerAssetAssignment",
+      "description": "The list of assets assigned to an Associate",
+      "type": "object",
+      "properties": {
+        "assignmentDate": {
+          "description": "The date of the assignment",
+          "type": "string",
+          "format": "date"
+        },
+        "assignedAssets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssignedAsset"
+          }
+        },
+        "associateOID": {
+          "description": "A unique identifier of an associate",
+          "type": "string"
+        },
+        "workerID": {
+          "$ref": "#/definitions/WorkerID"
+        },
+        "organizationalUnit": {
+          "$ref": "#/definitions/OrganizationalAssetAssignmentOrganizationalUnit"
+        },
+        "workAssignmentID": {
+          "description": "A unique identifier of a work assignment",
+          "type": "string"
+        },
+        "descriptionText": {
+          "description": "Description of the related entity",
+          "type": "string"
+        },
+        "itemID": {
+          "description": "An identifier of the asset",
+          "type": "string"
+        },
+        "formattedName": {
+          "description": "A formatted version of the person name",
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "AssignedAsset": {
+      "title": "AssignedAsset",
+      "description": "The list of assets for an organization",
+      "type": "object",
+      "properties": {
+        "assetTypeCode": {
+          "$ref": "#/definitions/AssetTypeCode"
+        },
+        "manufacturerCode": {
+          "$ref": "#/definitions/ManufacturerCode"
+        },
+        "modelID": {
+          "description": "Identifies the model",
+          "type": "string"
+        },
+        "serialNumber": {
+          "description": "Manufacturer Serial Number of the asset",
+          "type": "string"
+        },
+        "assetStatusCode": {
+          "$ref": "#/definitions/AssetStatusCode"
+        },
+        "availabilityStatusCode": {
+          "$ref": "#/definitions/AvailabilityStatusCode"
+        },
+        "descriptionText": {
+          "description": "Description of the related entity",
+          "type": "string"
+        },
+        "assetValueAmount": {
+          "$ref": "#/definitions/AssetValueAmount"
+        },
+        "listPriceAmount": {
+          "$ref": "#/definitions/ListPriceAmount"
+        },
+        "costAmount": {
+          "$ref": "#/definitions/CostAmount"
+        },
+        "specifications": {
+          "description": "The list of specifications",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrganizationalAssetSpecificationType"
+          }
+        },
+        "acquisitionDate": {
+          "description": "The date acquired",
+          "type": "string",
+          "format": "date"
+        },
+        "returnDate": {
+          "description": "The date when the asset has been or will be returned",
+          "type": "string",
+          "format": "date"
+        },
+        "itemID": {
+          "description": "An identifier of the asset",
+          "type": "string"
+        },
+        "assetID": {
+          "description": "An identifier of the asset",
+          "type": "string"
+        },
+        "relatedAssetID": {
+          "description": "An identifier of the related asset",
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "AssetTypeCode": {
+      "title": "AssetTypeCode",
+      "description": "Identifies the type of asset.  E.g. laptop, car, mobile phone, etc...",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "ManufacturerCode": {
+      "title": "ManufacturerCode",
+      "description": "Identifies the type of asset.  E.g. laptop, car, mobile phone, etc...",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "AssetStatusCode": {
+      "title": "AssetStatusCode",
+      "description": "The status of the asset.  E.g. active, inactive",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "AvailabilityStatusCode": {
+      "title": "AvailabilityStatusCode",
+      "description": "The status of the availability of the related entityt.  E.g. available, allocated, etc..",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "AssetValueAmount": {
+      "title": "AssetValueAmount",
+      "description": "asset value amount",
+      "type": "object",
+      "properties": {
+        "amountValue": {
+          "description": "The monetary value of the object in which the amount is associated",
+          "type": "number",
+          "format": "double"
+        },
+        "currencyCode": {
+          "description": "Standard currency code as per ISO 4212",
+          "type": "string"
+        }
+      }
+    },
+    "ListPriceAmount": {
+      "title": "ListPriceAmount",
+      "description": "list price",
+      "type": "object",
+      "properties": {
+        "amountValue": {
+          "description": "The monetary value of the object in which the amount is associated",
+          "type": "number",
+          "format": "double"
+        },
+        "currencyCode": {
+          "description": "Standard currency code as per ISO 4212",
+          "type": "string"
+        }
+      }
+    },
+    "CostAmount": {
+      "title": "CostAmount",
+      "description": "The amount paid",
+      "type": "object",
+      "properties": {
+        "amountValue": {
+          "description": "The monetary value of the object in which the amount is associated",
+          "type": "number",
+          "format": "double"
+        },
+        "currencyCode": {
+          "description": "Standard currency code as per ISO 4212",
+          "type": "string"
+        }
+      }
+    },
+    "OrganizationalAssetSpecificationType": {
+      "title": "OrganizationalAssetSpecificationType",
+      "description": "A specification of the related entity",
+      "type": "object",
+      "properties": {
+        "specificationCode": {
+          "$ref": "#/definitions/SpecificationCode"
+        },
+        "specificationTypeCode": {
+          "$ref": "#/definitions/SpecificationTypeCode"
+        },
+        "textValues": {
+          "description": "The the values for the given instance",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "itemID": {
+          "description": "A unique identifier of a work assignment",
+          "type": "string"
+        }
+      }
+    },
+    "SpecificationCode": {
+      "title": "SpecificationCode",
+      "description": "Code identifying the spefication item",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "SpecificationTypeCode": {
+      "title": "SpecificationTypeCode",
+      "description": "Code identifying the type of specification item",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "Link": {
+      "title": "Link",
+      "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links",
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "rel": {
+          "$ref": "#/definitions/Rel"
+        },
+        "title": {
+          "description": "This property defines a title for the link.  The value must be a string. User agents MAY use this title when presenting the link to the user.",
+          "type": "string"
+        },
+        "targetSchema": {
+          "description": "This property is a schema that defines the expected structure of the JSON representation of the target of the link, if the target of the link is returned using JSON representation.",
+          "type": "string"
+        },
+        "mediaType": {
+          "$ref": "#/definitions/MediaType"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "encType": {
+          "$ref": "#/definitions/EncType"
+        },
+        "schema": {
+          "description": "This property contains a schema which defines the acceptable structure of the submitted request.  For a GET request, this schema would define the properties for the query string and for a POST request, this would define the body.",
+          "type": "string"
+        },
+        "payLoadArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayLoadArgument"
+          }
+        }
+      }
+    },
+    "Rel": {
+      "title": "Rel",
+      "description": "Indicates the nature of the relationship of the related resource to the resource that generated this representation",
+      "example": "alternate",
+      "type": "string",
+      "enum": [
+        "alternate",
+        "create",
+        "canonical",
+        "describedby",
+        "edit-form",
+        "enclosure",
+        "full",
+        "related",
+        "root",
+        "self",
+        "up",
+        "search",
+        "first",
+        "last",
+        "next",
+        "previous",
+        "/adp/invoke",
+        "/adp/image",
+        "/adp/confirm-message",
+        "/adp/status-monitor",
+        "/adp/codelist",
+        "/adp/template",
+        "/adp/externalLink",
+        "/adp/validation"
+      ]
+    },
+    "MediaType": {
+      "title": "MediaType",
+      "description": "The media type that the linked resource will return (Response)",
+      "example": "application/gzip",
+      "type": "string",
+      "enum": [
+        "application/gzip",
+        "application/json",
+        "application/msword",
+        "application/pdf",
+        "application/postscript",
+        "application/vnd.ms-excel",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/x-www-form-urlencoded",
+        "image/gif",
+        "image/jpeg",
+        "image/png",
+        "image/tiff",
+        "multipart/mixed",
+        "text/html",
+        "text/plain",
+        "application/vnd.visio",
+        "image/bmp",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-powerpoint",
+        "video/mp4",
+        "audio/mpeg",
+        "video/x-msvideo",
+        "video/x-ms-wmv",
+        "application/rtf",
+        "application/vnd.ms-outlook",
+        "text/csv",
+        "video/quicktime",
+        "application/zip",
+        "application/illustrator",
+        "text/xml"
+      ]
+    },
+    "Method": {
+      "title": "Method",
+      "description": "The HTTP method code (HTTP Verb) traverse the link (GET, POST, PUT or DELETE)",
+      "example": "GET",
+      "type": "string",
+      "enum": [
+        "GET",
+        "POST",
+        "DELETE",
+        "PUT"
+      ]
+    },
+    "EncType": {
+      "title": "EncType",
+      "description": "If present, this property indicates a query media type format that the server supports for querying or posting to the collection of instances at the target resource.  The query can be suffixed to the target URI to query the collection with property-based constraints on the resources that SHOULD be returned from the server or used to post data to the resource (depending on the method). (Request)",
+      "example": "application/json",
+      "type": "string",
+      "enum": [
+        "application/json",
+        "application/x-www-form-urlencoded"
+      ]
+    },
+    "PayLoadArgument": {
+      "title": "PayLoadArgument",
+      "type": "object",
+      "properties": {
+        "argumentPath": {
+          "description": "Code value (typically a key field) of the code list item",
+          "type": "string"
+        },
+        "argumentValue": {
+          "description": "Code value (typically a key field) of the code list item",
+          "type": "string"
+        }
+      }
+    },
+    "WorkerID": {
+      "title": "WorkerID",
+      "description": "An identifier for a worker, e.g. an Employee ID",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An actual ID value",
+          "type": "string"
+        },
+        "schemeCode": {
+          "$ref": "#/definitions/SchemeCode"
+        }
+      }
+    },
+    "SchemeCode": {
+      "title": "SchemeCode",
+      "description": "The scheme code",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "OrganizationalAssetAssignmentOrganizationalUnit": {
+      "title": "OrganizationalAssetAssignmentOrganizationalUnit",
+      "description": "An organizational unit",
+      "type": "object",
+      "properties": {
+        "nameCode": {
+          "$ref": "#/definitions/NameCode"
+        },
+        "typeCode": {
+          "$ref": "#/definitions/TypeCode"
+        },
+        "itemID": {
+          "description": "The unique identifier of the object in a collection",
+          "type": "string"
+        }
+      }
+    },
+    "NameCode": {
+      "title": "NameCode",
+      "description": "A coded name or descriptive label of the associated organizational unit entity. If this is a coded value, codeValue and shortName should be used. If this is just a string value, only shortName is necessary",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "TypeCode": {
+      "title": "TypeCode",
+      "description": "The organizational unit code and description, e.g. department code.",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "Meta": {
+      "title": "Meta",
+      "description": "Meta contains the metadata associated with a response.  A GET response may include metadata to support pagination",
+      "type": "object",
+      "properties": {
+        "startSequence": {
+          "description": "The instance resource sequence (number) identifying the first resource returned in the response. The server generates this sequence.  It is used by the client to determine the start sequence of the subsequent Get request",
+          "type": "integer",
+          "format": "int32"
+        },
+        "completeIndicator": {
+          "description": "Indicates whether the response completes the return of all of the resources of the instance resource set to the requesting system",
+          "type": "boolean"
+        },
+        "totalNumber": {
+          "description": "Number of total instance resources in an instance resource set. Note: An instance resource set is a set of instance resources that is determined by a server to satisfy the sets membership criteria (i.e., selection, filter, expansion and search criteria) of a resource management operation (e.g. GET request) upon a collection resource",
+          "type": "integer",
+          "format": "int32"
+        },
+        "resourceSetID": {
+          "description": "Unique identifier of the instance resource set.  It is generated by the server as a result of the original Get request",
+          "type": "string"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "ConfirmMessage": {
+      "title": "ConfirmMessage",
+      "description": "The ConfirmMessage contains the processing results for the corresponding request.  A request may have its processing reported as: succeeded, partially failed, or failed.",
+      "type": "object",
+      "properties": {
+        "confirmMessageID": {
+          "$ref": "#/definitions/ConfirmMessageID"
+        },
+        "createDateTime": {
+          "description": "The date & time that the message instance was generated.; follows the ISO-8601:2000 format: 2008-05-11T15:30:00-06:00.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "requestReceiptDateTime": {
+          "description": "The date & time that the request submitted by the client was received. Note, this timestamp may not be the same as the time the client actually submitted the request if there is a queuing mechanism between the client and server processing the request; it follows the ISO-8601:2000 format: 2008-05-11T15:30:00-06:00.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "protocolStatusCode": {
+          "$ref": "#/definitions/ProtocolStatusCode"
+        },
+        "protocolCode": {
+          "$ref": "#/definitions/ProtocolCode"
+        },
+        "requestID": {
+          "$ref": "#/definitions/RequestID"
+        },
+        "requestStatusCode": {
+          "$ref": "#/definitions/RequestStatusCode"
+        },
+        "requestMethodCode": {
+          "$ref": "#/definitions/RequestMethodCode"
+        },
+        "sessionID": {
+          "$ref": "#/definitions/SessionID"
+        },
+        "requestETag": {
+          "description": "The entity tag of the entity in the request.",
+          "type": "string"
+        },
+        "requestLink": {
+          "$ref": "#/definitions/RequestLink"
+        },
+        "processingStatusCode": {
+          "$ref": "#/definitions/ProcessingStatusCode"
+        },
+        "processMessages": {
+          "description": "processMessage is optional and contains processing information for either the request (at the ConfirmMessage level) or a resource being managed in the request (at the ResourceMessage level).  Most often there will be a single instance for an associated request or resource, but this structure allows for more than one if needed, for example, if multiple errors exist for a single resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessMessage"
+          }
+        },
+        "resourceMessages": {
+          "description": "resource Message contains the resource-specific processing results for resources being managed in the request.  A resource may have its processing reported as:  succeeded or failed.  It must be used to represent resource-specific messages.  In the case of a request managing multiple resources and resource-specific messages are to be returned, then this array will contain one object for each such resource of the request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceMessage"
+          }
+        }
+      }
+    },
+    "ConfirmMessageID": {
+      "title": "ConfirmMessageID",
+      "description": "An identifier for the instance of the confirm message.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "ProtocolStatusCode": {
+      "title": "ProtocolStatusCode",
+      "description": "Protocol-specific response status code.",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity.",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code not to exceed 25 characters",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "ProtocolCode": {
+      "title": "ProtocolCode",
+      "description": "Code that identifies the protocol used for the request.",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity.",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code not to exceed 25 characters",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "RequestID": {
+      "title": "RequestID",
+      "description": "The identifier of the request that generated this response.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "RequestStatusCode": {
+      "title": "RequestStatusCode",
+      "description": "The process results status code for the request.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue"
+        }
+      }
+    },
+    "CodeValue": {
+      "title": "CodeValue",
+      "description": "The code for the related entity.",
+      "example": "succeeded",
+      "type": "string",
+      "enum": [
+        "succeeded",
+        "partiallyFailed",
+        "failed"
+      ]
+    },
+    "RequestMethodCode": {
+      "title": "RequestMethodCode",
+      "description": "The method that was used on the request corresponding to this message instance.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue1"
+        }
+      }
+    },
+    "CodeValue1": {
+      "title": "CodeValue1",
+      "description": "The code for the related entity.",
+      "example": "GET",
+      "type": "string",
+      "enum": [
+        "GET",
+        "PUT",
+        "POST",
+        "PATCH",
+        "DELETE"
+      ]
+    },
+    "SessionID": {
+      "title": "SessionID",
+      "description": "A session identifier if one is available.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "RequestLink": {
+      "title": "RequestLink",
+      "description": "The link of the request that generated this response.",
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "rel": {
+          "$ref": "#/definitions/Rel"
+        },
+        "title": {
+          "description": "This property defines a title for the link.  The value must be a string. User agents MAY use this title when presenting the link to the user.",
+          "type": "string"
+        },
+        "targetSchema": {
+          "description": "This property is a schema that defines the expected structure of the JSON representation of the target of the link, if the target of the link is returned using JSON representation.",
+          "type": "string"
+        },
+        "mediaType": {
+          "$ref": "#/definitions/MediaType"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "encType": {
+          "$ref": "#/definitions/EncType"
+        },
+        "schema": {
+          "description": "This property contains a schema which defines the acceptable structure of the submitted request.  For a GET request, this schema would define the properties for the query string and for a POST request, this would define the body.",
+          "type": "string"
+        },
+        "payLoadArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayLoadArgument"
+          }
+        }
+      }
+    },
+    "ProcessingStatusCode": {
+      "title": "ProcessingStatusCode",
+      "description": "Processing status of the related request message.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue2"
+        }
+      }
+    },
+    "CodeValue2": {
+      "title": "CodeValue2",
+      "description": "The code for the related entity.",
+      "example": "received",
+      "type": "string",
+      "enum": [
+        "received",
+        "validated",
+        "started",
+        "completed"
+      ]
+    },
+    "ProcessMessage": {
+      "title": "ProcessMessage",
+      "description": "Each object contains processing information for either the request (at the ConfirmMessage level) or a resource being managed in the request (at the ResourceMessage level).",
+      "type": "object",
+      "properties": {
+        "processMessageID": {
+          "$ref": "#/definitions/ProcessMessageID"
+        },
+        "messageTypeCode": {
+          "$ref": "#/definitions/MessageTypeCode"
+        },
+        "sourceLocationExpression": {
+          "description": "Expression that provides the location (or source) of content in a message instance that is associated with a process message. Examples of expression languages include: XPath, XQuery, JSON Pointer.",
+          "type": "string"
+        },
+        "expressionLanguageCode": {
+          "$ref": "#/definitions/ExpressionLanguageCode"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "userMessage": {
+          "$ref": "#/definitions/UserMessage"
+        },
+        "developerMessage": {
+          "$ref": "#/definitions/DeveloperMessage"
+        }
+      }
+    },
+    "ProcessMessageID": {
+      "title": "ProcessMessageID",
+      "description": "An identifier for the instance of the process message.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "MessageTypeCode": {
+      "title": "MessageTypeCode",
+      "description": "Process Message instances may be of type: success, warning, error, or info.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue3"
+        }
+      }
+    },
+    "CodeValue3": {
+      "title": "CodeValue3",
+      "description": "The code for the related entity.",
+      "example": "success",
+      "type": "string",
+      "enum": [
+        "success",
+        "warning",
+        "error",
+        "info"
+      ]
+    },
+    "ExpressionLanguageCode": {
+      "title": "ExpressionLanguageCode",
+      "description": "Identifies the language used for expressions communicated in this message.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue4"
+        }
+      }
+    },
+    "CodeValue4": {
+      "title": "CodeValue4",
+      "description": "The code for the related entity.",
+      "example": "jPath",
+      "type": "string",
+      "enum": [
+        "jPath"
+      ]
+    },
+    "UserMessage": {
+      "title": "UserMessage",
+      "description": "Message returned to the user",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code associated with the message description.",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the message description.",
+          "type": "string"
+        },
+        "messageTxt": {
+          "description": "The value/content of the message description.",
+          "type": "string"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "DeveloperMessage": {
+      "title": "DeveloperMessage",
+      "description": "Message returned to the user",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code associated with the message description.",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the message description.",
+          "type": "string"
+        },
+        "messageTxt": {
+          "description": "The value/content of the message description.",
+          "type": "string"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "ResourceMessage": {
+      "title": "ResourceMessage",
+      "description": "Each object contains detailed information for a resource referenced in the original request.",
+      "type": "object",
+      "properties": {
+        "resourceMessageID": {
+          "$ref": "#/definitions/ResourceMessageID"
+        },
+        "resourceStatusCode": {
+          "$ref": "#/definitions/ResourceMessageResourceStatus"
+        },
+        "resourceLink": {
+          "$ref": "#/definitions/ResourceLink"
+        },
+        "processMessages": {
+          "description": "processMessage is optional and contains processing information for either the request (at the ConfirmMessage level) or a resource being managed in the request (at the ResourceMessage level).  Most often there will be a single instance for an associated request or resource, but this structure allows for more than one if needed, for example, if multiple errors exist for a single resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessMessageWithResourceStatusCode"
+          }
+        }
+      }
+    },
+    "ResourceMessageID": {
+      "title": "ResourceMessageID",
+      "description": "An identifier for the instance of the resource message.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceMessageResourceStatus": {
+      "title": "ResourceMessageResourceStatus",
+      "description": "The processing results status code of the resource of the request.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue5"
+        }
+      }
+    },
+    "CodeValue5": {
+      "title": "CodeValue5",
+      "description": "The code for the related entity.",
+      "example": "succeeded",
+      "type": "string",
+      "enum": [
+        "succeeded",
+        "failed",
+        "warning"
+      ]
+    },
+    "ResourceLink": {
+      "title": "ResourceLink",
+      "description": "The link of the request that generated this response.",
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "rel": {
+          "$ref": "#/definitions/Rel"
+        },
+        "title": {
+          "description": "This property defines a title for the link.  The value must be a string. User agents MAY use this title when presenting the link to the user.",
+          "type": "string"
+        },
+        "targetSchema": {
+          "description": "This property is a schema that defines the expected structure of the JSON representation of the target of the link, if the target of the link is returned using JSON representation.",
+          "type": "string"
+        },
+        "mediaType": {
+          "$ref": "#/definitions/MediaType"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "encType": {
+          "$ref": "#/definitions/EncType"
+        },
+        "schema": {
+          "description": "This property contains a schema which defines the acceptable structure of the submitted request.  For a GET request, this schema would define the properties for the query string and for a POST request, this would define the body.",
+          "type": "string"
+        },
+        "payLoadArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayLoadArgument"
+          }
+        }
+      }
+    },
+    "ProcessMessageWithResourceStatusCode": {
+      "title": "ProcessMessageWithResourceStatusCode",
+      "description": "Each object contains processing information for either the request (at the ConfirmMessage level) or a resource being managed in the request (at the ResourceMessage level).",
+      "type": "object",
+      "properties": {
+        "processMessageID": {
+          "$ref": "#/definitions/ProcessMessageID"
+        },
+        "messageTypeCode": {
+          "$ref": "#/definitions/MessageTypeCode"
+        },
+        "sourceLocationExpression": {
+          "description": "Expression that provides the location (or source) of content in a message instance that is associated with a process message. Examples of expression languages include: XPath, XQuery, JSON Pointer.",
+          "type": "string"
+        },
+        "expressionLanguageCode": {
+          "$ref": "#/definitions/ExpressionLanguageCode"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "userMessage": {
+          "$ref": "#/definitions/UserMessage"
+        },
+        "developerMessage": {
+          "$ref": "#/definitions/DeveloperMessage"
+        },
+        "resourceStatusCode": {
+          "$ref": "#/definitions/ResourceStatusCode"
+        }
+      }
+    },
+    "ResourceStatusCode": {
+      "title": "ResourceStatusCode",
+      "description": "DEPRECATED - Use messageTypeCode instead. The processing results status code of the resource of the request.",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity.",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code not to exceed 25 characters",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "HrV1OrganizationalAssetAssignments400Error": {
+      "title": "HrV1OrganizationalAssetAssignments400Error",
+      "example": {
+        "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+      },
+      "type": "object",
+      "properties": {
+        "externalValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "externalValue"
+      ]
+    },
+    "organizationalAssetAssignmentsMetaType": {
+      "title": "organizationalAssetAssignmentsMetaType",
+      "description": "The list of Assets assigned for an Organization - Meta",
+      "example": {
+        "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/organizationalAssetAssignments_meta_sample_v01_00_rev002.json"
+      },
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/organizationalAssetAssignmentsMeta"
+        }
+      }
+    },
+    "organizationalAssetAssignmentsMeta": {
+      "title": "organizationalAssetAssignmentsMeta",
+      "description": "organizationalAssetAssignments meta schema for - organizationalAssetAssignments_schema_v01_00_rev002.json",
+      "type": "object",
+      "properties": {
+        "queryCriteria": {
+          "description": "A collection of query criteria",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/organizationalAssetAssignmentsQueryCriterion"
+          }
+        },
+        "/organizationalAssetAssignments": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/organizationalAssetAssignments/associateOID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/workerID": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/organizationalAssetAssignments/workerID/idValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/workerID/schemeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/organizationalAssetAssignments/workerID/schemeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/workerID/schemeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/workerID/schemeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/organizationalUnit": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/organizationalAssetAssignments/organizationalUnit/nameCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/organizationalAssetAssignments/organizationalUnit/nameCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/organizationalUnit/nameCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/organizationalUnit/nameCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/organizationalUnit/typeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/organizationalAssetAssignments/organizationalUnit/typeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/organizationalUnit/typeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/organizationalUnit/typeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/organizationalUnit/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/workAssignmentID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignmentsText": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignmentDate": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/assetTypeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/assetTypeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/assetTypeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/assetTypeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/manufacturerCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/manufacturerCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/manufacturerCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/manufacturerCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/modelID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/serialNumber": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/assetStatusCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/assetStatusCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/assetStatusCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/assetStatusCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/availabilityStatusCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/availabilityStatusCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/availabilityStatusCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/availabilityStatusCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssetsText": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/assetValueAmount": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/assetValueAmount/amountValue": {
+          "$ref": "#/definitions/ContextNumberAmountValueType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/assetValueAmount/currencyCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/listPriceAmount": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/listPriceAmount/amountValue": {
+          "$ref": "#/definitions/ContextNumberAmountValueType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/listPriceAmount/currencyCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/costAmount": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/costAmount/amountValue": {
+          "$ref": "#/definitions/ContextNumberAmountValueType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/costAmount/currencyCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/specificationCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/specificationCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/specificationCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/specificationCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/specificationTypeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/specificationTypeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/specificationTypeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/specificationTypeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/textValues": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/links": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/links/href": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/links/rel": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/links/canonicalUri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/links/title": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/links/targetSchema": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/links/mediaType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/links/method": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/links/encType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/links/schema": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/links/payLoadArguments": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/links/payLoadArguments/argumentPath": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/links/payLoadArguments/argumentValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/specifications/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/acquisitionDate": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/returnDate": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/assetID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/relatedAssetID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/links": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/links/href": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/links/rel": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/links/canonicalUri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/links/title": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/links/targetSchema": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/links/mediaType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/links/method": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/links/encType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/links/schema": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/links/payLoadArguments": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/links/payLoadArguments/argumentPath": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/assignedAssets/links/payLoadArguments/argumentValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/formattedName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/links": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/organizationalAssetAssignments/links/href": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/links/rel": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/links/canonicalUri": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/links/title": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/links/targetSchema": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/links/mediaType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/links/method": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/links/encType": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/links/schema": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/links/payLoadArguments": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/organizationalAssetAssignments/links/payLoadArguments/argumentPath": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/organizationalAssetAssignments/links/payLoadArguments/argumentValue": {
+          "$ref": "#/definitions/stringType"
+        }
+      }
+    },
+    "organizationalAssetAssignmentsQueryCriterion": {
+      "title": "organizationalAssetAssignmentsQueryCriterion",
+      "description": "A single query parameter",
+      "type": "object",
+      "properties": {
+        "queryOptionCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "obligationCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "queryOptionTypeCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "defaultNumberValue": {
+          "description": "The default number value",
+          "type": "number",
+          "format": "double"
+        },
+        "defaultStringValue": {
+          "description": "The default string value",
+          "type": "string"
+        },
+        "resourcePathMax": {
+          "description": "Maximum number of resource paths supported",
+          "type": "integer",
+          "format": "int32"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "resourcePaths": {
+          "description": "A collection of acceptable resource paths to pass to the query option",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludedResourcePaths": {
+          "description": "A collection of resource paths which may not be passed to the query option.  An example use of this is where you allow all paths except 1 or 2.  You would want to only specify those which are excluded",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "queryValueCodeList": {
+          "$ref": "#/definitions/codeListType_v03"
+        },
+        "logicalOperators": {
+          "description": "A collection of logical operators",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogicalOperator"
+          }
+        },
+        "itemID": {
+          "description": "The simple (string) identifier of an object",
+          "type": "string"
+        }
+      }
+    },
+    "codeListType_v03": {
+      "title": "codeListType_v03",
+      "type": "object",
+      "properties": {
+        "codeListTitle": {
+          "description": "Code list title",
+          "type": "string"
+        },
+        "exclusiveIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        },
+        "listItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/codeListItemType_v02"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "codeListItemType_v02": {
+      "title": "codeListItemType_v02",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "itemID": {
+          "description": "The simple (string) identifier of an object",
+          "type": "string"
+        },
+        "valueDescription": {
+          "description": "Additional list item description",
+          "type": "string"
+        },
+        "foreignKey": {
+          "description": "Allows for filtering the code list",
+          "type": "string"
+        },
+        "inactiveIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        },
+        "defaultIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        }
+      }
+    },
+    "linkType_v02": {
+      "title": "linkType_v02",
+      "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links",
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "rel": {
+          "$ref": "#/definitions/Rel12"
+        },
+        "canonicalUri": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "title": {
+          "description": "This property defines a title for the link.  The value must be a string. User agents MAY use this title when presenting the link to the user",
+          "type": "string"
+        },
+        "targetSchema": {
+          "description": "This property is a schema that defines the expected structure of the JSON representation of the target of the link, if the target of the link is returned using JSON representation",
+          "type": "string"
+        },
+        "mediaType": {
+          "$ref": "#/definitions/MediaType12"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "encType": {
+          "$ref": "#/definitions/EncType"
+        },
+        "schema": {
+          "description": "This property contains a schema which defines the acceptable structure of the submitted request.  For a GET request, this schema would define the properties for the query string and for a POST request, this would define the body",
+          "type": "string"
+        },
+        "payLoadArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayLoadArgument"
+          }
+        }
+      }
+    },
+    "Rel12": {
+      "title": "Rel12",
+      "description": "Indicates the nature of the relationship of the related resource to the resource that generated this representation",
+      "example": "alternate",
+      "type": "string",
+      "enum": [
+        "alternate",
+        "create",
+        "canonical",
+        "describedby",
+        "edit-form",
+        "enclosure",
+        "full",
+        "related",
+        "root",
+        "self",
+        "up",
+        "search",
+        "first",
+        "last",
+        "next",
+        "previous",
+        "/adp/invoke",
+        "/adp/image",
+        "/adp/confirm-message",
+        "/adp/status-monitor",
+        "/adp/codelist",
+        "/adp/template",
+        "/adp/externalLink",
+        "/adp/validation",
+        "/adp/deeplink",
+        "/adp/attachment",
+        "/adp/workflow"
+      ]
+    },
+    "MediaType12": {
+      "title": "MediaType12",
+      "description": "The media type that the linked resource will return (Response)",
+      "example": "application/gzip",
+      "type": "string",
+      "enum": [
+        "application/gzip",
+        "application/json",
+        "application/msword",
+        "application/pdf",
+        "application/postscript",
+        "application/vnd.ms-excel",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/xml",
+        "application/x-www-form-urlencoded",
+        "image/gif",
+        "image/jpeg",
+        "image/png",
+        "image/tiff",
+        "multipart/mixed",
+        "text/html",
+        "text/plain",
+        "application/vnd.visio",
+        "image/bmp",
+        "image/x-ms-bmp",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-powerpoint",
+        "video/mp4",
+        "audio/mpeg",
+        "video/x-msvideo",
+        "video/x-ms-wmv",
+        "application/rtf",
+        "application/vnd.ms-outlook",
+        "text/csv",
+        "video/quicktime",
+        "application/zip",
+        "application/illustrator",
+        "text/xml"
+      ]
+    },
+    "LogicalOperator": {
+      "title": "LogicalOperator",
+      "description": "A logical operation",
+      "type": "object",
+      "properties": {
+        "logicalOperatorCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "mutuallyExclusiveIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        },
+        "mutuallyExclusiveLogicalOperatorCodes": {
+          "description": "A list of mutually exclusive operator codes.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "arrayType": {
+      "title": "arrayType",
+      "type": "object",
+      "properties": {
+        "minItems": {
+          "description": "Indicates the minimum items required for an array type.  This is only relevant if the given property is an array.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxItems": {
+          "description": "Indicates the maximum items supported for an array type.  This is only relevant if the given property is an array.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sameValueProperties": {
+          "description": "A list of properties which must have the exact same value within the array",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uniqueProperties": {
+          "description": "A list of properties which together must be unique",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uniqueItems": {
+          "type": "boolean"
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "helperMessageType": {
+      "title": "helperMessageType",
+      "description": "Helper text provided to the user when they take an action to affirm to be correct, true, or genuine.",
+      "type": "object",
+      "properties": {
+        "messageTxt": {
+          "description": "Message to present to the user.",
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "metaDataType": {
+      "title": "metaDataType",
+      "example": "string",
+      "type": "string",
+      "enum": [
+        "string",
+        "number",
+        "integer",
+        "boolean",
+        "object",
+        "array",
+        "null",
+        "any",
+        "string[date-time]",
+        "string[date]",
+        "string[time]",
+        "string[duration]",
+        "string[regex]",
+        "string[phone]",
+        "string[uri]",
+        "string[email]",
+        "string[ip-address]",
+        "string[ipv6]",
+        "string[host-name]",
+        "integer[regex]",
+        "integer[utc-millisec]",
+        "number[regex]",
+        "number[utc-millisec]"
+      ]
+    },
+    "stringType": {
+      "title": "stringType",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "type": "boolean"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property.",
+          "type": "string"
+        },
+        "minLength": {
+          "description": "Indicates the minimum length required for a property.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxLength": {
+          "description": "Indicates the maximum length supported for a property",
+          "type": "integer",
+          "format": "int32"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "string"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "masking": {
+          "$ref": "#/definitions/maskingRuleType"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "greaterThan": {
+          "description": "The value of the related property must be greater than the value of  all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lessThan": {
+          "description": "The value of the related property must be less than the value of all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "valueSet": {
+          "$ref": "#/definitions/valueSetType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "disallowItemType": {
+      "title": "disallowItemType",
+      "type": "object",
+      "properties": {
+        "itemID": {
+          "description": "A unique identifier of an object within the collection",
+          "type": "string"
+        }
+      }
+    },
+    "maskingRuleType": {
+      "title": "maskingRuleType",
+      "type": "object",
+      "properties": {
+        "authorizationRequiredIndicator": {
+          "type": "boolean"
+        },
+        "authorizationResourceID": {
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "valueSetType": {
+      "title": "valueSetType",
+      "description": "A reference to the codelist extended with values",
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/ValueSetMeta"
+        },
+        "valueSetListItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/valueSetItemType"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "ValueSetMeta": {
+      "title": "ValueSetMeta",
+      "type": "object",
+      "properties": {
+        "idValuePath": {
+          "description": "Code value (typically a key field) of the code list item",
+          "type": "string"
+        },
+        "itemDescriptionPath": {
+          "description": "Short name field of the code list item",
+          "type": "string"
+        }
+      }
+    },
+    "valueSetItemType": {
+      "title": "valueSetItemType",
+      "description": "The value set item type",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "itemDescription": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "defaultIndicator": {
+          "description": "Indicates if the current value is a default (pre-selected)",
+          "type": "boolean"
+        }
+      }
+    },
+    "objectType": {
+      "title": "objectType",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "description": "True indicates that the property is marked read only in the given context",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "optional": {
+          "description": "True indicates that this property does not need to be valued",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "hidden": {
+          "description": "True indicates that the property is carried in the message - to and from the System of Record, but is not exposed in the UI",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "stringCodeListType": {
+      "title": "stringCodeListType",
+      "type": "object",
+      "properties": {
+        "codeList": {
+          "$ref": "#/definitions/codeListType_v03"
+        },
+        "readOnly": {
+          "type": "boolean"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property.",
+          "type": "string"
+        },
+        "minLength": {
+          "description": "Indicates the minimum length required for a property.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxLength": {
+          "description": "Indicates the maximum length supported for a property",
+          "type": "integer",
+          "format": "int32"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "string"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "masking": {
+          "$ref": "#/definitions/maskingRuleType"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "greaterThan": {
+          "description": "The value of the related property must be greater than the value of  all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lessThan": {
+          "description": "The value of the related property must be less than the value of all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "valueSet": {
+          "$ref": "#/definitions/valueSetType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "ContextNumberAmountValueType": {
+      "title": "ContextNumberAmountValueType",
+      "description": "Context rules for a given object",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "description": "True indicates that the property is marked read only in the given context",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "optional": {
+          "description": "True indicates that this property does not need to be valued",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "hidden": {
+          "description": "True indicates that the property is carried in the message - to and from the System of Record, but is not exposed in the UI",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property.",
+          "type": "string"
+        },
+        "minLength": {
+          "description": "Indicates the minimum length required for a property.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxLength": {
+          "description": "Indicates the maximum length supported for a property",
+          "type": "integer",
+          "format": "int32"
+        },
+        "minAmountValue": {
+          "description": "Indicates the minimum amout value required for a property.",
+          "type": "number",
+          "format": "double"
+        },
+        "maxAmountValue": {
+          "description": "Indicates the maximum amount value supported for a property",
+          "type": "number",
+          "format": "double"
+        },
+        "minValue": {
+          "description": "Indicates the minimum value required for a property.",
+          "type": "number",
+          "format": "double"
+        },
+        "maxValue": {
+          "description": "Indicates the maximum value supported for a property",
+          "type": "number",
+          "format": "double"
+        },
+        "multipleOf": {
+          "description": "Indicates that the value must be a multiple of this value or divisible by this value.",
+          "type": "number",
+          "format": "double"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "number",
+          "format": "double"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "masking": {
+          "$ref": "#/definitions/maskingRuleType"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "greaterThan": {
+          "description": "The value of the related property must be greater than the value of  all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lessThan": {
+          "description": "The value of the related property must be less than the value of all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/DataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "DataType": {
+      "title": "DataType",
+      "description": "Data type of the attribute",
+      "example": "string",
+      "type": "string",
+      "enum": [
+        "string",
+        "number",
+        "integer",
+        "boolean",
+        "object",
+        "array",
+        "null",
+        "any",
+        "string[date-time]",
+        "string[date]",
+        "string[time]",
+        "string[regex]",
+        "string[phone]",
+        "string[uri]",
+        "string[email]",
+        "string[ip-address]",
+        "string[ipv6]",
+        "string[host-name]",
+        "integer[regex]",
+        "integer[utc-millisec]",
+        "number[regex]",
+        "number[utc-millisec]"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Organizational Asset Assignments",
+      "description": "List all organizational asset assignments"
+    },
+    {
+      "name": "Assign Organizational Asset",
+      "description": "An instance to capture an event to assign an asset(s)  to an associate"
+    },
+    {
+      "name": "Unassign Organizational Asset",
+      "description": "An instance to capture an event to unassign an asset by an associate"
+    },
+    {
+      "name": "Change Organizational Asset Assignment",
+      "description": "An instance to capture an event to assign an asset(s)  to an associate"
+    }
+  ]
+}

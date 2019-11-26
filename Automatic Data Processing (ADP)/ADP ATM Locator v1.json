@@ -1,0 +1,609 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "ATM Locator",
+    "description": "The ATM Locator API returns a list of ATM locations within a specific radius.",
+    "contact": {
+      "email": "Boris.Vernoff@adp.com",
+      "name": "Boris Vernoff"
+    }
+  },
+  "host": "test-api.adp.com",
+  "basePath": "/",
+  "schemes": [],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/payroll/v1/atm-locator": {
+      "get": {
+        "description": "Return list of locations and properties",
+        "summary": "a8169190-0d80-4444-a98b-6b8f8d1c3435",
+        "tags": [
+          "ATM Locations"
+        ],
+        "operationId": "PayrollV1AtmLocatorGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "roleCode",
+            "in": "header",
+            "required": true,
+            "enum": [
+              "employee",
+              "manager",
+              "practitioner",
+              "administrator",
+              "supervisor"
+            ],
+            "default": "employee",
+            "type": "string",
+            "description": "The role the user is playing during the transaction.  Possible values: employee,manager,practitioner,administrator,supervisor.  The roleCode header will be passed in all calls. When coming from Myself capabilities rolecode=employee. When coming from Team capabilities roleCode=manager. When coming from Practitioner capabilities roleCode=practitioner."
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "default": "atm,reload",
+            "type": "string",
+            "description": "Type of atm. Possible values are atm and reload.  If both are requested then they should be separated by comma. e.g. atm,reload in any order."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "default": "10",
+            "type": "integer",
+            "format": "int32",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Limit indicates the maximum number of locations to return.  Default 10."
+          },
+          {
+            "name": "latitude",
+            "in": "query",
+            "required": false,
+            "default": 34.105884,
+            "type": "number",
+            "format": "double",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Latitude in the decimal notation with 6 digits of precision. Required if longitude is passed."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Used with a method to make it conditional; the method is performed only if the client entity (via the given entity tag, ETag header) does not match the server entity."
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "required": false,
+            "default": -117.806335,
+            "type": "number",
+            "format": "double",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Longitude in the decimal notation with 6 digits of precision. Required if latitude is passed."
+          },
+          {
+            "name": "rad",
+            "in": "query",
+            "required": false,
+            "default": "10m",
+            "type": "string",
+            "description": "Radius from the coordinates. The value is a number with m for miles and km for kilometers. e.g. 10m or 10km.  Should use miles. This is the distance. Required if latitude and longitude are passed."
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "required": false,
+            "default": "San Dimas",
+            "type": "string",
+            "description": "City Name. city requires country subdivision."
+          },
+          {
+            "name": "countrysub",
+            "in": "query",
+            "required": false,
+            "default": "CA",
+            "type": "string",
+            "description": "Country Subdivision.  For US is it the state following the FIPS 5-2.  Currently only US supported. Country subdivision requires city."
+          },
+          {
+            "name": "postal",
+            "in": "query",
+            "required": false,
+            "default": "91773",
+            "type": "string",
+            "description": "Postal Code. postalCode may be used alone or in conjunction with city / countrySubdivision."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return list of locations and properties",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1AtmLocatorResponse"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/atmLocator_v1_0_rev001_PayCard.json"
+              }
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              },
+              "Cache-Control": {
+                "type": "string"
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified",
+            "schema": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1AtmLocator400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/response_v1_0_sample_rev004.json"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1AtmLocator400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/response_v1_0_sample_rev004.json"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1AtmLocator400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/response_v1_0_sample_rev004.json"
+              }
+            }
+          },
+          "413": {
+            "description": "Request Entity Too Large",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1AtmLocator400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/response_v1_0_sample_rev004.json"
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1AtmLocator400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/response_v1_0_sample_rev004.json"
+              }
+            }
+          },
+          "default": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1AtmLocator400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/response_v1_0_sample_rev004.json"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/PayrollV1AtmLocator400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/response_v1_0_sample_rev004.json"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "roleCode": {
+      "title": "roleCode",
+      "example": "employee",
+      "type": "string",
+      "enum": [
+        "employee",
+        "manager",
+        "practitioner",
+        "administrator",
+        "supervisor"
+      ]
+    },
+    "PayrollV1AtmLocatorResponse": {
+      "title": "PayrollV1AtmLocatorResponse",
+      "example": {
+        "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/atmLocator_v1_0_rev001_PayCard.json"
+      },
+      "type": "object",
+      "properties": {
+        "atmLocator": {
+          "description": "Return List of  ATMs or Reload Locations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AtmLocator"
+          }
+        }
+      }
+    },
+    "AtmLocator": {
+      "title": "AtmLocator",
+      "type": "object",
+      "properties": {
+        "locationType": {
+          "$ref": "#/definitions/LocationType"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        }
+      }
+    },
+    "LocationType": {
+      "title": "LocationType",
+      "description": "list of properties for the location",
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/Code"
+        },
+        "labelName": {
+          "description": "the name shown on the UI",
+          "type": "string"
+        },
+        "colorCode": {
+          "description": "Code identifying the color.  The status is shown in the specified color.  The 6 digit color code.  e.g. FF0000 for red.",
+          "type": "string"
+        }
+      }
+    },
+    "Code": {
+      "title": "Code",
+      "description": "Identifier of the type of location",
+      "example": "allpoint",
+      "type": "string",
+      "enum": [
+        "allpoint",
+        "atm",
+        "branch",
+        "greendot",
+        "moneypass",
+        "pnc",
+        "reload",
+        "visa"
+      ]
+    },
+    "Location": {
+      "title": "Location",
+      "description": "name and address of a physical location",
+      "type": "object",
+      "properties": {
+        "labelName": {
+          "description": "The label to be shown on the UI",
+          "type": "string"
+        },
+        "coordinate": {
+          "$ref": "#/definitions/Coordinate"
+        },
+        "distance": {
+          "$ref": "#/definitions/Distance"
+        },
+        "address": {
+          "$ref": "#/definitions/Address"
+        },
+        "phone": {
+          "description": "A list of telephone numbers",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Phone"
+          }
+        },
+        "email": {
+          "description": "A list of electronic addresses (i.e. email)",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Email"
+          }
+        },
+        "internet": {
+          "description": "list of internet uri.  For example website, home page, etc...",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Internet"
+          }
+        },
+        "locationPropertyCodes": {
+          "description": "list of properties for the location",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocationPropertyCode"
+          }
+        }
+      }
+    },
+    "Coordinate": {
+      "title": "Coordinate",
+      "description": "The coordinates of the location of the device as captured by the gps of the device.  Following the W3C Geolocation API Specification.  Reference: http://dev.w3.org/geo/api/spec-source.html#altitude",
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "description": "The angle, in degrees, of a position on Earth above the equator. (Latitude is negative for a place below the equator.) specified in decimal degrees",
+          "type": "number",
+          "format": "double"
+        },
+        "longitude": {
+          "description": "The angle, in degrees, of a position on Earth around the equator from the Greenwich Meridian specified in decimal degrees.",
+          "type": "number",
+          "format": "double"
+        },
+        "altitudeMeasure": {
+          "description": "Denotes the height of th eposition, specified in meters above the [WGS84] ellipsoid.",
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "Distance": {
+      "title": "Distance",
+      "description": "the distance in meters from the requested coordinates",
+      "type": "object",
+      "properties": {
+        "unitValue": {
+          "description": "the radius (distance) that the person may clock in from the coordinate.",
+          "type": "number",
+          "format": "double"
+        },
+        "unitCode": {
+          "$ref": "#/definitions/UnitCode"
+        }
+      }
+    },
+    "UnitCode": {
+      "title": "UnitCode",
+      "description": "unit which the range is communicated in",
+      "example": "meters",
+      "type": "string",
+      "enum": [
+        "meters",
+        "miles"
+      ]
+    },
+    "Address": {
+      "title": "Address",
+      "description": "components of an address",
+      "type": "object",
+      "properties": {
+        "lineOne": {
+          "description": "Line One consists of any valid set of the following address components: primary address number, pre-directional (e.g. East) , street name, suffix, post-directional (e.g. SW), secondary address identifier, and secondary address. It may have a Post Office Box, or Private Mail Box Address (e.g. APO/FPO) if it is a Communication Address",
+          "type": "string"
+        },
+        "lineTwo": {
+          "description": "Line Two consists of any secondary address identifiers which do not fit in Line One. Example is an Apartment or Suite designation. The preference is to fit all designators on Line One which the USPS considers the Delivery Point.",
+          "type": "string"
+        },
+        "lineThree": {
+          "description": "Line Three consists of any additional address designators.",
+          "type": "string"
+        },
+        "lineFour": {
+          "description": "Line Four consists of any additional address designators.",
+          "type": "string"
+        },
+        "lineFive": {
+          "description": "Line Five consists of any additional address designators.",
+          "type": "string"
+        },
+        "cityName": {
+          "description": "Identifies the town or city.",
+          "type": "string"
+        },
+        "citySubdivisionName": {
+          "description": "Qualifies the further division of the City, for example, a city may have many districts or boroughs. The type attribute identifies the type of this entity; e.g., City, Borough etc., and there is a pre-defined list of types supported, with the ability to add new ones as necessary.",
+          "type": "string"
+        },
+        "countrySubdivision": {
+          "description": "Qualifies the further division of the Country. These may be Districts, Regions, States, Provinces etc. A possible list of values is as specified in ISO 3166-2. The type attribute identifies the type of this e.g. District, Region etc, and there is a pre-defined list of types supported, with the ability to add new ones as necessary",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CountrySubdivision"
+          },
+          "minItems": 1
+        },
+        "countryCode": {
+          "description": "Country in which the Address is in. ISO_3166-1-alpha-2 code list",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "The string of characters used to identify the postal zone specific to the country where the mail is delivered.",
+          "type": "string",
+          "maxLength": 15
+        }
+      }
+    },
+    "CountrySubdivision": {
+      "title": "CountrySubdivision",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Qualifies the further division of the Country. These may be Districts, Regions, States, Provinces etc. A possible list of values is as specified in ISO 3166-2. The type attribute identifies the type of this e.g. District, Region etc, and there is a pre-defined list of types supported, with the ability to add new ones as necessary",
+          "type": "string"
+        },
+        "typeCode": {
+          "$ref": "#/definitions/TypeCode"
+        }
+      }
+    },
+    "TypeCode": {
+      "title": "TypeCode",
+      "example": "state",
+      "type": "string",
+      "enum": [
+        "state",
+        "province",
+        "region"
+      ]
+    },
+    "Phone": {
+      "title": "Phone",
+      "description": "A phone number to be displayed",
+      "type": "object",
+      "properties": {
+        "labelName": {
+          "description": "The label to be shown on the UI",
+          "type": "string"
+        },
+        "channelCode": {
+          "$ref": "#/definitions/ChannelCode"
+        },
+        "formattedDialNumber": {
+          "description": "The formatted telephone number.  The component parts of the telephone are put together into a presentation pattern as defined by the regex format specified.  Please note that backslash is used as an escape character in regex, but a double backslash is needed to escape within the json schema.  The regex will accept +CC NNNNNNNNNNNNNN where + is the symbol indicating the caller to enter their country specific code to call from outside the country.  CC is the country code for an international number (optional), and the area code and dial number.  The local access code (i.e. 1 (201) 333 4444. 1 is the access code in US) is not passed.  The UI will present the phone number following its own presentation convention",
+          "type": "string"
+        },
+        "extension": {
+          "description": "The extension of the local communication number. In the case of a Telephone Number accessing a Pager Network the Extension maybe the Pager Identification Number required to leave a message for the Pager Number.",
+          "type": "string",
+          "maxLength": 20
+        }
+      }
+    },
+    "ChannelCode": {
+      "title": "ChannelCode",
+      "description": "Identifies the channel in which the associated entity comes",
+      "example": "phone",
+      "type": "string",
+      "enum": [
+        "phone",
+        "fax",
+        "mobile",
+        "pager"
+      ]
+    },
+    "Email": {
+      "title": "Email",
+      "type": "object",
+      "properties": {
+        "labelName": {
+          "description": "The label to be shown on the UI",
+          "type": "string"
+        },
+        "uri": {
+          "description": "An email address (i.e. email)",
+          "type": "string"
+        }
+      }
+    },
+    "Internet": {
+      "title": "Internet",
+      "description": "An internet uri.  Examples: twitter, facebook, blog, etc...",
+      "type": "object",
+      "properties": {
+        "labelName": {
+          "$ref": "#/definitions/LabelName"
+        },
+        "uri": {
+          "description": "Uri of the internet address",
+          "type": "string"
+        }
+      }
+    },
+    "LabelName": {
+      "title": "LabelName",
+      "description": "The label to be shown on the UI",
+      "example": "corporate website",
+      "type": "string",
+      "enum": [
+        "corporate website",
+        "twitter",
+        "facebook"
+      ]
+    },
+    "LocationPropertyCode": {
+      "title": "LocationPropertyCode",
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/Code1"
+        },
+        "labelName": {
+          "description": "the name shown on the UI",
+          "type": "string"
+        },
+        "colorCode": {
+          "description": "Code identifying the color.  The status is shown in the specified color.  The 6 digit color code.  e.g. FF0000 for red.",
+          "type": "string"
+        }
+      }
+    },
+    "Code1": {
+      "title": "Code1",
+      "description": "Identifier of the property provided by the location",
+      "example": "24hr",
+      "type": "string",
+      "enum": [
+        "24hr",
+        "wheelchair",
+        "indoors",
+        "drivethru"
+      ]
+    },
+    "PayrollV1AtmLocator400Error": {
+      "title": "PayrollV1AtmLocator400Error",
+      "example": {
+        "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/response_v1_0_sample_rev004.json"
+      },
+      "type": "object",
+      "properties": {
+        "externalValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "externalValue"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "ATM Locations",
+      "description": "List ATM locations"
+    }
+  ]
+}

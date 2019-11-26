@@ -1,0 +1,3799 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Data Collection Entries",
+    "description": "This API supports the processing of a collection data collection",
+    "contact": {
+      "email": "Isabel.Espina.Carvajal@adp.com",
+      "name": "Isabel Espina Carvajal"
+    }
+  },
+  "host": "test-api.adp.com",
+  "basePath": "/",
+  "schemes": [],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/time/v1/data-collection-entries": {
+      "get": {
+        "description": "Request the list of all available worker data collection entries that the requester is authorized to view",
+        "summary": "c22ebdb6-6c00-40bd-a3f0-0464a9c80605",
+        "tags": [
+          "Data Collection Entries"
+        ],
+        "operationId": "TimeV1DataCollectionEntriesGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "roleCode",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The role the user is playing during the transaction.  Possible values: employee,manager,practitioner,administrator,supervisor.  The roleCode header will be passed in all calls. When coming from Myself capabilities rolecode=employee. When coming from Team capabilities roleCode=manager. When coming from Practitioner capabilities roleCode=practitioner."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request the list of all available worker data collection entries that the requester is authorized to view",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionEntries"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/dataCollectionEntries_sample_v01_00_rev001.json"
+              }
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              },
+              "Cache-Control": {
+                "type": "string"
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified",
+            "schema": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "413": {
+            "description": "Request Entity Too Large",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "default": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/time/v1/data-collection-entries/{data-collection-entries-id}": {
+      "get": {
+        "description": "Returns a single data collection entry",
+        "summary": "6213d4d9-9343-46e4-8e5d-df5aa7970f8e",
+        "tags": [
+          "Data Collection Entries"
+        ],
+        "operationId": "TimeV1DataCollectionEntriesByDataCollectionEntriesIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data-collection-entries-id",
+            "in": "path",
+            "required": true,
+            "default": "123123",
+            "type": "string",
+            "description": "<ul style=\"list-style-type: circle;\">"
+          },
+          {
+            "name": "roleCode",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The role the user is playing during the transaction.  Possible values: employee,manager,practitioner,administrator,supervisor.  The roleCode header will be passed in all calls. When coming from Myself capabilities rolecode=employee. When coming from Team capabilities roleCode=manager. When coming from Practitioner capabilities roleCode=practitioner."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a single data collection entry",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionEntries"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/dataCollectionEntries_sample_v01_00_rev001.json"
+              }
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              },
+              "Cache-Control": {
+                "type": "string"
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified",
+            "schema": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "413": {
+            "description": "Request Entity Too Large",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "default": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/time/v1/data-collection-entries.process": {
+      "post": {
+        "description": "Process data collection entries event instance",
+        "summary": "ecc32a68-e5a2-4f73-9ff1-fdc567fc9e76",
+        "tags": [
+          "Process Data Collection Entries"
+        ],
+        "operationId": "EventsTimeV1DataCollectionEntriesProcessPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "roleCode",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The role the user is playing during the transaction.  Possible values: employee,manager,practitioner,administrator,supervisor.  The roleCode header will be passed in all calls. When coming from Myself capabilities rolecode=employee. When coming from Team capabilities roleCode=manager. When coming from Practitioner capabilities roleCode=practitioner."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "posted contents",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionEntriesProcessEvent"
+            }
+          },
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "“Accept-Language” “: ” ( language | “*” ) [“;” “q” “=”qvalue]. Specifies the language(s) that are acceptable for the response. The optional qvalue represents a quality level for acceptable languages."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Process data collection entries event instance",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionEntriesProcessEvent"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/events_time.dataCollectionEntries.process_response_sample_v01_00_rev001.json"
+              }
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              },
+              "Cache-Control": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "default": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/time/v1/data-collection-entries.process/meta": {
+      "get": {
+        "description": "Retrieve event metadata",
+        "summary": "116b5b84-b91a-4514-9d69-12713c6a36f0",
+        "tags": [
+          "Process Data Collection Entries"
+        ],
+        "operationId": "EventsTimeV1DataCollectionEntriesProcessMetaGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "roleCode",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The role the user is playing during the transaction.  Possible values: employee,manager,practitioner,administrator,supervisor.  The roleCode header will be passed in all calls. When coming from Myself capabilities rolecode=employee. When coming from Team capabilities roleCode=manager. When coming from Practitioner capabilities roleCode=practitioner."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The OData $filter parameter MUST be used to specify the filter criterion.  Please refer RESTful Web API Design Standard document for this query parameter specification details."
+          },
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "“Accept-Language” “: ” ( language | “*” ) [“;” “q” “=”qvalue]. Specifies the language(s) that are acceptable for the response. The optional qvalue represents a quality level for acceptable languages."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieve event metadata",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionEntriesProcessEventMeta"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/events_time.dataCollectionEntries.process_meta_sample_v01_00_rev001.json"
+              }
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              },
+              "Cache-Control": {
+                "type": "string"
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified",
+            "schema": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "406": {
+            "description": "Not Acceptable",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "412": {
+            "description": "Precondition Failed",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "413": {
+            "description": "Request Entity Too Large",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "default": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/EventsTimeV1DataCollectionEntriesProcess400Error"
+            },
+            "examples": {
+              "application/json": {
+                "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataCollectionEntries": {
+      "title": "DataCollectionEntries",
+      "description": "A collection of data Entries",
+      "example": {
+        "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/dataCollectionEntries_sample_v01_00_rev001.json"
+      },
+      "type": "object",
+      "properties": {
+        "dataCollectionEntries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dataCollectionEntriesTransform"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        },
+        "confirmMessage": {
+          "$ref": "#/definitions/ConfirmMessage"
+        }
+      }
+    },
+    "dataCollectionEntriesTransform": {
+      "title": "dataCollectionEntriesTransform",
+      "type": "object",
+      "properties": {
+        "itemID": {
+          "description": "The unique identifier of the object in a collection",
+          "type": "string"
+        },
+        "terminalID": {
+          "description": "The identifier of a data collection terminal device.",
+          "type": "string"
+        },
+        "terminalName": {
+          "description": "The name of the terminal",
+          "type": "string"
+        },
+        "workerDataCollectionEntries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkerDataCollectionEntry"
+          }
+        }
+      }
+    },
+    "WorkerDataCollectionEntry": {
+      "title": "WorkerDataCollectionEntry",
+      "type": "object",
+      "properties": {
+        "entryCode": {
+          "$ref": "#/definitions/EntryCode"
+        },
+        "entryTypeCode": {
+          "$ref": "#/definitions/EntryTypeCode"
+        },
+        "badgeID": {
+          "description": "A unique identifier of a worker in the time system",
+          "type": "string"
+        },
+        "actorBadgeID": {
+          "description": "A unique identifier of the worker who made the entry in the device on behalf of the worker identified by the badgeID",
+          "type": "string"
+        },
+        "workAssignmentID": {
+          "description": "A unique identifier of a work assignment",
+          "type": "string"
+        },
+        "deviceDateTime": {
+          "description": "Date Time of the entering device.  This time is to be logged by the System of Record to maintain forensics on the time logged based on synchronization with the server clock and that of the user's mobile device. Data Representation Temporal Data Element Specification following ISO-8601:2000 specification.  The granularity for date-time for this API will always be the following: YYYY-MM-DDThh:mm:ss-+hh:mm.  where -+ is either minus or plus depending on whether the offset from GMT is positive or negative hours minutes.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "entryDateTime": {
+          "description": "The date as logged by the device based on the clock reference time from the server. Data Representation Temporal Data Element Specification following ISO-8601:2000 specification.  The granularity for date-time for this API will always be the following: YYYY-MM-DDThh:mm:ss-+hh:mm.  where -+ is either minus or plus depending on whether the offset from GMT is positive or negative hours minutes.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "actionCode": {
+          "$ref": "#/definitions/ActionCode"
+        },
+        "laborAllocations": {
+          "description": "Time may be allocated to a department, project, location, etc...",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataCollectionEntryLaborAllocation"
+          }
+        },
+        "entryOverrideCodes": {
+          "description": "Codes that represent overrides that a user may select for the entry,e.g. if the worker is requesting to override the standard meal deduction for this entry, the code would identify the rule.  Example is that the worker is scheduled for lunch, but is working through lunch.  This tells the system that the worker is working through lunch and to not count the regularly scheduled lunch time",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataCollectionEntryEntryOverrideCode"
+          }
+        },
+        "comment": {
+          "$ref": "#/definitions/Comment"
+        },
+        "secondsQuantity": {
+          "description": "Indecimal digits to arbitrary precision",
+          "type": "number",
+          "format": "double"
+        },
+        "hourQuantity": {
+          "description": "Indecimal digits to arbitrary precision",
+          "type": "number",
+          "format": "double"
+        },
+        "timeDuration": {
+          "description": "The string reprersentation of the time value usually expressed as hh:mm",
+          "type": "string"
+        },
+        "unitQuantity": {
+          "description": "Unit Quantity",
+          "type": "integer",
+          "format": "int32"
+        },
+        "amount": {
+          "description": "the entered amount",
+          "type": "string"
+        },
+        "entryID": {
+          "description": "Unique identifier of the entry",
+          "type": "string"
+        }
+      }
+    },
+    "EntryCode": {
+      "title": "EntryCode",
+      "description": "Code identifying the code that the entry is associated to.  This may be an earning code, pay code, expense code, etc...",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "EntryTypeCode": {
+      "title": "EntryTypeCode",
+      "description": "Code identifying the type of entry.  Examples are hours, amount, timePair.  The type of entry drives what data is relevant for the entry.",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "ActionCode": {
+      "title": "ActionCode",
+      "description": "The Action Code.  Punch, ClockIn/ClockOut, lunchout, transfer",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "DataCollectionEntryLaborAllocation": {
+      "title": "DataCollectionEntryLaborAllocation",
+      "type": "object",
+      "properties": {
+        "allocationCode": {
+          "$ref": "#/definitions/AllocationCode"
+        },
+        "allocationTypeCode": {
+          "$ref": "#/definitions/AllocationTypeCode"
+        },
+        "itemID": {
+          "description": "The unique identifier of the object in a collection",
+          "type": "string"
+        }
+      }
+    },
+    "AllocationCode": {
+      "title": "AllocationCode",
+      "description": "The code identifying the allocation",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "AllocationTypeCode": {
+      "title": "AllocationTypeCode",
+      "description": "The type of allocation",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "DataCollectionEntryEntryOverrideCode": {
+      "title": "DataCollectionEntryEntryOverrideCode",
+      "type": "object",
+      "properties": {
+        "itemID": {
+          "description": "The unique identifier of the object in a collection",
+          "type": "string"
+        },
+        "overrideCode": {
+          "$ref": "#/definitions/OverrideCode"
+        },
+        "overrideTypeCode": {
+          "$ref": "#/definitions/OverrideTypeCode"
+        }
+      }
+    },
+    "OverrideCode": {
+      "title": "OverrideCode",
+      "description": "The code identifying the entry override",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "OverrideTypeCode": {
+      "title": "OverrideTypeCode",
+      "description": "The type of override (i.e. cancelmealdeduct, workrule)",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "The comment entered by the submitter or the reviewer",
+      "type": "object",
+      "properties": {
+        "textValue": {
+          "description": "The text entered by the user",
+          "type": "string"
+        },
+        "commentCode": {
+          "$ref": "#/definitions/CommentCode"
+        },
+        "appliesToCode": {
+          "description": "Type of the related time entry note, one of the pre-defined by the backend SOR",
+          "type": "string"
+        }
+      }
+    },
+    "CommentCode": {
+      "title": "CommentCode",
+      "description": "Type of the related time entry note, one of the pre-defined by the backend SOR",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "Meta": {
+      "title": "Meta",
+      "description": "Meta contains the metadata associated with a response.  A GET response may include metadata to support pagination",
+      "type": "object",
+      "properties": {
+        "startSequence": {
+          "description": "The instance resource sequence (number) identifying the first resource returned in the response. The server generates this sequence.  It is used by the client to determine the start sequence of the subsequent Get request",
+          "type": "integer",
+          "format": "int32"
+        },
+        "completeIndicator": {
+          "description": "Indicates whether the response completes the return of all of the resources of the instance resource set to the requesting system",
+          "type": "boolean"
+        },
+        "totalNumber": {
+          "description": "Number of total instance resources in an instance resource set. Note: An instance resource set is a set of instance resources that is determined by a server to satisfy the sets membership criteria (i.e., selection, filter, expansion and search criteria) of a resource management operation (e.g. GET request) upon a collection resource",
+          "type": "integer",
+          "format": "int32"
+        },
+        "resourceSetID": {
+          "description": "Unique identifier of the instance resource set.  It is generated by the server as a result of the original Get request",
+          "type": "string"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "Link": {
+      "title": "Link",
+      "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links",
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "rel": {
+          "$ref": "#/definitions/Rel"
+        },
+        "canonicalUri": {
+          "description": "A unique identifier of the feature/function/operation, the link poins to",
+          "type": "string"
+        },
+        "title": {
+          "description": "This property defines a title for the link.  The value must be a string. User agents MAY use this title when presenting the link to the user.",
+          "type": "string"
+        },
+        "targetSchema": {
+          "description": "This property is a schema that defines the expected structure of the JSON representation of the target of the link, if the target of the link is returned using JSON representation.",
+          "type": "string"
+        },
+        "mediaType": {
+          "$ref": "#/definitions/MediaType"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "encType": {
+          "$ref": "#/definitions/EncType"
+        },
+        "schema": {
+          "description": "This property contains a schema which defines the acceptable structure of the submitted request.  For a GET request, this schema would define the properties for the query string and for a POST request, this would define the body.",
+          "type": "string"
+        },
+        "payLoadArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayLoadArgument"
+          }
+        }
+      }
+    },
+    "Rel": {
+      "title": "Rel",
+      "description": "Indicates the nature of the relationship of the related resource to the resource that generated this representation",
+      "example": "alternate",
+      "type": "string",
+      "enum": [
+        "alternate",
+        "create",
+        "canonical",
+        "describedby",
+        "edit-form",
+        "enclosure",
+        "full",
+        "related",
+        "root",
+        "self",
+        "up",
+        "search",
+        "first",
+        "last",
+        "next",
+        "previous",
+        "/adp/invoke",
+        "/adp/image",
+        "/adp/confirm-message",
+        "/adp/status-monitor",
+        "/adp/codelist",
+        "/adp/template",
+        "/adp/externalLink",
+        "/adp/validation",
+        "/adp/deeplink"
+      ]
+    },
+    "MediaType": {
+      "title": "MediaType",
+      "description": "The media type that the linked resource will return (Response)",
+      "example": "application/gzip",
+      "type": "string",
+      "enum": [
+        "application/gzip",
+        "application/json",
+        "application/msword",
+        "application/pdf",
+        "application/postscript",
+        "application/vnd.ms-excel",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/x-www-form-urlencoded",
+        "image/gif",
+        "image/jpeg",
+        "image/png",
+        "image/tiff",
+        "multipart/mixed",
+        "text/html",
+        "text/plain",
+        "application/vnd.visio",
+        "image/bmp",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-powerpoint",
+        "video/mp4",
+        "audio/mpeg",
+        "video/x-msvideo",
+        "video/x-ms-wmv",
+        "application/rtf",
+        "application/vnd.ms-outlook",
+        "text/csv",
+        "video/quicktime",
+        "application/zip",
+        "application/illustrator",
+        "text/xml"
+      ]
+    },
+    "Method": {
+      "title": "Method",
+      "description": "The HTTP method code (HTTP Verb) traverse the link (GET, POST, PUT or DELETE)",
+      "example": "GET",
+      "type": "string",
+      "enum": [
+        "GET",
+        "POST",
+        "DELETE",
+        "PUT"
+      ]
+    },
+    "EncType": {
+      "title": "EncType",
+      "description": "If present, this property indicates a query media type format that the server supports for querying or posting to the collection of instances at the target resource.  The query can be suffixed to the target URI to query the collection with property-based constraints on the resources that SHOULD be returned from the server or used to post data to the resource (depending on the method). (Request)",
+      "example": "application/json",
+      "type": "string",
+      "enum": [
+        "application/json",
+        "application/x-www-form-urlencoded"
+      ]
+    },
+    "PayLoadArgument": {
+      "title": "PayLoadArgument",
+      "type": "object",
+      "properties": {
+        "argumentPath": {
+          "description": "Code value (typically a key field) of the code list item",
+          "type": "string"
+        },
+        "argumentValue": {
+          "description": "Code value (typically a key field) of the code list item",
+          "type": "string"
+        }
+      }
+    },
+    "ConfirmMessage": {
+      "title": "ConfirmMessage",
+      "description": "The ConfirmMessage contains the processing results for the corresponding request.  A request may have its processing reported as: succeeded, partially failed, or failed.",
+      "type": "object",
+      "properties": {
+        "confirmMessageID": {
+          "$ref": "#/definitions/ConfirmMessageID"
+        },
+        "createDateTime": {
+          "description": "The date & time that the message instance was generated.; follows the ISO-8601:2000 format: 2008-05-11T15:30:00-06:00.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "requestReceiptDateTime": {
+          "description": "The date & time that the request submitted by the client was received. Note, this timestamp may not be the same as the time the client actually submitted the request if there is a queuing mechanism between the client and server processing the request; it follows the ISO-8601:2000 format: 2008-05-11T15:30:00-06:00.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "protocolStatusCode": {
+          "$ref": "#/definitions/ProtocolStatusCode"
+        },
+        "protocolCode": {
+          "$ref": "#/definitions/ProtocolCode"
+        },
+        "requestID": {
+          "$ref": "#/definitions/RequestID"
+        },
+        "requestStatusCode": {
+          "$ref": "#/definitions/RequestStatusCode"
+        },
+        "requestMethodCode": {
+          "$ref": "#/definitions/RequestMethodCode"
+        },
+        "sessionID": {
+          "$ref": "#/definitions/SessionID"
+        },
+        "requestETag": {
+          "description": "The entity tag of the entity in the request.",
+          "type": "string"
+        },
+        "requestLink": {
+          "$ref": "#/definitions/RequestLink"
+        },
+        "processingStatusCode": {
+          "$ref": "#/definitions/ProcessingStatusCode"
+        },
+        "processMessages": {
+          "description": "processMessage is optional and contains processing information for either the request (at the ConfirmMessage level) or a resource being managed in the request (at the ResourceMessage level).  Most often there will be a single instance for an associated request or resource, but this structure allows for more than one if needed, for example, if multiple errors exist for a single resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessMessage"
+          }
+        },
+        "resourceMessages": {
+          "description": "resource Message contains the resource-specific processing results for resources being managed in the request.  A resource may have its processing reported as:  succeeded or failed.  It must be used to represent resource-specific messages.  In the case of a request managing multiple resources and resource-specific messages are to be returned, then this array will contain one object for each such resource of the request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceMessage"
+          }
+        }
+      }
+    },
+    "ConfirmMessageID": {
+      "title": "ConfirmMessageID",
+      "description": "An identifier for the instance of the confirm message.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "ProtocolStatusCode": {
+      "title": "ProtocolStatusCode",
+      "description": "Protocol-specific response status code.",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity.",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code not to exceed 25 characters",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "ProtocolCode": {
+      "title": "ProtocolCode",
+      "description": "Code that identifies the protocol used for the request.",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity.",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code not to exceed 25 characters",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "RequestID": {
+      "title": "RequestID",
+      "description": "The identifier of the request that generated this response.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "RequestStatusCode": {
+      "title": "RequestStatusCode",
+      "description": "The process results status code for the request.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue"
+        }
+      }
+    },
+    "CodeValue": {
+      "title": "CodeValue",
+      "description": "The code for the related entity.",
+      "example": "succeeded",
+      "type": "string",
+      "enum": [
+        "succeeded",
+        "partiallyFailed",
+        "failed"
+      ]
+    },
+    "RequestMethodCode": {
+      "title": "RequestMethodCode",
+      "description": "The method that was used on the request corresponding to this message instance.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue1"
+        }
+      }
+    },
+    "CodeValue1": {
+      "title": "CodeValue1",
+      "description": "The code for the related entity.",
+      "example": "GET",
+      "type": "string",
+      "enum": [
+        "GET",
+        "PUT",
+        "POST",
+        "PATCH",
+        "DELETE"
+      ]
+    },
+    "SessionID": {
+      "title": "SessionID",
+      "description": "A session identifier if one is available.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "RequestLink": {
+      "title": "RequestLink",
+      "description": "The link of the request that generated this response.",
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "rel": {
+          "$ref": "#/definitions/Rel"
+        },
+        "canonicalUri": {
+          "description": "A unique identifier of the feature/function/operation, the link poins to",
+          "type": "string"
+        },
+        "title": {
+          "description": "This property defines a title for the link.  The value must be a string. User agents MAY use this title when presenting the link to the user.",
+          "type": "string"
+        },
+        "targetSchema": {
+          "description": "This property is a schema that defines the expected structure of the JSON representation of the target of the link, if the target of the link is returned using JSON representation.",
+          "type": "string"
+        },
+        "mediaType": {
+          "$ref": "#/definitions/MediaType"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "encType": {
+          "$ref": "#/definitions/EncType"
+        },
+        "schema": {
+          "description": "This property contains a schema which defines the acceptable structure of the submitted request.  For a GET request, this schema would define the properties for the query string and for a POST request, this would define the body.",
+          "type": "string"
+        },
+        "payLoadArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayLoadArgument"
+          }
+        }
+      }
+    },
+    "ProcessingStatusCode": {
+      "title": "ProcessingStatusCode",
+      "description": "Processing status of the related request message.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue2"
+        }
+      }
+    },
+    "CodeValue2": {
+      "title": "CodeValue2",
+      "description": "The code for the related entity.",
+      "example": "received",
+      "type": "string",
+      "enum": [
+        "received",
+        "validated",
+        "started",
+        "completed"
+      ]
+    },
+    "ProcessMessage": {
+      "title": "ProcessMessage",
+      "description": "Each object contains processing information for either the request (at the ConfirmMessage level) or a resource being managed in the request (at the ResourceMessage level).",
+      "type": "object",
+      "properties": {
+        "processMessageID": {
+          "$ref": "#/definitions/ProcessMessageID"
+        },
+        "messageTypeCode": {
+          "$ref": "#/definitions/MessageTypeCode"
+        },
+        "sourceLocationExpression": {
+          "description": "Expression that provides the location (or source) of content in a message instance that is associated with a process message. Examples of expression languages include: XPath, XQuery, JSON Pointer.",
+          "type": "string"
+        },
+        "expressionLanguageCode": {
+          "$ref": "#/definitions/ExpressionLanguageCode"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "userMessage": {
+          "$ref": "#/definitions/UserMessage"
+        },
+        "developerMessage": {
+          "$ref": "#/definitions/DeveloperMessage"
+        }
+      }
+    },
+    "ProcessMessageID": {
+      "title": "ProcessMessageID",
+      "description": "An identifier for the instance of the process message.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "MessageTypeCode": {
+      "title": "MessageTypeCode",
+      "description": "Process Message instances may be of type: success, warning, error, or info.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue3"
+        }
+      }
+    },
+    "CodeValue3": {
+      "title": "CodeValue3",
+      "description": "The code for the related entity.",
+      "example": "success",
+      "type": "string",
+      "enum": [
+        "success",
+        "warning",
+        "error",
+        "info"
+      ]
+    },
+    "ExpressionLanguageCode": {
+      "title": "ExpressionLanguageCode",
+      "description": "Identifies the language used for expressions communicated in this message.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue4"
+        }
+      }
+    },
+    "CodeValue4": {
+      "title": "CodeValue4",
+      "description": "The code for the related entity.",
+      "example": "jPath",
+      "type": "string",
+      "enum": [
+        "jPath"
+      ]
+    },
+    "UserMessage": {
+      "title": "UserMessage",
+      "description": "Message returned to the user",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code associated with the message description.",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the message description.",
+          "type": "string"
+        },
+        "messageTxt": {
+          "description": "The value/content of the message description.",
+          "type": "string"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "DeveloperMessage": {
+      "title": "DeveloperMessage",
+      "description": "Message returned to the user",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code associated with the message description.",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the message description.",
+          "type": "string"
+        },
+        "messageTxt": {
+          "description": "The value/content of the message description.",
+          "type": "string"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "ResourceMessage": {
+      "title": "ResourceMessage",
+      "description": "Each object contains detailed information for a resource referenced in the original request.",
+      "type": "object",
+      "properties": {
+        "resourceMessageID": {
+          "$ref": "#/definitions/ResourceMessageID"
+        },
+        "resourceStatusCode": {
+          "$ref": "#/definitions/ResourceMessageResourceStatus"
+        },
+        "resourceLink": {
+          "$ref": "#/definitions/ResourceLink"
+        },
+        "processMessages": {
+          "description": "processMessage is optional and contains processing information for either the request (at the ConfirmMessage level) or a resource being managed in the request (at the ResourceMessage level).  Most often there will be a single instance for an associated request or resource, but this structure allows for more than one if needed, for example, if multiple errors exist for a single resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessMessageWithResourceStatusCode"
+          }
+        }
+      }
+    },
+    "ResourceMessageID": {
+      "title": "ResourceMessageID",
+      "description": "An identifier for the instance of the resource message.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An ID",
+          "type": "string"
+        },
+        "schemeName": {
+          "description": "The type of ID",
+          "type": "string"
+        },
+        "schemeAgencyName": {
+          "description": "The agency that issues the ID",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceMessageResourceStatus": {
+      "title": "ResourceMessageResourceStatus",
+      "description": "The processing results status code of the resource of the request.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "codeValue": {
+          "$ref": "#/definitions/CodeValue5"
+        }
+      }
+    },
+    "CodeValue5": {
+      "title": "CodeValue5",
+      "description": "The code for the related entity.",
+      "example": "succeeded",
+      "type": "string",
+      "enum": [
+        "succeeded",
+        "failed",
+        "warning"
+      ]
+    },
+    "ResourceLink": {
+      "title": "ResourceLink",
+      "description": "The link of the request that generated this response.",
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "rel": {
+          "$ref": "#/definitions/Rel"
+        },
+        "canonicalUri": {
+          "description": "A unique identifier of the feature/function/operation, the link poins to",
+          "type": "string"
+        },
+        "title": {
+          "description": "This property defines a title for the link.  The value must be a string. User agents MAY use this title when presenting the link to the user.",
+          "type": "string"
+        },
+        "targetSchema": {
+          "description": "This property is a schema that defines the expected structure of the JSON representation of the target of the link, if the target of the link is returned using JSON representation.",
+          "type": "string"
+        },
+        "mediaType": {
+          "$ref": "#/definitions/MediaType"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "encType": {
+          "$ref": "#/definitions/EncType"
+        },
+        "schema": {
+          "description": "This property contains a schema which defines the acceptable structure of the submitted request.  For a GET request, this schema would define the properties for the query string and for a POST request, this would define the body.",
+          "type": "string"
+        },
+        "payLoadArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayLoadArgument"
+          }
+        }
+      }
+    },
+    "ProcessMessageWithResourceStatusCode": {
+      "title": "ProcessMessageWithResourceStatusCode",
+      "description": "Each object contains processing information for either the request (at the ConfirmMessage level) or a resource being managed in the request (at the ResourceMessage level).",
+      "type": "object",
+      "properties": {
+        "processMessageID": {
+          "$ref": "#/definitions/ProcessMessageID"
+        },
+        "messageTypeCode": {
+          "$ref": "#/definitions/MessageTypeCode"
+        },
+        "sourceLocationExpression": {
+          "description": "Expression that provides the location (or source) of content in a message instance that is associated with a process message. Examples of expression languages include: XPath, XQuery, JSON Pointer.",
+          "type": "string"
+        },
+        "expressionLanguageCode": {
+          "$ref": "#/definitions/ExpressionLanguageCode"
+        },
+        "links": {
+          "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "userMessage": {
+          "$ref": "#/definitions/UserMessage"
+        },
+        "developerMessage": {
+          "$ref": "#/definitions/DeveloperMessage"
+        },
+        "resourceStatusCode": {
+          "$ref": "#/definitions/ResourceStatusCode"
+        }
+      }
+    },
+    "ResourceStatusCode": {
+      "title": "ResourceStatusCode",
+      "description": "DEPRECATED - Use messageTypeCode instead. The processing results status code of the resource of the request.",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity.",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code not to exceed 25 characters",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "DataCollectionEntriesProcessEvent": {
+      "title": "DataCollectionEntriesProcessEvent",
+      "description": "An instance to process a collection of data entries from 1 to many data collection terminals (i.e. a clock)",
+      "example": {
+        "summary": "A sample file",
+        "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/events_time.dataCollectionEntries.process_request_sample_v01_00_rev001.json"
+      },
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Event"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        },
+        "confirmMessage": {
+          "$ref": "#/definitions/ConfirmMessage"
+        }
+      }
+    },
+    "Event": {
+      "title": "Event",
+      "description": "An instance to to the modification of 1 to many timeEntries.",
+      "type": "object",
+      "properties": {
+        "eventID": {
+          "description": "The unique identifier of the event instance. This is set by the system of record once an event is recorded as in progress or complete",
+          "type": "string"
+        },
+        "serviceCategoryCode": {
+          "$ref": "#/definitions/ServiceCategoryCode"
+        },
+        "eventNameCode": {
+          "$ref": "#/definitions/EventNameCode"
+        },
+        "eventTitle": {
+          "description": "The event title offers a way to describe a particular instance of an event at a level more granular than the event name, e.g. 2014 Annual Enrollment",
+          "type": "string"
+        },
+        "eventSubTitle": {
+          "description": "The event sub title provides event instance summary details, e.g. All Annual Enrollment elections become effective on January 1, 2014",
+          "type": "string"
+        },
+        "eventReasonCode": {
+          "$ref": "#/definitions/EventReasonCode"
+        },
+        "eventStatusCode": {
+          "$ref": "#/definitions/EventStatusCode"
+        },
+        "priorityCode": {
+          "$ref": "#/definitions/PriorityCode"
+        },
+        "recordDateTime": {
+          "description": "This is the date time the event is recorded in the system of record with an event status code equal to complete. This value is set by the system of record",
+          "type": "string",
+          "format": "date-time"
+        },
+        "creationDateTime": {
+          "description": "This is the date time the event is created. If a system of record creates the event instance, as in the case of an annual enrollment for example, then is sets the creation date time. If a user declares an event, then this is set to the date time when the first call is made to the system of record",
+          "type": "string",
+          "format": "date-time"
+        },
+        "effectiveDateTime": {
+          "description": "This is the effective date, or effective date time fo the event from a business perspective. In some systems, this may be referred to as the Event Date. For example, for a birth event, this is the date of birth. If there is no effective date from a business perspective, this is set equal to the record date time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "expirationDateTime": {
+          "description": "This value is set by the system of record and used to term the life cycle of an event instance.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "dueDateTime": {
+          "description": "This value is set by the system of record and allows for the presentation of a date by which the system of record would like the user to complete the event",
+          "type": "string",
+          "format": "date-time"
+        },
+        "notificationIndicator": {
+          "description": "True indicates that the requestor wants notifications on the status of the request",
+          "type": "boolean"
+        },
+        "originator": {
+          "$ref": "#/definitions/Originator"
+        },
+        "actor": {
+          "$ref": "#/definitions/Actor"
+        },
+        "actAsParty": {
+          "$ref": "#/definitions/ActAsParty"
+        },
+        "onBehalfOfParty": {
+          "$ref": "#/definitions/OnBehalfOfParty"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "data": {
+          "$ref": "#/definitions/Data"
+        }
+      }
+    },
+    "ServiceCategoryCode": {
+      "title": "ServiceCategoryCode",
+      "description": "The service domain, e.g. HR, Payroll, Benefits, etc. This field is always present and valued based on a standard codelist",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "EventNameCode": {
+      "title": "EventNameCode",
+      "description": "This is the canonical name of the event, e.g. dependent.add, worker.hire. This field is always present and valued based on a standard codelist",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "EventReasonCode": {
+      "title": "EventReasonCode",
+      "description": "This allows for further refinement of the associated event. For example, for a worker.maritalStatus.change event, the reason code could be used to describe whether it is a Marriage or Divorce. This is optional and valued as defined by the system of record",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "EventStatusCode": {
+      "title": "EventStatusCode",
+      "description": "This identifies the status of the event. An event that has been initiated by the system of record will have an event status code of created. An event that is saved in a work in progress state will have an event status code of inProgress. An event that has been recorded will have an event status code of complete. These values are set by the system of record and valued based on a standard codeslist",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "PriorityCode": {
+      "title": "PriorityCode",
+      "description": "This allows the system of record to prioritize events and is valued based on a standard codelist",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "Originator": {
+      "title": "Originator",
+      "description": "An originator is a user, machine or event that triggered the event",
+      "type": "object",
+      "properties": {
+        "applicationID": {
+          "$ref": "#/definitions/ApplicationID"
+        },
+        "associateOID": {
+          "description": "The unique identifier of an associate who originated the event.",
+          "type": "string"
+        },
+        "personOID": {
+          "description": "The unique identifier of a person who originated the event or a process",
+          "type": "string"
+        },
+        "formattedName": {
+          "description": "Human readable name of the event originator",
+          "type": "string"
+        },
+        "eventID": {
+          "description": "The unique identifier of the event instance. This is generated once an event is recorded with an event status code equal to Complete. This value is set by the system of record.",
+          "type": "string"
+        },
+        "eventNameCode": {
+          "$ref": "#/definitions/EventNameCode1"
+        },
+        "deviceID": {
+          "description": "The unique identifier of the device, e.g. a time clock, door entry beam",
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationID": {
+      "title": "ApplicationID",
+      "description": "The unique identifier of the application which originated the event or a process",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An actual ID value",
+          "type": "string"
+        },
+        "schemeCode": {
+          "$ref": "#/definitions/SchemeCode"
+        }
+      }
+    },
+    "SchemeCode": {
+      "title": "SchemeCode",
+      "description": "The scheme code",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "EventNameCode1": {
+      "title": "EventNameCode1",
+      "description": "This is the canonical name of the event, e.g. dependent.add, worker.hire",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "Actor": {
+      "title": "Actor",
+      "description": "The actor is the party that completed the recording of the event",
+      "type": "object",
+      "properties": {
+        "applicationID": {
+          "$ref": "#/definitions/ApplicationID1"
+        },
+        "associateOID": {
+          "description": "The unique identifier of an associate who originated the event or a process",
+          "type": "string"
+        },
+        "personOID": {
+          "description": "The unique identifier of a person who originated the event or a process",
+          "type": "string"
+        },
+        "formattedName": {
+          "description": "Human readable name of the actor",
+          "type": "string"
+        },
+        "deviceID": {
+          "description": "The unique identifier of the device, e.g. a time clock, door entry beam.",
+          "type": "string"
+        },
+        "geoCoordinate": {
+          "$ref": "#/definitions/GeoCoordinate"
+        },
+        "deviceUserAgentID": {
+          "description": "Identifier of the user agent of the device used by the actor who worked on the event or process",
+          "type": "string"
+        },
+        "assignedGroups": {
+          "description": "An event instance",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssignedGroup"
+          }
+        }
+      }
+    },
+    "ApplicationID1": {
+      "title": "ApplicationID1",
+      "description": "The unique identifier of the application which originated the event.",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "An actual ID value",
+          "type": "string"
+        },
+        "schemeCode": {
+          "$ref": "#/definitions/SchemeCode"
+        }
+      }
+    },
+    "GeoCoordinate": {
+      "title": "GeoCoordinate",
+      "description": "The coordinates of the location of the actor",
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "description": "The angle, in degrees, of a position on Earth above the equator. (Latitude is negative for a place below the equator.) specified in decimal degrees",
+          "type": "number",
+          "format": "double"
+        },
+        "longitude": {
+          "description": "The angle, in degrees, of a position on Earth around the equator from the Greenwich Meridian specified in decimal degrees",
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "AssignedGroup": {
+      "title": "AssignedGroup",
+      "type": "object",
+      "properties": {
+        "groupID": {
+          "description": "The unique identifier of the group",
+          "type": "string"
+        },
+        "groupName": {
+          "description": "The name of the group",
+          "type": "string"
+        },
+        "assignedGroupMembers": {
+          "description": "Associates that are part of the group(s) assigned to the review event.  The actor is the member that actually completes the event.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssignedGroupMember"
+          }
+        }
+      }
+    },
+    "AssignedGroupMember": {
+      "title": "AssignedGroupMember",
+      "description": "An instance of an Associate that is part of the group(s) assigned to the review event.  The actor is the member that actually completes the event.",
+      "type": "object",
+      "properties": {
+        "associateOID": {
+          "description": "The unique identifier of an associate who originated the event or a process",
+          "type": "string"
+        },
+        "formattedName": {
+          "description": "Human readable name of the actor",
+          "type": "string"
+        }
+      }
+    },
+    "ActAsParty": {
+      "title": "ActAsParty",
+      "description": "The party (client employee) information that the actor is acting as to complete the recording of the event. Example:  An ADP Support User (principal A = Actor) views data within an ADP Application as a client employee (principal B) in read only mode.",
+      "type": "object",
+      "properties": {
+        "applicationID": {
+          "$ref": "#/definitions/ApplicationID1"
+        },
+        "associateOID": {
+          "description": "The unique identifier of an associate who originated the event or a process",
+          "type": "string"
+        },
+        "personOID": {
+          "description": "The unique identifier of a person who originated the event or a process",
+          "type": "string"
+        },
+        "formattedName": {
+          "description": "Human readable name of the actor",
+          "type": "string"
+        },
+        "deviceID": {
+          "description": "The unique identifier of the device, e.g. a time clock, door entry beam.",
+          "type": "string"
+        },
+        "geoCoordinate": {
+          "$ref": "#/definitions/GeoCoordinate"
+        },
+        "deviceUserAgentID": {
+          "description": "Identifier of the user agent of the device used by the actor who worked on the event or process",
+          "type": "string"
+        },
+        "assignedGroups": {
+          "description": "An event instance",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssignedGroup"
+          }
+        },
+        "organizationOID": {
+          "description": "A unique identifier of a client employee's organization id",
+          "type": "string"
+        }
+      }
+    },
+    "OnBehalfOfParty": {
+      "title": "OnBehalfOfParty",
+      "description": "The party (client employee) that the actor is acting on behalf of to complete the recording of the event. Example:  An ADP Support User (principal A = Actor) views data within an ADP Application as a client employee (principal B) and can take action on that person's behalf.  The Actor may have access to certain features or screens that the Client Employee cannot view, e.g. diagnostics screens.",
+      "type": "object",
+      "properties": {
+        "applicationID": {
+          "$ref": "#/definitions/ApplicationID1"
+        },
+        "associateOID": {
+          "description": "The unique identifier of an associate who originated the event or a process",
+          "type": "string"
+        },
+        "personOID": {
+          "description": "The unique identifier of a person who originated the event or a process",
+          "type": "string"
+        },
+        "formattedName": {
+          "description": "Human readable name of the actor",
+          "type": "string"
+        },
+        "deviceID": {
+          "description": "The unique identifier of the device, e.g. a time clock, door entry beam.",
+          "type": "string"
+        },
+        "geoCoordinate": {
+          "$ref": "#/definitions/GeoCoordinate"
+        },
+        "deviceUserAgentID": {
+          "description": "Identifier of the user agent of the device used by the actor who worked on the event or process",
+          "type": "string"
+        },
+        "assignedGroups": {
+          "description": "An event instance",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssignedGroup"
+          }
+        },
+        "organizationOID": {
+          "description": "A unique identifier of a client employee's organization id",
+          "type": "string"
+        }
+      }
+    },
+    "Data": {
+      "title": "Data",
+      "description": "Event Data",
+      "type": "object",
+      "properties": {
+        "eventContext": {
+          "$ref": "#/definitions/EventContext"
+        },
+        "transform": {
+          "$ref": "#/definitions/Transform"
+        },
+        "output": {
+          "$ref": "#/definitions/Output"
+        }
+      }
+    },
+    "EventContext": {
+      "title": "EventContext",
+      "description": "Data which sets the context for the event.  That is, the keys which set context",
+      "type": "object",
+      "properties": {
+        "contextExpressionID": {
+          "description": "A globally unique (GUID) identifier of the context expression. This conveys the context of the associated data. For example, if the context is set to Germany, the data would adhere to the business rules and formatting rules relevant to Germany",
+          "type": "string"
+        }
+      }
+    },
+    "Transform": {
+      "title": "Transform",
+      "description": "Data transformed in the event",
+      "type": "object",
+      "properties": {
+        "eventReasonCode": {
+          "$ref": "#/definitions/EventReasonCode1"
+        },
+        "eventStatusCode": {
+          "$ref": "#/definitions/EventStatusCode1"
+        },
+        "effectiveDateTime": {
+          "description": "This is the effective date, or effective date time fo the event from a business perspective. In some systems, this may be referred to as the Event Date. For example, for a birth event, this is the date of birth. If there is no effective date from a business perspective, this is set equal to the record date time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "notificationIndicator": {
+          "description": "True indicates that the requestor wants notifications on the status of the request",
+          "type": "boolean"
+        },
+        "dataCollectionEntries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataCollectionEntriesTransform1"
+          }
+        }
+      }
+    },
+    "EventReasonCode1": {
+      "title": "EventReasonCode1",
+      "description": "This allows for further refinement of the associated event. For example, for a worker.maritalStatus.change event, the reason code could be used to describe whether it is a Marriage vs. Divorce vs. Separation",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "EventStatusCode1": {
+      "title": "EventStatusCode1",
+      "description": "This identifies the status of the event. An event that has been created, either by the system of record or as the result of a user, will have an event status code of Created. An event that is saved in a work in progress state (as determined by the permissable state codes), will have an event status code of InProgress. An event that has been recorded, will have an event status code of Complete. This value is set by the system of record",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        }
+      }
+    },
+    "DataCollectionEntriesTransform1": {
+      "title": "DataCollectionEntriesTransform1",
+      "type": "object",
+      "properties": {
+        "itemID": {
+          "description": "The unique identifier of the object in a collection",
+          "type": "string"
+        },
+        "terminalID": {
+          "description": "The identifier of a data collection terminal device.",
+          "type": "string"
+        },
+        "terminalName": {
+          "description": "The name of the terminal",
+          "type": "string"
+        },
+        "workerDataCollectionEntries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkerDataCollectionEntryTransform"
+          }
+        }
+      }
+    },
+    "WorkerDataCollectionEntryTransform": {
+      "title": "WorkerDataCollectionEntryTransform",
+      "type": "object",
+      "properties": {
+        "entryCode": {
+          "$ref": "#/definitions/EntryCode"
+        },
+        "entryTypeCode": {
+          "$ref": "#/definitions/EntryTypeCode"
+        },
+        "badgeID": {
+          "description": "A unique identifier of a worker in the time system",
+          "type": "string"
+        },
+        "actorBadgeID": {
+          "description": "A unique identifier of the worker who made the entry in the device on behalf of the worker identified by the badgeID",
+          "type": "string"
+        },
+        "workAssignmentID": {
+          "description": "A unique identifier of a work assignment",
+          "type": "string"
+        },
+        "deviceDateTime": {
+          "description": "Date Time of the entering device.  This time is to be logged by the System of Record to maintain forensics on the time logged based on synchronization with the server clock and that of the user's mobile device. Data Representation Temporal Data Element Specification following ISO-8601:2000 specification.  The granularity for date-time for this API will always be the following: YYYY-MM-DDThh:mm:ss-+hh:mm.  where -+ is either minus or plus depending on whether the offset from GMT is positive or negative hours minutes.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "entryDateTime": {
+          "description": "The date as logged by the device based on the clock reference time from the server. Data Representation Temporal Data Element Specification following ISO-8601:2000 specification.  The granularity for date-time for this API will always be the following: YYYY-MM-DDThh:mm:ss-+hh:mm.  where -+ is either minus or plus depending on whether the offset from GMT is positive or negative hours minutes.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "actionCode": {
+          "$ref": "#/definitions/ActionCode"
+        },
+        "laborAllocations": {
+          "description": "Time may be allocated to a department, project, location, etc...",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataCollectionEntryLaborAllocation"
+          }
+        },
+        "entryOverrideCodes": {
+          "description": "Codes that represent overrides that a user may select for the entry,e.g. if the worker is requesting to override the standard meal deduction for this entry, the code would identify the rule.  Example is that the worker is scheduled for lunch, but is working through lunch.  This tells the system that the worker is working through lunch and to not count the regularly scheduled lunch time",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataCollectionEntryEntryOverrideCode"
+          }
+        },
+        "comment": {
+          "$ref": "#/definitions/Comment"
+        },
+        "secondsQuantity": {
+          "description": "Indecimal digits to arbitrary precision",
+          "type": "number",
+          "format": "double"
+        },
+        "hourQuantity": {
+          "description": "Indecimal digits to arbitrary precision",
+          "type": "number",
+          "format": "double"
+        },
+        "timeDuration": {
+          "description": "The string reprersentation of the time value usually expressed as hh:mm",
+          "type": "string"
+        },
+        "unitQuantity": {
+          "description": "Unit Quantity",
+          "type": "integer",
+          "format": "int32"
+        },
+        "amount": {
+          "description": "the entered amount",
+          "type": "string"
+        },
+        "entryID": {
+          "description": "Unique identifier of the entry",
+          "type": "string"
+        }
+      }
+    },
+    "Output": {
+      "title": "Output",
+      "description": "Result of the event",
+      "type": "object",
+      "properties": {
+        "dataCollectionEntries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataCollectionEntriesOutput"
+          }
+        }
+      }
+    },
+    "DataCollectionEntriesOutput": {
+      "title": "DataCollectionEntriesOutput",
+      "type": "object",
+      "properties": {
+        "itemID": {
+          "description": "The unique identifier of the object in a collection",
+          "type": "string"
+        },
+        "terminalID": {
+          "description": "The identifier of a data collection terminal device.",
+          "type": "string"
+        },
+        "terminalName": {
+          "description": "The name of the terminal",
+          "type": "string"
+        },
+        "workerDataCollectionEntries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkerDataCollectionEntryOutput"
+          }
+        }
+      }
+    },
+    "WorkerDataCollectionEntryOutput": {
+      "title": "WorkerDataCollectionEntryOutput",
+      "type": "object",
+      "properties": {
+        "entryCode": {
+          "$ref": "#/definitions/EntryCode"
+        },
+        "entryTypeCode": {
+          "$ref": "#/definitions/EntryTypeCode"
+        },
+        "badgeID": {
+          "description": "A unique identifier of a worker in the time system",
+          "type": "string"
+        },
+        "actorBadgeID": {
+          "description": "A unique identifier of the worker who made the entry in the device on behalf of the worker identified by the badgeID",
+          "type": "string"
+        },
+        "workAssignmentID": {
+          "description": "A unique identifier of a work assignment",
+          "type": "string"
+        },
+        "deviceDateTime": {
+          "description": "Date Time of the entering device.  This time is to be logged by the System of Record to maintain forensics on the time logged based on synchronization with the server clock and that of the user's mobile device. Data Representation Temporal Data Element Specification following ISO-8601:2000 specification.  The granularity for date-time for this API will always be the following: YYYY-MM-DDThh:mm:ss-+hh:mm.  where -+ is either minus or plus depending on whether the offset from GMT is positive or negative hours minutes.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "entryDateTime": {
+          "description": "The date as logged by the device based on the clock reference time from the server. Data Representation Temporal Data Element Specification following ISO-8601:2000 specification.  The granularity for date-time for this API will always be the following: YYYY-MM-DDThh:mm:ss-+hh:mm.  where -+ is either minus or plus depending on whether the offset from GMT is positive or negative hours minutes.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "actionCode": {
+          "$ref": "#/definitions/ActionCode"
+        },
+        "laborAllocations": {
+          "description": "Time may be allocated to a department, project, location, etc...",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataCollectionEntryLaborAllocation"
+          }
+        },
+        "entryOverrideCodes": {
+          "description": "Codes that represent overrides that a user may select for the entry,e.g. if the worker is requesting to override the standard meal deduction for this entry, the code would identify the rule.  Example is that the worker is scheduled for lunch, but is working through lunch.  This tells the system that the worker is working through lunch and to not count the regularly scheduled lunch time",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataCollectionEntryEntryOverrideCode"
+          }
+        },
+        "comment": {
+          "$ref": "#/definitions/Comment"
+        },
+        "secondsQuantity": {
+          "description": "Indecimal digits to arbitrary precision",
+          "type": "number",
+          "format": "double"
+        },
+        "hourQuantity": {
+          "description": "Indecimal digits to arbitrary precision",
+          "type": "number",
+          "format": "double"
+        },
+        "timeDuration": {
+          "description": "The string reprersentation of the time value usually expressed as hh:mm",
+          "type": "string"
+        },
+        "unitQuantity": {
+          "description": "Unit Quantity",
+          "type": "integer",
+          "format": "int32"
+        },
+        "amount": {
+          "description": "the entered amount",
+          "type": "string"
+        },
+        "entryID": {
+          "description": "Unique identifier of the entry",
+          "type": "string"
+        }
+      }
+    },
+    "EventsTimeV1DataCollectionEntriesProcess400Error": {
+      "title": "EventsTimeV1DataCollectionEntriesProcess400Error",
+      "example": {
+        "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/confirmMessage_v1_0_rev002.json"
+      },
+      "type": "object",
+      "properties": {
+        "externalValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "externalValue"
+      ]
+    },
+    "DataCollectionEntriesProcessEventMeta": {
+      "title": "DataCollectionEntriesProcessEventMeta",
+      "description": "An instance to process a collection of data entries from 1 to many data collection terminals (i.e. a clock) - Meta",
+      "example": {
+        "externalValue": "https://s3.amazonaws.com/es-schema-dev-portal-iat/schema/events_time.dataCollectionEntries.process_meta_sample_v01_00_rev001.json"
+      },
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/Meta2"
+        }
+      }
+    },
+    "Meta2": {
+      "title": "Meta2",
+      "description": "Event meta data",
+      "type": "object",
+      "properties": {
+        "/serviceCategoryCode/codeValue": {
+          "description": "The service domain, e.g HR, Payroll, Benefits, etc. This field is always present and valued based on a standard codelist.",
+          "example": "time",
+          "type": "string",
+          "default": "time"
+        },
+        "/eventNameCode/codeValue": {
+          "description": "This is the canonical name of the event, e.g. dependent.add, worker.hire. This field is always present and valued based on a standard codelist.",
+          "example": "dataCollectionEntries.process",
+          "type": "string",
+          "default": "dataCollectionEntries.process"
+        },
+        "queryCriteria": {
+          "description": "A collection of query criteria",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dataCollectionEntriesprocessQueryCriterion"
+          }
+        },
+        "/data/eventContext": {
+          "description": "Validation rules for the event context",
+          "type": "object"
+        },
+        "/data/transforms": {
+          "description": "A collection of transform rules",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataTransform"
+          }
+        }
+      },
+      "required": [
+        "/serviceCategoryCode/codeValue",
+        "/eventNameCode/codeValue"
+      ]
+    },
+    "dataCollectionEntriesprocessQueryCriterion": {
+      "title": "dataCollectionEntriesprocessQueryCriterion",
+      "description": "A single query parameter",
+      "type": "object",
+      "properties": {
+        "queryOptionCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "obligationCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "queryOptionTypeCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "defaultNumberValue": {
+          "description": "The default number value",
+          "type": "number",
+          "format": "double"
+        },
+        "defaultStringValue": {
+          "description": "The default string value",
+          "type": "string"
+        },
+        "resourcePathMax": {
+          "description": "Maximum number of resource paths supported",
+          "type": "integer",
+          "format": "int32"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "resourcePaths": {
+          "description": "A collection of acceptable resource paths to pass to the query option",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludedResourcePaths": {
+          "description": "A collection of resource paths which may not be passed to the query option.  An example use of this is where you allow all paths except 1 or 2.  You would want to only specify those which are excluded",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "queryValueCodeList": {
+          "$ref": "#/definitions/codeListType_v03"
+        },
+        "logicalOperators": {
+          "description": "A collection of logical operators",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogicalOperator"
+          }
+        },
+        "itemID": {
+          "description": "The simple (string) identifier of an object",
+          "type": "string"
+        }
+      }
+    },
+    "codeListType_v03": {
+      "title": "codeListType_v03",
+      "type": "object",
+      "properties": {
+        "codeListTitle": {
+          "description": "Code list title",
+          "type": "string"
+        },
+        "exclusiveIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        },
+        "listItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/codeListItemType_v02"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "codeListItemType_v02": {
+      "title": "codeListItemType_v02",
+      "type": "object",
+      "properties": {
+        "codeValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "longName": {
+          "description": "Long description of the related code",
+          "type": "string"
+        },
+        "itemID": {
+          "description": "The simple (string) identifier of an object",
+          "type": "string"
+        },
+        "valueDescription": {
+          "description": "Additional list item description",
+          "type": "string"
+        },
+        "foreignKey": {
+          "description": "Allows for filtering the code list",
+          "type": "string"
+        },
+        "inactiveIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        },
+        "defaultIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        }
+      }
+    },
+    "linkType_v02": {
+      "title": "linkType_v02",
+      "description": "A link description object is used to describe link relations.  In the context of a schema, it defines the link relations of the instances of the schema, and can be parameterized by the instance values.  The link description format can be used on its own in regular (non-schema documents), and use of this format can be declared by referencing the normative link description schema as the the schema for the data structure that uses the links",
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "rel": {
+          "$ref": "#/definitions/Rel19"
+        },
+        "canonicalUri": {
+          "description": "The URI of the related entity",
+          "type": "string"
+        },
+        "title": {
+          "description": "This property defines a title for the link.  The value must be a string. User agents MAY use this title when presenting the link to the user",
+          "type": "string"
+        },
+        "targetSchema": {
+          "description": "This property is a schema that defines the expected structure of the JSON representation of the target of the link, if the target of the link is returned using JSON representation",
+          "type": "string"
+        },
+        "mediaType": {
+          "$ref": "#/definitions/MediaType19"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "encType": {
+          "$ref": "#/definitions/EncType"
+        },
+        "schema": {
+          "description": "This property contains a schema which defines the acceptable structure of the submitted request.  For a GET request, this schema would define the properties for the query string and for a POST request, this would define the body",
+          "type": "string"
+        },
+        "payLoadArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayLoadArgument"
+          }
+        }
+      }
+    },
+    "Rel19": {
+      "title": "Rel19",
+      "description": "Indicates the nature of the relationship of the related resource to the resource that generated this representation",
+      "example": "alternate",
+      "type": "string",
+      "enum": [
+        "alternate",
+        "create",
+        "canonical",
+        "describedby",
+        "edit-form",
+        "enclosure",
+        "full",
+        "related",
+        "root",
+        "self",
+        "up",
+        "search",
+        "first",
+        "last",
+        "next",
+        "previous",
+        "/adp/invoke",
+        "/adp/image",
+        "/adp/confirm-message",
+        "/adp/status-monitor",
+        "/adp/codelist",
+        "/adp/template",
+        "/adp/externalLink",
+        "/adp/validation",
+        "/adp/deeplink",
+        "/adp/attachment",
+        "/adp/workflow"
+      ]
+    },
+    "MediaType19": {
+      "title": "MediaType19",
+      "description": "The media type that the linked resource will return (Response)",
+      "example": "application/gzip",
+      "type": "string",
+      "enum": [
+        "application/gzip",
+        "application/json",
+        "application/msword",
+        "application/pdf",
+        "application/postscript",
+        "application/vnd.ms-excel",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/xml",
+        "application/x-www-form-urlencoded",
+        "image/gif",
+        "image/jpeg",
+        "image/png",
+        "image/tiff",
+        "multipart/mixed",
+        "text/html",
+        "text/plain",
+        "application/vnd.visio",
+        "image/bmp",
+        "image/x-ms-bmp",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-powerpoint",
+        "video/mp4",
+        "audio/mpeg",
+        "video/x-msvideo",
+        "video/x-ms-wmv",
+        "application/rtf",
+        "application/vnd.ms-outlook",
+        "text/csv",
+        "video/quicktime",
+        "application/zip",
+        "application/illustrator",
+        "text/xml"
+      ]
+    },
+    "LogicalOperator": {
+      "title": "LogicalOperator",
+      "description": "A logical operation",
+      "type": "object",
+      "properties": {
+        "logicalOperatorCode": {
+          "description": "A simple (string) code.  Can have a code list reference",
+          "type": "string"
+        },
+        "mutuallyExclusiveIndicator": {
+          "description": "Boolean expression",
+          "type": "boolean"
+        },
+        "mutuallyExclusiveLogicalOperatorCodes": {
+          "description": "A list of mutually exclusive operator codes.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DataTransform": {
+      "title": "DataTransform",
+      "type": "object",
+      "properties": {
+        "itemID": {
+          "description": "The unique identifier of the collection.",
+          "type": "string"
+        },
+        "/eventReasonCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/eventReasonCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/eventReasonCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/eventReasonCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/eventStatusCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/eventStatusCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/eventStatusCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/eventStatusCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/effectiveDateTime": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/notificationIndicator": {
+          "$ref": "#/definitions/booleanType"
+        },
+        "/dataCollectionEntries": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/dataCollectionEntries/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/terminalID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/terminalName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryTypeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryTypeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryTypeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryTypeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/badgeID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/actorBadgeID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/workAssignmentID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/deviceDateTime": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryDateTime": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/actionCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/actionCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/actionCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/actionCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/laborAllocations": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/laborAllocations/allocationCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/laborAllocations/allocationCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/laborAllocations/allocationCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/laborAllocations/allocationCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/laborAllocations/allocationTypeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/laborAllocations/allocationTypeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/laborAllocations/allocationTypeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/laborAllocations/allocationTypeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/laborAllocations/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryOverrideCodes": {
+          "$ref": "#/definitions/arrayType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryOverrideCodes/itemID": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryOverrideCodes/overrideCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryOverrideCodes/overrideCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryOverrideCodes/overrideCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryOverrideCodes/overrideCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryOverrideCodes/overrideTypeCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryOverrideCodes/overrideTypeCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryOverrideCodes/overrideTypeCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryOverrideCodes/overrideTypeCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/comment": {
+          "$ref": "#/definitions/objectType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/comment/textValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/comment/commentCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/comment/commentCode/codeValue": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/comment/commentCode/shortName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/comment/commentCode/longName": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/comment/appliesToCode": {
+          "$ref": "#/definitions/stringCodeListType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/secondsQuantity": {
+          "$ref": "#/definitions/numberType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/hourQuantity": {
+          "$ref": "#/definitions/numberType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/timeDuration": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/unitQuantity": {
+          "$ref": "#/definitions/numberType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/amount": {
+          "$ref": "#/definitions/stringType"
+        },
+        "/dataCollectionEntries/workerDataCollectionEntries/entryID": {
+          "$ref": "#/definitions/stringType"
+        }
+      }
+    },
+    "stringCodeListType": {
+      "title": "stringCodeListType",
+      "type": "object",
+      "properties": {
+        "codeList": {
+          "$ref": "#/definitions/codeListType_v03"
+        },
+        "readOnly": {
+          "type": "boolean"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property.",
+          "type": "string"
+        },
+        "minLength": {
+          "description": "Indicates the minimum length required for a property.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxLength": {
+          "description": "Indicates the maximum length supported for a property",
+          "type": "integer",
+          "format": "int32"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "string"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "masking": {
+          "$ref": "#/definitions/maskingRuleType"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "greaterThan": {
+          "description": "The value of the related property must be greater than the value of  all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lessThan": {
+          "description": "The value of the related property must be less than the value of all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "valueSet": {
+          "$ref": "#/definitions/valueSetType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "disallowItemType": {
+      "title": "disallowItemType",
+      "type": "object",
+      "properties": {
+        "itemID": {
+          "description": "A unique identifier of an object within the collection",
+          "type": "string"
+        }
+      }
+    },
+    "maskingRuleType": {
+      "title": "maskingRuleType",
+      "type": "object",
+      "properties": {
+        "authorizationRequiredIndicator": {
+          "type": "boolean"
+        },
+        "authorizationResourceID": {
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "helperMessageType": {
+      "title": "helperMessageType",
+      "description": "Helper text provided to the user when they take an action to affirm to be correct, true, or genuine.",
+      "type": "object",
+      "properties": {
+        "messageTxt": {
+          "description": "Message to present to the user.",
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "metaDataType": {
+      "title": "metaDataType",
+      "example": "string",
+      "type": "string",
+      "enum": [
+        "string",
+        "number",
+        "integer",
+        "boolean",
+        "object",
+        "array",
+        "null",
+        "any",
+        "string[date-time]",
+        "string[date]",
+        "string[time]",
+        "string[duration]",
+        "string[regex]",
+        "string[phone]",
+        "string[uri]",
+        "string[email]",
+        "string[ip-address]",
+        "string[ipv6]",
+        "string[host-name]",
+        "integer[regex]",
+        "integer[utc-millisec]",
+        "number[regex]",
+        "number[utc-millisec]"
+      ]
+    },
+    "valueSetType": {
+      "title": "valueSetType",
+      "description": "A reference to the codelist extended with values",
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/ValueSetMeta"
+        },
+        "valueSetListItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/valueSetItemType"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "ValueSetMeta": {
+      "title": "ValueSetMeta",
+      "type": "object",
+      "properties": {
+        "idValuePath": {
+          "description": "Code value (typically a key field) of the code list item",
+          "type": "string"
+        },
+        "itemDescriptionPath": {
+          "description": "Short name field of the code list item",
+          "type": "string"
+        }
+      }
+    },
+    "valueSetItemType": {
+      "title": "valueSetItemType",
+      "description": "The value set item type",
+      "type": "object",
+      "properties": {
+        "idValue": {
+          "description": "The code for the related entity",
+          "type": "string"
+        },
+        "itemDescription": {
+          "description": "Short description of the related code",
+          "type": "string"
+        },
+        "defaultIndicator": {
+          "description": "Indicates if the current value is a default (pre-selected)",
+          "type": "boolean"
+        }
+      }
+    },
+    "stringType": {
+      "title": "stringType",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "type": "boolean"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property.",
+          "type": "string"
+        },
+        "minLength": {
+          "description": "Indicates the minimum length required for a property.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxLength": {
+          "description": "Indicates the maximum length supported for a property",
+          "type": "integer",
+          "format": "int32"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "string"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "masking": {
+          "$ref": "#/definitions/maskingRuleType"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "greaterThan": {
+          "description": "The value of the related property must be greater than the value of  all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lessThan": {
+          "description": "The value of the related property must be less than the value of all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "valueSet": {
+          "$ref": "#/definitions/valueSetType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "booleanType": {
+      "title": "booleanType",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "description": "True indicates that the property is marked read only in the given context",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "optional": {
+          "description": "True indicates that this property does not need to be valued",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "hidden": {
+          "description": "True indicates that the property is carried in the message - to and from the System of Record, but is not exposed in the UI",
+          "type": "boolean"
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property",
+          "type": "string"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "boolean"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/DataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "DataType": {
+      "title": "DataType",
+      "description": "Data type of the attribute",
+      "example": "string",
+      "type": "string",
+      "enum": [
+        "string",
+        "number",
+        "integer",
+        "boolean",
+        "object",
+        "array",
+        "null",
+        "any",
+        "string[date-time]",
+        "string[date]",
+        "string[time]",
+        "string[regex]",
+        "string[phone]",
+        "string[uri]",
+        "string[email]",
+        "string[ip-address]",
+        "string[ipv6]",
+        "string[host-name]",
+        "integer[regex]",
+        "integer[utc-millisec]",
+        "number[regex]",
+        "number[utc-millisec]"
+      ]
+    },
+    "arrayType": {
+      "title": "arrayType",
+      "type": "object",
+      "properties": {
+        "minItems": {
+          "description": "Indicates the minimum items required for an array type.  This is only relevant if the given property is an array.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxItems": {
+          "description": "Indicates the maximum items supported for an array type.  This is only relevant if the given property is an array.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sameValueProperties": {
+          "description": "A list of properties which must have the exact same value within the array",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uniqueProperties": {
+          "description": "A list of properties which together must be unique",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uniqueItems": {
+          "type": "boolean"
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "objectType": {
+      "title": "objectType",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "description": "True indicates that the property is marked read only in the given context",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "optional": {
+          "description": "True indicates that this property does not need to be valued",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "hidden": {
+          "description": "True indicates that the property is carried in the message - to and from the System of Record, but is not exposed in the UI",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    },
+    "numberType": {
+      "title": "numberType",
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "description": "True indicates that the property is marked read only in the given context",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "optional": {
+          "description": "True indicates that this property does not need to be valued",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "hidden": {
+          "description": "True indicates that the property is carried in the message - to and from the System of Record, but is not exposed in the UI",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "disallow": {
+          "description": "Specified on a target property.  If the passed conditions are true then this property is disallowed and therefore, not presented to a user.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/disallowItemType"
+          }
+        },
+        "shortLabelName": {
+          "description": "Provides a client defined UI label for the property which is less than an average of 20 characters in length.",
+          "type": "string"
+        },
+        "longLabelName": {
+          "description": "Provides a client defined UI long label for the property.",
+          "type": "string"
+        },
+        "minLength": {
+          "description": "Indicates the minimum length required for a property.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxLength": {
+          "description": "Indicates the maximum length supported for a property",
+          "type": "integer",
+          "format": "int32"
+        },
+        "minValue": {
+          "description": "Indicates the minimum value required for a property.",
+          "type": "number",
+          "format": "double"
+        },
+        "maxValue": {
+          "description": "Indicates the maximum value supported for a property",
+          "type": "number",
+          "format": "double"
+        },
+        "multipleOf": {
+          "description": "Indicates that the value must be a multiple of this value or divisible by this value.",
+          "type": "number",
+          "format": "double"
+        },
+        "default": {
+          "description": "Indicates the default value which should be populated by default",
+          "type": "number",
+          "format": "double"
+        },
+        "pattern": {
+          "description": "Indicates a regular expression on the required pattern for the value",
+          "type": "string"
+        },
+        "masking": {
+          "$ref": "#/definitions/maskingRuleType"
+        },
+        "equals": {
+          "description": "Provides 1 to many properties which the value of this property must be equal to.  If the property is equal to any of the value of the properties then the validation is successful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "greaterThan": {
+          "description": "The value of the related property must be greater than the value of  all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lessThan": {
+          "description": "The value of the related property must be less than the value of all the given properties in the array.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "description": "List conditional dependencies of supported properties (readOnly, pattern, hidden, disallow etc.) of an attribute or an object. Dependencies can be defined using oneOf (OR) / allOf (AND) object. oneOf - successful if one of the conditions satisfies, allOf - successful if all the conditions satisfies. Refer API specification for dependencies context object syntax and rules. Dependencies context cannot be validated against context schema if dependencies is defined context JSON, because the dependencies JSON structure is dynamically defined for attributes and the not defined in the context schema. Attribute level properties and dependencies properties are mutually exclusive, example - readOnly property can be set either at attribute level or inside dependencies. If both hidden and disallow properties are set inside dependencies or at attribute level, hidden property takes precedence.",
+          "type": "object"
+        },
+        "helperMessage": {
+          "$ref": "#/definitions/helperMessageType"
+        },
+        "dataType": {
+          "$ref": "#/definitions/metaDataType"
+        },
+        "dependencyLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkType_v02"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Data Collection Entries",
+      "description": "List worker data collection entries"
+    },
+    {
+      "name": "Process Data Collection Entries",
+      "description": "This API supports the processing of a collection data collection entries from 1 to Many data collection terminals (i.e. Time Clock)."
+    }
+  ]
+}
