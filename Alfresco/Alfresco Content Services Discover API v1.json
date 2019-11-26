@@ -1,0 +1,321 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1",
+    "title": "Alfresco Content Services REST API",
+    "description": "**Discovery API**\n\nProvides access to information about Alfresco Content Services.\n",
+    "contact": {}
+  },
+  "host": "www.example.com",
+  "basePath": "/alfresco/api",
+  "securityDefinitions": {
+    "auth": {
+      "type": "basic"
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/discovery": {
+      "get": {
+        "description": "**Note:** this endpoint is available in Alfresco 5.2 and newer versions.\n\nRetrieves the capabilities and detailed version information from the repository.\n",
+        "summary": "getRepositoryInformation",
+        "tags": [
+          "discovery"
+        ],
+        "operationId": "DiscoveryGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryEntry"
+            },
+            "headers": {}
+          },
+          "501": {
+            "description": "Discovery is disabled for the system",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "title": "Error",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error1"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "VersionInfo": {
+      "title": "VersionInfo",
+      "type": "object",
+      "properties": {
+        "major": {
+          "type": "string"
+        },
+        "minor": {
+          "type": "string"
+        },
+        "patch": {
+          "type": "string"
+        },
+        "hotfix": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "label": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "major",
+        "minor",
+        "patch",
+        "hotfix",
+        "schema",
+        "label",
+        "display"
+      ]
+    },
+    "StatusInfo": {
+      "title": "StatusInfo",
+      "type": "object",
+      "properties": {
+        "isReadOnly": {
+          "example": false,
+          "type": "boolean",
+          "default": "false"
+        },
+        "isAuditEnabled": {
+          "type": "boolean"
+        },
+        "isQuickShareEnabled": {
+          "type": "boolean"
+        },
+        "isThumbnailGenerationEnabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "isReadOnly",
+        "isAuditEnabled",
+        "isQuickShareEnabled",
+        "isThumbnailGenerationEnabled"
+      ]
+    },
+    "EntitlementsInfo": {
+      "title": "EntitlementsInfo",
+      "type": "object",
+      "properties": {
+        "maxUsers": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "maxDocs": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isClusterEnabled": {
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "isCryptodocEnabled": {
+          "example": false,
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "LicenseInfo": {
+      "title": "LicenseInfo",
+      "type": "object",
+      "properties": {
+        "issuedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "remainingDays": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "holder": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string"
+        },
+        "entitlements": {
+          "$ref": "#/definitions/EntitlementsInfo"
+        }
+      },
+      "required": [
+        "issuedAt",
+        "expiresAt",
+        "remainingDays",
+        "holder",
+        "mode"
+      ]
+    },
+    "ModuleInfo": {
+      "title": "ModuleInfo",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "installDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "installState": {
+          "type": "string"
+        },
+        "versionMin": {
+          "type": "string"
+        },
+        "versionMax": {
+          "type": "string"
+        }
+      }
+    },
+    "RepositoryInfo": {
+      "title": "RepositoryInfo",
+      "type": "object",
+      "properties": {
+        "edition": {
+          "type": "string"
+        },
+        "version": {
+          "$ref": "#/definitions/VersionInfo"
+        },
+        "status": {
+          "$ref": "#/definitions/StatusInfo"
+        },
+        "license": {
+          "$ref": "#/definitions/LicenseInfo"
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModuleInfo"
+          }
+        }
+      },
+      "required": [
+        "edition",
+        "version",
+        "status"
+      ]
+    },
+    "RepositoryEntry": {
+      "title": "RepositoryEntry",
+      "type": "object",
+      "properties": {
+        "repository": {
+          "$ref": "#/definitions/RepositoryInfo"
+        }
+      },
+      "required": [
+        "repository"
+      ]
+    },
+    "DiscoveryEntry": {
+      "title": "DiscoveryEntry",
+      "type": "object",
+      "properties": {
+        "entry": {
+          "$ref": "#/definitions/RepositoryEntry"
+        }
+      },
+      "required": [
+        "entry"
+      ]
+    },
+    "Error1": {
+      "title": "Error1",
+      "type": "object",
+      "properties": {
+        "errorKey": {
+          "type": "string"
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "briefSummary": {
+          "type": "string"
+        },
+        "stackTrace": {
+          "type": "string"
+        },
+        "descriptionURL": {
+          "type": "string"
+        },
+        "logId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "statusCode",
+        "briefSummary",
+        "stackTrace",
+        "descriptionURL"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "discovery",
+      "description": ""
+    }
+  ]
+}

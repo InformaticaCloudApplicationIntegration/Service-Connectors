@@ -1,0 +1,274 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1",
+    "title": "Alfresco Content Services REST API",
+    "description": "**Authentication API**\n\nProvides access to the authentication features of Alfresco Content Services.\n",
+    "contact": {}
+  },
+  "host": "www.example.com",
+  "basePath": "/alfresco/api/-default-/public/authentication/versions/1",
+  "securityDefinitions": {
+    "auth": {
+      "type": "basic"
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/tickets": {
+      "post": {
+        "description": "**Note:** this endpoint is available in Alfresco 5.2 and newer versions.\n\nLogs in and returns the new authentication ticket.\n\nThe userId and password properties are mandatory in the request body. For example:\n```JSON\n{\n    \"userId\": \"jbloggs\",\n    \"password\": \"password\"\n}\n```\nTo use the ticket in future requests you should pass it in the request header.\nFor example using Javascript:\n  ```Javascript\n    request.setRequestHeader (\"Authorization\", \"Basic \" + btoa(ticket));\n  ```\n",
+        "summary": "createTicket",
+        "tags": [
+          "authentication"
+        ],
+        "operationId": "TicketsPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ticketBodyCreate",
+            "in": "body",
+            "required": true,
+            "description": "The user credential.",
+            "schema": {
+              "$ref": "#/definitions/TicketBody"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TicketEntry"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "**userId** or **password** is not provided\n",
+            "schema": {}
+          },
+          "403": {
+            "description": "Login failed",
+            "schema": {}
+          },
+          "501": {
+            "description": "SAML is enabled and enforced",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/tickets/-me-": {
+      "get": {
+        "description": "**Note:** this endpoint is available in Alfresco 5.2 and newer versions.\n\nValidates the specified ticket (derived from Authorization header) is still valid.\n\nFor example, you can pass the Authorization request header using Javascript:\n  ```Javascript\n    request.setRequestHeader (\"Authorization\", \"Basic \" + btoa(ticket));\n  ```\n",
+        "summary": "validateTicket",
+        "tags": [
+          "authentication"
+        ],
+        "operationId": "TicketsMeGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ValidTicketEntry"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "URL path does not include **-me-** or the ticket is not provided by the Authorization header",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "The request is authorized correctly but the status of the user (of the supplied ticket) has changed (for example, the user is locked or the account is disabled) or the ticket has expired",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "**Note:** this endpoint is available in Alfresco 5.2 and newer versions.\n\nDeletes logged in ticket (logout).\n",
+        "summary": "deleteTicket",
+        "tags": [
+          "authentication"
+        ],
+        "operationId": "TicketsMeDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Successful response",
+            "headers": {}
+          },
+          "400": {
+            "description": "URL path does not include **-me-** or the ticket is not provided by the Authorization header",
+            "schema": {}
+          },
+          "404": {
+            "description": "Status of the user has changed (for example, the user is locked or the account is disabled) or the ticket has expired",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "title": "Error",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error1"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "TicketBody": {
+      "title": "TicketBody",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "TicketEntry": {
+      "title": "TicketEntry",
+      "type": "object",
+      "properties": {
+        "entry": {
+          "$ref": "#/definitions/Ticket"
+        }
+      },
+      "required": [
+        "entry"
+      ]
+    },
+    "Ticket": {
+      "title": "Ticket",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "ValidTicketEntry": {
+      "title": "ValidTicketEntry",
+      "type": "object",
+      "properties": {
+        "entry": {
+          "$ref": "#/definitions/ValidTicket"
+        }
+      },
+      "required": [
+        "entry"
+      ]
+    },
+    "ValidTicket": {
+      "title": "ValidTicket",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "Error1": {
+      "title": "Error1",
+      "type": "object",
+      "properties": {
+        "errorKey": {
+          "type": "string"
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "briefSummary": {
+          "type": "string"
+        },
+        "stackTrace": {
+          "type": "string"
+        },
+        "descriptionURL": {
+          "type": "string"
+        },
+        "logId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "statusCode",
+        "briefSummary",
+        "stackTrace",
+        "descriptionURL"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "authentication",
+      "description": ""
+    }
+  ]
+}

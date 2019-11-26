@@ -1,0 +1,1487 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1",
+    "title": "Alfresco Content Services REST API",
+    "description": "**Search API**\n\nProvides access to the search features of Alfresco Content Services.\n",
+    "contact": {}
+  },
+  "host": "www.example.com",
+  "basePath": "/alfresco/api/-default-/public/search/versions/1",
+  "securityDefinitions": {
+    "auth": {
+      "type": "basic"
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/search": {
+      "post": {
+        "description": "**Note**: this endpoint is available in Alfresco 5.2 and newer versions.\n\n**You specify all the parameters in this API in a JSON body**, URL parameters are not supported.\nA basic query looks like this:\n\n```JSON\n{\n  \"query\": {\n    \"query\": \"foo\"\n  }\n}\n```\n\n**Note:** These are the minimum possible query parameters.\n\nThe default search language is **afts** ([Alfresco Full Text Search](http://docs.alfresco.com/5.1/concepts/rm-searchsyntax-intro.html)), but you can also specify **cmis**, and **lucene**.\n\nA basic CMIS query looks like this:\n\n```JSON\n{\n  \"query\": {\n    \"query\": \"select * from cmis:folder\",\n    \"language\": \"cmis\"\n  }\n}\n```\n\nBy default, **results are limited to the first 100.**\nResults can be restricted using \"paging\". For example:\n```JSON\n\"paging\": {\n  \"maxItems\": \"50\",\n  \"skipCount\": \"28\"\n}\n```\nThis example would ensure that results are **limited by Final Size**,\nskipping the first 28 results and returning the next 50.\n\nAlternatively, you can limit the results by using the **limits JSON body parameter**. For example,\n```JSON\n\"limits\": {\n  \"permissionEvaluationTime\": 20000,\n  \"permissionEvaluationCount\": 2000\n}\n```\n\nYou can use the **include JSON body parameter** to return additional information.\nThis works in the same way as in the /nodes/{nodeId}/children method in the core API. For example:\n```JSON\n\"include\": [\"aspectNames\", \"properties\", \"isLink\"]\n```\n\nYou can use the **fields JSON body parameter** to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.\nThis works in the same way as in the /nodes/{nodeId}/children method in the core API. For example:\n```JSON\n\"fields\": [\"id\", \"name\", \"search\"]\n```\n\nYou can sort the results using the **sort JSON body parameter**, for example:\n```JSON\n\"sort\": [{\"type\":\"FIELD\", \"field\":\"cm:description\", \"ascending\":\"true\"}]\n```\n**Note:** the **sort** parameter is not supported for CMIS queries.\n\nBy default, search uses the **\"nodes\" location**, which is the **content store known as workspace://SpacesStore**.\nTo change the scope to another location you can use the **locations JSON body parameter**. You can specify either **nodes** (the default), **versions** or **deleted-nodes**.  For example,\n```JSON\n\"scope\": {\n    \"locations\": [\"deleted-nodes\"]\n}\n```\nYou can specify templates using the **templates JSON body parameter**, for example:\n```JSON\n\"templates\": [{\"name\": \"_PERSON\",\"template\": \"|%firstName OR |%lastName OR |%userName\"},\n              {\"name\": \"mytemplate\",\"template\": \"%cm:content\"}]\n```\n\n**Note: Spell checking only works on Search Services (Solr 6) if you have already enabled suggestions.**\n\nFor **spell checking** you can use a query like this:\n```JSON\n{\n  \"query\": {\n    \"query\": \"cm:title:alfrezco\"\n  },\n  \"spellcheck\": {\"query\": \"alfrezco\"}\n}\n```\n\nIf you are already specifying \"userQuery\" then the following may be easier\nand produces the same result :\n```JSON\n{\n  \"query\": {\n    \"query\": \"cm:title:alfrezco\",\n    \"userQuery\": \"alfrezco\"\n  },\n  \"spellcheck\": {}\n}\n```\n\nThe spellcheck response includes a spellCheck context like this:\n```JSON\n\"context\": {\n  \"spellCheck\": {\n    \"type\": \"searchInsteadFor\",\n    \"suggestions\": [\"alfresco\"]\n  }\n},\n```\n\nTo specify defaults, you  use a **defaults JSON body parameter**, for example:\n```JSON\n\"defaults\": {\n  \"textAttributes\": [\n    \"cm:content\", \"cm:name\"\n  ],\n  \"defaultFTSOperator\": \"AND\",\n  \"defaultFTSFieldOperator\": \"OR\",\n  \"namespace\": \"cm\",\n  \"defaultFieldName\": \"PATH\"\n}\n```\n\nYou can specify several filter queries using the **filterQueries JSON body parameter**, for example:\n```JSON\n\"filterQueries\": [{\"query\": \"TYPE:'cm:folder'\"},{\"query\": \"cm:creator:mjackson\"}]\n```\n\nYou can specify several facet queries using the **facetQueries JSON body parameter**, for example:\n```JSON\n\"facetQueries\": [{\"query\": \"created:2016\",\"label\": \"CreatedThisYear\"}]\n```\nThe response will contain a matching \"context\" section, the \"label\" will match the facet query.\n```JSON\n\"context\": {\n  \"facetQueries\": [\n    {\"label\": \"CreatedThisYear\",\"count\": 3}\n  ]\n},\n```\n\nA complete query for facetting via the content.size field looks this:\n```JSON\n{\n  \"query\": {\n    \"query\": \"presentation\",\n    \"language\": \"afts\"\n  },\n    \"facetQueries\": [\n        {\"query\": \"content.size:[0 TO 10240]\", \"label\": \"xtra small\"},\n        {\"query\": \"content.size:[10240 TO 102400]\", \"label\": \"small\"},\n        {\"query\": \"content.size:[102400 TO 1048576]\", \"label\": \"medium\"},\n        {\"query\": \"content.size:[1048576 TO 16777216]\", \"label\": \"large\"},\n        {\"query\": \"content.size:[16777216 TO 134217728]\", \"label\": \"xtra large\"},\n        {\"query\": \"content.size:[134217728 TO MAX]\", \"label\": \"XX large\"}\n  ],\n    \"facetFields\": {\"facets\": [{\"field\": \"'content.size'\"}]}\n}\n```\n\nThe response will contain a matching \"context\" section, the \"label\" will match the facet query.\n```JSON\n\"context\": {\n  \"facetQueries\": [\n    { \"label\": \"small\",\"count\": 2 },\n    { \"label\": \"large\",\"count\": 0 },\n    { \"label\": \"xtra small\",\"count\": 5 },\n    { \"label\": \"xtra large\",\"count\": 56},\n    { \"label\": \"medium\",\"count\": 4 },\n    { \"label\": \"XX large\", \"count\": 1 }\n  ]\n},\n```\n\nYou can specify several facet fields using the **facetFields JSON body parameter**, for example:\n```JSON\n\"facetFields\": {\"facets\": [{\"field\": \"creator\", \"mincount\": 1}, {\"field\": \"modifier\", \"mincount\": 1}]}\n```\nThe response will contain a matching \"context\" section, the \"label\" will match the facet field.\n```JSON\n\"context\": {\n   \"facetsFields\": [\n     {  \"label\": \"creator\",\n        \"buckets\": [\n          { \"label\": \"System\", \"count\": 75 },\n          { \"label\": \"mjackson\", \"count\": 5 }\n        ]},\n     {  \"label\": \"modifier\",\n        \"buckets\": [\n          { \"label\": \"System\", \"count\": 72 },\n          { \"label\": \"mjackson\", \"count\": 5 },\n          { \"label\": \"admin\", \"count\": 3 }\n        ]}\n   ]\n},\n```\n\nGrouping facet queries that go together can be done by specifying the group label in the fact queries as follow:\n```JSON\n    {\n        \"query\": {\n            \"query\": \"presentation\"\n        },\n        \"facetQueries\": [\n            {\"query\": \"content.size:[0 TO 102400]\", \"label\": \"small\", \"group\":\"foo\"},\n            {\"query\": \"content.size:[102400 TO 1048576]\", \"label\": \"medium\",\"group\":\"foo\"},\n            {\"query\": \"content.size:[1048576 TO 16777216]\", \"label\": \"large\",\"group\":\"foo\"}\n        ]\n    }\n```\nThe above query returns the results a faceted field grouped under the label foo:\n```JSON\n{\n    \"context\": {\"facetsFields\": [{\n        \"label\": \"foo\",\n        \"buckets\": [\n            {\n                \"count\": 109,\n                \"label\": \"small\",\n                \"filterQuery\": \"content.size:[0 TO 102400]\"\n            },\n            {\n                \"count\": 0,\n                \"label\": \"large\",\n                \"filterQuery\": \"content.size:[1048576 TO 16777216]\"\n            },\n            {\n                \"count\": 0,\n                \"label\": \"medium\",\n                \"filterQuery\": \"content.size:[102400 TO 1048576]\"\n            }\n        ]\n    }]\n}\n```\nRange Faceting is supported by the **ranges JSON body parameter**, for example:\n```JSON\n    {\n        \"query\": {\n            \"query\": \"presentation\"\n        },\n        \"ranges\": [\n        {\n            \"field\": \"content.size\",\n             \"start\": \"0\",\n             \"end\": \"100\",\n             \"gap\": \"20\",\n             \"hardend\": true\n        },\n        {\n            \"field\": \"created\",\n            \"start\": \"2015-09-29T10:45:15.729Z\",\n            \"end\": \"2016-09-29T10:45:15.729Z\",\n            \"gap\": \"+100DAY\"\n        }]\n    }\n```\nAn example query for **search highlighting** could look like this:\n```JSON\n{\n  \"query\": {\n    \"query\": \"description:workflow\",\n    \"userQuery\":\"workflow\"\n  },\n  \"highlight\": {\n    \"prefix\": \"¿\",\n    \"postfix\": \"?\",\n    \"mergeContiguous\": true,\n    \"fields\": [\n      {\n        \"field\": \"cm:title\"\n      },\n      {\n        \"field\": \"description\",\n        \"prefix\": \"(\",\n        \"postfix\": \")\"\n      }\n\n    ]\n  }\n}\n```\nThe example above changes the highlighting prefix and postfix from the\n default <em> for all fields to ¿? and just for the \"description\" field to ().\n The hightlight information is added in each node entry response; here is\n an example partial response:\n```\n\"entry\": {\n        \"createdAt\": \"2016-10-12T15:24:31.202+0000\",\n        \"isFolder\": true,\n        \"search\": {\n          \"score\": 1,\n          \"highlight\": [\n            {\n              \"field\": \"cm:title\",\n              \"snippets\": [\n                \"Customized ¿Workflow? Process Definitions\"\n              ]\n            },\n            {\n              \"field\": \"description\",\n              \"snippets\": [\n                \"Customized (Workflow) Process Definitions\"\n              ]\n            }\n          ]\n      },\n```\n",
+        "summary": "search",
+        "tags": [
+          "search"
+        ],
+        "operationId": "SearchPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "queryBody",
+            "in": "body",
+            "required": true,
+            "description": "Generic query API",
+            "schema": {
+              "$ref": "#/definitions/SearchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ResultSetPaging"
+            },
+            "headers": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "title": "Error",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error1"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "SearchRequest": {
+      "title": "SearchRequest",
+      "type": "object",
+      "properties": {
+        "query": {
+          "$ref": "#/definitions/RequestQuery"
+        },
+        "paging": {
+          "$ref": "#/definitions/RequestPagination"
+        },
+        "include": {
+          "description": "Returns additional information about the node. The following optional fields can be requested:\n * properties\n * aspectNames\n * path\n * isLink\n * allowableOperations\n * association",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestInclude"
+          }
+        },
+        "includeRequest": {
+          "description": "When true, include the original request in the response",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "fields": {
+          "description": "A list of field names.\nYou can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth.\nThe list applies to a returned individual entity or entries within a collection.\nIf the **include** parameter is used aswell then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sort": {
+          "description": "How to sort the rows? An array of sort specifications. The array order defines the ordering precedence.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestSortDefinition"
+          }
+        },
+        "templates": {
+          "description": "Templates usewd for query expansion.\nA template called \"WOOF\" defined as \"%(cm:name cm:title)\" allows\nWOOF:example\nto generate\ncm:name:example cm:name:example",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestTemplate"
+          }
+        },
+        "defaults": {
+          "$ref": "#/definitions/RequestDefaults"
+        },
+        "localization": {
+          "$ref": "#/definitions/RequestLocalization"
+        },
+        "filterQueries": {
+          "description": "Filter Queries. Constraints that apply to the results set but do not affect the score of each entry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestFilterQuery"
+          }
+        },
+        "facetQueries": {
+          "description": "Facet queries to include",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestFacetQuery"
+          }
+        },
+        "facetFields": {
+          "$ref": "#/definitions/RequestFacetFields"
+        },
+        "facetIntervals": {
+          "$ref": "#/definitions/RequestFacetIntervals"
+        },
+        "pivots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestPivot"
+          }
+        },
+        "stats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestStats"
+          }
+        },
+        "spellcheck": {
+          "$ref": "#/definitions/RequestSpellcheck"
+        },
+        "scope": {
+          "$ref": "#/definitions/RequestScope"
+        },
+        "limits": {
+          "$ref": "#/definitions/RequestLimits"
+        },
+        "highlight": {
+          "$ref": "#/definitions/RequestHighlight"
+        },
+        "ranges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestRange"
+          }
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "RequestPivot": {
+      "title": "RequestPivot",
+      "description": "A list of pivots.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "A key corresponding to a matching field facet label or stats.",
+          "type": "string"
+        },
+        "pivots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestPivot"
+          }
+        }
+      }
+    },
+    "RequestLocalization": {
+      "title": "RequestLocalization",
+      "description": "Localization settings",
+      "type": "object",
+      "properties": {
+        "timezone": {
+          "description": "A valid timezone id supported by @see java.time.ZoneId",
+          "type": "string"
+        },
+        "locales": {
+          "description": "A list of Locales definied by IETF BCP 47.  The ordering is significant.  The first locale (leftmost) is used for sort and query localization, whereas the remaining locales are used for query only.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RequestStats": {
+      "title": "RequestStats",
+      "description": "A list of stats request.",
+      "type": "object",
+      "properties": {
+        "field": {
+          "description": "The stats field",
+          "type": "string"
+        },
+        "label": {
+          "description": "A label to include for reference the stats field",
+          "type": "string"
+        },
+        "min": {
+          "description": "The minimum value of the field",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "max": {
+          "description": "The maximum value of the field",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "sum": {
+          "description": "The sum of all values of the field",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "countValues": {
+          "description": "The number which have a value for this field",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "missing": {
+          "description": "The number which do not have a value for this field",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "mean": {
+          "description": "The average",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "stddev": {
+          "description": "Standard deviation",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "sumOfSquares": {
+          "description": "Sum of all values squared",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "distinctValues": {
+          "description": "The set of all distinct values for the field (This can be very expensive to calculate)",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "countDistinct": {
+          "description": "The number of distinct values  (This can be very expensive to calculate)",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "cardinality": {
+          "description": "A statistical approximation of the number of distinct values",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "cardinalityAccuracy": {
+          "description": "Number between 0.0 and 1.0 indicating how aggressively the algorithm should try to be accurate. Used with boolean cardinality flag.",
+          "example": 0.3,
+          "type": "number",
+          "default": 0.3,
+          "format": "double"
+        },
+        "excludeFilters": {
+          "description": "A list of filters to exclude",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "percentiles": {
+          "description": "A list of percentile values, e.g. \"1,99,99.9\"",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    },
+    "RequestQuery": {
+      "title": "RequestQuery",
+      "description": "Query.",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/definitions/Language"
+        },
+        "userQuery": {
+          "description": "The exact search request typed in by the user",
+          "type": "string"
+        },
+        "query": {
+          "description": "The query which may have been generated in some way from the userQuery",
+          "type": "string"
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "ResultSetPaging": {
+      "title": "ResultSetPaging",
+      "description": "Query results",
+      "type": "object",
+      "properties": {
+        "list": {
+          "$ref": "#/definitions/List"
+        }
+      }
+    },
+    "ResultSetContext": {
+      "title": "ResultSetContext",
+      "description": "Context that applies to the whole result set",
+      "type": "object",
+      "properties": {
+        "consistency": {
+          "$ref": "#/definitions/ResponseConsistency"
+        },
+        "request": {
+          "$ref": "#/definitions/SearchRequest"
+        },
+        "facetQueries": {
+          "description": "The counts from facet queries",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FacetQuery"
+          }
+        },
+        "facetsFields": {
+          "description": "The counts from field facets",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResultBuckets"
+          }
+        },
+        "facets": {
+          "description": "The faceted response",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericFacetResponse"
+          }
+        },
+        "spellcheck": {
+          "description": "Suggested corrections\n\nIf zero results were found for the original query then a single entry of type \"searchInsteadFor\" will be returned.\nIf alternatives were found that return more results than the original query they are returned as \"didYouMean\" options.\nThe highest quality suggestion is first.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Spellcheck"
+          }
+        }
+      }
+    },
+    "GenericFacetResponse": {
+      "title": "GenericFacetResponse",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The facet type, eg. interval, range, pivot, stats",
+          "type": "string"
+        },
+        "label": {
+          "description": "The field name or its explicit label, if provided on the request",
+          "type": "string"
+        },
+        "buckets": {
+          "description": "An array of buckets and values",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericBucket"
+          }
+        }
+      }
+    },
+    "GenericBucket": {
+      "title": "GenericBucket",
+      "description": "A bucket of facet results",
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "The bucket label",
+          "type": "string"
+        },
+        "filterQuery": {
+          "description": "The filter query you can use to apply this facet",
+          "type": "string"
+        },
+        "display": {
+          "description": "An optional field for additional display information",
+          "type": "object"
+        },
+        "metrics": {
+          "description": "An array of buckets and values",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericMetric"
+          }
+        },
+        "facets": {
+          "description": "Additional list of nested facets",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "bucketInfo": {
+          "$ref": "#/definitions/BucketInfo"
+        }
+      }
+    },
+    "GenericMetric": {
+      "title": "GenericMetric",
+      "description": "A metric used in faceting",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of metric, e.g. count",
+          "type": "string"
+        },
+        "value": {
+          "description": "The metric value, e.g. {\"count\": 34}",
+          "type": "object"
+        }
+      }
+    },
+    "ResultBuckets": {
+      "title": "ResultBuckets",
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "The field name or its explicit label, if provided on the request",
+          "type": "string"
+        },
+        "buckets": {
+          "description": "An array of buckets and values",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Bucket"
+          }
+        }
+      }
+    },
+    "ResultSetRowEntry": {
+      "title": "ResultSetRowEntry",
+      "description": "A row in the result set",
+      "type": "object",
+      "properties": {
+        "entry": {
+          "$ref": "#/definitions/ResultNode"
+        }
+      },
+      "required": [
+        "entry"
+      ]
+    },
+    "ResultNode": {
+      "title": "ResultNode",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "description": "The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |.\nThe character . must not be used at the end of the name.",
+          "type": "string",
+          "pattern": "^(?!(.*[\\\"\\*\\\\\\>\\<\\?\\/\\:\\|]+.*)|(.*[\\.]?.*[\\.]+$)|(.*[ ]+$))"
+        },
+        "nodeType": {
+          "type": "string"
+        },
+        "isFolder": {
+          "type": "boolean"
+        },
+        "isFile": {
+          "type": "boolean"
+        },
+        "isLocked": {
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "modifiedByUser": {
+          "$ref": "#/definitions/UserInfo"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdByUser": {
+          "$ref": "#/definitions/UserInfo"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "isLink": {
+          "type": "boolean"
+        },
+        "content": {
+          "$ref": "#/definitions/ContentInfo"
+        },
+        "aspectNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object"
+        },
+        "allowableOperations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "path": {
+          "$ref": "#/definitions/PathInfo"
+        },
+        "search": {
+          "$ref": "#/definitions/SearchEntry"
+        },
+        "archivedByUser": {
+          "$ref": "#/definitions/UserInfo"
+        },
+        "archivedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "versionLabel": {
+          "type": "string"
+        },
+        "versionComment": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "nodeType",
+        "isFolder",
+        "isFile",
+        "modifiedAt",
+        "modifiedByUser",
+        "createdAt",
+        "createdByUser"
+      ]
+    },
+    "SearchEntry": {
+      "title": "SearchEntry",
+      "type": "object",
+      "properties": {
+        "score": {
+          "description": "The score for this row",
+          "type": "number",
+          "format": "double"
+        },
+        "highlight": {
+          "description": "Highlight fragments if requested and available. A match can happen in any of the requested field.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Highlight"
+          }
+        }
+      }
+    },
+    "Node": {
+      "title": "Node",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "description": "The name must not contain spaces or the following special characters: * \" < > \\ / ? : and |.\nThe character . must not be used at the end of the name.",
+          "type": "string",
+          "pattern": "^(?!(.*[\\\"\\*\\\\\\>\\<\\?\\/\\:\\|]+.*)|(.*[\\.]?.*[\\.]+$)|(.*[ ]+$))"
+        },
+        "nodeType": {
+          "type": "string"
+        },
+        "isFolder": {
+          "type": "boolean"
+        },
+        "isFile": {
+          "type": "boolean"
+        },
+        "isLocked": {
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "modifiedByUser": {
+          "$ref": "#/definitions/UserInfo"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdByUser": {
+          "$ref": "#/definitions/UserInfo"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "isLink": {
+          "type": "boolean"
+        },
+        "content": {
+          "$ref": "#/definitions/ContentInfo"
+        },
+        "aspectNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object"
+        },
+        "allowableOperations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "path": {
+          "$ref": "#/definitions/PathInfo"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "nodeType",
+        "isFolder",
+        "isFile",
+        "modifiedAt",
+        "modifiedByUser",
+        "createdAt",
+        "createdByUser"
+      ]
+    },
+    "UserInfo": {
+      "title": "UserInfo",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "displayName",
+        "id"
+      ]
+    },
+    "ContentInfo": {
+      "title": "ContentInfo",
+      "type": "object",
+      "properties": {
+        "mimeType": {
+          "type": "string"
+        },
+        "mimeTypeName": {
+          "type": "string"
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "encoding": {
+          "type": "string"
+        },
+        "mimeTypeGroup": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "mimeType",
+        "mimeTypeName",
+        "sizeInBytes"
+      ]
+    },
+    "PathElement": {
+      "title": "PathElement",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "PathInfo": {
+      "title": "PathInfo",
+      "type": "object",
+      "properties": {
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PathElement"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "isComplete": {
+          "type": "boolean"
+        }
+      }
+    },
+    "RequestDefaults": {
+      "title": "RequestDefaults",
+      "description": "Common query defaults",
+      "type": "object",
+      "properties": {
+        "textAttributes": {
+          "description": "A list of query fields/properties used to expand TEXT: queries.\nThe default is cm:content.\nYou could include all content properties using d:content or list all individual content properties or types.\nAs more terms are included the query size, complexity, memory impact and query time will increase.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "defaultFTSOperator": {
+          "$ref": "#/definitions/DefaultFTSOperator"
+        },
+        "defaultFTSFieldOperator": {
+          "$ref": "#/definitions/DefaultFTSFieldOperator"
+        },
+        "namespace": {
+          "description": "The default name space to use if one is not provided",
+          "example": "cm",
+          "type": "string",
+          "default": "cm"
+        },
+        "defaultFieldName": {
+          "example": "TEXT",
+          "type": "string",
+          "default": "TEXT"
+        }
+      }
+    },
+    "RequestScope": {
+      "title": "RequestScope",
+      "description": "Scope",
+      "type": "object",
+      "properties": {
+        "locations": {
+          "$ref": "#/definitions/Locations"
+        }
+      }
+    },
+    "RequestPagination": {
+      "title": "RequestPagination",
+      "type": "object",
+      "properties": {
+        "maxItems": {
+          "description": "The maximum number of items to return in the query results",
+          "example": 100,
+          "type": "integer",
+          "default": 100,
+          "minimum": 1.0,
+          "format": "int32"
+        },
+        "skipCount": {
+          "description": "The number of items to skip from the start of the query set",
+          "example": 0,
+          "type": "integer",
+          "default": 0,
+          "minimum": 0.0,
+          "format": "int32"
+        }
+      }
+    },
+    "Pagination": {
+      "title": "Pagination",
+      "type": "object",
+      "properties": {
+        "count": {
+          "description": "The number of objects in the entries array.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "hasMoreItems": {
+          "description": "A boolean value which is **true** if there are more entities in the collection\nbeyond those in this response. A true value means a request with a larger value\nfor the **skipCount** or the **maxItems** parameter will return more entities.",
+          "type": "boolean"
+        },
+        "totalItems": {
+          "description": "An integer describing the total number of entities in the collection.\nThe API might not be able to determine this value,\nin which case this property will not be present.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "skipCount": {
+          "description": "An integer describing how many entities exist in the collection before\nthose included in this list.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "maxItems": {
+          "description": "The value of the **maxItems** parameter used to generate this list,\nor if there was no **maxItems** parameter the default value is 100",
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "count",
+        "hasMoreItems",
+        "skipCount",
+        "maxItems"
+      ]
+    },
+    "ResponseConsistency": {
+      "title": "ResponseConsistency",
+      "description": "The consistency state of the index used to execute the query",
+      "type": "object",
+      "properties": {
+        "lastTxId": {
+          "description": "The id of the last indexed transaction",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "RequestFacetFields": {
+      "title": "RequestFacetFields",
+      "description": "Simple facet fields to include\nThe Properties reflect the global properties related to field facts in SOLR.\nThey are descripbed in detail by the SOLR documentation",
+      "type": "object",
+      "properties": {
+        "facets": {
+          "description": "Define specifc fields on which to facet (adds SOLR facet.field and f.<field>.facet.* options)",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestFacetField"
+          }
+        }
+      }
+    },
+    "RequestFacetField": {
+      "title": "RequestFacetField",
+      "description": "A simple facet field",
+      "type": "object",
+      "properties": {
+        "field": {
+          "description": "The facet field",
+          "type": "string"
+        },
+        "label": {
+          "description": "A label to include in place of the facet field",
+          "type": "string"
+        },
+        "prefix": {
+          "description": "Restricts the possible constraints to only indexed values with a specified prefix.",
+          "type": "string"
+        },
+        "sort": {
+          "$ref": "#/definitions/Sort"
+        },
+        "method": {
+          "$ref": "#/definitions/Method"
+        },
+        "missing": {
+          "description": "When true, count results that match the query but which have no facet value for the field (in addition to the Term-based constraints).",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "mincount": {
+          "description": "The minimum count required for a facet field to be included in the response.",
+          "example": 1,
+          "type": "integer",
+          "default": 1,
+          "format": "int32"
+        },
+        "facetEnumCacheMinDf": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "excludeFilters": {
+          "description": "Filter Queries with tags listed here will not be included in facet counts.\nThis is used for multi-select facetting.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RequestLimits": {
+      "title": "RequestLimits",
+      "description": "Limit the time and resources used for query execution",
+      "type": "object",
+      "properties": {
+        "permissionEvaluationTime": {
+          "description": "Maximum time for post query permission evaluation",
+          "example": 20000,
+          "type": "integer",
+          "default": 20000,
+          "format": "int32"
+        },
+        "permissionEvaluationCount": {
+          "description": "Maximum count of post query permission evaluations",
+          "example": 2000,
+          "type": "integer",
+          "default": 2000,
+          "format": "int32"
+        }
+      }
+    },
+    "RequestFacetIntervals": {
+      "title": "RequestFacetIntervals",
+      "description": "Facet Intervals",
+      "type": "object",
+      "properties": {
+        "sets": {
+          "description": "Sets the intervals for all fields.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestFacetSet"
+          }
+        },
+        "intervals": {
+          "description": "Specifies the fields to facet by interval.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Interval"
+          }
+        }
+      }
+    },
+    "RequestFacetSet": {
+      "title": "RequestFacetSet",
+      "description": "The interval to Set",
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "A label to use to identify the set",
+          "type": "string"
+        },
+        "start": {
+          "description": "The start of the range",
+          "type": "string"
+        },
+        "end": {
+          "description": "The end of the range",
+          "type": "string"
+        },
+        "startInclusive": {
+          "description": "When true, the set will include values greater or equal to \"start\"",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "endInclusive": {
+          "description": "When true, the set will include values less than or equal to \"end\"",
+          "example": true,
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "RequestSpellcheck": {
+      "title": "RequestSpellcheck",
+      "description": "Request that spellcheck fragments to be added to result set rows\nThe properties reflect SOLR spellcheck parameters.",
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        }
+      }
+    },
+    "RequestHighlight": {
+      "title": "RequestHighlight",
+      "description": "Request that highlight fragments to be added to result set rows\nThe properties reflect SOLR highlighting parameters.",
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "description": "The string used to mark the start of a highlight in a fragment.",
+          "type": "string"
+        },
+        "postfix": {
+          "description": "The string used to mark the end of a highlight in a fragment.",
+          "type": "string"
+        },
+        "snippetCount": {
+          "description": "The maximum number of distinct highlight snippets to return for each highlight field.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "fragmentSize": {
+          "description": "The character length of each snippet.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxAnalyzedChars": {
+          "description": "The number of characters to be considered for highlighting. Matches after this count will not be shown.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "mergeContiguous": {
+          "description": "If fragments over lap they can be  merged into one larger fragment",
+          "type": "boolean"
+        },
+        "usePhraseHighlighter": {
+          "description": "Should phrases be identified.",
+          "type": "boolean"
+        },
+        "fields": {
+          "description": "The fields to highlight and field specific configuration properties for each field",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Field"
+          }
+        }
+      }
+    },
+    "RequestRange": {
+      "title": "RequestRange",
+      "description": "Facet range",
+      "type": "object",
+      "properties": {
+        "field": {
+          "description": "The name of the field to perform range",
+          "type": "string"
+        },
+        "start": {
+          "description": "The start of the range",
+          "type": "string"
+        },
+        "end": {
+          "description": "The end of the range",
+          "type": "string"
+        },
+        "gap": {
+          "description": "Bucket size",
+          "type": "string"
+        },
+        "hardend": {
+          "description": "If true means that the last bucket will end at “end” even if it is less than “gap” wide.",
+          "type": "boolean"
+        },
+        "other": {
+          "description": "before, after, between, non, all",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "include": {
+          "description": "lower, upper, edge, outer, all",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "label": {
+          "description": "A label to include as a pivot reference",
+          "type": "string"
+        },
+        "excludeFilters": {
+          "description": "Filter queries to exclude when calculating statistics",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Bucket": {
+      "title": "Bucket",
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "The bucket label",
+          "type": "string"
+        },
+        "filterQuery": {
+          "description": "The filter query you can use to apply this facet",
+          "type": "string"
+        },
+        "count": {
+          "description": "The count for the bucket",
+          "type": "integer",
+          "format": "int32"
+        },
+        "display": {
+          "description": "An optional field for additional display information",
+          "type": "object"
+        }
+      }
+    },
+    "BucketInfo": {
+      "title": "BucketInfo",
+      "description": "Additional information of nested facet",
+      "type": "object",
+      "properties": {
+        "start": {
+          "description": "The start of range",
+          "type": "string"
+        },
+        "startInclusive": {
+          "description": "Includes values greater or equal to \"start\"",
+          "type": "boolean"
+        },
+        "end": {
+          "description": "The end of range",
+          "type": "string"
+        },
+        "endInclusive": {
+          "description": "Includes values less than or equal to \"end\"",
+          "type": "boolean"
+        }
+      }
+    },
+    "DefaultFTSFieldOperator": {
+      "title": "DefaultFTSFieldOperator",
+      "description": "The default way to combine query parts in field query groups when AND or OR is not explicitly stated - includes ! - +\nFIELD:(one two three)",
+      "example": "AND",
+      "type": "string",
+      "enum": [
+        "AND",
+        "OR"
+      ]
+    },
+    "DefaultFTSOperator": {
+      "title": "DefaultFTSOperator",
+      "description": "The default way to combine query parts when AND or OR is not explicitly stated - includes ! - +\none two three\n(one two three)",
+      "example": "AND",
+      "type": "string",
+      "enum": [
+        "AND",
+        "OR"
+      ]
+    },
+    "Error1": {
+      "title": "Error1",
+      "type": "object",
+      "properties": {
+        "errorKey": {
+          "type": "string"
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "briefSummary": {
+          "type": "string"
+        },
+        "stackTrace": {
+          "type": "string"
+        },
+        "descriptionURL": {
+          "type": "string"
+        },
+        "logId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "statusCode",
+        "briefSummary",
+        "stackTrace",
+        "descriptionURL"
+      ]
+    },
+    "FacetQuery": {
+      "title": "FacetQuery",
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "filterQuery": {
+          "description": "The filter query you can use to apply this facet",
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Field": {
+      "title": "Field",
+      "type": "object",
+      "properties": {
+        "field": {
+          "description": "The name of the field to highlight.",
+          "type": "string"
+        },
+        "snippetCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "fragmentSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "mergeContiguous": {
+          "type": "boolean"
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "postfix": {
+          "type": "string"
+        }
+      }
+    },
+    "Highlight": {
+      "title": "Highlight",
+      "type": "object",
+      "properties": {
+        "field": {
+          "description": "The field where a match occured (one of the fields defined on the request)",
+          "type": "string"
+        },
+        "snippets": {
+          "description": "Any number of snippets for the specified field highlighting the matching text",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Interval": {
+      "title": "Interval",
+      "type": "object",
+      "properties": {
+        "field": {
+          "description": "The field to facet on",
+          "type": "string"
+        },
+        "label": {
+          "description": "A label to use to identify the field facet",
+          "type": "string"
+        },
+        "sets": {
+          "description": "Sets the intervals for all fields.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestFacetSet"
+          }
+        }
+      }
+    },
+    "Language": {
+      "title": "Language",
+      "description": "The query language in which the query is written.",
+      "example": "afts",
+      "type": "string",
+      "enum": [
+        "afts",
+        "lucene",
+        "cmis"
+      ]
+    },
+    "List": {
+      "title": "List",
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/Pagination"
+        },
+        "context": {
+          "$ref": "#/definitions/ResultSetContext"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResultSetRowEntry"
+          }
+        }
+      }
+    },
+    "Locations": {
+      "title": "Locations",
+      "description": "The locations to include in the query",
+      "example": "nodes",
+      "type": "string",
+      "enum": [
+        "nodes",
+        "versions",
+        "deleted-nodes"
+      ]
+    },
+    "Method": {
+      "title": "Method",
+      "example": "ENUM",
+      "type": "string",
+      "enum": [
+        "ENUM",
+        "FC"
+      ]
+    },
+    "RequestFacetQuery": {
+      "title": "RequestFacetQuery",
+      "type": "object",
+      "properties": {
+        "query": {
+          "description": "A facet query",
+          "type": "string"
+        },
+        "label": {
+          "description": "A label to include in place of the facet query",
+          "type": "string"
+        }
+      }
+    },
+    "RequestFilterQuery": {
+      "title": "RequestFilterQuery",
+      "type": "object",
+      "properties": {
+        "query": {
+          "description": "The filter query expression.\nFor multi-select facets selected facets must be order together",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tags used exclude the filters from facet evaluation for multi-select facet support",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RequestInclude": {
+      "title": "RequestInclude",
+      "example": "allowableOperations",
+      "type": "string",
+      "enum": [
+        "allowableOperations",
+        "aspectNames",
+        "isLink",
+        "isLocked",
+        "path",
+        "properties"
+      ]
+    },
+    "RequestSortDefinition": {
+      "title": "RequestSortDefinition",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Type"
+        },
+        "field": {
+          "description": "The name of the field",
+          "type": "string"
+        },
+        "ascending": {
+          "description": "The sort order. (The ordering of nulls is determined by the SOLR configuration)",
+          "example": false,
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "RequestTemplate": {
+      "title": "RequestTemplate",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The template name",
+          "type": "string"
+        },
+        "template": {
+          "description": "The template",
+          "type": "string"
+        }
+      }
+    },
+    "Sort": {
+      "title": "Sort",
+      "example": "COUNT",
+      "type": "string",
+      "enum": [
+        "COUNT",
+        "INDEX"
+      ]
+    },
+    "Spellcheck": {
+      "title": "Spellcheck",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Type1"
+        },
+        "suggestion": {
+          "description": "A suggested alternative query",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Type": {
+      "title": "Type",
+      "description": "How to order - using a field, when position of the document in the index, score/relevence.",
+      "example": "FIELD",
+      "type": "string",
+      "enum": [
+        "FIELD",
+        "DOCUMENT",
+        "SCORE"
+      ]
+    },
+    "Type1": {
+      "title": "Type1",
+      "example": "searchInsteadFor",
+      "type": "string",
+      "enum": [
+        "searchInsteadFor",
+        "didYouMean"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "search",
+      "description": ""
+    }
+  ]
+}

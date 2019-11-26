@@ -1,0 +1,3025 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1",
+    "title": "Alfresco Content Services REST API",
+    "description": "**Workflow API**\n\nProvides access to the workflow features of Alfresco Content Services.\n",
+    "contact": {}
+  },
+  "host": "www.example.com",
+  "basePath": "/alfresco/api/-default-/public/workflow/versions/1",
+  "securityDefinitions": {
+    "auth": {
+      "type": "basic"
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/deployments": {
+      "get": {
+        "description": "Gets a list of deployments.\n\nThe authenticated user must have role admin (non-network deployments) or\nnetwork admin (networks enabled).\n\nIf networks are enabled, the network admin can only see the deployments\nin the given network.\n",
+        "summary": "listDeployments",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "DeploymentsGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "skipCount",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The number of entities that  exist in the collection before those included in this list."
+          },
+          {
+            "name": "maxItems",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The maximum number of items to return in the list."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/DeploymentPaging"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: value of **maxItems** or **skipCount** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/deployments/{deploymentId}": {
+      "get": {
+        "description": "Gets a specified deployment defined by **deploymentId**.\n\nThe authenticated user must have role admin (non-network deployments) or\nnetwork admin (networks enabled).\n\nIf networks are enabled, the deployment is only returned if the deployment\nis in the given network.\n",
+        "summary": "getDeployment",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "DeploymentsByDeploymentIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The unique id must be a String. It is returned as an **id** from the entity."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/DeploymentEntry"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**deploymentId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "This request will delete the deployment including the tasks, process definitions contained in the deployment.\n\nThe request will also delete processes and history information associated with the deployment.\n",
+        "summary": "deleteDeployment",
+        "tags": [
+          "deployments"
+        ],
+        "operationId": "DeploymentsByDeploymentIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The unique id must be a String. It is returned as an **id** from the entity"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful response",
+            "headers": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/process-definitions": {
+      "get": {
+        "description": "Gets a list of process definitions.\n\nIn non-network deployments, any authenticated user will see all the\nprocess definitions.\n\nIf networks are enabled, the network admin can only see the deployments\nin the given network.\n",
+        "summary": "listProcessDefinitions",
+        "tags": [
+          "process-definitions"
+        ],
+        "operationId": "ProcessDefinitionsGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "skipCount",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The number of entities that  exist in the collection before those included in this list."
+          },
+          {
+            "name": "maxItems",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The maximum number of items to return in the list."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A string to control the order of the entities returned in a list. You can use the **orderby** parameter to\nsort the list by one or more fields.\n\nEach field has a default sort order, which is normally ascending order. Read the API method implementation notes\nabove to check if any fields used in this method have a descending default search order.\n\nTo sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field."
+          },
+          {
+            "name": "where",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "A string to restrict the returned objects by using a predicate."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ProcessDefinitionPaging"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: value of **maxItems**, **skipCount**, **orderBy**, or **where** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/process-definitions/{processDefinitionId}": {
+      "get": {
+        "description": "Gets a process definition identified by **processDefinitionId**.\n\nIn non-network deployments, any authenticated user will see all the\nprocess definitions. If networks are enabled, the network admin can only\nsee the deployments in the given network.\n",
+        "summary": "getProcessDefinition",
+        "tags": [
+          "process-definitions"
+        ],
+        "operationId": "ProcessDefinitionsByProcessDefinitionIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "processDefinitionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a process definition."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ProcessDefinitionEntry"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**processDefinitionId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/process-definitions/{processDefinitionId}/image": {
+      "get": {
+        "description": "Gets an image that represents a single process definition identified by **processDefinitionId**.\n\nIn non-network deployments, any authenticated user will see all the\nprocess definitions.\n\nIf networks are enabled, the network admin can only see the deployments\nin the given network.\n",
+        "summary": "getProcessDefinitionImage",
+        "tags": [
+          "process-definitions"
+        ],
+        "operationId": "ProcessDefinitionsImageByProcessDefinitionIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "processDefinitionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a process definition."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**processDefinitionId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/process-definitions/{processDefinitionId}/start-form-model": {
+      "get": {
+        "description": "Gets a model of the start form type definition.\n\nAn authenticated user will have access to all start form models.\nIn a network, only start form models that are inside the given network are returned.\n",
+        "summary": "getProcessDefinitionStartFormModel",
+        "tags": [
+          "process-definitions"
+        ],
+        "operationId": "ProcessDefinitionsStartFormModelByProcessDefinitionIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "processDefinitionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a process definition."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TaskFormModelPaging"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**processDefinitionId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/processes": {
+      "get": {
+        "description": "Gets a  list of processes.\n\nAn authenticated user will have access to a processes if the user has\nstarted the process or if the user is involved in any of the process’s\ntasks. In a network, only processes that are inside the given network are\nreturned.\n\nIn non-network deployments, any authenticated user will see all the\nprocess definitions.\n\nIf networks are enabled, the network admin can only see the deployments\nin the given network.\n",
+        "summary": "listProcesses",
+        "tags": [
+          "processes"
+        ],
+        "operationId": "ProcessesGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "skipCount",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The number of entities that  exist in the collection before those included in this list."
+          },
+          {
+            "name": "maxItems",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The maximum number of items to return in the list."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A string to control the order of the entities returned in a list. You can use the **orderby** parameter to\nsort the list by one or more fields.\n\nEach field has a default sort order, which is normally ascending order. Read the API method implementation notes\nabove to check if any fields used in this method have a descending default search order.\n\nTo sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field."
+          },
+          {
+            "name": "where",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "A string to restrict the returned objects by using a predicate."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ProcessPaging"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: value of **maxItems**, **skipCount**, **orderBy**, or **where** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates a new process.\n\nIn non-network deployments, any authenticated user can start a new process for\nany process definition.\n\nIf networks are enabled, the authenticated user can start a new process for a\nprocess definition in the user's network.\n\n**Note:** You can start more than one process by\nspecifying a list of process entries in the JSON body like this:\n\n```JSON\n[\n  {\n     \"processDefinitionKey\": \"activitiAdhoc\",\n     \"variables\": {\n        \"bpm_assignee\": \"fred\"\n    }\n  },\n  {\n     \"processDefinitionKey\": \"activitiAdhoc\",\n     \"variables\": {\n        \"bpm_assignee\": \"joe\"\n    }\n]\n```\nIf you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:\n\n```JSON\n{\n  \"list\": {\n    \"pagination\": {\n      \"count\": 2,\n      \"hasMoreItems\": false,\n      \"totalItems\": 2,\n      \"skipCount\": 0,\n      \"maxItems\": 100\n    },\n    \"entries\": [\n      {\n        \"entry\": {\n          ...\n        }\n      },\n      {\n        \"entry\": {\n          ...\n        }\n      }\n    ]\n  }\n}\n```\n",
+        "summary": "createProcess",
+        "tags": [
+          "processes"
+        ],
+        "operationId": "ProcessesPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "processBody",
+            "in": "body",
+            "required": true,
+            "description": "process properties",
+            "schema": {
+              "$ref": "#/definitions/ProcessBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ProcessEntry"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: **processBody** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/processes/{processId}": {
+      "get": {
+        "description": "Gets the process identified by **processId**.\n\nAn authenticated user will have access to a process if the user has\nstarted the process or if the user is involved in any of the process’s\ntasks. In a network, only processes that are inside the given network are\nreturned.\n\nIn non-network deployments, administrators can see all processes and\nperform all operations on tasks. In network deployments, network\nadministrators can see all processes in their network and perform all\noperations on tasks in their network.\n",
+        "summary": "getProcess",
+        "tags": [
+          "processes"
+        ],
+        "operationId": "ProcessesByProcessIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "processId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a process."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ProcessEntry"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**processId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "Deletes the process with the specified **processId**.",
+        "summary": "deleteProcess",
+        "tags": [
+          "processes"
+        ],
+        "operationId": "ProcessesByProcessIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "processId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a process."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful response",
+            "headers": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "The processId does not exist",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/processes/{processId}/variables": {
+      "get": {
+        "description": "Gets a list of variables for the process **processId**.\n\nAn authenticated user will have access to a processes variables if the\nuser has started  the process or if the user is involved in any of the\nprocess’s tasks.  In a network, only variables for a process that is\ninside the given network are returned.\n\nIn non-network deployments, administrators can see all variables and\nperform all operations  on those variable. In network deployments,\nnetwork administrators can see all variables in  their network and\nperform all operations on variables in their network.\n",
+        "summary": "listProcessVariables",
+        "tags": [
+          "processes"
+        ],
+        "operationId": "ProcessesVariablesByProcessIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "processId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a process."
+          },
+          {
+            "name": "skipCount",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The number of entities that  exist in the collection before those included in this list."
+          },
+          {
+            "name": "maxItems",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The maximum number of items to return in the list."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/VariablePaging"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: value of **maxItems** or **skipCount** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**processId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "post": {
+        "description": "Create or update a variable for a given process.\nIf the variable does not exist yet, it will be created.        \n\n\n**Note:** You can create or update more than one variable by \nspecifying a list of variables in the JSON body like this:\n\n```JSON\n[\n  {\n    \"name\": \"string\",\n    \"value\": \"string\",\n    \"type\": \"string\"\n  },\n  {\n    \"name\": \"string\",\n    \"value\": \"string\",\n    \"type\": \"string\"\n  }\n]\n```\nIf you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:\n\n```JSON\n{\n  \"list\": {\n    \"pagination\": {\n      \"count\": 2,\n      \"hasMoreItems\": false,\n      \"totalItems\": 2,\n      \"skipCount\": 0,\n      \"maxItems\": 100\n    },\n    \"entries\": [\n      {\n        \"entry\": {\n          ...\n        }\n      },\n      {\n        \"entry\": {\n         ...\n        }\n      }\n    ]\n  }\n}\n```\n",
+        "summary": "createProcessVariables",
+        "tags": [
+          "processes"
+        ],
+        "operationId": "ProcessesVariablesByProcessIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "processId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a process."
+          },
+          {
+            "name": "variableBody",
+            "in": "body",
+            "required": true,
+            "description": "A variable",
+            "schema": {
+              "$ref": "#/definitions/VariableBody"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/VariableEntry"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: **variableBody** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**processId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/processes/{processId}/variables/{variableName}": {
+      "put": {
+        "description": "Creates or updates a specific variable **variableName** for process **processId**.\n",
+        "summary": "createProcessVariable",
+        "tags": [
+          "processes"
+        ],
+        "operationId": "ProcessesVariablesByProcessIdAndVariableNamePut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "processId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a process."
+          },
+          {
+            "name": "variableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of a variable."
+          },
+          {
+            "name": "variableBody",
+            "in": "body",
+            "required": true,
+            "description": "A variable",
+            "schema": {
+              "$ref": "#/definitions/VariableBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/VariableEntry"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: **variableBody** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**processId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "Deletes the variable **variableName** from the process with the specified **processId**.",
+        "summary": "deleteProcessVariable",
+        "tags": [
+          "processes"
+        ],
+        "operationId": "ProcessesVariablesByProcessIdAndVariableNameDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "processId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a process."
+          },
+          {
+            "name": "variableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of a variable."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful response",
+            "headers": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "The **processId** does not exist or the **variableName** does not exist",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/processes/{processId}/items": {
+      "get": {
+        "description": "Gets a list of items for the specified process **processId**.\n\nAn authenticated user will have access to a processes items if the\nuser has started the process or if the user is involved in any of the\nprocess’s tasks.  In a network, only items for a process that is\ninside the given network are returned.\n\nIn non-network deployments, administrators can see all items and\nperform all operations  on those items. In network deployments,\nnetwork administrators can see all items in their network and\nperform all operations on items in their network.\n",
+        "summary": "listProcessItems",
+        "tags": [
+          "processes"
+        ],
+        "operationId": "ProcessesItemsByProcessIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "processId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a process."
+          },
+          {
+            "name": "skipCount",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The number of entities that  exist in the collection before those included in this list."
+          },
+          {
+            "name": "maxItems",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The maximum number of items to return in the list."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ItemPaging"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: value of **maxItems** or **skipCount** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**processId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates an item for process **processId**\".\n\nIf the item  already is part of that process the request will have no effect.\n\n**Note:** You can create more than one item by\nspecifying a list of items in the JSON body like this:\n\n```JSON\n[\n  {\n     \"id\": \"1ff9da1a-ee2f-4b9c-8c34-44665e844444\"\n  },\n  {\n     \"id\": \"1ff9da1a-ee2f-4b9c-8c34-44665e855555\"\n  }\n]\n```\nIf you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:\n\n```JSON\n{\n  \"list\": {\n    \"pagination\": {\n      \"count\": 2,\n      \"hasMoreItems\": false,\n      \"totalItems\": 2,\n      \"skipCount\": 0,\n      \"maxItems\": 100\n    },\n    \"entries\": [\n      {\n        \"entry\": {\n          ...\n        }\n      },\n      {\n        \"entry\": {\n          ...\n        }\n      }\n    ]\n  }\n}\n```\n",
+        "summary": "createProcessItem",
+        "tags": [
+          "processes"
+        ],
+        "operationId": "ProcessesItemsByProcessIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "processId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a process."
+          },
+          {
+            "name": "itemBody",
+            "in": "body",
+            "required": true,
+            "description": "The **nodeId** of the item",
+            "schema": {
+              "$ref": "#/definitions/ItemBody"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ItemPaging"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: **itemBody** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**processId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/processes/{processId}/items/{itemId}": {
+      "delete": {
+        "description": "Deletes the item with the specified **itemId** from the process with the specified **processId**.\n",
+        "summary": "deleteProcessItem",
+        "tags": [
+          "processes"
+        ],
+        "operationId": "ProcessesItemsByProcessIdAndItemIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "processId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a process."
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of an item."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful response",
+            "headers": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "The **processId** does not exist or the **itemId** does not exist",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/processes/{processId}/tasks": {
+      "get": {
+        "description": "Gets a list of tasks for the specified process **processId**.\n\nAn authenticated user will have access to a processes tasks if the\nuser has started the process or if the user is involved in any of the\nprocess’s tasks.  In a network, only tasks for a process that is\ninside the given network are returned.\n\nIn non-network deployments, administrators can see all tasks and\nperform all operations  on those tasks. In network deployments,\nnetwork administrators can see all tasks in their network and\nperform all operations on tasks in their network.\n",
+        "summary": "listTasksForProcess",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "ProcessesTasksByProcessIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "processId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a process."
+          },
+          {
+            "name": "skipCount",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The number of entities that  exist in the collection before those included in this list."
+          },
+          {
+            "name": "maxItems",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The maximum number of items to return in the list."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A string to control the order of the entities returned in a list. You can use the **orderby** parameter to\nsort the list by one or more fields.\n\nEach field has a default sort order, which is normally ascending order. Read the API method implementation notes\nabove to check if any fields used in this method have a descending default search order.\n\nTo sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TaskPaging"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: value of **maxItems**, **skipCount**, or **orderBy** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**processId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/tasks": {
+      "get": {
+        "description": "Gets a list of tasks visible to the authenticated user.\n\nTasks are returned for which the authenticated user is the assignee  or\na candidate. If networks are enabled, the only tasks that are inside\nthe given network are returned.\n\nIn non-network deployments, administrators can see all processes and\nperform all operations on tasks. In network deployments, network\nadministrators can see all processes in their network and perform all\noperations on tasks in their network.\n",
+        "summary": "listTasks",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "TasksGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "skipCount",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The number of entities that  exist in the collection before those included in this list."
+          },
+          {
+            "name": "maxItems",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The maximum number of items to return in the list."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A string to control the order of the entities returned in a list. You can use the **orderby** parameter to\nsort the list by one or more fields.\n\nEach field has a default sort order, which is normally ascending order. Read the API method implementation notes\nabove to check if any fields used in this method have a descending default search order.\n\nTo sort the entities in a specific order, you can use the **ASC** and **DESC** keywords for any field."
+          },
+          {
+            "name": "where",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "A string to restrict the returned objects by using a predicate."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TaskPaging"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: value of **maxItems**, **skipCount**, **orderBy**, or **where** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/tasks/{taskId}": {
+      "get": {
+        "description": "Gets the task identified by **taskId**.\n\nAn authenticated user will have access to a task if the user has\nstarted the process or if the user is involved in any of the process’s\ntasks. In a network, only tasks that are inside the given network are\nreturned.\n\nIn non-network deployments, administrators can see all processes and\nperform all operations on tasks. In network deployments, network\nadministrators can see all processes in their network and perform all\noperations on tasks in their network.\n",
+        "summary": "getTask",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "TasksByTaskIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a task."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TaskEntry"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**taskId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates the state of the task **taskId**.\n\nTo perform a task action the authenticated user must be the assignee  or\na candidate. If networks is enabled, the task action is only\nperformed  if the task is inside the given network.\n\nIn non-network deployments, administrators can perform all operations\non  tasks. In network deployments, network administrators can see all\ntasks  in their network and perform all operations on tasks in their\nnetwork.\n\nYou use the **select** parameter in the URL to specify a comma-separated list of\nproperties in the\ntask that you want to update. Use the JSON body to specify the new values for those\nproperties.\n\nSo for example to change the state of task **123** to **completed**, use\nthis URL\nhttp://localhost:8080/alfresco/api/-default-/public/workflow/versions/1/tasks/123?select=state, and\nprovide this request body:\n\n```JSON\n{\n  \"state\": \"completed\"\n}\n```\nState Transitions\n=================\n\nClients can invoke actions by assigning an allowed value to the state property of a task.\nThe select parameter can be used to allow for a partial update of the resource.\nAlfresco will check for illegal state transitions and return an HTTP Bad Request (Response 400)\nif an illegal state transition is attempted.\nThere are five state transitions, completing, claiming, unclaiming, delegating, resolving.\n\nCompleting a task\n-----------------\n\nIf variables are included in the JSON body, they will be set in the task and then the process will continue.\n\nTo complete a task, the authenticated user must be the assignee of the task, the owner of the task, or have started the process.\n\nIn non-network deployments, administrators can perform this task operation on all tasks.\nIn network deployments, network administrators can perform this action on all tasks in their network.\n\nHere's an example PUT request\n\n```\n/tasks/123?select=state,variables\n```\nHere's is a corresponding PUT request body:\n\n```JSON\n{\n  “state : “completed”,\n  “variables” : [\n  {\n    \"name\" : \"bpm_priority\",\n    \"type\" : \"d_int\",\n    \"value\" : 1,\n    \"scope\" : \"global\"\n  }\n ]\n}\n```\n\nClaiming a task\n-----------------\n\nTo claim a task, the authenticated user must be the assignee of the task,\nthe owner of the task, or have started the process.\n\nHere's an example PUT request\n\n```\n/tasks/123?select=state\n```\nHere's a corresponding PUT request body:\n\n```JSON\n{\n  “state : “claimed”\n}\n```\n\nUnclaiming a task\n-----------------\n\nThis removes the current assignee of the task.\n\nTo unclaim a task, the authenticated user must be the assignee of the task,\nthe owner of the task, or have started the process.\n\nHere's an example PUT request\n\n```\n/tasks/123?select=state\n```\nHere's a corresponding PUT request body:\n\n```JSON\n{\n  “state : “unclaimed”\n}\n```\n\nDelegating a task\n-----------------\n\nThis delegates the task from the owner to an assignee.\nThe result is the same as if the assignee had claimed the task,\nbut the task can then be resolved and the owner will\nbecome the assignee again.\n\nTo delegate a task, the authenticated user must be the\nassignee of the task and the assignee must be different from the owner.\n\nHere's an example PUT request\n\n```\n/tasks/123?select=state,assignee\n```\nHere's a corresponding PUT request body:\n\n```JSON\n{\n  “state : “delegated”,\n  “assignee : “Kermit”\n}\n```\nResolving a task\n-----------------\n\nThis returns a delegated task back to the owner.\nIn order to delegate a task, the authenticated user\nmust be the assignee of the task and the assignee must\nbe different from the owner.\n\nTo resolve a task, the authenticated user must be\nthe assignee of the task, the owner of the task,\nor have started the process.\n\nHere's an example PUT request\n\n```\n/tasks/123?select=state\n```\nHere's a corresponding PUT request body:\n\n```JSON\n{\n  “state : “resolved”\n}\n```\n",
+        "summary": "updateTask",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "TasksByTaskIdPut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a task."
+          },
+          {
+            "name": "taskBody",
+            "in": "body",
+            "required": true,
+            "description": "An object containing the properties to be updated",
+            "schema": {
+              "$ref": "#/definitions/TaskBody"
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "A string specifying a required subset of properties to be returned for an entity or list of entities. Properties are separated by commas."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TaskEntry"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: **taskBody** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/tasks/{taskId}/task-form-model": {
+      "get": {
+        "description": "Gets the model of the task form type definition.\n\nAn authenticated user will have access to  access to all task form models.\nIn a network, only task form models that are inside the given network\nare returned.\n",
+        "summary": "getTaskFormModel",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "TasksTaskFormModelByTaskIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a task."
+          },
+          {
+            "name": "skipCount",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The number of entities that  exist in the collection before those included in this list."
+          },
+          {
+            "name": "maxItems",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The maximum number of items to return in the list."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TaskFormModelPaging"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: value of **maxItems** or **skipCount** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**taskId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/tasks/{taskId}/variables": {
+      "get": {
+        "description": "Gets a list of variables for the specified task **taskId**.\n\nAn authenticated user will have access to a tasks variables if the\nuser has started the process or if the user is involved in any of the\nprocess’s tasks.  In a network, only variables for a process that is\ninside the given network are returned.\n\nIn non-network deployments, administrators can see all variables and\nperform all operations  on those variable. In network deployments,\nnetwork administrators can see all variables in  their network and\nperform all operations on variables in their network.\n",
+        "summary": "listTaskVariables",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "TasksVariablesByTaskIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a task."
+          },
+          {
+            "name": "skipCount",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The number of entities that  exist in the collection before those included in this list."
+          },
+          {
+            "name": "maxItems",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The maximum number of items to return in the list."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          },
+          {
+            "name": "where",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "A string to restrict the returned objects by using a predicate."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/VariablePaging"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: value of **maxItems**, **skipCount**, or **where** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**taskId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "post": {
+        "description": "Create or update a variable for the task **taskId**.\nIf the variable does not exist yet, it will be created.      \n\n\n**Note:** You can create or update more than one variable by \nspecifying a list of variables in the JSON body like this:\n\n```JSON\n[\n  {\n    \"name\": \"string\",\n    \"value\": \"string\",\n    \"type\": \"string\"\n  },\n  {\n    \"name\": \"string\",\n    \"value\": \"string\",\n    \"type\": \"string\"\n  }\n]\n```\nIf you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:\n\n```JSON\n{\n  \"list\": {\n    \"pagination\": {\n      \"count\": 2,\n      \"hasMoreItems\": false,\n      \"totalItems\": 2,\n      \"skipCount\": 0,\n      \"maxItems\": 100\n    },\n    \"entries\": [\n      {\n        \"entry\": {\n          ...\n        }\n      },\n      {\n        \"entry\": {\n         ...\n        }\n      }\n    ]\n  }\n}\n```\n",
+        "summary": "createTaskVariables",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "TasksVariablesByTaskIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a task."
+          },
+          {
+            "name": "variable",
+            "in": "body",
+            "required": true,
+            "description": "A variable",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/VariableEntry"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**taskId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/tasks/{taskId}/variables/{variableName}": {
+      "put": {
+        "description": "Creates or updates a specific variable **variableName** for a given task **taskId**.\n",
+        "summary": "updateTaskVariable",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "TasksVariablesByTaskIdAndVariableNamePut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a task."
+          },
+          {
+            "name": "variableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of a variable."
+          },
+          {
+            "name": "variableBody",
+            "in": "body",
+            "required": true,
+            "description": "A variable",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/VariableEntry"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: **variableBody** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**taskId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "Deletes the variable with the specified **variableName** from the task with the specified **taskId**.\n",
+        "summary": "deleteTaskVariable",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "TasksVariablesByTaskIdAndVariableNameDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a task."
+          },
+          {
+            "name": "variableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of a variable."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful response",
+            "headers": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "The **taskId** does not exist or the **variableName** does not exist",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/tasks/{taskId}/items": {
+      "get": {
+        "description": "Gets a list of items for the specified task **taskId**.\n\nAn authenticated user will have access to a task's items if the\nuser has started the process or if the user is involved in any of the\nprocess’s tasks.  In a network, only items for a process that is\ninside the given network are returned.\n\nIn non-network deployments, administrators can see all items and\nperform all operations  on those items. In network deployments,\nnetwork administrators can see all items in their network and\nperform all operations on items in their network.\n",
+        "summary": "listTaskItems",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "TasksItemsByTaskIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a task."
+          },
+          {
+            "name": "skipCount",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The number of entities that  exist in the collection before those included in this list."
+          },
+          {
+            "name": "maxItems",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The maximum number of items to return in the list."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ItemPaging"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: value of **maxItems** or **skipCount** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**taskId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates an item for a given task **taskId**.\n\nIf the item  already is part of that task the request will have no effect.\n\n**Note:** You can create more than one item by\nspecifying a list of items in the JSON body like this:\n\n```JSON\n[\n  {\n     \"id\": \"1ff9da1a-ee2f-4b9c-8c34-44665e844444\"\n  },\n  {\n     \"id\": \"1ff9da1a-ee2f-4b9c-8c34-44665e855555\"\n  }\n]\n```\nIf you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:\n\n```JSON\n{\n  \"list\": {\n    \"pagination\": {\n      \"count\": 2,\n      \"hasMoreItems\": false,\n      \"totalItems\": 2,\n      \"skipCount\": 0,\n      \"maxItems\": 100\n    },\n    \"entries\": [\n      {\n        \"entry\": {\n          ...\n        }\n      },\n      {\n        \"entry\": {\n          ...\n        }\n      }\n    ]\n  }\n}\n```\n",
+        "summary": "createTaskItem",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "TasksItemsByTaskIdPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a task."
+          },
+          {
+            "name": "itemBody",
+            "in": "body",
+            "required": true,
+            "description": "The nodeId of the item",
+            "schema": {
+              "$ref": "#/definitions/ItemBody"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ItemPaging"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: **itemBody** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**taskId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/tasks/{taskId}/items/{itemId}": {
+      "delete": {
+        "description": "Deletes the item with the specified **itemId** from the task with the specified **taskId**.\n",
+        "summary": "deleteTaskItem",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "TasksItemsByTaskIdAndItemIdDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a task."
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of an item."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful response",
+            "headers": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "The **taskId** does not exist or the **itemId** does not exist",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/tasks/{taskId}/candidates": {
+      "get": {
+        "description": "Gets a list of candidate users and groups for the specified task **taskId**.\n",
+        "summary": "listTaskCandidates",
+        "tags": [
+          "tasks"
+        ],
+        "operationId": "TasksCandidatesByTaskIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of a task."
+          },
+          {
+            "name": "skipCount",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The number of entities that  exist in the collection before those included in this list."
+          },
+          {
+            "name": "maxItems",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1.0,
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "The maximum number of items to return in the list."
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of property names. You can use the properties parameter to restrict the number of returned properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CandidatePaging"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid parameter: value of **maxItems** or **skipCount** is invalid\n",
+            "schema": {}
+          },
+          "401": {
+            "description": "Authentication failed",
+            "schema": {}
+          },
+          "404": {
+            "description": "**taskId** does not exist\n",
+            "schema": {}
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "title": "Error",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error1"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Pagination": {
+      "title": "Pagination",
+      "type": "object",
+      "properties": {
+        "count": {
+          "description": "The number of objects in the entries array.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "hasMoreItems": {
+          "description": "A boolean value which is **true** if there are more entities in the collection\nbeyond those in this response. A true value means a request with a larger value\nfor the **skipCount** or the **maxItems** parameter will return more entities.",
+          "type": "boolean"
+        },
+        "totalItems": {
+          "description": "An integer describing the total number of entities in the collection.\nThe API might not be able to determine this value,\nin which case this property will not be present.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "skipCount": {
+          "description": "An integer describing how many entities exist in the collection before\nthose included in this list.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "maxItems": {
+          "description": "The value of the **maxItems** parameter used to generate this list,\nor if there was no **maxItems** parameter the default value, 10",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "DeploymentPaging": {
+      "title": "DeploymentPaging",
+      "type": "object",
+      "properties": {
+        "list": {
+          "$ref": "#/definitions/List"
+        }
+      }
+    },
+    "DeploymentEntry": {
+      "title": "DeploymentEntry",
+      "type": "object",
+      "properties": {
+        "entry": {
+          "$ref": "#/definitions/Deployment"
+        }
+      }
+    },
+    "Deployment": {
+      "title": "Deployment",
+      "description": "A deployment resource represents one file inside a deployment.\n\nProcess files, forms and perhaps some other files are authored in\na separate environment. The act of deployment brings them into the runtime\nworkflow engine.\n\nA deployment is a collection of files that include all resources to specify\none or more process definitions. After deployment, the included process\ndefinitions are known to the workflow runtime engine and new processes can\nbe started.\n\nUsers can then continue to edit the process and other files in their\nauthoring environment like e.g. our eclipse based process editor.\nA redeployment will result in a complete separate deployment containing new\nversions of the process definition.\n\nWhen a process definition inside a new deployment has the same key as an\nexisting process definition, then it is considered a new version of the\nexisting process definition.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "deployedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ProcessDefinitionPaging": {
+      "title": "ProcessDefinitionPaging",
+      "type": "object",
+      "properties": {
+        "list": {
+          "$ref": "#/definitions/List1"
+        }
+      }
+    },
+    "ProcessDefinitionEntry": {
+      "title": "ProcessDefinitionEntry",
+      "type": "object",
+      "properties": {
+        "entry": {
+          "$ref": "#/definitions/ProcessDefinition"
+        }
+      }
+    },
+    "ProcessDefinition": {
+      "title": "ProcessDefinition",
+      "description": "A process definition is a description of an execution flow in terms of\nactivities. New processes are created and started for a process\ndefinition.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique id of this process definition",
+          "type": "string"
+        },
+        "key": {
+          "description": "The key of this process definition",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of this process definition",
+          "type": "string"
+        },
+        "category": {
+          "description": "The category to which this process definition belongs",
+          "type": "string"
+        },
+        "deploymentId": {
+          "description": "The deployment of which this process definition is a part",
+          "type": "string"
+        },
+        "title": {
+          "description": "The title of this process definition",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of this process definition",
+          "type": "string"
+        },
+        "startFormResourceKey": {
+          "description": "The start form key",
+          "type": "string"
+        },
+        "graphicNotationDefined": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ProcessPaging": {
+      "title": "ProcessPaging",
+      "type": "object",
+      "properties": {
+        "list": {
+          "$ref": "#/definitions/List2"
+        }
+      }
+    },
+    "ProcessEntry": {
+      "title": "ProcessEntry",
+      "type": "object",
+      "properties": {
+        "entry": {
+          "$ref": "#/definitions/Process"
+        }
+      }
+    },
+    "Process": {
+      "title": "Process",
+      "description": "A process describes a running instance of a process definition.\n\nWhen a new deployment includes a process definition that is already\ndeployed with the same key, the newly deployed process definition will be\nconsidered a new version of the same process definition. By default\nprocesses will keep running in the process definition they are started in.\nBut new processes can be started in the latest version of a process\ndefinition by using the processDefinitionKey parameter.\n\nIn non-network deployments, administrators can see all processes and\nperform all operations on tasks. In network deployments, network\nadministrators can see processes in their network and perform all\noperations on tasks in their network.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique id of this process",
+          "type": "string"
+        },
+        "processDefinitionId": {
+          "description": "The unique identity of the owning process definition",
+          "type": "string"
+        },
+        "businessKey": {
+          "description": "The business key",
+          "type": "string"
+        },
+        "startedAt": {
+          "description": "The date time this process started",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endedAt": {
+          "description": "The date time this process started",
+          "type": "string",
+          "format": "date-time"
+        },
+        "durationInMs": {
+          "description": "The duration of this process",
+          "type": "integer",
+          "format": "int32"
+        },
+        "startActivityDefinitionId": {
+          "description": "The id of the first activity in the process",
+          "type": "string"
+        },
+        "endActivityDefinitionId": {
+          "description": "The id of the last activity in the process",
+          "type": "string"
+        },
+        "startUserId": {
+          "description": "The id of the user who started the process",
+          "type": "string"
+        },
+        "deleteReason": {
+          "description": "The reason this process was canceled",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "TaskPaging": {
+      "title": "TaskPaging",
+      "type": "object",
+      "properties": {
+        "list": {
+          "$ref": "#/definitions/List3"
+        }
+      }
+    },
+    "TaskEntry": {
+      "title": "TaskEntry",
+      "type": "object",
+      "properties": {
+        "entry": {
+          "$ref": "#/definitions/Task"
+        }
+      }
+    },
+    "Task": {
+      "title": "Task",
+      "description": "A task describes one task for a human user.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique id of this task",
+          "type": "string"
+        },
+        "processId": {
+          "description": "The containing process's unique id",
+          "type": "string"
+        },
+        "processDefinitionId": {
+          "description": "The unique identity of the owning process definition",
+          "type": "string"
+        },
+        "activityDefinitionId": {
+          "description": "The activity id of this task",
+          "type": "string"
+        },
+        "name": {
+          "description": "The text name of this task",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of this task",
+          "type": "string"
+        },
+        "dueAt": {
+          "description": "The date time this task is due",
+          "type": "string",
+          "format": "date-time"
+        },
+        "startedAt": {
+          "description": "The date time this task started",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endedAt": {
+          "description": "The date time this task started",
+          "type": "string",
+          "format": "date-time"
+        },
+        "durationInMs": {
+          "description": "The duration of this task",
+          "type": "integer",
+          "format": "int32"
+        },
+        "priority": {
+          "description": "The numeric priority of this task",
+          "type": "integer",
+          "format": "int32"
+        },
+        "owner": {
+          "description": "The id of the user who owns this task",
+          "type": "string"
+        },
+        "assignee": {
+          "description": "The id of the user who is currently assigned this task",
+          "type": "string"
+        },
+        "formResourceKey": {
+          "description": "The key of the form for this task",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/State"
+        },
+        "variables": {
+          "description": "An array of variables for this task",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Variable"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "VariablePaging": {
+      "title": "VariablePaging",
+      "type": "object",
+      "properties": {
+        "list": {
+          "$ref": "#/definitions/List4"
+        }
+      }
+    },
+    "VariableEntry": {
+      "title": "VariableEntry",
+      "type": "object",
+      "properties": {
+        "entry": {
+          "$ref": "#/definitions/Variable"
+        }
+      }
+    },
+    "Variable": {
+      "title": "Variable",
+      "description": "A task variable.",
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "VariableBody": {
+      "title": "VariableBody",
+      "description": "An input process variable.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "ProcessBody": {
+      "title": "ProcessBody",
+      "description": "required to start a process.",
+      "type": "object",
+      "properties": {
+        "processDefinitionKey": {
+          "type": "string"
+        },
+        "variables": {
+          "$ref": "#/definitions/ProcessBodyVariable"
+        }
+      }
+    },
+    "ProcessBodyVariable": {
+      "title": "ProcessBodyVariable",
+      "description": "A set of process variables of differing types.",
+      "type": "object",
+      "properties": {
+        "bpm_assignee": {
+          "type": "string"
+        },
+        "bpm_sendEMailNotifications": {
+          "type": "boolean"
+        },
+        "bpm_workflowPriority": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ItemBody": {
+      "title": "ItemBody",
+      "description": "The **nodeId** of the item",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "ItemPaging": {
+      "title": "ItemPaging",
+      "type": "object",
+      "properties": {
+        "list": {
+          "$ref": "#/definitions/List5"
+        }
+      }
+    },
+    "ItemEntry": {
+      "title": "ItemEntry",
+      "type": "object",
+      "properties": {
+        "entry": {
+          "$ref": "#/definitions/Item"
+        }
+      }
+    },
+    "Item": {
+      "title": "Item",
+      "description": "A process item.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "mimeType": {
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/Person"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "edited": {
+          "type": "boolean"
+        },
+        "modifiedBy": {
+          "$ref": "#/definitions/Person"
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "TaskFormModelPaging": {
+      "title": "TaskFormModelPaging",
+      "type": "object",
+      "properties": {
+        "list": {
+          "$ref": "#/definitions/List6"
+        }
+      }
+    },
+    "TaskFormModelEntry": {
+      "title": "TaskFormModelEntry",
+      "type": "object",
+      "properties": {
+        "entry": {
+          "$ref": "#/definitions/TaskFormModel"
+        }
+      }
+    },
+    "TaskFormModel": {
+      "title": "TaskFormModel",
+      "description": "A task form model item.",
+      "type": "object",
+      "properties": {
+        "dataType": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "qualifiedName": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "defaultValue": {
+          "type": "string"
+        },
+        "allowedValues": {
+          "description": "An array of allowed values for this item",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Person": {
+      "title": "Person",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "avatarId": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "skypeId": {
+          "type": "string"
+        },
+        "googleId": {
+          "type": "string"
+        },
+        "instantMessageId": {
+          "type": "string"
+        },
+        "jobTitle": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "company": {
+          "$ref": "#/definitions/Company"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "statusUpdatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "userStatus": {
+          "type": "string"
+        },
+        "enabled": {
+          "example": true,
+          "type": "boolean",
+          "default": true
+        },
+        "emailNotificationsEnabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "Company": {
+      "title": "Company",
+      "type": "object",
+      "properties": {
+        "organization": {
+          "type": "string"
+        },
+        "address1": {
+          "type": "string"
+        },
+        "address2": {
+          "type": "string"
+        },
+        "address3": {
+          "type": "string"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "TaskBody": {
+      "title": "TaskBody",
+      "description": "Input body to update a specific task.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The text name of this task",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of this task",
+          "type": "string"
+        },
+        "dueAt": {
+          "description": "The date time this task is due",
+          "type": "string",
+          "format": "date-time"
+        },
+        "priority": {
+          "description": "The numeric priority of this task",
+          "type": "integer",
+          "format": "int32"
+        },
+        "owner": {
+          "description": "The id of the user who owns this task",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/State"
+        },
+        "variables": {
+          "description": "An array of variables for this task",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Variable"
+          }
+        }
+      }
+    },
+    "CandidatePaging": {
+      "title": "CandidatePaging",
+      "type": "object",
+      "properties": {
+        "list": {
+          "$ref": "#/definitions/List7"
+        }
+      }
+    },
+    "CandidateEntry": {
+      "title": "CandidateEntry",
+      "type": "object",
+      "properties": {
+        "entry": {
+          "$ref": "#/definitions/Candidate"
+        }
+      }
+    },
+    "Candidate": {
+      "title": "Candidate",
+      "description": "A candidate item.",
+      "type": "object",
+      "properties": {
+        "candidateType": {
+          "$ref": "#/definitions/CandidateType"
+        },
+        "candidateId": {
+          "type": "string"
+        }
+      }
+    },
+    "CandidateType": {
+      "title": "CandidateType",
+      "example": "user",
+      "type": "string",
+      "enum": [
+        "user",
+        "group"
+      ]
+    },
+    "Error1": {
+      "title": "Error1",
+      "type": "object",
+      "properties": {
+        "errorKey": {
+          "type": "string"
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "briefSummary": {
+          "type": "string"
+        },
+        "stackTrace": {
+          "type": "string"
+        },
+        "descriptionURL": {
+          "type": "string"
+        },
+        "logId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "statusCode",
+        "briefSummary",
+        "stackTrace",
+        "descriptionURL"
+      ]
+    },
+    "List": {
+      "title": "List",
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/Pagination"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentEntry"
+          }
+        }
+      }
+    },
+    "List1": {
+      "title": "List1",
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/Pagination"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessDefinitionEntry"
+          }
+        }
+      }
+    },
+    "List2": {
+      "title": "List2",
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/Pagination"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProcessEntry"
+          }
+        }
+      }
+    },
+    "List3": {
+      "title": "List3",
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/Pagination"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TaskEntry"
+          }
+        }
+      }
+    },
+    "List4": {
+      "title": "List4",
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/Pagination"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VariableEntry"
+          }
+        }
+      }
+    },
+    "List5": {
+      "title": "List5",
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/Pagination"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemEntry"
+          }
+        }
+      }
+    },
+    "List6": {
+      "title": "List6",
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/Pagination"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TaskFormModelEntry"
+          }
+        }
+      }
+    },
+    "List7": {
+      "title": "List7",
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/Pagination"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CandidateEntry"
+          }
+        }
+      }
+    },
+    "State": {
+      "title": "State",
+      "description": "The state of this task",
+      "example": "unclaimed",
+      "type": "string",
+      "enum": [
+        "unclaimed",
+        "claimed",
+        "completed",
+        "resolved"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "deployments",
+      "description": "Retrieve and manage deployments"
+    },
+    {
+      "name": "process-definitions",
+      "description": "Retrieve and manage process definitions"
+    },
+    {
+      "name": "processes",
+      "description": "Retrieve and manage processes"
+    },
+    {
+      "name": "tasks",
+      "description": "Retrieve and manage tasks"
+    }
+  ]
+}
