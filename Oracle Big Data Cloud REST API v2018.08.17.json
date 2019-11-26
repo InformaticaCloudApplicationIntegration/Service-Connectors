@@ -1,0 +1,3552 @@
+{
+    "swagger":"2.0",
+    "info":{
+        "description":"<p>The Oracle Big Data Cloud (BDC) provides APIs to control Spark Jobs. Currently the following Spark Jobs are supported [batch,interactive,streaming] with the following Spark Sessions [spark,pyspark,sparkr].</p>",
+        "version":"2018.08.17",
+        "title":"REST API for Oracle Big Data Cloud",
+        "x-summary":"The Oracle Big Data Cloud (BDC) provides APIs to control Spark Jobs."
+    },
+    "schemes":[
+        "https"
+    ],
+    "paths":{
+        "/bdcsce/api/v1.1/build":{
+            "get":{
+                "tags":[
+                    "Build Info"
+                ],
+                "summary":"Get Build Info",
+                "operationId":"getBuildInfo",
+                "parameters":[
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "type":"string"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Build Info was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-build-get",
+                "x-filename-id":"bdcsce-api-v1.1-build-get"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}":{
+            "get":{
+                "tags":[
+                    "Cluster"
+                ],
+                "summary":"Get Cluster Info",
+                "operationId":"getClusterInfo",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/ClusterStatusSnapshot"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Cluster was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-get"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/jobs":{
+            "get":{
+                "tags":[
+                    "Compute Job"
+                ],
+                "summary":"List the latest status of all Compute Job",
+                "operationId":"listJobs",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/PageableJobStatus"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Compute Job was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-jobs-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-jobs-get"
+            },
+            "post":{
+                "tags":[
+                    "Compute Job"
+                ],
+                "summary":"Submit a Spark Compute Job",
+                "operationId":"postJob",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"body",
+                        "name":"Spark Job Request",
+                        "description":"Definition of the Spark Job that you want to submit.",
+                        "required":true,
+                        "schema":{
+                            "$ref":"#/definitions/SparkJobHttpRequest"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/AsyncJobStatus"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Compute Job was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-jobs-post",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-jobs-post"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/jobs/mapred":{
+            "post":{
+                "tags":[
+                    "Compute Job"
+                ],
+                "summary":"Submit a Map-Reduce Compute Job",
+                "operationId":"postYarnMapReduceJob",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"body",
+                        "name":"Yarn Map-Reduce Job Request",
+                        "description":"Definition of the Map-Reduce Job that you want to submit.",
+                        "required":true,
+                        "schema":{
+                            "$ref":"#/definitions/YarnMapReduceJobHttpRequest"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/AsyncJobStatus"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Compute Job was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-jobs-mapred-post",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-jobs-mapred-post"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/jobs/spark":{
+            "post":{
+                "tags":[
+                    "Compute Job"
+                ],
+                "summary":"Submit a Spark Compute Job",
+                "operationId":"postSparkJob",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"body",
+                        "name":"Spark Job Request",
+                        "description":"Definition of the Spark Job that you want to submit.",
+                        "required":true,
+                        "schema":{
+                            "$ref":"#/definitions/SparkJobHttpRequest"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/AsyncJobStatus"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Compute Job was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-jobs-spark-post",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-jobs-spark-post"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/jobs/summary":{
+            "get":{
+                "tags":[
+                    "Compute Job"
+                ],
+                "summary":"Get Compute Job Summary",
+                "operationId":"getAggregatedJobsMetrics",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/AggregatedJobsMetrics"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Compute Job was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-jobs-summary-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-jobs-summary-get"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/jobs/{jobId}":{
+            "get":{
+                "tags":[
+                    "Compute Job"
+                ],
+                "summary":"Get a Compute Job reference.",
+                "operationId":"getJob",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"jobId",
+                        "in":"path",
+                        "description":"Compute Job Identifier",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/AsyncJobStatus"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Compute Job was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-jobs-{jobId}-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-jobs-jobid-get"
+            },
+            "delete":{
+                "tags":[
+                    "Compute Job"
+                ],
+                "summary":"Request a Compute Job to be aborted.",
+                "operationId":"abortJob",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"jobId",
+                        "in":"path",
+                        "description":"Compute Job Identifier",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/JobProgressValue"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Compute Job was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-jobs-{jobId}-delete",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-jobs-jobid-delete"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/jobs/{jobId}/logs/aggregated/{name}":{
+            "get":{
+                "tags":[
+                    "Compute Job"
+                ],
+                "summary":"Page through a Compute Job aggregated log.",
+                "operationId":"getAggregatedLogBytes",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"jobId",
+                        "in":"path",
+                        "description":"Compute Job Identifier",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"name",
+                        "in":"path",
+                        "description":"Name of the log file in job's log directory.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"bytes",
+                        "in":"query",
+                        "description":"Number of bytes to return from the tail.",
+                        "required":false,
+                        "type":"integer",
+                        "format":"int64"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "type":"string"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Compute Job was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-jobs-{jobId}-logs-aggregated-{name}-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-jobs-jobid-logs-aggregated-name-get"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/jobs/{jobId}/logs/runtime/{containerId}/{name}":{
+            "get":{
+                "tags":[
+                    "Compute Job"
+                ],
+                "summary":"Page through a Compute Job container/running log.",
+                "operationId":"getRunningLogBytes",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"jobId",
+                        "in":"path",
+                        "description":"Compute Job Identifier",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"containerId",
+                        "in":"path",
+                        "description":"Container Identifier",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"name",
+                        "in":"path",
+                        "description":"Name of the log file in the job's log directory.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"bytes",
+                        "in":"query",
+                        "description":"Number of bytes to return from the tail.",
+                        "required":false,
+                        "type":"integer",
+                        "format":"int64"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "type":"string"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Compute Job was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-jobs-{jobId}-logs-runtime-{containerId}-{name}-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-jobs-jobid-logs-runtime-containerid-name-get"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/jobs/{jobId}/status":{
+            "get":{
+                "tags":[
+                    "Compute Job"
+                ],
+                "summary":"Get a latest Compute Job status.",
+                "operationId":"getJobStatus",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"jobId",
+                        "in":"path",
+                        "description":"Compute Job Identifier",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/JobProgressValue"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Compute Job was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-jobs-{jobId}-status-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-jobs-jobid-status-get"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/keystores/service/keys":{
+            "get":{
+                "tags":[
+                    "Service Key Store - Key"
+                ],
+                "summary":"Get Service Key Store - Key",
+                "operationId":"getSystemKeys",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/PageableSystemKeys"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Service Key Store - Key was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-keystores-service-keys-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-keystores-service-keys-get"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/keystores/service/keys/{key}":{
+            "get":{
+                "tags":[
+                    "Service Key Store - Key"
+                ],
+                "summary":"Fetch Service Key Store - Key",
+                "operationId":"getSystemKeyReference",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"key",
+                        "in":"path",
+                        "description":"Key identifier",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/KeyStoreKeyRef"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Service Key Store - Key was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-keystores-service-keys-{key}-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-keystores-service-keys-key-get"
+            },
+            "put":{
+                "tags":[
+                    "Service Key Store - Key"
+                ],
+                "summary":"Update a Service Key Store - Key",
+                "operationId":"updateSystemKeyReference",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"body",
+                        "name":"keyValue",
+                        "description":"The updated value for the given key in the key store.",
+                        "required":true,
+                        "schema":{
+                            "$ref":"#/definitions/KeyStoreKeyValueRef"
+                        }
+                    },
+                    {
+                        "name":"key",
+                        "in":"path",
+                        "description":"Key identifier",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/KeyStoreKeyRef"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Service Key Store - Key was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-keystores-service-keys-{key}-put",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-keystores-service-keys-key-put"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/keystores/user/keys":{
+            "get":{
+                "tags":[
+                    "User Key Store - Key"
+                ],
+                "summary":"Get User Key Store - Key",
+                "operationId":"getUserKeys",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/PageableUserKeys"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The User Key Store - Key was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-keystores-user-keys-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-keystores-user-keys-get"
+            },
+            "post":{
+                "tags":[
+                    "User Key Store - Key"
+                ],
+                "summary":"Create/Update a User Key Store - Key",
+                "operationId":"upsertUserKeyEntry",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"body",
+                        "name":"keyEntry",
+                        "description":"Key entry that will be added to the key store.",
+                        "required":true,
+                        "schema":{
+                            "$ref":"#/definitions/KeyStoreKeyHttpRequest"
+                        }
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The User Key Store - Key was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-keystores-user-keys-post",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-keystores-user-keys-post"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/keystores/user/keys/{key}":{
+            "get":{
+                "tags":[
+                    "User Key Store - Key"
+                ],
+                "summary":"Fetch User Key Store - Key",
+                "operationId":"getUserKey",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"key",
+                        "in":"path",
+                        "description":"Key identifier",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/KeyStoreKeyRef"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The User Key Store - Key was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-keystores-user-keys-{key}-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-keystores-user-keys-key-get"
+            },
+            "put":{
+                "tags":[
+                    "User Key Store - Key"
+                ],
+                "summary":"Update a User Key Store - Key",
+                "operationId":"updateUserKey",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"body",
+                        "name":"keyValue",
+                        "description":"The updated value for the given key in the key store.",
+                        "required":true,
+                        "schema":{
+                            "$ref":"#/definitions/KeyStoreKeyValueRef"
+                        }
+                    },
+                    {
+                        "name":"key",
+                        "in":"path",
+                        "description":"Key identifier",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/KeyStoreKeyRef"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The User Key Store - Key was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-keystores-user-keys-{key}-put",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-keystores-user-keys-key-put"
+            },
+            "delete":{
+                "tags":[
+                    "User Key Store - Key"
+                ],
+                "summary":"Delete a User Key Store - Key",
+                "operationId":"deleteUserKey",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"key",
+                        "in":"path",
+                        "description":"Key identifier",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/KeyStoreKeyRef"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The User Key Store - Key was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-keystores-user-keys-{key}-delete",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-keystores-user-keys-key-delete"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/metrics":{
+            "get":{
+                "tags":[
+                    "Cluster Metrics"
+                ],
+                "summary":"Get Cluster Host Metrics",
+                "operationId":"getClusterHostMetrics",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/ClusterMetricsAggregation"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Cluster Host Metrics was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-metrics-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-metrics-get"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/metrics/workers":{
+            "get":{
+                "tags":[
+                    "Cluster Metrics"
+                ],
+                "summary":"Get Cluster Worker Metrics",
+                "operationId":"getClusterWorkerNodeMetrics",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/ClusterWorkerNodeMetricsColl"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Cluster Host Metrics was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-metrics-workers-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-metrics-workers-get"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/objectstore/default":{
+            "get":{
+                "tags":[
+                    "Oracle Cloud Storage"
+                ],
+                "summary":"Get default Oracle Cloud Storage container Status",
+                "operationId":"getContainerStatus",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/SwiftObjectStoreContainerStatus"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Oracle Cloud Storage was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-objectstore-default-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-objectstore-default-get"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/objectstore/default/files":{
+            "get":{
+                "tags":[
+                    "Oracle Cloud Storage"
+                ],
+                "summary":"List default Oracle Cloud Storage container objects.",
+                "operationId":"listObjects",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/PageableObjectStoreReferences"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Oracle Cloud Storage was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-objectstore-default-files-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-objectstore-default-files-get"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/objectstore/default/files/{subPath}":{
+            "get":{
+                "tags":[
+                    "Oracle Cloud Storage"
+                ],
+                "summary":"Get default Oracle Cloud Storage container object meta-data.",
+                "operationId":"getFile",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"subPath",
+                        "in":"path",
+                        "description":"Path of file in Object Store",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"",
+                        "schema":{
+                            "$ref":"#/definitions/SwiftObjectStoreFile"
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Oracle Cloud Storage was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-objectstore-default-files-{subPath}-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-objectstore-default-files-subpath-get"
+            }
+        },
+        "/bdcsce/api/v1.1/clustermgmt/{identityDomainId}/instances/{clusterId}/queues":{
+            "get":{
+                "tags":[
+                    "Job Scheduler Queues"
+                ],
+                "summary":"List Job Scheduler Queues elements",
+                "operationId":"getJobQueues",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"List of scheduler queues.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "$ref":"#/definitions/JobQueue"
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Job Scheduler Queues was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-queues-get",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-queues-get"
+            },
+            "post":{
+                "tags":[
+                    "Job Scheduler Queues"
+                ],
+                "summary":"Update Job Scheduler Queues",
+                "operationId":"updateJobQueues",
+                "parameters":[
+                    {
+                        "name":"identityDomainId",
+                        "in":"path",
+                        "description":"Identity domain ID of the Oracle Cloud Service instance, used for authentication.",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "name":"clusterId",
+                        "in":"path",
+                        "description":"Identifier for the Cluster",
+                        "required":true,
+                        "type":"string"
+                    },
+                    {
+                        "in":"body",
+                        "name":"JobQueueRequest",
+                        "description":"List of Queue Definition that will be set on the Cluster's Job Scheduler.",
+                        "required":true,
+                        "schema":{
+                            "$ref":"#/definitions/JobQueuesHttpRequest"
+                        }
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description":"List of errors related to the request.",
+                        "schema":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"An internal error occurred.",
+                        "schema":{
+                            "$ref":"#/definitions/Error"
+                        }
+                    },
+                    "404":{
+                        "description":"The Job Scheduler Queues was not found."
+                    }
+                },
+                "security":[
+                    {
+                        "basicAuth":[
+                        ]
+                    }
+                ],
+                "x-internal-id":"bdcsce-api-v1.1-clustermgmt-{identityDomainId}-instances-{clusterId}-queues-post",
+                "x-filename-id":"bdcsce-api-v1.1-clustermgmt-identitydomainid-instances-clusterid-queues-post"
+            }
+        }
+    },
+    "securityDefinitions":{
+        "basicAuth":{
+            "type":"basic"
+        }
+    },
+    "definitions":{
+        "ClusterHostMetrics":{
+            "type":"object",
+            "required":[
+                "clusterName",
+                "cpuCount",
+                "hostName",
+                "isHealthy",
+                "totalMemoryMB"
+            ],
+            "properties":{
+                "clusterName":{
+                    "type":"string",
+                    "description":"Name of the cluster."
+                },
+                "hostName":{
+                    "type":"string",
+                    "description":"Name of the host."
+                },
+                "cpuCount":{
+                    "type":"string",
+                    "description":"Number of CPUs."
+                },
+                "totalMemoryMB":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"Memory on the host."
+                },
+                "isHealthy":{
+                    "type":"boolean",
+                    "description":"Is this Host healthy.",
+                    "default":false
+                }
+            }
+        },
+        "JobAggregatedLogs":{
+            "type":"object",
+            "properties":{
+                "files":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/JobLogFileReference"
+                    }
+                }
+            }
+        },
+        "JobConnectorReference":{
+            "type":"object",
+            "required":[
+                "description",
+                "name",
+                "rel",
+                "uris"
+            ],
+            "properties":{
+                "name":{
+                    "type":"string",
+                    "description":"The name of the interface. e.g. Spark UI"
+                },
+                "description":{
+                    "type":"string",
+                    "description":"The description of the interface."
+                },
+                "uris":{
+                    "type":"array",
+                    "description":"The URI of the linked resource",
+                    "items":{
+                        "$ref":"#/definitions/JobConnectorResourceIdentifier"
+                    }
+                },
+                "rel":{
+                    "type":"string",
+                    "format":"uri",
+                    "description":"Related uri"
+                },
+                "type":{
+                    "type":"string",
+                    "description":"The media type to apply to the URI",
+                    "readOnly":true
+                }
+            }
+        },
+        "ClusterPackageVersionInfo":{
+            "type":"object",
+            "properties":{
+                "name":{
+                    "type":"string"
+                },
+                "version":{
+                    "type":"string"
+                }
+            }
+        },
+        "HostMetricsAggregation":{
+            "type":"object",
+            "properties":{
+                "totalMemoryMB":{
+                    "type":"integer",
+                    "format":"int64"
+                },
+                "totalCores":{
+                    "type":"integer",
+                    "format":"int32"
+                },
+                "totalOCPUs":{
+                    "type":"integer",
+                    "format":"int32"
+                },
+                "totalNodes":{
+                    "type":"integer",
+                    "format":"int32"
+                },
+                "totalHealthyNodes":{
+                    "type":"integer",
+                    "format":"int32"
+                }
+            }
+        },
+        "AggregatedJobsMetrics":{
+            "type":"object",
+            "properties":{
+                "succeeded":{
+                    "type":"number",
+                    "format":"double"
+                },
+                "processing":{
+                    "type":"number",
+                    "format":"double"
+                },
+                "failed":{
+                    "type":"number",
+                    "format":"double"
+                },
+                "aborted":{
+                    "type":"number",
+                    "format":"double"
+                },
+                "accepted":{
+                    "type":"number",
+                    "format":"double"
+                }
+            }
+        },
+        "PageableObjectStoreReferences":{
+            "type":"object",
+            "required":[
+                "container",
+                "count"
+            ],
+            "properties":{
+                "container":{
+                    "description":"Container the items come from.",
+                    "$ref":"#/definitions/SwiftObjectStoreContainerStatus"
+                },
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/SwiftObjectStoreFileHeader"
+                    }
+                },
+                "limit":{
+                    "type":"object",
+                    "description":"For an integer value n, limits the number of results to n."
+                },
+                "offset":{
+                    "type":"object",
+                    "description":"The page number. Normally used if you are not specifying a marker or endMarker."
+                },
+                "marker":{
+                    "type":"string",
+                    "description":"For a string value, x, returns container names that are greater than the marker value."
+                },
+                "endMarker":{
+                    "type":"string",
+                    "description":"For a string value, x, returns container names that are less than the marker value."
+                },
+                "prefix":{
+                    "type":"string",
+                    "description":"Named items in the response begin with this value."
+                },
+                "hasMore":{
+                    "type":"object",
+                    "description":"Are there more items to fetch"
+                },
+                "links":{
+                    "type":"array",
+                    "description":"Hyperlinks to other associated resources.",
+                    "items":{
+                        "$ref":"#/definitions/ModelLink"
+                    }
+                },
+                "count":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Number of items returned"
+                }
+            }
+        },
+        "ClusterMetricsAggregation":{
+            "type":"object",
+            "properties":{
+                "hosts":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/ClusterHostMetrics"
+                    }
+                },
+                "aggregation":{
+                    "$ref":"#/definitions/HostMetricsAggregation"
+                },
+                "clusterMetrics":{
+                    "$ref":"#/definitions/ClusterMetrics"
+                }
+            }
+        },
+        "JobQueuesHttpRequest":{
+            "type":"object",
+            "properties":{
+                "queues":{
+                    "type":"array",
+                    "description":"List of Queues that will be set in the Job Scheduler.",
+                    "items":{
+                        "$ref":"#/definitions/JobQueue"
+                    }
+                }
+            }
+        },
+        "KeyStoreEntry":{
+            "type":"object",
+            "properties":{
+                "key":{
+                    "type":"string",
+                    "description":"Identifier for the key."
+                },
+                "value":{
+                    "type":"string",
+                    "description":"Value of the key stored in the keystore."
+                }
+            }
+        },
+        "KeyStoreKeyHttpRequest":{
+            "type":"object",
+            "properties":{
+                "entry":{
+                    "description":"Key Store entry.",
+                    "$ref":"#/definitions/KeyStoreEntry"
+                }
+            }
+        },
+        "YarnMapReduceJobHttpRequest":{
+            "type":"object",
+            "properties":{
+                "job":{
+                    "description":"MapReduce Job Specification",
+                    "$ref":"#/definitions/YarnMapReduceJob"
+                }
+            }
+        },
+        "ClusterStatusSnapshot":{
+            "type":"object",
+            "required":[
+                "components"
+            ],
+            "properties":{
+                "clusterInfo":{
+                    "description":"Summarized cluster information.",
+                    "$ref":"#/definitions/ClusterInfo"
+                },
+                "components":{
+                    "description":"State of the cluster.",
+                    "$ref":"#/definitions/ClusterComponentsInfo"
+                },
+                "snapshotTime":{
+                    "type":"integer",
+                    "format":"int64"
+                }
+            }
+        },
+        "JobConnectorResourceIdentifier":{
+            "type":"object",
+            "required":[
+                "description",
+                "id",
+                "uri"
+            ],
+            "properties":{
+                "id":{
+                    "type":"string",
+                    "description":"The id of the interface. e.g. 1"
+                },
+                "description":{
+                    "type":"string",
+                    "description":"The description of the interface."
+                },
+                "uri":{
+                    "type":"string",
+                    "format":"uri",
+                    "description":"The URI of the linked resource"
+                }
+            }
+        },
+        "AsyncJobStatus":{
+            "type":"object",
+            "properties":{
+                "id":{
+                    "type":"string",
+                    "description":"Unique Job Identifier",
+                    "readOnly":true
+                },
+                "name":{
+                    "type":"string",
+                    "description":"Name of the Job, used for visual identification. It is not unique."
+                },
+                "applicationType":{
+                    "type":"string",
+                    "description":"The kind of application that this job represents.",
+                    "enum":[
+                        "hive",
+                        "mapreduce",
+                        "spark",
+                        "tez",
+                        "yarn",
+                        "unkown"
+                    ]
+                },
+                "applicationTags":{
+                    "type":"array",
+                    "description":"A collection of tags or labels associated with this job.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "queue":{
+                    "type":"string",
+                    "description":"Job Queue where this job was scheduled to run."
+                },
+                "intervalToPoll":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"Specifies the number of milliseconds to wait before rechecking the status of a job."
+                },
+                "completedPercentage":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"A value between 0 and 100 that specifies the percentage that the job is complete."
+                },
+                "startTimeMillis":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"Time in which job started (in ms since epoch)"
+                },
+                "endTimeMillis":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"Time in which job ended (in ms since epoch)"
+                },
+                "elapsedTime":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"Time since the job started (in ms)"
+                },
+                "allocatedMB":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Sum of memory in MB allocated to the job's running containers."
+                },
+                "allocatedVCores":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Sum of virtual cores allocated to the job's running containers."
+                },
+                "runningContainers":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Number of containers currently running for the job."
+                },
+                "progress":{
+                    "type":"string",
+                    "description":"Current progress of the Job.",
+                    "enum":[
+                        "aborted",
+                        "aborting",
+                        "accepted",
+                        "failed",
+                        "paused",
+                        "pending",
+                        "processing",
+                        "succeeded",
+                        "undefined"
+                    ]
+                },
+                "message":{
+                    "type":"string",
+                    "description":"Human-readable message that describes the current processing status."
+                },
+                "error":{
+                    "description":"Specifies the exception detail of the original request. This value is available only when a job has completed and failed.",
+                    "$ref":"#/definitions/Error"
+                },
+                "memorySeconds":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"The amount of memory the job has allocated"
+                },
+                "vcoreSeconds":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"The amount of CPU resources the job has allocated"
+                },
+                "containerLogs":{
+                    "type":"array",
+                    "description":"Location of log file(s) for a running job.",
+                    "items":{
+                        "$ref":"#/definitions/JobContainerLogs"
+                    }
+                },
+                "aggregatedLogs":{
+                    "description":"Aggregated log file(s) for a completed job available in the cluster.",
+                    "$ref":"#/definitions/JobAggregatedLogs"
+                },
+                "aggregatedStoredLogs":{
+                    "description":"Location of the aggregated log file(s) that have been copied to long term storage.",
+                    "$ref":"#/definitions/JobAggregatedStoredLogs"
+                },
+                "connectors":{
+                    "type":"array",
+                    "description":"Connecting interfaces that this Job offers. An example of this connector will be the Spark UI.",
+                    "items":{
+                        "$ref":"#/definitions/JobConnectorReference"
+                    }
+                },
+                "links":{
+                    "type":"array",
+                    "description":"Hyperlinks to other associated resources.",
+                    "items":{
+                        "$ref":"#/definitions/ModelLink"
+                    }
+                },
+                "snapshotTime":{
+                    "type":"integer",
+                    "format":"int64"
+                },
+                "startTime":{
+                    "type":"string",
+                    "format":"date-time",
+                    "description":"Specifies the time at which the job started.",
+                    "readOnly":true
+                },
+                "endTime":{
+                    "type":"string",
+                    "format":"date-time",
+                    "description":"Specifies the time at which the job has ended. This property is available only after a job has ended.",
+                    "readOnly":true
+                },
+                "sessionType":{
+                    "type":"string",
+                    "readOnly":true
+                },
+                "jobType":{
+                    "type":"string",
+                    "readOnly":true
+                },
+                "nameAlias":{
+                    "type":"string",
+                    "readOnly":true
+                },
+                "displayName":{
+                    "type":"string",
+                    "readOnly":true
+                },
+                "allocatedOCores":{
+                    "type":"object",
+                    "description":"Sum of virtual cores allocated to the job???s running containers.",
+                    "readOnly":true
+                },
+                "completed":{
+                    "type":"object",
+                    "description":"Specifies whether the job has been completed. It can be used to determine whether the client needs to keep polling the -progress- status.",
+                    "readOnly":true
+                }
+            }
+        },
+        "PageableSystemKeys":{
+            "type":"object",
+            "required":[
+                "count"
+            ],
+            "properties":{
+                "limit":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"limit that was set by the user"
+                },
+                "offset":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"offset for pagination"
+                },
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/KeyStoreKeyRef"
+                    }
+                },
+                "totalResults":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Total number of items independent of limit "
+                },
+                "links":{
+                    "type":"array",
+                    "description":"Hyperlinks to other associated resources.",
+                    "items":{
+                        "$ref":"#/definitions/ModelLink"
+                    }
+                },
+                "count":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Number of items returned"
+                },
+                "hasMore":{
+                    "type":"boolean",
+                    "description":"Are there more items to fetch",
+                    "default":false
+                }
+            }
+        },
+        "JobLogFileReference":{
+            "type":"object",
+            "properties":{
+                "name":{
+                    "type":"string"
+                },
+                "uri":{
+                    "type":"string",
+                    "format":"uri"
+                },
+                "sizeBytes":{
+                    "type":"integer",
+                    "format":"int64"
+                }
+            }
+        },
+        "YarnMapReduceJob":{
+            "type":"object",
+            "required":[
+                "applicationFile",
+                "applicationName"
+            ],
+            "properties":{
+                "id":{
+                    "type":"string",
+                    "description":"Unique Identifier of this Job."
+                },
+                "clusterId":{
+                    "type":"string",
+                    "description":"The Cluster where the given Job is assigned to run."
+                },
+                "queue":{
+                    "type":"string",
+                    "description":"Server queue used to submit too."
+                },
+                "applicationName":{
+                    "type":"string",
+                    "description":"The name given to the application, mainly used for UI or Audit Logs."
+                },
+                "applicationFile":{
+                    "type":"string",
+                    "description":"The name of the file, script, or jar file that will be used to submit the Job."
+                },
+                "applicationClass":{
+                    "type":"string",
+                    "description":"Qualified name of the Class"
+                },
+                "applicationSupportFiles":{
+                    "type":"array",
+                    "description":"List of files that will be downloaded and collocated for the given Job.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "maxJobDurationInSecs":{
+                    "type":"object",
+                    "description":"Maximum duration of a Job in seconds. When a Job exceeds the amount of time the Job will be terminated."
+                },
+                "maxSubmissionLatencyInSecs":{
+                    "type":"object",
+                    "description":"The maximum waiting period that the requester is willing to wait for the job to actually start running inside a cluster before the Job is considered failed, REQUEST_TIMEOUT."
+                },
+                "mapMemoryMB":{
+                    "type":"object"
+                },
+                "mapCPUVCores":{
+                    "type":"object"
+                },
+                "reduceMemoryMB":{
+                    "type":"object"
+                },
+                "reduceCPUVCores":{
+                    "type":"object"
+                },
+                "applicationArguments":{
+                    "type":"array",
+                    "description":"Arguments that need to be sent to the _Application Main_ or the _Application Script_.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "applicationJarFiles":{
+                    "type":"array",
+                    "description":"List of jars that will be downloaded and added to the classpath of the given Job.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "hadoopConf":{
+                    "type":"object",
+                    "description":"Map of Hadoop configuration options that will be used to submit the Job.",
+                    "additionalProperties":{
+                        "type":"string"
+                    }
+                },
+                "extraJavaOptions":{
+                    "type":"array",
+                    "description":"A map of extra JVM options to pass to the mapper and reducer. For instance, GC settings or other logging. ",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "env":{
+                    "type":"object",
+                    "description":"Map of environment variable that should be available to the Job containers.",
+                    "additionalProperties":{
+                        "type":"string"
+                    }
+                },
+                "amEnv":{
+                    "type":"object",
+                    "additionalProperties":{
+                        "type":"string"
+                    }
+                },
+                "amCores":{
+                    "type":"object"
+                },
+                "amExtraJavaOptions":{
+                    "type":"array",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "amMemory":{
+                    "type":"object"
+                },
+                "amMemoryOverhead":{
+                    "type":"object"
+                },
+                "amNodeLabelExpression":{
+                    "type":"string"
+                },
+                "applicationExtraLibraryPath":{
+                    "type":"array",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "applicationSupportArchives":{
+                    "type":"array",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "applicationTags":{
+                    "type":"array",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "containerMemory":{
+                    "type":"object"
+                },
+                "containerMemoryOverhead":{
+                    "type":"object"
+                },
+                "attemptFailuresValidityInterval":{
+                    "type":"object"
+                },
+                "maxAppAttempts":{
+                    "type":"object"
+                },
+                "applicationType":{
+                    "type":"string",
+                    "enum":[
+                        "hive",
+                        "mapreduce",
+                        "spark",
+                        "tez",
+                        "yarn",
+                        "unkown"
+                    ]
+                },
+                "jobType":{
+                    "type":"string",
+                    "enum":[
+                        "batch",
+                        "streaming"
+                    ]
+                }
+            }
+        },
+        "JobQueue":{
+            "type":"object",
+            "required":[
+                "capacity",
+                "maximumCapacity",
+                "name",
+                "state"
+            ],
+            "properties":{
+                "name":{
+                    "type":"string",
+                    "description":"Name of the queue."
+                },
+                "capacity":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Capacity of the queue."
+                },
+                "currentCapacity":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Current capacity of the queue."
+                },
+                "maximumCapacity":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Maximum capacity of the queue."
+                },
+                "state":{
+                    "type":"string",
+                    "description":"State of the queue.",
+                    "enum":[
+                        "STOPPED",
+                        "RUNNING"
+                    ]
+                },
+                "preemptionDisabled":{
+                    "type":"boolean",
+                    "description":"Set to `true` if preemption is enabled.",
+                    "default":false
+                }
+            }
+        },
+        "Error":{
+            "type":"object",
+            "required":[
+                "status",
+                "title"
+            ],
+            "properties":{
+                "title":{
+                    "type":"string",
+                    "description":"title"
+                },
+                "status":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"status"
+                },
+                "detail":{
+                    "type":"string",
+                    "description":"detail"
+                },
+                "instance":{
+                    "type":"string",
+                    "description":"instance"
+                },
+                "o:errorCode":{
+                    "type":"string",
+                    "description":"error code",
+                    "readOnly":true
+                },
+                "o:errorPath":{
+                    "type":"string",
+                    "description":"error path",
+                    "readOnly":true
+                },
+                "o:errorDetails":{
+                    "type":"array",
+                    "description":"error details",
+                    "readOnly":true,
+                    "items":{
+                        "$ref":"#/definitions/Error"
+                    }
+                },
+                "type":{
+                    "type":"string",
+                    "description":"RFC Link",
+                    "readOnly":true
+                }
+            }
+        },
+        "SwiftObjectStoreFileHeader":{
+            "type":"object",
+            "properties":{
+                "containerName":{
+                    "type":"string",
+                    "description":"Name container that has this file.."
+                },
+                "swiftServiceName":{
+                    "type":"string",
+                    "description":"Service Name that ."
+                },
+                "name":{
+                    "type":"string",
+                    "description":"Name of the file."
+                },
+                "path":{
+                    "type":"string",
+                    "description":"Path of the file as described by the Object Store or File System where it is located."
+                },
+                "lastModifiedAt":{
+                    "type":"string",
+                    "format":"date-time",
+                    "description":"Timestamp when the file was created"
+                },
+                "bytes":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"Size of the file as described by the Object Store or File System where it is located."
+                },
+                "bareName":{
+                    "type":"string",
+                    "description":"Bare name as described by the Object Store."
+                },
+                "contentType":{
+                    "type":"string",
+                    "description":"Content Type, if identifiable."
+                },
+                "hash":{
+                    "type":"string",
+                    "description":"The MD5 checksum value of the object content."
+                },
+                "ociRef":{
+                    "type":"string",
+                    "description":"OCI URI that can be used to reference this object using the OCI HDFS Driver"
+                },
+                "swift2dRef":{
+                    "type":"string",
+                    "description":"Swift2D URI that can be used to reference this object with the Stocator Driver."
+                },
+                "swiftRef":{
+                    "type":"string",
+                    "description":"Swift URI that can be used to reference this object with the Hadoop Openstack Driver."
+                },
+                "directory":{
+                    "type":"boolean",
+                    "description":"True if this object represents a pseudo directory.",
+                    "default":false
+                }
+            }
+        },
+        "JobAggregatedStoredLogs":{
+            "type":"object",
+            "properties":{
+                "containerName":{
+                    "type":"string"
+                },
+                "containerPath":{
+                    "type":"string"
+                },
+                "containerHref":{
+                    "type":"string"
+                },
+                "files":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/JobLogFileReference"
+                    }
+                }
+            }
+        },
+        "SparkJobHttpRequest":{
+            "type":"object",
+            "properties":{
+                "job":{
+                    "description":"Spark Job Specification",
+                    "$ref":"#/definitions/SparkJob"
+                }
+            }
+        },
+        "KeyStoreKeyRef":{
+            "type":"object",
+            "properties":{
+                "key":{
+                    "type":"string",
+                    "description":"Identifier for the key."
+                }
+            }
+        },
+        "ObjectStoreReferenceHeader":{
+            "type":"object",
+            "properties":{
+                "directory":{
+                    "type":"boolean",
+                    "description":"True if this object represents a pseudo directory.",
+                    "default":false
+                }
+            }
+        },
+        "KeyStoreKeyValueRef":{
+            "type":"object",
+            "properties":{
+                "value":{
+                    "type":"string",
+                    "description":"Value of the key stored in the keystore."
+                }
+            }
+        },
+        "ClusterWorkerNodeMetrics":{
+            "type":"object",
+            "required":[
+                "availMemoryMB",
+                "availableVirtualCores",
+                "healthReport",
+                "healthStatus",
+                "id",
+                "lastHealthUpdate",
+                "nodeHTTPAddress",
+                "nodeHostName",
+                "numContainers",
+                "state",
+                "usedMemoryMB",
+                "usedVirtualCores"
+            ],
+            "properties":{
+                "rack":{
+                    "type":"string",
+                    "description":"The rack location of this node."
+                },
+                "state":{
+                    "type":"string",
+                    "description":"State of the node - valid values are: NEW, RUNNING, UNHEALTHY, DECOMMISSIONED, LOST, REBOOTED.",
+                    "enum":[
+                        "NEW",
+                        "RUNNING",
+                        "UNHEALTHY",
+                        "DECOMMISSIONED",
+                        "LOST",
+                        "REBOOTED"
+                    ]
+                },
+                "id":{
+                    "type":"string",
+                    "description":"The node id."
+                },
+                "nodeHostName":{
+                    "type":"string",
+                    "description":"The host name of the node."
+                },
+                "nodeHTTPAddress":{
+                    "type":"string",
+                    "description":"The nodes HTTP address."
+                },
+                "healthStatus":{
+                    "type":"string",
+                    "description":"The health status of the node - Healthy or Unhealthy."
+                },
+                "healthReport":{
+                    "type":"string",
+                    "description":"Additional information on the health of this node."
+                },
+                "lastHealthUpdate":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"The last time the node reported its health (in ms since epoch)."
+                },
+                "usedMemoryMB":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"The total amount of memory currently used on the node (in MB)."
+                },
+                "availMemoryMB":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"The total amount of memory currently available on the node (in MB)."
+                },
+                "usedVirtualCores":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"The total number of vCores currently used on the node."
+                },
+                "availableVirtualCores":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"The total number of vCores available on the node."
+                },
+                "numContainers":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"The total number of containers currently running on the node."
+                }
+            }
+        },
+        "SwiftObjectStoreFile":{
+            "type":"object",
+            "properties":{
+                "containerName":{
+                    "type":"string",
+                    "description":"Name container that has this file.."
+                },
+                "swiftServiceName":{
+                    "type":"string",
+                    "description":"Service Name that ."
+                },
+                "name":{
+                    "type":"string",
+                    "description":"Name of the file."
+                },
+                "bareName":{
+                    "type":"string",
+                    "description":"Bare name as described by the Object Store."
+                },
+                "path":{
+                    "type":"string",
+                    "description":"Path of the file as described by the Object Store or File System where it is located."
+                },
+                "lastModifiedAt":{
+                    "type":"string",
+                    "format":"date-time",
+                    "description":"Timestamp when the file was created"
+                },
+                "createdAt":{
+                    "type":"string",
+                    "format":"date-time",
+                    "description":"Timestamp when the file was created"
+                },
+                "bytes":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"Size of the file as described by the Object Store or File System where it is located."
+                },
+                "deletedAt":{
+                    "type":"string",
+                    "format":"date-time"
+                },
+                "exists":{
+                    "type":"boolean",
+                    "default":false
+                },
+                "contentType":{
+                    "type":"string",
+                    "description":"Content Type, if identifiable."
+                },
+                "hash":{
+                    "type":"string",
+                    "description":"The MD5 checksum value of the object content."
+                },
+                "uri":{
+                    "type":"string",
+                    "format":"uri",
+                    "description":"File URI in Object Store."
+                },
+                "manifest":{
+                    "type":"string",
+                    "description":"Object Store file manifest."
+                },
+                "ociRef":{
+                    "type":"string",
+                    "description":"OCI URI that can be used to reference this object using the OCI HDFS Driver"
+                },
+                "swift2dRef":{
+                    "type":"string",
+                    "description":"Swift2D URI that can be used to reference this object with the Stocator Driver."
+                },
+                "swiftRef":{
+                    "type":"string",
+                    "description":"Swift URI that can be used to reference this object with the Hadoop Openstack Driver."
+                },
+                "directory":{
+                    "type":"boolean",
+                    "description":"True if this object represents a pseudo directory.",
+                    "default":false
+                }
+            }
+        },
+        "ClusterInfo":{
+            "type":"object",
+            "required":[
+                "createdOn",
+                "deploymentProfile",
+                "id",
+                "isIdcsEnabled",
+                "name",
+                "state",
+                "storageType"
+            ],
+            "properties":{
+                "id":{
+                    "type":"string",
+                    "description":"Unique Identifier of this Cluster."
+                },
+                "name":{
+                    "type":"string",
+                    "description":"Name of the cluster."
+                },
+                "createdOn":{
+                    "type":"object",
+                    "description":"Time in milliseconds since Epoch of the creation fo the Cluster."
+                },
+                "state":{
+                    "type":"string",
+                    "description":"State of the cluster.",
+                    "enum":[
+                        "active",
+                        "readonly",
+                        "shuttingdown",
+                        "undefined"
+                    ]
+                },
+                "isIdcsEnabled":{
+                    "type":"boolean",
+                    "description":"Is the cluster IDCS enabled",
+                    "default":false
+                },
+                "deploymentProfile":{
+                    "type":"string",
+                    "description":"deploymentProfile"
+                },
+                "storageType":{
+                    "type":"string",
+                    "description":"storageType",
+                    "enum":[
+                        "unknown",
+                        "nimbula",
+                        "bmc"
+                    ]
+                }
+            }
+        },
+        "ClusterMetrics":{
+            "type":"object",
+            "required":[
+                "activeNodes",
+                "allocatedMB",
+                "allocatedVirtualCores",
+                "appsCompleted",
+                "appsFailed",
+                "appsKilled",
+                "appsPending",
+                "appsRunning",
+                "appsSubmitted",
+                "availableMB",
+                "availableVirtualCores",
+                "containersAllocated",
+                "containersPending",
+                "containersReserved",
+                "decommissionedNodes",
+                "lostNodes",
+                "rebootedNodes",
+                "reservedMB",
+                "reservedVirtualCores",
+                "totalMB",
+                "totalNodes",
+                "totalVirtualCores",
+                "unhealthyNodes",
+                "workerNodes"
+            ],
+            "properties":{
+                "appsSubmitted":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Number of jobs submitted."
+                },
+                "appsCompleted":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Number of jobs completed."
+                },
+                "appsPending":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Number of jobs pending."
+                },
+                "appsRunning":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Number of jobs running."
+                },
+                "appsFailed":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Number of jobs failed."
+                },
+                "appsKilled":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Number of jobs killed."
+                },
+                "reservedMB":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"Reserved memory in resource manager."
+                },
+                "availableMB":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"Available memory in resource manager."
+                },
+                "allocatedMB":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"Allocated memory in resource manager."
+                },
+                "reservedVirtualCores":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Reserved virtual cores in resource manager."
+                },
+                "availableVirtualCores":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Available virtual cores in resource manager."
+                },
+                "allocatedVirtualCores":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Allocated virtual cores in resource manager."
+                },
+                "containersAllocated":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Allocated Containers in resource manager."
+                },
+                "containersReserved":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Reserved Containers in resource manager."
+                },
+                "containersPending":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Pending Containers in resource manager."
+                },
+                "totalMB":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"Total Memory in resource manager."
+                },
+                "totalVirtualCores":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Total Virtual Cores in resource manager."
+                },
+                "totalNodes":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Total Nodes in Cluster."
+                },
+                "lostNodes":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Lost Nodes in Cluster."
+                },
+                "unhealthyNodes":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Unhealthy Nodes in Cluster."
+                },
+                "decommissionedNodes":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Decommissioned Nodes in Cluster."
+                },
+                "rebootedNodes":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Rebooted Nodes in Cluster."
+                },
+                "activeNodes":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Active Nodes in Cluster."
+                },
+                "workerNodes":{
+                    "type":"array",
+                    "description":"Metrics of each Worker Node in the Cluster.",
+                    "items":{
+                        "$ref":"#/definitions/ClusterWorkerNodeMetrics"
+                    }
+                }
+            }
+        },
+        "ClusterComponentsInfo":{
+            "type":"object",
+            "required":[
+                "imageVersion",
+                "platform"
+            ],
+            "properties":{
+                "imageVersion":{
+                    "type":"string",
+                    "description":"Version of the Oracle Product"
+                },
+                "platform":{
+                    "type":"array",
+                    "description":"List of packages and their versions that conform this cluster.",
+                    "items":{
+                        "$ref":"#/definitions/ClusterPackageVersionInfo"
+                    }
+                }
+            }
+        },
+        "ModelLink":{
+            "type":"object",
+            "required":[
+                "href",
+                "rel"
+            ],
+            "properties":{
+                "href":{
+                    "type":"string",
+                    "description":"The URI of the linked resource"
+                },
+                "rel":{
+                    "type":"string",
+                    "description":"Relation link"
+                },
+                "method":{
+                    "type":"string",
+                    "description":"The method to apply to the URI"
+                },
+                "templated":{
+                    "type":"object",
+                    "description":"Is the URI a template"
+                },
+                "mediaType":{
+                    "type":"string",
+                    "description":"The media type to apply to the URI"
+                },
+                "profile":{
+                    "type":"string",
+                    "description":"The profile"
+                }
+            }
+        },
+        "SwiftObjectStoreContainerStatus":{
+            "type":"object",
+            "properties":{
+                "name":{
+                    "type":"string",
+                    "description":"Name of the container."
+                },
+                "path":{
+                    "type":"string",
+                    "description":"Path of the container."
+                },
+                "count":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"Number of objects in the container."
+                },
+                "bytesUsed":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"Total bytes used in the container."
+                },
+                "storageServerTime":{
+                    "type":"string",
+                    "format":"date-time",
+                    "description":"Time as described by Object Store."
+                },
+                "quotaBytes":{
+                    "type":"object",
+                    "description":"Available bytes quota as described by the Object Store."
+                },
+                "containerReadPermission":{
+                    "type":"string"
+                },
+                "containerWritePermission":{
+                    "type":"string"
+                },
+                "publicURL":{
+                    "type":"string"
+                },
+                "privateURL":{
+                    "type":"string"
+                },
+                "timestamp":{
+                    "type":"string",
+                    "format":"date-time",
+                    "description":"Timestamp of the measurement."
+                },
+                "availableQuotaBytes":{
+                    "type":"object",
+                    "description":"Available quota in bytes."
+                },
+                "timestampMs":{
+                    "type":"integer",
+                    "format":"int64",
+                    "description":"Timestamp, in milliseconds, of the measurement."
+                },
+                "href":{
+                    "type":"string",
+                    "description":"Hyperlink to the container.",
+                    "readOnly":true
+                }
+            }
+        },
+        "ClusterWorkerNodeMetricsColl":{
+            "type":"object",
+            "required":[
+                "nodes"
+            ],
+            "properties":{
+                "nodes":{
+                    "type":"array",
+                    "description":"Metrics of each Worker Node in the Cluster.",
+                    "items":{
+                        "$ref":"#/definitions/ClusterWorkerNodeMetrics"
+                    }
+                }
+            }
+        },
+        "PageableJobStatus":{
+            "type":"object",
+            "required":[
+                "count"
+            ],
+            "properties":{
+                "limit":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"limit that was set by the user"
+                },
+                "offset":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"offset for pagination"
+                },
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/AsyncJobStatus"
+                    }
+                },
+                "totalResults":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Total number of items independent of limit "
+                },
+                "links":{
+                    "type":"array",
+                    "description":"Hyperlinks to other associated resources.",
+                    "items":{
+                        "$ref":"#/definitions/ModelLink"
+                    }
+                },
+                "count":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Number of items returned"
+                },
+                "hasMore":{
+                    "type":"boolean",
+                    "description":"Are there more items to fetch",
+                    "default":false
+                }
+            }
+        },
+        "PageableUserKeys":{
+            "type":"object",
+            "required":[
+                "count"
+            ],
+            "properties":{
+                "limit":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"limit that was set by the user"
+                },
+                "offset":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"offset for pagination"
+                },
+                "items":{
+                    "type":"array",
+                    "items":{
+                        "$ref":"#/definitions/KeyStoreKeyRef"
+                    }
+                },
+                "totalResults":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Total number of items independent of limit "
+                },
+                "links":{
+                    "type":"array",
+                    "description":"Hyperlinks to other associated resources.",
+                    "items":{
+                        "$ref":"#/definitions/ModelLink"
+                    }
+                },
+                "count":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Number of items returned"
+                },
+                "hasMore":{
+                    "type":"boolean",
+                    "description":"Are there more items to fetch",
+                    "default":false
+                }
+            }
+        },
+        "SparkJob":{
+            "type":"object",
+            "required":[
+                "applicationFile",
+                "applicationName",
+                "sparkJobType",
+                "sparkSessionType"
+            ],
+            "properties":{
+                "id":{
+                    "type":"string",
+                    "description":"Unique Identifier of this Job."
+                },
+                "sparkJobType":{
+                    "type":"string",
+                    "description":"Type of the Spark Job",
+                    "enum":[
+                        "batch",
+                        "interactive",
+                        "streaming"
+                    ]
+                },
+                "sparkSessionType":{
+                    "type":"string",
+                    "description":"Type of the Spark session used to run the Job.",
+                    "enum":[
+                        "spark",
+                        "pyspark",
+                        "sparkr"
+                    ]
+                },
+                "applicationName":{
+                    "type":"string",
+                    "description":"The name given to the application, mainly used for UI or Audit Logs."
+                },
+                "applicationFile":{
+                    "type":"string",
+                    "description":"The name of the file, script, or jar file that will be used to submit the Job."
+                },
+                "packages":{
+                    "type":"array",
+                    "description":"Comma-separated list of maven coordinates of jars to include on the driver and executor classpaths. Will search the local maven repo, then maven central and any additional remote repository\nThe format for the coordinates should be `groupId:artifactId:version`.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "excludePackages":{
+                    "type":"array",
+                    "description":"Comma-separated list of groupId:artifactId, to exclude while resolving the dependencies provided in `packages`.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "repositories":{
+                    "type":"array",
+                    "description":"Comma-separated list of additional remote repositories to search for the maven coordinates given with `packages`.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "clusterId":{
+                    "type":"string",
+                    "description":"The Cluster where the given Job is assigned to run."
+                },
+                "extraListeners":{
+                    "type":"array",
+                    "description":"Extra listeners",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "applicationClass":{
+                    "type":"string",
+                    "description":"In case of an application that runs inside the JVM this will specify the qualified name of the Class that will be used to call Spark-Submit."
+                },
+                "applicationArguments":{
+                    "type":"array",
+                    "description":"Arguments that need to be sent to the _Application Main_ or the _Application Script_.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "applicationJarFiles":{
+                    "type":"array",
+                    "description":"List of jars that will be downloaded and collocated for the given Job.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "applicationPyFiles":{
+                    "type":"array",
+                    "description":"List of python files that will be downloaded and collocated for the given Job.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "applicationSupportFiles":{
+                    "type":"array",
+                    "description":"List of files that will be downloaded and collocated for the given Job.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "applicationArchives":{
+                    "type":"array",
+                    "description":"Archives to be uncompressed in the executor working directory (YARN mode only)",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "driverMemory":{
+                    "type":"string",
+                    "example":"2G",
+                    "description":"Memory for driver (e.g. 1000M, 2G)."
+                },
+                "driverLibraryPath":{
+                    "type":"string",
+                    "description":"Extra library path entries to pass to the driver."
+                },
+                "driverMaxResults":{
+                    "type":"string",
+                    "example":"2G",
+                    "description":"Limit of total size of serialized results of all partitions for each Spark action (e.g. collect). Should be at least 1M, or 0 for unlimited. Jobs will be aborted if the total size is above this limit. Having a high limit may cause out-of-memory errors in driver (depends on spark.driver.memory and memory overhead of objects in JVM). Setting a proper limit can protect the driver from out-of-memory errors."
+                },
+                "driverCores":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Number of cores used by driver. "
+                },
+                "driverClasspath":{
+                    "type":"array",
+                    "description":"Driver classpath.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "executorExtraClasspath":{
+                    "type":"array",
+                    "description":"Extra classpath entries to prepend to the classpath of executors.This exists primarily for backwards-compatibility with older versions of Spark.Users typically should not need to set this option.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "executorExtraLibraryPath":{
+                    "type":"string",
+                    "description":"Set a special library path to use when launching executor JVM's."
+                },
+                "extraJavaOptions":{
+                    "type":"array",
+                    "description":"A map of extra JVM options to pass to executors and driver. For instance, GC settings or other logging. Note that it is illegal to set Spark properties or heap size settings with this option. Spark properties should be set using a SparkConf object or the spark-defaults.conf file used with the spark-submit script. Heap size settings can be set with spark.executor.memory.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "executorEnv":{
+                    "type":"object",
+                    "description":"Map of environment variable that should be available to the Executor process. For example, the maximum waiting period that the requester is willing to wait for the job to actually start running inside a cluster before the Job is considered failed, REQUEST_TIMEOUT.",
+                    "additionalProperties":{
+                        "type":"string"
+                    }
+                },
+                "executorMemory":{
+                    "type":"string",
+                    "example":"2G",
+                    "description":"Memory for executor (e.g. 1000M, 2G)."
+                },
+                "executorCores":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Number of cores used by executor."
+                },
+                "numExecutors":{
+                    "type":"integer",
+                    "format":"int32",
+                    "description":"Number of executors."
+                },
+                "sparkConf":{
+                    "type":"object",
+                    "description":"Map of Spark configuration options that were used to submit the Job.",
+                    "additionalProperties":{
+                        "type":"string"
+                    }
+                },
+                "queue":{
+                    "type":"string",
+                    "description":"Server queue used to submit too."
+                },
+                "maxJobDurationInSecs":{
+                    "type":"object",
+                    "description":"Maximum duration of a Job in seconds. When a Job exceeds the amount of time the Job will be terminated."
+                },
+                "maxSubmissionLatencyInSecs":{
+                    "type":"object",
+                    "description":"The maximum waiting period that the requester is willing to wait for the job to actually start running inside a cluster before the Job is considered failed, REQUEST_TIMEOUT."
+                },
+                "applicationType":{
+                    "type":"string",
+                    "enum":[
+                        "hive",
+                        "mapreduce",
+                        "spark",
+                        "tez",
+                        "yarn",
+                        "unkown"
+                    ]
+                }
+            }
+        },
+        "JobProgressValue":{
+            "type":"object",
+            "properties":{
+                "progress":{
+                    "type":"string",
+                    "description":"Current Progress of the Job.",
+                    "enum":[
+                        "aborted",
+                        "aborting",
+                        "accepted",
+                        "failed",
+                        "paused",
+                        "pending",
+                        "processing",
+                        "succeeded",
+                        "undefined"
+                    ]
+                }
+            }
+        },
+        "JobContainerLogs":{
+            "type":"object",
+            "required":[
+                "containerId",
+                "files"
+            ],
+            "properties":{
+                "containerId":{
+                    "type":"string",
+                    "description":"Unique Identifier of the Container that is generating the Log."
+                },
+                "files":{
+                    "type":"array",
+                    "description":"Log files with path relative to the Container.",
+                    "items":{
+                        "$ref":"#/definitions/JobLogFileReference"
+                    }
+                }
+            }
+        }
+    },
+    "tags":[
+        {
+            "name":"Build Info",
+            "description":"The operations from the Build Info category."
+        },
+        {
+            "name":"Cluster",
+            "description":"The operations from the Cluster category."
+        },
+        {
+            "name":"Cluster Metrics",
+            "description":"The operations from the Cluster Metrics category."
+        },
+        {
+            "name":"Compute Job",
+            "description":"The operations from the Compute Job category."
+        },
+        {
+            "name":"Job Scheduler Queues",
+            "description":"The operations from the Job Scheduler Queues category."
+        },
+        {
+            "name":"Oracle Cloud Storage",
+            "description":"The operations from the Oracle Cloud Storage category."
+        },
+        {
+            "name":"Service Key Store - Key",
+            "description":"The operations from the Service Key Store - Key category."
+        },
+        {
+            "name":"User Key Store - Key",
+            "description":"The operations from the User Key Store - Key category."
+        }
+    ]
+}
