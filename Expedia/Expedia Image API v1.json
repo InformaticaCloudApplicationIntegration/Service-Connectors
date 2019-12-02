@@ -1,0 +1,415 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "The EPS Image API manages images for properties and rooms, allowing for different operations to list, create, update or remove image metadata. </br><br/>To start experimenting, please use your existing EQC credentials and properties. We've also made the following test credentials available: EQCtest12933870 / ew67nk33 assigned to test property ID 12933870.\n",
+		"version": "1.0",
+		"title": "EPS Image API",
+		"contact": {
+			"name": "Expedia Partner Services",
+			"url": "https://expediaconnectivity.com/developer",
+			"email": "eqcss@expedia.com"
+		}
+	},
+	"host": "services.expediapartnercentral.com",
+	"basePath": "/",
+	"tags": [
+		{
+			"name": "Image",
+			"description": "The image resource"
+		}
+	],
+	"schemes": [
+		"https"
+	],
+	"paths": {
+		"/properties/{propertyId}/images": {
+			"get": {
+				"tags": [
+					"Image"
+				],
+				"summary": "Obtain a list of images for a given property",
+				"operationId": "getImages",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "propertyId",
+						"in": "path",
+						"description": "Expedia Property ID",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "status",
+						"in": "query",
+						"description": "Status filter. String. Only supported value is \"all\".",
+						"required": false,
+						"type": "string",
+						"enum": [
+							"all"
+						]
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResponseWrapperDTO«List«Image»»"
+						}
+					}
+				},
+				"security": [
+					{
+						"Basic": [
+
+						]
+					}
+				]
+			},
+			"post": {
+				"tags": [
+					"Image"
+				],
+				"summary": "Adds an image to the property",
+				"operationId": "createImage",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "propertyId",
+						"in": "path",
+						"description": "Expedia Property ID",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "body",
+						"name": "image",
+						"description": "JSON message describing the new image",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Image"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResponseWrapperDTO«Image»"
+						}
+					}
+				},
+				"security": [
+					{
+						"Basic": [
+
+						]
+					}
+				]
+			}
+		},
+		"/properties/{propertyId}/images/{resourceId}": {
+			"get": {
+				"tags": [
+					"Image"
+				],
+				"summary": "Read a single image",
+				"operationId": "getImageByResourceId",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "propertyId",
+						"in": "path",
+						"description": "Expedia Property ID",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "resourceId",
+						"in": "path",
+						"description": "Image Resource ID",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResponseWrapperDTO«Image»"
+						}
+					}
+				},
+				"security": [
+					{
+						"Basic": [
+
+						]
+					}
+				]
+			},
+			"delete": {
+				"tags": [
+					"Image"
+				],
+				"summary": "Delete an existing image",
+				"operationId": "deleteImageByResourceId",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"*/*"
+				],
+				"parameters": [
+					{
+						"name": "propertyId",
+						"in": "path",
+						"description": "Expedia Property ID",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "resourceId",
+						"in": "path",
+						"description": "Image Resource ID",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				},
+				"security": [
+					{
+						"Basic": [
+
+						]
+					}
+				]
+			},
+			"patch": {
+				"tags": [
+					"Image"
+				],
+				"summary": "Patch an existing image",
+				"operationId": "updateImageByResourceId",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "propertyId",
+						"in": "path",
+						"description": "Expedia Property ID",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "resourceId",
+						"in": "path",
+						"description": "Image Resource ID",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "body",
+						"name": "image",
+						"description": "JSON message of partially updated image",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ResponseWrapperDTO«Image»"
+						}
+					}
+				},
+				"security": [
+					{
+						"Basic": [
+
+						]
+					}
+				]
+			}
+		}
+	},
+	"securityDefinitions": {
+		"Basic": {
+			"type": "basic"
+		}
+	},
+	"security": {
+		"Basic": []
+	},
+	"definitions": {
+		"Comment": {
+			"type": "object",
+			"properties": {
+				"text": {
+					"type": "string",
+					"description": "Comment text"
+				},
+				"timestamp": {
+					"type": "string",
+					"description": "Moment when the comment was created"
+				}
+			}
+		},
+		"ResponseWrapperDTO«List«Image»»": {
+			"type": "object",
+			"properties": {
+				"entity": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Image"
+					}
+				},
+				"errors": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ErrorDTO"
+					}
+				}
+			}
+		},
+		"RoomType": {
+			"type": "object",
+			"required": [
+				"resourceId"
+			],
+			"properties": {
+				"resourceId": {
+					"type": "integer",
+					"format": "int64",
+					"description": "Expedia ID for this resource. Generated when created. Generated on POST, required on PUT"
+				},
+				"roomTypeFeatured": {
+					"type": "boolean",
+					"example": false,
+					"description": "Used to pick the room image to be displayed when multiple are loaded for a given room type"
+				}
+			}
+		},
+		"ResponseWrapperDTO«Image»": {
+			"type": "object",
+			"properties": {
+				"entity": {
+					"$ref": "#/definitions/Image"
+				},
+				"errors": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ErrorDTO"
+					}
+				}
+			}
+		},
+		"ErrorDTO": {
+			"type": "object",
+			"properties": {
+				"code": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"message": {
+					"type": "string"
+				}
+			}
+		},
+		"Image": {
+			"type": "object",
+			"properties": {
+				"categoryCode": {
+					"type": "string",
+					"description": "Image category code"
+				},
+				"comments": {
+					"type": "array",
+					"description": "Comments associated with this image",
+					"readOnly": true,
+					"items": {
+						"$ref": "#/definitions/Comment"
+					}
+				},
+				"lastUpdateDateTime": {
+					"type": "string",
+					"description": "Last moment this image was updated",
+					"readOnly": true
+				},
+				"originalImageUrl": {
+					"type": "string",
+					"description": "URL of the image to be uploaded"
+				},
+				"propertyFeatured": {
+					"type": "boolean",
+					"example": false,
+					"description": "Determines whether or not the image should be the featured image in search results"
+				},
+				"publishedImageUrl": {
+					"type": "string",
+					"description": "The published derivative image URL",
+					"readOnly": true
+				},
+				"resourceId": {
+					"type": "string",
+					"description": "Expedia ID for this resource. Generated when created. Generated on POST, required on PUT",
+					"readOnly": true
+				},
+				"roomTypes": {
+					"type": "array",
+					"description": "Rooms associated with this image",
+					"items": {
+						"$ref": "#/definitions/RoomType"
+					}
+				},
+				"state": {
+					"type": "string",
+					"description": "Current processing state of the image",
+					"readOnly": true,
+					"enum": [
+						"NotFound",
+						"Received",
+						"DerivativesCreated",
+						"Rejected",
+						"Duplicate",
+						"Published"
+					]
+				},
+				"status": {
+					"type": "string",
+					"description": "Status of the image; Allowed values are: 'Active' (image displayed), 'Inactive' (image not displayed)",
+					"enum": [
+						"Active",
+						"Inactive"
+					]
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://api.xnet.hotwire/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="XnetHotelService" targetNamespace="http://api.xnet.hotwire/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://api.xnet.hotwire/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://api.xnet.hotwire/">
+<xs:element name="retrieveBooking" type="tns:retrieveBooking"></xs:element>
+<xs:element name="retrieveBookingResponse" type="tns:retrieveBookingResponse"></xs:element>
+<xs:element name="updateInventory" type="tns:updateInventory"></xs:element>
+<xs:element name="updateInventoryResponse" type="tns:updateInventoryResponse"></xs:element>
+<xs:complexType name="retrieveBooking">
+<xs:sequence>
+<xs:element minOccurs="0" name="BookingRetrievalRQ" type="tns:BookingRetrievalRQ"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="BookingRetrievalRQ">
+<xs:sequence>
+<xs:element minOccurs="0" name="Hotel" type="tns:Hotel"></xs:element>
+<xs:element minOccurs="0" name="Booking" type="tns:Reservation"></xs:element>
+<xs:element minOccurs="0" name="MinsInPast" type="tns:MinsInPast"></xs:element>
+</xs:sequence>
+<xs:attribute name="echoToken" type="xs:string"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="Hotel">
+<xs:sequence></xs:sequence>
+<xs:attribute name="id" type="xs:long" use="required"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="Reservation">
+<xs:sequence></xs:sequence>
+<xs:attribute name="id" type="xs:string" use="required"></xs:attribute>
+</xs:complexType>
+<xs:simpleType name="MinsInPast">
+<xs:restriction base="xs:int"></xs:restriction>
+</xs:simpleType>
+<xs:complexType name="retrieveBookingResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="BookingRetrievalRS" type="tns:RetrieveBookingsRS"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="RetrieveBookingsRS">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="Booking" type="tns:Booking"></xs:element>
+</xs:sequence>
+<xs:attribute name="version" type="xs:string" use="required"></xs:attribute>
+<xs:attribute name="timeStamp" type="xs:dateTime" use="required"></xs:attribute>
+<xs:attribute name="echoToken" type="xs:string"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="Booking">
+<xs:sequence>
+<xs:element minOccurs="0" name="Hotel" type="tns:Hotel"></xs:element>
+<xs:element minOccurs="0" name="RoomStay" type="tns:RoomStay"></xs:element>
+<xs:element minOccurs="0" name="Guest" type="tns:Guest"></xs:element>
+<xs:element minOccurs="0" name="SpecialRequest" type="tns:SpecialRequest"></xs:element>
+</xs:sequence>
+<xs:attribute name="id" type="xs:string"></xs:attribute>
+<xs:attribute name="type" type="xs:string"></xs:attribute>
+<xs:attribute name="createDateTime" type="xs:dateTime"></xs:attribute>
+<xs:attribute name="source" type="xs:string"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="RoomStay">
+<xs:sequence>
+<xs:element minOccurs="0" name="StayDate" type="tns:StayDate"></xs:element>
+<xs:element minOccurs="0" name="GuestCount" type="tns:GuestCount"></xs:element>
+<xs:element minOccurs="0" name="PerDayRates" type="tns:PerDayRates"></xs:element>
+<xs:element minOccurs="0" name="TotalAmount" type="tns:TotalAmount"></xs:element>
+<xs:element minOccurs="0" name="PaymentCard" type="tns:PaymentCard"></xs:element>
+</xs:sequence>
+<xs:attribute name="roomTypeID" type="xs:string"></xs:attribute>
+<xs:attribute name="ratePlanID" type="xs:string"></xs:attribute>
+<xs:attribute name="numberOfRooms" type="xs:int" use="required"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="StayDate">
+<xs:sequence></xs:sequence>
+<xs:attribute name="arrivalDate" type="xs:date"></xs:attribute>
+<xs:attribute name="departureDate" type="xs:date"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="GuestCount">
+<xs:sequence></xs:sequence>
+<xs:attribute name="adult" type="xs:int" use="required"></xs:attribute>
+<xs:attribute name="child" type="xs:int" use="required"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="PerDayRates">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="PerDayRate" type="tns:PerDayRate"></xs:element>
+</xs:sequence>
+<xs:attribute name="currency" type="xs:string"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="PerDayRate">
+<xs:sequence></xs:sequence>
+<xs:attribute name="stayDate" type="xs:date"></xs:attribute>
+<xs:attribute name="baseRate" type="xs:float" use="required"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="TotalAmount">
+<xs:sequence></xs:sequence>
+<xs:attribute name="amountAfterTaxes" type="xs:float" use="required"></xs:attribute>
+<xs:attribute name="amountOfTaxes" type="xs:float" use="required"></xs:attribute>
+<xs:attribute name="currency" type="xs:string"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="PaymentCard">
+<xs:sequence></xs:sequence>
+<xs:attribute name="cardHolderName" type="xs:string"></xs:attribute>
+<xs:attribute name="cardNumber" type="xs:string"></xs:attribute>
+<xs:attribute name="cardCode" type="xs:string"></xs:attribute>
+<xs:attribute name="seriesCode" type="xs:string"></xs:attribute>
+<xs:attribute name="expireDate" type="xs:string"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="Guest">
+<xs:sequence>
+<xs:element minOccurs="0" name="PrimaryGuest" type="tns:PrimaryGuest"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="PrimaryGuest">
+<xs:sequence></xs:sequence>
+<xs:attribute name="givenName" type="xs:string"></xs:attribute>
+<xs:attribute name="middleName" type="xs:string"></xs:attribute>
+<xs:attribute name="lastName" type="xs:string"></xs:attribute>
+</xs:complexType>
+<xs:simpleType name="SpecialRequest">
+<xs:restriction base="xs:string"></xs:restriction>
+</xs:simpleType>
+<xs:complexType name="faultInfo">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" name="Error" type="tns:errorInfo"></xs:element>
+</xs:sequence>
+<xs:attribute name="timestamp" type="xs:dateTime" use="required"></xs:attribute>
+<xs:attribute name="echoToken" type="xs:string" use="required"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="errorInfo">
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute name="code" type="xs:string" use="required"></xs:attribute>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="updateInventory">
+<xs:sequence>
+<xs:element minOccurs="0" name="AvailRateUpdateRQ" type="tns:AvailRateUpdateRQ"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AvailRateUpdateRQ">
+<xs:sequence>
+<xs:element name="Hotel" type="tns:Hotel"></xs:element>
+<xs:element maxOccurs="unbounded" name="AvailRateUpdate" type="tns:AvailRateUpdate"></xs:element>
+</xs:sequence>
+<xs:attribute name="echoToken" type="xs:string"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="AvailRateUpdate">
+<xs:sequence>
+<xs:element name="DateRange" type="tns:DateRange"></xs:element>
+<xs:element maxOccurs="unbounded" name="RoomType" type="tns:RoomType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="DateRange">
+<xs:sequence></xs:sequence>
+<xs:attribute name="from" type="xs:date" use="required"></xs:attribute>
+<xs:attribute name="to" type="xs:date" use="required"></xs:attribute>
+<xs:attribute name="sun" type="xs:boolean"></xs:attribute>
+<xs:attribute name="mon" type="xs:boolean"></xs:attribute>
+<xs:attribute name="tue" type="xs:boolean"></xs:attribute>
+<xs:attribute name="wed" type="xs:boolean"></xs:attribute>
+<xs:attribute name="thu" type="xs:boolean"></xs:attribute>
+<xs:attribute name="sat" type="xs:boolean"></xs:attribute>
+<xs:attribute name="fri" type="xs:boolean"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="RoomType">
+<xs:sequence>
+<xs:element minOccurs="0" name="Inventory" type="tns:Inventory"></xs:element>
+<xs:element minOccurs="0" name="RatePlan" type="tns:RatePlan"></xs:element>
+<xs:element minOccurs="0" name="RoomDetails" type="tns:RoomDetails"></xs:element>
+</xs:sequence>
+<xs:attribute name="id" type="xs:string" use="required"></xs:attribute>
+<xs:attribute name="closed" type="xs:boolean"></xs:attribute>
+<xs:attribute name="newOrUpdate" type="xs:boolean"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="Inventory">
+<xs:sequence></xs:sequence>
+<xs:attribute name="totalInventoryAvailable" type="xs:int" use="required"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="RatePlan">
+<xs:sequence>
+<xs:element minOccurs="0" name="Rate" type="tns:Rate"></xs:element>
+<xs:element minOccurs="0" name="Restrictions" type="tns:Restrictions"></xs:element>
+</xs:sequence>
+<xs:attribute name="id" type="xs:string" use="required"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="Rate">
+<xs:sequence></xs:sequence>
+<xs:attribute name="currency" type="xs:string" use="required"></xs:attribute>
+<xs:attribute name="perDay" type="xs:float"></xs:attribute>
+<xs:attribute name="extraPerson" type="xs:float"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="Restrictions">
+<xs:sequence></xs:sequence>
+<xs:attribute name="minLOS" type="xs:int"></xs:attribute>
+<xs:attribute name="maxLOS" type="xs:int"></xs:attribute>
+<xs:attribute name="closedToArrival" type="xs:boolean"></xs:attribute>
+<xs:attribute name="closedToDeparture" type="xs:boolean"></xs:attribute>
+<xs:attribute name="maxDaysToArrival" type="xs:int"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="RoomDetails">
+<xs:sequence></xs:sequence>
+<xs:attribute name="bedType" type="xs:string"></xs:attribute>
+<xs:attribute name="maxOccupancy" type="xs:int" use="required"></xs:attribute>
+<xs:attribute name="maxAdults" type="xs:int" use="required"></xs:attribute>
+<xs:attribute name="maxRoomsPerBooking" type="xs:int" use="required"></xs:attribute>
+<xs:attribute name="baseOccupancy" type="xs:int" use="required"></xs:attribute>
+<xs:attribute name="active" type="xs:boolean" use="required"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="updateInventoryResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="AvailRateUpdateRS" type="tns:AvailRateUpdateRS"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AvailRateUpdateRS">
+<xs:sequence>
+<xs:element minOccurs="0" name="Success" type="tns:Success"></xs:element>
+</xs:sequence>
+<xs:attribute name="version" type="xs:string" use="required"></xs:attribute>
+<xs:attribute name="timeStamp" type="xs:dateTime" use="required"></xs:attribute>
+<xs:attribute name="echoToken" type="xs:string"></xs:attribute>
+</xs:complexType>
+<xs:complexType name="Success">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+<xs:element name="Errors" nillable="true" type="tns:faultInfo"></xs:element>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="XnetApiException">
+    <wsdl:part element="ns1:Errors" name="XnetApiException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateInventory">
+    <wsdl:part element="ns1:updateInventory" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="retrieveBookingResponse">
+    <wsdl:part element="ns1:retrieveBookingResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="retrieveBooking">
+    <wsdl:part element="ns1:retrieveBooking" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateInventoryResponse">
+    <wsdl:part element="ns1:updateInventoryResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="XnetHotelService">
+    <wsdl:operation name="retrieveBooking">
+      <wsdl:input message="ns1:retrieveBooking" name="retrieveBooking">
+    </wsdl:input>
+      <wsdl:output message="ns1:retrieveBookingResponse" name="retrieveBookingResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns1:XnetApiException" name="XnetApiException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateInventory">
+      <wsdl:input message="ns1:updateInventory" name="updateInventory">
+    </wsdl:input>
+      <wsdl:output message="ns1:updateInventoryResponse" name="updateInventoryResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns1:XnetApiException" name="XnetApiException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

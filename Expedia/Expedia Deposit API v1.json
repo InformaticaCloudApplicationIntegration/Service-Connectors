@@ -1,0 +1,519 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "The EPS Deposit API manages the deposit policy for a property, offering operations to create/update, read and delete it. <br/><br/>To start experimenting, please use your existing EQC credentials and properties. We've also made the following test credentials available: EQCtest12933870 / ew67nk33 assigned to test property ID 12933870.",
+    "version": "1.0",
+    "title": "EPS Deposit API",
+    "contact": {
+      "name": "Expedia Partner Services",
+      "url": "https://expediaconnectivity.com/developer",
+      "email": "eqcss@expedia.com"
+    }
+  },
+  "host": "services.expediapartnercentral.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "tags": [
+    {
+      "name": "Deposit",
+      "description": "The Deposit resource"
+    }
+  ],
+  "paths": {
+    "/properties/{propertyId}/depositPolicy": {
+      "get": {
+        "tags": [
+          "Deposit"
+        ],
+        "summary": "Obtain the deposit policy for a given property",
+        "operationId": "getDepositPolicy",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "description": "Expedia Property ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The property has a deposit policy and it was returned.",
+            "headers": {
+              "Transaction-ID": {
+                "type": "string",
+                "description": "Unique transaction ID"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SuccessfulGetResponse"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/responses/ForbiddenError"
+          },
+          "404": {
+            "description": "Not Found. The property does not have a deposit policy defined.",
+            "headers": {
+              "Transaction-ID": {
+                "type": "string",
+                "description": "Unique transaction ID"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          },
+          "503": {
+            "$ref": "#/responses/ServiceUnavailableError"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Deposit"
+        ],
+        "summary": "Create/update the deposit policy for a given property",
+        "operationId": "setDepositPolicy",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "description": "Expedia Property ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "depositPolicy",
+            "description": "JSON document describing the deposit policy to be created/updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deposit"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The property didn't have a deposit policy, therefore it was created.",
+            "headers": {
+              "Transaction-ID": {
+                "type": "string",
+                "description": "Unique transaction ID"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent. The property already had a deposit policy defined, and it was updated successfully.",
+            "headers": {
+              "Transaction-ID": {
+                "type": "string",
+                "description": "Unique transaction ID"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequestError"
+          },
+          "401": {
+            "$ref": "#/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/responses/ForbiddenError"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          },
+          "503": {
+            "$ref": "#/responses/ServiceUnavailableError"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Deposit"
+        ],
+        "summary": "Delete the deposit policy for a given property",
+        "operationId": "deleteDepositPolicy",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "description": "Expedia Property ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. The property had a deposit policy and it was successfully deleted.",
+            "headers": {
+              "Transaction-ID": {
+                "type": "string",
+                "description": "Unique transaction ID"
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/responses/ForbiddenError"
+          },
+          "404": {
+            "description": "Not Found. The property did not have a deposit policy, therefore nothing was deleted.",
+            "headers": {
+              "Transaction-ID": {
+                "type": "string",
+                "description": "Unique transaction ID"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          },
+          "503": {
+            "$ref": "#/responses/ServiceUnavailableError"
+          }
+        },
+        "security": [
+          {
+            "Basic": []
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "InternalServerError": {
+      "description": "Internal Server Error. A system error occurred while processing the request. Retrying the request will likely yield to the same result.",
+      "headers": {
+        "Transaction-ID": {
+          "type": "string",
+          "description": "Unique transaction ID"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "ServiceUnavailableError": {
+      "description": "Service Unavailable. A temporary system error occurred while processing the request. You can retry the request later.",
+      "headers": {
+        "Transaction-ID": {
+          "type": "string",
+          "description": "Unique transaction ID"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "BadRequestError": {
+      "description": "Bad Request. An error occurred because the request is invalid. The error code and description contained in the payload of the response will give more information as to what was wrong with the request.",
+      "headers": {
+        "Transaction-ID": {
+          "type": "string",
+          "description": "Unique transaction ID"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "UnauthorizedError": {
+      "description": "Unauthorized. Invalid credentials were used to perform the request.",
+      "headers": {
+        "Transaction-ID": {
+          "type": "string",
+          "description": "Unique transaction ID"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "ForbiddenError": {
+      "description": "Forbidden. The authenticated user is not authorized to perform this request.",
+      "headers": {
+        "Transaction-ID": {
+          "type": "string",
+          "description": "Unique transaction ID"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Basic": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "Basic": []
+    }
+  ],
+  "definitions": {
+    "SuccessfulGetResponse": {
+      "type": "object",
+      "required": [
+        "entity"
+      ],
+      "properties": {
+        "entity": {
+          "$ref": "#/definitions/Deposit"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "required": [
+        "errors"
+      ],
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "List of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    },
+    "Deposit": {
+      "type": "object",
+      "properties": {
+        "defaultPolicy": {
+          "$ref": "#/definitions/DefaultPolicy",
+          "description": "Default policy. Applicable unless one or more exceptions are defined. Optional: it is possible to only define exception policies."
+        },
+        "exceptionPolicies": {
+          "type": "array",
+          "description": "Optional. Up to 4 exception policies can be defined. List of policies that override the default policy for the date range(s) specified in the exception. Order in the array of exception policies matters. The order of the elements in this array determines the order in which the policies should be applied in case of date overlap between exceptions.",
+          "items": {
+            "$ref": "#/definitions/ExceptionPolicy"
+          }
+        },
+        "_links": {
+          "$ref": "#/definitions/Links",
+          "description": "Object describing links to other resources to which this deposit policy is linked to. Optional (i.e. ignored) when specified on PUT operation."
+        }
+      }
+    },
+    "DefaultPolicy": {
+      "type": "object",
+      "required": [
+        "payments"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Default policy description. This field is optional."
+        },
+        "payments": {
+          "type": "array",
+          "description": "List of payment policies. Up to 4 payment policies can be defined.",
+          "items": {
+            "$ref": "#/definitions/PaymentPolicy"
+          }
+        }
+      }
+    },
+    "PaymentPolicy": {
+      "type": "object",
+      "required": [
+        "type",
+        "when"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Defines the type of payment policy.",
+          "enum": [
+            "NIGHT",
+            "AMOUNT",
+            "PERCENTAGE",
+            "REMAINDER"
+          ]
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Indicates the amount of money that must be paid. If type is REMAINDER, value cannot be specified. If type is either NIGHT or PERCENTAGE then the number must be whole (no fractional digits)."
+        },
+        "when": {
+          "$ref": "#/definitions/PaymentTime",
+          "description": "Indicates when the deposit is due."
+        }
+      }
+    },
+    "PaymentTime": {
+      "type": "object",
+      "description": "Order of payments in the array matters. Payments must be specified in chronological order: UPON_BOOKING followed by DAYS_PRIOR followed by UPON_ARRIVAL.",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Defines the type of payment time.",
+          "enum": [
+            "DAYS_PRIOR",
+            "UPON_ARRIVAL",
+            "UPON_BOOKING"
+          ]
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Only present if type is DAYS_PRIOR. Indicates the number of days prior to arrival that the customer must pay the deposit."
+        }
+      }
+    },
+    "ExceptionPolicy": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Exception policy description. This field is optional."
+        },
+        "payments": {
+          "type": "array",
+          "description": "List of payment policies. Up to 4 payment policies can be defined.",
+          "items": {
+            "$ref": "#/definitions/PaymentPolicy"
+          }
+        },
+        "dateRanges": {
+          "type": "array",
+          "description": "List of date range during which the exception policy applies. One exception can contain from 1 to 15 date ranges maximum.",
+          "items": {
+            "$ref": "#/definitions/DateRange"
+          }
+        }
+      }
+    },
+    "DateRange": {
+      "type": "object",
+      "required": [
+        "startDate",
+        "endDate"
+      ],
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Starting date of the exception policy. Format is YYYY-MM-DD."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Ending date of the exception policy. Format is YYYY-MM-DD."
+        },
+        "daysOfWeek": {
+          "type": "string",
+          "description": "List of days of the week the exception policy is applicable.",
+          "enum": [
+            "MON",
+            "TUE",
+            "WED",
+            "THU",
+            "FRI",
+            "SAT",
+            "SUN"
+          ]
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "An object describing an error returned by the service.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        }
+      }
+    },
+    "Links": {
+      "type": "object",
+      "description": "Object describing links to other resources to which this deposit policy is linked to.",
+      "required": [
+        "self",
+        "ratePlans"
+      ],
+      "properties": {
+        "self": {
+          "$ref": "#/definitions/Link",
+          "description": "Link to the current deposit policy."
+        },
+        "ratePlans": {
+          "type": "array",
+          "description": "Collection of links to the rate plans (active and inactive) on which this deposit policy is applicable.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "Link": {
+      "type": "object",
+      "description": "Object describing a single link to a resource to which this deposit policy is linked to.",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "type": "string",
+          "format": "URL",
+          "description": "The fully-qualified URL of the resource."
+        }
+      }
+    }
+  }
+}
