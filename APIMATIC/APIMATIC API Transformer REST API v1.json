@@ -1,0 +1,95 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0",
+        "title": "APIMATIC API Transformer",
+        "description": "Transform API Descriptions from/to various formats",
+        "x-logo": {
+            "url": "https://apimatic.io/img/theme/Convertron.svg",
+            "backgroundColor": "#2a313a"
+        },
+        "termsOfService": "https://apimatic.io/transformer",
+        "contact": {
+            "name": "API Transformer",
+            "email": "transform@apimatic.io",
+            "url": "https://apimatic.io/transformer"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "externalDocs": {
+        "description": "API Transformer Website",
+        "url": "https://apimatic.io/transformer"
+    },
+    "host": "apimatic.io",
+    "basePath": "/api/transform",
+    "securityDefinitions": {
+        "api-key": {
+            "type": "apiKey",
+            "name": "apikey",
+            "in": "query"
+        },
+        "basic": {
+            "type": "basic"
+        }
+    },
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/x-www-form-urlencoded",
+        "text/plain",
+        "multipart/form-data"
+    ],
+    "produces": [
+        "application/json",
+        "application/x-yaml"
+    ],
+    "paths": {
+        "/transform": {
+            "post": {
+                "description": "Transform API Descriptions from/to various formats e.g., Swagger, API Blueprint, RAML, WADL, Google Discovery, I/O Docs.\n\n### INPUTS\n* API Blueprint\n* Swagger 1.0 - 1.2\n* Swagger 2.0 JSON\n* Swagger 2.0 YAML\n* WADL - W3C 2009\n* Google Discovery\n* RAML 0.8\n* I/O Docs - Mashery\n* HAR 1.2\n* Postman Collection 1.0 - 2.0\n* APIMATIC Format\n* Mashape\n\n### OUTPUTS\n* API Blueprint\n* Swagger 1.2\n* Swagger 2.0 JSON\n* Swagger 2.0 YAML\n* WADL - W3C 2009\n* RAML 0.8 - 1.0\n* APIMATIC Format",
+                "summary": "Transform API Descriptions from/to various formats",
+                "operationId": "ConvertAPI",
+                "parameters": [
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "swagger10",
+                            "swagger20",
+                            "swaggeryaml",
+                            "apiblueprint",
+                            "wadl2009",
+                            "raml",
+                            "apimatic"
+                        ]
+                    },
+                    {
+                        "name": "url",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The converted API specification",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "429": {
+                        "description": "Rate-limit exceeded"
+                    }
+                },
+                "security": []
+            }
+        }
+    },
+    "security": []
+}
