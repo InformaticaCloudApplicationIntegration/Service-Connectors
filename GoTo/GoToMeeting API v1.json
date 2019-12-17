@@ -1,0 +1,1369 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "GoToMeeting",
+    "description": "# Setup Instructions\r\n[GoToMeeting API Documentation](https://goto-developer.logmeininc.com/gotomeeting-api-overview)\r\n\r\n### Environment Template\r\n1. **Choose the \"GoToMeeting\" template** on the **environment dropdown menu** (top right corner of the window)\r\n2. **Click on the EYE icon (quick look)** right next to the environment dropdown box, then **click on EDIT** right next to the environment's name\r\n3. **Fill the environment variables *client_id* and *client_secret*** from your account. You can retrieve these by creating a new App on the [Developer Center](https://goto-developer.logmeininc.com/user/me/apps).\r\n\r\n### OAuth 2.0\r\n1. Make sure the GoToMeeting environment is selected on the dropdown box on top right of the main screen.\r\n2. Right-click the collection on the left bar\r\n3. Click on **Edit**\r\n4. Click on **Authorization Tab**\r\n5. Click on **Get New Access Token**\r\n6. Fill the form with the variables below. They will be pulled automatically from the Environment template you just loaded:\r\n  - Callback URL: *{{callback_url}}*\r\n  - Auth URL: *{{auth_url}}*\r\n  - Access Token URL: *{{access_token_url}}*\r\n  - Client ID: *{{client_id}}*\r\n  - Client Secret: *{{client_secret}}*\r\n  - Client Authentication: *Send as Basic Auth header*\r\n7. Click on **Request Token**. You should see a GoToMeeting login screen now.\r\n8. **Login** with your GoToMeeting credentials.\r\n9. **Allow** the permission request to access data from your account.\r\n10. If you had success you should see your newly generated access token. Scroll to the bottom.\r\n11. Copy your **organizerKey**. You'll need to save it later as environment variable.\r\n12. Click on **Use Token**.\r\n13. Now just make sure you paste the **organizerKey** on the *{{organizerKey}}* variable in your environment.\r\n\r\n*Disclaimer: GoToMeeting access tokens expire in just 1h, so you might need to repeat steps 1-12 of the OAuth 2.0 process every hour you are working with the API.*",
+    "contact": {}
+  },
+  "host": "apidev.getgo.com",
+  "basePath": "/G2M/rest/organizers/DefaultParameterValue/sessions",
+  "securityDefinitions": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "http://example.com/auth",
+      "scopes": {}
+    }
+  },
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/G2M/rest/organizers": {
+      "post": {
+        "description": "<p>Creates a new organizer and sends an email to the email address defined in the request. This API call is only available to users with the admin role. You may also pass 'G2W' or 'G2T' or 'OPENVOICE' as productType, to create organizers for those products. A G2W or G2T organizer will also have access to G2M.</p>\r\n\r\n<table border=1>\t\t\t\t\t\t\t\t\t\t\r\n<tr>\t<th>\tfield\t</th>\t<th>\tvalue\t</th>\t<th>\tdescription\t</th>\t</tr>\r\n<tr>\t<td>\t\"firstName\"\t</td>\t<td>\t\"First\"\t</td>\t<td>\tString - max 25 characters\t</td>\t</tr>\r\n<tr>\t<td>\t\"lastName\"\t</td>\t<td>\t\"Last\"\t</td>\t<td>\tString - max 25 characters\t</td>\t</tr>\r\n<tr>\t<td>\t\"organizerEmail\"\t</td>\t<td>\t\"valid.org@email.com\"\t</td>\t<td>\tString with valid email syntax\t</td>\t</tr>\r\n<tr>\t<td>\t\"productType\"\t</td>\t<td>\t\"G2M\"\t</td>\t<td>\tMust be: G2M, G2W, G2T, OV\t</td>\t</tr>\r\n</table>",
+        "summary": "Organizer",
+        "tags": [
+          "Organizers"
+        ],
+        "operationId": "G2MRestOrganizersPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/OrganizerRequest"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Gets the individual organizer specified by the organizer's email address. If an email address is not specified, all organizers are returned. This API call is only available to users with the admin role.",
+        "summary": "Organizer by email",
+        "tags": [
+          "Organizers"
+        ],
+        "operationId": "G2MRestOrganizersGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "Deletes the individual organizer specified by the email address. This API call is only available to users with the admin role.",
+        "summary": "Organizer by email",
+        "tags": [
+          "Organizers"
+        ],
+        "operationId": "G2MRestOrganizersDelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/G2M/rest/organizers/{organizerKey}": {
+      "put": {
+        "description": "<p>Updates the products of the specified organizer. To add a product (G2M, G2W, G2T, OPENVOICE) for the organizer, the call must be sent once for each product you want to add. To remove all products for the organizer, set status to 'suspended'. The call is limited to users with the admin role.</p>\r\n<table border=1>\t\t\t\t\t\t\t\t\t\t\r\n<tr>\t<th>\tfield\t</th>\t<th>\tvalue\t</th>\t<th>\tdescription\t</th>\t</tr>\r\n<tr>\t<td>\t\"firstName\"\t</td>\t<td>\t\"First\"\t</td>\t<td>\tString - max 25 characters\t</td>\t</tr>\r\n<tr>\t<td>\t\"lastName\"\t</td>\t<td>\t\"Last\"\t</td>\t<td>\tString - max 25 characters\t</td>\t</tr>\r\n<tr>\t<td>\t\"organizerEmail\"\t</td>\t<td>\t\"valid.org@email.com\"\t</td>\t<td>\tString with valid email syntax\t</td>\t</tr>\r\n<tr>\t<td>\t\"productType\"\t</td>\t<td>\t\"G2M\"\t</td>\t<td>\tMust be: G2M, G2W, G2T, OV\t</td>\t</tr>\r\n<tr>\t<td>\t\"status\"\t</td>\t<td>\t\"suspended\"\t</td>\t<td>\tMust be: blank or suspended\t</td>\t</tr>\r\n</table>",
+        "summary": "Organizer",
+        "tags": [
+          "Organizers"
+        ],
+        "operationId": "G2MRestOrganizersByOrganizerKeyPut",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "organizerKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Gets the individual organizer specified by the organizer's email address. If an email address is not specified, all organizers are returned. This API call is only available to users with the admin role.",
+        "summary": "Organizer",
+        "tags": [
+          "Organizers"
+        ],
+        "operationId": "G2MRestOrganizersByOrganizerKeyGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "organizerKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "Deletes the individual organizer specified by the organizer key. This API call is only available to users with the admin role.",
+        "summary": "Organizer",
+        "tags": [
+          "Organizers"
+        ],
+        "operationId": "G2MRestOrganizersByOrganizerKeyDelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "organizerKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/G2M/rest/organizers/{organizerKey}/historicalMeetings": {
+      "get": {
+        "description": "Get historical meetings for the specified organizer that started within the specified date/time range. Meetings which are still ongoing at the time of the request are not included in the result.\n\nNEW: As of September 2018, a new MeetingRecording object is included for completed past meetings.",
+        "summary": "Historical meetings by organizer",
+        "tags": [
+          "Organizers"
+        ],
+        "operationId": "G2MRestOrganizersHistoricalMeetingsByOrganizerKeyGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "organizerKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/G2M/rest/organizers/{organizerKey}/attendees": {
+      "get": {
+        "description": "Lists all attendees for all meetings within a specified date range for a specified organizer. This API call is only available to users with the admin role.",
+        "summary": "Attendees by organizer",
+        "tags": [
+          "Organizers"
+        ],
+        "operationId": "G2MRestOrganizersAttendeesByOrganizerKeyGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "starttime",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "organizerKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/G2M/rest/meetings": {
+      "post": {
+        "description": "<p>Create a new meeting based on the parameters specified.</p>\r\n\r\n<table border=1>\t\t\t\t\t\t\t\t\t\t\r\n<tr>\t<th>\tfield\t</th>\t<th>\tvalue\t</th>\t<th>\tdescription\t</th>\t</tr>\r\n<tr>\t<td>\t\"subject\"\t</td>\t<td>\t\"subject\"\t</td>\t<td>\tString - max 100 char.\t</td>\t</tr>\r\n<tr>\t<td>\t\"starttime\"\t</td>\t<td>\t\"2019-05-10T12:00:00Z\"\t</td>\t<td>\t{YYYY}-{MM}-{DD}T{HH}:{MM}:{SS}Z format, UTC only\t</td>\t</tr>\r\n<tr>\t<td>\t\"endtime\"\t</td>\t<td>\t\"2019-05-10T13:00:00Z\"\t</td>\t<td>\t{YYYY}-{MM}-{DD}T{HH}:{MM}:{SS}Z format, UTC only\t</td>\t</tr>\r\n<tr>\t<td>\t\"passwordRequired\"\t</td>\t<td>\tFALSE\t</td>\t<td>\tBoolean: true, false\t</td>\t</tr>\r\n<tr>\t<td>\t\"conferencecallinfo\"\t</td>\t<td>\t\"hybrid\"\t</td>\t<td>\tMust be one of: Hybrid, PTSN, Free, Private, VoIP.\t</td>\t</tr>\r\n<tr>\t<td>\t\"timezonekey\"\t</td>\t<td>\t<leave blank>\t</td>\t<td>\tAll times default to UTC\t</td>\t</tr>\r\n<tr>\t<td>\t\"meetingtype\"\t</td>\t<td>\t\"scheduled\"\t</td>\t<td>\tMust be one of: scheduled, recurring, immediate\t</td>\t</tr>\r\n</table>",
+        "summary": "Meeting",
+        "tags": [
+          "Meetings"
+        ],
+        "operationId": "G2MRestMeetingsPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MeetingRequest"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/G2M/rest/meetings/{meetingId}": {
+      "put": {
+        "description": "<p>Updates an existing meeting specified by meetingId.</p>\r\n\r\n<table border=1>\t\t\t\t\t\t\t\t\t\t\r\n<tr>\t<th>\tfield\t</th>\t<th>\tvalue\t</th>\t<th>\tdescription\t</th>\t</tr>\r\n<tr>\t<td>\t\"subject\"\t</td>\t<td>\t\"subject\"\t</td>\t<td>\tString - max 100 char.\t</td>\t</tr>\r\n<tr>\t<td>\t\"starttime\"\t</td>\t<td>\t\"2019-05-10T12:00:00Z\"\t</td>\t<td>\t{YYYY}-{MM}-{DD}T{HH}:{MM}:{SS}Z format, UTC only\t</td>\t</tr>\r\n<tr>\t<td>\t\"endtime\"\t</td>\t<td>\t\"2019-05-10T13:00:00Z\"\t</td>\t<td>\t{YYYY}-{MM}-{DD}T{HH}:{MM}:{SS}Z format, UTC only\t</td>\t</tr>\r\n<tr>\t<td>\t\"passwordRequired\"\t</td>\t<td>\tFALSE\t</td>\t<td>\tBoolean: true, false\t</td>\t</tr>\r\n<tr>\t<td>\t\"conferencecallinfo\"\t</td>\t<td>\t\"hybrid\"\t</td>\t<td>\tMust be one of: Hybrid, PTSN, Free, Private, VoIP.\t</td>\t</tr>\r\n<tr>\t<td>\t\"timezonekey\"\t</td>\t<td>\t<leave blank>\t</td>\t<td>\tAll times default to UTC\t</td>\t</tr>\r\n<tr>\t<td>\t\"meetingtype\"\t</td>\t<td>\t\"scheduled\"\t</td>\t<td>\tMust be one of: scheduled, recurring, immediate\t</td>\t</tr>\r\n</table>",
+        "summary": "Meeting",
+        "tags": [
+          "Meetings"
+        ],
+        "operationId": "G2MRestMeetingsByMeetingIdPut",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MeetingRequest"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "meetingId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Returns the meeting details for the specified meeting.\n\nNEW: As of September 2018, a new MeetingRecording object is included for completed past meetings.",
+        "summary": "Meeting",
+        "tags": [
+          "Meetings"
+        ],
+        "operationId": "G2MRestMeetingsByMeetingIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "meetingId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "Deletes the meeting identified by the meetingId.",
+        "summary": "Meeting",
+        "tags": [
+          "Meetings"
+        ],
+        "operationId": "G2MRestMeetingsByMeetingIdDelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "meetingId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/G2M/rest/meetings/{meetingId}/start": {
+      "get": {
+        "description": "Returns a host URL that can be used to start a meeting. When this URL is opened in a web browser, the GoToMeeting client will be downloaded and launched and the meeting will start. The end user is not required to login to a client.",
+        "summary": "Meeting link",
+        "tags": [
+          "Meetings"
+        ],
+        "operationId": "G2MRestMeetingsStartByMeetingIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "meetingId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/G2M/rest/upcomingMeetings": {
+      "get": {
+        "description": "Gets upcoming meetings for the current authenticated organizer.",
+        "summary": "Upcoming meetings",
+        "tags": [
+          "Meetings"
+        ],
+        "operationId": "G2MRestUpcomingMeetingsGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/G2M/rest/meetings/{meetingID}/attendees": {
+      "get": {
+        "description": "List all attendees for specified meetingId of historical meeting. The historical meetings can be fetched using 'Get historical meetings', 'Get historical meetings by organizer', and 'Get historical meetings by group'. For users with the admin role this call returns attendees for any meeting. For any other user the call will return attendees for meetings on which the user is a valid organizer.",
+        "summary": "Attendees by meeting",
+        "tags": [
+          "Meetings"
+        ],
+        "operationId": "G2MRestMeetingsAttendeesByMeetingIDGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "meetingID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/G2M/rest/historicalMeetings": {
+      "get": {
+        "description": "Get historical meetings for the currently authenticated organizer that started within the specified date/time range. Meetings which are still ongoing at the time of the request are not included. A maximum of 25 meetings is returned. \n\nNEW: As of September 2018, a new MeetingRecording object is included.",
+        "summary": "Historical meetings",
+        "tags": [
+          "Meetings"
+        ],
+        "operationId": "G2MRestHistoricalMeetingsGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/{sessionId}": {
+      "delete": {
+        "description": "Use this call to clean up your data by deleting any specific session. The sessionID(s) are included by meeting in the Get Historical Meetings call.\n\nEach meeting held is at least one session. One meeting may be multiple sessions if the organizer stopped and restarted the meeting for any reason, such as their device of choice did not work. Recurring meetings are at least one session per event.\n\nThe call removes the specified session(s) from LogMeIn's servers including the sessionID, the attendee list, and any recordings. The meeting will still appear in your organizer's Meeting History, but will have no associated sessions.\n\nNOTE: The delete occurs at the session level because this provides the greatest granular control. To delete for a specific meetingID, you would need to accumualate all sessions for the meeting and apply the delete.",
+        "summary": "Delete session",
+        "tags": [
+          "Meetings"
+        ],
+        "operationId": "BySessionIdDelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/{sessionId}/attendees": {
+      "delete": {
+        "description": "Use this call to clean up your data by deleting the attendee list for a specific session. The sessionID(s) and the number of attendees at each session is included by meeting in the Get Historical Meetings call.\n\nEach meeting held is at least one session. One meeting may be multiple sessions if the organizer stopped and restarted the meeting for any reason, such as their device of choice did not work. Recurring meetings are at least one session per event.\n\nThe call removes the attendee list from the session from LogMeIn's servers. You can remove the entire session data using the Delete Session call, or delete recordings of the meeting using the Delete Session Recordings call. The meeting will still appear in your organizer's Meeting History, but will have no associated attendees.\n\nNOTE: The delete occurs at the session level because this provides the greatest granular control. To delete for a specific meetingID, you would need to accumualate all sessions for the meeting and apply the delete.",
+        "summary": "Delete session attendees",
+        "tags": [
+          "Meetings"
+        ],
+        "operationId": "AttendeesBySessionIdDelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/G2M/rest/groups": {
+      "get": {
+        "description": "List all groups for an account. This API call is only available to users with the admin role.",
+        "summary": "Groups",
+        "tags": [
+          "Groups"
+        ],
+        "operationId": "G2MRestGroupsGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/G2M/rest/groups/{groupkey}/organizers": {
+      "get": {
+        "description": "Returns all the organizers within a specific group. This API call is only available to users with the admin role.",
+        "summary": "Organizers by group",
+        "tags": [
+          "Groups"
+        ],
+        "operationId": "G2MRestGroupsOrganizersByGroupkeyGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "groupkey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/G2M/rest/groups/{groupkey}/attendees": {
+      "get": {
+        "description": "Returns all attendees for all meetings within specified date range held by organizers within the specified group. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.",
+        "summary": "Attendees by group",
+        "tags": [
+          "Groups"
+        ],
+        "operationId": "G2MRestGroupsAttendeesByGroupkeyGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "groupkey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/G2M/rest/groups/{groupKey}/upcomingMeetings": {
+      "get": {
+        "description": "Get upcoming meetings for a specified group. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.",
+        "summary": "Upcoming meetings by group",
+        "tags": [
+          "Groups"
+        ],
+        "operationId": "G2MRestGroupsUpcomingMeetingsByGroupKeyGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "groupKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/G2M/rest/groups/{groupkey}/historicalMeetings": {
+      "get": {
+        "description": "Get historical meetings for the specified group that started within the specified date/time range. This API call is only available to users with the admin role. This API call is restricted to groups with a maximum of 50 organizers. Remark: Meetings which are still ongoing at the time of the request are NOT contained in the result array.",
+        "summary": "Historical meetings by group",
+        "tags": [
+          "Groups"
+        ],
+        "operationId": "G2MRestGroupsHistoricalMeetingsByGroupkeyGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "groupkey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "//api.getgo.com/G2M/rest/groups/{groupKey}/organizers": {
+      "post": {
+        "description": "<p>Creates a new organizer and sends an email to the email address defined in request. This API call is only available to users with the admin role. You may also pass 'G2W' or 'G2T' or 'OPENVOICE' as productType variables, creating organizers for those products. A G2W or G2T organizer will also have access to G2M.</p>\r\n<table border=1>\t\t\t\t\t\t\t\t\t\t\r\n<tr>\t<th>\tfield\t</th>\t<th>\tvalue\t</th>\t<th>\tdescription\t</th>\t</tr>\r\n<tr>\t<td>\t\"organizerEmail\"\t</td>\t<td>\t\"valid.org@email.com\"\t</td>\t<td>\tString with valid email syntax\t</td>\t</tr>\r\n<tr>\t<td>\t\"firstName\"\t</td>\t<td>\t\"First\"\t</td>\t<td>\tString - max 25 characters\t</td>\t</tr>\r\n<tr>\t<td>\t\"lastName\"\t</td>\t<td>\t\"Last\"\t</td>\t<td>\tString - max 25 characters\t</td>\t</tr>\r\n<tr>\t<td>\t\"productType\"\t</td>\t<td>\t\"G2M\"\t</td>\t<td>\tMust be: G2M, G2W, G2T, OV\t</td>\t</tr>\r\n</table>",
+        "summary": "Organizer in group",
+        "tags": [
+          "Groups"
+        ],
+        "operationId": "ApiGetgoComG2MRestGroupsOrganizersByGroupKeyPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/OrganizeringroupRequest"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "groupKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "OrganizerRequest": {
+      "title": "OrganizerRequest",
+      "example": {
+        "firstName": "First",
+        "lastName": "Last",
+        "organizerEmail": "email@example.com",
+        "productType": "G2M"
+      },
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "organizerEmail": {
+          "type": "string"
+        },
+        "productType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "organizerEmail",
+        "productType"
+      ]
+    },
+    "MeetingRequest": {
+      "title": "MeetingRequest",
+      "example": {
+        "subject": "Subject",
+        "starttime": "2018-05-10T12:00:00Z",
+        "endtime": "2018-05-10T13:00:00Z",
+        "passwordrequired": false,
+        "conferencecallinfo": "hybrid",
+        "timezonekey": "",
+        "meetingtype": "scheduled"
+      },
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string"
+        },
+        "starttime": {
+          "type": "string"
+        },
+        "endtime": {
+          "type": "string"
+        },
+        "passwordrequired": {
+          "type": "boolean"
+        },
+        "conferencecallinfo": {
+          "type": "string"
+        },
+        "timezonekey": {
+          "type": "string"
+        },
+        "meetingtype": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "subject",
+        "starttime",
+        "endtime",
+        "passwordrequired",
+        "conferencecallinfo",
+        "timezonekey",
+        "meetingtype"
+      ]
+    },
+    "OrganizeringroupRequest": {
+      "title": "OrganizeringroupRequest",
+      "example": {
+        "organizerEmail": "valid.org@email.com",
+        "firstName": "First",
+        "lastName": "Last",
+        "productType": "G2M"
+      },
+      "type": "object",
+      "properties": {
+        "organizerEmail": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "productType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "organizerEmail",
+        "firstName",
+        "lastName",
+        "productType"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Organizers"
+    },
+    {
+      "name": "Meetings"
+    },
+    {
+      "name": "Groups"
+    }
+  ]
+}

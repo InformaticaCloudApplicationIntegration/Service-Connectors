@@ -1,0 +1,5729 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "GoToAssist Service Desk - V2 API",
+    "description": "The GoToAssist Service Desk API provides seamless integration of GoToAssist ServiceDesk features into your existing infrastructure or third party applications.",
+    "contact": {}
+  },
+  "host": "api.getgo.com",
+  "basePath": "/G2ASD/rest/v2",
+  "securityDefinitions": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "http://example.com/auth",
+      "scopes": {}
+    }
+  },
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/incidents/{incidentID}": {
+      "get": {
+        "description": "Retrieve a specified incident record.",
+        "summary": "Get incident",
+        "tags": [
+          "Incidents"
+        ],
+        "operationId": "IncidentsByIncidentIDGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "incident_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "note_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "incidentID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "put": {
+        "description": "Modify an existing incident record.",
+        "summary": "Update incident",
+        "tags": [
+          "Incidents"
+        ],
+        "operationId": "IncidentsByIncidentIDPut",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UpdateincidentRequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "incidentID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/incidents": {
+      "get": {
+        "description": "Retrieve a list of all incidents.",
+        "summary": "Get incidents",
+        "tags": [
+          "Incidents"
+        ],
+        "operationId": "IncidentsGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "incident_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "filter[service]",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/services/demo-services/incidents": {
+      "post": {
+        "description": "Create a new incident record.",
+        "summary": "Create incident",
+        "tags": [
+          "Incidents"
+        ],
+        "operationId": "ServicesDemoServicesIncidentsPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreateincidentRequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/problems": {
+      "get": {
+        "description": "Retrieves one or all problems. \n\nA problem is a recurring issue that affects the quality of a service to a customer, such as a technical glitch, something unclear about the user interface or the absence of a feature or certain information repeatedly requested by customers. Problems are typically incidents that continue to arise, sometimes despite a short-term fix. When a customer is affected by an incident which is resolved with a\"quick fix\" or workaround, the service for that customer will likely be impaired again because the problem is still active and waiting to produce the recurring incident again and again.",
+        "summary": "Get problems",
+        "tags": [
+          "Problems"
+        ],
+        "operationId": "ProblemsGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "problem_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "filter[service]",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/problems/{problemID}": {
+      "get": {
+        "description": "Retrieves a specified problem. \n\nA problem is a recurring issue that affects the quality of a service to a customer, such as a technical glitch, something unclear about the user interface or the absence of a feature or certain information repeatedly requested by customers. Problems are typically incidents that continue to arise, sometimes despite a short-term fix. When a customer is affected by an incident which is resolved with a\"quick fix\" or workaround, the service for that customer will likely be impaired again because the problem is still active and waiting to produce the recurring incident again and again.",
+        "summary": "Get problem",
+        "tags": [
+          "Problems"
+        ],
+        "operationId": "ProblemsByProblemIDGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "problem_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "problemID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "put": {
+        "description": "Modifies an existing problem record.",
+        "summary": "Update problem",
+        "tags": [
+          "Problems"
+        ],
+        "operationId": "ProblemsByProblemIDPut",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UpdateproblemRequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "problemID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/services/demo-services/problems": {
+      "post": {
+        "description": "Create a new problem record.",
+        "summary": "Create service problem",
+        "tags": [
+          "Problems"
+        ],
+        "operationId": "ServicesDemoServicesProblemsPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreateserviceproblemRequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/releases": {
+      "get": {
+        "description": "Retrieves releases for your account. \n\nReleases are the implementation of incidents and changes into services. When incidents are resolved and changes are completed, they are ready to be deployed to customers. Releases provide a way of tracking when incidents and changes are implemented and who is responsible for aspects of the release process. Service Desk release forms are designed to enable the following development process: planning, approval, testing and deployment.",
+        "summary": "Get releases",
+        "tags": [
+          "Releases"
+        ],
+        "operationId": "ReleasesGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "release_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "filter[service]",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/releases/{releaseID}": {
+      "get": {
+        "description": "Retrieves a specified release for your account.",
+        "summary": "Get release",
+        "tags": [
+          "Releases"
+        ],
+        "operationId": "ReleasesByReleaseIDGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "release_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "releaseID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "put": {
+        "description": "Modifies a specified release.",
+        "summary": "Update release",
+        "tags": [
+          "Releases"
+        ],
+        "operationId": "ReleasesByReleaseIDPut",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UpdatereleaseRequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "releaseID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/services/demo-services/releases": {
+      "post": {
+        "description": "Creates a new release for your account.",
+        "summary": "Create release",
+        "tags": [
+          "Releases"
+        ],
+        "operationId": "ServicesDemoServicesReleasesPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreatereleaseRequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/companies": {
+      "get": {
+        "description": "Get Companies",
+        "summary": "Get companies",
+        "tags": [
+          "Companies"
+        ],
+        "operationId": "CompaniesGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "company_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "post": {
+        "description": "Create Company",
+        "summary": "Create company",
+        "tags": [
+          "Companies"
+        ],
+        "operationId": "CompaniesPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreatecompanyRequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/companies/4278193982": {
+      "get": {
+        "description": "Get Company",
+        "summary": "Get company",
+        "tags": [
+          "Companies"
+        ],
+        "operationId": "Companies4278193982Get",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "company_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/companies/1402730396520825132": {
+      "put": {
+        "description": "Update Company",
+        "summary": "Update company",
+        "tags": [
+          "Companies"
+        ],
+        "operationId": "Companies1402730396520825132Put",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UpdatecompanyRequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/customers": {
+      "get": {
+        "description": "Get Customers",
+        "summary": "Get customers",
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "CustomersGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "customer_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "filter[email]",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "post": {
+        "description": "Create Customer",
+        "summary": "Create customer",
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "CustomersPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreatecustomerRequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/customers/1384840568863236129": {
+      "get": {
+        "description": "Get Customer",
+        "summary": "Get customer",
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "Customers1384840568863236129Get",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "customer_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/customers/1402728089780322396": {
+      "put": {
+        "description": "Update Customer",
+        "summary": "Update customer",
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "Customers1402728089780322396Put",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UpdatecustomerRequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/services": {
+      "get": {
+        "description": "Get services",
+        "summary": "Get services",
+        "tags": [
+          "Services"
+        ],
+        "operationId": "ServicesGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "service_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/services/{id}": {
+      "get": {
+        "description": "Get Service",
+        "summary": "Get service",
+        "tags": [
+          "Services"
+        ],
+        "operationId": "ServicesByIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "service_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/accounts": {
+      "get": {
+        "description": "",
+        "summary": "Get account",
+        "tags": [
+          "User / Account"
+        ],
+        "operationId": "AccountsGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "account_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "portal_setting_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "user_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/services/799736401016592250/groups": {
+      "get": {
+        "description": "Get Service Groups",
+        "summary": "Get service groups",
+        "tags": [
+          "User / Account"
+        ],
+        "operationId": "Services799736401016592250GroupsGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "group_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/services/799736401016592250/users": {
+      "get": {
+        "description": "Get Service User",
+        "summary": "Get service user",
+        "tags": [
+          "User / Account"
+        ],
+        "operationId": "Services799736401016592250UsersGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/services/799736401016592250/customers": {
+      "get": {
+        "description": "Get Service Customer",
+        "summary": "Get service customer",
+        "tags": [
+          "User / Account"
+        ],
+        "operationId": "Services799736401016592250CustomersGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "customer_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/users": {
+      "get": {
+        "description": "Get Users",
+        "summary": "Get users",
+        "tags": [
+          "User / Account"
+        ],
+        "operationId": "UsersGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/users/me": {
+      "get": {
+        "description": "Get my profile",
+        "summary": "Get my profile",
+        "tags": [
+          "User / Account"
+        ],
+        "operationId": "UsersMeGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/users/1210812651657060467": {
+      "get": {
+        "description": "Get User",
+        "summary": "Get user",
+        "tags": [
+          "User / Account"
+        ],
+        "operationId": "Users1210812651657060467Get",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/groups": {
+      "get": {
+        "description": "Get Groups",
+        "summary": "Get groups",
+        "tags": [
+          "Groups"
+        ],
+        "operationId": "GroupsGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "group_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/groups/4278195262": {
+      "get": {
+        "description": "Get Group",
+        "summary": "Get group",
+        "tags": [
+          "Groups"
+        ],
+        "operationId": "Groups4278195262Get",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "group_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/attachments/5wmdq00v6h3ul4yu7bnngr0xb": {
+      "get": {
+        "description": "Get Attachment",
+        "summary": "Get attachment",
+        "tags": [
+          "Attachments"
+        ],
+        "operationId": "Attachments5wmdq00v6h3ul4yu7bnngr0xbGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/attachments/5wmdq00v6h3ul4yu7bnngr0xb/5e8bd3aaecce47c8ae5d2a12f7d7b7bab9cdf44a99ce71685d341e5973942e6b": {
+      "get": {
+        "description": "Get Download Attachment",
+        "summary": "Get download attachment",
+        "tags": [
+          "Attachments"
+        ],
+        "operationId": "Attachments5wmdq00v6h3ul4yu7bnngr0xb5e8bd3aaecce47c8ae5d2a12f7d7b7bab9cdf44a99ce71685d341e5973942e6bGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/changes": {
+      "get": {
+        "description": "Get Changes",
+        "summary": "Get changes",
+        "tags": [
+          "Changes"
+        ],
+        "operationId": "ChangesGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "change_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "filter[service]",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/changes/{changeId}": {
+      "get": {
+        "description": "Get Change",
+        "summary": "Get change",
+        "tags": [
+          "Changes"
+        ],
+        "operationId": "ChangesByChangeIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "change_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "changeId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      },
+      "put": {
+        "description": "Update Change",
+        "summary": "Update change",
+        "tags": [
+          "Changes"
+        ],
+        "operationId": "ChangesByChangeIdPut",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UpdatechangeRequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "changeId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/services/demo-services/changes": {
+      "post": {
+        "description": "Create Change",
+        "summary": "Create service change",
+        "tags": [
+          "Changes"
+        ],
+        "operationId": "ServicesDemoServicesChangesPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreateservicechangeRequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/messages": {
+      "get": {
+        "description": "Get Messages",
+        "summary": "Get messages",
+        "tags": [
+          "Messages"
+        ],
+        "operationId": "MessagesGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "message_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/messages/21571": {
+      "get": {
+        "description": "Get Message",
+        "summary": "Get message",
+        "tags": [
+          "Messages"
+        ],
+        "operationId": "Messages21571Get",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "message_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/knowledge_articles": {
+      "get": {
+        "description": "Get Knowledge Articles",
+        "summary": "Get knowledge articles",
+        "tags": [
+          "Knowledge articles"
+        ],
+        "operationId": "KnowledgeArticlesGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "knowledge_article_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/knowledge_articles/21695": {
+      "get": {
+        "description": "Get knowledge article",
+        "summary": "Get knowledge article",
+        "tags": [
+          "Knowledge articles"
+        ],
+        "operationId": "KnowledgeArticles21695Get",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "knowledge_article_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/config_types": {
+      "get": {
+        "description": "Get Root Config Type",
+        "summary": "Get root configuration type",
+        "tags": [
+          "Config Types and Item"
+        ],
+        "operationId": "ConfigTypesGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "config_type_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "config_item_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/config_types/4278195670": {
+      "get": {
+        "description": "Get Config Type",
+        "summary": "Get configuration type",
+        "tags": [
+          "Config Types and Item"
+        ],
+        "operationId": "ConfigTypes4278195670Get",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "config_type_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "config_item_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/config_relationship_types": {
+      "get": {
+        "description": "Get Config Relationship Types",
+        "summary": "Get configuration relationship types",
+        "tags": [
+          "Config Types and Item"
+        ],
+        "operationId": "ConfigRelationshipTypesGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "config_relationship_type_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/config_items/13252": {
+      "get": {
+        "description": "Get ConfigItem",
+        "summary": "Get configuration item",
+        "tags": [
+          "Config Types and Item"
+        ],
+        "operationId": "ConfigItems13252Get",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "config_item_properties",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/config_items": {
+      "post": {
+        "description": "Create ConfigItem",
+        "summary": "Create configuration item",
+        "tags": [
+          "Config Types and Item"
+        ],
+        "operationId": "ConfigItemsPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreateconfigurationitemRequest"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/config_items/32132": {
+      "put": {
+        "description": "Update ConfigItem",
+        "summary": "Update configuration item",
+        "tags": [
+          "Config Types and Item"
+        ],
+        "operationId": "ConfigItems32132Put",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CreateincidentRequest": {
+      "title": "CreateincidentRequest",
+      "example": {
+        "object": {
+          "title": "Postman test title",
+          "notify_watchlisted": 1,
+          "notify_customer": 1,
+          "customer": "/customers/1384840568863236129",
+          "customer_viewable": 1,
+          "watching_external_emails": {
+            "add": [
+              "kumar10@jedix.com",
+              "kumar11@jedix.com"
+            ]
+          },
+          "linkages": {
+            "add": [
+              "/incidents/24343"
+            ]
+          },
+          "type": "Feedback",
+          "priority_level": "1",
+          "interesting": "true",
+          "common": "true",
+          "has_agreed_due_date": "true",
+          "due_date": "10/08/2017",
+          "tasks": {
+            "create": [
+              {
+                "title": "task1",
+                "status": "in_progress"
+              }
+            ]
+          },
+          "comments": {
+            "create": [
+              {
+                "note": "This is the new comment",
+                "attachments": {
+                  "add": {
+                    "filename": "jmeterTest.txt",
+                    "content_type": "text/plain",
+                    "file_data": "YW5kcmUgdHJ5\n"
+                  }
+                }
+              },
+              {
+                "note": "This is the second comment"
+              }
+            ]
+          },
+          "symptom": {
+            "note": "This is the symptom",
+            "attachments": {
+              "add": {
+                "filename": "symptom.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          }
+        }
+      },
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/Object"
+        }
+      },
+      "required": [
+        "object"
+      ]
+    },
+    "Object": {
+      "title": "Object",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "notify_watchlisted": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "notify_customer": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "customer": {
+          "type": "string"
+        },
+        "customer_viewable": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "watching_external_emails": {
+          "$ref": "#/definitions/WatchingExternalEmails"
+        },
+        "linkages": {
+          "$ref": "#/definitions/Linkages"
+        },
+        "type": {
+          "type": "string"
+        },
+        "priority_level": {
+          "type": "string"
+        },
+        "interesting": {
+          "type": "string"
+        },
+        "common": {
+          "type": "string"
+        },
+        "has_agreed_due_date": {
+          "type": "string"
+        },
+        "due_date": {
+          "type": "string"
+        },
+        "tasks": {
+          "$ref": "#/definitions/Tasks"
+        },
+        "comments": {
+          "$ref": "#/definitions/Comments"
+        },
+        "symptom": {
+          "$ref": "#/definitions/Symptom"
+        }
+      },
+      "required": [
+        "title",
+        "notify_watchlisted",
+        "notify_customer",
+        "customer",
+        "customer_viewable",
+        "watching_external_emails",
+        "linkages",
+        "type",
+        "priority_level",
+        "interesting",
+        "common",
+        "has_agreed_due_date",
+        "due_date",
+        "tasks",
+        "comments",
+        "symptom"
+      ]
+    },
+    "WatchingExternalEmails": {
+      "title": "WatchingExternalEmails",
+      "type": "object",
+      "properties": {
+        "add": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "add"
+      ]
+    },
+    "Linkages": {
+      "title": "Linkages",
+      "type": "object",
+      "properties": {
+        "add": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "add"
+      ]
+    },
+    "Tasks": {
+      "title": "Tasks",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create": {
+      "title": "Create",
+      "type": "object",
+      "properties": {
+        "title": {
+          "example": "task1",
+          "type": "string"
+        },
+        "status": {
+          "example": "in_progress",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "status"
+      ]
+    },
+    "Comments": {
+      "title": "Comments",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create1"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create1": {
+      "title": "Create1",
+      "type": "object",
+      "properties": {
+        "note": {
+          "example": "This is the new comment",
+          "type": "string"
+        },
+        "attachments": {
+          "$ref": "#/definitions/Attachments"
+        }
+      },
+      "required": [
+        "note"
+      ]
+    },
+    "Attachments": {
+      "title": "Attachments",
+      "example": {
+        "add": {
+          "filename": "jmeterTest.txt",
+          "content_type": "text/plain",
+          "file_data": "YW5kcmUgdHJ5\n"
+        }
+      },
+      "type": "object",
+      "properties": {
+        "add": {
+          "$ref": "#/definitions/Add"
+        }
+      },
+      "required": [
+        "add"
+      ]
+    },
+    "Add": {
+      "title": "Add",
+      "example": {
+        "filename": "jmeterTest.txt",
+        "content_type": "text/plain",
+        "file_data": "YW5kcmUgdHJ5\n"
+      },
+      "type": "object",
+      "properties": {
+        "filename": {
+          "example": "jmeterTest.txt",
+          "type": "string"
+        },
+        "content_type": {
+          "example": "text/plain",
+          "type": "string"
+        },
+        "file_data": {
+          "example": "YW5kcmUgdHJ5\n",
+          "type": "string"
+        }
+      },
+      "required": [
+        "filename",
+        "content_type",
+        "file_data"
+      ]
+    },
+    "Symptom": {
+      "title": "Symptom",
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "attachments": {
+          "$ref": "#/definitions/Attachments"
+        }
+      },
+      "required": [
+        "note",
+        "attachments"
+      ]
+    },
+    "UpdateincidentRequest": {
+      "title": "UpdateincidentRequest",
+      "example": {
+        "object": {
+          "tasks": {
+            "create": [
+              {
+                "title": "PostManTask",
+                "status": "in_progress",
+                "comments": {
+                  "create": [
+                    {
+                      "note": "This is the new jmeter comment added comment",
+                      "attachments": {
+                        "add": {
+                          "filename": "jmeterTest.txt",
+                          "content_type": "text/plain",
+                          "file_data": "YW5kcmUgdHJ5\n"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "time_entries": {
+            "create": [
+              {
+                "hours": 1,
+                "description": "first entry"
+              },
+              {
+                "hours": 2,
+                "description": "second entry"
+              }
+            ]
+          },
+          "notify_watchlisted": "true",
+          "notify_customer": "true",
+          "title": "UpdatePostMan incident title",
+          "customer_viewable": "true",
+          "watching_external_emails": {
+            "remove": [
+              "a@a.com",
+              "b@b.com"
+            ],
+            "add": [
+              "jmeter@c.com"
+            ]
+          },
+          "type": "Bug",
+          "priority_level": "1",
+          "interesting": "true",
+          "common": "true",
+          "has_agreed_due_date": "true",
+          "due_date": "11/08/2017",
+          "comments": {
+            "create": [
+              {
+                "note": "This is the new comment added comment",
+                "attachments": {
+                  "add": {
+                    "filename": "jemeterCommentTest.txt",
+                    "content_type": "text/plain",
+                    "file_data": "YW5kcmUgdHJ5\n"
+                  }
+                }
+              }
+            ]
+          },
+          "actions": {
+            "stop_the_clock": {},
+            "start_the_clock": {},
+            "escalate": {
+              "note": "Escalting this"
+            }
+          },
+          "symptom": {
+            "note": "This is the updated symptom",
+            "attachments": {
+              "add": {
+                "filename": "symptom.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "resolved": true,
+          "state": "in_progress",
+          "resolution": {
+            "note": "This is the updated resolution",
+            "attachments": {
+              "add": {
+                "filename": "linkPage.jpg",
+                "content_type": "image/jpeg",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          }
+        }
+      },
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/Object1"
+        }
+      },
+      "required": [
+        "object"
+      ]
+    },
+    "Object1": {
+      "title": "Object1",
+      "type": "object",
+      "properties": {
+        "tasks": {
+          "$ref": "#/definitions/Tasks1"
+        },
+        "time_entries": {
+          "$ref": "#/definitions/TimeEntries"
+        },
+        "notify_watchlisted": {
+          "type": "string"
+        },
+        "notify_customer": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "customer_viewable": {
+          "type": "string"
+        },
+        "watching_external_emails": {
+          "$ref": "#/definitions/WatchingExternalEmails1"
+        },
+        "type": {
+          "type": "string"
+        },
+        "priority_level": {
+          "type": "string"
+        },
+        "interesting": {
+          "type": "string"
+        },
+        "common": {
+          "type": "string"
+        },
+        "has_agreed_due_date": {
+          "type": "string"
+        },
+        "due_date": {
+          "type": "string"
+        },
+        "comments": {
+          "$ref": "#/definitions/Comments1"
+        },
+        "actions": {
+          "$ref": "#/definitions/Actions"
+        },
+        "symptom": {
+          "$ref": "#/definitions/Symptom"
+        },
+        "resolved": {
+          "type": "boolean"
+        },
+        "state": {
+          "type": "string"
+        },
+        "resolution": {
+          "$ref": "#/definitions/Resolution"
+        }
+      },
+      "required": [
+        "tasks",
+        "time_entries",
+        "notify_watchlisted",
+        "notify_customer",
+        "title",
+        "customer_viewable",
+        "watching_external_emails",
+        "type",
+        "priority_level",
+        "interesting",
+        "common",
+        "has_agreed_due_date",
+        "due_date",
+        "comments",
+        "actions",
+        "symptom",
+        "resolved",
+        "state",
+        "resolution"
+      ]
+    },
+    "Tasks1": {
+      "title": "Tasks1",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create2"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create2": {
+      "title": "Create2",
+      "type": "object",
+      "properties": {
+        "title": {
+          "example": "PostManTask",
+          "type": "string"
+        },
+        "status": {
+          "example": "in_progress",
+          "type": "string"
+        },
+        "comments": {
+          "$ref": "#/definitions/Comments1"
+        }
+      },
+      "required": [
+        "title",
+        "status",
+        "comments"
+      ]
+    },
+    "Comments1": {
+      "title": "Comments1",
+      "example": {
+        "create": [
+          {
+            "note": "This is the new jmeter comment added comment",
+            "attachments": {
+              "add": {
+                "filename": "jmeterTest.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "create": {
+          "example": [
+            {
+              "note": "This is the new jmeter comment added comment",
+              "attachments": {
+                "add": {
+                  "filename": "jmeterTest.txt",
+                  "content_type": "text/plain",
+                  "file_data": "YW5kcmUgdHJ5\n"
+                }
+              }
+            }
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create3"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create3": {
+      "title": "Create3",
+      "example": {
+        "note": "This is the new jmeter comment added comment",
+        "attachments": {
+          "add": {
+            "filename": "jmeterTest.txt",
+            "content_type": "text/plain",
+            "file_data": "YW5kcmUgdHJ5\n"
+          }
+        }
+      },
+      "type": "object",
+      "properties": {
+        "note": {
+          "example": "This is the new jmeter comment added comment",
+          "type": "string"
+        },
+        "attachments": {
+          "$ref": "#/definitions/Attachments"
+        }
+      },
+      "required": [
+        "note",
+        "attachments"
+      ]
+    },
+    "TimeEntries": {
+      "title": "TimeEntries",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create4"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create4": {
+      "title": "Create4",
+      "type": "object",
+      "properties": {
+        "hours": {
+          "example": 1,
+          "type": "integer",
+          "format": "int32"
+        },
+        "description": {
+          "example": "first entry",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hours",
+        "description"
+      ]
+    },
+    "WatchingExternalEmails1": {
+      "title": "WatchingExternalEmails1",
+      "type": "object",
+      "properties": {
+        "remove": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "add": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "remove",
+        "add"
+      ]
+    },
+    "Actions": {
+      "title": "Actions",
+      "type": "object",
+      "properties": {
+        "stop_the_clock": {
+          "type": "object"
+        },
+        "start_the_clock": {
+          "type": "object"
+        },
+        "escalate": {
+          "$ref": "#/definitions/Escalate"
+        }
+      },
+      "required": [
+        "stop_the_clock",
+        "start_the_clock",
+        "escalate"
+      ]
+    },
+    "Escalate": {
+      "title": "Escalate",
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "note"
+      ]
+    },
+    "Resolution": {
+      "title": "Resolution",
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "attachments": {
+          "$ref": "#/definitions/Attachments"
+        }
+      },
+      "required": [
+        "note",
+        "attachments"
+      ]
+    },
+    "CreateserviceproblemRequest": {
+      "title": "CreateserviceproblemRequest",
+      "example": {
+        "object": {
+          "title": "Postman problem test",
+          "priority_level": "1",
+          "type": "Issue",
+          "notify_watchlisted": 1,
+          "notify_customer": 1,
+          "customer_viewable": 1,
+          "customer": "/customers/1384840568863236129",
+          "watching_external_emails": {
+            "add": [
+              "kumar10@jedix.com",
+              "kumar11@jedix.com"
+            ]
+          },
+          "linkages": {
+            "add": [
+              "/incidents/32127",
+              "/problems/24338"
+            ]
+          },
+          "time_entries": {
+            "create": [
+              {
+                "description": "HotFix",
+                "hours": "20"
+              }
+            ]
+          },
+          "tasks": {
+            "create": [
+              {
+                "title": "task1",
+                "status": "in_progress",
+                "due_date": "13 Sep 2017, 21:31",
+                "comments": {
+                  "create": {
+                    "note": "test task comment",
+                    "attachments": {
+                      "add": {
+                        "filename": "TeskTaskComment.txt",
+                        "content_type": "text/plain",
+                        "file_data": "YW5kcmUgdHJ5\n"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "comments": {
+            "create": [
+              {
+                "note": "New Comment",
+                "attachments": {
+                  "add": {
+                    "filename": "kumarComments.txt",
+                    "content_type": "text/plain",
+                    "file_data": "YW5kcmUgdHJ5\n"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/Object2"
+        }
+      },
+      "required": [
+        "object"
+      ]
+    },
+    "Object2": {
+      "title": "Object2",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "priority_level": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "notify_watchlisted": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "notify_customer": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "customer_viewable": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "customer": {
+          "type": "string"
+        },
+        "watching_external_emails": {
+          "$ref": "#/definitions/WatchingExternalEmails"
+        },
+        "linkages": {
+          "$ref": "#/definitions/Linkages"
+        },
+        "time_entries": {
+          "$ref": "#/definitions/TimeEntries1"
+        },
+        "tasks": {
+          "$ref": "#/definitions/Tasks2"
+        },
+        "comments": {
+          "$ref": "#/definitions/Comments1"
+        }
+      },
+      "required": [
+        "title",
+        "priority_level",
+        "type",
+        "notify_watchlisted",
+        "notify_customer",
+        "customer_viewable",
+        "customer",
+        "watching_external_emails",
+        "linkages",
+        "time_entries",
+        "tasks",
+        "comments"
+      ]
+    },
+    "TimeEntries1": {
+      "title": "TimeEntries1",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create6"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create6": {
+      "title": "Create6",
+      "type": "object",
+      "properties": {
+        "description": {
+          "example": "HotFix",
+          "type": "string"
+        },
+        "hours": {
+          "example": "20",
+          "type": "string"
+        }
+      },
+      "required": [
+        "description",
+        "hours"
+      ]
+    },
+    "Tasks2": {
+      "title": "Tasks2",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create7"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create7": {
+      "title": "Create7",
+      "type": "object",
+      "properties": {
+        "title": {
+          "example": "task1",
+          "type": "string"
+        },
+        "status": {
+          "example": "in_progress",
+          "type": "string"
+        },
+        "due_date": {
+          "example": "13 Sep 2017, 21:31",
+          "type": "string"
+        },
+        "comments": {
+          "$ref": "#/definitions/Comments3"
+        }
+      },
+      "required": [
+        "title",
+        "status",
+        "due_date",
+        "comments"
+      ]
+    },
+    "Comments3": {
+      "title": "Comments3",
+      "example": {
+        "create": {
+          "note": "test task comment",
+          "attachments": {
+            "add": {
+              "filename": "TeskTaskComment.txt",
+              "content_type": "text/plain",
+              "file_data": "YW5kcmUgdHJ5\n"
+            }
+          }
+        }
+      },
+      "type": "object",
+      "properties": {
+        "create": {
+          "$ref": "#/definitions/Create3"
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "UpdateproblemRequest": {
+      "title": "UpdateproblemRequest",
+      "example": {
+        "object": {
+          "title": "Test problem updated",
+          "notify_watchlisted": "false",
+          "customer_viewable": "true",
+          "notify_customer": "false",
+          "type": "Issue",
+          "priority_level": "1",
+          "tags": {
+            "add": [
+              "L1 Issue",
+              "Minor"
+            ],
+            "remove": [
+              "Major"
+            ]
+          },
+          "time_entries": {
+            "create": [
+              {
+                "description": "Rent",
+                "hours": "20"
+              },
+              {
+                "description": "Rent Again",
+                "hours": "10"
+              }
+            ]
+          },
+          "tasks": {
+            "create": [
+              {
+                "title": "New Task for the Problem",
+                "status": "in_progress",
+                "due_date": "14 Sep 2017, 21:31"
+              },
+              {
+                "title": "New Task for the Problem #2",
+                "status": "new",
+                "comments": {
+                  "create": {
+                    "note": "test task comment",
+                    "attachments": {
+                      "add": {
+                        "filename": "TeskTaskComment.txt",
+                        "content_type": "text/plain",
+                        "file_data": "YW5kcmUgdHJ5\n"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "comments": {
+            "create": [
+              {
+                "note": "New Comment",
+                "attachments": {
+                  "add": {
+                    "filename": "kumarComments.txt",
+                    "content_type": "text/plain",
+                    "file_data": "YW5kcmUgdHJ5\n"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/Object3"
+        }
+      },
+      "required": [
+        "object"
+      ]
+    },
+    "Object3": {
+      "title": "Object3",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "notify_watchlisted": {
+          "type": "string"
+        },
+        "customer_viewable": {
+          "type": "string"
+        },
+        "notify_customer": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "priority_level": {
+          "type": "string"
+        },
+        "tags": {
+          "$ref": "#/definitions/Tags"
+        },
+        "time_entries": {
+          "$ref": "#/definitions/TimeEntries1"
+        },
+        "tasks": {
+          "$ref": "#/definitions/Tasks3"
+        },
+        "comments": {
+          "$ref": "#/definitions/Comments1"
+        }
+      },
+      "required": [
+        "title",
+        "notify_watchlisted",
+        "customer_viewable",
+        "notify_customer",
+        "type",
+        "priority_level",
+        "tags",
+        "time_entries",
+        "tasks",
+        "comments"
+      ]
+    },
+    "Tags": {
+      "title": "Tags",
+      "type": "object",
+      "properties": {
+        "add": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "remove": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "add",
+        "remove"
+      ]
+    },
+    "Tasks3": {
+      "title": "Tasks3",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create11"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create11": {
+      "title": "Create11",
+      "type": "object",
+      "properties": {
+        "title": {
+          "example": "New Task for the Problem",
+          "type": "string"
+        },
+        "status": {
+          "example": "in_progress",
+          "type": "string"
+        },
+        "due_date": {
+          "example": "14 Sep 2017, 21:31",
+          "type": "string"
+        },
+        "comments": {
+          "$ref": "#/definitions/Comments3"
+        }
+      },
+      "required": [
+        "title",
+        "status"
+      ]
+    },
+    "CreatereleaseRequest": {
+      "title": "CreatereleaseRequest",
+      "example": {
+        "object": {
+          "title": "Postman release test",
+          "priority_level": "1",
+          "type": "Urgent",
+          "notify_watchlisted": 1,
+          "notify_customer": 1,
+          "customer_viewable": 1,
+          "due_date": "13 Sep 2017, 21:31",
+          "due_live_at": "14 Sep 2017, 21:31",
+          "test_due_date": "13 Sep 2017, 20:31",
+          "released_to_production_at": "15 Sep 2017, 21:31",
+          "customer": "/customers/1384840568863236129",
+          "watching_external_emails": {
+            "add": [
+              "kumar10@jedix.com",
+              "kumar11@jedix.com"
+            ]
+          },
+          "linkages": {
+            "add": [
+              "/incidents/32127",
+              "/problems/24332",
+              "/changes/32129",
+              "/releases/24340"
+            ]
+          },
+          "testers": {
+            "create": [
+              {
+                "user": "/users/1030649756839600157",
+                "focus": "test release",
+                "status": "not_started"
+              }
+            ]
+          },
+          "time_entries": {
+            "create": [
+              {
+                "description": "HotFix",
+                "hours": "20"
+              }
+            ]
+          },
+          "tasks": {
+            "create": [
+              {
+                "title": "task1",
+                "status": "in_progress",
+                "due_date": "13 Sep 2017, 21:31",
+                "comments": {
+                  "create": {
+                    "note": "test task comment",
+                    "attachments": {
+                      "add": {
+                        "filename": "TeskTaskComment.txt",
+                        "content_type": "text/plain",
+                        "file_data": "YW5kcmUgdHJ5\n"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "release_instruction": {
+            "note": "New Release Instruction",
+            "attachments": {
+              "add": {
+                "filename": "kumarInst.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "component": {
+            "note": "New Component Instruction",
+            "attachments": {
+              "add": {
+                "filename": "kumarComp.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "backout": {
+            "note": "New Backout Instruction",
+            "attachments": {
+              "add": {
+                "filename": "kumarBack.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "comments": {
+            "create": [
+              {
+                "note": "New Comment",
+                "attachments": {
+                  "add": {
+                    "filename": "kumarComments.txt",
+                    "content_type": "text/plain",
+                    "file_data": "YW5kcmUgdHJ5\n"
+                  }
+                }
+              }
+            ]
+          },
+          "test_plan": {
+            "note": "Test Plan Title",
+            "attachments": {
+              "add": {
+                "filename": "TestPlan.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "issues": {
+            "create": [
+              {
+                "title": "Issue Title",
+                "priority": 1,
+                "state": "Open",
+                "notes": {
+                  "create": [
+                    {
+                      "note": "New Issue Comment",
+                      "attachments": {
+                        "add": {
+                          "filename": "kumarIssueComments.txt",
+                          "content_type": "text/plain",
+                          "file_data": "YW5kcmUgdHJ5\n"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "release_records": {
+            "create": [
+              {
+                "released_to": "Testing",
+                "reference": "One",
+                "release_status": "Pending",
+                "released_at": "16 Sep 2017, 21:31",
+                "released_by_user": "/users/1030649756839600157",
+                "record_notes": {
+                  "create": [
+                    {
+                      "note": "New Record Note",
+                      "attachments": {
+                        "add": {
+                          "filename": "RecordNote.txt",
+                          "content_type": "text/plain",
+                          "file_data": "YW5kcmUgdHJ5\n"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/Object4"
+        }
+      },
+      "required": [
+        "object"
+      ]
+    },
+    "Object4": {
+      "title": "Object4",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "priority_level": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "notify_watchlisted": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "notify_customer": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "customer_viewable": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "due_date": {
+          "type": "string"
+        },
+        "due_live_at": {
+          "type": "string"
+        },
+        "test_due_date": {
+          "type": "string"
+        },
+        "released_to_production_at": {
+          "type": "string"
+        },
+        "customer": {
+          "type": "string"
+        },
+        "watching_external_emails": {
+          "$ref": "#/definitions/WatchingExternalEmails"
+        },
+        "linkages": {
+          "$ref": "#/definitions/Linkages"
+        },
+        "testers": {
+          "$ref": "#/definitions/Testers"
+        },
+        "time_entries": {
+          "$ref": "#/definitions/TimeEntries1"
+        },
+        "tasks": {
+          "$ref": "#/definitions/Tasks2"
+        },
+        "release_instruction": {
+          "$ref": "#/definitions/ReleaseInstruction"
+        },
+        "component": {
+          "$ref": "#/definitions/Component"
+        },
+        "backout": {
+          "$ref": "#/definitions/Backout"
+        },
+        "comments": {
+          "$ref": "#/definitions/Comments1"
+        },
+        "test_plan": {
+          "$ref": "#/definitions/TestPlan"
+        },
+        "issues": {
+          "$ref": "#/definitions/Issues"
+        },
+        "release_records": {
+          "$ref": "#/definitions/ReleaseRecords"
+        }
+      },
+      "required": [
+        "title",
+        "priority_level",
+        "type",
+        "notify_watchlisted",
+        "notify_customer",
+        "customer_viewable",
+        "due_date",
+        "due_live_at",
+        "test_due_date",
+        "released_to_production_at",
+        "customer",
+        "watching_external_emails",
+        "linkages",
+        "testers",
+        "time_entries",
+        "tasks",
+        "release_instruction",
+        "component",
+        "backout",
+        "comments",
+        "test_plan",
+        "issues",
+        "release_records"
+      ]
+    },
+    "Testers": {
+      "title": "Testers",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create14"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create14": {
+      "title": "Create14",
+      "type": "object",
+      "properties": {
+        "user": {
+          "example": "/users/1030649756839600157",
+          "type": "string"
+        },
+        "focus": {
+          "example": "test release",
+          "type": "string"
+        },
+        "status": {
+          "example": "not_started",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user",
+        "focus",
+        "status"
+      ]
+    },
+    "ReleaseInstruction": {
+      "title": "ReleaseInstruction",
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "attachments": {
+          "$ref": "#/definitions/Attachments"
+        }
+      },
+      "required": [
+        "note",
+        "attachments"
+      ]
+    },
+    "Component": {
+      "title": "Component",
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "attachments": {
+          "$ref": "#/definitions/Attachments"
+        }
+      },
+      "required": [
+        "note",
+        "attachments"
+      ]
+    },
+    "Backout": {
+      "title": "Backout",
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "attachments": {
+          "$ref": "#/definitions/Attachments"
+        }
+      },
+      "required": [
+        "note",
+        "attachments"
+      ]
+    },
+    "TestPlan": {
+      "title": "TestPlan",
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "attachments": {
+          "$ref": "#/definitions/Attachments"
+        }
+      },
+      "required": [
+        "note",
+        "attachments"
+      ]
+    },
+    "Issues": {
+      "title": "Issues",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create19"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create19": {
+      "title": "Create19",
+      "type": "object",
+      "properties": {
+        "title": {
+          "example": "Issue Title",
+          "type": "string"
+        },
+        "priority": {
+          "example": 1,
+          "type": "integer",
+          "format": "int32"
+        },
+        "state": {
+          "example": "Open",
+          "type": "string"
+        },
+        "notes": {
+          "$ref": "#/definitions/Notes"
+        }
+      },
+      "required": [
+        "title",
+        "priority",
+        "state",
+        "notes"
+      ]
+    },
+    "Notes": {
+      "title": "Notes",
+      "example": {
+        "create": [
+          {
+            "note": "New Issue Comment",
+            "attachments": {
+              "add": {
+                "filename": "kumarIssueComments.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "create": {
+          "example": [
+            {
+              "note": "New Issue Comment",
+              "attachments": {
+                "add": {
+                  "filename": "kumarIssueComments.txt",
+                  "content_type": "text/plain",
+                  "file_data": "YW5kcmUgdHJ5\n"
+                }
+              }
+            }
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create3"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "ReleaseRecords": {
+      "title": "ReleaseRecords",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create21"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create21": {
+      "title": "Create21",
+      "type": "object",
+      "properties": {
+        "released_to": {
+          "example": "Testing",
+          "type": "string"
+        },
+        "reference": {
+          "example": "One",
+          "type": "string"
+        },
+        "release_status": {
+          "example": "Pending",
+          "type": "string"
+        },
+        "released_at": {
+          "example": "16 Sep 2017, 21:31",
+          "type": "string"
+        },
+        "released_by_user": {
+          "example": "/users/1030649756839600157",
+          "type": "string"
+        },
+        "record_notes": {
+          "$ref": "#/definitions/RecordNotes"
+        }
+      },
+      "required": [
+        "released_to",
+        "reference",
+        "release_status",
+        "released_at",
+        "released_by_user",
+        "record_notes"
+      ]
+    },
+    "RecordNotes": {
+      "title": "RecordNotes",
+      "example": {
+        "create": [
+          {
+            "note": "New Record Note",
+            "attachments": {
+              "add": {
+                "filename": "RecordNote.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "create": {
+          "example": [
+            {
+              "note": "New Record Note",
+              "attachments": {
+                "add": {
+                  "filename": "RecordNote.txt",
+                  "content_type": "text/plain",
+                  "file_data": "YW5kcmUgdHJ5\n"
+                }
+              }
+            }
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create3"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "UpdatereleaseRequest": {
+      "title": "UpdatereleaseRequest",
+      "example": {
+        "object": {
+          "title": "Postman release update",
+          "priority_level": "1",
+          "type": "Urgent",
+          "notify_watchlisted": "true",
+          "notify_customer": "true",
+          "customer_viewable": "true",
+          "due_date": "13 Sep 2017, 21:31",
+          "due_live_at": "14 Sep 2017, 21:31",
+          "test_due_date": "13 Sep 2017, 20:31",
+          "released_to_production_at": "15 Sep 2017, 21:31",
+          "time_entries": {
+            "create": [
+              {
+                "description": "HotFix",
+                "hours": "20"
+              }
+            ]
+          },
+          "tasks": {
+            "create": [
+              {
+                "title": "task1",
+                "status": "in_progress",
+                "locked": true,
+                "due_date": "13 Sep 2017, 21:31",
+                "comments": {
+                  "create": {
+                    "note": "test task comment",
+                    "attachments": {
+                      "add": {
+                        "filename": "TeskTaskComment.txt",
+                        "content_type": "text/plain",
+                        "file_data": "YW5kcmUgdHJ5\n"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "release_instruction": {
+            "note": "New Release Instruction UpdatedSep",
+            "attachments": {
+              "add": {
+                "filename": "kumarInst.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "component": {
+            "note": "New Component Instruction UpdatedSep",
+            "attachments": {
+              "add": {
+                "filename": "kumarComp.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "backout": {
+            "note": "New Backout Instruction UpdatedSep",
+            "attachments": {
+              "add": {
+                "filename": "kumarBack.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "comments": {
+            "create": [
+              {
+                "note": "New Comment UpdatedSep",
+                "attachments": {
+                  "add": {
+                    "filename": "kumarComments.txt",
+                    "content_type": "text/plain",
+                    "file_data": "YW5kcmUgdHJ5\n"
+                  }
+                }
+              }
+            ]
+          },
+          "test_plan": {
+            "note": "Test Plan Title UpdatedSep",
+            "attachments": {
+              "add": {
+                "filename": "TestPlan.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "issues": {
+            "create": [
+              {
+                "title": "Issue Title",
+                "priority": 1,
+                "state": "Open",
+                "notes": {
+                  "create": [
+                    {
+                      "note": "New Issue Comment",
+                      "attachments": {
+                        "add": {
+                          "filename": "kumarIssueComments.txt",
+                          "content_type": "text/plain",
+                          "file_data": "YW5kcmUgdHJ5\n"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "release_records": {
+            "create": [
+              {
+                "released_to": "Testing",
+                "reference": "One",
+                "release_status": "Pending",
+                "released_at": "16 Sep 2017, 21:31",
+                "record_notes": {
+                  "create": [
+                    {
+                      "note": "New Record Note",
+                      "attachments": {
+                        "add": {
+                          "filename": "RecordNote.txt",
+                          "content_type": "text/plain",
+                          "file_data": "YW5kcmUgdHJ5\n"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "tags": {
+            "add": [
+              "ZeroDefect"
+            ],
+            "remove": [
+              "Minor"
+            ]
+          }
+        }
+      },
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/Object5"
+        }
+      },
+      "required": [
+        "object"
+      ]
+    },
+    "Object5": {
+      "title": "Object5",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "priority_level": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "notify_watchlisted": {
+          "type": "string"
+        },
+        "notify_customer": {
+          "type": "string"
+        },
+        "customer_viewable": {
+          "type": "string"
+        },
+        "due_date": {
+          "type": "string"
+        },
+        "due_live_at": {
+          "type": "string"
+        },
+        "test_due_date": {
+          "type": "string"
+        },
+        "released_to_production_at": {
+          "type": "string"
+        },
+        "time_entries": {
+          "$ref": "#/definitions/TimeEntries1"
+        },
+        "tasks": {
+          "$ref": "#/definitions/Tasks5"
+        },
+        "release_instruction": {
+          "$ref": "#/definitions/ReleaseInstruction"
+        },
+        "component": {
+          "$ref": "#/definitions/Component"
+        },
+        "backout": {
+          "$ref": "#/definitions/Backout"
+        },
+        "comments": {
+          "$ref": "#/definitions/Comments1"
+        },
+        "test_plan": {
+          "$ref": "#/definitions/TestPlan"
+        },
+        "issues": {
+          "$ref": "#/definitions/Issues"
+        },
+        "release_records": {
+          "$ref": "#/definitions/ReleaseRecords1"
+        },
+        "tags": {
+          "$ref": "#/definitions/Tags"
+        }
+      },
+      "required": [
+        "title",
+        "priority_level",
+        "type",
+        "notify_watchlisted",
+        "notify_customer",
+        "customer_viewable",
+        "due_date",
+        "due_live_at",
+        "test_due_date",
+        "released_to_production_at",
+        "time_entries",
+        "tasks",
+        "release_instruction",
+        "component",
+        "backout",
+        "comments",
+        "test_plan",
+        "issues",
+        "release_records",
+        "tags"
+      ]
+    },
+    "Tasks5": {
+      "title": "Tasks5",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create24"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create24": {
+      "title": "Create24",
+      "type": "object",
+      "properties": {
+        "title": {
+          "example": "task1",
+          "type": "string"
+        },
+        "status": {
+          "example": "in_progress",
+          "type": "string"
+        },
+        "locked": {
+          "example": true,
+          "type": "boolean"
+        },
+        "due_date": {
+          "example": "13 Sep 2017, 21:31",
+          "type": "string"
+        },
+        "comments": {
+          "$ref": "#/definitions/Comments3"
+        }
+      },
+      "required": [
+        "title",
+        "status",
+        "locked",
+        "due_date",
+        "comments"
+      ]
+    },
+    "ReleaseRecords1": {
+      "title": "ReleaseRecords1",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create29"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create29": {
+      "title": "Create29",
+      "type": "object",
+      "properties": {
+        "released_to": {
+          "example": "Testing",
+          "type": "string"
+        },
+        "reference": {
+          "example": "One",
+          "type": "string"
+        },
+        "release_status": {
+          "example": "Pending",
+          "type": "string"
+        },
+        "released_at": {
+          "example": "16 Sep 2017, 21:31",
+          "type": "string"
+        },
+        "record_notes": {
+          "$ref": "#/definitions/RecordNotes"
+        }
+      },
+      "required": [
+        "released_to",
+        "reference",
+        "release_status",
+        "released_at",
+        "record_notes"
+      ]
+    },
+    "CreatecompanyRequest": {
+      "title": "CreatecompanyRequest",
+      "example": {
+        "object": {
+          "name": "TestPostMan",
+          "address": "Test addr",
+          "other_phone": "54535435",
+          "office_phone": "4343",
+          "website": "www.test.com",
+          "fax": "1123",
+          "mobile_phone": "8998794234",
+          "email": "foo@bar.com"
+        }
+      },
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/Object6"
+        }
+      },
+      "required": [
+        "object"
+      ]
+    },
+    "Object6": {
+      "title": "Object6",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "other_phone": {
+          "type": "string"
+        },
+        "office_phone": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        },
+        "mobile_phone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "address",
+        "other_phone",
+        "office_phone",
+        "website",
+        "fax",
+        "mobile_phone",
+        "email"
+      ]
+    },
+    "UpdatecompanyRequest": {
+      "title": "UpdatecompanyRequest",
+      "example": {
+        "object": {
+          "name": "TestRest Postman Updated",
+          "address": "Test addr",
+          "other_phone": "54535435",
+          "office_phone": "4343",
+          "website": "www.test.com",
+          "fax": "1123",
+          "mobile_phone": "8998794234",
+          "email": "foo@bar.com"
+        }
+      },
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/Object6"
+        }
+      },
+      "required": [
+        "object"
+      ]
+    },
+    "CreatecustomerRequest": {
+      "title": "CreatecustomerRequest",
+      "example": {
+        "object": {
+          "first_name": "test",
+          "last_name": "customer",
+          "email": "test_123@foo.com",
+          "email_format": "HTML",
+          "language": "en_US",
+          "person_detail": {
+            "address": "BTM",
+            "department": "IT",
+            "fax": "1231231",
+            "job_title": "SSE",
+            "mobile_phone": "12312421412",
+            "notes": "TEST",
+            "office_phone": "12312421412",
+            "other_phone": "22",
+            "website": "www.test.com"
+          }
+        }
+      },
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/Object8"
+        }
+      },
+      "required": [
+        "object"
+      ]
+    },
+    "Object8": {
+      "title": "Object8",
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "email_format": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "person_detail": {
+          "$ref": "#/definitions/PersonDetail"
+        }
+      },
+      "required": [
+        "first_name",
+        "last_name",
+        "email",
+        "email_format",
+        "language",
+        "person_detail"
+      ]
+    },
+    "PersonDetail": {
+      "title": "PersonDetail",
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "department": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        },
+        "job_title": {
+          "type": "string"
+        },
+        "mobile_phone": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "office_phone": {
+          "type": "string"
+        },
+        "other_phone": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "address",
+        "department",
+        "fax",
+        "job_title",
+        "mobile_phone",
+        "notes",
+        "office_phone",
+        "other_phone",
+        "website"
+      ]
+    },
+    "UpdatecustomerRequest": {
+      "title": "UpdatecustomerRequest",
+      "example": {
+        "object": {
+          "first_name": "test updated",
+          "last_name": "user updated",
+          "email": "test_1234@foo.com",
+          "email_format": "HTML",
+          "language": "en_US",
+          "person_detail": {
+            "address": "BTM",
+            "department": "IT",
+            "fax": "1231231",
+            "job_title": "SSE",
+            "mobile_phone": "12312421412",
+            "notes": "TEST",
+            "office_phone": "12312421412",
+            "other_phone": "22",
+            "website": "www.test.com"
+          }
+        }
+      },
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/Object8"
+        }
+      },
+      "required": [
+        "object"
+      ]
+    },
+    "UpdatechangeRequest": {
+      "title": "UpdatechangeRequest",
+      "example": {
+        "object": {
+          "title": "Postman Change update",
+          "priority_level": "1",
+          "type": "Major",
+          "notify_watchlisted": "true",
+          "notify_customer": "true",
+          "customer_viewable": "true",
+          "time_entries": {
+            "create": [
+              {
+                "description": "HotFix",
+                "hours": "20"
+              },
+              {
+                "description": "Change Request",
+                "hours": "70"
+              }
+            ]
+          },
+          "tasks": {
+            "create": [
+              {
+                "title": "task12",
+                "status": "in_progress",
+                "due_date": "13 Sep 2017, 21:31"
+              },
+              {
+                "title": "task34",
+                "status": "done",
+                "due_date": "14 Sep 2017, 21:31",
+                "comments": {
+                  "create": {
+                    "note": "test task comment",
+                    "attachments": {
+                      "add": {
+                        "filename": "TeskTaskComment.txt",
+                        "content_type": "text/plain",
+                        "file_data": "YW5kcmUgdHJ5\n"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "description": {
+            "note": "New Description",
+            "attachments": {
+              "add": {
+                "filename": "kumarDesc.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "reason": {
+            "note": "New Reason",
+            "attachments": {
+              "add": {
+                "filename": "kumarReason.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "comments": {
+            "create": [
+              {
+                "note": "New Comment",
+                "attachments": {
+                  "add": {
+                    "filename": "kumarComments.txt",
+                    "content_type": "text/plain",
+                    "file_data": "YW5kcmUgdHJ5\n"
+                  }
+                }
+              }
+            ]
+          },
+          "impact_analysis": {
+            "note": "New IMA updated",
+            "attachments": {
+              "add": {
+                "filename": "kumarIMA.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "complexity": "Low",
+          "risk": "Low",
+          "est_hrs": "3",
+          "build_instruction": {
+            "note": "New build instruction updated",
+            "attachments": {
+              "add": {
+                "filename": "kumarComments.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "build_progress_notes": {
+            "create": [
+              {
+                "note": "New build progress notes updated",
+                "attachments": {
+                  "add": {
+                    "filename": "kumarProgressNotes.txt",
+                    "content_type": "text/plain",
+                    "file_data": "YW5kcmUgdHJ5\n"
+                  }
+                }
+              }
+            ]
+          },
+          "test_plan": {
+            "note": "Test Plan Title NewUpdated",
+            "attachments": {
+              "add": {
+                "filename": "TestPlan.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "issues": {
+            "create": [
+              {
+                "title": "Issue Title444",
+                "priority": 1,
+                "state": "Open",
+                "notes": {
+                  "create": [
+                    {
+                      "note": "New Issue Comment 445",
+                      "attachments": {
+                        "add": {
+                          "filename": "kumarIssueComments.txt",
+                          "content_type": "text/plain",
+                          "file_data": "YW5kcmUgdHJ5\n"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "custom_fields": {
+            "Fixable": "Today Evening"
+          },
+          "tags": {
+            "add": [
+              "Minor"
+            ],
+            "remove": [
+              "Major"
+            ]
+          }
+        }
+      },
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/Object10"
+        }
+      },
+      "required": [
+        "object"
+      ]
+    },
+    "Object10": {
+      "title": "Object10",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "priority_level": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "notify_watchlisted": {
+          "type": "string"
+        },
+        "notify_customer": {
+          "type": "string"
+        },
+        "customer_viewable": {
+          "type": "string"
+        },
+        "time_entries": {
+          "$ref": "#/definitions/TimeEntries1"
+        },
+        "tasks": {
+          "$ref": "#/definitions/Tasks6"
+        },
+        "description": {
+          "$ref": "#/definitions/Description"
+        },
+        "reason": {
+          "$ref": "#/definitions/Reason"
+        },
+        "comments": {
+          "$ref": "#/definitions/Comments1"
+        },
+        "impact_analysis": {
+          "$ref": "#/definitions/ImpactAnalysis"
+        },
+        "complexity": {
+          "type": "string"
+        },
+        "risk": {
+          "type": "string"
+        },
+        "est_hrs": {
+          "type": "string"
+        },
+        "build_instruction": {
+          "$ref": "#/definitions/BuildInstruction"
+        },
+        "build_progress_notes": {
+          "$ref": "#/definitions/BuildProgressNotes"
+        },
+        "test_plan": {
+          "$ref": "#/definitions/TestPlan"
+        },
+        "issues": {
+          "$ref": "#/definitions/Issues"
+        },
+        "custom_fields": {
+          "$ref": "#/definitions/CustomFields"
+        },
+        "tags": {
+          "$ref": "#/definitions/Tags"
+        }
+      },
+      "required": [
+        "title",
+        "priority_level",
+        "type",
+        "notify_watchlisted",
+        "notify_customer",
+        "customer_viewable",
+        "time_entries",
+        "tasks",
+        "description",
+        "reason",
+        "comments",
+        "impact_analysis",
+        "complexity",
+        "risk",
+        "est_hrs",
+        "build_instruction",
+        "build_progress_notes",
+        "test_plan",
+        "issues",
+        "custom_fields",
+        "tags"
+      ]
+    },
+    "Tasks6": {
+      "title": "Tasks6",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create32"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create32": {
+      "title": "Create32",
+      "type": "object",
+      "properties": {
+        "title": {
+          "example": "task12",
+          "type": "string"
+        },
+        "status": {
+          "example": "in_progress",
+          "type": "string"
+        },
+        "due_date": {
+          "example": "13 Sep 2017, 21:31",
+          "type": "string"
+        },
+        "comments": {
+          "$ref": "#/definitions/Comments3"
+        }
+      },
+      "required": [
+        "title",
+        "status",
+        "due_date"
+      ]
+    },
+    "Description": {
+      "title": "Description",
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "attachments": {
+          "$ref": "#/definitions/Attachments"
+        }
+      },
+      "required": [
+        "note",
+        "attachments"
+      ]
+    },
+    "Reason": {
+      "title": "Reason",
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "attachments": {
+          "$ref": "#/definitions/Attachments"
+        }
+      },
+      "required": [
+        "note",
+        "attachments"
+      ]
+    },
+    "ImpactAnalysis": {
+      "title": "ImpactAnalysis",
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "attachments": {
+          "$ref": "#/definitions/Attachments"
+        }
+      },
+      "required": [
+        "note",
+        "attachments"
+      ]
+    },
+    "BuildInstruction": {
+      "title": "BuildInstruction",
+      "type": "object",
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "attachments": {
+          "$ref": "#/definitions/Attachments"
+        }
+      },
+      "required": [
+        "note",
+        "attachments"
+      ]
+    },
+    "BuildProgressNotes": {
+      "title": "BuildProgressNotes",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create3"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "CustomFields": {
+      "title": "CustomFields",
+      "type": "object",
+      "properties": {
+        "Fixable": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Fixable"
+      ]
+    },
+    "CreateservicechangeRequest": {
+      "title": "CreateservicechangeRequest",
+      "example": {
+        "object": {
+          "title": "Postman Change",
+          "priority_level": "1",
+          "type": "Major",
+          "notify_watchlisted": 1,
+          "notify_customer": 1,
+          "customer_viewable": 1,
+          "customer": "/customers/1384840568863236129",
+          "watching_external_emails": {
+            "add": [
+              "kumar10@jedix.com",
+              "kumar11@jedix.com"
+            ]
+          },
+          "time_entries": {
+            "create": [
+              {
+                "description": "HotFix",
+                "hours": "20"
+              }
+            ]
+          },
+          "linkages": {
+            "add": [
+              "/incidents/32127",
+              "/problems/24332",
+              "/changes/20501"
+            ]
+          },
+          "testers": {
+            "create": [
+              {
+                "user": "/users/1030649756839600157",
+                "focus": "test",
+                "status": "not_started"
+              }
+            ]
+          },
+          "tasks": {
+            "create": [
+              {
+                "title": "task1",
+                "status": "in_progress",
+                "due_date": "13 Sep 2017, 21:31",
+                "comments": {
+                  "create": {
+                    "note": "test task comment",
+                    "attachments": {
+                      "add": {
+                        "filename": "TeskTaskComment.txt",
+                        "content_type": "text/plain",
+                        "file_data": "YW5kcmUgdHJ5\n"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "description": {
+            "note": "New Description 2344",
+            "attachments": {
+              "add": {
+                "filename": "kumarDesc22.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "reason": {
+            "note": "New Reason",
+            "attachments": {
+              "add": {
+                "filename": "kumarReason.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "comments": {
+            "create": [
+              {
+                "note": "New Comment",
+                "attachments": {
+                  "add": {
+                    "filename": "kumarComments.txt",
+                    "content_type": "text/plain",
+                    "file_data": "YW5kcmUgdHJ5\n"
+                  }
+                }
+              }
+            ]
+          },
+          "impact_analysis": {
+            "note": "New IMA",
+            "attachments": {
+              "add": {
+                "filename": "kumarIMA.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "complexity": "Low",
+          "risk": "Low",
+          "est_hrs": "3",
+          "build_instruction": {
+            "note": "New build instruction",
+            "attachments": {
+              "add": {
+                "filename": "kumarComments.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "build_progress_notes": {
+            "create": [
+              {
+                "note": "New build progress notes",
+                "attachments": {
+                  "add": {
+                    "filename": "kumarProgressNotes.txt",
+                    "content_type": "text/plain",
+                    "file_data": "YW5kcmUgdHJ5\n"
+                  }
+                }
+              }
+            ]
+          },
+          "test_plan": {
+            "note": "Test Plan Title",
+            "attachments": {
+              "add": {
+                "filename": "TestPlan.txt",
+                "content_type": "text/plain",
+                "file_data": "YW5kcmUgdHJ5\n"
+              }
+            }
+          },
+          "issues": {
+            "create": [
+              {
+                "title": "Issue Title",
+                "priority": 1,
+                "state": "Open",
+                "notes": {
+                  "create": [
+                    {
+                      "note": "New Issue Comment",
+                      "attachments": {
+                        "add": {
+                          "filename": "kumarIssueComments.txt",
+                          "content_type": "text/plain",
+                          "file_data": "YW5kcmUgdHJ5\n"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/Object11"
+        }
+      },
+      "required": [
+        "object"
+      ]
+    },
+    "Object11": {
+      "title": "Object11",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "priority_level": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "notify_watchlisted": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "notify_customer": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "customer_viewable": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "customer": {
+          "type": "string"
+        },
+        "watching_external_emails": {
+          "$ref": "#/definitions/WatchingExternalEmails"
+        },
+        "time_entries": {
+          "$ref": "#/definitions/TimeEntries1"
+        },
+        "linkages": {
+          "$ref": "#/definitions/Linkages"
+        },
+        "testers": {
+          "$ref": "#/definitions/Testers"
+        },
+        "tasks": {
+          "$ref": "#/definitions/Tasks2"
+        },
+        "description": {
+          "$ref": "#/definitions/Description"
+        },
+        "reason": {
+          "$ref": "#/definitions/Reason"
+        },
+        "comments": {
+          "$ref": "#/definitions/Comments1"
+        },
+        "impact_analysis": {
+          "$ref": "#/definitions/ImpactAnalysis"
+        },
+        "complexity": {
+          "type": "string"
+        },
+        "risk": {
+          "type": "string"
+        },
+        "est_hrs": {
+          "type": "string"
+        },
+        "build_instruction": {
+          "$ref": "#/definitions/BuildInstruction"
+        },
+        "build_progress_notes": {
+          "$ref": "#/definitions/BuildProgressNotes"
+        },
+        "test_plan": {
+          "$ref": "#/definitions/TestPlan"
+        },
+        "issues": {
+          "$ref": "#/definitions/Issues"
+        }
+      },
+      "required": [
+        "title",
+        "priority_level",
+        "type",
+        "notify_watchlisted",
+        "notify_customer",
+        "customer_viewable",
+        "customer",
+        "watching_external_emails",
+        "time_entries",
+        "linkages",
+        "testers",
+        "tasks",
+        "description",
+        "reason",
+        "comments",
+        "impact_analysis",
+        "complexity",
+        "risk",
+        "est_hrs",
+        "build_instruction",
+        "build_progress_notes",
+        "test_plan",
+        "issues"
+      ]
+    },
+    "CreateconfigurationitemRequest": {
+      "title": "CreateconfigurationitemRequest",
+      "example": {
+        "object": {
+          "name": "Test Config Item",
+          "description": "Test Config Desc",
+          "config_type": "/config_types/4278195670",
+          "config_item_fields": {
+            "create": [
+              {
+                "name": "Test1",
+                "value": "test"
+              },
+              {
+                "name": "Test2",
+                "value": "test"
+              }
+            ]
+          },
+          "watching_users": {
+            "add": [
+              "/users/1210812651657060467"
+            ]
+          },
+          "notify_watchlisted": 1,
+          "comments": {
+            "create": [
+              {
+                "note": "New Comment",
+                "attachments": {
+                  "add": {
+                    "filename": "kumarComments.txt",
+                    "content_type": "text/plain",
+                    "file_data": "YW5kcmUgdHJ5\n"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/Object12"
+        }
+      },
+      "required": [
+        "object"
+      ]
+    },
+    "Object12": {
+      "title": "Object12",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "config_type": {
+          "type": "string"
+        },
+        "config_item_fields": {
+          "$ref": "#/definitions/ConfigItemFields"
+        },
+        "watching_users": {
+          "$ref": "#/definitions/WatchingUsers"
+        },
+        "notify_watchlisted": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "comments": {
+          "$ref": "#/definitions/Comments1"
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "config_type",
+        "config_item_fields",
+        "watching_users",
+        "notify_watchlisted",
+        "comments"
+      ]
+    },
+    "ConfigItemFields": {
+      "title": "ConfigItemFields",
+      "type": "object",
+      "properties": {
+        "create": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Create46"
+          }
+        }
+      },
+      "required": [
+        "create"
+      ]
+    },
+    "Create46": {
+      "title": "Create46",
+      "type": "object",
+      "properties": {
+        "name": {
+          "example": "Test1",
+          "type": "string"
+        },
+        "value": {
+          "example": "test",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "WatchingUsers": {
+      "title": "WatchingUsers",
+      "type": "object",
+      "properties": {
+        "add": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "add"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Incidents",
+      "description": ""
+    },
+    {
+      "name": "Problems",
+      "description": ""
+    },
+    {
+      "name": "Releases",
+      "description": ""
+    },
+    {
+      "name": "Companies",
+      "description": ""
+    },
+    {
+      "name": "Customers",
+      "description": ""
+    },
+    {
+      "name": "Services",
+      "description": ""
+    },
+    {
+      "name": "User / Account",
+      "description": ""
+    },
+    {
+      "name": "Groups",
+      "description": ""
+    },
+    {
+      "name": "Attachments",
+      "description": ""
+    },
+    {
+      "name": "Changes",
+      "description": ""
+    },
+    {
+      "name": "Messages",
+      "description": ""
+    },
+    {
+      "name": "Knowledge articles",
+      "description": ""
+    },
+    {
+      "name": "Config Types and Item",
+      "description": ""
+    }
+  ]
+}
