@@ -1,0 +1,1037 @@
+{
+    "swagger": "2.0",
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "securityDefinitions": {
+        "basicAuthentication": {
+            "type": "basic"
+        }
+    },
+    "x-sap-shortText":"API to maintain Employees alternative cost distribution",
+    "x-servers": [{
+        "url": "https://{landscapehost}/odata/v2",
+        "description": "OData APIs for the SuccessFactors Data Centers",
+        "templates": {
+            "landscapehost": {
+                "description": "SuccessFactors Data Center host",
+                "enum": ["api2.successfactors.eu",
+                "apisalesdemo2.successfactors.eu",
+                "api2preview.sapsf.eu",
+                "api4.successfactors.com",
+                "apisalesdemo4.successfactors.com",
+                "api4preview.sapsf.com",
+                "api5.successfactors.eu",
+                "api8.successfactors.com",
+                "apisalesdemo8.successfactors.com",
+                "api8preview.sapsf.com",
+                "api10.successfactors.com",
+                "api10preview.sapsf.com",
+                "api012.successfactors.eu",
+                "apirot.successfactors.eu",
+                "api12preview.sapsf.eu",
+                "api15.sapsf.cn",
+                "api16.sapsf.eu",
+                "api17preview.sapsf.com",
+                "api17.sapsf.com",
+                "api18preview.sapsf.com",
+                "api18.sapsf.com"],
+                "default": "api2.successfactors.eu"
+            }
+        }
+    }],
+    "info": {
+        "title": "Alternative Cost Distribution",
+        "version": "1.0",
+        "description": "API to maintain Employees alternative cost distribution"
+    },
+    "externalDocs": {
+        "description": "More Information available in help.sap.com",
+        "url": "https://help.sap.com/viewer/b2b06831c2cb4d5facd1dfde49a7aab5/latest"
+    },
+    "schemes": ["https"],
+    "host": "sandbox.api.sap.com",
+    "basePath": "/successfactors/odata/v2",
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "tags": [{
+        "name": "EmpCostDistribution"
+    },
+    {
+        "name": "EmpCostDistributionItem"
+    }],
+    "definitions": {
+        "odata.error": {
+            "type": "object",
+            "required": ["error"],
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/odata.error.main"
+                }
+            }
+        },
+        "odata.error.main": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/odata.error.detail"
+                    }
+                },
+                "innererror": {
+                    "type": "object",
+                    "description": "The structure of this object is service-specific"
+                }
+            }
+        },
+        "odata.error.detail": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                }
+            }
+        },
+        "SFOData.EmpCostDistribution": {
+            "type": "object",
+            "properties": {
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "effectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "effectiveStartDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemCreatedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemCreatedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemLastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemTransactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "usersSysId": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "items": {
+                    "title": "Related Collection(SFOData.EmpCostDistributionItem)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.EmpCostDistributionItem"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": "EmpCostDistribution"
+        },
+        "SFOData.EmpCostDistributionItem": {
+            "type": "object",
+            "properties": {
+                "EmpCostDistribution_effectiveStartDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "EmpCostDistribution_usersSysId": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "costCenter": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "externalCode": {
+                    "type": "string",
+                    "format": "int64"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemCreatedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemCreatedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemLastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemLastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemLastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemTransactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "percentage": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "decimal",
+                    "multipleOf": 1
+                }
+            },
+            "title": "EmpCostDistributionItem"
+        }
+    },
+    "paths": {
+        "/EmpCostDistribution": {
+            "get": {
+                "summary": "Get entities from EmpCostDistribution",
+                "tags": ["EmpCostDistribution"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "effectiveEndDate",
+                        "effectiveEndDate desc",
+                        "effectiveStartDate",
+                        "effectiveStartDate desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDate",
+                        "lastModifiedDate desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedDateWithTZ",
+                        "lastModifiedDateWithTZ desc",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedBy desc",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemCreatedDate desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedBy desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemStatus",
+                        "mdfSystemStatus desc",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemTransactionSequence desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc",
+                        "usersSysId",
+                        "usersSysId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDateTime",
+                        "effectiveEndDate",
+                        "effectiveStartDate",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "usersSysId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "items"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of EmpCostDistribution",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.EmpCostDistribution"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to EmpCostDistribution",
+                "tags": ["EmpCostDistribution"],
+                "parameters": [{
+                    "name": "EmpCostDistribution",
+                    "in": "body",
+                    "description": "New entity",
+                    "schema": {
+                        "$ref": "#/definitions/SFOData.EmpCostDistribution"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "schema": {
+                            "title": "Created EmpCostDistribution",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.EmpCostDistribution"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpCostDistribution(effectiveStartDate={effectiveStartDate},usersSysId='{usersSysId}')": {
+            "get": {
+                "summary": "Get entity from EmpCostDistribution by key",
+                "tags": ["EmpCostDistribution"],
+                "parameters": [{
+                    "name": "effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "usersSysId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: usersSysId",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDateTime",
+                        "effectiveEndDate",
+                        "effectiveStartDate",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "usersSysId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "items"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "EmpCostDistribution",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.EmpCostDistribution"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update entity in EmpCostDistribution",
+                "tags": ["EmpCostDistribution"],
+                "parameters": [{
+                    "name": "effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "usersSysId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: usersSysId",
+                    "type": "string"
+                },
+                {
+                    "name": "EmpCostDistribution",
+                    "in": "body",
+                    "description": "New property values",
+                    "schema": {
+                        "title": "Modified EmpCostDistribution",
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "$ref": "#/definitions/SFOData.EmpCostDistribution"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from EmpCostDistribution",
+                "tags": ["EmpCostDistribution"],
+                "parameters": [{
+                    "name": "effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "usersSysId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: usersSysId",
+                    "type": "string"
+                },
+                {
+                    "name": "If-Match",
+                    "in": "header",
+                    "description": "ETag",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpCostDistributionItem": {
+            "get": {
+                "summary": "Get entities from EmpCostDistributionItem",
+                "tags": ["EmpCostDistributionItem"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["EmpCostDistribution_effectiveStartDate",
+                        "EmpCostDistribution_effectiveStartDate desc",
+                        "EmpCostDistribution_usersSysId",
+                        "EmpCostDistribution_usersSysId desc",
+                        "costCenter",
+                        "costCenter desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "externalCode",
+                        "externalCode desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedBy desc",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemCreatedDate desc",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveEndDate desc",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEffectiveStartDate desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedBy desc",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDate desc",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemLastModifiedDateWithTZ desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemStatus",
+                        "mdfSystemStatus desc",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemTransactionSequence desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc",
+                        "percentage",
+                        "percentage desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["EmpCostDistribution_effectiveStartDate",
+                        "EmpCostDistribution_usersSysId",
+                        "costCenter",
+                        "createdBy",
+                        "createdDateTime",
+                        "externalCode",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "percentage"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of EmpCostDistributionItem",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.EmpCostDistributionItem"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to EmpCostDistributionItem",
+                "tags": ["EmpCostDistributionItem"],
+                "parameters": [{
+                    "name": "EmpCostDistributionItem",
+                    "in": "body",
+                    "description": "New entity",
+                    "schema": {
+                        "$ref": "#/definitions/SFOData.EmpCostDistributionItem"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "schema": {
+                            "title": "Created EmpCostDistributionItem",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.EmpCostDistributionItem"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpCostDistributionItem(EmpCostDistribution_effectiveStartDate={EmpCostDistribution_effectiveStartDate},EmpCostDistribution_usersSysId='{EmpCostDistribution_usersSysId}',externalCode={externalCode})": {
+            "get": {
+                "summary": "Get entity from EmpCostDistributionItem by key",
+                "tags": ["EmpCostDistributionItem"],
+                "parameters": [{
+                    "name": "EmpCostDistribution_effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: EmpCostDistribution_effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "EmpCostDistribution_usersSysId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: EmpCostDistribution_usersSysId",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["EmpCostDistribution_effectiveStartDate",
+                        "EmpCostDistribution_usersSysId",
+                        "costCenter",
+                        "createdBy",
+                        "createdDateTime",
+                        "externalCode",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "percentage"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "EmpCostDistributionItem",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.EmpCostDistributionItem"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update entity in EmpCostDistributionItem",
+                "tags": ["EmpCostDistributionItem"],
+                "parameters": [{
+                    "name": "EmpCostDistribution_effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: EmpCostDistribution_effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "EmpCostDistribution_usersSysId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: EmpCostDistribution_usersSysId",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "EmpCostDistributionItem",
+                    "in": "body",
+                    "description": "New property values",
+                    "schema": {
+                        "title": "Modified EmpCostDistributionItem",
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "$ref": "#/definitions/SFOData.EmpCostDistributionItem"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from EmpCostDistributionItem",
+                "tags": ["EmpCostDistributionItem"],
+                "parameters": [{
+                    "name": "EmpCostDistribution_effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: EmpCostDistribution_effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "EmpCostDistribution_usersSysId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: EmpCostDistribution_usersSysId",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "If-Match",
+                    "in": "header",
+                    "description": "ETag",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "top": {
+            "name": "$top",
+            "in": "query",
+            "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630)",
+            "type": "integer",
+            "default":20
+        },
+        "skip": {
+            "name": "$skip",
+            "in": "query",
+            "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631)",
+            "type": "integer"
+        },
+        "count": {
+            "name": "$count",
+            "in": "query",
+            "description": "Include count of items, see [OData Count](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374632)",
+            "type": "boolean"
+        },
+        "filter": {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+        },
+        "search": {
+            "name": "$search",
+            "in": "query",
+            "description": "Search items by search phrases, see [OData Searching](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374633)",
+            "type": "string"
+        }
+    },
+    "responses": {
+        "error": {
+            "description": "Error",
+            "schema": {
+                "$ref": "#/definitions/odata.error"
+            }
+        }
+    }
+}
