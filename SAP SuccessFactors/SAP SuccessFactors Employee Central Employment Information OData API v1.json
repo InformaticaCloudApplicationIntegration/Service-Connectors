@@ -1,0 +1,2750 @@
+{
+    "swagger": "2.0",
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "securityDefinitions": {
+        "basicAuthentication": {
+            "type": "basic"
+        }
+    },
+    "x-sap-shortText":"API to access all the employment related information",
+    "x-servers": [{
+        "url": "https://{landscapehost}/odata/v2",
+        "description": "OData APIs for the SuccessFactors Data Centers",
+        "templates": {
+            "landscapehost": {
+                "description": "SuccessFactors Data Center host",
+                "enum": ["api2.successfactors.eu",
+                "apisalesdemo2.successfactors.eu",
+                "api2preview.sapsf.eu",
+                "api4.successfactors.com",
+                "apisalesdemo4.successfactors.com",
+                "api4preview.sapsf.com",
+                "api5.successfactors.eu",
+                "api8.successfactors.com",
+                "apisalesdemo8.successfactors.com",
+                "api8preview.sapsf.com",
+                "api10.successfactors.com",
+                "api10preview.sapsf.com",
+                "api012.successfactors.eu",
+                "apirot.successfactors.eu",
+                "api12preview.sapsf.eu",
+                "api15.sapsf.cn",
+                "api16.sapsf.eu",
+                "api17preview.sapsf.com",
+                "api17.sapsf.com",
+                "api18preview.sapsf.com",
+                "api18.sapsf.com"],
+                "default": "api2.successfactors.eu"
+            }
+        }
+    }],
+    "info": {
+        "title": "Employment Information",
+        "version": "1.0",
+        "description": "API to access all the employment related information for an employee such employment termination information, work permit documentation and job history for an employee such as title, job code, and department"
+    },
+    "externalDocs": {
+        "description": "More Information available in help.sap.com",
+        "url": "https://help.sap.com/viewer/b2b06831c2cb4d5facd1dfde49a7aab5/latest"
+    },
+    "schemes": ["https"],
+    "host": "sandbox.api.sap.com",
+    "basePath": "/successfactors/odata/v2",
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "tags": [{
+        "name": "EmpEmployment"
+    },
+    {
+        "name": "EmpEmploymentTermination"
+    },
+    {
+        "name": "EmpWorkPermit"
+    },
+    {
+        "name": "EmpJobRelationships"
+    },
+    {
+        "name": "EmpJob"
+    },
+    {
+        "name": "PersonEmpTerminationInfo"
+    }],
+    "definitions": {
+        "odata.error": {
+            "type": "object",
+            "required": ["error"],
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/odata.error.main"
+                }
+            }
+        },
+        "odata.error.main": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/odata.error.detail"
+                    }
+                },
+                "innererror": {
+                    "type": "object",
+                    "description": "The structure of this object is service-specific"
+                }
+            }
+        },
+        "odata.error.detail": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                }
+            }
+        },
+        "SFOData.EmpEmployment": {
+            "type": "object",
+            "properties": {
+                "StockEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "assignmentClass": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "benefitsEligibilityStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "benefitsEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "bonusPayExpirationDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "eligibleForSalContinuation": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "eligibleForStock": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "employeeFirstEmployment": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "endDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "firstDateWorked": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "includeAllRecords": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "initialOptionGrant": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "double",
+                    "example": 3.14
+                },
+                "initialStockGrant": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "double",
+                    "example": 3.14
+                },
+                "isContingentWorker": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "isECRecord": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "jobNumber": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "lastDateWorked": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "okToRehire": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "originalStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "payrollEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "personIdExternal": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "prevEmployeeId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "professionalServiceDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "regretTermination": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "salaryEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "seniorityDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "serviceDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "startDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "userId": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "empJobRelationshipNav": {
+                    "title": "Related Collection(SFOData.EmpJobRelationships)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.EmpJobRelationships"
+                            }
+                        }
+                    }
+                },
+                "empWorkPermitNav": {
+                    "title": "Related Collection(SFOData.EmpWorkPermit)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.EmpWorkPermit"
+                            }
+                        }
+                    }
+                },
+                "jobInfoNav": {
+                    "title": "Related Collection(SFOData.EmpJob)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.EmpJob"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": "EmpEmployment"
+        },
+        "SFOData.EmpEmploymentTermination": {
+            "type": "object",
+            "properties": {
+                "StockEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "attachmentId": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "benefitsEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "bonusPayExpirationDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "eligibleForSalContinuation": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "endDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "eventReason": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "lastDateWorked": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "newMainEmploymentId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "decimal",
+                    "multipleOf": 1
+                },
+                "notes": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 4000
+                },
+                "okToRehire": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "payrollEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "personIdExternal": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "regretTermination": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "salaryEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "userId": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "employmentNav": {
+                    "$ref": "#/definitions/SFOData.EmpEmployment"
+                },
+                "jobInfoNav": {
+                    "$ref": "#/definitions/SFOData.EmpJob"
+                }
+            },
+            "title": "EmpEmploymentTermination"
+        },
+        "SFOData.EmpWorkPermit": {
+            "type": "object",
+            "properties": {
+                "attachment": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "base64url"
+                },
+                "attachmentFileName": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "attachmentFileSize": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "decimal",
+                    "multipleOf": 1
+                },
+                "attachmentFileType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 5
+                },
+                "attachmentId": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "attachmentMimeType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "attachmentStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "decimal",
+                    "multipleOf": 1
+                },
+                "country": {
+                    "type": "string",
+                    "maxLength": 256
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "documentNumber": {
+                    "type": "string",
+                    "maxLength": 256
+                },
+                "documentTitle": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "documentType": {
+                    "type": "string",
+                    "maxLength": 256
+                },
+                "expirationDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "isValidated": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "issueDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "issuePlace": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "issuingAuthority": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "notes": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 4000
+                },
+                "userId": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "employmentNav": {
+                    "$ref": "#/definitions/SFOData.EmpEmployment"
+                }
+            },
+            "title": "EmpWorkPermit"
+        },
+        "SFOData.EmpJobRelationships": {
+            "type": "object",
+            "properties": {
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "endDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "operation": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "relUserId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 384
+                },
+                "relationshipType": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "startDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "userId": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "employmentNav": {
+                    "$ref": "#/definitions/SFOData.EmpEmployment"
+                },
+                "relEmploymentNav": {
+                    "$ref": "#/definitions/SFOData.EmpEmployment"
+                }
+            },
+            "title": "EmpJobRelationships"
+        },
+        "SFOData.EmpJob": {
+            "type": "object",
+            "properties": {
+                "assedicCertInitialStateNum": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "assedicCertObjectNum": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "businessUnit": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "calcMethodIndicator": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "commitmentIndicator": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "company": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "contractReferenceForAed": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "contractType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "costCenter": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "countryOfCompany": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "defaultOvertimeCompensationVariant": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "department": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "division": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "eeo1JobCategory": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "eeo4JobCategory": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "eeo5JobCategory": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "eeo6JobCategory": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "eeoClass": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "electoralCollegeForWorkersRepresentatives": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "electoralCollegeForWorksCouncil": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "empRelationship": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "emplStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "employeeClass": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "employeeWorkgroupMembership": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 60
+                },
+                "employmentType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "endDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "event": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "eventReason": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "exclExecutiveSector": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "expectedReturnDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "familyRelationshipWithEmployer": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "fgtsDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "fgtsOptant": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "fgtsPercent": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "double",
+                    "example": 3.14
+                },
+                "flsaStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "fte": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "double",
+                    "example": 3.14
+                },
+                "harmfulAgentExposure": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "hazard": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "healthRisk": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "holidayCalendarCode": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "isCompetitionClauseActive": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "isFulltimeEmployee": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "isSideLineJobAllowed": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "jobCode": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "jobTitle": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "laborProtection": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "location": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "managerId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "mandatoryWorkBreakRecord": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "municipalInseeCode": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "notes": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 4000
+                },
+                "operation": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "payGrade": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "payScaleArea": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "payScaleGroup": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "payScaleLevel": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "payScaleType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "pcfm": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "pensionProtection": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "permitIndicator": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "position": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "positionEntryDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "probationPeriodEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "regularTemp": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "residentVote": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "retired": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "seqNumber": {
+                    "type": "string",
+                    "format": "int64"
+                },
+                "sickPaySupplement": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "standardHours": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "double",
+                    "example": 3.14
+                },
+                "startDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "teachersPension": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "timeRecordingAdmissibilityCode": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "timeRecordingProfileCode": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "timeRecordingVariant": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "timeTypeProfileCode": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "timezone": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "travelDistance": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "double",
+                    "example": 3.14
+                },
+                "tupeOrgNumber": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "userId": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "workLocation": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "workerCategory": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "workingDaysPerWeek": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "double",
+                    "example": 3.14
+                },
+                "workingTimeDirective": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "workscheduleCode": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "wtdHoursLimit": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "employmentNav": {
+                    "$ref": "#/definitions/SFOData.EmpEmployment"
+                },
+                "managerEmploymentNav": {
+                    "$ref": "#/definitions/SFOData.EmpEmployment"
+                }
+            },
+            "title": "EmpJob"
+        },
+        "SFOData.PersonEmpTerminationInfo": {
+            "type": "object",
+            "properties": {
+                "activeEmploymentsCount": {
+                    "type": "integer",
+                    "default": "null",
+                    "format": "int32"
+                },
+                "latestTerminationDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "personIdExternal": {
+                    "type": "string",
+                    "maxLength": 100
+                }
+            },
+            "title": "PersonEmpTerminationInfo"
+        }
+    },
+    "paths": {
+        "/EmpEmployment": {
+            "get": {
+                "summary": "Get entities from EmpEmployment",
+                "tags": ["EmpEmployment"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["StockEndDate",
+                        "StockEndDate desc",
+                        "assignmentClass",
+                        "assignmentClass desc",
+                        "benefitsEligibilityStartDate",
+                        "benefitsEligibilityStartDate desc",
+                        "benefitsEndDate",
+                        "benefitsEndDate desc",
+                        "bonusPayExpirationDate",
+                        "bonusPayExpirationDate desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "eligibleForSalContinuation",
+                        "eligibleForSalContinuation desc",
+                        "eligibleForStock",
+                        "eligibleForStock desc",
+                        "employeeFirstEmployment",
+                        "employeeFirstEmployment desc",
+                        "endDate",
+                        "endDate desc",
+                        "firstDateWorked",
+                        "firstDateWorked desc",
+                        "includeAllRecords",
+                        "includeAllRecords desc",
+                        "initialOptionGrant",
+                        "initialOptionGrant desc",
+                        "initialStockGrant",
+                        "initialStockGrant desc",
+                        "isContingentWorker",
+                        "isContingentWorker desc",
+                        "isECRecord",
+                        "isECRecord desc",
+                        "jobNumber",
+                        "jobNumber desc",
+                        "lastDateWorked",
+                        "lastDateWorked desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "okToRehire",
+                        "okToRehire desc",
+                        "originalStartDate",
+                        "originalStartDate desc",
+                        "payrollEndDate",
+                        "payrollEndDate desc",
+                        "personIdExternal",
+                        "personIdExternal desc",
+                        "prevEmployeeId",
+                        "prevEmployeeId desc",
+                        "professionalServiceDate",
+                        "professionalServiceDate desc",
+                        "regretTermination",
+                        "regretTermination desc",
+                        "salaryEndDate",
+                        "salaryEndDate desc",
+                        "seniorityDate",
+                        "seniorityDate desc",
+                        "serviceDate",
+                        "serviceDate desc",
+                        "startDate",
+                        "startDate desc",
+                        "userId",
+                        "userId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["StockEndDate",
+                        "assignmentClass",
+                        "benefitsEligibilityStartDate",
+                        "benefitsEndDate",
+                        "bonusPayExpirationDate",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "eligibleForSalContinuation",
+                        "eligibleForStock",
+                        "employeeFirstEmployment",
+                        "endDate",
+                        "firstDateWorked",
+                        "includeAllRecords",
+                        "initialOptionGrant",
+                        "initialStockGrant",
+                        "isContingentWorker",
+                        "isECRecord",
+                        "jobNumber",
+                        "lastDateWorked",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "okToRehire",
+                        "originalStartDate",
+                        "payrollEndDate",
+                        "personIdExternal",
+                        "prevEmployeeId",
+                        "professionalServiceDate",
+                        "regretTermination",
+                        "salaryEndDate",
+                        "seniorityDate",
+                        "serviceDate",
+                        "startDate",
+                        "userId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "empJobRelationshipNav",
+                        "empWorkPermitNav",
+                        "jobInfoNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of EmpEmployment",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.EmpEmployment"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpEmployment(personIdExternal='{personIdExternal}',userId='{userId}')": {
+            "get": {
+                "summary": "Get entity from EmpEmployment by key",
+                "tags": ["EmpEmployment"],
+                "parameters": [{
+                    "name": "personIdExternal",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: personIdExternal",
+                    "type": "string"
+                },
+                {
+                    "name": "userId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: userId",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["StockEndDate",
+                        "assignmentClass",
+                        "benefitsEligibilityStartDate",
+                        "benefitsEndDate",
+                        "bonusPayExpirationDate",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "eligibleForSalContinuation",
+                        "eligibleForStock",
+                        "employeeFirstEmployment",
+                        "endDate",
+                        "firstDateWorked",
+                        "includeAllRecords",
+                        "initialOptionGrant",
+                        "initialStockGrant",
+                        "isContingentWorker",
+                        "isECRecord",
+                        "jobNumber",
+                        "lastDateWorked",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "okToRehire",
+                        "originalStartDate",
+                        "payrollEndDate",
+                        "personIdExternal",
+                        "prevEmployeeId",
+                        "professionalServiceDate",
+                        "regretTermination",
+                        "salaryEndDate",
+                        "seniorityDate",
+                        "serviceDate",
+                        "startDate",
+                        "userId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "empJobRelationshipNav",
+                        "empWorkPermitNav",
+                        "jobInfoNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "EmpEmployment",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.EmpEmployment"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpEmploymentTermination": {
+            "get": {
+                "summary": "Get entities from EmpEmploymentTermination",
+                "tags": ["EmpEmploymentTermination"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["StockEndDate",
+                        "StockEndDate desc",
+                        "attachmentId",
+                        "attachmentId desc",
+                        "benefitsEndDate",
+                        "benefitsEndDate desc",
+                        "bonusPayExpirationDate",
+                        "bonusPayExpirationDate desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "eligibleForSalContinuation",
+                        "eligibleForSalContinuation desc",
+                        "endDate",
+                        "endDate desc",
+                        "eventReason",
+                        "eventReason desc",
+                        "lastDateWorked",
+                        "lastDateWorked desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "newMainEmploymentId",
+                        "newMainEmploymentId desc",
+                        "notes",
+                        "notes desc",
+                        "okToRehire",
+                        "okToRehire desc",
+                        "payrollEndDate",
+                        "payrollEndDate desc",
+                        "personIdExternal",
+                        "personIdExternal desc",
+                        "regretTermination",
+                        "regretTermination desc",
+                        "salaryEndDate",
+                        "salaryEndDate desc",
+                        "userId",
+                        "userId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["StockEndDate",
+                        "attachmentId",
+                        "benefitsEndDate",
+                        "bonusPayExpirationDate",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "eligibleForSalContinuation",
+                        "endDate",
+                        "eventReason",
+                        "lastDateWorked",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "newMainEmploymentId",
+                        "notes",
+                        "okToRehire",
+                        "payrollEndDate",
+                        "personIdExternal",
+                        "regretTermination",
+                        "salaryEndDate",
+                        "userId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "employmentNav",
+                        "jobInfoNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of EmpEmploymentTermination",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.EmpEmploymentTermination"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpEmploymentTermination(endDate={endDate},personIdExternal='{personIdExternal}',userId='{userId}')": {
+            "get": {
+                "summary": "Get entity from EmpEmploymentTermination by key",
+                "tags": ["EmpEmploymentTermination"],
+                "parameters": [{
+                    "name": "endDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: endDate",
+                    "type": "string"
+                },
+                {
+                    "name": "personIdExternal",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: personIdExternal",
+                    "type": "string"
+                },
+                {
+                    "name": "userId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: userId",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["StockEndDate",
+                        "attachmentId",
+                        "benefitsEndDate",
+                        "bonusPayExpirationDate",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "eligibleForSalContinuation",
+                        "endDate",
+                        "eventReason",
+                        "lastDateWorked",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "newMainEmploymentId",
+                        "notes",
+                        "okToRehire",
+                        "payrollEndDate",
+                        "personIdExternal",
+                        "regretTermination",
+                        "salaryEndDate",
+                        "userId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "employmentNav",
+                        "jobInfoNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "EmpEmploymentTermination",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.EmpEmploymentTermination"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpWorkPermit": {
+            "get": {
+                "summary": "Get entities from EmpWorkPermit",
+                "tags": ["EmpWorkPermit"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["attachment",
+                        "attachment desc",
+                        "attachmentFileName",
+                        "attachmentFileName desc",
+                        "attachmentFileSize",
+                        "attachmentFileSize desc",
+                        "attachmentFileType",
+                        "attachmentFileType desc",
+                        "attachmentId",
+                        "attachmentId desc",
+                        "attachmentMimeType",
+                        "attachmentMimeType desc",
+                        "attachmentStatus",
+                        "attachmentStatus desc",
+                        "country",
+                        "country desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "documentNumber",
+                        "documentNumber desc",
+                        "documentTitle",
+                        "documentTitle desc",
+                        "documentType",
+                        "documentType desc",
+                        "expirationDate",
+                        "expirationDate desc",
+                        "isValidated",
+                        "isValidated desc",
+                        "issueDate",
+                        "issueDate desc",
+                        "issuePlace",
+                        "issuePlace desc",
+                        "issuingAuthority",
+                        "issuingAuthority desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "notes",
+                        "notes desc",
+                        "userId",
+                        "userId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["attachment",
+                        "attachmentFileName",
+                        "attachmentFileSize",
+                        "attachmentFileType",
+                        "attachmentId",
+                        "attachmentMimeType",
+                        "attachmentStatus",
+                        "country",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "documentNumber",
+                        "documentTitle",
+                        "documentType",
+                        "expirationDate",
+                        "isValidated",
+                        "issueDate",
+                        "issuePlace",
+                        "issuingAuthority",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "notes",
+                        "userId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "employmentNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of EmpWorkPermit",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.EmpWorkPermit"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpWorkPermit(country='{country}',documentNumber='{documentNumber}',documentType='{documentType}',userId='{userId}')": {
+            "get": {
+                "summary": "Get entity from EmpWorkPermit by key",
+                "tags": ["EmpWorkPermit"],
+                "parameters": [{
+                    "name": "country",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: country",
+                    "type": "string"
+                },
+                {
+                    "name": "documentNumber",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: documentNumber",
+                    "type": "string"
+                },
+                {
+                    "name": "documentType",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: documentType",
+                    "type": "string"
+                },
+                {
+                    "name": "userId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: userId",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["attachment",
+                        "attachmentFileName",
+                        "attachmentFileSize",
+                        "attachmentFileType",
+                        "attachmentId",
+                        "attachmentMimeType",
+                        "attachmentStatus",
+                        "country",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "documentNumber",
+                        "documentTitle",
+                        "documentType",
+                        "expirationDate",
+                        "isValidated",
+                        "issueDate",
+                        "issuePlace",
+                        "issuingAuthority",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "notes",
+                        "userId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "employmentNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "EmpWorkPermit",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.EmpWorkPermit"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpJobRelationships": {
+            "get": {
+                "summary": "Get entities from EmpJobRelationships",
+                "tags": ["EmpJobRelationships"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "endDate",
+                        "endDate desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "operation",
+                        "operation desc",
+                        "relUserId",
+                        "relUserId desc",
+                        "relationshipType",
+                        "relationshipType desc",
+                        "startDate",
+                        "startDate desc",
+                        "userId",
+                        "userId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "endDate",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "operation",
+                        "relUserId",
+                        "relationshipType",
+                        "startDate",
+                        "userId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "employmentNav",
+                        "relEmploymentNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of EmpJobRelationships",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.EmpJobRelationships"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpJobRelationships(relationshipType='{relationshipType}',startDate={startDate},userId='{userId}')": {
+            "get": {
+                "summary": "Get entity from EmpJobRelationships by key",
+                "tags": ["EmpJobRelationships"],
+                "parameters": [{
+                    "name": "relationshipType",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: relationshipType",
+                    "type": "string"
+                },
+                {
+                    "name": "startDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: startDate",
+                    "type": "string"
+                },
+                {
+                    "name": "userId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: userId",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "endDate",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "operation",
+                        "relUserId",
+                        "relationshipType",
+                        "startDate",
+                        "userId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "employmentNav",
+                        "relEmploymentNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "EmpJobRelationships",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.EmpJobRelationships"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpJob": {
+            "get": {
+                "summary": "Get entities from EmpJob",
+                "tags": ["EmpJob"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["assedicCertInitialStateNum",
+                        "assedicCertInitialStateNum desc",
+                        "assedicCertObjectNum",
+                        "assedicCertObjectNum desc",
+                        "businessUnit",
+                        "businessUnit desc",
+                        "calcMethodIndicator",
+                        "calcMethodIndicator desc",
+                        "commitmentIndicator",
+                        "commitmentIndicator desc",
+                        "company",
+                        "company desc",
+                        "contractReferenceForAed",
+                        "contractReferenceForAed desc",
+                        "contractType",
+                        "contractType desc",
+                        "costCenter",
+                        "costCenter desc",
+                        "countryOfCompany",
+                        "countryOfCompany desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "defaultOvertimeCompensationVariant",
+                        "defaultOvertimeCompensationVariant desc",
+                        "department",
+                        "department desc",
+                        "division",
+                        "division desc",
+                        "eeo1JobCategory",
+                        "eeo1JobCategory desc",
+                        "eeo4JobCategory",
+                        "eeo4JobCategory desc",
+                        "eeo5JobCategory",
+                        "eeo5JobCategory desc",
+                        "eeo6JobCategory",
+                        "eeo6JobCategory desc",
+                        "eeoClass",
+                        "eeoClass desc",
+                        "electoralCollegeForWorkersRepresentatives",
+                        "electoralCollegeForWorkersRepresentatives desc",
+                        "electoralCollegeForWorksCouncil",
+                        "electoralCollegeForWorksCouncil desc",
+                        "empRelationship",
+                        "empRelationship desc",
+                        "emplStatus",
+                        "emplStatus desc",
+                        "employeeClass",
+                        "employeeClass desc",
+                        "employeeWorkgroupMembership",
+                        "employeeWorkgroupMembership desc",
+                        "employmentType",
+                        "employmentType desc",
+                        "endDate",
+                        "endDate desc",
+                        "event",
+                        "event desc",
+                        "eventReason",
+                        "eventReason desc",
+                        "exclExecutiveSector",
+                        "exclExecutiveSector desc",
+                        "expectedReturnDate",
+                        "expectedReturnDate desc",
+                        "familyRelationshipWithEmployer",
+                        "familyRelationshipWithEmployer desc",
+                        "fgtsDate",
+                        "fgtsDate desc",
+                        "fgtsOptant",
+                        "fgtsOptant desc",
+                        "fgtsPercent",
+                        "fgtsPercent desc",
+                        "flsaStatus",
+                        "flsaStatus desc",
+                        "fte",
+                        "fte desc",
+                        "harmfulAgentExposure",
+                        "harmfulAgentExposure desc",
+                        "hazard",
+                        "hazard desc",
+                        "healthRisk",
+                        "healthRisk desc",
+                        "holidayCalendarCode",
+                        "holidayCalendarCode desc",
+                        "isCompetitionClauseActive",
+                        "isCompetitionClauseActive desc",
+                        "isFulltimeEmployee",
+                        "isFulltimeEmployee desc",
+                        "isSideLineJobAllowed",
+                        "isSideLineJobAllowed desc",
+                        "jobCode",
+                        "jobCode desc",
+                        "jobTitle",
+                        "jobTitle desc",
+                        "laborProtection",
+                        "laborProtection desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "location",
+                        "location desc",
+                        "managerId",
+                        "managerId desc",
+                        "mandatoryWorkBreakRecord",
+                        "mandatoryWorkBreakRecord desc",
+                        "municipalInseeCode",
+                        "municipalInseeCode desc",
+                        "notes",
+                        "notes desc",
+                        "operation",
+                        "operation desc",
+                        "payGrade",
+                        "payGrade desc",
+                        "payScaleArea",
+                        "payScaleArea desc",
+                        "payScaleGroup",
+                        "payScaleGroup desc",
+                        "payScaleLevel",
+                        "payScaleLevel desc",
+                        "payScaleType",
+                        "payScaleType desc",
+                        "pcfm",
+                        "pcfm desc",
+                        "pensionProtection",
+                        "pensionProtection desc",
+                        "permitIndicator",
+                        "permitIndicator desc",
+                        "position",
+                        "position desc",
+                        "positionEntryDate",
+                        "positionEntryDate desc",
+                        "probationPeriodEndDate",
+                        "probationPeriodEndDate desc",
+                        "regularTemp",
+                        "regularTemp desc",
+                        "residentVote",
+                        "residentVote desc",
+                        "retired",
+                        "retired desc",
+                        "seqNumber",
+                        "seqNumber desc",
+                        "sickPaySupplement",
+                        "sickPaySupplement desc",
+                        "standardHours",
+                        "standardHours desc",
+                        "startDate",
+                        "startDate desc",
+                        "teachersPension",
+                        "teachersPension desc",
+                        "timeRecordingAdmissibilityCode",
+                        "timeRecordingAdmissibilityCode desc",
+                        "timeRecordingProfileCode",
+                        "timeRecordingProfileCode desc",
+                        "timeRecordingVariant",
+                        "timeRecordingVariant desc",
+                        "timeTypeProfileCode",
+                        "timeTypeProfileCode desc",
+                        "timezone",
+                        "timezone desc",
+                        "travelDistance",
+                        "travelDistance desc",
+                        "tupeOrgNumber",
+                        "tupeOrgNumber desc",
+                        "userId",
+                        "userId desc",
+                        "workLocation",
+                        "workLocation desc",
+                        "workerCategory",
+                        "workerCategory desc",
+                        "workingDaysPerWeek",
+                        "workingDaysPerWeek desc",
+                        "workingTimeDirective",
+                        "workingTimeDirective desc",
+                        "workscheduleCode",
+                        "workscheduleCode desc",
+                        "wtdHoursLimit",
+                        "wtdHoursLimit desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["assedicCertInitialStateNum",
+                        "assedicCertObjectNum",
+                        "businessUnit",
+                        "calcMethodIndicator",
+                        "commitmentIndicator",
+                        "company",
+                        "contractReferenceForAed",
+                        "contractType",
+                        "costCenter",
+                        "countryOfCompany",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "defaultOvertimeCompensationVariant",
+                        "department",
+                        "division",
+                        "eeo1JobCategory",
+                        "eeo4JobCategory",
+                        "eeo5JobCategory",
+                        "eeo6JobCategory",
+                        "eeoClass",
+                        "electoralCollegeForWorkersRepresentatives",
+                        "electoralCollegeForWorksCouncil",
+                        "empRelationship",
+                        "emplStatus",
+                        "employeeClass",
+                        "employeeWorkgroupMembership",
+                        "employmentType",
+                        "endDate",
+                        "event",
+                        "eventReason",
+                        "exclExecutiveSector",
+                        "expectedReturnDate",
+                        "familyRelationshipWithEmployer",
+                        "fgtsDate",
+                        "fgtsOptant",
+                        "fgtsPercent",
+                        "flsaStatus",
+                        "fte",
+                        "harmfulAgentExposure",
+                        "hazard",
+                        "healthRisk",
+                        "holidayCalendarCode",
+                        "isCompetitionClauseActive",
+                        "isFulltimeEmployee",
+                        "isSideLineJobAllowed",
+                        "jobCode",
+                        "jobTitle",
+                        "laborProtection",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "location",
+                        "managerId",
+                        "mandatoryWorkBreakRecord",
+                        "municipalInseeCode",
+                        "notes",
+                        "operation",
+                        "payGrade",
+                        "payScaleArea",
+                        "payScaleGroup",
+                        "payScaleLevel",
+                        "payScaleType",
+                        "pcfm",
+                        "pensionProtection",
+                        "permitIndicator",
+                        "position",
+                        "positionEntryDate",
+                        "probationPeriodEndDate",
+                        "regularTemp",
+                        "residentVote",
+                        "retired",
+                        "seqNumber",
+                        "sickPaySupplement",
+                        "standardHours",
+                        "startDate",
+                        "teachersPension",
+                        "timeRecordingAdmissibilityCode",
+                        "timeRecordingProfileCode",
+                        "timeRecordingVariant",
+                        "timeTypeProfileCode",
+                        "timezone",
+                        "travelDistance",
+                        "tupeOrgNumber",
+                        "userId",
+                        "workLocation",
+                        "workerCategory",
+                        "workingDaysPerWeek",
+                        "workingTimeDirective",
+                        "workscheduleCode",
+                        "wtdHoursLimit"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "employmentNav",
+                        "managerEmploymentNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of EmpJob",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.EmpJob"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpJob(seqNumber={seqNumber},startDate={startDate},userId='{userId}')": {
+            "get": {
+                "summary": "Get entity from EmpJob by key",
+                "tags": ["EmpJob"],
+                "parameters": [{
+                    "name": "seqNumber",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: seqNumber",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "startDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: startDate",
+                    "type": "string"
+                },
+                {
+                    "name": "userId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: userId",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["assedicCertInitialStateNum",
+                        "assedicCertObjectNum",
+                        "businessUnit",
+                        "calcMethodIndicator",
+                        "commitmentIndicator",
+                        "company",
+                        "contractReferenceForAed",
+                        "contractType",
+                        "costCenter",
+                        "countryOfCompany",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "defaultOvertimeCompensationVariant",
+                        "department",
+                        "division",
+                        "eeo1JobCategory",
+                        "eeo4JobCategory",
+                        "eeo5JobCategory",
+                        "eeo6JobCategory",
+                        "eeoClass",
+                        "electoralCollegeForWorkersRepresentatives",
+                        "electoralCollegeForWorksCouncil",
+                        "empRelationship",
+                        "emplStatus",
+                        "employeeClass",
+                        "employeeWorkgroupMembership",
+                        "employmentType",
+                        "endDate",
+                        "event",
+                        "eventReason",
+                        "exclExecutiveSector",
+                        "expectedReturnDate",
+                        "familyRelationshipWithEmployer",
+                        "fgtsDate",
+                        "fgtsOptant",
+                        "fgtsPercent",
+                        "flsaStatus",
+                        "fte",
+                        "harmfulAgentExposure",
+                        "hazard",
+                        "healthRisk",
+                        "holidayCalendarCode",
+                        "isCompetitionClauseActive",
+                        "isFulltimeEmployee",
+                        "isSideLineJobAllowed",
+                        "jobCode",
+                        "jobTitle",
+                        "laborProtection",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "location",
+                        "managerId",
+                        "mandatoryWorkBreakRecord",
+                        "municipalInseeCode",
+                        "notes",
+                        "operation",
+                        "payGrade",
+                        "payScaleArea",
+                        "payScaleGroup",
+                        "payScaleLevel",
+                        "payScaleType",
+                        "pcfm",
+                        "pensionProtection",
+                        "permitIndicator",
+                        "position",
+                        "positionEntryDate",
+                        "probationPeriodEndDate",
+                        "regularTemp",
+                        "residentVote",
+                        "retired",
+                        "seqNumber",
+                        "sickPaySupplement",
+                        "standardHours",
+                        "startDate",
+                        "teachersPension",
+                        "timeRecordingAdmissibilityCode",
+                        "timeRecordingProfileCode",
+                        "timeRecordingVariant",
+                        "timeTypeProfileCode",
+                        "timezone",
+                        "travelDistance",
+                        "tupeOrgNumber",
+                        "userId",
+                        "workLocation",
+                        "workerCategory",
+                        "workingDaysPerWeek",
+                        "workingTimeDirective",
+                        "workscheduleCode",
+                        "wtdHoursLimit"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "employmentNav",
+                        "managerEmploymentNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "EmpJob",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.EmpJob"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PersonEmpTerminationInfo": {
+            "get": {
+                "summary": "Get entities from PersonEmpTerminationInfo",
+                "tags": ["PersonEmpTerminationInfo"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["activeEmploymentsCount",
+                        "activeEmploymentsCount desc",
+                        "latestTerminationDate",
+                        "latestTerminationDate desc",
+                        "personIdExternal",
+                        "personIdExternal desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["activeEmploymentsCount",
+                        "latestTerminationDate",
+                        "personIdExternal"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PersonEmpTerminationInfo",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PersonEmpTerminationInfo"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PersonEmpTerminationInfo('{personIdExternal}')": {
+            "get": {
+                "summary": "Get entity from PersonEmpTerminationInfo by key",
+                "tags": ["PersonEmpTerminationInfo"],
+                "parameters": [{
+                    "name": "personIdExternal",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: personIdExternal",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["activeEmploymentsCount",
+                        "latestTerminationDate",
+                        "personIdExternal"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PersonEmpTerminationInfo",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PersonEmpTerminationInfo"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "top": {
+            "name": "$top",
+            "in": "query",
+            "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630)",
+            "type": "integer",
+            "default":20
+        },
+        "skip": {
+            "name": "$skip",
+            "in": "query",
+            "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631)",
+            "type": "integer"
+        },
+        "count": {
+            "name": "$count",
+            "in": "query",
+            "description": "Include count of items, see [OData Count](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374632)",
+            "type": "boolean"
+        },
+        "filter": {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+        },
+        "search": {
+            "name": "$search",
+            "in": "query",
+            "description": "Search items by search phrases, see [OData Searching](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374633)",
+            "type": "string"
+        }
+    },
+    "responses": {
+        "error": {
+            "description": "Error",
+            "schema": {
+                "$ref": "#/definitions/odata.error"
+            }
+        }
+    }
+}
