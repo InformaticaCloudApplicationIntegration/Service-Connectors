@@ -1,0 +1,1702 @@
+{
+    "swagger": "2.0",
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "securityDefinitions": {
+        "basicAuthentication": {
+            "type": "basic"
+        }
+    },
+    "x-sap-shortText":"API to access global assignment information for an employee.",
+    "x-servers": [{
+        "url": "https://{landscapehost}/odata/v2",
+        "description": "OData APIs for the SuccessFactors Data Centers",
+        "templates": {
+            "landscapehost": {
+                "description": "SuccessFactors Data Center host",
+                "enum": ["api2.successfactors.eu",
+                "apisalesdemo2.successfactors.eu",
+                "api2preview.sapsf.eu",
+                "api4.successfactors.com",
+                "apisalesdemo4.successfactors.com",
+                "api4preview.sapsf.com",
+                "api5.successfactors.eu",
+                "api8.successfactors.com",
+                "apisalesdemo8.successfactors.com",
+                "api8preview.sapsf.com",
+                "api10.successfactors.com",
+                "api10preview.sapsf.com",
+                "api012.successfactors.eu",
+                "apirot.successfactors.eu",
+                "api12preview.sapsf.eu",
+                "api15.sapsf.cn",
+                "api16.sapsf.eu",
+                "api17preview.sapsf.com",
+                "api17.sapsf.com",
+                "api18preview.sapsf.com",
+                "api18.sapsf.com"],
+                "default": "api2.successfactors.eu"
+            }
+        }
+    }],
+    "info": {
+        "title": "Global Assignment",
+        "version": "1.0",
+        "description": "API to access global assignment information for an employee."
+    },
+    "externalDocs": {
+        "description": "More Information available in help.sap.com",
+        "url": "https://help.sap.com/viewer/b2b06831c2cb4d5facd1dfde49a7aab5/latest"
+    },
+    "schemes": ["https"],
+    "host": "sandbox.api.sap.com",
+    "basePath": "/successfactors/odata/v2",
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "tags": [{
+        "name": "SecondaryAssignmentsItem"
+    },
+    {
+        "name": "SecondaryAssignments"
+    },
+    {
+        "name": "RightToReturn"
+    },
+    {
+        "name": "EmpGlobalAssignment"
+    }],
+    "definitions": {
+        "odata.error": {
+            "type": "object",
+            "required": ["error"],
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/odata.error.main"
+                }
+            }
+        },
+        "odata.error.main": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/odata.error.detail"
+                    }
+                },
+                "innererror": {
+                    "type": "object",
+                    "description": "The structure of this object is service-specific"
+                }
+            }
+        },
+        "odata.error.detail": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                }
+            }
+        },
+        "SFOData.SecondaryAssignmentsItem": {
+            "type": "object",
+            "properties": {
+                "SecondaryAssignments_effectiveStartDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "SecondaryAssignments_externalCode": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "externalCode": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemTransactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "usersSysId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                }
+            },
+            "title": "SecondaryAssignmentsItem"
+        },
+        "SFOData.SecondaryAssignments": {
+            "type": "object",
+            "properties": {
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "effectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "effectiveStartDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "externalCode": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemTransactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "allSfProcesses": {
+                    "title": "Related Collection(SFOData.SecondaryAssignmentsItem)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.SecondaryAssignmentsItem"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": "SecondaryAssignments"
+        },
+        "SFOData.RightToReturn": {
+            "type": "object",
+            "properties": {
+                "Position_code": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "Position_effectiveStartDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "code": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "gaEndJobInfoId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "gaEventReason": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "gaStartJobInfoId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "loaTimeType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "mdfSystemCreatedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemCreatedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemLastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemLastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemLastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemTransactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "reason": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                }
+            },
+            "title": "RightToReturn"
+        },
+        "SFOData.EmpGlobalAssignment": {
+            "type": "object",
+            "properties": {
+                "assignmentClass": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "assignmentType": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "endDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "payrollEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "personIdExternal": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "plannedEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "startDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "userId": {
+                    "type": "string",
+                    "maxLength": 100
+                }
+            },
+            "title": "EmpGlobalAssignment"
+        }
+    },
+    "paths": {
+        "/SecondaryAssignmentsItem": {
+            "get": {
+                "summary": "Get entities from SecondaryAssignmentsItem",
+                "tags": ["SecondaryAssignmentsItem"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["SecondaryAssignments_effectiveStartDate",
+                        "SecondaryAssignments_effectiveStartDate desc",
+                        "SecondaryAssignments_externalCode",
+                        "SecondaryAssignments_externalCode desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDate",
+                        "createdDate desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "externalCode",
+                        "externalCode desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDate",
+                        "lastModifiedDate desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedDateWithTZ",
+                        "lastModifiedDateWithTZ desc",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveEndDate desc",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEffectiveStartDate desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemStatus",
+                        "mdfSystemStatus desc",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemTransactionSequence desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc",
+                        "usersSysId",
+                        "usersSysId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["SecondaryAssignments_effectiveStartDate",
+                        "SecondaryAssignments_externalCode",
+                        "createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "externalCode",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "usersSysId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of SecondaryAssignmentsItem",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.SecondaryAssignmentsItem"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to SecondaryAssignmentsItem",
+                "tags": ["SecondaryAssignmentsItem"],
+                "parameters": [{
+                    "name": "SecondaryAssignmentsItem",
+                    "in": "body",
+                    "description": "New entity",
+                    "schema": {
+                        "$ref": "#/definitions/SFOData.SecondaryAssignmentsItem"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "schema": {
+                            "title": "Created SecondaryAssignmentsItem",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.SecondaryAssignmentsItem"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/SecondaryAssignmentsItem(SecondaryAssignments_effectiveStartDate={SecondaryAssignments_effectiveStartDate},SecondaryAssignments_externalCode='{SecondaryAssignments_externalCode}',externalCode='{externalCode}')": {
+            "get": {
+                "summary": "Get entity from SecondaryAssignmentsItem by key",
+                "tags": ["SecondaryAssignmentsItem"],
+                "parameters": [{
+                    "name": "SecondaryAssignments_effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: SecondaryAssignments_effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "SecondaryAssignments_externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: SecondaryAssignments_externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["SecondaryAssignments_effectiveStartDate",
+                        "SecondaryAssignments_externalCode",
+                        "createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "externalCode",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "usersSysId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "SecondaryAssignmentsItem",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.SecondaryAssignmentsItem"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update entity in SecondaryAssignmentsItem",
+                "tags": ["SecondaryAssignmentsItem"],
+                "parameters": [{
+                    "name": "SecondaryAssignments_effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: SecondaryAssignments_effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "SecondaryAssignments_externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: SecondaryAssignments_externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "SecondaryAssignmentsItem",
+                    "in": "body",
+                    "description": "New property values",
+                    "schema": {
+                        "title": "Modified SecondaryAssignmentsItem",
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "$ref": "#/definitions/SFOData.SecondaryAssignmentsItem"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from SecondaryAssignmentsItem",
+                "tags": ["SecondaryAssignmentsItem"],
+                "parameters": [{
+                    "name": "SecondaryAssignments_effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: SecondaryAssignments_effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "SecondaryAssignments_externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: SecondaryAssignments_externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "If-Match",
+                    "in": "header",
+                    "description": "ETag",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/SecondaryAssignments": {
+            "get": {
+                "summary": "Get entities from SecondaryAssignments",
+                "tags": ["SecondaryAssignments"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdBy desc",
+                        "createdDate",
+                        "createdDate desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "effectiveEndDate",
+                        "effectiveEndDate desc",
+                        "effectiveStartDate",
+                        "effectiveStartDate desc",
+                        "externalCode",
+                        "externalCode desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDate",
+                        "lastModifiedDate desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedDateWithTZ",
+                        "lastModifiedDateWithTZ desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemStatus",
+                        "mdfSystemStatus desc",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemTransactionSequence desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "effectiveEndDate",
+                        "effectiveStartDate",
+                        "externalCode",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "allSfProcesses"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of SecondaryAssignments",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.SecondaryAssignments"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to SecondaryAssignments",
+                "tags": ["SecondaryAssignments"],
+                "parameters": [{
+                    "name": "SecondaryAssignments",
+                    "in": "body",
+                    "description": "New entity",
+                    "schema": {
+                        "$ref": "#/definitions/SFOData.SecondaryAssignments"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "schema": {
+                            "title": "Created SecondaryAssignments",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.SecondaryAssignments"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/SecondaryAssignments(effectiveStartDate={effectiveStartDate},externalCode='{externalCode}')": {
+            "get": {
+                "summary": "Get entity from SecondaryAssignments by key",
+                "tags": ["SecondaryAssignments"],
+                "parameters": [{
+                    "name": "effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "effectiveEndDate",
+                        "effectiveStartDate",
+                        "externalCode",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "allSfProcesses"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "SecondaryAssignments",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.SecondaryAssignments"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update entity in SecondaryAssignments",
+                "tags": ["SecondaryAssignments"],
+                "parameters": [{
+                    "name": "effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "SecondaryAssignments",
+                    "in": "body",
+                    "description": "New property values",
+                    "schema": {
+                        "title": "Modified SecondaryAssignments",
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "$ref": "#/definitions/SFOData.SecondaryAssignments"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from SecondaryAssignments",
+                "tags": ["SecondaryAssignments"],
+                "parameters": [{
+                    "name": "effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "If-Match",
+                    "in": "header",
+                    "description": "ETag",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/RightToReturn": {
+            "get": {
+                "summary": "Get entities from RightToReturn",
+                "tags": ["RightToReturn"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["Position_code",
+                        "Position_code desc",
+                        "Position_effectiveStartDate",
+                        "Position_effectiveStartDate desc",
+                        "code",
+                        "code desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "gaEndJobInfoId",
+                        "gaEndJobInfoId desc",
+                        "gaEventReason",
+                        "gaEventReason desc",
+                        "gaStartJobInfoId",
+                        "gaStartJobInfoId desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "loaTimeType",
+                        "loaTimeType desc",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedBy desc",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemCreatedDate desc",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveEndDate desc",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEffectiveStartDate desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedBy desc",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDate desc",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemLastModifiedDateWithTZ desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemStatus",
+                        "mdfSystemStatus desc",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemTransactionSequence desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc",
+                        "reason",
+                        "reason desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["Position_code",
+                        "Position_effectiveStartDate",
+                        "code",
+                        "createdBy",
+                        "createdDateTime",
+                        "gaEndJobInfoId",
+                        "gaEventReason",
+                        "gaStartJobInfoId",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "loaTimeType",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "reason"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of RightToReturn",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.RightToReturn"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to RightToReturn",
+                "tags": ["RightToReturn"],
+                "parameters": [{
+                    "name": "RightToReturn",
+                    "in": "body",
+                    "description": "New entity",
+                    "schema": {
+                        "$ref": "#/definitions/SFOData.RightToReturn"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "schema": {
+                            "title": "Created RightToReturn",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.RightToReturn"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/RightToReturn(Position_code='{Position_code}',Position_effectiveStartDate={Position_effectiveStartDate},code='{code}')": {
+            "get": {
+                "summary": "Get entity from RightToReturn by key",
+                "tags": ["RightToReturn"],
+                "parameters": [{
+                    "name": "Position_code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: Position_code",
+                    "type": "string"
+                },
+                {
+                    "name": "Position_effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: Position_effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: code",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["Position_code",
+                        "Position_effectiveStartDate",
+                        "code",
+                        "createdBy",
+                        "createdDateTime",
+                        "gaEndJobInfoId",
+                        "gaEventReason",
+                        "gaStartJobInfoId",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "loaTimeType",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "reason"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "RightToReturn",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.RightToReturn"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update entity in RightToReturn",
+                "tags": ["RightToReturn"],
+                "parameters": [{
+                    "name": "Position_code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: Position_code",
+                    "type": "string"
+                },
+                {
+                    "name": "Position_effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: Position_effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: code",
+                    "type": "string"
+                },
+                {
+                    "name": "RightToReturn",
+                    "in": "body",
+                    "description": "New property values",
+                    "schema": {
+                        "title": "Modified RightToReturn",
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "$ref": "#/definitions/SFOData.RightToReturn"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from RightToReturn",
+                "tags": ["RightToReturn"],
+                "parameters": [{
+                    "name": "Position_code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: Position_code",
+                    "type": "string"
+                },
+                {
+                    "name": "Position_effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: Position_effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: code",
+                    "type": "string"
+                },
+                {
+                    "name": "If-Match",
+                    "in": "header",
+                    "description": "ETag",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpGlobalAssignment": {
+            "get": {
+                "summary": "Get entities from EmpGlobalAssignment",
+                "tags": ["EmpGlobalAssignment"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["assignmentClass",
+                        "assignmentClass desc",
+                        "assignmentType",
+                        "assignmentType desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "endDate",
+                        "endDate desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "payrollEndDate",
+                        "payrollEndDate desc",
+                        "personIdExternal",
+                        "personIdExternal desc",
+                        "plannedEndDate",
+                        "plannedEndDate desc",
+                        "startDate",
+                        "startDate desc",
+                        "userId",
+                        "userId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["assignmentClass",
+                        "assignmentType",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "endDate",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "payrollEndDate",
+                        "personIdExternal",
+                        "plannedEndDate",
+                        "startDate",
+                        "userId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of EmpGlobalAssignment",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.EmpGlobalAssignment"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpGlobalAssignment('{userId}')": {
+            "get": {
+                "summary": "Get entity from EmpGlobalAssignment by key",
+                "tags": ["EmpGlobalAssignment"],
+                "parameters": [{
+                    "name": "userId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: userId",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["assignmentClass",
+                        "assignmentType",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "endDate",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "payrollEndDate",
+                        "personIdExternal",
+                        "plannedEndDate",
+                        "startDate",
+                        "userId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "EmpGlobalAssignment",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.EmpGlobalAssignment"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "top": {
+            "name": "$top",
+            "in": "query",
+            "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630)",
+            "type": "integer",
+            "default":20
+        },
+        "skip": {
+            "name": "$skip",
+            "in": "query",
+            "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631)",
+            "type": "integer"
+        },
+        "count": {
+            "name": "$count",
+            "in": "query",
+            "description": "Include count of items, see [OData Count](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374632)",
+            "type": "boolean"
+        },
+        "filter": {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+        },
+        "search": {
+            "name": "$search",
+            "in": "query",
+            "description": "Search items by search phrases, see [OData Searching](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374633)",
+            "type": "string"
+        }
+    },
+    "responses": {
+        "error": {
+            "description": "Error",
+            "schema": {
+                "$ref": "#/definitions/odata.error"
+            }
+        }
+    }
+}
