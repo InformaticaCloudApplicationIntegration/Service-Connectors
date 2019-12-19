@@ -1,0 +1,805 @@
+{
+    "swagger": "2.0",
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "securityDefinitions": {
+        "basicAuthentication": {
+            "type": "basic"
+        }
+    },
+    "x-sap-shortText":"API to access localization information",
+    "x-servers": [{
+        "url": "https://{landscapehost}/odata/v2",
+        "description": "OData APIs for the SuccessFactors Data Centers",
+        "templates": {
+            "landscapehost": {
+                "description": "SuccessFactors Data Center host",
+                "enum": ["api2.successfactors.eu",
+                "apisalesdemo2.successfactors.eu",
+                "api2preview.sapsf.eu",
+                "api4.successfactors.com",
+                "apisalesdemo4.successfactors.com",
+                "api4preview.sapsf.com",
+                "api5.successfactors.eu",
+                "api8.successfactors.com",
+                "apisalesdemo8.successfactors.com",
+                "api8preview.sapsf.com",
+                "api10.successfactors.com",
+                "api10preview.sapsf.com",
+                "api012.successfactors.eu",
+                "apirot.successfactors.eu",
+                "api12preview.sapsf.eu",
+                "api15.sapsf.cn",
+                "api16.sapsf.eu",
+                "api17preview.sapsf.com",
+                "api17.sapsf.com",
+                "api18preview.sapsf.com",
+                "api18.sapsf.com"],
+                "default": "api2.successfactors.eu"
+            }
+        }
+    }],
+    "info": {
+        "title": "Localization",
+        "version": "1.0",
+        "description": "API to access localization information"
+    },
+    "externalDocs": {
+        "description": "More Information available in help.sap.com",
+        "url": "https://help.sap.com/viewer/b2b06831c2cb4d5facd1dfde49a7aab5/latest"
+    },
+    "schemes": ["https"],
+    "host": "sandbox.api.sap.com",
+    "basePath": "/successfactors/odata/v2",
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "tags": [{
+        "name": "NameFormatGO"
+    },
+    {
+        "name": "NameElementGO"
+    }],
+    "definitions": {
+        "odata.error": {
+            "type": "object",
+            "required": ["error"],
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/odata.error.main"
+                }
+            }
+        },
+        "odata.error.main": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/odata.error.detail"
+                    }
+                },
+                "innererror": {
+                    "type": "object",
+                    "description": "The structure of this object is service-specific"
+                }
+            }
+        },
+        "odata.error.detail": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                }
+            }
+        },
+        "SFOData.NameFormatGO": {
+            "type": "object",
+            "properties": {
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "externalCode": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "externalName": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemCreatedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemCreatedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemLastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemLastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemLastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemTransactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "sample": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "nameElements": {
+                    "title": "Related Collection(SFOData.NameElementGO)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.NameElementGO"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": "NameFormatGO"
+        },
+        "SFOData.NameElementGO": {
+            "type": "object",
+            "properties": {
+                "NameFormatGO_externalCode": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "externalCode": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemTransactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "nameArtifactEnum": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "sampleData": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "separator": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                }
+            },
+            "title": "NameElementGO"
+        }
+    },
+    "paths": {
+        "/NameFormatGO": {
+            "get": {
+                "summary": "Get entities from NameFormatGO",
+                "tags": ["NameFormatGO"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "externalCode",
+                        "externalCode desc",
+                        "externalName",
+                        "externalName desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedBy desc",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemCreatedDate desc",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveEndDate desc",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEffectiveStartDate desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedBy desc",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDate desc",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemLastModifiedDateWithTZ desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemStatus",
+                        "mdfSystemStatus desc",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemTransactionSequence desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc",
+                        "sample",
+                        "sample desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDateTime",
+                        "externalCode",
+                        "externalName",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "sample"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "nameElements"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of NameFormatGO",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.NameFormatGO"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/NameFormatGO('{externalCode}')": {
+            "get": {
+                "summary": "Get entity from NameFormatGO by key",
+                "tags": ["NameFormatGO"],
+                "parameters": [{
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDateTime",
+                        "externalCode",
+                        "externalName",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "sample"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "nameElements"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "NameFormatGO",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.NameFormatGO"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/NameElementGO": {
+            "get": {
+                "summary": "Get entities from NameElementGO",
+                "tags": ["NameElementGO"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["NameFormatGO_externalCode",
+                        "NameFormatGO_externalCode desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDate",
+                        "createdDate desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "externalCode",
+                        "externalCode desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDate",
+                        "lastModifiedDate desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedDateWithTZ",
+                        "lastModifiedDateWithTZ desc",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveEndDate desc",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEffectiveStartDate desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemStatus",
+                        "mdfSystemStatus desc",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemTransactionSequence desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc",
+                        "nameArtifactEnum",
+                        "nameArtifactEnum desc",
+                        "sampleData",
+                        "sampleData desc",
+                        "separator",
+                        "separator desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["NameFormatGO_externalCode",
+                        "createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "externalCode",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "nameArtifactEnum",
+                        "sampleData",
+                        "separator"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of NameElementGO",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.NameElementGO"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/NameElementGO(NameFormatGO_externalCode='{NameFormatGO_externalCode}',externalCode='{externalCode}')": {
+            "get": {
+                "summary": "Get entity from NameElementGO by key",
+                "tags": ["NameElementGO"],
+                "parameters": [{
+                    "name": "NameFormatGO_externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: NameFormatGO_externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["NameFormatGO_externalCode",
+                        "createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "externalCode",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "nameArtifactEnum",
+                        "sampleData",
+                        "separator"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "NameElementGO",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.NameElementGO"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "top": {
+            "name": "$top",
+            "in": "query",
+            "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630)",
+            "type": "integer",
+            "default":20
+        },
+        "skip": {
+            "name": "$skip",
+            "in": "query",
+            "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631)",
+            "type": "integer"
+        },
+        "count": {
+            "name": "$count",
+            "in": "query",
+            "description": "Include count of items, see [OData Count](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374632)",
+            "type": "boolean"
+        },
+        "filter": {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+        },
+        "search": {
+            "name": "$search",
+            "in": "query",
+            "description": "Search items by search phrases, see [OData Searching](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374633)",
+            "type": "string"
+        }
+    },
+    "responses": {
+        "error": {
+            "description": "Error",
+            "schema": {
+                "$ref": "#/definitions/odata.error"
+            }
+        }
+    }
+}
