@@ -1,0 +1,3621 @@
+{
+    "swagger": "2.0",
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "securityDefinitions": {
+        "basicAuthentication": {
+            "type": "basic"
+        }
+    },
+    "x-sap-shortText":"API to access personal information for an employee.",
+    "x-servers": [{
+        "url": "https://{landscapehost}/odata/v2",
+        "description": "OData APIs for the SuccessFactors Data Centers",
+        "templates": {
+            "landscapehost": {
+                "description": "SuccessFactors Data Center host",
+                "enum": ["api2.successfactors.eu",
+                "apisalesdemo2.successfactors.eu",
+                "api2preview.sapsf.eu",
+                "api4.successfactors.com",
+                "apisalesdemo4.successfactors.com",
+                "api4preview.sapsf.com",
+                "api5.successfactors.eu",
+                "api8.successfactors.com",
+                "apisalesdemo8.successfactors.com",
+                "api8preview.sapsf.com",
+                "api10.successfactors.com",
+                "api10preview.sapsf.com",
+                "api012.successfactors.eu",
+                "apirot.successfactors.eu",
+                "api12preview.sapsf.eu",
+                "api15.sapsf.cn",
+                "api16.sapsf.eu",
+                "api17preview.sapsf.com",
+                "api17.sapsf.com",
+                "api18preview.sapsf.com",
+                "api18.sapsf.com"],
+                "default": "api2.successfactors.eu"
+            }
+        }
+    }],
+    "info": {
+        "title": "Personal Information",
+        "version": "1.0",
+        "description": "API to access personal information for an employee such as emergency contact information, social media accounts, email address, non-effective-dated biographical information such as date of birth, country of birth and national identification card information"
+    },
+    "externalDocs": {
+        "description": "More Information available in help.sap.com",
+        "url": "https://help.sap.com/viewer/b2b06831c2cb4d5facd1dfde49a7aab5/latest"
+    },
+    "schemes": ["https"],
+    "host": "sandbox.api.sap.com",
+    "basePath": "/successfactors/odata/v2",
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "tags": [{
+        "name": "PerEmergencyContacts"
+    },
+    {
+        "name": "PerPhone"
+    },
+    {
+        "name": "PersonKey"
+    },
+    {
+        "name": "PerPersonal"
+    },
+    {
+        "name": "PerSocialAccount"
+    },
+    {
+        "name": "PerPerson"
+    },
+    {
+        "name": "PerPersonRelationship"
+    },
+    {
+        "name": "PerEmail"
+    },
+    {
+        "name": "HrisEmergencyContactAddressDEFLT"
+    },
+    {
+        "name": "PerNationalId"
+    },
+    {
+        "name": "PerAddressDEFLT"
+    }],
+    "definitions": {
+        "odata.error": {
+            "type": "object",
+            "required": ["error"],
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/odata.error.main"
+                }
+            }
+        },
+        "odata.error.main": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/odata.error.detail"
+                    }
+                },
+                "innererror": {
+                    "type": "object",
+                    "description": "The structure of this object is service-specific"
+                }
+            }
+        },
+        "odata.error.detail": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                }
+            }
+        },
+        "SFOData.PerEmergencyContacts": {
+            "type": "object",
+            "properties": {
+                "addressAddress1": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressAddress2": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressAddress3": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressCity": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressCountry": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressCounty": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressProvince": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressState": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressZipCode": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "email": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "isAddSameAsEmployee": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 256
+                },
+                "operation": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "personIdExternal": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "phone": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "primaryFlag": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 1
+                },
+                "relationship": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "secondPhone": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressNavDEFLT": {
+                    "$ref": "#/definitions/SFOData.HrisEmergencyContactAddressDEFLT"
+                },
+                "personNav": {
+                    "$ref": "#/definitions/SFOData.PerPerson"
+                }
+            },
+            "title": "PerEmergencyContacts"
+        },
+        "SFOData.PerPhone": {
+            "type": "object",
+            "properties": {
+                "areaCode": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "countryCode": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "extension": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "includeAllRecords": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "isPrimary": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "operation": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "personIdExternal": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "phoneNumber": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "phoneType": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "personNav": {
+                    "$ref": "#/definitions/SFOData.PerPerson"
+                }
+            },
+            "title": "PerPhone"
+        },
+        "SFOData.PersonKey": {
+            "type": "object",
+            "properties": {
+                "perPersonUuid": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "personId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "personIdExternal": {
+                    "type": "string",
+                    "maxLength": 32
+                }
+            },
+            "title": "PersonKey"
+        },
+        "SFOData.PerPersonal": {
+            "type": "object",
+            "properties": {
+                "attachmentId": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "businessFirstName": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "businessLastName": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "displayName": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "endDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "firstName": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "gender": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 2
+                },
+                "includeAllRecords": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "initials": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastName": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "maritalStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 50
+                },
+                "middleName": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "nationality": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "nativePreferredLang": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "operation": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "personIdExternal": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "preferredName": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "salutation": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "script": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "startDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "title": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "personNav": {
+                    "$ref": "#/definitions/SFOData.PerPerson"
+                }
+            },
+            "title": "PerPersonal"
+        },
+        "SFOData.PerSocialAccount": {
+            "type": "object",
+            "properties": {
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "domain": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "imId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "operation": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "personIdExternal": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "url": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "personNav": {
+                    "$ref": "#/definitions/SFOData.PerPerson"
+                }
+            },
+            "title": "PerSocialAccount"
+        },
+        "SFOData.PerPerson": {
+            "type": "object",
+            "properties": {
+                "birthName": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "countryOfBirth": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "dateOfBirth": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "includeAllRecords": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "perPersonUuid": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "personId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "personIdExternal": {
+                    "type": "string",
+                    "maxLength": 32
+                },
+                "regionOfBirth": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "userId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "emailNav": {
+                    "title": "Related Collection(SFOData.PerEmail)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.PerEmail"
+                            }
+                        }
+                    }
+                },
+                "emergencyContactNav": {
+                    "title": "Related Collection(SFOData.PerEmergencyContacts)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.PerEmergencyContacts"
+                            }
+                        }
+                    }
+                },
+                "homeAddressNavDEFLT": {
+                    "title": "Related Collection(SFOData.PerAddressDEFLT)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.PerAddressDEFLT"
+                            }
+                        }
+                    }
+                },
+                "nationalIdNav": {
+                    "title": "Related Collection(SFOData.PerNationalId)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.PerNationalId"
+                            }
+                        }
+                    }
+                },
+                "personRerlationshipNav": {
+                    "title": "Related Collection(SFOData.PerPersonRelationship)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.PerPersonRelationship"
+                            }
+                        }
+                    }
+                },
+                "personalInfoNav": {
+                    "title": "Related Collection(SFOData.PerPersonal)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.PerPersonal"
+                            }
+                        }
+                    }
+                },
+                "phoneNav": {
+                    "title": "Related Collection(SFOData.PerPhone)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.PerPhone"
+                            }
+                        }
+                    }
+                },
+                "socialAccountNav": {
+                    "title": "Related Collection(SFOData.PerSocialAccount)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.PerSocialAccount"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": "PerPerson"
+        },
+        "SFOData.PerPersonRelationship": {
+            "type": "object",
+            "properties": {
+                "addressAddress1": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressAddress2": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressAddress3": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressCity": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressCountry": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressCounty": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressProvince": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressState": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressZipCode": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "attachmentId": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "endDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "firstName": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "isAccompanyingDependent": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "isAddressSameAsPerson": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "isBeneficiary": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastName": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "operation": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "personIdExternal": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "relatedPersonIdExternal": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "relationshipType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 30
+                },
+                "startDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "personNav": {
+                    "$ref": "#/definitions/SFOData.PerPerson"
+                },
+                "relNationalIdNav": {
+                    "$ref": "#/definitions/SFOData.PerNationalId"
+                },
+                "relPersonNav": {
+                    "$ref": "#/definitions/SFOData.PerPerson"
+                },
+                "relPersonalNav": {
+                    "$ref": "#/definitions/SFOData.PerPersonal"
+                }
+            },
+            "title": "PerPersonRelationship"
+        },
+        "SFOData.PerEmail": {
+            "type": "object",
+            "properties": {
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "emailAddress": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "emailType": {
+                    "type": "string",
+                    "maxLength": 38
+                },
+                "includeAllRecords": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "isPrimary": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "operation": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "personIdExternal": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "personNav": {
+                    "$ref": "#/definitions/SFOData.PerPerson"
+                }
+            },
+            "title": "PerEmail"
+        },
+        "SFOData.HrisEmergencyContactAddressDEFLT": {
+            "type": "object",
+            "properties": {
+                "address1": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "address2": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "address3": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "address4": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "address5": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressId": {
+                    "type": "string",
+                    "format": "decimal",
+                    "multipleOf": 1
+                },
+                "addressType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 30
+                },
+                "city": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "country": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "county": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "endDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "notes": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 4000
+                },
+                "province": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "startDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "state": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "zipCode": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                }
+            },
+            "title": "HrisEmergencyContactAddressDEFLT"
+        },
+        "SFOData.PerNationalId": {
+            "type": "object",
+            "properties": {
+                "cardType": {
+                    "type": "string",
+                    "maxLength": 256
+                },
+                "country": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "isPrimary": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "nationalId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "notes": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 4000
+                },
+                "operation": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "personIdExternal": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "personNav": {
+                    "$ref": "#/definitions/SFOData.PerPerson"
+                }
+            },
+            "title": "PerNationalId"
+        },
+        "SFOData.PerAddressDEFLT": {
+            "type": "object",
+            "properties": {
+                "address1": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "address2": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "address3": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "address4": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "address5": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "addressType": {
+                    "type": "string",
+                    "maxLength": 30
+                },
+                "city": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "country": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "county": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "empUsersSysId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "endDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "includeAllRecords": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "notes": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 4000
+                },
+                "operation": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "personIdExternal": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "province": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "startDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "state": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "zipCode": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 256
+                },
+                "personNav": {
+                    "$ref": "#/definitions/SFOData.PerPerson"
+                }
+            },
+            "title": "PerAddressDEFLT"
+        },
+        "SFOData.GenerateNextPersonIDResponse": {
+            "type": "object",
+            "properties": {
+                "personID": {
+                    "type": "string",
+                    "default": "null"
+                }
+            },
+            "title": "GenerateNextPersonIDResponse"
+        }
+    },
+    "paths": {
+        "/PerEmergencyContacts": {
+            "get": {
+                "summary": "Get entities from PerEmergencyContacts",
+                "tags": ["PerEmergencyContacts"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["addressAddress1",
+                        "addressAddress1 desc",
+                        "addressAddress2",
+                        "addressAddress2 desc",
+                        "addressAddress3",
+                        "addressAddress3 desc",
+                        "addressCity",
+                        "addressCity desc",
+                        "addressCountry",
+                        "addressCountry desc",
+                        "addressCounty",
+                        "addressCounty desc",
+                        "addressProvince",
+                        "addressProvince desc",
+                        "addressState",
+                        "addressState desc",
+                        "addressZipCode",
+                        "addressZipCode desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "email",
+                        "email desc",
+                        "isAddSameAsEmployee",
+                        "isAddSameAsEmployee desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "name",
+                        "name desc",
+                        "operation",
+                        "operation desc",
+                        "personIdExternal",
+                        "personIdExternal desc",
+                        "phone",
+                        "phone desc",
+                        "primaryFlag",
+                        "primaryFlag desc",
+                        "relationship",
+                        "relationship desc",
+                        "secondPhone",
+                        "secondPhone desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["addressAddress1",
+                        "addressAddress2",
+                        "addressAddress3",
+                        "addressCity",
+                        "addressCountry",
+                        "addressCounty",
+                        "addressProvince",
+                        "addressState",
+                        "addressZipCode",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "email",
+                        "isAddSameAsEmployee",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "name",
+                        "operation",
+                        "personIdExternal",
+                        "phone",
+                        "primaryFlag",
+                        "relationship",
+                        "secondPhone"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "addressNavDEFLT",
+                        "personNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PerEmergencyContacts",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PerEmergencyContacts"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerEmergencyContacts(name='{name}',personIdExternal='{personIdExternal}',relationship='{relationship}')": {
+            "get": {
+                "summary": "Get entity from PerEmergencyContacts by key",
+                "tags": ["PerEmergencyContacts"],
+                "parameters": [{
+                    "name": "name",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: name",
+                    "type": "string"
+                },
+                {
+                    "name": "personIdExternal",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: personIdExternal",
+                    "type": "string"
+                },
+                {
+                    "name": "relationship",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: relationship",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["addressAddress1",
+                        "addressAddress2",
+                        "addressAddress3",
+                        "addressCity",
+                        "addressCountry",
+                        "addressCounty",
+                        "addressProvince",
+                        "addressState",
+                        "addressZipCode",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "email",
+                        "isAddSameAsEmployee",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "name",
+                        "operation",
+                        "personIdExternal",
+                        "phone",
+                        "primaryFlag",
+                        "relationship",
+                        "secondPhone"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "addressNavDEFLT",
+                        "personNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PerEmergencyContacts",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PerEmergencyContacts"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerPhone": {
+            "get": {
+                "summary": "Get entities from PerPhone",
+                "tags": ["PerPhone"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["areaCode",
+                        "areaCode desc",
+                        "countryCode",
+                        "countryCode desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "extension",
+                        "extension desc",
+                        "includeAllRecords",
+                        "includeAllRecords desc",
+                        "isPrimary",
+                        "isPrimary desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "operation",
+                        "operation desc",
+                        "personIdExternal",
+                        "personIdExternal desc",
+                        "phoneNumber",
+                        "phoneNumber desc",
+                        "phoneType",
+                        "phoneType desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["areaCode",
+                        "countryCode",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "extension",
+                        "includeAllRecords",
+                        "isPrimary",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "operation",
+                        "personIdExternal",
+                        "phoneNumber",
+                        "phoneType"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "personNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PerPhone",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PerPhone"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerPhone(personIdExternal='{personIdExternal}',phoneType='{phoneType}')": {
+            "get": {
+                "summary": "Get entity from PerPhone by key",
+                "tags": ["PerPhone"],
+                "parameters": [{
+                    "name": "personIdExternal",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: personIdExternal",
+                    "type": "string"
+                },
+                {
+                    "name": "phoneType",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: phoneType",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["areaCode",
+                        "countryCode",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "extension",
+                        "includeAllRecords",
+                        "isPrimary",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "operation",
+                        "personIdExternal",
+                        "phoneNumber",
+                        "phoneType"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "personNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PerPhone",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PerPhone"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PersonKey": {
+            "get": {
+                "summary": "Get entities from PersonKey",
+                "tags": ["PersonKey"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["perPersonUuid",
+                        "perPersonUuid desc",
+                        "personId",
+                        "personId desc",
+                        "personIdExternal",
+                        "personIdExternal desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["perPersonUuid",
+                        "personId",
+                        "personIdExternal"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PersonKey",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PersonKey"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PersonKey('{personIdExternal}')": {
+            "get": {
+                "summary": "Get entity from PersonKey by key",
+                "tags": ["PersonKey"],
+                "parameters": [{
+                    "name": "personIdExternal",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: personIdExternal",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["perPersonUuid",
+                        "personId",
+                        "personIdExternal"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PersonKey",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PersonKey"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerPersonal": {
+            "get": {
+                "summary": "Get entities from PerPersonal",
+                "tags": ["PerPersonal"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["attachmentId",
+                        "attachmentId desc",
+                        "businessFirstName",
+                        "businessFirstName desc",
+                        "businessLastName",
+                        "businessLastName desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "displayName",
+                        "displayName desc",
+                        "endDate",
+                        "endDate desc",
+                        "firstName",
+                        "firstName desc",
+                        "gender",
+                        "gender desc",
+                        "includeAllRecords",
+                        "includeAllRecords desc",
+                        "initials",
+                        "initials desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "lastName",
+                        "lastName desc",
+                        "maritalStatus",
+                        "maritalStatus desc",
+                        "middleName",
+                        "middleName desc",
+                        "nationality",
+                        "nationality desc",
+                        "nativePreferredLang",
+                        "nativePreferredLang desc",
+                        "operation",
+                        "operation desc",
+                        "personIdExternal",
+                        "personIdExternal desc",
+                        "preferredName",
+                        "preferredName desc",
+                        "salutation",
+                        "salutation desc",
+                        "script",
+                        "script desc",
+                        "startDate",
+                        "startDate desc",
+                        "title",
+                        "title desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["attachmentId",
+                        "businessFirstName",
+                        "businessLastName",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "displayName",
+                        "endDate",
+                        "firstName",
+                        "gender",
+                        "includeAllRecords",
+                        "initials",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "lastName",
+                        "maritalStatus",
+                        "middleName",
+                        "nationality",
+                        "nativePreferredLang",
+                        "operation",
+                        "personIdExternal",
+                        "preferredName",
+                        "salutation",
+                        "script",
+                        "startDate",
+                        "title"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "personNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PerPersonal",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PerPersonal"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerPersonal(personIdExternal='{personIdExternal}',startDate={startDate})": {
+            "get": {
+                "summary": "Get entity from PerPersonal by key",
+                "tags": ["PerPersonal"],
+                "parameters": [{
+                    "name": "personIdExternal",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: personIdExternal",
+                    "type": "string"
+                },
+                {
+                    "name": "startDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: startDate",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["attachmentId",
+                        "businessFirstName",
+                        "businessLastName",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "displayName",
+                        "endDate",
+                        "firstName",
+                        "gender",
+                        "includeAllRecords",
+                        "initials",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "lastName",
+                        "maritalStatus",
+                        "middleName",
+                        "nationality",
+                        "nativePreferredLang",
+                        "operation",
+                        "personIdExternal",
+                        "preferredName",
+                        "salutation",
+                        "script",
+                        "startDate",
+                        "title"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "personNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PerPersonal",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PerPersonal"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerSocialAccount": {
+            "get": {
+                "summary": "Get entities from PerSocialAccount",
+                "tags": ["PerSocialAccount"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "domain",
+                        "domain desc",
+                        "imId",
+                        "imId desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "operation",
+                        "operation desc",
+                        "personIdExternal",
+                        "personIdExternal desc",
+                        "url",
+                        "url desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "domain",
+                        "imId",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "operation",
+                        "personIdExternal",
+                        "url"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "personNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PerSocialAccount",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PerSocialAccount"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerSocialAccount(domain='{domain}',personIdExternal='{personIdExternal}')": {
+            "get": {
+                "summary": "Get entity from PerSocialAccount by key",
+                "tags": ["PerSocialAccount"],
+                "parameters": [{
+                    "name": "domain",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: domain",
+                    "type": "string"
+                },
+                {
+                    "name": "personIdExternal",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: personIdExternal",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "domain",
+                        "imId",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "operation",
+                        "personIdExternal",
+                        "url"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "personNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PerSocialAccount",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PerSocialAccount"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerPerson": {
+            "get": {
+                "summary": "Get entities from PerPerson",
+                "tags": ["PerPerson"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["birthName",
+                        "birthName desc",
+                        "countryOfBirth",
+                        "countryOfBirth desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "dateOfBirth",
+                        "dateOfBirth desc",
+                        "includeAllRecords",
+                        "includeAllRecords desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "perPersonUuid",
+                        "perPersonUuid desc",
+                        "personId",
+                        "personId desc",
+                        "personIdExternal",
+                        "personIdExternal desc",
+                        "regionOfBirth",
+                        "regionOfBirth desc",
+                        "userId",
+                        "userId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["birthName",
+                        "countryOfBirth",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "dateOfBirth",
+                        "includeAllRecords",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "perPersonUuid",
+                        "personId",
+                        "personIdExternal",
+                        "regionOfBirth",
+                        "userId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "emailNav",
+                        "emergencyContactNav",
+                        "homeAddressNavDEFLT",
+                        "nationalIdNav",
+                        "personRerlationshipNav",
+                        "personalInfoNav",
+                        "phoneNav",
+                        "socialAccountNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PerPerson",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PerPerson"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerPerson('{personIdExternal}')": {
+            "get": {
+                "summary": "Get entity from PerPerson by key",
+                "tags": ["PerPerson"],
+                "parameters": [{
+                    "name": "personIdExternal",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: personIdExternal",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["birthName",
+                        "countryOfBirth",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "dateOfBirth",
+                        "includeAllRecords",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "perPersonUuid",
+                        "personId",
+                        "personIdExternal",
+                        "regionOfBirth",
+                        "userId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "emailNav",
+                        "emergencyContactNav",
+                        "homeAddressNavDEFLT",
+                        "nationalIdNav",
+                        "personRerlationshipNav",
+                        "personalInfoNav",
+                        "phoneNav",
+                        "socialAccountNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PerPerson",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PerPerson"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerPersonRelationship": {
+            "get": {
+                "summary": "Get entities from PerPersonRelationship",
+                "tags": ["PerPersonRelationship"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["addressAddress1",
+                        "addressAddress1 desc",
+                        "addressAddress2",
+                        "addressAddress2 desc",
+                        "addressAddress3",
+                        "addressAddress3 desc",
+                        "addressCity",
+                        "addressCity desc",
+                        "addressCountry",
+                        "addressCountry desc",
+                        "addressCounty",
+                        "addressCounty desc",
+                        "addressProvince",
+                        "addressProvince desc",
+                        "addressState",
+                        "addressState desc",
+                        "addressZipCode",
+                        "addressZipCode desc",
+                        "attachmentId",
+                        "attachmentId desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "endDate",
+                        "endDate desc",
+                        "firstName",
+                        "firstName desc",
+                        "isAccompanyingDependent",
+                        "isAccompanyingDependent desc",
+                        "isAddressSameAsPerson",
+                        "isAddressSameAsPerson desc",
+                        "isBeneficiary",
+                        "isBeneficiary desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "lastName",
+                        "lastName desc",
+                        "operation",
+                        "operation desc",
+                        "personIdExternal",
+                        "personIdExternal desc",
+                        "relatedPersonIdExternal",
+                        "relatedPersonIdExternal desc",
+                        "relationshipType",
+                        "relationshipType desc",
+                        "startDate",
+                        "startDate desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["addressAddress1",
+                        "addressAddress2",
+                        "addressAddress3",
+                        "addressCity",
+                        "addressCountry",
+                        "addressCounty",
+                        "addressProvince",
+                        "addressState",
+                        "addressZipCode",
+                        "attachmentId",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "endDate",
+                        "firstName",
+                        "isAccompanyingDependent",
+                        "isAddressSameAsPerson",
+                        "isBeneficiary",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "lastName",
+                        "operation",
+                        "personIdExternal",
+                        "relatedPersonIdExternal",
+                        "relationshipType",
+                        "startDate"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "personNav",
+                        "relNationalIdNav",
+                        "relPersonNav",
+                        "relPersonalNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PerPersonRelationship",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PerPersonRelationship"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerPersonRelationship(personIdExternal='{personIdExternal}',relatedPersonIdExternal='{relatedPersonIdExternal}',startDate={startDate})": {
+            "get": {
+                "summary": "Get entity from PerPersonRelationship by key",
+                "tags": ["PerPersonRelationship"],
+                "parameters": [{
+                    "name": "personIdExternal",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: personIdExternal",
+                    "type": "string"
+                },
+                {
+                    "name": "relatedPersonIdExternal",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: relatedPersonIdExternal",
+                    "type": "string"
+                },
+                {
+                    "name": "startDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: startDate",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["addressAddress1",
+                        "addressAddress2",
+                        "addressAddress3",
+                        "addressCity",
+                        "addressCountry",
+                        "addressCounty",
+                        "addressProvince",
+                        "addressState",
+                        "addressZipCode",
+                        "attachmentId",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "endDate",
+                        "firstName",
+                        "isAccompanyingDependent",
+                        "isAddressSameAsPerson",
+                        "isBeneficiary",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "lastName",
+                        "operation",
+                        "personIdExternal",
+                        "relatedPersonIdExternal",
+                        "relationshipType",
+                        "startDate"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "personNav",
+                        "relNationalIdNav",
+                        "relPersonNav",
+                        "relPersonalNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PerPersonRelationship",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PerPersonRelationship"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerEmail": {
+            "get": {
+                "summary": "Get entities from PerEmail",
+                "tags": ["PerEmail"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "emailAddress",
+                        "emailAddress desc",
+                        "emailType",
+                        "emailType desc",
+                        "includeAllRecords",
+                        "includeAllRecords desc",
+                        "isPrimary",
+                        "isPrimary desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "operation",
+                        "operation desc",
+                        "personIdExternal",
+                        "personIdExternal desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "emailAddress",
+                        "emailType",
+                        "includeAllRecords",
+                        "isPrimary",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "operation",
+                        "personIdExternal"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "personNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PerEmail",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PerEmail"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerEmail(emailType='{emailType}',personIdExternal='{personIdExternal}')": {
+            "get": {
+                "summary": "Get entity from PerEmail by key",
+                "tags": ["PerEmail"],
+                "parameters": [{
+                    "name": "emailType",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: emailType",
+                    "type": "string"
+                },
+                {
+                    "name": "personIdExternal",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: personIdExternal",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "emailAddress",
+                        "emailType",
+                        "includeAllRecords",
+                        "isPrimary",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "operation",
+                        "personIdExternal"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "personNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PerEmail",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PerEmail"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/HrisEmergencyContactAddressDEFLT": {
+            "get": {
+                "summary": "Get entities from HrisEmergencyContactAddressDEFLT",
+                "tags": ["HrisEmergencyContactAddressDEFLT"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["address1",
+                        "address1 desc",
+                        "address2",
+                        "address2 desc",
+                        "address3",
+                        "address3 desc",
+                        "address4",
+                        "address4 desc",
+                        "address5",
+                        "address5 desc",
+                        "addressId",
+                        "addressId desc",
+                        "addressType",
+                        "addressType desc",
+                        "city",
+                        "city desc",
+                        "country",
+                        "country desc",
+                        "county",
+                        "county desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "endDate",
+                        "endDate desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "notes",
+                        "notes desc",
+                        "province",
+                        "province desc",
+                        "startDate",
+                        "startDate desc",
+                        "state",
+                        "state desc",
+                        "zipCode",
+                        "zipCode desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["address1",
+                        "address2",
+                        "address3",
+                        "address4",
+                        "address5",
+                        "addressId",
+                        "addressType",
+                        "city",
+                        "country",
+                        "county",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "endDate",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "notes",
+                        "province",
+                        "startDate",
+                        "state",
+                        "zipCode"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of HrisEmergencyContactAddressDEFLT",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.HrisEmergencyContactAddressDEFLT"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/HrisEmergencyContactAddressDEFLT('{addressId}')": {
+            "get": {
+                "summary": "Get entity from HrisEmergencyContactAddressDEFLT by key",
+                "tags": ["HrisEmergencyContactAddressDEFLT"],
+                "parameters": [{
+                    "name": "addressId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: addressId",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["address1",
+                        "address2",
+                        "address3",
+                        "address4",
+                        "address5",
+                        "addressId",
+                        "addressType",
+                        "city",
+                        "country",
+                        "county",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "endDate",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "notes",
+                        "province",
+                        "startDate",
+                        "state",
+                        "zipCode"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "HrisEmergencyContactAddressDEFLT",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.HrisEmergencyContactAddressDEFLT"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerNationalId": {
+            "get": {
+                "summary": "Get entities from PerNationalId",
+                "tags": ["PerNationalId"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["cardType",
+                        "cardType desc",
+                        "country",
+                        "country desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "isPrimary",
+                        "isPrimary desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "nationalId",
+                        "nationalId desc",
+                        "notes",
+                        "notes desc",
+                        "operation",
+                        "operation desc",
+                        "personIdExternal",
+                        "personIdExternal desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["cardType",
+                        "country",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "isPrimary",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "nationalId",
+                        "notes",
+                        "operation",
+                        "personIdExternal"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "personNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PerNationalId",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PerNationalId"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerNationalId(cardType='{cardType}',country='{country}',personIdExternal='{personIdExternal}')": {
+            "get": {
+                "summary": "Get entity from PerNationalId by key",
+                "tags": ["PerNationalId"],
+                "parameters": [{
+                    "name": "cardType",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: cardType",
+                    "type": "string"
+                },
+                {
+                    "name": "country",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: country",
+                    "type": "string"
+                },
+                {
+                    "name": "personIdExternal",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: personIdExternal",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["cardType",
+                        "country",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "isPrimary",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "nationalId",
+                        "notes",
+                        "operation",
+                        "personIdExternal"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "personNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PerNationalId",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PerNationalId"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerAddressDEFLT": {
+            "get": {
+                "summary": "Get entities from PerAddressDEFLT",
+                "tags": ["PerAddressDEFLT"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["address1",
+                        "address1 desc",
+                        "address2",
+                        "address2 desc",
+                        "address3",
+                        "address3 desc",
+                        "address4",
+                        "address4 desc",
+                        "address5",
+                        "address5 desc",
+                        "addressType",
+                        "addressType desc",
+                        "city",
+                        "city desc",
+                        "country",
+                        "country desc",
+                        "county",
+                        "county desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "empUsersSysId",
+                        "empUsersSysId desc",
+                        "endDate",
+                        "endDate desc",
+                        "includeAllRecords",
+                        "includeAllRecords desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "notes",
+                        "notes desc",
+                        "operation",
+                        "operation desc",
+                        "personIdExternal",
+                        "personIdExternal desc",
+                        "province",
+                        "province desc",
+                        "startDate",
+                        "startDate desc",
+                        "state",
+                        "state desc",
+                        "zipCode",
+                        "zipCode desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["address1",
+                        "address2",
+                        "address3",
+                        "address4",
+                        "address5",
+                        "addressType",
+                        "city",
+                        "country",
+                        "county",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "empUsersSysId",
+                        "endDate",
+                        "includeAllRecords",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "notes",
+                        "operation",
+                        "personIdExternal",
+                        "province",
+                        "startDate",
+                        "state",
+                        "zipCode"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "personNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PerAddressDEFLT",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PerAddressDEFLT"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PerAddressDEFLT(addressType='{addressType}',personIdExternal='{personIdExternal}',startDate={startDate})": {
+            "get": {
+                "summary": "Get entity from PerAddressDEFLT by key",
+                "tags": ["PerAddressDEFLT"],
+                "parameters": [{
+                    "name": "addressType",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: addressType",
+                    "type": "string"
+                },
+                {
+                    "name": "personIdExternal",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: personIdExternal",
+                    "type": "string"
+                },
+                {
+                    "name": "startDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: startDate",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["address1",
+                        "address2",
+                        "address3",
+                        "address4",
+                        "address5",
+                        "addressType",
+                        "city",
+                        "country",
+                        "county",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "empUsersSysId",
+                        "endDate",
+                        "includeAllRecords",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "notes",
+                        "operation",
+                        "personIdExternal",
+                        "province",
+                        "startDate",
+                        "state",
+                        "zipCode"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "personNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PerAddressDEFLT",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PerAddressDEFLT"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/generateNextPersonID": {
+            "post": {
+                "summary": "Invoke action generateNextPersonID",
+                "tags": ["Service Operations"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "title": "Result",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.GenerateNextPersonIDResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "top": {
+            "name": "$top",
+            "in": "query",
+            "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630)",
+            "type": "integer",
+            "default":20
+        },
+        "skip": {
+            "name": "$skip",
+            "in": "query",
+            "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631)",
+            "type": "integer"
+        },
+        "count": {
+            "name": "$count",
+            "in": "query",
+            "description": "Include count of items, see [OData Count](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374632)",
+            "type": "boolean"
+        },
+        "filter": {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+        },
+        "search": {
+            "name": "$search",
+            "in": "query",
+            "description": "Search items by search phrases, see [OData Searching](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374633)",
+            "type": "string"
+        }
+    },
+    "responses": {
+        "error": {
+            "description": "Error",
+            "schema": {
+                "$ref": "#/definitions/odata.error"
+            }
+        }
+    }
+}
