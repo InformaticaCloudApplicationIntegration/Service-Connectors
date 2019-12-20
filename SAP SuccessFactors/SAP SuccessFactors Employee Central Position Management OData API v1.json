@@ -1,0 +1,3453 @@
+{
+    "swagger": "2.0",
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "securityDefinitions": {
+        "basicAuthentication": {
+            "type": "basic"
+        }
+    },
+    "x-sap-shortText":"API for Employee Position Management",
+    "x-servers": [{
+        "url": "https://{landscapehost}/odata/v2",
+        "description": "OData APIs for the SuccessFactors Data Centers",
+        "templates": {
+            "landscapehost": {
+                "description": "SuccessFactors Data Center host",
+                "enum": ["api2.successfactors.eu",
+                "apisalesdemo2.successfactors.eu",
+                "api2preview.sapsf.eu",
+                "api4.successfactors.com",
+                "apisalesdemo4.successfactors.com",
+                "api4preview.sapsf.com",
+                "api5.successfactors.eu",
+                "api8.successfactors.com",
+                "apisalesdemo8.successfactors.com",
+                "api8preview.sapsf.com",
+                "api10.successfactors.com",
+                "api10preview.sapsf.com",
+                "api012.successfactors.eu",
+                "apirot.successfactors.eu",
+                "api12preview.sapsf.eu",
+                "api15.sapsf.cn",
+                "api16.sapsf.eu",
+                "api17preview.sapsf.com",
+                "api17.sapsf.com",
+                "api18preview.sapsf.com",
+                "api18.sapsf.com"],
+                "default": "api2.successfactors.eu"
+            }
+        }
+    }],
+    "info": {
+        "title": "Position Management",
+        "version": "1.0",
+        "description": "API for Employees Position Management"
+    },
+    "externalDocs": {
+        "description": "More Information available in help.sap.com",
+        "url": "https://help.sap.com/viewer/b2b06831c2cb4d5facd1dfde49a7aab5/latest"
+    },
+    "schemes": ["https"],
+    "host": "sandbox.api.sap.com",
+    "basePath": "/successfactors/odata/v2",
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "tags": [{
+        "name": "PositionEntity"
+    },
+    {
+        "name": "PositionRequisitionStatus"
+    },
+    {
+        "name": "PositionMatrixRelationship"
+    },
+    {
+        "name": "PositionCompetencyMappingEntity"
+    },
+    {
+        "name": "Position"
+    },
+    {
+        "name": "PositionSkillMappingEntity"
+    }],
+    "definitions": {
+        "odata.error": {
+            "type": "object",
+            "required": ["error"],
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/odata.error.main"
+                }
+            }
+        },
+        "odata.error.main": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/odata.error.detail"
+                    }
+                },
+                "innererror": {
+                    "type": "object",
+                    "description": "The structure of this object is service-specific"
+                }
+            }
+        },
+        "odata.error.detail": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                }
+            }
+        },
+        "SFOData.PositionEntity": {
+            "type": "object",
+            "properties": {
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "effectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "effectiveStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "externalCode": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "jobCode": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "position": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "status": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "subModule": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "transactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "positionCompetencyMappings": {
+                    "title": "Related Collection(SFOData.PositionCompetencyMappingEntity)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.PositionCompetencyMappingEntity"
+                            }
+                        }
+                    }
+                },
+                "positionNav": {
+                    "title": "Related Collection(SFOData.Position)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.Position"
+                            }
+                        }
+                    }
+                },
+                "positionSkillMappings": {
+                    "title": "Related Collection(SFOData.PositionSkillMappingEntity)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.PositionSkillMappingEntity"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": "PositionEntity"
+        },
+        "SFOData.PositionRequisitionStatus": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "format": "int64"
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "positionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "processingStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "requisitionId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                }
+            },
+            "title": "PositionRequisitionStatus"
+        },
+        "SFOData.PositionMatrixRelationship": {
+            "type": "object",
+            "properties": {
+                "Position_code": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "Position_effectiveStartDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "matrixRelationshipType": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "mdfSystemCreatedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemCreatedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemLastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemLastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemLastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemTransactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "relatedPosition": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "relatedPositionNav": {
+                    "title": "Related Collection(SFOData.Position)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.Position"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": "PositionMatrixRelationship"
+        },
+        "SFOData.PositionCompetencyMappingEntity": {
+            "type": "object",
+            "properties": {
+                "PositionEntity_externalCode": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "competency": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "effectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "effectiveStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "externalCode": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "rating_de_DE": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "rating_defaultValue": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "rating_en_GB": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "rating_en_US": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "rating_es_ES": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "rating_fr_FR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "rating_ja_JP": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "rating_ko_KR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "rating_localized": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "rating_nl_NL": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "rating_pt_BR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "rating_pt_PT": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "rating_ru_RU": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "rating_zh_CN": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "rating_zh_TW": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "status": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "subModule": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "transactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "weight_de_DE": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "weight_defaultValue": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "weight_en_GB": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "weight_en_US": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "weight_es_ES": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "weight_fr_FR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "weight_ja_JP": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "weight_ko_KR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "weight_localized": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "weight_nl_NL": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "weight_pt_BR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "weight_pt_PT": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "weight_ru_RU": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "weight_zh_CN": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "weight_zh_TW": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                }
+            },
+            "title": "PositionCompetencyMappingEntity"
+        },
+        "SFOData.Position": {
+            "type": "object",
+            "properties": {
+                "businessUnit": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "changeReason": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "code": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "comment": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "company": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "costCenter": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "creationSource": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "criticality": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "department": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "description": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "division": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "effectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "effectiveStartDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "effectiveStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "employeeClass": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "externalName_de_DE": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalName_defaultValue": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalName_en_GB": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalName_en_US": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalName_es_ES": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalName_fr_FR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalName_ja_JP": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalName_ko_KR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalName_localized": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalName_nl_NL": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalName_pt_BR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalName_pt_PT": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalName_ru_RU": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalName_zh_CN": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalName_zh_TW": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "incumbent": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "jobCode": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "jobLevel": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "jobTitle": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "legacyPositionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "location": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemOptimisticLockUUID": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "multipleIncumbentsAllowed": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "payGrade": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "payRange": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "positionControlled": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "positionCriticality": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "positionTitle": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "regularTemporary": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "standardHours": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "decimal",
+                    "multipleOf": 1
+                },
+                "targetFTE": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "decimal",
+                    "multipleOf": 1
+                },
+                "technicalParameters": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "transactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "type": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "vacant": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "parentPosition": {
+                    "$ref": "#/definitions/SFOData.Position"
+                },
+                "positionMatrixRelationship": {
+                    "title": "Related Collection(SFOData.PositionMatrixRelationship)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.PositionMatrixRelationship"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": "Position"
+        },
+        "SFOData.PositionSkillMappingEntity": {
+            "type": "object",
+            "properties": {
+                "PositionEntity_externalCode": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "effectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "effectiveStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "externalCode": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "proLevel_de_DE": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "proLevel_defaultValue": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "proLevel_en_GB": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "proLevel_en_US": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "proLevel_es_ES": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "proLevel_fr_FR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "proLevel_ja_JP": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "proLevel_ko_KR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "proLevel_localized": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "proLevel_nl_NL": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "proLevel_pt_BR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "proLevel_pt_PT": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "proLevel_ru_RU": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "proLevel_zh_CN": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "proLevel_zh_TW": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "skill": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "status": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "subModule": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "transactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                }
+            },
+            "title": "PositionSkillMappingEntity"
+        },
+        "SFOData.RuleFieldMappingBean": {
+            "type": "object",
+            "properties": {
+                "fieldName": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "fieldValue": {
+                    "type": "string",
+                    "default": "null"
+                }
+            },
+            "title": "RuleFieldMappingBean",
+            "description": "RuleFieldMappingBean"
+        },
+        "SFOData.RuleFieldMappingBeanList": {
+            "type": "object",
+            "properties": {
+                "ruleFieldMappings": {
+                    "$ref": "#/definitions/SFOData.RuleFieldMappingBean"
+                }
+            },
+            "title": "RuleFieldMappingBeanList",
+            "description": "RuleFieldMappingBeanList"
+        }
+    },
+    "paths": {
+        "/PositionEntity": {
+            "get": {
+                "summary": "Get entities from PositionEntity",
+                "tags": ["PositionEntity"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdBy desc",
+                        "createdDate",
+                        "createdDate desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "effectiveEndDate",
+                        "effectiveEndDate desc",
+                        "effectiveStartDate",
+                        "effectiveStartDate desc",
+                        "externalCode",
+                        "externalCode desc",
+                        "jobCode",
+                        "jobCode desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDate",
+                        "lastModifiedDate desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedDateWithTZ",
+                        "lastModifiedDateWithTZ desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc",
+                        "position",
+                        "position desc",
+                        "status",
+                        "status desc",
+                        "subModule",
+                        "subModule desc",
+                        "transactionSequence",
+                        "transactionSequence desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "effectiveEndDate",
+                        "effectiveStartDate",
+                        "externalCode",
+                        "jobCode",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemVersionId",
+                        "position",
+                        "status",
+                        "subModule",
+                        "transactionSequence"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "positionCompetencyMappings",
+                        "positionNav",
+                        "positionSkillMappings"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PositionEntity",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PositionEntity"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to PositionEntity",
+                "tags": ["PositionEntity"],
+                "parameters": [{
+                    "name": "PositionEntity",
+                    "in": "body",
+                    "description": "New entity",
+                    "schema": {
+                        "$ref": "#/definitions/SFOData.PositionEntity"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "schema": {
+                            "title": "Created PositionEntity",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PositionEntity"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PositionEntity('{externalCode}')": {
+            "get": {
+                "summary": "Get entity from PositionEntity by key",
+                "tags": ["PositionEntity"],
+                "parameters": [{
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "effectiveEndDate",
+                        "effectiveStartDate",
+                        "externalCode",
+                        "jobCode",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemVersionId",
+                        "position",
+                        "status",
+                        "subModule",
+                        "transactionSequence"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "positionCompetencyMappings",
+                        "positionNav",
+                        "positionSkillMappings"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PositionEntity",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PositionEntity"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update entity in PositionEntity",
+                "tags": ["PositionEntity"],
+                "parameters": [{
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "PositionEntity",
+                    "in": "body",
+                    "description": "New property values",
+                    "schema": {
+                        "title": "Modified PositionEntity",
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "$ref": "#/definitions/SFOData.PositionEntity"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from PositionEntity",
+                "tags": ["PositionEntity"],
+                "parameters": [{
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "If-Match",
+                    "in": "header",
+                    "description": "ETag",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PositionRequisitionStatus": {
+            "get": {
+                "summary": "Get entities from PositionRequisitionStatus",
+                "tags": ["PositionRequisitionStatus"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["code",
+                        "code desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "positionId",
+                        "positionId desc",
+                        "processingStatus",
+                        "processingStatus desc",
+                        "requisitionId",
+                        "requisitionId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["code",
+                        "createdBy",
+                        "createdDateTime",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "mdfSystemRecordStatus",
+                        "positionId",
+                        "processingStatus",
+                        "requisitionId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PositionRequisitionStatus",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PositionRequisitionStatus"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to PositionRequisitionStatus",
+                "tags": ["PositionRequisitionStatus"],
+                "parameters": [{
+                    "name": "PositionRequisitionStatus",
+                    "in": "body",
+                    "description": "New entity",
+                    "schema": {
+                        "$ref": "#/definitions/SFOData.PositionRequisitionStatus"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "schema": {
+                            "title": "Created PositionRequisitionStatus",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PositionRequisitionStatus"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PositionRequisitionStatus({code})": {
+            "get": {
+                "summary": "Get entity from PositionRequisitionStatus by key",
+                "tags": ["PositionRequisitionStatus"],
+                "parameters": [{
+                    "name": "code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: code",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["code",
+                        "createdBy",
+                        "createdDateTime",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "mdfSystemRecordStatus",
+                        "positionId",
+                        "processingStatus",
+                        "requisitionId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PositionRequisitionStatus",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PositionRequisitionStatus"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update entity in PositionRequisitionStatus",
+                "tags": ["PositionRequisitionStatus"],
+                "parameters": [{
+                    "name": "code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: code",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "PositionRequisitionStatus",
+                    "in": "body",
+                    "description": "New property values",
+                    "schema": {
+                        "title": "Modified PositionRequisitionStatus",
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "$ref": "#/definitions/SFOData.PositionRequisitionStatus"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from PositionRequisitionStatus",
+                "tags": ["PositionRequisitionStatus"],
+                "parameters": [{
+                    "name": "code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: code",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "If-Match",
+                    "in": "header",
+                    "description": "ETag",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PositionMatrixRelationship": {
+            "get": {
+                "summary": "Get entities from PositionMatrixRelationship",
+                "tags": ["PositionMatrixRelationship"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["Position_code",
+                        "Position_code desc",
+                        "Position_effectiveStartDate",
+                        "Position_effectiveStartDate desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "matrixRelationshipType",
+                        "matrixRelationshipType desc",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedBy desc",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemCreatedDate desc",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveEndDate desc",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEffectiveStartDate desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedBy desc",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDate desc",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemLastModifiedDateWithTZ desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemStatus",
+                        "mdfSystemStatus desc",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemTransactionSequence desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc",
+                        "relatedPosition",
+                        "relatedPosition desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["Position_code",
+                        "Position_effectiveStartDate",
+                        "createdBy",
+                        "createdDateTime",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "matrixRelationshipType",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "relatedPosition"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "relatedPositionNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PositionMatrixRelationship",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PositionMatrixRelationship"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to PositionMatrixRelationship",
+                "tags": ["PositionMatrixRelationship"],
+                "parameters": [{
+                    "name": "PositionMatrixRelationship",
+                    "in": "body",
+                    "description": "New entity",
+                    "schema": {
+                        "$ref": "#/definitions/SFOData.PositionMatrixRelationship"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "schema": {
+                            "title": "Created PositionMatrixRelationship",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PositionMatrixRelationship"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PositionMatrixRelationship(Position_code='{Position_code}',Position_effectiveStartDate={Position_effectiveStartDate},matrixRelationshipType='{matrixRelationshipType}')": {
+            "get": {
+                "summary": "Get entity from PositionMatrixRelationship by key",
+                "tags": ["PositionMatrixRelationship"],
+                "parameters": [{
+                    "name": "Position_code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: Position_code",
+                    "type": "string"
+                },
+                {
+                    "name": "Position_effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: Position_effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "matrixRelationshipType",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: matrixRelationshipType",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["Position_code",
+                        "Position_effectiveStartDate",
+                        "createdBy",
+                        "createdDateTime",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "matrixRelationshipType",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "relatedPosition"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "relatedPositionNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PositionMatrixRelationship",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PositionMatrixRelationship"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update entity in PositionMatrixRelationship",
+                "tags": ["PositionMatrixRelationship"],
+                "parameters": [{
+                    "name": "Position_code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: Position_code",
+                    "type": "string"
+                },
+                {
+                    "name": "Position_effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: Position_effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "matrixRelationshipType",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: matrixRelationshipType",
+                    "type": "string"
+                },
+                {
+                    "name": "PositionMatrixRelationship",
+                    "in": "body",
+                    "description": "New property values",
+                    "schema": {
+                        "title": "Modified PositionMatrixRelationship",
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "$ref": "#/definitions/SFOData.PositionMatrixRelationship"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from PositionMatrixRelationship",
+                "tags": ["PositionMatrixRelationship"],
+                "parameters": [{
+                    "name": "Position_code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: Position_code",
+                    "type": "string"
+                },
+                {
+                    "name": "Position_effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: Position_effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "matrixRelationshipType",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: matrixRelationshipType",
+                    "type": "string"
+                },
+                {
+                    "name": "If-Match",
+                    "in": "header",
+                    "description": "ETag",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PositionCompetencyMappingEntity": {
+            "get": {
+                "summary": "Get entities from PositionCompetencyMappingEntity",
+                "tags": ["PositionCompetencyMappingEntity"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["PositionEntity_externalCode",
+                        "PositionEntity_externalCode desc",
+                        "competency",
+                        "competency desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDate",
+                        "createdDate desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "effectiveEndDate",
+                        "effectiveEndDate desc",
+                        "effectiveStartDate",
+                        "effectiveStartDate desc",
+                        "externalCode",
+                        "externalCode desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDate",
+                        "lastModifiedDate desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedDateWithTZ",
+                        "lastModifiedDateWithTZ desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc",
+                        "rating_de_DE",
+                        "rating_de_DE desc",
+                        "rating_defaultValue",
+                        "rating_defaultValue desc",
+                        "rating_en_GB",
+                        "rating_en_GB desc",
+                        "rating_en_US",
+                        "rating_en_US desc",
+                        "rating_es_ES",
+                        "rating_es_ES desc",
+                        "rating_fr_FR",
+                        "rating_fr_FR desc",
+                        "rating_ja_JP",
+                        "rating_ja_JP desc",
+                        "rating_ko_KR",
+                        "rating_ko_KR desc",
+                        "rating_localized",
+                        "rating_localized desc",
+                        "rating_nl_NL",
+                        "rating_nl_NL desc",
+                        "rating_pt_BR",
+                        "rating_pt_BR desc",
+                        "rating_pt_PT",
+                        "rating_pt_PT desc",
+                        "rating_ru_RU",
+                        "rating_ru_RU desc",
+                        "rating_zh_CN",
+                        "rating_zh_CN desc",
+                        "rating_zh_TW",
+                        "rating_zh_TW desc",
+                        "status",
+                        "status desc",
+                        "subModule",
+                        "subModule desc",
+                        "transactionSequence",
+                        "transactionSequence desc",
+                        "weight_de_DE",
+                        "weight_de_DE desc",
+                        "weight_defaultValue",
+                        "weight_defaultValue desc",
+                        "weight_en_GB",
+                        "weight_en_GB desc",
+                        "weight_en_US",
+                        "weight_en_US desc",
+                        "weight_es_ES",
+                        "weight_es_ES desc",
+                        "weight_fr_FR",
+                        "weight_fr_FR desc",
+                        "weight_ja_JP",
+                        "weight_ja_JP desc",
+                        "weight_ko_KR",
+                        "weight_ko_KR desc",
+                        "weight_localized",
+                        "weight_localized desc",
+                        "weight_nl_NL",
+                        "weight_nl_NL desc",
+                        "weight_pt_BR",
+                        "weight_pt_BR desc",
+                        "weight_pt_PT",
+                        "weight_pt_PT desc",
+                        "weight_ru_RU",
+                        "weight_ru_RU desc",
+                        "weight_zh_CN",
+                        "weight_zh_CN desc",
+                        "weight_zh_TW",
+                        "weight_zh_TW desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["PositionEntity_externalCode",
+                        "competency",
+                        "createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "effectiveEndDate",
+                        "effectiveStartDate",
+                        "externalCode",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemVersionId",
+                        "rating_de_DE",
+                        "rating_defaultValue",
+                        "rating_en_GB",
+                        "rating_en_US",
+                        "rating_es_ES",
+                        "rating_fr_FR",
+                        "rating_ja_JP",
+                        "rating_ko_KR",
+                        "rating_localized",
+                        "rating_nl_NL",
+                        "rating_pt_BR",
+                        "rating_pt_PT",
+                        "rating_ru_RU",
+                        "rating_zh_CN",
+                        "rating_zh_TW",
+                        "status",
+                        "subModule",
+                        "transactionSequence",
+                        "weight_de_DE",
+                        "weight_defaultValue",
+                        "weight_en_GB",
+                        "weight_en_US",
+                        "weight_es_ES",
+                        "weight_fr_FR",
+                        "weight_ja_JP",
+                        "weight_ko_KR",
+                        "weight_localized",
+                        "weight_nl_NL",
+                        "weight_pt_BR",
+                        "weight_pt_PT",
+                        "weight_ru_RU",
+                        "weight_zh_CN",
+                        "weight_zh_TW"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PositionCompetencyMappingEntity",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PositionCompetencyMappingEntity"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to PositionCompetencyMappingEntity",
+                "tags": ["PositionCompetencyMappingEntity"],
+                "parameters": [{
+                    "name": "PositionCompetencyMappingEntity",
+                    "in": "body",
+                    "description": "New entity",
+                    "schema": {
+                        "$ref": "#/definitions/SFOData.PositionCompetencyMappingEntity"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "schema": {
+                            "title": "Created PositionCompetencyMappingEntity",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PositionCompetencyMappingEntity"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PositionCompetencyMappingEntity(PositionEntity_externalCode='{PositionEntity_externalCode}',externalCode='{externalCode}')": {
+            "get": {
+                "summary": "Get entity from PositionCompetencyMappingEntity by key",
+                "tags": ["PositionCompetencyMappingEntity"],
+                "parameters": [{
+                    "name": "PositionEntity_externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: PositionEntity_externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["PositionEntity_externalCode",
+                        "competency",
+                        "createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "effectiveEndDate",
+                        "effectiveStartDate",
+                        "externalCode",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemVersionId",
+                        "rating_de_DE",
+                        "rating_defaultValue",
+                        "rating_en_GB",
+                        "rating_en_US",
+                        "rating_es_ES",
+                        "rating_fr_FR",
+                        "rating_ja_JP",
+                        "rating_ko_KR",
+                        "rating_localized",
+                        "rating_nl_NL",
+                        "rating_pt_BR",
+                        "rating_pt_PT",
+                        "rating_ru_RU",
+                        "rating_zh_CN",
+                        "rating_zh_TW",
+                        "status",
+                        "subModule",
+                        "transactionSequence",
+                        "weight_de_DE",
+                        "weight_defaultValue",
+                        "weight_en_GB",
+                        "weight_en_US",
+                        "weight_es_ES",
+                        "weight_fr_FR",
+                        "weight_ja_JP",
+                        "weight_ko_KR",
+                        "weight_localized",
+                        "weight_nl_NL",
+                        "weight_pt_BR",
+                        "weight_pt_PT",
+                        "weight_ru_RU",
+                        "weight_zh_CN",
+                        "weight_zh_TW"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PositionCompetencyMappingEntity",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PositionCompetencyMappingEntity"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update entity in PositionCompetencyMappingEntity",
+                "tags": ["PositionCompetencyMappingEntity"],
+                "parameters": [{
+                    "name": "PositionEntity_externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: PositionEntity_externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "PositionCompetencyMappingEntity",
+                    "in": "body",
+                    "description": "New property values",
+                    "schema": {
+                        "title": "Modified PositionCompetencyMappingEntity",
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "$ref": "#/definitions/SFOData.PositionCompetencyMappingEntity"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from PositionCompetencyMappingEntity",
+                "tags": ["PositionCompetencyMappingEntity"],
+                "parameters": [{
+                    "name": "PositionEntity_externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: PositionEntity_externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "If-Match",
+                    "in": "header",
+                    "description": "ETag",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/Position": {
+            "get": {
+                "summary": "Get entities from Position",
+                "tags": ["Position"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["businessUnit",
+                        "businessUnit desc",
+                        "changeReason",
+                        "changeReason desc",
+                        "code",
+                        "code desc",
+                        "comment",
+                        "comment desc",
+                        "company",
+                        "company desc",
+                        "costCenter",
+                        "costCenter desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDate",
+                        "createdDate desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "creationSource",
+                        "creationSource desc",
+                        "criticality",
+                        "criticality desc",
+                        "department",
+                        "department desc",
+                        "description",
+                        "description desc",
+                        "division",
+                        "division desc",
+                        "effectiveEndDate",
+                        "effectiveEndDate desc",
+                        "effectiveStartDate",
+                        "effectiveStartDate desc",
+                        "effectiveStatus",
+                        "effectiveStatus desc",
+                        "employeeClass",
+                        "employeeClass desc",
+                        "externalName_de_DE",
+                        "externalName_de_DE desc",
+                        "externalName_defaultValue",
+                        "externalName_defaultValue desc",
+                        "externalName_en_GB",
+                        "externalName_en_GB desc",
+                        "externalName_en_US",
+                        "externalName_en_US desc",
+                        "externalName_es_ES",
+                        "externalName_es_ES desc",
+                        "externalName_fr_FR",
+                        "externalName_fr_FR desc",
+                        "externalName_ja_JP",
+                        "externalName_ja_JP desc",
+                        "externalName_ko_KR",
+                        "externalName_ko_KR desc",
+                        "externalName_localized",
+                        "externalName_localized desc",
+                        "externalName_nl_NL",
+                        "externalName_nl_NL desc",
+                        "externalName_pt_BR",
+                        "externalName_pt_BR desc",
+                        "externalName_pt_PT",
+                        "externalName_pt_PT desc",
+                        "externalName_ru_RU",
+                        "externalName_ru_RU desc",
+                        "externalName_zh_CN",
+                        "externalName_zh_CN desc",
+                        "externalName_zh_TW",
+                        "externalName_zh_TW desc",
+                        "incumbent",
+                        "incumbent desc",
+                        "jobCode",
+                        "jobCode desc",
+                        "jobLevel",
+                        "jobLevel desc",
+                        "jobTitle",
+                        "jobTitle desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDate",
+                        "lastModifiedDate desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedDateWithTZ",
+                        "lastModifiedDateWithTZ desc",
+                        "legacyPositionId",
+                        "legacyPositionId desc",
+                        "location",
+                        "location desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemOptimisticLockUUID",
+                        "mdfSystemOptimisticLockUUID desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc",
+                        "multipleIncumbentsAllowed",
+                        "multipleIncumbentsAllowed desc",
+                        "payGrade",
+                        "payGrade desc",
+                        "payRange",
+                        "payRange desc",
+                        "positionControlled",
+                        "positionControlled desc",
+                        "positionCriticality",
+                        "positionCriticality desc",
+                        "positionTitle",
+                        "positionTitle desc",
+                        "regularTemporary",
+                        "regularTemporary desc",
+                        "standardHours",
+                        "standardHours desc",
+                        "targetFTE",
+                        "targetFTE desc",
+                        "technicalParameters",
+                        "technicalParameters desc",
+                        "transactionSequence",
+                        "transactionSequence desc",
+                        "type",
+                        "type desc",
+                        "vacant",
+                        "vacant desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["businessUnit",
+                        "changeReason",
+                        "code",
+                        "comment",
+                        "company",
+                        "costCenter",
+                        "createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "creationSource",
+                        "criticality",
+                        "department",
+                        "description",
+                        "division",
+                        "effectiveEndDate",
+                        "effectiveStartDate",
+                        "effectiveStatus",
+                        "employeeClass",
+                        "externalName_de_DE",
+                        "externalName_defaultValue",
+                        "externalName_en_GB",
+                        "externalName_en_US",
+                        "externalName_es_ES",
+                        "externalName_fr_FR",
+                        "externalName_ja_JP",
+                        "externalName_ko_KR",
+                        "externalName_localized",
+                        "externalName_nl_NL",
+                        "externalName_pt_BR",
+                        "externalName_pt_PT",
+                        "externalName_ru_RU",
+                        "externalName_zh_CN",
+                        "externalName_zh_TW",
+                        "incumbent",
+                        "jobCode",
+                        "jobLevel",
+                        "jobTitle",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "legacyPositionId",
+                        "location",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemOptimisticLockUUID",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemVersionId",
+                        "multipleIncumbentsAllowed",
+                        "payGrade",
+                        "payRange",
+                        "positionControlled",
+                        "positionCriticality",
+                        "positionTitle",
+                        "regularTemporary",
+                        "standardHours",
+                        "targetFTE",
+                        "technicalParameters",
+                        "transactionSequence",
+                        "type",
+                        "vacant"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "parentPosition",
+                        "positionMatrixRelationship"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of Position",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.Position"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to Position",
+                "tags": ["Position"],
+                "parameters": [{
+                    "name": "Position",
+                    "in": "body",
+                    "description": "New entity",
+                    "schema": {
+                        "$ref": "#/definitions/SFOData.Position"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "schema": {
+                            "title": "Created Position",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.Position"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/Position(code='{code}',effectiveStartDate={effectiveStartDate})": {
+            "get": {
+                "summary": "Get entity from Position by key",
+                "tags": ["Position"],
+                "parameters": [{
+                    "name": "code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: code",
+                    "type": "string"
+                },
+                {
+                    "name": "effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["businessUnit",
+                        "changeReason",
+                        "code",
+                        "comment",
+                        "company",
+                        "costCenter",
+                        "createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "creationSource",
+                        "criticality",
+                        "department",
+                        "description",
+                        "division",
+                        "effectiveEndDate",
+                        "effectiveStartDate",
+                        "effectiveStatus",
+                        "employeeClass",
+                        "externalName_de_DE",
+                        "externalName_defaultValue",
+                        "externalName_en_GB",
+                        "externalName_en_US",
+                        "externalName_es_ES",
+                        "externalName_fr_FR",
+                        "externalName_ja_JP",
+                        "externalName_ko_KR",
+                        "externalName_localized",
+                        "externalName_nl_NL",
+                        "externalName_pt_BR",
+                        "externalName_pt_PT",
+                        "externalName_ru_RU",
+                        "externalName_zh_CN",
+                        "externalName_zh_TW",
+                        "incumbent",
+                        "jobCode",
+                        "jobLevel",
+                        "jobTitle",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "legacyPositionId",
+                        "location",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemOptimisticLockUUID",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemVersionId",
+                        "multipleIncumbentsAllowed",
+                        "payGrade",
+                        "payRange",
+                        "positionControlled",
+                        "positionCriticality",
+                        "positionTitle",
+                        "regularTemporary",
+                        "standardHours",
+                        "targetFTE",
+                        "technicalParameters",
+                        "transactionSequence",
+                        "type",
+                        "vacant"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "parentPosition",
+                        "positionMatrixRelationship"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "Position",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.Position"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update entity in Position",
+                "tags": ["Position"],
+                "parameters": [{
+                    "name": "code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: code",
+                    "type": "string"
+                },
+                {
+                    "name": "effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "Position",
+                    "in": "body",
+                    "description": "New property values",
+                    "schema": {
+                        "title": "Modified Position",
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "$ref": "#/definitions/SFOData.Position"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from Position",
+                "tags": ["Position"],
+                "parameters": [{
+                    "name": "code",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: code",
+                    "type": "string"
+                },
+                {
+                    "name": "effectiveStartDate",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: effectiveStartDate",
+                    "type": "string"
+                },
+                {
+                    "name": "If-Match",
+                    "in": "header",
+                    "description": "ETag",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PositionSkillMappingEntity": {
+            "get": {
+                "summary": "Get entities from PositionSkillMappingEntity",
+                "tags": ["PositionSkillMappingEntity"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["PositionEntity_externalCode",
+                        "PositionEntity_externalCode desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDate",
+                        "createdDate desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "effectiveEndDate",
+                        "effectiveEndDate desc",
+                        "effectiveStartDate",
+                        "effectiveStartDate desc",
+                        "externalCode",
+                        "externalCode desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDate",
+                        "lastModifiedDate desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedDateWithTZ",
+                        "lastModifiedDateWithTZ desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc",
+                        "proLevel_de_DE",
+                        "proLevel_de_DE desc",
+                        "proLevel_defaultValue",
+                        "proLevel_defaultValue desc",
+                        "proLevel_en_GB",
+                        "proLevel_en_GB desc",
+                        "proLevel_en_US",
+                        "proLevel_en_US desc",
+                        "proLevel_es_ES",
+                        "proLevel_es_ES desc",
+                        "proLevel_fr_FR",
+                        "proLevel_fr_FR desc",
+                        "proLevel_ja_JP",
+                        "proLevel_ja_JP desc",
+                        "proLevel_ko_KR",
+                        "proLevel_ko_KR desc",
+                        "proLevel_localized",
+                        "proLevel_localized desc",
+                        "proLevel_nl_NL",
+                        "proLevel_nl_NL desc",
+                        "proLevel_pt_BR",
+                        "proLevel_pt_BR desc",
+                        "proLevel_pt_PT",
+                        "proLevel_pt_PT desc",
+                        "proLevel_ru_RU",
+                        "proLevel_ru_RU desc",
+                        "proLevel_zh_CN",
+                        "proLevel_zh_CN desc",
+                        "proLevel_zh_TW",
+                        "proLevel_zh_TW desc",
+                        "skill",
+                        "skill desc",
+                        "status",
+                        "status desc",
+                        "subModule",
+                        "subModule desc",
+                        "transactionSequence",
+                        "transactionSequence desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["PositionEntity_externalCode",
+                        "createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "effectiveEndDate",
+                        "effectiveStartDate",
+                        "externalCode",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemVersionId",
+                        "proLevel_de_DE",
+                        "proLevel_defaultValue",
+                        "proLevel_en_GB",
+                        "proLevel_en_US",
+                        "proLevel_es_ES",
+                        "proLevel_fr_FR",
+                        "proLevel_ja_JP",
+                        "proLevel_ko_KR",
+                        "proLevel_localized",
+                        "proLevel_nl_NL",
+                        "proLevel_pt_BR",
+                        "proLevel_pt_PT",
+                        "proLevel_ru_RU",
+                        "proLevel_zh_CN",
+                        "proLevel_zh_TW",
+                        "skill",
+                        "status",
+                        "subModule",
+                        "transactionSequence"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of PositionSkillMappingEntity",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.PositionSkillMappingEntity"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to PositionSkillMappingEntity",
+                "tags": ["PositionSkillMappingEntity"],
+                "parameters": [{
+                    "name": "PositionSkillMappingEntity",
+                    "in": "body",
+                    "description": "New entity",
+                    "schema": {
+                        "$ref": "#/definitions/SFOData.PositionSkillMappingEntity"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "schema": {
+                            "title": "Created PositionSkillMappingEntity",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PositionSkillMappingEntity"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/PositionSkillMappingEntity(PositionEntity_externalCode='{PositionEntity_externalCode}',externalCode='{externalCode}')": {
+            "get": {
+                "summary": "Get entity from PositionSkillMappingEntity by key",
+                "tags": ["PositionSkillMappingEntity"],
+                "parameters": [{
+                    "name": "PositionEntity_externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: PositionEntity_externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["PositionEntity_externalCode",
+                        "createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "effectiveEndDate",
+                        "effectiveStartDate",
+                        "externalCode",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemVersionId",
+                        "proLevel_de_DE",
+                        "proLevel_defaultValue",
+                        "proLevel_en_GB",
+                        "proLevel_en_US",
+                        "proLevel_es_ES",
+                        "proLevel_fr_FR",
+                        "proLevel_ja_JP",
+                        "proLevel_ko_KR",
+                        "proLevel_localized",
+                        "proLevel_nl_NL",
+                        "proLevel_pt_BR",
+                        "proLevel_pt_PT",
+                        "proLevel_ru_RU",
+                        "proLevel_zh_CN",
+                        "proLevel_zh_TW",
+                        "skill",
+                        "status",
+                        "subModule",
+                        "transactionSequence"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "PositionSkillMappingEntity",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.PositionSkillMappingEntity"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update entity in PositionSkillMappingEntity",
+                "tags": ["PositionSkillMappingEntity"],
+                "parameters": [{
+                    "name": "PositionEntity_externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: PositionEntity_externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "PositionSkillMappingEntity",
+                    "in": "body",
+                    "description": "New property values",
+                    "schema": {
+                        "title": "Modified PositionSkillMappingEntity",
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "$ref": "#/definitions/SFOData.PositionSkillMappingEntity"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from PositionSkillMappingEntity",
+                "tags": ["PositionSkillMappingEntity"],
+                "parameters": [{
+                    "name": "PositionEntity_externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: PositionEntity_externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "If-Match",
+                    "in": "header",
+                    "description": "ETag",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/getPositionObjectData": {
+            "get": {
+                "summary": "Invoke function getPositionObjectData",
+                "tags": ["Service Operations"],
+                "parameters": [{
+                    "name": "positionId",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "format": "int64"
+                },
+                {
+                    "name": "userId",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "title": "Result",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.RuleFieldMappingBeanList"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "top": {
+            "name": "$top",
+            "in": "query",
+            "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630)",
+            "type": "integer",
+            "default":20
+        },
+        "skip": {
+            "name": "$skip",
+            "in": "query",
+            "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631)",
+            "type": "integer"
+        },
+        "count": {
+            "name": "$count",
+            "in": "query",
+            "description": "Include count of items, see [OData Count](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374632)",
+            "type": "boolean"
+        },
+        "filter": {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+        },
+        "search": {
+            "name": "$search",
+            "in": "query",
+            "description": "Search items by search phrases, see [OData Searching](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374633)",
+            "type": "string"
+        }
+    },
+    "responses": {
+        "error": {
+            "description": "Error",
+            "schema": {
+                "$ref": "#/definitions/odata.error"
+            }
+        }
+    }
+}
