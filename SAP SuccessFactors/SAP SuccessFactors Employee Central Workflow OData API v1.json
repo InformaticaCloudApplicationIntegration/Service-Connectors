@@ -1,0 +1,3547 @@
+{
+    "swagger": "2.0",
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "securityDefinitions": {
+        "basicAuthentication": {
+            "type": "basic"
+        }
+    },
+    "x-sap-shortText":"API to access data of Employees Workflow Requests and Workflow data.",
+    "x-servers": [{
+        "url": "https://{landscapehost}/odata/v2",
+        "description": "OData APIs for the SuccessFactors Data Centers",
+        "templates": {
+            "landscapehost": {
+                "description": "SuccessFactors Data Center host",
+                "enum": ["api2.successfactors.eu",
+                "apisalesdemo2.successfactors.eu",
+                "api2preview.sapsf.eu",
+                "api4.successfactors.com",
+                "apisalesdemo4.successfactors.com",
+                "api4preview.sapsf.com",
+                "api5.successfactors.eu",
+                "api8.successfactors.com",
+                "apisalesdemo8.successfactors.com",
+                "api8preview.sapsf.com",
+                "api10.successfactors.com",
+                "api10preview.sapsf.com",
+                "api012.successfactors.eu",
+                "apirot.successfactors.eu",
+                "api12preview.sapsf.eu",
+                "api15.sapsf.cn",
+                "api16.sapsf.eu",
+                "api17preview.sapsf.com",
+                "api17.sapsf.com",
+                "api18preview.sapsf.com",
+                "api18.sapsf.com"],
+                "default": "api2.successfactors.eu"
+            }
+        }
+    }],
+    "info": {
+        "title": "Workflow",
+        "version": "1.0",
+        "description": "API to access data of Employees Workflow Requests and Workflow data such as current status"
+    },
+    "externalDocs": {
+        "description": "More Information available in help.sap.com",
+        "url": "https://help.sap.com/viewer/b2b06831c2cb4d5facd1dfde49a7aab5/latest"
+    },
+    "schemes": ["https"],
+    "host": "sandbox.api.sap.com",
+    "basePath": "/successfactors/odata/v2",
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "tags": [{
+        "name": "MyPendingWorkflow"
+    },
+    {
+        "name": "WfRequestParticipator"
+    },
+    {
+        "name": "WorkflowAllowedActionList"
+    },
+    {
+        "name": "AlertMessage"
+    },
+    {
+        "name": "WfRequestComments"
+    },
+    {
+        "name": "WfRequestStep"
+    },
+    {
+        "name": "AutoDelegateDetail"
+    },
+    {
+        "name": "AutoDelegateConfig"
+    },
+    {
+        "name": "EmpWfRequest"
+    },
+    {
+        "name": "WfRequest"
+    }],
+    "definitions": {
+        "odata.error": {
+            "type": "object",
+            "required": ["error"],
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/odata.error.main"
+                }
+            }
+        },
+        "odata.error.main": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/odata.error.detail"
+                    }
+                },
+                "innererror": {
+                    "type": "object",
+                    "description": "The structure of this object is service-specific"
+                }
+            }
+        },
+        "odata.error.detail": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                }
+            }
+        },
+        "SFOData.MyPendingWorkflow": {
+            "type": "object",
+            "properties": {
+                "desc": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "subject": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "url": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "wfRequestId": {
+                    "type": "string"
+                }
+            },
+            "title": "MyPendingWorkflow"
+        },
+        "SFOData.WfRequestParticipator": {
+            "type": "object",
+            "properties": {
+                "actorType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "ownerId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "participatorType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "processingOrder": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "relatedTo": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "roleId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "wfRequestId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "wfRequestParticipatorId": {
+                    "type": "string",
+                    "format": "int64"
+                }
+            },
+            "title": "WfRequestParticipator"
+        },
+        "SFOData.WorkflowAllowedActionList": {
+            "type": "object",
+            "properties": {
+                "allowApprove": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "allowDelegateDecline": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "allowDelegateGrant": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "allowDelegateRevoke": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "allowPostComment": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "allowReject": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "allowResubmit": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "allowSendback": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "allowUpdateRequest": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "allowWithdraw": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "wfRequestId": {
+                    "type": "string",
+                    "format": "int64"
+                }
+            },
+            "title": "WorkflowAllowedActionList"
+        },
+        "SFOData.AlertMessage": {
+            "type": "object",
+            "properties": {
+                "alertDescription": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_de_DE": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_defaultValue": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_en_GB": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_en_US": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_es_ES": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_fr_FR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_ja_JP": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_ko_KR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_localized": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_nl_NL": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_pt_BR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_pt_PT": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_ru_RU": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_zh_CN": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertDescriptionLocalized_zh_TW": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeader": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_de_DE": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_defaultValue": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_en_GB": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_en_US": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_es_ES": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_fr_FR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_ja_JP": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_ko_KR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_localized": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_nl_NL": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_pt_BR": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_pt_PT": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_ru_RU": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_zh_CN": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "alertHeaderLocalized_zh_TW": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "effectiveStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "externalCode": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "externalName": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemCreatedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemCreatedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemLastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemLastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemLastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemTransactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "wfRequestNav": {
+                    "title": "Related Collection(SFOData.WfRequest)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.WfRequest"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": "AlertMessage"
+        },
+        "SFOData.WfRequestComments": {
+            "type": "object",
+            "properties": {
+                "actionType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 30
+                },
+                "comments": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 4000
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "userId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "wfRequestCommentId": {
+                    "type": "string",
+                    "format": "int64"
+                },
+                "wfRequestId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "wfRequestStepId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                }
+            },
+            "title": "WfRequestComments"
+        },
+        "SFOData.WfRequestStep": {
+            "type": "object",
+            "properties": {
+                "actionType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "approverType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "ownerId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "processedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "relatedTo": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "role": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 30
+                },
+                "status": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 30
+                },
+                "stepNum": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "wfRequestId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "wfRequestStepId": {
+                    "type": "string",
+                    "format": "int64"
+                },
+                "wfRequestNav": {
+                    "$ref": "#/definitions/SFOData.WfRequest"
+                }
+            },
+            "title": "WfRequestStep"
+        },
+        "SFOData.AutoDelegateDetail": {
+            "type": "object",
+            "properties": {
+                "AutoDelegateConfig_delegator": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "alwaysOn": {
+                    "type": "boolean",
+                    "default": "null"
+                },
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "delegatee": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "externalCode": {
+                    "type": "string",
+                    "maxLength": 128
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemTransactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "status": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                }
+            },
+            "title": "AutoDelegateDetail"
+        },
+        "SFOData.AutoDelegateConfig": {
+            "type": "object",
+            "properties": {
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "createdDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "delegator": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "lastModifiedDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedDateWithTZ": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveEndDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEffectiveStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "mdfSystemEntityId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemObjectType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemRecordStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemStatus": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 255
+                },
+                "mdfSystemTransactionSequence": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "mdfSystemVersionId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "autoDelegateDetails": {
+                    "title": "Related Collection(SFOData.AutoDelegateDetail)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.AutoDelegateDetail"
+                            }
+                        }
+                    }
+                },
+                "wfRequestNav": {
+                    "title": "Related Collection(SFOData.WfRequest)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.WfRequest"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": "AutoDelegateConfig"
+        },
+        "SFOData.EmpWfRequest": {
+            "type": "object",
+            "properties": {
+                "actionType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "effectiveDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "empWfRequestId": {
+                    "type": "string",
+                    "format": "int64"
+                },
+                "entityType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "eventReason": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "requestType": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "subjectId": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 1024
+                },
+                "wfConfig": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 32
+                },
+                "wfRequestId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                }
+            },
+            "title": "EmpWfRequest"
+        },
+        "SFOData.WfRequest": {
+            "type": "object",
+            "properties": {
+                "createdBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "createdOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "currentStepNum": {
+                    "type": "integer",
+                    "default": "null",
+                    "format": "int32"
+                },
+                "lastModifiedBy": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 100
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "lastModifiedOn": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "module": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 128
+                },
+                "parentWfRequestId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                },
+                "reminderSentDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "status": {
+                    "type": "string",
+                    "default": "null",
+                    "maxLength": 30
+                },
+                "totalSteps": {
+                    "type": "integer",
+                    "default": "null",
+                    "format": "int32"
+                },
+                "url": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "wfRequestId": {
+                    "type": "string",
+                    "format": "int64"
+                },
+                "empWfRequestNav": {
+                    "$ref": "#/definitions/SFOData.EmpWfRequest"
+                },
+                "parentWfRequestNav": {
+                    "$ref": "#/definitions/SFOData.WfRequest"
+                },
+                "wfRequestCommentsNav": {
+                    "title": "Related Collection(SFOData.WfRequestComments)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.WfRequestComments"
+                            }
+                        }
+                    }
+                },
+                "wfRequestParticipatorNav": {
+                    "title": "Related Collection(SFOData.WfRequestParticipator)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.WfRequestParticipator"
+                            }
+                        }
+                    }
+                },
+                "wfRequestStepNav": {
+                    "title": "Related Collection(SFOData.WfRequestStep)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.WfRequestStep"
+                            }
+                        }
+                    }
+                },
+                "workflowAllowedActionListNav": {
+                    "title": "Related Collection(SFOData.WorkflowAllowedActionList)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.WorkflowAllowedActionList"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": "WfRequest"
+        },
+        "SFOData.WfRequestActionResponse": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "wfRequestId": {
+                    "type": "string",
+                    "default": "null",
+                    "format": "int64"
+                }
+            },
+            "title": "WfRequestActionResponse"
+        }
+    },
+    "paths": {
+        "/MyPendingWorkflow": {
+            "get": {
+                "summary": "Get entities from MyPendingWorkflow",
+                "tags": ["MyPendingWorkflow"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["desc",
+                        "desc desc",
+                        "subject",
+                        "subject desc",
+                        "url",
+                        "url desc",
+                        "wfRequestId",
+                        "wfRequestId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["desc",
+                        "subject",
+                        "url",
+                        "wfRequestId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of MyPendingWorkflow",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.MyPendingWorkflow"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/MyPendingWorkflow('{wfRequestId}')": {
+            "get": {
+                "summary": "Get entity from MyPendingWorkflow by key",
+                "tags": ["MyPendingWorkflow"],
+                "parameters": [{
+                    "name": "wfRequestId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: wfRequestId",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["desc",
+                        "subject",
+                        "url",
+                        "wfRequestId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "MyPendingWorkflow",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.MyPendingWorkflow"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/WfRequestParticipator": {
+            "get": {
+                "summary": "Get entities from WfRequestParticipator",
+                "tags": ["WfRequestParticipator"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["actorType",
+                        "actorType desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "ownerId",
+                        "ownerId desc",
+                        "participatorType",
+                        "participatorType desc",
+                        "processingOrder",
+                        "processingOrder desc",
+                        "relatedTo",
+                        "relatedTo desc",
+                        "roleId",
+                        "roleId desc",
+                        "wfRequestId",
+                        "wfRequestId desc",
+                        "wfRequestParticipatorId",
+                        "wfRequestParticipatorId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["actorType",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "ownerId",
+                        "participatorType",
+                        "processingOrder",
+                        "relatedTo",
+                        "roleId",
+                        "wfRequestId",
+                        "wfRequestParticipatorId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of WfRequestParticipator",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.WfRequestParticipator"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/WfRequestParticipator({wfRequestParticipatorId})": {
+            "get": {
+                "summary": "Get entity from WfRequestParticipator by key",
+                "tags": ["WfRequestParticipator"],
+                "parameters": [{
+                    "name": "wfRequestParticipatorId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: wfRequestParticipatorId",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["actorType",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "ownerId",
+                        "participatorType",
+                        "processingOrder",
+                        "relatedTo",
+                        "roleId",
+                        "wfRequestId",
+                        "wfRequestParticipatorId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "WfRequestParticipator",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.WfRequestParticipator"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/WorkflowAllowedActionList": {
+            "get": {
+                "summary": "Get entities from WorkflowAllowedActionList",
+                "tags": ["WorkflowAllowedActionList"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["allowApprove",
+                        "allowApprove desc",
+                        "allowDelegateDecline",
+                        "allowDelegateDecline desc",
+                        "allowDelegateGrant",
+                        "allowDelegateGrant desc",
+                        "allowDelegateRevoke",
+                        "allowDelegateRevoke desc",
+                        "allowPostComment",
+                        "allowPostComment desc",
+                        "allowReject",
+                        "allowReject desc",
+                        "allowResubmit",
+                        "allowResubmit desc",
+                        "allowSendback",
+                        "allowSendback desc",
+                        "allowUpdateRequest",
+                        "allowUpdateRequest desc",
+                        "allowWithdraw",
+                        "allowWithdraw desc",
+                        "wfRequestId",
+                        "wfRequestId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["allowApprove",
+                        "allowDelegateDecline",
+                        "allowDelegateGrant",
+                        "allowDelegateRevoke",
+                        "allowPostComment",
+                        "allowReject",
+                        "allowResubmit",
+                        "allowSendback",
+                        "allowUpdateRequest",
+                        "allowWithdraw",
+                        "wfRequestId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of WorkflowAllowedActionList",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.WorkflowAllowedActionList"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/WorkflowAllowedActionList({wfRequestId})": {
+            "get": {
+                "summary": "Get entity from WorkflowAllowedActionList by key",
+                "tags": ["WorkflowAllowedActionList"],
+                "parameters": [{
+                    "name": "wfRequestId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: wfRequestId",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["allowApprove",
+                        "allowDelegateDecline",
+                        "allowDelegateGrant",
+                        "allowDelegateRevoke",
+                        "allowPostComment",
+                        "allowReject",
+                        "allowResubmit",
+                        "allowSendback",
+                        "allowUpdateRequest",
+                        "allowWithdraw",
+                        "wfRequestId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "WorkflowAllowedActionList",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.WorkflowAllowedActionList"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/AlertMessage": {
+            "get": {
+                "summary": "Get entities from AlertMessage",
+                "tags": ["AlertMessage"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["alertDescription",
+                        "alertDescription desc",
+                        "alertDescriptionLocalized_de_DE",
+                        "alertDescriptionLocalized_de_DE desc",
+                        "alertDescriptionLocalized_defaultValue",
+                        "alertDescriptionLocalized_defaultValue desc",
+                        "alertDescriptionLocalized_en_GB",
+                        "alertDescriptionLocalized_en_GB desc",
+                        "alertDescriptionLocalized_en_US",
+                        "alertDescriptionLocalized_en_US desc",
+                        "alertDescriptionLocalized_es_ES",
+                        "alertDescriptionLocalized_es_ES desc",
+                        "alertDescriptionLocalized_fr_FR",
+                        "alertDescriptionLocalized_fr_FR desc",
+                        "alertDescriptionLocalized_ja_JP",
+                        "alertDescriptionLocalized_ja_JP desc",
+                        "alertDescriptionLocalized_ko_KR",
+                        "alertDescriptionLocalized_ko_KR desc",
+                        "alertDescriptionLocalized_localized",
+                        "alertDescriptionLocalized_localized desc",
+                        "alertDescriptionLocalized_nl_NL",
+                        "alertDescriptionLocalized_nl_NL desc",
+                        "alertDescriptionLocalized_pt_BR",
+                        "alertDescriptionLocalized_pt_BR desc",
+                        "alertDescriptionLocalized_pt_PT",
+                        "alertDescriptionLocalized_pt_PT desc",
+                        "alertDescriptionLocalized_ru_RU",
+                        "alertDescriptionLocalized_ru_RU desc",
+                        "alertDescriptionLocalized_zh_CN",
+                        "alertDescriptionLocalized_zh_CN desc",
+                        "alertDescriptionLocalized_zh_TW",
+                        "alertDescriptionLocalized_zh_TW desc",
+                        "alertHeader",
+                        "alertHeader desc",
+                        "alertHeaderLocalized_de_DE",
+                        "alertHeaderLocalized_de_DE desc",
+                        "alertHeaderLocalized_defaultValue",
+                        "alertHeaderLocalized_defaultValue desc",
+                        "alertHeaderLocalized_en_GB",
+                        "alertHeaderLocalized_en_GB desc",
+                        "alertHeaderLocalized_en_US",
+                        "alertHeaderLocalized_en_US desc",
+                        "alertHeaderLocalized_es_ES",
+                        "alertHeaderLocalized_es_ES desc",
+                        "alertHeaderLocalized_fr_FR",
+                        "alertHeaderLocalized_fr_FR desc",
+                        "alertHeaderLocalized_ja_JP",
+                        "alertHeaderLocalized_ja_JP desc",
+                        "alertHeaderLocalized_ko_KR",
+                        "alertHeaderLocalized_ko_KR desc",
+                        "alertHeaderLocalized_localized",
+                        "alertHeaderLocalized_localized desc",
+                        "alertHeaderLocalized_nl_NL",
+                        "alertHeaderLocalized_nl_NL desc",
+                        "alertHeaderLocalized_pt_BR",
+                        "alertHeaderLocalized_pt_BR desc",
+                        "alertHeaderLocalized_pt_PT",
+                        "alertHeaderLocalized_pt_PT desc",
+                        "alertHeaderLocalized_ru_RU",
+                        "alertHeaderLocalized_ru_RU desc",
+                        "alertHeaderLocalized_zh_CN",
+                        "alertHeaderLocalized_zh_CN desc",
+                        "alertHeaderLocalized_zh_TW",
+                        "alertHeaderLocalized_zh_TW desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "effectiveStatus",
+                        "effectiveStatus desc",
+                        "externalCode",
+                        "externalCode desc",
+                        "externalName",
+                        "externalName desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedBy desc",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemCreatedDate desc",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveEndDate desc",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEffectiveStartDate desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedBy desc",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDate desc",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemLastModifiedDateWithTZ desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemTransactionSequence desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["alertDescription",
+                        "alertDescriptionLocalized_de_DE",
+                        "alertDescriptionLocalized_defaultValue",
+                        "alertDescriptionLocalized_en_GB",
+                        "alertDescriptionLocalized_en_US",
+                        "alertDescriptionLocalized_es_ES",
+                        "alertDescriptionLocalized_fr_FR",
+                        "alertDescriptionLocalized_ja_JP",
+                        "alertDescriptionLocalized_ko_KR",
+                        "alertDescriptionLocalized_localized",
+                        "alertDescriptionLocalized_nl_NL",
+                        "alertDescriptionLocalized_pt_BR",
+                        "alertDescriptionLocalized_pt_PT",
+                        "alertDescriptionLocalized_ru_RU",
+                        "alertDescriptionLocalized_zh_CN",
+                        "alertDescriptionLocalized_zh_TW",
+                        "alertHeader",
+                        "alertHeaderLocalized_de_DE",
+                        "alertHeaderLocalized_defaultValue",
+                        "alertHeaderLocalized_en_GB",
+                        "alertHeaderLocalized_en_US",
+                        "alertHeaderLocalized_es_ES",
+                        "alertHeaderLocalized_fr_FR",
+                        "alertHeaderLocalized_ja_JP",
+                        "alertHeaderLocalized_ko_KR",
+                        "alertHeaderLocalized_localized",
+                        "alertHeaderLocalized_nl_NL",
+                        "alertHeaderLocalized_pt_BR",
+                        "alertHeaderLocalized_pt_PT",
+                        "alertHeaderLocalized_ru_RU",
+                        "alertHeaderLocalized_zh_CN",
+                        "alertHeaderLocalized_zh_TW",
+                        "createdBy",
+                        "createdDateTime",
+                        "effectiveStatus",
+                        "externalCode",
+                        "externalName",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "wfRequestNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of AlertMessage",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.AlertMessage"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to AlertMessage",
+                "tags": ["AlertMessage"],
+                "parameters": [{
+                    "name": "AlertMessage",
+                    "in": "body",
+                    "description": "New entity",
+                    "schema": {
+                        "$ref": "#/definitions/SFOData.AlertMessage"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "schema": {
+                            "title": "Created AlertMessage",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.AlertMessage"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/AlertMessage('{externalCode}')": {
+            "get": {
+                "summary": "Get entity from AlertMessage by key",
+                "tags": ["AlertMessage"],
+                "parameters": [{
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["alertDescription",
+                        "alertDescriptionLocalized_de_DE",
+                        "alertDescriptionLocalized_defaultValue",
+                        "alertDescriptionLocalized_en_GB",
+                        "alertDescriptionLocalized_en_US",
+                        "alertDescriptionLocalized_es_ES",
+                        "alertDescriptionLocalized_fr_FR",
+                        "alertDescriptionLocalized_ja_JP",
+                        "alertDescriptionLocalized_ko_KR",
+                        "alertDescriptionLocalized_localized",
+                        "alertDescriptionLocalized_nl_NL",
+                        "alertDescriptionLocalized_pt_BR",
+                        "alertDescriptionLocalized_pt_PT",
+                        "alertDescriptionLocalized_ru_RU",
+                        "alertDescriptionLocalized_zh_CN",
+                        "alertDescriptionLocalized_zh_TW",
+                        "alertHeader",
+                        "alertHeaderLocalized_de_DE",
+                        "alertHeaderLocalized_defaultValue",
+                        "alertHeaderLocalized_en_GB",
+                        "alertHeaderLocalized_en_US",
+                        "alertHeaderLocalized_es_ES",
+                        "alertHeaderLocalized_fr_FR",
+                        "alertHeaderLocalized_ja_JP",
+                        "alertHeaderLocalized_ko_KR",
+                        "alertHeaderLocalized_localized",
+                        "alertHeaderLocalized_nl_NL",
+                        "alertHeaderLocalized_pt_BR",
+                        "alertHeaderLocalized_pt_PT",
+                        "alertHeaderLocalized_ru_RU",
+                        "alertHeaderLocalized_zh_CN",
+                        "alertHeaderLocalized_zh_TW",
+                        "createdBy",
+                        "createdDateTime",
+                        "effectiveStatus",
+                        "externalCode",
+                        "externalName",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "mdfSystemCreatedBy",
+                        "mdfSystemCreatedDate",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemLastModifiedBy",
+                        "mdfSystemLastModifiedDate",
+                        "mdfSystemLastModifiedDateWithTZ",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "wfRequestNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "AlertMessage",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.AlertMessage"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update entity in AlertMessage",
+                "tags": ["AlertMessage"],
+                "parameters": [{
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "AlertMessage",
+                    "in": "body",
+                    "description": "New property values",
+                    "schema": {
+                        "title": "Modified AlertMessage",
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "$ref": "#/definitions/SFOData.AlertMessage"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from AlertMessage",
+                "tags": ["AlertMessage"],
+                "parameters": [{
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "If-Match",
+                    "in": "header",
+                    "description": "ETag",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/WfRequestComments": {
+            "get": {
+                "summary": "Get entities from WfRequestComments",
+                "tags": ["WfRequestComments"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["actionType",
+                        "actionType desc",
+                        "comments",
+                        "comments desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "userId",
+                        "userId desc",
+                        "wfRequestCommentId",
+                        "wfRequestCommentId desc",
+                        "wfRequestId",
+                        "wfRequestId desc",
+                        "wfRequestStepId",
+                        "wfRequestStepId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["actionType",
+                        "comments",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "userId",
+                        "wfRequestCommentId",
+                        "wfRequestId",
+                        "wfRequestStepId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of WfRequestComments",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.WfRequestComments"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/WfRequestComments({wfRequestCommentId})": {
+            "get": {
+                "summary": "Get entity from WfRequestComments by key",
+                "tags": ["WfRequestComments"],
+                "parameters": [{
+                    "name": "wfRequestCommentId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: wfRequestCommentId",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["actionType",
+                        "comments",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "userId",
+                        "wfRequestCommentId",
+                        "wfRequestId",
+                        "wfRequestStepId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "WfRequestComments",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.WfRequestComments"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/WfRequestStep": {
+            "get": {
+                "summary": "Get entities from WfRequestStep",
+                "tags": ["WfRequestStep"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["actionType",
+                        "actionType desc",
+                        "approverType",
+                        "approverType desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "ownerId",
+                        "ownerId desc",
+                        "processedBy",
+                        "processedBy desc",
+                        "relatedTo",
+                        "relatedTo desc",
+                        "role",
+                        "role desc",
+                        "status",
+                        "status desc",
+                        "stepNum",
+                        "stepNum desc",
+                        "wfRequestId",
+                        "wfRequestId desc",
+                        "wfRequestStepId",
+                        "wfRequestStepId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["actionType",
+                        "approverType",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "ownerId",
+                        "processedBy",
+                        "relatedTo",
+                        "role",
+                        "status",
+                        "stepNum",
+                        "wfRequestId",
+                        "wfRequestStepId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "wfRequestNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of WfRequestStep",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.WfRequestStep"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/WfRequestStep({wfRequestStepId})": {
+            "get": {
+                "summary": "Get entity from WfRequestStep by key",
+                "tags": ["WfRequestStep"],
+                "parameters": [{
+                    "name": "wfRequestStepId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: wfRequestStepId",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["actionType",
+                        "approverType",
+                        "createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "ownerId",
+                        "processedBy",
+                        "relatedTo",
+                        "role",
+                        "status",
+                        "stepNum",
+                        "wfRequestId",
+                        "wfRequestStepId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "wfRequestNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "WfRequestStep",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.WfRequestStep"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/AutoDelegateDetail": {
+            "get": {
+                "summary": "Get entities from AutoDelegateDetail",
+                "tags": ["AutoDelegateDetail"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["AutoDelegateConfig_delegator",
+                        "AutoDelegateConfig_delegator desc",
+                        "alwaysOn",
+                        "alwaysOn desc",
+                        "createdBy",
+                        "createdBy desc",
+                        "createdDate",
+                        "createdDate desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "delegatee",
+                        "delegatee desc",
+                        "externalCode",
+                        "externalCode desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDate",
+                        "lastModifiedDate desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedDateWithTZ",
+                        "lastModifiedDateWithTZ desc",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveEndDate desc",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEffectiveStartDate desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemStatus",
+                        "mdfSystemStatus desc",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemTransactionSequence desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc",
+                        "status",
+                        "status desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["AutoDelegateConfig_delegator",
+                        "alwaysOn",
+                        "createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "delegatee",
+                        "externalCode",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "status"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of AutoDelegateDetail",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.AutoDelegateDetail"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to AutoDelegateDetail",
+                "tags": ["AutoDelegateDetail"],
+                "parameters": [{
+                    "name": "AutoDelegateDetail",
+                    "in": "body",
+                    "description": "New entity",
+                    "schema": {
+                        "$ref": "#/definitions/SFOData.AutoDelegateDetail"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "schema": {
+                            "title": "Created AutoDelegateDetail",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.AutoDelegateDetail"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/AutoDelegateDetail(AutoDelegateConfig_delegator='{AutoDelegateConfig_delegator}',externalCode='{externalCode}')": {
+            "get": {
+                "summary": "Get entity from AutoDelegateDetail by key",
+                "tags": ["AutoDelegateDetail"],
+                "parameters": [{
+                    "name": "AutoDelegateConfig_delegator",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: AutoDelegateConfig_delegator",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["AutoDelegateConfig_delegator",
+                        "alwaysOn",
+                        "createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "delegatee",
+                        "externalCode",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId",
+                        "status"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "AutoDelegateDetail",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.AutoDelegateDetail"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update entity in AutoDelegateDetail",
+                "tags": ["AutoDelegateDetail"],
+                "parameters": [{
+                    "name": "AutoDelegateConfig_delegator",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: AutoDelegateConfig_delegator",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "AutoDelegateDetail",
+                    "in": "body",
+                    "description": "New property values",
+                    "schema": {
+                        "title": "Modified AutoDelegateDetail",
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "$ref": "#/definitions/SFOData.AutoDelegateDetail"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from AutoDelegateDetail",
+                "tags": ["AutoDelegateDetail"],
+                "parameters": [{
+                    "name": "AutoDelegateConfig_delegator",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: AutoDelegateConfig_delegator",
+                    "type": "string"
+                },
+                {
+                    "name": "externalCode",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: externalCode",
+                    "type": "string"
+                },
+                {
+                    "name": "If-Match",
+                    "in": "header",
+                    "description": "ETag",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/AutoDelegateConfig": {
+            "get": {
+                "summary": "Get entities from AutoDelegateConfig",
+                "tags": ["AutoDelegateConfig"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdBy desc",
+                        "createdDate",
+                        "createdDate desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "delegator",
+                        "delegator desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDate",
+                        "lastModifiedDate desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedDateWithTZ",
+                        "lastModifiedDateWithTZ desc",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveEndDate desc",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEffectiveStartDate desc",
+                        "mdfSystemEntityId",
+                        "mdfSystemEntityId desc",
+                        "mdfSystemObjectType",
+                        "mdfSystemObjectType desc",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordId desc",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemRecordStatus desc",
+                        "mdfSystemStatus",
+                        "mdfSystemStatus desc",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemTransactionSequence desc",
+                        "mdfSystemVersionId",
+                        "mdfSystemVersionId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "delegator",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "autoDelegateDetails",
+                        "wfRequestNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of AutoDelegateConfig",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.AutoDelegateConfig"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add new entity to AutoDelegateConfig",
+                "tags": ["AutoDelegateConfig"],
+                "parameters": [{
+                    "name": "AutoDelegateConfig",
+                    "in": "body",
+                    "description": "New entity",
+                    "schema": {
+                        "$ref": "#/definitions/SFOData.AutoDelegateConfig"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Created entity",
+                        "schema": {
+                            "title": "Created AutoDelegateConfig",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.AutoDelegateConfig"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/AutoDelegateConfig('{delegator}')": {
+            "get": {
+                "summary": "Get entity from AutoDelegateConfig by key",
+                "tags": ["AutoDelegateConfig"],
+                "parameters": [{
+                    "name": "delegator",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: delegator",
+                    "type": "string"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDate",
+                        "createdDateTime",
+                        "delegator",
+                        "lastModifiedBy",
+                        "lastModifiedDate",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateWithTZ",
+                        "mdfSystemEffectiveEndDate",
+                        "mdfSystemEffectiveStartDate",
+                        "mdfSystemEntityId",
+                        "mdfSystemObjectType",
+                        "mdfSystemRecordId",
+                        "mdfSystemRecordStatus",
+                        "mdfSystemStatus",
+                        "mdfSystemTransactionSequence",
+                        "mdfSystemVersionId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "autoDelegateDetails",
+                        "wfRequestNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "AutoDelegateConfig",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.AutoDelegateConfig"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update entity in AutoDelegateConfig",
+                "tags": ["AutoDelegateConfig"],
+                "parameters": [{
+                    "name": "delegator",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: delegator",
+                    "type": "string"
+                },
+                {
+                    "name": "AutoDelegateConfig",
+                    "in": "body",
+                    "description": "New property values",
+                    "schema": {
+                        "title": "Modified AutoDelegateConfig",
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "$ref": "#/definitions/SFOData.AutoDelegateConfig"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete entity from AutoDelegateConfig",
+                "tags": ["AutoDelegateConfig"],
+                "parameters": [{
+                    "name": "delegator",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: delegator",
+                    "type": "string"
+                },
+                {
+                    "name": "If-Match",
+                    "in": "header",
+                    "description": "ETag",
+                    "type": "string"
+                }],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpWfRequest": {
+            "get": {
+                "summary": "Get entities from EmpWfRequest",
+                "tags": ["EmpWfRequest"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["actionType",
+                        "actionType desc",
+                        "effectiveDate",
+                        "effectiveDate desc",
+                        "empWfRequestId",
+                        "empWfRequestId desc",
+                        "entityType",
+                        "entityType desc",
+                        "eventReason",
+                        "eventReason desc",
+                        "requestType",
+                        "requestType desc",
+                        "subjectId",
+                        "subjectId desc",
+                        "wfConfig",
+                        "wfConfig desc",
+                        "wfRequestId",
+                        "wfRequestId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["actionType",
+                        "effectiveDate",
+                        "empWfRequestId",
+                        "entityType",
+                        "eventReason",
+                        "requestType",
+                        "subjectId",
+                        "wfConfig",
+                        "wfRequestId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of EmpWfRequest",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.EmpWfRequest"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/EmpWfRequest({empWfRequestId})": {
+            "get": {
+                "summary": "Get entity from EmpWfRequest by key",
+                "tags": ["EmpWfRequest"],
+                "parameters": [{
+                    "name": "empWfRequestId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: empWfRequestId",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["actionType",
+                        "effectiveDate",
+                        "empWfRequestId",
+                        "entityType",
+                        "eventReason",
+                        "requestType",
+                        "subjectId",
+                        "wfConfig",
+                        "wfRequestId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "EmpWfRequest",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.EmpWfRequest"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/WfRequest": {
+            "get": {
+                "summary": "Get entities from WfRequest",
+                "tags": ["WfRequest"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdBy desc",
+                        "createdDateTime",
+                        "createdDateTime desc",
+                        "createdOn",
+                        "createdOn desc",
+                        "currentStepNum",
+                        "currentStepNum desc",
+                        "lastModifiedBy",
+                        "lastModifiedBy desc",
+                        "lastModifiedDateTime",
+                        "lastModifiedDateTime desc",
+                        "lastModifiedOn",
+                        "lastModifiedOn desc",
+                        "module",
+                        "module desc",
+                        "parentWfRequestId",
+                        "parentWfRequestId desc",
+                        "reminderSentDate",
+                        "reminderSentDate desc",
+                        "status",
+                        "status desc",
+                        "totalSteps",
+                        "totalSteps desc",
+                        "url",
+                        "url desc",
+                        "wfRequestId",
+                        "wfRequestId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "currentStepNum",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "module",
+                        "parentWfRequestId",
+                        "reminderSentDate",
+                        "status",
+                        "totalSteps",
+                        "url",
+                        "wfRequestId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "empWfRequestNav",
+                        "parentWfRequestNav",
+                        "wfRequestCommentsNav",
+                        "wfRequestParticipatorNav",
+                        "wfRequestStepNav",
+                        "workflowAllowedActionListNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of WfRequest",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.WfRequest"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/WfRequest({wfRequestId})": {
+            "get": {
+                "summary": "Get entity from WfRequest by key",
+                "tags": ["WfRequest"],
+                "parameters": [{
+                    "name": "wfRequestId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: wfRequestId",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["createdBy",
+                        "createdDateTime",
+                        "createdOn",
+                        "currentStepNum",
+                        "lastModifiedBy",
+                        "lastModifiedDateTime",
+                        "lastModifiedOn",
+                        "module",
+                        "parentWfRequestId",
+                        "reminderSentDate",
+                        "status",
+                        "totalSteps",
+                        "url",
+                        "wfRequestId"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "empWfRequestNav",
+                        "parentWfRequestNav",
+                        "wfRequestCommentsNav",
+                        "wfRequestParticipatorNav",
+                        "wfRequestStepNav",
+                        "workflowAllowedActionListNav"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "WfRequest",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.WfRequest"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/approveWfRequest": {
+            "post": {
+                "summary": "Invoke action approveWfRequest",
+                "tags": ["Service Operations"],
+                "parameters": [{
+                    "name": "wfRequestId",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "format": "int64"
+                },
+                {
+                    "name": "comment",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "title": "Result",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "title": "Related Collection(SFOData.WfRequestActionResponse)",
+                                    "type": "object",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.WfRequestActionResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/commentWfRequest": {
+            "post": {
+                "summary": "Invoke action commentWfRequest",
+                "tags": ["Service Operations"],
+                "parameters": [{
+                    "name": "wfRequestId",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "format": "int64"
+                },
+                {
+                    "name": "comment",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "title": "Result",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "title": "Related Collection(SFOData.WfRequestActionResponse)",
+                                    "type": "object",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.WfRequestActionResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/rejectWfRequest": {
+            "post": {
+                "summary": "Invoke action rejectWfRequest",
+                "tags": ["Service Operations"],
+                "parameters": [{
+                    "name": "wfRequestId",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "format": "int64"
+                },
+                {
+                    "name": "comment",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "title": "Result",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "title": "Related Collection(SFOData.WfRequestActionResponse)",
+                                    "type": "object",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.WfRequestActionResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/sendbackWfRequest": {
+            "post": {
+                "summary": "Invoke action sendbackWfRequest",
+                "tags": ["Service Operations"],
+                "parameters": [{
+                    "name": "wfRequestId",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "format": "int64"
+                },
+                {
+                    "name": "comment",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "title": "Result",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "title": "Related Collection(SFOData.WfRequestActionResponse)",
+                                    "type": "object",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.WfRequestActionResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/withdrawWfRequest": {
+            "post": {
+                "summary": "Invoke action withdrawWfRequest",
+                "tags": ["Service Operations"],
+                "parameters": [{
+                    "name": "wfRequestId",
+                    "in": "query",
+                    "required": true,
+                    "type": "string",
+                    "format": "int64"
+                },
+                {
+                    "name": "comment",
+                    "in": "query",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "title": "Result",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "title": "Related Collection(SFOData.WfRequestActionResponse)",
+                                    "type": "object",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.WfRequestActionResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "top": {
+            "name": "$top",
+            "in": "query",
+            "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630)",
+            "type": "integer",
+            "default":20
+        },
+        "skip": {
+            "name": "$skip",
+            "in": "query",
+            "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631)",
+            "type": "integer"
+        },
+        "count": {
+            "name": "$count",
+            "in": "query",
+            "description": "Include count of items, see [OData Count](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374632)",
+            "type": "boolean"
+        },
+        "filter": {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+        },
+        "search": {
+            "name": "$search",
+            "in": "query",
+            "description": "Search items by search phrases, see [OData Searching](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374633)",
+            "type": "string"
+        }
+    },
+    "responses": {
+        "error": {
+            "description": "Error",
+            "schema": {
+                "$ref": "#/definitions/odata.error"
+            }
+        }
+    }
+}
