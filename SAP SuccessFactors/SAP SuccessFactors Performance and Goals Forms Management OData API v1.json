@@ -1,0 +1,928 @@
+{
+    "swagger": "2.0",
+    "security": [
+        {
+            "basicAuthentication": []
+        }
+    ],
+    "securityDefinitions": {
+        "basicAuthentication": {
+            "type": "basic"
+        }
+    },
+    "x-sap-shortText":"API to access all Performance Management and 360 Forms.",
+    "x-servers": [{
+        "url": "https://{landscapehost}/odata/v2",
+        "description": "OData APIs for the SuccessFactors Data Centers",
+        "templates": {
+            "landscapehost": {
+                "description": "SuccessFactors Data Center host",
+                "enum": ["api2.successfactors.eu",
+                "apisalesdemo2.successfactors.eu",
+                "api2preview.sapsf.eu",
+                "api4.successfactors.com",
+                "apisalesdemo4.successfactors.com",
+                "api4preview.sapsf.com",
+                "api5.successfactors.eu",
+                "api8.successfactors.com",
+                "apisalesdemo8.successfactors.com",
+                "api8preview.sapsf.com",
+                "api10.successfactors.com",
+                "api10preview.sapsf.com",
+                "api012.successfactors.eu",
+                "apirot.successfactors.eu",
+                "api12preview.sapsf.eu",
+                "api15.sapsf.cn",
+                "api16.sapsf.eu",
+                "api17preview.sapsf.com",
+                "api17.sapsf.com",
+                "api18preview.sapsf.com",
+                "api18.sapsf.com"],
+                "default": "api2.successfactors.eu"
+            }
+        }
+    }],
+    "info": {
+        "title": "Forms Management",
+        "version": "1.0",
+        "description": "API to access all Performance Management and 360 Forms"
+    },
+    "externalDocs": {
+        "description": "More Information available in help.sap.com",
+        "url": "https://help.sap.com/viewer/28bc3c8e3f214ab487ec51b1b8709adc/latest"
+    },
+    "schemes": ["https"],
+    "host": "sandbox.api.sap.com",
+    "basePath": "/successfactors/odata/v2",
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "tags": [{
+        "name": "FormHeader"
+    },
+    {
+        "name": "FormPerfPotSummarySection"
+    },
+    {
+        "name": "FormFolder"
+    },
+    {
+        "name": "FormTemplate"
+    }],
+    "definitions": {
+        "odata.error": {
+            "type": "object",
+            "required": ["error"],
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/odata.error.main"
+                }
+            }
+        },
+        "odata.error.main": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/odata.error.detail"
+                    }
+                },
+                "innererror": {
+                    "type": "object",
+                    "description": "The structure of this object is service-specific"
+                }
+            }
+        },
+        "odata.error.detail": {
+            "type": "object",
+            "required": ["code",
+            "message"],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                }
+            }
+        },
+        "SFOData.FormHeader": {
+            "type": "object",
+            "properties": {
+                "creationDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "currentStep": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "dateAssigned": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "formDataId": {
+                    "type": "string",
+                    "format": "int64"
+                },
+                "formDataStatus": {
+                    "type": "string",
+                    "format": "int64"
+                },
+                "formDataVersion": {
+                    "type": "string"
+                },
+                "formLastModifiedDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "formOriginator": {
+                    "type": "string"
+                },
+                "formReviewDueDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "formReviewEndDate": {
+                    "type": "string",
+                    "example": "/Date(1492098664000)/"
+                },
+                "formReviewStartDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "formSubjectId": {
+                    "type": "string"
+                },
+                "formTemplateId": {
+                    "type": "string",
+                    "format": "int64"
+                },
+                "formTemplateType": {
+                    "type": "string"
+                },
+                "formTitle": {
+                    "type": "string"
+                },
+                "isRated": {
+                    "type": "boolean"
+                },
+                "rating": {
+                    "type": "string",
+                    "format": "decimal",
+                    "multipleOf": 1
+                },
+                "sender": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "stepDueDate": {
+                    "type": "string",
+                    "default": "null",
+                    "example": "/Date(1492098664000)/"
+                },
+                "formTemplate": {
+                    "$ref": "#/definitions/SFOData.FormTemplate"
+                }
+            },
+            "title": "FormHeader"
+        },
+        "SFOData.FormPerfPotSummarySection": {
+            "type": "object",
+            "properties": {
+                "formContentId": {
+                    "type": "string",
+                    "format": "int64"
+                },
+                "formDataId": {
+                    "type": "string",
+                    "format": "int64"
+                },
+                "sectionDescription": {
+                    "type": "string",
+                    "default": "null"
+                },
+                "sectionIndex": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "sectionName": {
+                    "type": "string",
+                    "default": "null"
+                }
+            },
+            "title": "FormPerfPotSummarySection"
+        },
+        "SFOData.FormFolder": {
+            "type": "object",
+            "properties": {
+                "folderId": {
+                    "type": "string",
+                    "format": "int64"
+                },
+                "folderName": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "string"
+                }
+            },
+            "title": "FormFolder"
+        },
+        "SFOData.FormTemplate": {
+            "type": "object",
+            "properties": {
+                "formTemplateId": {
+                    "type": "string",
+                    "format": "int64"
+                },
+                "formTemplateName": {
+                    "type": "string"
+                },
+                "formTemplateType": {
+                    "type": "string"
+                },
+                "associatedForms": {
+                    "title": "Related Collection(SFOData.FormHeader)",
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SFOData.FormHeader"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": "FormTemplate"
+        }
+    },
+    "paths": {
+        "/FormHeader": {
+            "get": {
+                "summary": "Get entities from FormHeader",
+                "tags": ["FormHeader"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["creationDate",
+                        "creationDate desc",
+                        "currentStep",
+                        "currentStep desc",
+                        "dateAssigned",
+                        "dateAssigned desc",
+                        "formDataId",
+                        "formDataId desc",
+                        "formDataStatus",
+                        "formDataStatus desc",
+                        "formDataVersion",
+                        "formDataVersion desc",
+                        "formLastModifiedDate",
+                        "formLastModifiedDate desc",
+                        "formOriginator",
+                        "formOriginator desc",
+                        "formReviewDueDate",
+                        "formReviewDueDate desc",
+                        "formReviewEndDate",
+                        "formReviewEndDate desc",
+                        "formReviewStartDate",
+                        "formReviewStartDate desc",
+                        "formSubjectId",
+                        "formSubjectId desc",
+                        "formTemplateId",
+                        "formTemplateId desc",
+                        "formTemplateType",
+                        "formTemplateType desc",
+                        "formTitle",
+                        "formTitle desc",
+                        "isRated",
+                        "isRated desc",
+                        "rating",
+                        "rating desc",
+                        "sender",
+                        "sender desc",
+                        "stepDueDate",
+                        "stepDueDate desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["creationDate",
+                        "currentStep",
+                        "dateAssigned",
+                        "formDataId",
+                        "formDataStatus",
+                        "formDataVersion",
+                        "formLastModifiedDate",
+                        "formOriginator",
+                        "formReviewDueDate",
+                        "formReviewEndDate",
+                        "formReviewStartDate",
+                        "formSubjectId",
+                        "formTemplateId",
+                        "formTemplateType",
+                        "formTitle",
+                        "isRated",
+                        "rating",
+                        "sender",
+                        "stepDueDate"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "formTemplate"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of FormHeader",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.FormHeader"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/FormHeader({formDataId})": {
+            "get": {
+                "summary": "Get entity from FormHeader by key",
+                "tags": ["FormHeader"],
+                "parameters": [{
+                    "name": "formDataId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: formDataId",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["creationDate",
+                        "currentStep",
+                        "dateAssigned",
+                        "formDataId",
+                        "formDataStatus",
+                        "formDataVersion",
+                        "formLastModifiedDate",
+                        "formOriginator",
+                        "formReviewDueDate",
+                        "formReviewEndDate",
+                        "formReviewStartDate",
+                        "formSubjectId",
+                        "formTemplateId",
+                        "formTemplateType",
+                        "formTitle",
+                        "isRated",
+                        "rating",
+                        "sender",
+                        "stepDueDate"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "formTemplate"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "FormHeader",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.FormHeader"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/FormPerfPotSummarySection": {
+            "get": {
+                "summary": "Get entities from FormPerfPotSummarySection",
+                "tags": ["FormPerfPotSummarySection"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["formContentId",
+                        "formContentId desc",
+                        "formDataId",
+                        "formDataId desc",
+                        "sectionDescription",
+                        "sectionDescription desc",
+                        "sectionIndex",
+                        "sectionIndex desc",
+                        "sectionName",
+                        "sectionName desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["formContentId",
+                        "formDataId",
+                        "sectionDescription",
+                        "sectionIndex",
+                        "sectionName"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of FormPerfPotSummarySection",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.FormPerfPotSummarySection"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/FormPerfPotSummarySection(formContentId={formContentId},formDataId={formDataId})": {
+            "get": {
+                "summary": "Get entity from FormPerfPotSummarySection by key",
+                "tags": ["FormPerfPotSummarySection"],
+                "parameters": [{
+                    "name": "formContentId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: formContentId",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "formDataId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: formDataId",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["formContentId",
+                        "formDataId",
+                        "sectionDescription",
+                        "sectionIndex",
+                        "sectionName"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "FormPerfPotSummarySection",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.FormPerfPotSummarySection"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/FormFolder": {
+            "get": {
+                "summary": "Get entities from FormFolder",
+                "tags": ["FormFolder"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["folderId",
+                        "folderId desc",
+                        "folderName",
+                        "folderName desc",
+                        "userId",
+                        "userId desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["folderId",
+                        "folderName",
+                        "userId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of FormFolder",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.FormFolder"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/FormFolder({folderId})": {
+            "get": {
+                "summary": "Get entity from FormFolder by key",
+                "tags": ["FormFolder"],
+                "parameters": [{
+                    "name": "folderId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: folderId",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["folderId",
+                        "folderName",
+                        "userId"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "FormFolder",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.FormFolder"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/FormTemplate": {
+            "get": {
+                "summary": "Get entities from FormTemplate",
+                "tags": ["FormTemplate"],
+                "parameters": [{
+                    "$ref": "#/parameters/top"
+                },
+                {
+                    "$ref": "#/parameters/skip"
+                },
+                {
+                    "$ref": "#/parameters/search"
+                },
+                {
+                    "$ref": "#/parameters/filter"
+                },
+                {
+                    "$ref": "#/parameters/count"
+                },
+                {
+                    "name": "$orderby",
+                    "in": "query",
+                    "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["formTemplateId",
+                        "formTemplateId desc",
+                        "formTemplateName",
+                        "formTemplateName desc",
+                        "formTemplateType",
+                        "formTemplateType desc"]
+                    }
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["formTemplateId",
+                        "formTemplateName",
+                        "formTemplateType"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "associatedForms"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entities",
+                        "schema": {
+                            "type": "object",
+                            "title": "Wrapper",
+                            "properties": {
+                                "d": {
+                                    "type": "object",
+                                    "title": "Collection of FormTemplate",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/SFOData.FormTemplate"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        },
+        "/FormTemplate({formTemplateId})": {
+            "get": {
+                "summary": "Get entity from FormTemplate by key",
+                "tags": ["FormTemplate"],
+                "parameters": [{
+                    "name": "formTemplateId",
+                    "in": "path",
+                    "required": true,
+                    "description": "key: formTemplateId",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                {
+                    "name": "$select",
+                    "in": "query",
+                    "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["formTemplateId",
+                        "formTemplateName",
+                        "formTemplateType"]
+                    }
+                },
+                {
+                    "name": "$expand",
+                    "in": "query",
+                    "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "enum": ["*",
+                        "associatedForms"]
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Retrieved entity",
+                        "schema": {
+                            "title": "FormTemplate",
+                            "type": "object",
+                            "properties": {
+                                "d": {
+                                    "$ref": "#/definitions/SFOData.FormTemplate"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/error"
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "top": {
+            "name": "$top",
+            "in": "query",
+            "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630)",
+            "type": "integer",
+            "default":20
+        },
+        "skip": {
+            "name": "$skip",
+            "in": "query",
+            "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631)",
+            "type": "integer"
+        },
+        "count": {
+            "name": "$count",
+            "in": "query",
+            "description": "Include count of items, see [OData Count](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374632)",
+            "type": "boolean"
+        },
+        "filter": {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+        },
+        "search": {
+            "name": "$search",
+            "in": "query",
+            "description": "Search items by search phrases, see [OData Searching](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374633)",
+            "type": "string"
+        }
+    },
+    "responses": {
+        "error": {
+            "description": "Error",
+            "schema": {
+                "$ref": "#/definitions/odata.error"
+            }
+        }
+    }
+}
