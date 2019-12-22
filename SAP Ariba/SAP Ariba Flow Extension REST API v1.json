@@ -1,0 +1,968 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "1.0",
+    "title": "Flow Extension API",
+    "description": "This API allows you to intercept a document at specific points within its normal flow. You can also temporarily suspend the flow of a document if desired. During this interception, you can: \n* Access data associated with the document\n* Post attachments to the document\n* Resume or halt the workflow entirely"
+  },
+  "x-sap-shortText": "Intercept a document at specific points within its normal document flow.",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/flowextension/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/flowextension/v1/{environment}",
+      "description": "Flow Extension API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "flowextension",
+      "description": "Flow Extension API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "event-controller",
+      "description": "Event Controller"
+    }
+  ],
+  "paths": {
+    "/action/flowextensions/{flowExtensionId}/events/{eventId}/halt": {
+      "post": {
+        "tags": [
+          "event-controller"
+        ],
+        "summary": "This API completes the flow extension and rejects the document by returning it to the sender in 'FAILED' status. The flow extension must be configured to support this API.An error status code 400 is returned if the flow extension does not support Halt or if the event is in the wrong state. Successful invocation returns an HTTP status code 200, asynchronously causes any uploaded comments and attachments to be applied to the document, sets the document status to FAILED, and re-queues the document to allow it to be propagated back to the sender. Successful invocation of Halt completes the flow extension processing for the event.",
+        "operationId": "halt",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The base 64 encrypted auth header string. eg 'Authorization:Basic #$%@&*DSJJJJ' ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "flowExtensionId",
+            "in": "path",
+            "description": "The flow extension id of the provider",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "The external id corresponding to the event",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "message",
+            "description": "The message body. e.g. Comments as why the document was halted",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/action/flowextensions/{flowExtensionId}/events/acknowledge": {
+      "post": {
+        "tags": [
+          "event-controller"
+        ],
+        "summary": "This acknowledges receipt of an Event retrieved using the Get Next Event API. Invoking this API informs the flow extension service that the event has been successfully delivered, thus preventing the event from being returned by subsequent Get Next Event calls. Subsequent API calls for the event, such as Post Document Update and Resume, will not work until Acknowledge has been called. e.g POST Body <events><event><eventId>ATHZ2HG61Y6H9OY55SDE384</eventId></event></events> ",
+        "operationId": "acknowledgeEventsUsingPOST",
+        "consumes": [
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The base 64 encrypted auth header string. eg 'Authorization:Basic #$%@&*DSJJJJ' ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "flowExtensionId",
+            "in": "path",
+            "description": "The flow extension id of the provider",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "events",
+            "description": "The events which are got by getNextEvents, which the provider acknowledges receiving",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventsModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AckResponseData"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/action/flowextensions/{flowExtensionId}/events/{eventId}/complete": {
+      "post": {
+        "tags": [
+          "event-controller"
+        ],
+        "summary": "This API is supported for asynchronous (non-suspending) flow extensions. Invoking Complete indicates completion of the flow extension processing for the event. For Complete to succeed, the event must have been received and acknowledged, and it must be a non-suspending flow extension type. An error status code 400 is returned if the flow extension does not support Complete or if the event is in the wrong state. Successful invocation returns an HTTP status code 200. ",
+        "operationId": "completeEventUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The base 64 encrypted auth header string. eg 'Authorization:Basic #$%@&*DSJJJJ' ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "flowExtensionId",
+            "in": "path",
+            "description": "The flow extension id of the provider",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "The external id corresponding to the flow extension event",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/action/flowextensions/{flowExtensionId}/events/{eventId}/resume": {
+      "post": {
+        "tags": [
+          "event-controller"
+        ],
+        "summary": "This API completes the flow extension and allows the document to continue with its normal processing flow. This API is not supported for flow extension types which are asynchronous, i.e., those which do not suspend the normal document processing flow. For suspending flow extensions, Resume must be invoked at the end of flow extension processing. (Exception: some extensions support rejecting the document via Halt in addition to Resume; see description of Halt API below.) An error status code 400 is returned if the flow extension does not support Resume or if the event is in the wrong state. Successful invocation returns an HTTP status code 200, asynchronously causes any uploaded comments and attachments to be applied to the document, re-queues the document to continue the normal document flow, and completes the flow extension processing for the event.",
+        "operationId": "resumeEventUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The base 64 encrypted auth header string. eg 'Authorization:Basic #$%@&*DSJJJJ' ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "flowExtensionId",
+            "in": "path",
+            "description": "The flow extension id of the provider",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "The external event id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/flowextensions/{flowExtensionId}/events/{eventId}": {
+      "post": {
+        "tags": [
+          "event-controller"
+        ],
+        "summary": "This API is currently not supported in sandbox. i.e. The try it out button will not work. API provides the ability to post a comment or attachments to a document event. Attachments are sent via a POST request of multipart/mixed or multipart/form-data content type. Only Events in the 'SENT' state can receive attachment updates. This API is rejected for flow extension types which do not support document updates. \u201cAsynchronous\u201d flow extensions, which do not suspend the normal document flow, do not support post document update. An error status code 400 is returned if the flow extension does not support document update. The API is also rejected if the event is not in the proper state. The event must have been acknowledged via the Acknowledge API call prior to invoking this API. This API may not be invoked a second time for the same event; if multiple attachments are to be added, they must be included in the same invocation. Successful invocation returns an HTTP status code 200, and uploads the comment and attachments, which will be applied to the document when the extension flow is completed via a call to Resume or Halt (described below).",
+        "operationId": "postDocumentUpdateUsingPOST",
+        "consumes": [
+          "multipart/mixed",
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The base 64 encrypted auth header string. eg 'Authorization:Basic #$%@&*DSJJJJ' ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "flowExtensionId",
+            "in": "path",
+            "description": "The flow extension id of the provider",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "The external event id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "comment",
+            "in": "query",
+            "description": "Comments with regard to the document which has been intercepted",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "file",
+            "in": "query",
+            "description": "file(s) which have been attached",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResponseEntity"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/flowextensions/{flowExtensionId}/events": {
+      "get": {
+        "tags": [
+          "event-controller"
+        ],
+        "summary": "API provides the capability to retrieve the n most recent events from Extension Queue. A flow extension Event will be generated when a document being delivered to Buyer/Supplier satisfies the criteria of Flow Extension subscription and criteria for interception to be processed by a Third Party. When the event is generated, it will be added to the flow extension event queue. The Retrieve API (also referred to as the \u201cGet Next Events\u201d API call) retrieves the next available event(s) from the queue.",
+        "operationId": "getNextEvents",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The base 64 encrypted auth header string. eg 'Authorization:Basic #$%@&*DSJJJJ' ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "flowExtensionId",
+            "in": "path",
+            "description": "The flow extension id of the provider",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "max number of flow extensions which can be returned in that call. If not specified, count = 1",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EventsModel"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "$ref": "#/definitions/EventsModel"
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/flowextensions/{flowExtensionId}/events/{eventId}/eventdata": {
+      "get": {
+        "tags": [
+          "event-controller"
+        ],
+        "summary": "API provides the capability to retrieve relevant document data from Ariba Network for a specific Event that External party has received a notification for. This is for events that Consumer has retrieved using Get Next Event.",
+        "operationId": "getEventDataUsingGET",
+        "consumes": [
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The base 64 encrypted auth header string. eg 'Authorization:Basic #$%@&*DSJJJJ' ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The type of data which can be returned. Acceptable values: application/json, application/xml, multipart/mixed",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "flowExtensionId",
+            "in": "path",
+            "description": "The flow extension id of the provider",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "The external id corresponding to the event",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/flowextensions/{flowExtensionId}/events/{eventId}/eventdata/attachment": {
+      "get": {
+        "tags": [
+          "event-controller"
+        ],
+        "summary": "API provides the capability to retrieve relevant document data for a specific document based on the document contentid (cid) from Ariba Network for a specific Event that External party has received a notification for. This is for events that Consumer has retrieved using Get Next Event.",
+        "operationId": "getDocumentAttachmentUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "The base 64 encrypted auth header string. eg 'Authorization:Basic #$%@&*DSJJJJ' ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The accepted document format. e.g. application/pdf",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "flowExtensionId",
+            "in": "path",
+            "description": "The flow extension id of the provider",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventId",
+            "in": "path",
+            "description": "The external event id of the event",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cid",
+            "in": "query",
+            "description": "The content id of the document attachment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InputStreamResource"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AckResponseEvents": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "InputStream": {
+      "type": "object"
+    },
+    "ModelAndView": {
+      "type": "object",
+      "properties": {
+        "empty": {
+          "type": "boolean"
+        },
+        "model": {
+          "type": "object"
+        },
+        "modelMap": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "reference": {
+          "type": "boolean"
+        },
+        "view": {
+          "$ref": "#/definitions/View"
+        },
+        "viewName": {
+          "type": "string"
+        }
+      }
+    },
+    "AckResponseFailedEvents": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AckResponseFailedEvent"
+          }
+        }
+      }
+    },
+    "View": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string"
+        }
+      }
+    },
+    "URI": {
+      "type": "object",
+      "properties": {
+        "absolute": {
+          "type": "boolean"
+        },
+        "authority": {
+          "type": "string"
+        },
+        "fragment": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "opaque": {
+          "type": "boolean"
+        },
+        "path": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "query": {
+          "type": "string"
+        },
+        "rawAuthority": {
+          "type": "string"
+        },
+        "rawFragment": {
+          "type": "string"
+        },
+        "rawPath": {
+          "type": "string"
+        },
+        "rawQuery": {
+          "type": "string"
+        },
+        "rawSchemeSpecificPart": {
+          "type": "string"
+        },
+        "rawUserInfo": {
+          "type": "string"
+        },
+        "scheme": {
+          "type": "string"
+        },
+        "schemeSpecificPart": {
+          "type": "string"
+        },
+        "userInfo": {
+          "type": "string"
+        }
+      }
+    },
+    "URL": {
+      "type": "object",
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "content": {
+          "type": "object"
+        },
+        "defaultPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "file": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "query": {
+          "type": "string"
+        },
+        "ref": {
+          "type": "string"
+        },
+        "userInfo": {
+          "type": "string"
+        }
+      }
+    },
+    "EventsModel": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ANFlowExtensionEventModel"
+          }
+        },
+        "flowExtensionId": {
+          "type": "string"
+        }
+      }
+    },
+    "ResponseEntity": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object"
+        },
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "100",
+            "101",
+            "102",
+            "103",
+            "200",
+            "201",
+            "202",
+            "203",
+            "204",
+            "205",
+            "206",
+            "207",
+            "208",
+            "226",
+            "300",
+            "301",
+            "302",
+            "303",
+            "304",
+            "305",
+            "307",
+            "308",
+            "400",
+            "401",
+            "402",
+            "403",
+            "404",
+            "405",
+            "406",
+            "407",
+            "408",
+            "409",
+            "410",
+            "411",
+            "412",
+            "413",
+            "414",
+            "415",
+            "416",
+            "417",
+            "418",
+            "419",
+            "420",
+            "421",
+            "422",
+            "423",
+            "424",
+            "426",
+            "428",
+            "429",
+            "431",
+            "500",
+            "501",
+            "502",
+            "503",
+            "504",
+            "505",
+            "506",
+            "507",
+            "508",
+            "509",
+            "510",
+            "511"
+          ]
+        }
+      }
+    },
+    "ANFlowExtensionEventModel": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "type": "string"
+        },
+        "eventId": {
+          "type": "number",
+          "format": "double"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "File": {
+      "type": "object",
+      "properties": {
+        "absolute": {
+          "type": "boolean"
+        },
+        "absolutePath": {
+          "type": "string"
+        },
+        "canonicalPath": {
+          "type": "string"
+        },
+        "directory": {
+          "type": "boolean"
+        },
+        "file": {
+          "type": "boolean"
+        },
+        "freeSpace": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parent": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "totalSpace": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "usableSpace": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "AckResponseFailedEvent": {
+      "type": "object",
+      "properties": {
+        "event": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "AckResponseData": {
+      "type": "object",
+      "properties": {
+        "acknowledged": {
+          "$ref": "#/definitions/AckResponseEvents"
+        },
+        "failed": {
+          "$ref": "#/definitions/AckResponseFailedEvents"
+        }
+      }
+    },
+    "InputStreamResource": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "file": {
+          "$ref": "#/definitions/File"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "inputStream": {
+          "$ref": "#/definitions/InputStream"
+        },
+        "open": {
+          "type": "boolean"
+        },
+        "readable": {
+          "type": "boolean"
+        },
+        "uri": {
+          "$ref": "#/definitions/URI"
+        },
+        "url": {
+          "$ref": "#/definitions/URL"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,2961 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "1.0",
+    "title": "External Approval API for Sourcing and Supplier Management",
+    "description": "The External approval API for sourcing and supplier management processes external approvals for sourcing and supplier management tasks."
+  },
+  "x-sap-shortText": "Processes external approvals for sourcing and supplier management tasks.",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/sourcing-approval/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/sourcing-approval/v1/{environment}",
+      "description": "External Approval API for Sourcing and Supplier Management endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "ru.openapi.ariba.com",
+            "mn1.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api-ru.ariba.com",
+            "api.mn1.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "sourcing-approval",
+      "description": "External Approval API for Sourcing and Supplier Management"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "RU",
+      "description": "RU data center"
+    },
+    {
+      "name": "UAE",
+      "description": "UAE data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/changes": {
+      "get": {
+        "description": "Returns the list of entities whose state has changed since the last request.",
+        "summary": "Get Changes",
+        "tags": [
+          "Core"
+        ],
+        "operationId": "get Changes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "number of changes to return"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "starting record number in result set"
+          },
+          {
+            "name": "needTotal",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "indicates whether total count of the query"
+          },
+          {
+            "name": "lastChangeId",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The id of the last change to start the search (if omitted - will start at first change)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of changed entities",
+            "schema": {
+              "$ref": "#/definitions/EntityChanges"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/pendingApprovables": {
+      "get": {
+        "summary": "Get all pending documents/task approvables",
+        "description": "List all documents/tasks that are pending approval",
+        "operationId": "getPendingApprovables",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Core"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm."
+          },
+          {
+            "name": "user",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "user id of the user."
+          },
+          {
+            "name": "passwordAdapter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "passwordAdapter of the user."
+          },
+          {
+            "name": "documentType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "document type the user is requesting."
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "the starting point within the collection of resource results to be returned."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "maximum number of items that may be returned for a single request."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PendingApprovals"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request with some missing parameter",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/400PendingApprovables"
+              }
+            }
+          },
+          "404": {
+            "description": "User ID not found",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/404PendingApprovables"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{entity_type}/{entity_id}": {
+      "get": {
+        "description": "Returns the details of an entity identified by the entity_type & entity_id parameters.",
+        "summary": "Get Entity Details",
+        "tags": [
+          "Core"
+        ],
+        "operationId": "Get Entity Details",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "entity_type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Entity type"
+          },
+          {
+            "name": "entity_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the entity"
+          },
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the entity."
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request. The parameters you have passed in request are incorrect",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Entity Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/action": {
+      "post": {
+        "description": "Performs the specified action on the entity. Possible values of action for the entity Task are Approve, Deny and DenyWithResubmit.",
+        "summary": "Act on Entity",
+        "tags": [
+          "Core"
+        ],
+        "operationId": "Act on Entity",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm"
+          },
+          {
+            "name": "user",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the user"
+          },
+          {
+            "name": "passwordadapter",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "passwordAdapter for this user"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Details of the action to be performed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Action Success"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request. The parameter you have passed in request are incorrect",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Entity Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{entity_type}/{entity_id}/attachments/{attachment_id}": {
+      "get": {
+        "description": "Download an attachment associated with the entity identified by entity_id. If the entity has one or more attachments, this API returns the attachment specified by the attachment_id parameter.",
+        "summary": "Get Attachment",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Get Attachment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "entity_type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Entity type"
+          },
+          {
+            "name": "entity_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the entity"
+          },
+          {
+            "name": "attachment_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the attachment"
+          },
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Attachment Stream."
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request. The parameter you have passed in request are incorrect",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Entity/Attachment Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/usergroups/{group_name}/members": {
+      "get": {
+        "description": "Returns the list of users who are members of the group specified in group_name. This API uses the unique name for the group.",
+        "summary": "Get Approver Group's Members",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "GetApproversByGroupName",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "group_name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique name of the group"
+          },
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Group Members"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request. The parameter you have passed in request are incorrect",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Group Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActionRequest": {
+      "title": "Entity Action Request",
+      "example": {
+        "actionableType": "Task",
+        "uniqueName": "TSK123",
+        "actionName": "Approve",
+        "options": {
+          "comment": "Approved!"
+        }
+      },
+      "type": "object",
+      "properties": {
+        "actionableType": {
+          "description": "Entity Type",
+          "type": "string"
+        },
+        "uniqueName": {
+          "description": "Unique identifier of the entity",
+          "type": "string"
+        },
+        "actionName": {
+          "description": "Action to be performed on the entity",
+          "type": "string"
+        },
+        "options": {
+          "description": "Action Options",
+          "type": "object"
+        }
+      },
+      "required": [
+        "actionableType",
+        "uniqueName",
+        "actionName"
+      ]
+    },
+    "ErrorResponse": {
+      "title": "Error Response",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "error code",
+          "type": "string"
+        },
+        "errorDescription": {
+          "description": "error description string",
+          "type": "string"
+        },
+        "description": {
+          "description": "error description string",
+          "type": "string"
+        }
+      }
+    },
+    "EntityChanges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EntityChange"
+      },
+      "description": "list of entity change objects"
+    },
+    "EntityChange": {
+      "type": "object",
+      "properties": {
+        "restResourceName": {
+          "type": "string",
+          "description": "entity type."
+        },
+        "approvableUniqueName": {
+          "type": "string",
+          "description": "unique identifier of the entity"
+        },
+        "changeType": {
+          "type": "string",
+          "description": "the type of change. Possible values of change types for entity Task are ApprovableDenied, ApprovableFullyApproved, ApprovableWithdrawn, ApprovalRequestActivated"
+        },
+        "changeSequenceId": {
+          "type": "string",
+          "description": "id of the change"
+        },
+        "changeParameters": {
+          "type": "string",
+          "description": "the id of the approval node in the graph (if relevant)"
+        },
+        "realm": {
+          "type": "string",
+          "description": "realm id for this change"
+        }
+      }
+    },
+    "PendingApprovals": {
+      "type": "object",
+      "properties": {
+        "uniqueName": {
+          "type": "string",
+          "description": "unique name of approvable/document",
+          "example": "TSK14"
+        },
+        "documentType": {
+          "type": "string",
+          "description": "document type of the approvable/document",
+          "example": "ariba.collaborate.core.Document"
+        },
+        "description": {
+          "type": "string",
+          "description": "description about the approvable/document",
+          "example": "A document"
+        },
+        "assignedDate": {
+          "type": "string",
+          "description": "assigned Date of this approvable",
+          "example": "2019/05/20"
+        },
+        "attachments": {
+          "type": "array",
+          "description": "list of attachments for this approvable/document",
+          "items": {
+            "type": "string"
+          }
+        },
+        "approver": {
+          "type": "string",
+          "description": "approver for this approvable/document",
+          "example": "cnoll"
+        },
+        "email": {
+          "type": "string",
+          "description": "email address of approver for this approvable/document",
+          "example": "cnoll@ariba.com"
+        }
+      }
+    },
+    "400PendingApprovables": {
+      "description": "Something went wrong. The query parameter you have passed in request are inCorrect or missing",
+      "example": {
+        "error": "invalid_parameter",
+        "error_description": "Incorrect queryable type: document",
+        "description": "Incorrect queryable type: document"
+      },
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "",
+          "example": "invalid_parameter",
+          "type": "string"
+        },
+        "error_description": {
+          "description": "",
+          "example": "Incorrect queryable type: document",
+          "type": "string"
+        },
+        "description": {
+          "description": "",
+          "example": "Incorrect queryable type: document",
+          "type": "string"
+        }
+      },
+      "required": [
+        "error",
+        "error_description",
+        "description"
+      ]
+    },
+    "404PendingApprovables": {
+      "description": "Something went wrong. The username passed in the query param is not found",
+      "example": {
+        "error": "not_found",
+        "error_description": "User not found with uniqueName cnollll",
+        "description": "User not found with uniqueName cnollll"
+      },
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "",
+          "example": "not_found",
+          "type": "string"
+        },
+        "error_description": {
+          "description": "",
+          "example": "User not found with uniqueName cnollll",
+          "type": "string"
+        },
+        "description": {
+          "description": "",
+          "example": "User not found with uniqueName cnollll",
+          "type": "string"
+        }
+      },
+      "required": [
+        "error",
+        "error_description",
+        "description"
+      ]
+    },
+    "TaskDetails": {
+      "type": "object",
+      "title": "Task Details",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the task"
+        },
+        "title": {
+          "type": "string",
+          "description": "Task title."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "True if the task is mandatory"
+        },
+        "beginDate": {
+          "type": "number",
+          "description": "Start date of the task in milliseconds."
+        },
+        "dueDate": {
+          "type": "number",
+          "description": "Due date for the task in milliseconds."
+        },
+        "endDate": {
+          "type": "number",
+          "description": "End date for the task in milliseconds."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief description of the task"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the task"
+        },
+        "altStatus": {
+          "type": "string",
+          "description": "A more detailed and specific status string than the main status"
+        },
+        "displayStatus": {
+          "type": "string",
+          "description": "Display status of the task"
+        },
+        "owner": {
+          "$ref": "#/definitions/Principal",
+          "description": "user or group that owns this task"
+        },
+        "originalOwner": {
+          "$ref": "#/definitions/Principal",
+          "description": "Original owner of the task before the current owner started work on it"
+        },
+        "isObsoleted": {
+          "type": "boolean",
+          "description": "true if this is not the current round of the task"
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "Unique identifier of the task workspace"
+        },
+        "workspaceTitle": {
+          "type": "string",
+          "description": "Title of the task workspace "
+        },
+        "workspaceAribaType": {
+          "type": "string",
+          "description": "Type of the task workspace"
+        },
+        "workspaceEntityType": {
+          "type": "string",
+          "description": "Entity Type of the task workspace."
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the comment"
+              },
+              "date": {
+                "type": "number",
+                "description": "Comment creation date in milliseconds "
+              },
+              "body": {
+                "type": "string",
+                "description": "Comment text"
+              },
+              "user": {
+                "description": "User who created the comment",
+                "$ref": "#/definitions/User"
+              },
+              "taskId": {
+                "type": "string",
+                "description": "Id of the task"
+              },
+              "parentCommentId": {
+                "type": "string",
+                "description": "Id of the parent comment"
+              },
+              "state": {
+                "type": "string",
+                "description": "Comment State"
+              },
+              "round": {
+                "type": "string",
+                "description": "Task round label"
+              }
+            }
+          },
+          "description": "List of comments for this task"
+        },
+        "approvalRequests": {
+          "type": "array",
+          "description": "Description of approval nodes in the approval graph",
+          "items": {
+            "$ref": "#/definitions/ApprovalRequest"
+          }
+        },
+        "activeApprovalRequestIds": {
+          "type": "string",
+          "description": "comma-separated ids of active approval requests"
+        },
+        "phaseApplicability": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": ""
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "IDs of tasks that this task directly depends on"
+        },
+        "document": {
+          "type": "object",
+          "properties": {
+            "aribaType": {
+              "type": "string",
+              "description": "Type of the document"
+            },
+            "entityType": {
+              "type": "string",
+              "description": "Entity Type of the document"
+            },
+            "id": {
+              "type": "string",
+              "description": "Unique identifier of the document"
+            },
+            "content": {
+              "type": "object",
+              "description": "Content of the document"
+            }
+          },
+          "description": "Document associated with this task"
+        }
+      }
+    },
+    "ApprovalRequest": {
+      "description": "Individual approval node.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "number",
+          "description": "approval request state. 1 - \"NotYetActive\", 2 - \"ActiveButNoActionYet\", 4 - \"Denied\", 8 -\"Approved\", 16 -\"Rejected\""
+        },
+        "approvalState": {
+          "type": "string",
+          "description": "string representation of approval state."
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "indicates whether approval is required for this request"
+        },
+        "approvedBy": {
+          "$ref": "#/definitions/Principal",
+          "description": "name of the approver"
+        },
+        "reason": {
+          "type": "string",
+          "description": "reason for this approval request"
+        },
+        "assignedDate": {
+          "type": "number",
+          "description": "assigned date in milliseconds"
+        },
+        "approvedDate": {
+          "type": "number",
+          "description": "approved date in milliseconds"
+        },
+        "id": {
+          "type": "string",
+          "description": "approval request id"
+        },
+        "taskId": {
+          "type": "string",
+          "description": "id of the task for this approval request"
+        },
+        "dependencyApprovalRequestsUID": {
+          "type": "array",
+          "description": "List of approvalRequest ids that must be approved before this approvalRequest becomes active",
+          "items": {
+            "type": "string"
+          }
+        },
+        "approvers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Principal"
+          },
+          "description": ""
+        }
+      }
+    },
+    "Principal": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type (user/group)"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "group": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "id of the group"
+            },
+            "uniqueName": {
+              "type": "string",
+              "description": "unique name of the group"
+            }
+          }
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "uniqueName": {
+          "type": "string",
+          "description": "Unique name of the user"
+        },
+        "passwordAdaptor": {
+          "type": "string",
+          "description": "Unique name of the user"
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of the user."
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "email address"
+        },
+        "phone": {
+          "type": "string",
+          "description": "phone number"
+        },
+        "realm": {
+          "type": "string",
+          "description": "user's realm"
+        }
+      }
+    },
+    "SupplierRequestProject": {
+      "type": "object",
+      "title": "Supplier Request Project",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SupplierManagementProject"
+        },
+        {
+          "properties": {
+            "requestStatus": {
+              "type": "string",
+              "description": "Status of supplier request"
+            },
+            "smVendorId": {
+              "type": "string",
+              "description": ""
+            },
+            "isAutoRegEnabled": {
+              "type": "boolean",
+              "description": "True if the automatic registration invite parameter is enabled"
+            }
+          }
+        }
+      ]
+    },
+    "SupplierRegistrationProject": {
+      "type": "object",
+      "title": "Supplier Registration Project",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SupplierManagementProject"
+        },
+        {
+          "properties": {
+            "registrationStatus": {
+              "type": "string",
+              "description": "Status of supplier registration process."
+            }
+          }
+        }
+      ]
+    },
+    "SupplierQualificationProject": {
+      "type": "object",
+      "title": "Supplier Registration Project",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SupplierManagementProject"
+        },
+        {
+          "properties": {
+            "qualificationStatus": {
+              "type": "string",
+              "description": "Status of supplier qualification process"
+            },
+            "requalificationStatus": {
+              "type": "string",
+              "description": "Status of supplier re-qualification process"
+            },
+            "expiryDate": {
+              "type": "number",
+              "description": "Date of qualification expiration in milliseconds"
+            },
+            "requalEligibilityDate": {
+              "type": "number",
+              "description": "The date in milliseconds when the current qualification will be eligible for re-qualification."
+            }
+          }
+        }
+      ]
+    },
+    "SupplierDisqualificationProject": {
+      "type": "object",
+      "title": "Supplier Disqualification Project",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SupplierManagementProject"
+        },
+        {
+          "properties": {
+            "disqualificationStatus": {
+              "type": "string",
+              "description": "Status of the supplier disqualification process"
+            },
+            "disqualificationDate": {
+              "type": "string",
+              "description": "Date of disqualification in milliseconds"
+            },
+            "disqualifiedUntilDate": {
+              "type": "string",
+              "description": "Date of until the end of the disqualification in milliseconds"
+            }
+          }
+        }
+      ]
+    },
+    "SMQuestionnaire": {
+      "title": "Supplier Management Questionnaire",
+      "type": "object",
+      "properties": {
+        "questionnaireTitle": {
+          "type": "string",
+          "description": "Questionnaire title"
+        },
+        "questionnaireId": {
+          "type": "string",
+          "description": "Questionnaire Id"
+        },
+        "processId": {
+          "type": "string",
+          "description": "Processs Id"
+        },
+        "format": {
+          "type": "string",
+          "description": "Questionnaire Format (Form/Questionnaire)"
+        },
+        "workspaceId": {
+          "type": "string"
+        },
+        "questionnaireLocale": {
+          "type": "string",
+          "description": "Base locale associated with the questionnaire document"
+        },
+        "requesterLocale": {
+          "type": "string"
+        },
+        "locale": {
+          "type": "string",
+          "description": "Locale associated with the questionnaire items and answers"
+        },
+        "draft": {
+          "type": "boolean",
+          "description": ""
+        },
+        "action": {
+          "type": "string"
+        },
+        "currentStatus": {
+          "type": "string"
+        },
+        "questionnaireDueDate": {
+          "type": "number",
+          "description": "Questionnaire due date in milliseconds"
+        },
+        "questionnaireStatus": {
+          "type": "integer",
+          "description": ""
+        },
+        "commodityLevels": {
+          "type": "array",
+          "description": "Commodity levels allowed to enter in the questionnaire",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supplier": {
+          "type": "object",
+          "properties": {
+            "s4SystemId": {
+              "type": "string",
+              "description": "Unique identifier of the supplier in sourcing system"
+            },
+            "smVendorId": {
+              "type": "string",
+              "description": "Unique identifier of supplier in SM"
+            },
+            "name": {
+              "type": "string",
+              "description": "Supplier organization name"
+            },
+            "vendorIds": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VendorIdInfo"
+              },
+              "description": "Vendor IDs in various systems"
+            }
+          }
+        },
+        "items": {
+          "type": "array",
+          "description": "Questionnaire items",
+          "items": {
+            "$ref": "#/definitions/SMQuestionnaireItemDefn"
+          }
+        },
+        "answers": {
+          "type": "array",
+          "description": "Questionnaire answers",
+          "items": {
+            "$ref": "#/definitions/SMQuestionnaireItemAnswer"
+          }
+        }
+      }
+    },
+    "SMQuestionnaireItemDefn": {
+      "type": "object",
+      "properties": {
+        "isCombo": {
+          "type": "boolean",
+          "description": ""
+        },
+        "itemId": {
+          "type": "string",
+          "description": "Unique identifier of the item"
+        },
+        "answerType": {
+          "type": "string",
+          "description": "Item Answer Type"
+        },
+        "label": {
+          "type": "string",
+          "description": "Item Label"
+        },
+        "toolTip": {
+          "type": "string",
+          "description": "Tooltip"
+        },
+        "charWidth": {
+          "type": "integer",
+          "description": ""
+        },
+        "maxLength": {
+          "type": "integer",
+          "description": ""
+        },
+        "isAlwaysVisible": {
+          "type": "boolean",
+          "description": ""
+        },
+        "relatedItemId": {
+          "type": "string",
+          "description": ""
+        },
+        "maskingPattern": {
+          "type": "string",
+          "description": "Item masking pattern"
+        },
+        "validationPattern": {
+          "type": "string",
+          "description": "Item validation pattern"
+        },
+        "validationPatternError": {
+          "type": "string",
+          "description": ""
+        },
+        "externalSystemCorrelationId": {
+          "type": "string",
+          "description": "Id of the item"
+        },
+        "number": {
+          "type": "number",
+          "description": "Item number"
+        },
+        "qualifiedNumber": {
+          "type": "string",
+          "description": "Fully qualified item number by combining the numbers from all the  ancestors."
+        },
+        "masterDataType": {
+          "type": "string",
+          "description": ""
+        },
+        "isMapping": {
+          "type": "boolean",
+          "description": ""
+        },
+        "mappingDefaultKey": {
+          "type": "string",
+          "description": ""
+        },
+        "isMultiValue": {
+          "type": "boolean",
+          "description": ""
+        },
+        "required": {
+          "type": "boolean",
+          "description": " True if the item is required"
+        },
+        "editable": {
+          "type": "boolean",
+          "description": "True if the item is editable"
+        },
+        "affectsVisibility": {
+          "type": "boolean",
+          "description": ""
+        },
+        "isRequirement": {
+          "type": "boolean",
+          "description": ""
+        },
+        "hasRange": {
+          "type": "boolean",
+          "description": ""
+        },
+        "range": {
+          "type": "object",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fromRange": {
+                "type": "string"
+              },
+              "toRange": {
+                "type": "string"
+              }
+            }
+          },
+          "description": ""
+        },
+        "hasAcceptableValues": {
+          "type": "boolean",
+          "description": ""
+        },
+        "acceptableValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": ""
+        },
+        "acceptableValuesMLS": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MLSString"
+          },
+          "description": ""
+        },
+        "allowValueOtherThanAcceptableValues": {
+          "type": "boolean",
+          "description": ""
+        },
+        "enumerationCodeDelimiters": {
+          "type": "string",
+          "description": ""
+        },
+        "precision": {
+          "type": "integer",
+          "description": ""
+        },
+        "dateFormat": {
+          "type": "string",
+          "description": ""
+        },
+        "currency": {
+          "type": "string",
+          "description": ""
+        },
+        "unitOfMeasure": {
+          "type": "string",
+          "description": ""
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": ""
+        },
+        "referenceDocs": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Attachment Id"
+              },
+              "fileName": {
+                "type": "string",
+                "description": "Attachment File Name"
+              },
+              "mimeType": {
+                "type": "string"
+              },
+              "fileSize": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "allowAttachmentsAndComments": {
+          "type": "boolean",
+          "description": ""
+        },
+        "attachmentsAndComments": {
+          "type": "string",
+          "description": ""
+        },
+        "vendorFieldMapping": {
+          "type": "string",
+          "description": ""
+        },
+        "fieldMappings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": ""
+        },
+        "searchLabel": {
+          "type": "string",
+          "description": ""
+        },
+        "searchLabelMLS": {
+          "$ref": "#/definitions/MLSString"
+        },
+        "refreshUrl": {
+          "type": "string",
+          "description": ""
+        },
+        "tableFormat": {
+          "type": "boolean",
+          "description": ""
+        },
+        "section": {
+          "type": "boolean",
+          "description": ""
+        },
+        "repeatableScetion": {
+          "type": "boolean"
+        },
+        "repeatableSectionParent": {
+          "type": "boolean"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SMQuestionnaireItemDefn"
+          }
+        }
+      }
+    },
+    "MLSString": {
+      "type": "object",
+      "description": "Multi-locale string",
+      "properties": {
+        "defaultTranslation": {
+          "type": "string"
+        },
+        "translations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SMQuestionnaireItemAnswer": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        },
+        "alternative": {
+          "type": "string"
+        },
+        "externalSystemCorrelationId": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "multiValueAnswer": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bankAccountAnswer": {
+          "type": "object"
+        },
+        "addressAnswer": {
+          "type": "object",
+          "properties": {
+            "street": {
+              "type": "string"
+            },
+            "line2": {
+              "type": "string"
+            },
+            "line3": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "postalCode": {
+              "type": "string"
+            },
+            "countryCode": {
+              "type": "string"
+            }
+          }
+        },
+        "extendedAddressAnswer": {
+          "type": "object"
+        },
+        "taxDataAnswer": {
+          "type": "object"
+        },
+        "attachmentAnswer": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Attachment Id"
+            },
+            "fileName": {
+              "type": "string",
+              "description": "Attachment File Name"
+            },
+            "mimeType": {
+              "type": "string"
+            },
+            "fileSize": {
+              "type": "number"
+            }
+          }
+        },
+        "certificateAnswer": {
+          "type": "object",
+          "properties": {
+            "certified": {
+              "type": "boolean"
+            },
+            "id": {
+              "type": "string"
+            },
+            "certificateType": {
+              "type": "string"
+            },
+            "issuer": {
+              "type": "string"
+            },
+            "yearOfPublication": {
+              "type": "string"
+            },
+            "certificateNumber": {
+              "type": "string"
+            },
+            "certificateLocation": {
+              "type": "string"
+            },
+            "effectiveDate": {
+              "type": "string"
+            },
+            "expirationDate": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "attachment": {
+              "type": "object"
+            }
+          }
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "SupplierManagementProject": {
+      "title": "Supplier Management Project",
+      "discriminator": "aribaType",
+      "type": "object",
+      "required": [
+        "aribaType"
+      ],
+      "properties": {
+        "commodity": {
+          "type": "array",
+          "description": "Zero or more hierarchical commodity codes that are associated with the project",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uniqueName": {
+                "type": "string"
+              },
+              "domain": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "hierarchy": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "documents": {
+          "type": "array",
+          "description": "List of documents associated with the project excluding questionnaires",
+          "items": {
+            "type": "object",
+            "properties": {
+              "isFile": {
+                "type": "boolean",
+                "description": ""
+              },
+              "projectItemType": {
+                "type": "string",
+                "description": "Item Type (Document/Workspace/Folder)"
+              },
+              "entityType": {
+                "type": "string",
+                "description": "Entity Type of the document."
+              },
+              "title": {
+                "type": "string",
+                "description": "Document title"
+              },
+              "version": {
+                "type": "string",
+                "description": "Document version"
+              },
+              "aribaType": {
+                "type": "string",
+                "description": "Ariba document type"
+              },
+              "workspaceTitle": {
+                "type": "string",
+                "description": "Workspace title"
+              },
+              "parentId": {
+                "type": "string",
+                "description": "Id of the parent document"
+              },
+              "isDeleted": {
+                "type": "boolean",
+                "description": "True if deleted"
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the document"
+              },
+              "status": {
+                "type": "string",
+                "description": "Status"
+              },
+              "workspaceId": {
+                "type": "string",
+                "description": "Workspace Id"
+              },
+              "owner": {
+                "type": "object",
+                "description": "Owner",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "uniqueName": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "surveys": {
+          "type": "array",
+          "description": "List of questionnaires associated with the project",
+          "items": {
+            "type": "object",
+            "properties": {
+              "isFile": {
+                "type": "boolean",
+                "description": ""
+              },
+              "projectItemType": {
+                "type": "string",
+                "description": "Item Type (Document/Workspace/Folder)"
+              },
+              "entityType": {
+                "type": "string",
+                "description": "Entity Type of the survey."
+              },
+              "title": {
+                "type": "string",
+                "description": "Document title"
+              },
+              "version": {
+                "type": "string",
+                "description": "Document version"
+              },
+              "aribaType": {
+                "type": "string",
+                "description": "Ariba document type"
+              },
+              "workspaceTitle": {
+                "type": "string",
+                "description": "Workspace title"
+              },
+              "parentId": {
+                "type": "string",
+                "description": "Id of the parent document"
+              },
+              "isDeleted": {
+                "type": "boolean",
+                "description": "True if deleted"
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique identifier of the document"
+              },
+              "status": {
+                "type": "string",
+                "description": "Status"
+              },
+              "workspaceId": {
+                "type": "string",
+                "description": "Workspace Id"
+              },
+              "owner": {
+                "type": "object",
+                "description": "Owner",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "uniqueName": {
+                    "type": "string"
+                  }
+                }
+              },
+              "isRequired": {
+                "type": "boolean",
+                "description": "true if the questionnaire is required"
+              },
+              "isInternal": {
+                "type": "boolean",
+                "description": "True if the questionnaire is marked as internal"
+              },
+              "processId": {
+                "type": "string",
+                "description": ""
+              },
+              "biddingUser": {
+                "$ref": "#/definitions/User"
+              },
+              "isSupplierProfile": {
+                "type": "boolean",
+                "description": "True if the questionnaire is marked as supplier profile"
+              },
+              "isQualificationRequest": {
+                "type": "boolean",
+                "description": "True id the questionnaire is amrked as qualification request"
+              }
+            }
+          }
+        },
+        "beginDate": {
+          "type": "number",
+          "description": "Start date for the project in milliseconds"
+        },
+        "mainContact": {
+          "$ref": "#/definitions/User",
+          "description": ""
+        },
+        "processId": {
+          "type": "string",
+          "description": ""
+        },
+        "invitees": {
+          "type": "array",
+          "description": "List of invited users",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        },
+        "department": {
+          "type": "array",
+          "description": "Zero or more hierarchical departments that are associated with the project.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "departmentId": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "tasks": {
+          "type": "array",
+          "description": "List of tasks in the project",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": ""
+              },
+              "documentId": {
+                "type": "string",
+                "description": "Id of the associated document"
+              },
+              "documentName": {
+                "type": "string",
+                "description": ""
+              },
+              "beginDate": {
+                "type": "number",
+                "description": ""
+              },
+              "type": {
+                "type": "string",
+                "description": ""
+              },
+              "title": {
+                "type": "string",
+                "description": ""
+              },
+              "required": {
+                "type": "boolean",
+                "description": ""
+              },
+              "id": {
+                "type": "string",
+                "description": ""
+              },
+              "isObsoleted": {
+                "type": "boolean",
+                "description": ""
+              },
+              "owner": {
+                "$ref": "#/definitions/User",
+                "description": ""
+              }
+            }
+          }
+        },
+        "isAutoApproval": {
+          "type": "boolean",
+          "description": "true if project is configured for auto approval"
+        },
+        "region": {
+          "type": "array",
+          "description": "Zero or more hierarchical geographical regions associated with the project",
+          "items": {
+            "type": "object",
+            "properties": {
+              "region": {
+                "type": "string",
+                "description": "Region"
+              },
+              "description": {
+                "type": "string",
+                "description": "Region description"
+              }
+            }
+          }
+        },
+        "supplier": {
+          "type": "object",
+          "description": "Supplier for whom this project was setup",
+          "properties": {
+            "systemId": {
+              "type": "string",
+              "description": "Unique identifier of the supplier"
+            },
+            "smVendorId": {
+              "type": "string",
+              "description": ""
+            },
+            "name": {
+              "type": "string",
+              "description": "Supplier organization name"
+            },
+            "phone": {
+              "type": "string",
+              "description": "Primary phone number of the supplier"
+            },
+            "email": {
+              "type": "string",
+              "description": "Primary email address of the supplier"
+            },
+            "fax": {
+              "type": "string",
+              "description": "Primary fax number of the supplier"
+            },
+            "users": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              },
+              "description": "Users belonging to the supplier org"
+            },
+            "vendorIds": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VendorIdInfo"
+              },
+              "description": "Vendor IDs in various systems"
+            }
+          }
+        },
+        "isFile": {
+          "type": "boolean",
+          "description": ""
+        },
+        "projectItemType": {
+          "type": "string",
+          "description": "Item Type (Document/Workspace/Folder)"
+        },
+        "entityType": {
+          "type": "string",
+          "description": "Entity Type."
+        },
+        "title": {
+          "type": "string",
+          "description": "Document title"
+        },
+        "version": {
+          "type": "string",
+          "description": "Document version"
+        },
+        "aribaType": {
+          "type": "string",
+          "description": "Ariba Document type"
+        },
+        "workspaceTitle": {
+          "type": "string",
+          "description": "Workspace title"
+        },
+        "parentId": {
+          "type": "string",
+          "description": "Id of the parent document"
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "True if deleted"
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the document"
+        },
+        "status": {
+          "type": "string",
+          "description": ""
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "Workspace Id"
+        },
+        "owner": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "uniqueName": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "VendorIdInfo": {
+      "type": "object",
+      "properties": {
+        "sourceSystem": {
+          "type": "string",
+          "description": "System name"
+        },
+        "id": {
+          "type": "string",
+          "description": "Vendor Unique identifier in the specified source system"
+        }
+      }
+    },
+    "SourcingEvent": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "internalId": {
+          "type": "string"
+        },
+        "templateProjectInternalId": {
+          "type": "string"
+        },
+        "testProject": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "baseLanguage": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "object",
+          "properties": {
+            "uniqueName": {
+              "type": "string"
+            },
+            "passwordAdapter": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "emailAddress": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "networkUserId": {
+              "type": "string"
+            },
+            "networkPersonId": {
+              "type": "string"
+            }
+          }
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uniqueName": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "departments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uniqueName": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "commodities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uniqueName": {
+                "type": "string"
+              },
+              "domain": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "eventTypeName": {
+          "type": "string"
+        },
+        "customFields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "fieldType": {
+                "type": "string"
+              },
+              "fieldValue": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "previewDate": {
+          "type": "string"
+        },
+        "openDate": {
+          "type": "string"
+        },
+        "closeDate": {
+          "type": "string"
+        },
+        "estimatedAwardDate": {
+          "type": "string"
+        },
+        "externalSystem": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "executionStrategy": {
+              "type": "string"
+            },
+            "paymentTerms": {
+              "type": "string"
+            },
+            "companyCode": {
+              "type": "string"
+            },
+            "documentType": {
+              "type": "string"
+            },
+            "purchasingOrganization": {
+              "type": "string"
+            },
+            "documentCategory": {
+              "type": "string"
+            },
+            "purchasingGroup": {
+              "type": "string"
+            }
+          }
+        },
+        "invitedSuppliers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "mainContact": {
+                "type": "object",
+                "properties": {
+                  "uniqueName": {
+                    "type": "string"
+                  },
+                  "passwordAdapter": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "emailAddress": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "networkUserId": {
+                    "type": "string"
+                  },
+                  "networkPersonId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "contacts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "uniqueName": {
+                      "type": "string"
+                    },
+                    "passwordAdapter": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "emailAddress": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string"
+                    },
+                    "networkUserId": {
+                      "type": "string"
+                    },
+                    "networkPersonId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "organization": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "systemID": {
+                    "type": "string"
+                  },
+                  "smVendorID": {
+                    "type": "string"
+                  },
+                  "organizationIDs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "domain": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "address": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "uniqueName": {
+                        "type": "string"
+                      },
+                      "phone": {
+                        "type": "string"
+                      },
+                      "fax": {
+                        "type": "string"
+                      },
+                      "lines": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string"
+                      },
+                      "postalCode": {
+                        "type": "string"
+                      },
+                      "country": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "isResponseTeam": {
+                "type": "boolean"
+              },
+              "networkSupplierStatus": {
+                "type": "string"
+              },
+              "invitationId": {
+                "type": "string"
+              },
+              "qualificationStatus": {
+                "type": "boolean"
+              },
+              "isPreferred": {
+                "type": "boolean"
+              },
+              "hasBid": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "eventChanges": {
+          "type": "object",
+          "properties": {
+            "contentChanges": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ContentChange"
+              }
+            },
+            "participantChanges": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ParticipantChange"
+              }
+            }
+          }
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Item"
+          }
+        },
+        "itemResponses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemResponses"
+          }
+        },
+        "baselineSpend": {
+          "type": "string"
+        },
+        "scenario": {
+          "$ref": "#/definitions/SourcingScenario"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "realUser": {
+                "type": "string"
+              },
+              "effectedUser": {
+                "type": "string"
+              },
+              "createdDate": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "action": {
+                "type": "string"
+              },
+              "details": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ContentChange": {
+      "type": "object",
+      "properties": {
+        "publishedVersion": {
+          "$ref": "#/definitions/BasicItem"
+        },
+        "draftVersion": {
+          "$ref": "#/definitions/BasicItem"
+        },
+        "diffType": {
+          "type": "string"
+        },
+        "responsesRemoved": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "ParticipantChange": {
+      "type": "object",
+      "properties": {
+        "contactName": {
+          "type": "string"
+        },
+        "itemName": {
+          "type": "string"
+        },
+        "diff": {
+          "type": "string"
+        }
+      }
+    },
+    "BasicItem": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "Item": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "itemType": {
+          "type": "string"
+        },
+        "commodity": {
+          "type": "object",
+          "properties": {
+            "uniqueName": {
+              "type": "string"
+            },
+            "domain": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "parentItem": {
+          "type": "string"
+        },
+        "prerequisiteType": {
+          "type": "number"
+        },
+        "isRequirement": {
+          "type": "boolean"
+        },
+        "terms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "fieldId": {
+                "type": "string"
+              },
+              "valueTypeName": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "supplierValue ": {
+                "type": "string"
+              },
+              "attachments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "fileName": {
+                      "type": "string"
+                    },
+                    "contentType": {
+                      "type": "string"
+                    },
+                    "contentLength": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "competitiveTermFieldId": {
+          "type": "string"
+        },
+        "invitedSuppliers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "mainContact": {
+                "type": "object",
+                "properties": {
+                  "uniqueName": {
+                    "type": "string"
+                  },
+                  "passwordAdapter": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "emailAddress": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "networkUserId": {
+                    "type": "string"
+                  },
+                  "networkPersonId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "contacts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "uniqueName": {
+                      "type": "string"
+                    },
+                    "passwordAdapter": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "emailAddress": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string"
+                    },
+                    "networkUserId": {
+                      "type": "string"
+                    },
+                    "networkPersonId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "organization": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "systemID": {
+                    "type": "string"
+                  },
+                  "smVendorID": {
+                    "type": "string"
+                  },
+                  "organizationIDs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "domain": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "address": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "uniqueName": {
+                        "type": "string"
+                      },
+                      "phone": {
+                        "type": "string"
+                      },
+                      "fax": {
+                        "type": "string"
+                      },
+                      "lines": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string"
+                      },
+                      "postalCode": {
+                        "type": "string"
+                      },
+                      "country": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "isResponseTeam": {
+                "type": "boolean"
+              },
+              "networkSupplierStatus": {
+                "type": "string"
+              },
+              "invitationId": {
+                "type": "string"
+              },
+              "qualificationStatus": {
+                "type": "boolean"
+              },
+              "isPreferred": {
+                "type": "boolean"
+              },
+              "hasBid": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "description": "If it has child items then it is referred to definition Item"
+          }
+        }
+      }
+    },
+    "ItemResponses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "alternativeName": {
+            "type": "string"
+          },
+          "item": {
+            "$ref": "#/definitions/Item"
+          },
+          "supplierUser": {
+            "type": "object",
+            "properties": {
+              "uniqueName": {
+                "type": "string"
+              },
+              "passwordAdapter": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "emailAddress": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "networkUserId": {
+                "type": "string"
+              },
+              "networkPersonId": {
+                "type": "string"
+              }
+            }
+          },
+          "supplierOrganization": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "systemID": {
+                "type": "string"
+              },
+              "smVendorID": {
+                "type": "string"
+              },
+              "organizationIDs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "domain": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "address": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "uniqueName": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "fax": {
+                    "type": "string"
+                  },
+                  "lines": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "postalCode": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "submissionDate": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SourcingScenario": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "scenarioId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "scenarioStatus": {
+            "type": "number"
+          },
+          "scenarioType": {
+            "type": "number"
+          },
+          "supplierBids": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "supplierBid": {
+                  "$ref": "#/definitions/ItemResponses"
+                },
+                "submissionDate": {
+                  "type": "string"
+                },
+                "isAward": {
+                  "type": "string"
+                },
+                "bidRank": {
+                  "type": "string"
+                },
+                "winningSplitType": {
+                  "type": "string"
+                },
+                "winningSplitValue": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "awardStatus": {
+            "type": "number"
+          },
+          "selectedSuppliersCount": {
+            "type": "number"
+          },
+          "selectedItemsCount": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "SourcingProject": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "copyFromProject": {
+          "type": "string"
+        },
+        "projectState": {
+          "type": "string"
+        },
+        "testProject": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "baseLanguage": {
+          "type": "string"
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "owner": {
+          "type": "string"
+        },
+        "departments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "commodities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourcedBy": {
+          "type": "string"
+        },
+        "executionStrategy": {
+          "type": "string"
+        },
+        "projectReason": {
+          "type": "string"
+        },
+        "predecessorProject": {
+          "type": "string"
+        },
+        "customFields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "fieldType": {
+                "type": "string"
+              },
+              "fieldValue": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "externalSystem": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "executionStrategy": {
+              "type": "string"
+            },
+            "paymentTerms": {
+              "type": "string"
+            },
+            "companyCode": {
+              "type": "string"
+            },
+            "documentType": {
+              "type": "string"
+            },
+            "purchasingOrganization": {
+              "type": "string"
+            },
+            "documentCategory": {
+              "type": "string"
+            },
+            "purchasingGroup": {
+              "type": "string"
+            }
+          }
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "attachment": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "fileName": {
+                    "type": "string"
+                  },
+                  "contentType": {
+                    "type": "string"
+                  },
+                  "contentLength": {
+                    "type": "number"
+                  }
+                }
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "description": "If it has child items then it is referred to documents type"
+                }
+              }
+            }
+          }
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "createdDate": {
+                "type": "string"
+              },
+              "realUser": {
+                "type": "string"
+              },
+              "effectedUser": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "action": {
+                "type": "string"
+              },
+              "details": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

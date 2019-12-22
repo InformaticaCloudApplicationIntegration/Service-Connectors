@@ -1,0 +1,409 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "2.0",
+    "title": "Operational Reporting for Procurement - Job Submission API",
+    "description": "The SAP Ariba Operational Reporting APIs for procurement enables you to report on the transactional procurement data that you need to make operational decisions. You use the API to create a client application that extracts reportable data.\n\nOperational Reporting API is used to retrieve real-time transaction data for procurement objects.\n\nThe client application posts a reporting job to the jobs queue specifying a reporting view template."
+  },
+  "x-sap-shortText": "Enables your application to submit jobs to the Operational Reporting API for Procurement (asynchronous usage).",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/procurement-reporting-job/v2/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/procurement-reporting-job/v2/{environment}",
+      "description": "Operational Reporting for Procurement - Job Submission API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "ru.openapi.ariba.com",
+            "mn1.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api-ru.ariba.com",
+            "api.mn1.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "procurement-reporting-job",
+      "description": "Operational Reporting for Procurement - Job Submission API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "RU",
+      "description": "RU data center"
+    },
+    {
+      "name": "UAE",
+      "description": "UAE data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    },
+    {
+      "name": "Job Submission",
+      "description": "request submission for retreiving transaction data"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/jobs": {
+      "post": {
+        "description": "Submit a job for a view template to retrieve data for a particular transaction document type.",
+        "summary": "Submit job Request",
+        "tags": [
+          "Job Submission"
+        ],
+        "operationId": "Submit job Request",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Customer realm name"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "The \"date\" filters are mandatory. other filters can be overridden. Filters not defined as part of view template definition cannot be overridden.",
+            "schema": {
+              "$ref": "#/definitions/SubmitJobRequestrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/SubmitJobRequestresponse"
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FilterExpression": {
+      "title": "FilterExpression",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Customized name for the field. This field will be passed while posting a job. e.g TimeCreatedFrom/MyTimeCreated/createdFrom",
+          "type": "string"
+        },
+        "field": {
+          "description": "Field name which is a filter key and defined in whitelist. e.g TimeCreated",
+          "type": "string"
+        },
+        "op": {
+          "description": "Operations allowed. <= >= == <> IN LIKE NOT LIKE",
+          "type": "string"
+        },
+        "defaultValue": {
+          "description": "Passing defaultvalue is optional. Default value can always be overridden.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "field",
+        "op"
+      ],
+      "example": {
+        "filterExpressions": [
+          {
+            "name": "createdDateFrom",
+            "field": "TimeCreated",
+            "op": ">=",
+            "defaultValue": "2017-11-05T01:01:59Z"
+          },
+          {
+            "name": "createdDateTo",
+            "field": "TimeCreated",
+            "op": "<=",
+            "defaultValue": "2017-11-06T01:01:59Z"
+          },
+          {
+            "name": "StatusInList",
+            "field": "StatusString",
+            "op": "IN",
+            "defaultValue": [
+              "Approved",
+              "Canceled",
+              "Canceling",
+              "Collaborating",
+              "Collaboration",
+              "Completed",
+              "Composing",
+              "DeniedInvalidOrdered",
+              "Ordering",
+              "Received",
+              "Receiving",
+              "Submitted"
+            ]
+          }
+        ]
+      }
+    },
+    "SubmitJobRequestrequest": {
+      "title": "Submit job RequestRequest",
+      "example": {
+        "viewTemplateName": "Requisition_PeopleSoft_updatedRange",
+        "filters": {
+          "updatedDateFrom": "2017-07-06T23:55:31Z",
+          "updatedDateTo": "2017-07-11T10:00:00Z"
+        }
+      },
+      "type": "object",
+      "properties": {
+        "viewTemplateName": {
+          "description": "",
+          "type": "string"
+        },
+        "filters": {
+          "$ref": "#/definitions/Filters"
+        }
+      },
+      "required": [
+        "viewTemplateName",
+        "filters"
+      ]
+    },
+    "Filters": {
+      "title": "Filters",
+      "type": "object",
+      "properties": {
+        "updatedDateFrom": {
+          "description": "",
+          "type": "string",
+          "example": "2017-07-06T23:55:31Z"
+        },
+        "updatedDateTo": {
+          "description": "",
+          "type": "string",
+          "example": "2017-07-06T23:55:31Z"
+        }
+      },
+      "required": [
+        "updatedDateFrom",
+        "updatedDateTo"
+      ]
+    },
+    "SubmitJobRequestresponse": {
+      "title": "Submit job RequestResponse",
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "The generated Job Id",
+          "type": "string",
+          "example": "c1f53a792-0282-4505-be90-558c2e2652561512101983835"
+        },
+        "files": {
+          "description": "Files will be generated once the Job is in completed state",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "description": "The possible job status are : pending, Inprogress, completed and expired",
+          "type": "string"
+        },
+        "createdDate": {
+          "description": "The job creation time",
+          "type": "string"
+        },
+        "viewTemplateName": {
+          "description": "viewtemplate name with which job is submitted",
+          "type": "string"
+        },
+        "filters": {
+          "$ref": "#/definitions/Filters"
+        },
+        "documentType": {
+          "description": "Procurement transaction dcument type for which current job is submitted",
+          "type": "string"
+        },
+        "selectAttributesSnap": {
+          "description": "Select attributes defined for the view",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filterExpressionsSnap": {
+          "description": "Filter criteria defined for view",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterExpression"
+          }
+        }
+      },
+      "required": [
+        "jobId",
+        "files",
+        "status",
+        "createdDate",
+        "viewTemplateName",
+        "filters",
+        "documentType",
+        "selectAttributesSnap",
+        "filterExpressionsSnap"
+      ]
+    },
+    "ErrorView": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "InvalidSelectAttr"
+        },
+        "message": {
+          "type": "string",
+          "example": "Invalid select attributes"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Unauthorized/API key not found"
+        },
+        "message": {
+          "type": "string",
+          "example": "Token Expired/ API Key not found"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorInternal": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Internal Server Error"
+        },
+        "message": {
+          "type": "string",
+          "example": "Internal Server Error"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "responses": {
+    "InvalidSelectAttributes": {
+      "description": "The select attributes are either not whitelisted/duplicated/customized",
+      "schema": {
+        "$ref": "#/definitions/ErrorView"
+      }
+    },
+    "Unauthorized": {
+      "description": "Unauthorized request. Check oauth token is expired or you are not using correct oauth token.",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "InternalServerError": {
+      "description": "If your URL is not constructed properly, you have trailing spaces in URl, request body format is wrong or ARIBA site is temporarily down",
+      "schema": {
+        "$ref": "#/definitions/ErrorInternal"
+      }
+    },
+    "Forbidden": {
+      "description": "forbidden",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    }
+  }
+}

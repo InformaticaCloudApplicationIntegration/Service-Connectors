@@ -1,0 +1,341 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "1.0.0",
+    "title": "Integration Monitoring API for Strategic Sourcing",
+    "description": "The data integration options available in SAP Ariba allows customers to import or export master and transaction data, to and from their ERP system. Data can be imported or exported by running individual or batch data import or export tasks from the user interface, or by scheduling the import or export using the SAP Ariba Integration Toolkit (ITK). The Integration monitoring API for Strategic Sourcing allows customers to develop client applications that call the Integration monitoring API URL, which will return the status of a particular integration event (a data import or export task). This is useful for customers to automate their batch import or export jobs to or from their SAP Ariba solution. Buyer organizations can use the Integration monitoring API to monitor the status of import and export integration events. The API returns the current running status of the specified event, or, if the event is not currently running, the system returns details of the last run status of the specific event. It can also be configured to return the execution history of the integration event.\n\nThe Integration monitoring API is applicable to:\n* SAP, PeopleSoft, and generic ERP systems\n* Individual import and export file channel integration events\n* Batch import integration events\n* Transaction and master data."
+  },
+  "x-sap-shortText": "Allows customers to import or export master and transaction data, to and from their ERP system.",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/strategicsourcing-eventstatus/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/strategicsourcing-eventstatus/v1/{environment}",
+      "description": "Integration Monitoring API for Strategic Sourcing endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "ru.openapi.ariba.com",
+            "mn1.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api-ru.ariba.com",
+            "api.mn1.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "strategicsourcing-eventstatus",
+      "description": "Integration Monitoring API for Strategic Sourcing"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "RU",
+      "description": "RU data center"
+    },
+    {
+      "name": "UAE",
+      "description": "UAE data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    },
+    {
+      "name": "IE-status-retrieval-api",
+      "description": "Integration Events Status Retrieval"
+    }
+  ],
+  "paths": {
+    "/v2/events/status": {
+      "get": {
+        "tags": [
+          "/v2/events/status"
+        ],
+        "description": "Gets the status of the Integration Events in Strategic Sourcing application for a specific realm.\n",
+        "operationId": "events/status",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "description": "Provide uniquename of the realm. Example \"testRealm\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventname",
+            "in": "header",
+            "description": "Name of the event to retrieve the status. This can be the name which displays in UI or the InternalEventName or ITKDisplayName. Example \"Import Master Data Batch Pull\" or \"GroupSharedUserMapPull\"",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "histcount",
+            "in": "header",
+            "description": "Based on this value it retrieves the event status history. For example, if the value is 2, it retrieves the last 2 status of the Integration event. Value should be from 1 to 50.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "This is unique identifier key. By providing this value we should be able to retrieve the status of particular integration event run status. And also make sure that we should not provide value for eventname header when we try to retrieve status with uid. Example \"R3JvdXBTaGFyZWRVc2VyTWFwUHVsbCNfIzE1MjUyMzg2MjMwMDA=\"",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errormessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "402": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "response": {
+      "type": "object",
+      "properties": {
+        "internalEventName": {
+          "type": "string",
+          "description": "The internal name of the event being monitored."
+        },
+        "itkDisplayNames": {
+          "type": "string",
+          "description": "The ITK display name(s) of the event(s). For example, \u201cBatch Data Load\u201d and \u201cImport Batch Data\u201d."
+        },
+        "eventDisplayName": {
+          "type": "string",
+          "description": "The external name of the event being monitored(Which shows in UI)."
+        },
+        "checkSum": {
+          "type": "string",
+          "description": "The number of data bits transferred in the import or export event."
+        },
+        "eventStartTime": {
+          "type": "string",
+          "description": "The start time of the event being monitored in EPOCH format."
+        },
+        "eventEndTime": {
+          "type": "string",
+          "description": "The end time of the event being monitored in EPOCH format."
+        },
+        "eventStatus": {
+          "type": "integer",
+          "description": "This field contains one of the following values, to indicate how successful the import or export event was, 0 - The event did not run, 1 - The event completed successfully, 2 - The event completed with warning, 3 - The event is in progress, 4 - The event failed to run due to an error."
+        },
+        "recordsCreated": {
+          "type": "integer",
+          "description": "The number of records created as a result of an import event."
+        },
+        "recordsUpdated": {
+          "type": "integer",
+          "description": "The number of records updated as a result of an import event."
+        },
+        "recordsDeleted": {
+          "type": "integer",
+          "description": "The number of records deleted as a result of an import event."
+        },
+        "recordsExported": {
+          "type": "integer",
+          "description": "The number of records exported as a result of an export event."
+        },
+        "uid": {
+          "type": "string",
+          "description": "This is unique identifier key of the integration event."
+        },
+        "clientDetails": {
+          "type": "object",
+          "properties": {
+            "clientType": {
+              "type": "string",
+              "description": "Value is DataTransferTool, if we upload the data from ITK."
+            },
+            "clientVersion": {
+              "type": "string",
+              "description": "Version of the ITK."
+            },
+            "clientInfo": {
+              "type": "string",
+              "description": "Information of the client from where the data was uploaded via ITK."
+            }
+          }
+        },
+        "errorDetails": {
+          "type": "object",
+          "properties": {
+            "itemID": {
+              "type": "integer",
+              "description": "Error Item Number"
+            },
+            "severity": {
+              "type": "string",
+              "description": "Warning or Error"
+            },
+            "dataSource": {
+              "type": "string",
+              "description": "Name of the CSV file."
+            },
+            "lineNumber": {
+              "type": "integer",
+              "description": "Line number at where the warning or error is."
+            },
+            "errorMsg": {
+              "type": "string",
+              "description": "Error Message."
+            },
+            "fieldName": {
+              "type": "string",
+              "description": "Name of the field in the CSV file."
+            },
+            "column": {
+              "type": "string",
+              "description": "Column name in the CSV file."
+            },
+            "dataValue": {
+              "type": "string",
+              "description": "Value of the data in the CSV file."
+            }
+          }
+        },
+        "subEvents": {
+          "type": "object",
+          "properties": {
+            "internalEventName": {
+              "type": "string",
+              "description": "The internal name of the event being monitored."
+            },
+            "eventDisplayName": {
+              "type": "string",
+              "description": "The ITK display name(s) of the event(s). For example, \u201cBatch Data Load\u201d and \u201cImport Batch Data\u201d."
+            },
+            "eventStatus": {
+              "type": "integer",
+              "description": "This field contains one of the following values, to indicate how successful the import or export event was, 0 - The event did not run, 1 - The event completed successfully, 2 - The event completed with warning, 3 - The event is in progress, 4 - The event failed to run due to an error."
+            },
+            "recordsCreated": {
+              "type": "integer",
+              "description": "The number of records created as a result of an import event."
+            },
+            "recordsUpdated": {
+              "type": "string",
+              "description": "The number of records updated as a result of an import event."
+            },
+            "recordsDeleted": {
+              "type": "integer",
+              "description": "The number of records deleted as a result of an import event."
+            },
+            "recordsExported": {
+              "type": "string",
+              "description": "The number of records exported as a result of an export event."
+            }
+          }
+        }
+      }
+    },
+    "errormessage": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

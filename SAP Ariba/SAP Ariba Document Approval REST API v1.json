@@ -1,0 +1,1654 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "1.0",
+    "title": "Document Approval API",
+    "description": "The Document Approvals API allows you to create a client application to approve or deny requisitions and invoices generated in an SAP Ariba procurement solution. The client application can process a requisition or invoice either manually, by presenting the decision to an authorized user, or programmatically by providing the ID of a specific user authorized to approve, deny, or comment on the requisition or invoice."
+  },
+  "x-sap-shortText": "Enables your application to approve or deny requisitions and invoices generated in an SAP Ariba procurement solution.",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/approval/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/approval/v1/{environment}",
+      "description": "Document Approval API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "ru.openapi.ariba.com",
+            "mn1.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api-ru.ariba.com",
+            "api.mn1.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "approval",
+      "description": "Document Approval API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "RU",
+      "description": "RU data center"
+    },
+    {
+      "name": "UAE",
+      "description": "UAE data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/changes": {
+      "get": {
+        "description": "Returns the list of approvable documents whose approval state has changed since the last request.  <p>Send the ID of the most recent requisition your client application has processed, if any, in the request headers. This ID is unnecessary if no requisitions have yet been processed.",
+        "summary": "Get Changes",
+        "tags": [
+          "Core"
+        ],
+        "operationId": "get Changes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm. \nTry it out with: mytestrealm"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "number of changes to return \n Try it out with: 2"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "starting record number in result set \n Try it out with: 1"
+          },
+          {
+            "name": "needTotal",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "indicates whether total count of the query"
+          },
+          {
+            "name": "lastChangeId",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The id of the last change to start the search (if omitted - will start at first change) \n Try it out with: 2"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GetChangeResponse"
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{approvable_type}/{approvable_id}": {
+      "get": {
+        "description": "Returns the details of an approvable document (requisition/invoice) identified by the approvable_id parameter.",
+        "summary": "Get Document Details",
+        "tags": [
+          "Core"
+        ],
+        "operationId": "Get Document Details",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "approvable_type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Document type, requisitions or invoices \n Try it out with: requisitions "
+          },
+          {
+            "name": "approvable_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the approvable \n Try it out with: PR2"
+          },
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm \nTry it out with: mytestrealm"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the approvable document.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RequisitionDetailsResponse"
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/operations/rest/{approvable_type}/{action}": {
+      "post": {
+        "description": "Approves, denies or withdraws the specified approvable type, or posts a comment. Possible values of action are approve, deny, and comment.",
+        "summary": "Act on Approvable",
+        "tags": [
+          "Core"
+        ],
+        "operationId": "Act on Approvable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "approvable_type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Document type, requisitions or invoices \n Try it out with: requisitions"
+          },
+          {
+            "name": "action",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "approve/deny/withdraw \n Try it out with: approve"
+          },
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm \n Try it out with: mytestrealm"
+          },
+          {
+            "name": "user",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the user \n Try it out with: mallen"
+          },
+          {
+            "name": "passwordadapter",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "passwordAdapter for this user \n Try it out with: PasswordAdapter1"
+          },
+          {
+            "name": "ApprovalAction ",
+            "in": "body",
+            "required": true,
+            "description": "Details of the approval action",
+            "schema": {
+              "$ref": "#/definitions/ApproveInvoiceTyperequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the approvable document.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApproveRequisitionResponse"
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "400": {
+            "description": "Details of the approvable document.",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/400ApproveRequisition1"
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/pendingApprovables": {
+      "get": {
+        "summary": "Get all pending documents/task approvables",
+        "description": "List all documents/tasks that are pending approval",
+        "operationId": "getPendingApprovables",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Core"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm."
+          },
+          {
+            "name": "user",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "user id of the user."
+          },
+          {
+            "name": "passwordAdapter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "passwordAdapter of the user."
+          },
+          {
+            "name": "documentType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "document type the user is requesting."
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "the starting point within the collection of resource results to be returned."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "maximum number of items that may be returned for a single request."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PendingApprovals"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request with some missing parameter",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/400PendingApprovables"
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "description": "User ID not found",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/404PendingApprovables"
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/usergroups/{group_name}/members": {
+      "get": {
+        "description": "Returns the list of users who are members of the group specified in group_name. This API uses the unique name for the group.",
+        "summary": "Get Approver Group's Members",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "GetApproversByGroupName",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "group_name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique name of the group \nTry it out with: WXYZ"
+          },
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm \nTry it out with: mytestrealm"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the approvable document.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GetApproverGroupMemberResponse"
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/groups/{group_id}/members": {
+      "get": {
+        "description": "Returns the list of users who are members of the group specified in group_name. This API uses the baseId to get the group details.",
+        "summary": "GroupMembers",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "GroupMembers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "group_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the group \nTry it out with: WXYZ"
+          },
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "\nTry it out with: mytestrealm"
+          },
+          {
+            "name": "user",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "\nTry it out with: mallen"
+          },
+          {
+            "name": "passwordadapter",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "\nTry it out with: PasswordAdapter1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GroupMembersResponse"
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/{approvable_type}/{approvable_id}/attachments/{attachment_id}": {
+      "get": {
+        "description": "Download an attachment associated with the approvable document identified by approvable_id. If the document has one or more attachments, this API returns the attachment specified by the attachment_id parameter.",
+        "summary": "Get Approvable attachment",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Get Approvable attachment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "approvable_type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Document type, requisitions or invoices \nTry it out with: requisitions"
+          },
+          {
+            "name": "approvable_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the approvable \nTry it out with: PR2"
+          },
+          {
+            "name": "attachment_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the attachment \nTry it out with: 2"
+          },
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm \nTry it out with: mytestrealm"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "object",
+              "example": "This is a text file and you see the content of the file when you execute this API."
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GetChangeResponse": {
+      "title": "Get Change Response",
+      "example": {
+        "changeParameters": "AAAAAEjJJu1cM",
+        "changeSequenceId": "1",
+        "changeType": "ApprovalRequestActivated",
+        "approvableUniqueName": "PR19432",
+        "restResourceName": "requisitions",
+        "realm": "qarealm"
+      },
+      "type": "object",
+      "properties": {
+        "changeParameters": {
+          "description": "",
+          "example": "AAAAAEjJJu1cM",
+          "type": "string"
+        },
+        "changeSequenceId": {
+          "description": "",
+          "example": "1",
+          "type": "string"
+        },
+        "changeType": {
+          "description": "",
+          "example": "ApprovalRequestActivated",
+          "type": "string"
+        },
+        "approvableUniqueName": {
+          "description": "",
+          "example": "PR19432",
+          "type": "string"
+        },
+        "restResourceName": {
+          "description": "",
+          "example": "requisitions",
+          "type": "string"
+        },
+        "realm": {
+          "description": "",
+          "example": "qarealm",
+          "type": "string"
+        }
+      },
+      "required": [
+        "changeParameters",
+        "changeSequenceId",
+        "changeType",
+        "approvableUniqueName",
+        "restResourceName",
+        "realm"
+      ]
+    },
+    "ApproveInvoiceTyperequest": {
+      "title": "Approve Invoice TypeRequest",
+      "example": {
+        "approvableId": "PR2",
+        "comment": "Approval granted!!!",
+        "visibleToSupplier": "false"
+      },
+      "type": "object",
+      "properties": {
+        "approvableId": {
+          "description": "",
+          "type": "string"
+        },
+        "comment": {
+          "description": "",
+          "type": "string"
+        },
+        "visibleToSupplier": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "required": [
+        "approvableId",
+        "comment",
+        "visibleToSupplier"
+      ]
+    },
+    "ApprovalAction": {
+      "title": "Approval Action Response",
+      "example": {
+        "approvableId": "INV4646-11355",
+        "comment": "Approval granted!!!",
+        "visibleToSupplier": "false"
+      },
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "error code",
+          "type": "string"
+        },
+        "errorDescription": {
+          "description": "error description string",
+          "type": "string"
+        },
+        "comment": {
+          "description": "original comment",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorCode": {
+      "title": "Error Code",
+      "example": {
+        "code": "0",
+        "message": "string",
+        "fields": "string"
+      },
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "error code",
+          "type": "integer"
+        },
+        "message": {
+          "description": "error description",
+          "type": "string"
+        },
+        "fields": {
+          "description": "",
+          "type": "string"
+        }
+      }
+    },
+    "RequisitionDetailsResponse": {
+      "type": "object",
+      "properties": {
+        "activeApprovalRequestIds": {
+          "type": "string",
+          "description": "comma-separated ids of active approval requests"
+        },
+        "activeApproverCount": {
+          "type": "number",
+          "description": "the count of active approvers"
+        },
+        "approvalRequests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApprovalRequest"
+          },
+          "description": "Description of approval nodes in the approval graph."
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attachment"
+          },
+          "description": "Description of approval nodes in the approval graph."
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Comment"
+          }
+        },
+        "firstActiveApproverName": {
+          "type": "string",
+          "description": "full name of the first active approver"
+        },
+        "isPinned": {
+          "type": "boolean",
+          "description": "indicates whether this approvable is pinned"
+        },
+        "lastModified": {
+          "type": "number",
+          "description": "modification time in milliseconds"
+        },
+        "lineItemCount": {
+          "type": "number",
+          "description": "line item count"
+        },
+        "lineItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReqLineItem"
+          },
+          "description": "Line item details of the requisition."
+        },
+        "realm": {
+          "type": "string",
+          "description": "the name of the realm"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Record"
+          }
+        },
+        "requester": {
+          "$ref": "#/definitions/UserReference"
+        },
+        "requesterName": {
+          "type": "string",
+          "description": "requester unique name."
+        },
+        "site": {
+          "type": "string",
+          "description": "canonical site name."
+        },
+        "statusString": {
+          "type": "string",
+          "description": "Current status of the requisition."
+        },
+        "submitDate": {
+          "type": "number",
+          "description": "Date in milliseconds when the requester submitted the requisition."
+        },
+        "timeUpdated": {
+          "type": "number",
+          "description": "The most recent timestamp in milliseconds when the requisition was updated."
+        },
+        "title": {
+          "type": "string",
+          "description": "title of the requisition"
+        },
+        "totalCost": {
+          "$ref": "#/definitions/Money"
+        },
+        "uniqueName": {
+          "type": "string",
+          "description": "Identifier that uniquely identifies the requisition."
+        },
+        "version": {
+          "type": "string",
+          "description": "version of this approvable"
+        }
+      }
+    },
+    "PendingApprovals": {
+      "type": "object",
+      "properties": {
+        "uniqueName": {
+          "type": "string",
+          "description": "unique name of approvable/document",
+          "example": "PR14"
+        },
+        "documentType": {
+          "type": "string",
+          "description": "document type of the approvable/document",
+          "example": "ariba.purchasing.core.Requisition"
+        },
+        "description": {
+          "type": "string",
+          "description": "description about the approvable/document",
+          "example": "A requisition"
+        },
+        "assignedDate": {
+          "type": "string",
+          "description": "assigned Date of this approvable",
+          "example": "2019/05/20"
+        },
+        "attachments": {
+          "type": "array",
+          "description": "list of attachments for this approvable/document",
+          "items": {
+            "type": "string"
+          }
+        },
+        "approver": {
+          "type": "string",
+          "description": "approver for this approvable/document",
+          "example": "cnoll"
+        },
+        "email": {
+          "type": "string",
+          "description": "email address of approver for this approvable/document",
+          "example": "cnoll@ariba.com"
+        }
+      }
+    },
+    "Record": {
+      "description": "a requisition modification record",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "record id"
+        },
+        "user": {
+          "$ref": "#/definitions/UserReference"
+        },
+        "date": {
+          "type": "number",
+          "description": "date in milliseconds"
+        },
+        "action": {
+          "type": "string",
+          "description": "action type"
+        },
+        "summary": {
+          "type": "string",
+          "description": "verbose action description"
+        },
+        "requisitionId": {
+          "type": "string",
+          "description": "unique name of the requisition"
+        },
+        "type": {
+          "type": "string",
+          "description": "action type abbreviation \"C\"- Comment,\"A\"- Attachment, \"N\"- Nudge,\"T\"- Action     (Ex. Approve, Deny, Withdraw).\n\"R\" Creation (Ex: Copied),  \"O\"- Other      (Ex: Submit, ApproverRequest).\n"
+        },
+        "comment": {
+          "type": "string",
+          "description": "comment text"
+        }
+      }
+    },
+    "Attachment": {
+      "description": "requisition attachment",
+      "type": "object",
+      "properties": {
+        "contentlength": {
+          "type": "number",
+          "description": "attachment content length"
+        },
+        "contentType": {
+          "type": "string",
+          "description": "attachment content type"
+        },
+        "date": {
+          "type": "number",
+          "description": "attachment date in milliseconds"
+        },
+        "externalAttachment": {
+          "type": "boolean",
+          "description": "indicates whether it is an external attachment"
+        },
+        "fileName": {
+          "type": "string",
+          "description": "attachment file name"
+        },
+        "id": {
+          "type": "string",
+          "description": "attachment unique id"
+        },
+        "numberInCollection": {
+          "type": "number",
+          "description": "indicates the number in collection"
+        },
+        "requisitionId": {
+          "type": "string",
+          "description": "requisition id"
+        },
+        "url": {
+          "type": "string",
+          "description": "attachment url"
+        },
+        "user": {
+          "$ref": "#/definitions/UserReference"
+        },
+        "userName": {
+          "type": "string",
+          "description": "user name"
+        }
+      }
+    },
+    "ApprovalRequest": {
+      "description": "Individual approval node.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "number",
+          "description": "approval request state. 1 - \"NotYetActive\", 2 - \"ActiveButNoActionYet\", 4 - \"Denied\", 8 -\"Approved\", 16 -\"Rejected\""
+        },
+        "approvalState": {
+          "type": "string",
+          "description": "string representation of approval state."
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "indicates whether approval is required for this request"
+        },
+        "approver": {
+          "type": "string",
+          "description": "name of the approver"
+        },
+        "reason": {
+          "type": "string",
+          "description": "reason for this approval request"
+        },
+        "assignedDate": {
+          "type": "number",
+          "description": "assigned date in milliseconds"
+        },
+        "id": {
+          "type": "string",
+          "description": "approval request id"
+        },
+        "requisitionId": {
+          "type": "string",
+          "description": "id of the requisition for this approval request"
+        },
+        "dependencyApprovalRequestsUID": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "approvers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Approvers"
+          }
+        }
+      }
+    },
+    "Comment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "comment id"
+        },
+        "date": {
+          "type": "number",
+          "description": "Date in milliseconds on which this comment was added."
+        },
+        "attachedToLine": {
+          "type": "number",
+          "description": "if comment is attached to line item - this line item's number in collection"
+        },
+        "text": {
+          "type": "string",
+          "description": "comment text"
+        },
+        "user": {
+          "$ref": "#/definitions/UserReference"
+        },
+        "requisitionId": {
+          "type": "string",
+          "description": "requisition id"
+        }
+      }
+    },
+    "ReqLineItem": {
+      "type": "object",
+      "properties": {
+        "accountings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SplitAccounting"
+          }
+        },
+        "amount": {
+          "$ref": "#/definitions/Money"
+        },
+        "billingAddress": {
+          "$ref": "#/definitions/Named"
+        },
+        "commodityExportMapEntry": {
+          "type": "object",
+          "properties": {
+            "accountType": {
+              "type": "object",
+              "description": "account type",
+              "properties": {
+                "uniqueName": {
+                  "type": "string",
+                  "description": "unique name for this account type"
+                }
+              }
+            }
+          }
+        },
+        "commonCommodityCode": {
+          "type": "string",
+          "description": "common commodity code"
+        },
+        "deliverTo": {
+          "type": "string",
+          "description": "deliver to"
+        },
+        "description": {
+          "$ref": "#/definitions/LineItemDescription"
+        },
+        "needBy": {
+          "type": "number",
+          "description": "need by date in milliseconds"
+        },
+        "numberInCollection": {
+          "type": "number",
+          "description": "number in collection"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "quantity"
+        },
+        "requisitionId": {
+          "type": "string",
+          "description": "requisition id"
+        },
+        "shipTo": {
+          "$ref": "#/definitions/Named"
+        },
+        "splitAccountingType": {
+          "type": "string",
+          "description": "unique name of the split accounting type"
+        },
+        "supplier": {
+          "$ref": "#/definitions/Supplier"
+        },
+        "supplierLocation": {
+          "$ref": "#/definitions/Named"
+        }
+      }
+    },
+    "LineItemDescription": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "description string"
+        },
+        "shortName": {
+          "type": "string",
+          "description": "line item's short name"
+        },
+        "supplierPartAuxiliaryID": {
+          "type": "string",
+          "description": "supplier part auxiliary id"
+        },
+        "unitOfMeasure": {
+          "type": "string",
+          "description": "unit of measure"
+        },
+        "supplierPartNumber": {
+          "type": "string",
+          "description": "supplier part number"
+        },
+        "price": {
+          "$ref": "#/definitions/Money"
+        }
+      }
+    },
+    "SplitAccounting": {
+      "type": "object",
+      "properties": {
+        "numberInCollection": {
+          "type": "number",
+          "description": "number in collection"
+        },
+        "percentage": {
+          "type": "number",
+          "format": "double",
+          "description": "percentage"
+        },
+        "quantity": {
+          "type": "number",
+          "format": "double",
+          "description": "quanity"
+        },
+        "amount": {
+          "$ref": "#/definitions/Money"
+        },
+        "erpSplitValue": {
+          "type": "string",
+          "description": "erp split value"
+        },
+        "requisitionId": {
+          "type": "string",
+          "description": "requisition id"
+        },
+        "lineItem": {
+          "type": "number",
+          "description": "line item number in collection"
+        },
+        "accountingCombinationID": {
+          "type": "string",
+          "description": "accounting combination id"
+        },
+        "account": {
+          "$ref": "#/definitions/Named"
+        },
+        "company": {
+          "$ref": "#/definitions/Named"
+        },
+        "businessUnit": {
+          "$ref": "#/definitions/Named"
+        },
+        "department": {
+          "$ref": "#/definitions/Named"
+        },
+        "costCenter": {
+          "$ref": "#/definitions/Named"
+        },
+        "subAccount": {
+          "$ref": "#/definitions/Named"
+        },
+        "product": {
+          "$ref": "#/definitions/Named"
+        },
+        "project": {
+          "$ref": "#/definitions/Named"
+        },
+        "region": {
+          "$ref": "#/definitions/Named"
+        }
+      }
+    },
+    "Supplier": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the object"
+        },
+        "uniqueName": {
+          "type": "string",
+          "description": "unique name of the object"
+        },
+        "commonSupplier": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "common supplier name"
+            }
+          }
+        }
+      }
+    },
+    "Money": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "bigdecimal",
+          "description": "Amount"
+        },
+        "currency": {
+          "type": "string",
+          "description": "A unique internal identifier for the currency."
+        }
+      }
+    },
+    "Named": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of the object"
+        },
+        "uniqueName": {
+          "type": "string",
+          "description": "unique name of the object"
+        }
+      }
+    },
+    "UserReference": {
+      "type": "object",
+      "properties": {
+        "uniqueName": {
+          "type": "string",
+          "description": "Unique name of the user"
+        },
+        "passwordAdaptor": {
+          "type": "string",
+          "description": "Unique name of the user"
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of the user."
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "email address"
+        },
+        "phone": {
+          "type": "string",
+          "description": "phone number"
+        },
+        "realm": {
+          "type": "string",
+          "description": "user's realm"
+        }
+      }
+    },
+    "Approvers": {
+      "type": "object",
+      "properties": {
+        "requisitionId": {
+          "type": "string",
+          "description": "Unique name of requisition"
+        },
+        "approvalRequestId": {
+          "type": "string",
+          "description": "approval request id"
+        },
+        "id": {
+          "type": "string",
+          "description": "id of this approvers object"
+        },
+        "type": {
+          "type": "string",
+          "description": "approver type (user/group)"
+        },
+        "user": {
+          "$ref": "#/definitions/UserReference"
+        },
+        "group": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "id of the group"
+            },
+            "uniqueName": {
+              "type": "string",
+              "description": "unique name of the group"
+            }
+          }
+        }
+      }
+    },
+    "ApprovableChanges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ApprovableChange"
+      },
+      "description": "list of requisition change objects"
+    },
+    "ApprovableChange": {
+      "type": "object",
+      "properties": {
+        "restResourceName": {
+          "type": "string",
+          "description": "the name of the rest resource (requisitions)."
+        },
+        "approvableUniqueName": {
+          "type": "string",
+          "description": "id of approvable"
+        },
+        "changeType": {
+          "type": "string",
+          "description": "the type of change"
+        },
+        "changeSequenceId": {
+          "type": "string",
+          "description": "id of the change"
+        },
+        "changeParameters": {
+          "type": "string",
+          "description": "the id of the approval node in the graph (if relevant)"
+        },
+        "realm": {
+          "type": "string",
+          "description": "realm id for this change"
+        }
+      }
+    },
+    "GetApproverGroupMemberResponse": {
+      "description": "Successfull Response",
+      "example": {
+        "emailAddress": "shilpa.pattnaik@sap.com",
+        "contentType": "image/png",
+        "phone": "",
+        "name": "Gene Halas",
+        "uniqueName": "ghalas",
+        "passwordAdapter": "PasswordAdapter1",
+        "realm": "qarealm"
+      },
+      "type": "object",
+      "properties": {
+        "emailAddress": {
+          "description": "",
+          "example": "shilpa.pattnaik@sap.com",
+          "type": "string"
+        },
+        "contentType": {
+          "description": "",
+          "example": "image/png",
+          "type": "string"
+        },
+        "phone": {
+          "description": "",
+          "type": "string"
+        },
+        "name": {
+          "description": "",
+          "example": "Gene Halas",
+          "type": "string"
+        },
+        "uniqueName": {
+          "description": "",
+          "example": "ghalas",
+          "type": "string"
+        },
+        "passwordAdapter": {
+          "description": "",
+          "example": "PasswordAdapter1",
+          "type": "string"
+        },
+        "realm": {
+          "description": "",
+          "example": "qarealm",
+          "type": "string"
+        }
+      },
+      "required": [
+        "emailAddress",
+        "contentType",
+        "phone",
+        "name",
+        "uniqueName",
+        "passwordAdapter",
+        "realm"
+      ]
+    },
+    "GroupMembersResponse": {
+      "description": "Suceessful Response",
+      "example": {
+        "emailAddress": "nobody@ansmtp.ariba.com",
+        "contentType": "image/png",
+        "phone": "",
+        "name": "OpsUser70",
+        "uniqueName": "OpsUser70",
+        "passwordAdapter": "PasswordAd2apter1",
+        "realm": "qarealm"
+      },
+      "type": "object",
+      "properties": {
+        "emailAddress": {
+          "description": "",
+          "example": "nobody@ansmtp.ariba.com",
+          "type": "string"
+        },
+        "contentType": {
+          "description": "",
+          "example": "image/png",
+          "type": "string"
+        },
+        "phone": {
+          "description": "",
+          "type": "string"
+        },
+        "name": {
+          "description": "",
+          "example": "OpsUser70",
+          "type": "string"
+        },
+        "uniqueName": {
+          "description": "",
+          "example": "OpsUser70",
+          "type": "string"
+        },
+        "passwordAdapter": {
+          "description": "",
+          "example": "PasswordAdapter1",
+          "type": "string"
+        },
+        "realm": {
+          "description": "",
+          "example": "qarealm",
+          "type": "string"
+        }
+      },
+      "required": [
+        "emailAddress",
+        "contentType",
+        "phone",
+        "name",
+        "uniqueName",
+        "passwordAdapter",
+        "realm"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Unauthorized/API key not found"
+        },
+        "message": {
+          "type": "string",
+          "example": "Token Expired/ API Key not found"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "BadRequest": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "not_found"
+        },
+        "message": {
+          "type": "string",
+          "example": "PR not found"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorInternal": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Internal Server Error"
+        },
+        "message": {
+          "type": "string",
+          "example": "Internal Server Error"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "400ApproveRequisition1": {
+      "description": "Something went wrong. The parameter you have passed in request are inncorrect",
+      "example": {
+        "error": "action_failed",
+        "error_description": "You have already approved this request.",
+        "description": "You have already approved this request."
+      },
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "",
+          "example": "action_failed",
+          "type": "string"
+        },
+        "error_description": {
+          "description": "",
+          "example": "You have already approved this request.",
+          "type": "string"
+        },
+        "description": {
+          "description": "",
+          "example": "You have already approved this request.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "error",
+        "error_description",
+        "description"
+      ]
+    },
+    "400PendingApprovables": {
+      "description": "Something went wrong. The query parameter you have passed in request are inCorrect or missing",
+      "example": {
+        "error": "invalid_parameter",
+        "error_description": "Incorrect queryable type: req",
+        "description": "Incorrect queryable type: req"
+      },
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "",
+          "example": "invalid_parameter",
+          "type": "string"
+        },
+        "error_description": {
+          "description": "",
+          "example": "Incorrect queryable type: req",
+          "type": "string"
+        },
+        "description": {
+          "description": "",
+          "example": "Incorrect queryable type: req",
+          "type": "string"
+        }
+      },
+      "required": [
+        "error",
+        "error_description",
+        "description"
+      ]
+    },
+    "404PendingApprovables": {
+      "description": "Something went wrong. The username passed in the query param is not found",
+      "example": {
+        "error": "not_found",
+        "error_description": "User not found with uniqueName cnollll",
+        "description": "User not found with uniqueName cnollll"
+      },
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "",
+          "example": "not_found",
+          "type": "string"
+        },
+        "error_description": {
+          "description": "",
+          "example": "User not found with uniqueName cnollll",
+          "type": "string"
+        },
+        "description": {
+          "description": "",
+          "example": "User not found with uniqueName cnollll",
+          "type": "string"
+        }
+      },
+      "required": [
+        "error",
+        "error_description",
+        "description"
+      ]
+    },
+    "ApproveRequisitionResponse": {
+      "description": "Successfull Response",
+      "example": {
+        "message": "SuccessfullyApproved"
+      },
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "",
+          "example": "successfullyApproved",
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ]
+    }
+  },
+  "responses": {
+    "Unauthorized": {
+      "description": "Unauthorized request. Check oauth token is expired or you are not using correct oauth token.",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "InternalServerError": {
+      "description": "If your URL is not constructed properly, you have trailing spaces in URl, request body format is wrong or ARIBA site is temporarily down",
+      "schema": {
+        "$ref": "#/definitions/ErrorInternal"
+      }
+    },
+    "Forbidden": {
+      "description": "You are not able to connnect because of proxy or network issue",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "BadRequest": {
+      "description": "Your request is not processed becuase of an error on server side",
+      "schema": {
+        "$ref": "#/definitions/BadRequest"
+      }
+    }
+  }
+}

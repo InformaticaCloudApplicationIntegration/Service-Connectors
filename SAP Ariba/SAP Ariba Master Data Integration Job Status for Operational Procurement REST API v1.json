@@ -1,0 +1,217 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "1.0.0",
+    "title": "Master Data Integration Job Status API for Operational Procurement",
+    "description": "The Master Data Integration Job Status API for Operational Procurement allows the external ERP system that posts master data to the Master Data Integration Service to query for the status of master data integration jobs. You can configure the API request to query on the jobId returned by the uploadXMLData API, or on an object name. The response is in JSON format. If the master data integration job successfully posted the data to the buying solution from SAP Ariba, then the response includes the following details, among others: the number of records inserted, the number of records updated, and the number of records deleted. If there are any errors when the data is posted to the buying solution, the error details are included in the response."
+  },
+  "x-sap-shortText": "Allows the external ERP system that posts master data to the Master Data Integration Service to reqeust the status of master data integration jobs.",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/mds-integration-job/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/mds-integration-job/v1/{environment}",
+      "description": "Master Data Integration Job Status API for Operational Procurement endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "ru.openapi.ariba.com",
+            "mn1.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api-ru.ariba.com",
+            "api.mn1.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "mds-integration-job",
+      "description": "Master Data Integration Job Status API for Operational Procurement"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "RU",
+      "description": "RU data center"
+    },
+    {
+      "name": "UAE",
+      "description": "UAE data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    },
+    {
+      "name": "integrationJobs-api",
+      "description": "This API allows the external ERP system that posts master data to the Master Data Integration Service to query for the status of master data integration jobs. You can configure the API request to query on the jobId returned by the uploadXMLData API, or on an object name. The response is in JSON format. If the master data integration job successfully posted the data to the buying solution from SAP Ariba, then the response includes the following details, the number of records inserted, the number of records updated, and the number of records deleted. If there are any errors when the data is posted to the buying solution, the error details are included in the response"
+    }
+  ],
+  "paths": {
+    "/integrationJobs": {
+      "get": {
+        "tags": [
+          "/integrationJobs"
+        ],
+        "description": "Get status of the status of master data integration job\n",
+        "operationId": "integrationJobs",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "query",
+            "description": "ANID of the Customer (ANXXX0002,AN71000004256,AN71000000764)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "objectName",
+            "in": "query",
+            "description": "Master Data Object to be queried (User,TaxCode,Group)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "query",
+            "description": "jobId to be queried(AAACAKABlAAAAE99u,AAACAKABlAAAAE99o)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errormessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/errormessage"
+            }
+          },
+          "404": {
+            "description": "URL Not Found",
+            "schema": {
+              "$ref": "#/definitions/errormessage"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/errormessage"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "response": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "string"
+        },
+        "StartDate": {
+          "type": "string"
+        },
+        "RecordsCreated": {
+          "type": "integer"
+        },
+        "RecordsDeleted": {
+          "type": "integer"
+        },
+        "RecordsUpdated": {
+          "type": "integer"
+        },
+        "WarningMessages": {
+          "type": "string"
+        },
+        "NonFatalExceptions": {
+          "type": "string"
+        },
+        "FatalErrors": {
+          "type": "string"
+        }
+      }
+    },
+    "errormessage": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
