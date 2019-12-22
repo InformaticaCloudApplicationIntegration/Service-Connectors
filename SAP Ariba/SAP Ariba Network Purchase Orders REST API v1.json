@@ -1,0 +1,694 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "1.0.0",
+    "title": "Ariba Network Purchase Orders API",
+    "description": "The Purchase Order API enables you to retrieve purchase order header and item details from the Ariba Network."
+  },
+  "x-sap-shortText": "Retrieve purchase order header and item details",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/purchase-orders/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/purchase-orders/v1/{environment}",
+      "description": "Ariba Network Purchase Orders API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "purchase-orders",
+      "description": "Ariba Network Purchase Orders API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    }
+  ],
+  "paths": {
+    "/orders": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "This API provides order header data matching the buyer, the supplier and the order id.",
+        "operationId": "getOrderHeaderListUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "X-ARIBA-NETWORK-ID",
+            "in": "header",
+            "description": "The customer's ANID.",
+            "required": true,
+            "type": "string",
+            "default": "AN02000000280"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "$filter=expression. 'expression' is a combination of resource parameters, values. We use 'eq' as operator to link parameter and value. We use 'and' as operator to link two or more parameters. For example, $filter=a eq 'b' and c eq 'd'. Currently we support the following parameters.<br/>\nsupplierANID         -- The supplier's ANID. <br/>\ndocumentNumber       -- Same as the orderID. The identifier for this order. Analogous to the purchase order number. <br/>\norderStatus          -- Order Status indicates where the order stands in regard to your processing of the order. <br/>\nroutingStatus        -- Routing Status indicates whether a purchase order or service order is queued, sent, acknowledged, or if routing failed.<br/>\nstartDate            -- Search by the date on which Ariba Network received the order. The maximum date range is 31 days.<br/>\nendDate              -- Search by the date on which Ariba Network received the order. The maximum date range is 31 days.<br/>\n",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "To specify the order of results. Please provide the parameter supplierANID into $filter when use $orderby. $orderby=propertyName asc, $orderby=propertyName desc.<br/>\nThe order can be either ascending or descending: asc or desc. If the order is not specified, then it is defaulted to ascending(asc).<br/>\npropertyName    -- The column to sort on. This is either of BUYERORGID, SUPPLIERORGID. <br/>\n",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "$skip is the number of items to be skipped",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "$top is the number of items to be returned (page size)",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "description": "To return the number of elements in a collection inline. The syntax is $count=true<br/>\n",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageData\u00abOrderHeader\u00bb"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/items": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "This API provides order item data matching the buyer, the supplier and the order id.",
+        "operationId": "getOrderItemsListUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "X-ARIBA-NETWORK-ID",
+            "in": "header",
+            "description": "The customer's ANID.",
+            "required": true,
+            "type": "string",
+            "default": "AN02000000280"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "$filter=expression. 'expression' is a combination of resource parameters, values. We use 'eq' as operator to link parameter and value. We use 'and' as operator to link two or more parameters. For example, $filter=a eq 'b' and c eq 'd'. Currently we support the following parameters.<br/>\nsupplierANID         -- The supplier's ANID. <br/>\ndocumentNumber       -- Same as the orderID. The identifier for this order. Analogous to the purchase order number. <br/>\norderStatus          -- Order Status indicates where the order stands in regard to your processing of the order. <br/>\nroutingStatus        -- Routing Status indicates whether a purchase order or service order is queued, sent, acknowledged, or if routing failed.<br/>\nstartDate            -- Search by the date on which Ariba Network received the order. The maximum date range is 31 days.<br/>\nendDate              -- Search by the date on which Ariba Network received the order. The maximum date range is 31 days.<br/>\n",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "To specify the order of results. Please provide the parameter supplierANID into $filter when use $orderby. $orderby=propertyName asc, $orderby=propertyName desc.<br/>\nThe order can be either ascending or descending: asc or desc. If the order is not specified, then it is defaulted to ascending(asc).<br/>\npropertyName    -- The column to sort on. This is either of BUYERORGID, SUPPLIERORGID. <br/>\n",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "$skip is the number of items to be skipped",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "$top is the number of items to be returned (page size)",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "description": "To return the number of elements in a collection inline. The syntax is $count=true<br/>\n",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageData\u00abOrderLineItem\u00bb"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OrderHeader": {
+      "type": "object",
+      "properties": {
+        "amountAvailable": {
+          "$ref": "#/definitions/MoneyDto"
+        },
+        "attachmentCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "balance": {
+          "description": "In case of partially invoiced PO, this field contains the balance left on the PO to be invoiced.",
+          "$ref": "#/definitions/MoneyDto"
+        },
+        "blanket": {
+          "type": "boolean"
+        },
+        "blanketPoId": {
+          "type": "number",
+          "format": "double"
+        },
+        "created": {
+          "type": "string",
+          "description": "Date the order was created."
+        },
+        "customerANID": {
+          "type": "string",
+          "description": "The customer's AN ID."
+        },
+        "customerName": {
+          "type": "string",
+          "description": "The customer's name."
+        },
+        "dashboardStatus": {
+          "type": "string",
+          "description": "Order Status indicates where the order stands with regards to your processing of the order."
+        },
+        "disputeId": {
+          "type": "number",
+          "format": "double"
+        },
+        "documentNumber": {
+          "type": "string",
+          "description": "Same as the orderID. The documentNumber is an identifier for a particular order, similar to the purchase order number."
+        },
+        "documentStatus": {
+          "type": "string"
+        },
+        "hideAmount": {
+          "type": "boolean",
+          "example": false,
+          "description": "An extrinsic that allows you to mask values for the amount."
+        },
+        "invoicedAmount": {
+          "$ref": "#/definitions/MoneyDto"
+        },
+        "isRelease": {
+          "type": "string",
+          "description": "Indicates whether the orderType is Release."
+        },
+        "numberOfInvoices": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "orderDate": {
+          "type": "string",
+          "description": "The date and time the order was created."
+        },
+        "pCardNumberPrefix": {
+          "type": "string",
+          "description": "First 4 numbers of the purchasing card number."
+        },
+        "payloadId": {
+          "type": "string",
+          "description": "An unique identifier for the document. This is copied directly from the cXML element of the original document."
+        },
+        "paymentTerms": {
+          "type": "array",
+          "description": "Net Terms or Payment Terms",
+          "items": {
+            "type": "string"
+          }
+        },
+        "paymentTermsExplanation": {
+          "type": "string",
+          "description": "Free-form text describing the payment terms for information purposes"
+        },
+        "poAmount": {
+          "description": "Total cost of the order.",
+          "$ref": "#/definitions/MoneyDto"
+        },
+        "poClosed": {
+          "type": "boolean"
+        },
+        "poShipToCity": {
+          "type": "string",
+          "description": "The\u00a0City\u00a0element is the city where ordered products are to be shipped."
+        },
+        "poShipToCode": {
+          "type": "string"
+        },
+        "poShipToCountry": {
+          "type": "string",
+          "description": "The\u00a0Country element is the country where goods are to be shipped."
+        },
+        "poShipToName": {
+          "type": "string",
+          "description": "For ship to, the\u00a0Name\u00a0element value should be the company or organization of the employee receiving ordered products. "
+        },
+        "poShipToPostalCode": {
+          "type": "string",
+          "description": "The\u00a0PostalCode\u00a0element is the postal or zip code where goods are to be shipped."
+        },
+        "poShipToState": {
+          "type": "string",
+          "description": "The\u00a0State\u00a0element is a two-letter state, province, or territory code for the location where the goods are to be shipped."
+        },
+        "poShipToStreet": {
+          "type": "string",
+          "description": "The\u00a0Street\u00a0element is the street address of the\u00a0ShipTo location where ordered products are to be delivered. "
+        },
+        "poVersion": {
+          "type": "number",
+          "format": "double",
+          "description": "Specifies the order version number of change orders, starting with \u201c1\u201d for the original order."
+        },
+        "purchasingAgentName": {
+          "type": "string",
+          "description": "Name of contact whose role is purchasing agent."
+        },
+        "releaseRequired": {
+          "type": "boolean",
+          "example": false,
+          "description": "Used only if orderType is blanket, to indicate whether the blanket order requires releases (purchase orders). If \u201cyes\u201d, is specified, then the blanket order requires separate release orders before the supplier can act. If \u201cno\u201d, then the supplier can act on the blanket order itself. By default this value is unspecified."
+        },
+        "revision": {
+          "type": "string"
+        },
+        "schedulingAgreement": {
+          "type": "boolean"
+        },
+        "serviceId": {
+          "type": "number",
+          "format": "double"
+        },
+        "settlement": {
+          "type": "string",
+          "description": "Method of PO settlement."
+        },
+        "status": {
+          "type": "string",
+          "description": "Routing Status indicates whether a purchase order or service order is queued, sent, acknowledged, or if routing failed."
+        },
+        "supplierANID": {
+          "type": "string",
+          "description": "The supplier's AN ID."
+        },
+        "supplierName": {
+          "type": "string",
+          "description": "The supplier's name."
+        },
+        "transportTerms": {
+          "type": "string",
+          "description": "The transport information for the shipment described by the order and the ship notice. This information comes from the order specified by the buyer and has to be included in the ship notice, so that these can be edited by the supplier, if required. This information and possible changes have to be carried back to the buyer."
+        },
+        "transportTermsDesc": {
+          "type": "string",
+          "description": "Transport terms description"
+        }
+      }
+    },
+    "MoneyDto": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "approx": {
+          "type": "number",
+          "format": "double"
+        },
+        "conversionDate": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        }
+      }
+    },
+    "OrderLineItem": {
+      "type": "object",
+      "properties": {
+        "agreementDate": {
+          "type": "string",
+          "description": "The date and time the agreement request was created. This is different from the effective and expiry date of the agreement."
+        },
+        "agreementId": {
+          "type": "string",
+          "description": "The procurement system agreement ID for this request"
+        },
+        "buyerBatchId": {
+          "type": "string",
+          "description": "An identifier from buyer to identify the material/goods produced in a single manufacturing run"
+        },
+        "buyerPartId": {
+          "type": "string",
+          "description": "It represents a product in buyer system. This identifier is specified by the buyer."
+        },
+        "category": {
+          "type": "string"
+        },
+        "confirmedQuantity": {
+          "type": "number",
+          "format": "double"
+        },
+        "cumulativeReceivedQuantity": {
+          "type": "number",
+          "format": "double",
+          "description": "A number value to identify the cumulative quantity of all goods received against the scheduling agreement released over a period up to a certain date."
+        },
+        "cumulativeReceivedUom": {
+          "type": "string",
+          "description": "Unit of measure for the cumulative received quantity."
+        },
+        "cumulativeShipQuantity": {
+          "type": "number",
+          "format": "double",
+          "description": "A number value to identify the cumulative quantity of all goods shipped against the scheduling agreement release over a period up to a certain date."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the items."
+        },
+        "documentNumber": {
+          "type": "string",
+          "description": "Same as the orderID. The documentNumber is an identifier for a particular order, similar to the purchase order number."
+        },
+        "itemLocation": {
+          "type": "string"
+        },
+        "itemReturnAuthorizationNumber": {
+          "type": "string",
+          "description": "Return Authorization Number information for a line item."
+        },
+        "itemShipToCity": {
+          "type": "string",
+          "description": "The\u00a0City\u00a0element is the city where ordered products are to be shipped."
+        },
+        "itemShipToCode": {
+          "type": "string"
+        },
+        "itemShipToCountry": {
+          "type": "string",
+          "description": "The\u00a0Country element is the country where goods are to be shipped."
+        },
+        "itemShipToName": {
+          "type": "string",
+          "description": "For ship to, the\u00a0Name\u00a0element value should be the company or organization of the employee receiving ordered products."
+        },
+        "itemShipToPostalCode": {
+          "type": "string",
+          "description": "The\u00a0PostalCode\u00a0element is the postal or zip code where goods are to be shipped."
+        },
+        "itemShipToState": {
+          "type": "string",
+          "description": "The\u00a0State\u00a0element is a two-letter state, province, or territory code for the location where the goods are to be shipped."
+        },
+        "itemShipToStreet": {
+          "type": "string",
+          "description": "The\u00a0Street\u00a0element is the street address of the\u00a0ShipTo location where ordered products are to be delivered. "
+        },
+        "lineNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Position (counting from 1) of this item in an order. Used to maintain a reference between items in create and update OrderRequest documents."
+        },
+        "lineOfBusiness": {
+          "type": "string"
+        },
+        "manufacturerPart": {
+          "type": "string",
+          "description": "ID with which the item\u2019s manufacturer identifies the item."
+        },
+        "materialGoAheadEndDate": {
+          "type": "string",
+          "description": "Date denoting the end of the material go-ahead period (go-ahead for purchase of input materials)"
+        },
+        "needBy": {
+          "type": "string",
+          "description": "The date this item was requested for delivery."
+        },
+        "partCategory": {
+          "type": "string"
+        },
+        "partType": {
+          "type": "string"
+        },
+        "pbqConversionFactor": {
+          "type": "number",
+          "format": "double",
+          "description": "Conversion factor for the PriceBasisQuantity."
+        },
+        "pbqQuantity": {
+          "type": "number",
+          "format": "double",
+          "description": "The\u00a0PriceBasisQuantity\u00a0element contains the quantity-based pricing for a line item. Quantity-based Pricing is commonly also referred to as Price-Based Quantity or\u00a0PBQ. Quantity-based pricing allows the unit price of an item to be based on a different price unit quantity than 1."
+        },
+        "pbqUOM": {
+          "type": "string",
+          "description": "Unit of measure for the PriceBasisQuantity."
+        },
+        "plannerCode": {
+          "type": "string"
+        },
+        "plannerDescription": {
+          "type": "string"
+        },
+        "previousAsnDate": {
+          "type": "string",
+          "description": "Previous ship notice date"
+        },
+        "previousAsnId": {
+          "type": "string",
+          "description": "Previous ship notice ID"
+        },
+        "previousReceivedQuantity": {
+          "type": "number",
+          "format": "double"
+        },
+        "previousReceivedQuantityUom": {
+          "type": "string",
+          "description": "Unit of measure for the previous received quantity."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority indicator, used to drive the priority of the orders for the suppliers."
+        },
+        "productCode": {
+          "type": "string"
+        },
+        "productFamily": {
+          "type": "string"
+        },
+        "productIdentifier": {
+          "type": "string",
+          "description": "Reference product number"
+        },
+        "productSubFamily": {
+          "type": "string"
+        },
+        "productionGoAheadEndDate": {
+          "type": "string",
+          "description": "Date denoting the end of the production go-ahead period"
+        },
+        "quantity": {
+          "type": "number",
+          "format": "double",
+          "description": "How many items are desired. Supplier and Commodity level items in an order of type \"blanket\" will use a default value of \"1\". The quantity in this case will not be used to compute the sub total. The MaxAmount in the BlanketItemDetail will be used to indicate any line level amounts."
+        },
+        "releaseType": {
+          "type": "string",
+          "description": "A string value to identify the type of release. The value will be either jit or forecast."
+        },
+        "requestedDeliveryDate": {
+          "type": "string",
+          "description": "The date this item was requested for delivery."
+        },
+        "requestedShipmentDate": {
+          "type": "string",
+          "description": "The ship date requested by the buyer for the item"
+        },
+        "storageLocation": {
+          "type": "string"
+        },
+        "supplierBatchId": {
+          "type": "string",
+          "description": "An identifier from supplier to identify the material/goods produced in a single manufacturing run"
+        },
+        "supplierPart": {
+          "type": "string",
+          "description": "SupplierPartID is how the supplier identifies an item."
+        },
+        "unitOfMeasure": {
+          "type": "string",
+          "description": "The UnitOfMeasure element contains the item Unit of Measure code as defined by the United Nations UOM standard."
+        },
+        "unitPrice": {
+          "description": "Price per unit of item.",
+          "$ref": "#/definitions/MoneyDto"
+        }
+      }
+    },
+    "PageData\u00abOrderLineItem\u00bb": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderLineItem"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "firstPage": {
+          "type": "boolean"
+        },
+        "lastPage": {
+          "type": "boolean"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "PageData\u00abOrderHeader\u00bb": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderHeader"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "firstPage": {
+          "type": "boolean"
+        },
+        "lastPage": {
+          "type": "boolean"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  }
+}

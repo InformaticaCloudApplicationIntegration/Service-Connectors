@@ -1,0 +1,685 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "1.0.0",
+    "title": "Asset Management API",
+    "description": "The Asset Management API enables you to assign unique values to asset line items on requisitions before purchase orders are generated. You use this API to create a client application to do the following:\n* Get the count of requisitions consisting of asset items.\n* Get requisitions consisting of line items configured as assets in the SAP Ariba Procurement solution.\n* Assign unique values to asset items on requisitions fetched from the SAP Ariba Procurement solution."
+  },
+  "x-sap-shortText": "Assigns unique values to requisition line items before POs are generated",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/asset-management/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/asset-management/v1/{environment}",
+      "description": "Asset Management API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "asset-management",
+      "description": "Asset Management API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/requisitions": {
+      "get": {
+        "description": "Returns a list of requisitions consisting of asset line items based on specified filter criteria",
+        "summary": "Returns requisitions that match specified criteria",
+        "tags": [
+          "Asset Requisition"
+        ],
+        "operationId": "Get list of asset requisitions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "This parameter is used to filter requisitions based on one or more attributes. For example: TimeCreated eq 2018-09-26T09:00:00Z TimeUpdated eq 2018-09-27T09:00:00Z"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "This parameter is set to true to get the total number of requisitions consisting of asset line items. For example, $count=true"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Number of asset-based requisitions to be returned"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Number of asset-based requisitions to be skipped (offset)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the requisitions",
+            "schema": {
+              "$ref": "#/definitions/RequisitionDetails"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/BadRequest"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/requisitions/$count": {
+      "get": {
+        "description": "Returns the count of requisitions consisting of asset line items",
+        "summary": "Gets total number of requisitions that have asset line items",
+        "tags": [
+          "Asset Requisition"
+        ],
+        "operationId": "Gets the total count of requisitions consisting of asset line items",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "number of items"
+          }
+        }
+      }
+    },
+    "/requisitions/batch/assets": {
+      "post": {
+        "description": "Update the asset values on requisitions using the asset records created in the external system",
+        "summary": "Update asset-based requisitions",
+        "tags": [
+          "Asset Requisition"
+        ],
+        "operationId": "Update asset-based requisitions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Asset data collection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetDataCollection"
+            }
+          },
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the realm"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Money": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "bigdecimal",
+          "description": "Amount"
+        },
+        "currency": {
+          "type": "string",
+          "description": "A unique internal identifier for the currency"
+        }
+      }
+    },
+    "RequisitionDetails": {
+      "type": "object",
+      "example": {
+        "count": "1",
+        "requisitions": [
+          {
+            "companyCode": {
+              "name": "IDES US INC",
+              "uniqueName": "3000"
+            },
+            "lineItems": [
+              {
+                "description": {
+                  "price": {
+                    "amount": 10,
+                    "currency": "USD"
+                  },
+                  "shortName": "Laptop",
+                  "unitOfMeasure": "each"
+                },
+                "shipTo": {
+                  "name": "New York",
+                  "uniqueName": "3000"
+                },
+                "itemCategory": "Material",
+                "amount": {
+                  "amount": 10,
+                  "currency": "USD"
+                },
+                "commodityExportMapEntry": {
+                  "accountType": {
+                    "uniqueName": "CostCenter"
+                  }
+                },
+                "purchaseGroup": {
+                  "name": "Corporate Purchasing",
+                  "uniqueName": "100"
+                },
+                "assetGroup": "",
+                "quantity": 1,
+                "numberInCollection": 1,
+                "accountCategory": {
+                  "description": "Asset",
+                  "uniqueName": "A"
+                },
+                "commonCommodityCode": "Apparel and Luggage and Personal Care Products",
+                "accountings": [
+                  {
+                    "assetDescription": null,
+                    "amount": {
+                      "amount": 10,
+                      "currency": "USD"
+                    },
+                    "costCenter": null,
+                    "assetLocation": null,
+                    "percentage": 100,
+                    "assetClass": null,
+                    "generalLedger": null,
+                    "quantity": 1,
+                    "customFields": [],
+                    "lineItem": 1,
+                    "numberInCollection": 1,
+                    "asset": {
+                      "description": "Administration Building, Los Angeles",
+                      "uniqueName": "000000001106"
+                    },
+                    "WBSElement": null,
+                    "internalOrder": null
+                  }
+                ]
+              }
+            ],
+            "requester": "Arnold Davis",
+            "title": "Copy of Req Test",
+            "status": "Submitted",
+            "uniqueName": "PR11"
+          }
+        ]
+      },
+      "properties": {
+        "count": {
+          "type": "number",
+          "description": "Total number of records"
+        },
+        "companyCode": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name associated with the company code"
+            },
+            "uniqueName": {
+              "type": "string",
+              "description": "Unique ID of the company code"
+            }
+          }
+        },
+        "requester": {
+          "type": "string",
+          "description": "Requester's unique name"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the requisition"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the requisition"
+        },
+        "uniqueName": {
+          "type": "string",
+          "description": "Unique ID of the requisition"
+        },
+        "lineItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReqLineItem"
+          },
+          "description": "Line-item details on the requisition"
+        }
+      }
+    },
+    "ReqLineItem": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "$ref": "#/definitions/LineItemDescription"
+        },
+        "shipTo": {
+          "$ref": "#/definitions/Named"
+        },
+        "itemCategory": {
+          "type": "string",
+          "description": "Item category"
+        },
+        "amount": {
+          "$ref": "#/definitions/Money"
+        },
+        "commodityExportMapEntry": {
+          "type": "object",
+          "properties": {
+            "accountType": {
+              "type": "object",
+              "description": "Account type",
+              "properties": {
+                "uniqueName": {
+                  "type": "string",
+                  "description": "Unique ID for this account type"
+                }
+              }
+            }
+          }
+        },
+        "purchaseGroup": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the purchase group"
+            },
+            "uniqueName": {
+              "type": "string",
+              "description": "Unique ID for this account type"
+            }
+          }
+        },
+        "assetGroup": {
+          "type": "integer",
+          "description": "Asset group ID"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Quantity"
+        },
+        "assetLineType": {
+          "type": "string",
+          "description": "Asset line type"
+        },
+        "numberInCollection": {
+          "type": "number",
+          "description": "Number in collection"
+        },
+        "accountCategory": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Name of the purchase group"
+            },
+            "uniqueName": {
+              "type": "string",
+              "description": " Unique ID for the account type."
+            }
+          }
+        },
+        "commonCommodityCode": {
+          "type": "string",
+          "description": "Common commodity code"
+        },
+        "accountings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SplitAccounting"
+          }
+        },
+        "lineItem": {
+          "type": "number",
+          "description": "Line item number in collection"
+        },
+        "WBSElement": {
+          "type": "string",
+          "description": "Unique ID of the WBS element"
+        },
+        "internalOrder": {
+          "type": "string",
+          "description": "Unique ID of the internal order"
+        },
+        "splitAccountingType": {
+          "type": "string",
+          "description": "Split account type"
+        }
+      }
+    },
+    "LineItemDescription": {
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "type": "string",
+          "description": "Line item's short name"
+        },
+        "unitOfMeasure": {
+          "type": "string",
+          "description": "Unit of measure"
+        },
+        "price": {
+          "$ref": "#/definitions/Money"
+        }
+      }
+    },
+    "Named": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the object"
+        },
+        "uniqueName": {
+          "type": "string",
+          "description": "Unique ID of the object"
+        }
+      }
+    },
+    "SplitAccounting": {
+      "type": "object",
+      "properties": {
+        "assetDescription": {
+          "type": "string",
+          "description": "Asset description"
+        },
+        "amount": {
+          "type": "number",
+          "format": "bigdecimal",
+          "description": "Amount"
+        },
+        "costCenter": {
+          "$ref": "#/definitions/Named"
+        },
+        "percentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Percentage"
+        },
+        "asset": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the asset"
+            },
+            "uniqueName": {
+              "type": "string",
+              "description": "Unique ID of the asset"
+            }
+          }
+        },
+        "assetLocation": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the asset location"
+            },
+            "uniqueName": {
+              "type": "string",
+              "description": "Unique ID of the asset location"
+            }
+          }
+        },
+        "assetClass": {
+          "$ref": "#/definitions/Named"
+        },
+        "generalLedger": {
+          "type": "string",
+          "description": "Unique ID of the general ledger"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Quantity"
+        }
+      }
+    },
+    "AssetDataCollection": {
+      "type": "array",
+      "example": {
+        "action": "update",
+        "requisitions": [
+          {
+            "uniqueName": "PR197",
+            "lineItems": [
+              {
+                "numberInCollection": 1,
+                "accountings": [
+                  {
+                    "numberInCollection": 1,
+                    "asset": {
+                      "name": "Laptop",
+                      "subNumber": "0000",
+                      "uniqueName": "100000005232",
+                      "companyCode": "3000"
+                    }
+                  }
+                ]
+              },
+              {
+                "numberInCollection": 2,
+                "accountings": [
+                  {
+                    "numberInCollection": 1,
+                    "asset": {
+                      "name": "Server",
+                      "subNumber": "0000",
+                      "uniqueName": "100000005233",
+                      "companyCode": "3000"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "items": {
+        "type": "object",
+        "properties": {
+          "uniqueName": {
+            "type": "string",
+            "description": "Unique name of the user"
+          },
+          "accountingAssetEntries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "lineNumber": {
+                  "type": "number",
+                  "description": "Line number"
+                },
+                "splitNumber": {
+                  "type": "number",
+                  "description": "Split number"
+                },
+                "asset": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the asset"
+                    },
+                    "subnumber": {
+                      "type": "string",
+                      "description": "Subnumber of the asset"
+                    },
+                    "uniqueName": {
+                      "type": "string",
+                      "description": "Unique ID of the asset"
+                    },
+                    "companyCode": {
+                      "type": "string",
+                      "description": "Unique ID of the company code"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "title": "Error Response",
+      "example": {
+        "code": "0",
+        "message": "string",
+        "details": "string"
+      },
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Error description",
+          "type": "string"
+        },
+        "error": {
+          "description": "Error type",
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Details of the error"
+        }
+      }
+    }
+  },
+  "responses": {
+    "Unauthorized": {
+      "description": "Unauthorized request. Either the OAuth token has expired, or the OAuth token is incorrect.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "InternalServerError": {
+      "description": "Your request is not processed because of a server error",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "Forbidden": {
+      "description": "Forbidden!!!"
+    },
+    "BadRequest": {
+      "description": "Bad request, invalid inputs",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    }
+  }
+}

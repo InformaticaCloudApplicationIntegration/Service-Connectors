@@ -1,0 +1,508 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "1.0.0",
+    "title": "Ariba Network Supplier Profile API",
+    "description": "The Ariba Network supplier profile API allows a customer with an Ariba Network Buyer Account to retrieve profile information about Ariba Network registered suppliers by passing the supplier's ANID."
+  },
+  "x-sap-shortText": "Retrieve supplier information for AN buyers",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/supplier-management/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/supplier-management/v1/{environment}",
+      "description": "Ariba Network Supplier Profile API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "supplier-management",
+      "description": "Ariba Network Supplier Profile API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "Profiles",
+      "description": "Ariba Network supplier profile API"
+    }
+  ],
+  "paths": {
+    "/profiles/{anid}": {
+      "get": {
+        "tags": [
+          "Profiles"
+        ],
+        "summary": "Get supplier profile",
+        "operationId": "getANOrgUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Basic Authorization, username/password should be 'ANID/shared secret' of a buyer",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "anid",
+            "in": "path",
+            "description": "Supplier ANID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Profile data type, it can be 'person', 'org'(default), currently only org is supported ",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "person",
+              "org"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile Details Retrieved",
+            "schema": {
+              "$ref": "#/definitions/ANOrgDTO"
+            }
+          },
+          "401": {
+            "description": "Authentication failed"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Cannot find the supplier profile with anid: {}"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ANStateDTO": {
+      "type": "object",
+      "properties": {
+        "abbreviation": {
+          "type": "string"
+        },
+        "countryIso2": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ANAddressDTO": {
+      "type": "object",
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "cityCode": {
+          "type": "string"
+        },
+        "cityLatin": {
+          "type": "string"
+        },
+        "country": {
+          "$ref": "#/definitions/ANCountryDTO"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "postalCodeLatin": {
+          "type": "string"
+        },
+        "stateAbbrev": {
+          "type": "string"
+        },
+        "stateCode": {
+          "type": "string"
+        },
+        "stateLatin": {
+          "type": "string"
+        },
+        "street1": {
+          "type": "string"
+        },
+        "street1Latin": {
+          "type": "string"
+        },
+        "street2": {
+          "type": "string"
+        },
+        "street2Latin": {
+          "type": "string"
+        },
+        "street3": {
+          "type": "string"
+        },
+        "street3Latin": {
+          "type": "string"
+        },
+        "street4": {
+          "type": "string"
+        },
+        "street4Latin": {
+          "type": "string"
+        }
+      }
+    },
+    "ANPhoneDTO": {
+      "type": "object",
+      "properties": {
+        "areaCode": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "extension": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "phoneCountryCode": {
+          "type": "string"
+        }
+      }
+    },
+    "ANCountryDTO": {
+      "type": "object",
+      "properties": {
+        "isoCountryCode": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "AnnualRevenueDTO": {
+      "type": "object",
+      "properties": {
+        "maxAmount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minAmount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ANOrgBusinessTypeDTO": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "ANFromAddressDTO": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/ANAddressDTO"
+        },
+        "addressName": {
+          "type": "string"
+        },
+        "taxId": {
+          "type": "string"
+        },
+        "vatId": {
+          "type": "string"
+        }
+      }
+    },
+    "ANCompanyDTO": {
+      "type": "object",
+      "properties": {
+        "companyDesc": {
+          "type": "string"
+        },
+        "internationalLocationNumber": {
+          "type": "string"
+        },
+        "legalName": {
+          "type": "string"
+        },
+        "marketingHeadline": {
+          "type": "string"
+        },
+        "regionalTaxIdNumber": {
+          "type": "string"
+        },
+        "stateOfIncorporation": {
+          "$ref": "#/definitions/ANStateDTO"
+        },
+        "stateTaxIdNumber": {
+          "type": "string"
+        },
+        "stockSymbol": {
+          "type": "string"
+        },
+        "taxIdNumber": {
+          "type": "string"
+        },
+        "vatId": {
+          "type": "string"
+        }
+      }
+    },
+    "MappingJacksonValue": {
+      "type": "object",
+      "properties": {
+        "jsonpFunction": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        }
+      }
+    },
+    "ANContactDTO": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/ANAddressDTO"
+        },
+        "businessTitle": {
+          "type": "string"
+        },
+        "contactAssignment": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "email": {
+          "type": "string"
+        },
+        "fax": {
+          "$ref": "#/definitions/ANPhoneDTO"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "$ref": "#/definitions/ANPhoneDTO"
+        }
+      }
+    },
+    "ANOrgDTO": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/ANAddressDTO"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "anid": {
+          "type": "string"
+        },
+        "annualRevenue": {
+          "$ref": "#/definitions/AnnualRevenueDTO"
+        },
+        "businessTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ANOrgBusinessTypeDTO"
+          }
+        },
+        "commodities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "company": {
+          "$ref": "#/definitions/ANCompanyDTO"
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ANContactDTO"
+          }
+        },
+        "country": {
+          "type": "string"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "dunsNumber": {
+          "type": "string"
+        },
+        "fromAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ANFromAddressDTO"
+          }
+        },
+        "greenInitiatives": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        },
+        "industries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isExemptFromBackupWithholding": {
+          "type": "string"
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "language": {
+          "type": "string"
+        },
+        "mainEmailAddress": {
+          "type": "string"
+        },
+        "mainFax": {
+          "$ref": "#/definitions/ANPhoneDTO"
+        },
+        "mainPhone": {
+          "$ref": "#/definitions/ANPhoneDTO"
+        },
+        "mainWebAddress": {
+          "type": "string"
+        },
+        "minorityList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "minorityOwned": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nameLatin": {
+          "type": "string"
+        },
+        "numberOfEmployees": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "orgLocale": {
+          "type": "string"
+        },
+        "ownerList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ownership": {
+          "type": "boolean"
+        },
+        "parentANID": {
+          "type": "string"
+        },
+        "privateId": {
+          "type": "string"
+        },
+        "publicAccountCreatedOn": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "toOrgTerritories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "typeOfOrganization": {
+          "type": "string"
+        },
+        "yearFounded": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  }
+}

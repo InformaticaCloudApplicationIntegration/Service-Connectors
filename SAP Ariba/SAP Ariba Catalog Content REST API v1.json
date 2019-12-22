@@ -1,0 +1,533 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "1.0",
+    "title": "Catalog Content API",
+    "description": "This API set enables your application to fetch catalog data from the SAP Ariba solution. The following APIs enable you to fetch specific catalog related information:\n* catalog subscriptions that have been activated after a specified date and time\n* attribute-based faceted catalog data\n* all or a filtered subset of items in a catalog"
+  },
+  "x-sap-shortText": "Enables your application to fetch catalog data from the SAP Ariba solution.",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/catalogcontent/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/catalogcontent/v1/{environment}",
+      "description": "Catalog Content API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "ru.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api-ru.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "catalogcontent",
+      "description": "Catalog Content API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "RU",
+      "description": "RU data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    },
+    {
+      "name": "content-query-service-controller",
+      "description": "Content Query Service APIs"
+    }
+  ],
+  "paths": {
+    "/catalogname/{CatalogName}/supplierid/{SupplierId}/items": {
+      "get": {
+        "tags": [
+          "content-query-service-controller"
+        ],
+        "summary": "Get list of filtered catalog items",
+        "operationId": "getCatalogItemsUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "header",
+            "description": "Realm Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "CatalogName",
+            "in": "path",
+            "description": "CatalogName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "SupplierId",
+            "in": "path",
+            "description": "SupplierId Domain Value Pair",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Output fields, e.g.: LeadTime,ManufacturerPartId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rsqlfilter",
+            "in": "query",
+            "description": "RSQL Filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Offset",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit",
+            "required": false,
+            "type": "integer",
+            "default": 1000,
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Catalog Items",
+            "schema": {
+              "$ref": "#/definitions/ItemResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ContentErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden!!!!!"
+          },
+          "404": {
+            "description": "Realm not found",
+            "schema": {
+              "$ref": "#/definitions/ContentErrorResponse"
+            }
+          },
+          "412": {
+            "description": "Pre condition failed due to required data not found",
+            "schema": {
+              "$ref": "#/definitions/ContentErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/ContentErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/catalogs": {
+      "get": {
+        "tags": [
+          "content-query-service-controller"
+        ],
+        "summary": "Get list of active catalog data",
+        "operationId": "getCatalogsUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "header",
+            "description": "Realm",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Activated from Date, ISO Format 2017-03-24T05:26:41",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "supplierdomain",
+            "in": "query",
+            "description": "Supplier Domain",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of CatalogName and SupplierId values",
+            "schema": {
+              "$ref": "#/definitions/CatalogResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ContentErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden!!!!!"
+          },
+          "404": {
+            "description": "Authorized user not found",
+            "schema": {
+              "$ref": "#/definitions/ContentErrorResponse"
+            }
+          },
+          "412": {
+            "description": "Pre condition failed due to required data not found",
+            "schema": {
+              "$ref": "#/definitions/ContentErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/ContentErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/facets": {
+      "get": {
+        "tags": [
+          "content-query-service-controller"
+        ],
+        "summary": "Get list of Facet data",
+        "operationId": "getFacetUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "header",
+            "description": "Realm Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Facet field, e.g. ClassificationCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rsqlfilter",
+            "in": "query",
+            "description": "RSQL Filter",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of facet values",
+            "schema": {
+              "$ref": "#/definitions/FacetResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ContentErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden!!!!!"
+          },
+          "404": {
+            "description": "Authorized user not found",
+            "schema": {
+              "$ref": "#/definitions/ContentErrorResponse"
+            }
+          },
+          "412": {
+            "description": "Pre condition failed due to required data not found",
+            "schema": {
+              "$ref": "#/definitions/ContentErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/ContentErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ItemResponse": {
+      "type": "object",
+      "properties": {
+        "contents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MapStringToObject"
+          }
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "firstPage": {
+          "type": "boolean",
+          "example": false
+        },
+        "lastPage": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "MapStringToString": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "MapStringToObject": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "CatalogResponse": {
+      "type": "object",
+      "properties": {
+        "contents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivatedCatalogSummary"
+          }
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "firstPage": {
+          "type": "boolean",
+          "example": false
+        },
+        "lastPage": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "FacetResponse": {
+      "type": "object",
+      "properties": {
+        "contents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MapStringToObject"
+          }
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "firstPage": {
+          "type": "boolean",
+          "example": false
+        },
+        "lastPage": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "ContentErrorResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "error",
+        "extra_messages",
+        "msg",
+        "service",
+        "status",
+        "timestamp"
+      ],
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "HTTP status code"
+        },
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "error": {
+          "type": "string",
+          "description": "Error"
+        },
+        "service": {
+          "type": "string",
+          "description": "Exception code"
+        },
+        "msg": {
+          "type": "string",
+          "description": "Exception message"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The time the exception occurred"
+        },
+        "extra_messages": {
+          "type": "array",
+          "description": "Additional messages",
+          "items": {
+            "$ref": "#/definitions/MapStringToString"
+          }
+        }
+      },
+      "description": "Error response"
+    },
+    "ActivatedCatalogSummary": {
+      "type": "object",
+      "properties": {
+        "ActivatedDate": {
+          "type": "string"
+        },
+        "CatalogName": {
+          "type": "string"
+        },
+        "SupplierId": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

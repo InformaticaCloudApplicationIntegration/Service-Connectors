@@ -1,0 +1,389 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "2.0",
+    "title": "Analytical Reporting - Synchronous API",
+    "description": "The Analytical reporting APIs enable you  to create a client application that extracts reportable data from reporting facts and dimensions such as you would select in the user interface when creating an analytical report. For example, you could use these APIs to extract and report on the analytical data that you need to import to a customer's warehouse or create dashboards for trend assessment.\n\nThe Synchronous API for analytics enables you to submit smaller requests and receive results synchronously. In the synchronous usage, requested output is batched and paginated, and results are returned one page at a time. The maximum number of records returned is 50,000. As a best practice, we recommend that the synchronous usage be used only with custom reporting view templates that have few fields and short filter date ranges. For example, this usage would be good for checking how many sourcing projects will expire next month and returning their names."
+  },
+  "x-sap-shortText": "Extracts reporting data from reporting facts and dimensions using the Analytical Reporting API (synchronous usage).",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/analytics-reporting-details/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/analytics-reporting-details/v1/{environment}",
+      "description": "Analytical Reporting - Synchronous API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "ru.openapi.ariba.com",
+            "mn1.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api-ru.ariba.com",
+            "api.mn1.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "analytics-reporting-details",
+      "description": "Analytical Reporting - Synchronous API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "RU",
+      "description": "RU data center"
+    },
+    {
+      "name": "UAE",
+      "description": "UAE data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    },
+    {
+      "name": "Analysis Reporting Synchronous API",
+      "description": "synchronous API to get reporting data"
+    }
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/views/{viewTemplateName}": {
+      "get": {
+        "description": "Synchronous API to get analytical reporting data, appropriate for smaller results sets",
+        "summary": "Requested output is batched and paginated and JSON results are returned one page at a time",
+        "tags": [
+          "Analysis reporting Synchronous API"
+        ],
+        "operationId": "GetDetails",
+        "parameters": [
+          {
+            "name": "viewTemplateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "view template name"
+          },
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Customer realm name"
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Filter criteria to query"
+          },
+          {
+            "name": "pagetoken",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "takes page token value to show next page results of request"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/SynchronousAPIResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/InvalidFilters"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SynchronousAPIResponse": {
+      "title": "Synchronous API Response",
+      "type": "object",
+      "example": {
+        "Records": [
+          {
+            "Owner": {
+              "SourceSystem": "ASM",
+              "UserId": "en130917b",
+              "PasswordAdapter": "PasswordAdapter1"
+            },
+            "OnTimeOrLate": "On Time",
+            "Process": {
+              "SourceSystem": "ASM",
+              "BaseProcessId": ""
+            },
+            "NoticePeriod": 0,
+            "AutoRenewalCount": 0,
+            "AllOwners": [
+              {
+                "AllOwners": {
+                  "SourceSystem": "ASM",
+                  "UserId": "en130917b",
+                  "PasswordAdapter": "PasswordAdapter1"
+                }
+              }
+            ],
+            "AmendmentReason": "",
+            "ProjectInfo": {
+              "ProjectId": "CW3310",
+              "SourceSystem": "ASM"
+            },
+            "ProposedIncrementalAmount": 0,
+            "AutoRenewalInterval": 0,
+            "Status": "Gray",
+            "OrigAmount": 0,
+            "LoadUpdateTime": "2017-10-10T10:07:54Z",
+            "Duration": 0,
+            "ExpirationTermType": "Fixed",
+            "ContractCurrency": "",
+            "BeginDate": {
+              "Day": "2017-10-01T00:00:00Z"
+            },
+            "LoadCreateTime": "2017-10-01T00:38:38Z",
+            "AmendmentVersion": "0",
+            "State": "Active",
+            "Region": [
+              {
+                "Region": {
+                  "RegionId": ""
+                }
+              }
+            ],
+            "IsCombinedSpend": false,
+            "Contract": {
+              "SourceSystem": "ASM",
+              "ContractId": "CW3310"
+            },
+            "IsTestProject": true,
+            "Description": "",
+            "Organization": [
+              {
+                "Organization": {
+                  "OrganizationId": ""
+                }
+              }
+            ],
+            "HierarchyType": "StandAlone",
+            "AgreementDate": {
+              "Day": "1970-01-01T00:00:00Z"
+            },
+            "ProcessStatus": "",
+            "ProposedAmount": 0,
+            "DependsOnProject": {
+              "ProjectId": "",
+              "SourceSystem": "ASM"
+            },
+            "ContractStatus": "Draft",
+            "IsEvergreen": false,
+            "ContainerProject": {
+              "ProjectId": "",
+              "SourceSystem": ""
+            },
+            "ParentAgreement": {
+              "ProjectId": "",
+              "SourceSystem": "ASM"
+            },
+            "AffectedParties": [
+              {
+                "AffectedParties": {
+                  "SourceSystem": "ASM",
+                  "SupplierId": "sid808",
+                  "SupplierLocationId": ""
+                }
+              }
+            ],
+            "Commodity": [
+              {
+                "Commodity": {
+                  "CommodityId": "",
+                  "SourceCommodityDomain": "unspsc"
+                }
+              }
+            ],
+            "Supplier": {
+              "SourceSystem": "ASM",
+              "SupplierId": "sid808",
+              "SupplierLocationId": ""
+            },
+            "DocumentVersion": "1",
+            "DueDate": {
+              "Day": "1970-01-01T00:00:00Z"
+            },
+            "OrigProposedAmount": 0,
+            "AllowAdhocSpend": false,
+            "Amount": 0,
+            "AclId": 151,
+            "ProjectId": "CW3310",
+            "ContractId": "CW3310",
+            "EndDate": {
+              "Day": "1970-01-01T00:00:00Z"
+            },
+            "ApprovedAmount": 0,
+            "ExpirationDate": {
+              "Day": "1970-01-01T00:00:00Z"
+            },
+            "ComplexSpendAvailableAmount": 0,
+            "MaxAutoRenewalsAllowed": 0,
+            "RelatedId": "",
+            "SourceSystem": {
+              "SourceSystemId": "ASM"
+            },
+            "EffectiveDate": {
+              "Day": "2017-10-02T00:00:00Z"
+            }
+          }
+        ]
+      }
+    },
+    "ErrorView": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "InvalidSelectAttr"
+        },
+        "message": {
+          "type": "string",
+          "example": "Invalid select attributes"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Unauthorized/API key not found"
+        },
+        "message": {
+          "type": "string",
+          "example": "Token Expired/ API Key not found"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorInternal": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Internal Server Error"
+        },
+        "message": {
+          "type": "string",
+          "example": "Internal Server Error"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "responses": {
+    "InvalidFilters": {
+      "description": "The filters provided are invalid",
+      "schema": {
+        "$ref": "#/definitions/ErrorView"
+      }
+    },
+    "Unauthorized": {
+      "description": "Unauthorized request. Check oauth token is expired or you are not using correct oauth token.",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "InternalServerError": {
+      "description": "If your URL is not constructed properly, you have trailing spaces in URl, request body format is wrong or ARIBA site is temporarily down",
+      "schema": {
+        "$ref": "#/definitions/ErrorInternal"
+      }
+    },
+    "Forbidden": {
+      "description": "forbidden",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    }
+  }
+}

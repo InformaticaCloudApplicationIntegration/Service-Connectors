@@ -1,0 +1,525 @@
+{
+    "swagger": "2.0", 
+    "security": [
+        {
+            "OAuth2": []
+        }
+    ],
+    "securityDefinitions": {
+        "OAuth2": {
+            "type": "oauth2",
+            "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+            "tokenUrl": "https://{regionOauth}/oauth/token",
+            "flow": "application",
+            "scopes": {}
+        }
+    },
+    "externalDocs": {
+        "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+        "url": "https://developer.ariba.com/api"
+    },
+    "info": {
+        "version": "1.0",
+        "title": "Custom Forms API",
+        "description": "This API set enables your application to get information about form designs created in the forms builder; and data from submitted form documents.\n\nA typical use case for this API set is to get form document data for the purpose of reporting or sending to an external ERP system.\n\nNote: When needed, SAP Ariba Custom Forms APIs might add additional attributes to resources that are exposed via REST APIs. The client should be prepared for such additional attributes and their de-serialization should not be impacted due to additional attributes."
+    },
+    "x-sap-shortText": "Retrieves information about form designs created in the forms builder and data from submitted form documents.",
+    "host": "sandbox.api.sap.com",
+    "basePath": "/ariba/api/customforms/v1/sandbox",
+    "schemes": [
+        "https"
+    ],
+    "x-servers": [
+        {
+            "url": "https://{region}/api/customforms/v1/{environment}",
+            "description": "Custom Forms API endpoint",
+            "templates": {
+                "region": {
+                    "enum": [
+                        "openapi.ariba.com",
+                        "eu.openapi.ariba.com",
+                        "ru.openapi.ariba.com",
+                        "mn1.openapi.ariba.com",
+                        "mn2.openapi.ariba.com",
+                        "openapi.sapariba.cn"
+                    ],
+                    "default": "openapi.ariba.com",
+                    "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+                },
+                "regionOauth": {
+                    "enum": [
+                        "api.ariba.com",
+                        "api-eu.ariba.com",
+                        "api-ru.ariba.com",
+                        "api.mn1.ariba.com",
+                        "api.mn2.ariba.com",
+                        "api.sapariba.cn"
+                    ],
+                    "default": "api.ariba.com",
+                    "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+                },
+                "environment": {
+                    "enum": [
+                        "sandbox",
+                        "prod"
+                    ],
+                    "default": "sandbox",
+                    "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+                }
+            }
+        }
+    ],
+    "tags": [
+        {
+            "name": "customforms",
+            "description": "Custom Forms API"
+        },
+        {
+            "name": "US",
+            "description": "US data center"
+        },
+        {
+            "name": "EU",
+            "description": "EU data center"
+        },
+        {
+            "name": "RU",
+            "description": "RU data center"
+        },
+        {
+            "name": "UAE",
+            "description": "UAE data center"
+        },
+        {
+            "name": "KSA",
+            "description": "KSA data center"
+        },
+        {
+            "name": "CN",
+            "description": "CN data center"
+        },
+        {
+            "name": "form-documents-api",
+            "description": "Operations for managing the data in submitted form documents"
+        },
+        {
+            "name": "forms-service-api",
+            "description": "Operations for working with the metadata of form designs"
+        }
+    ],
+    "paths": {
+        "/forms": {
+            "get": {
+                "tags": [
+                    "forms-service-api"
+                ],
+                "summary": "Returns information about form designs that have been published, including obsolete and deleted versions. Use the filter parameter to filter the form designs by status, form design name, and name of the user who published the form.",
+                "operationId": "getAllMetadataPublicUsingGET_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "rsqlfilter",
+                        "in": "query",
+                        "description": "Filters the records using one or more of the following terms: status (published, deleted, obsolete), name, publishedBy. For status, use the operator =in=. For name and publishedBy, use ==. Separate multiple terms with ‘and’.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The number of records to return. The maximum value is 999.",
+                        "required": false,
+                        "type": "string",
+                        "default": "20"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "The page from which to start returning records from the entire set of results.",
+                        "required": false,
+                        "type": "string",
+                        "default": "0"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful retrieval of form design records",
+                        "schema": {
+                            "$ref": "#/definitions/Form"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid form design status. Valid status values: published, deleted, obsolete",
+                        "schema": {
+                            "$ref": "#/definitions/ExceptionResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ExceptionResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/forms/{form_id}/documents": {
+            "get": {
+                "tags": [
+                    "form-documents-api"
+                ],
+                "summary": "Returns data from all form documents associated with the specified form design ID. Use the filter parameter to filter the documents by document approval status, form design version, and document submission date.",
+                "operationId": "getAllDocumentsByFormIdPublicUsingGET_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "description": "Form design ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "rsqlfilter",
+                        "in": "query",
+                        "description": "Filters the records using one or more of the following terms: status (Approved, Denied, Submitted), createDate, formVersion. For status, use the operator =in=. For createDate, use >= for the ‘from’ date and = for the ‘to’ date. For formVersion, use ==. Separate multiple terms with ‘and’.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The number of records to return. The maximum value is 999.",
+                        "required": false,
+                        "type": "string",
+                        "default": "20"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "The page from which to start returning records from the entire set of results.",
+                        "required": false,
+                        "type": "string",
+                        "default": "0"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful retrieval of form document records",
+                        "schema": {
+                            "$ref": "#/definitions/FormDocument"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/ExceptionResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ExceptionResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Form design with specified formID not found",
+                        "schema": {
+                            "$ref": "#/definitions/ExceptionResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ExceptionResponse": {
+            "type": "object",
+            "required": [
+                "code",
+                "error",
+                "msg",
+                "service",
+                "status",
+                "timestamp"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "Form exception code"
+                },
+                "error": {
+                    "type": "string",
+                    "description": "The name of the exception"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "The text of the exception"
+                },
+                "service": {
+                    "type": "string",
+                    "description": "The service where the exception occurred"
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "HTTP status code of the exception"
+                },
+                "timestamp": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "The time the exception occurred"
+                }
+            },
+            "description": "The response of the exception"
+        },
+        "FormDocument": {
+            "type": "object",
+            "required": [
+                "createDate",
+                "data",
+                "formId",
+                "formVersion",
+                "id",
+                "name",
+                "status",
+                "uniqueName",
+                "userId"
+            ],
+            "properties": {
+                "createDate": {
+                    "type": "string",
+                    "description": "The time the form was submitted (in milliseconds)"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "The data in the form document",
+                    "items": {
+                        "$ref": "#/definitions/WidgetData"
+                    }
+                },
+                "formId": {
+                    "type": "string",
+                    "description": "Form design ID"
+                },
+                "formVersion": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Version of the form design"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Internal form document ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Form design name"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Approval status of form document"
+                },
+                "uniqueName": {
+                    "type": "string",
+                    "description": "Form document ID displayed in the UI"
+                },
+                "userId": {
+                    "type": "string",
+                    "description": "User ID of the user who submitted the form document"
+                }
+            },
+            "description": "Document resource representation of Form"
+        },
+        "WidgetData": {
+            "type": "object",
+            "required": [
+                "id",
+                "value"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Widget ID"
+                },
+                "value": {
+                    "type": "object",
+                    "description": "The data the user entered in the widget"
+                }
+            },
+            "description": "Metadata resource representation"
+        },
+        "Form": {
+            "type": "object",
+            "required": [
+                "id",
+                "name",
+                "publishedAt",
+                "publishedBy",
+                "status",
+                "version",
+                "widgetsMetadata"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Form design ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Form design name"
+                },
+                "publishedAt": {
+                    "type": "string",
+                    "description": "The time the form was published (in milliseconds)"
+                },
+                "publishedBy": {
+                    "type": "string",
+                    "description": "Username of the user who published the form design"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Status of form design"
+                },
+                "version": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Version of the form design"
+                },
+                "widgetsMetadata": {
+                    "type": "array",
+                    "description": "Username of the user who published the form design",
+                    "items": {
+                        "$ref": "#/definitions/WidgetMetadata"
+                    }
+                }
+            },
+            "description": "Metadata resource representation"
+        },
+        "WidgetMetadata": {
+            "type": "object",
+            "required": [
+                "id",
+                "label",
+                "type"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Widget ID"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Widget display label"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Widget type"
+                }
+            },
+            "description": "Metadata resource representation"
+        },
+        "PageResource«FormDocument»": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FormDocument"
+                    }
+                },
+                "firstPage": {
+                    "type": "boolean"
+                },
+                "lastPage": {
+                    "type": "boolean"
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "links": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Link"
+                    }
+                },
+                "offset": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalElements": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalOffsets": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "Link": {
+            "type": "object",
+            "properties": {
+                "href": {
+                    "type": "string"
+                },
+                "rel": {
+                    "type": "string"
+                },
+                "templated": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "PageResource«Form»": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Form"
+                    }
+                },
+                "firstPage": {
+                    "type": "boolean"
+                },
+                "lastPage": {
+                    "type": "boolean"
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "links": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Link"
+                    }
+                },
+                "offset": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalElements": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalOffsets": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        }
+    }
+}

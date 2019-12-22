@@ -1,0 +1,419 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "2.0",
+    "title": "Analytical Reporting - Job Results API",
+    "description": "The Analytical reporting APIs enable you  to create a client application that extracts reportable data from reporting facts and dimensions such as you would select in the user interface when creating an analytical report. For example, you could use these APIs to extract and report on the analytical data that you need to import to a customer's warehouse or create dashboards for trend assessment.\n\nThe Job results API for analytics allows you to request output from asynchronous jobs posted using the Job submission API for analytics. Requested output is batched into ZIP files containing 5000 records per file, and these can be downloaded one at a time. The maximum number of records returned is 50,000, or 10 files containing 5000 records per file. Files created in response to an asynchronous API query expire after 48 hours. As a best practice, we recommend the asynchronous usage when you update analytical data to your data warehouse."
+  },
+  "x-sap-shortText": "Enables your application to view the results of jobs previously submitted to the Analytical Reporting API (asynchronous usage).",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/analytics-reporting-jobresult/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/analytics-reporting-jobresult/v1/{environment}",
+      "description": "Analytical Reporting - Job Results API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "ru.openapi.ariba.com",
+            "mn1.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api-ru.ariba.com",
+            "api.mn1.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "analytics-reporting-jobresult",
+      "description": "Analytical Reporting - Job Results API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "RU",
+      "description": "RU data center"
+    },
+    {
+      "name": "UAE",
+      "description": "UAE data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    },
+    {
+      "name": "Job Status",
+      "description": "Getting status of the submittes request (Pending/In Progeress/Completed/Expired )"
+    },
+    {
+      "name": "File Download",
+      "description": "Downloading resulted data"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/jobs/{jobId}": {
+      "get": {
+        "description": "Query the status of a submitted asynchronous analytical reporting job",
+        "summary": "Returns the status of the specified asynchronous analytical reporting job",
+        "tags": [
+          "Job Status"
+        ],
+        "operationId": "Get Job Status",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Customer realm Name"
+          },
+          {
+            "name": "jobId",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The Job Id provided in the response of the post job API"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/GetJobStatusresponse"
+            },
+            "examples": {}
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/files/{fileId}": {
+      "get": {
+        "description": "This API is going to download the resulted data file. File is in zip format",
+        "summary": "Requests file one at a time for completed job by specifying {fileId}",
+        "tags": [
+          "File Download"
+        ],
+        "operationId": "FileDownload",
+        "produces": [
+          "zip"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Customer realm name"
+          },
+          {
+            "name": "jobId",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The Job Id of the completed job"
+          },
+          {
+            "name": "fileId",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "The file Id for the generated file after job is completed. File is a .zip file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A zip file containing records.txt",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/InvalidJobId"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FilterExpression": {
+      "title": "FilterExpression",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Customized name for the field. This field will be passed while posting a job. e.g TimeCreatedFrom/MyTimeCreated/createdFrom",
+          "type": "string"
+        },
+        "field": {
+          "description": "Field name which is a filter key and defined in whitelist. e.g TimeCreated",
+          "type": "string"
+        },
+        "op": {
+          "description": "Operations allowed. <= >= == <> IN LIKE NOT LIKE",
+          "type": "string"
+        },
+        "defaultValue": {
+          "description": "Passing defaultvalue is optional. Default value can always be overridden.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "field",
+        "op"
+      ],
+      "example": {
+        "filterExpressions": [
+          {
+            "name": "createdDateFrom",
+            "field": "TimeCreated",
+            "op": ">=",
+            "defaultValue": "2017-11-05T01:01:59Z"
+          },
+          {
+            "name": "createdDateTo",
+            "field": "TimeCreated",
+            "op": "<=",
+            "defaultValue": "2017-11-06T01:01:59Z"
+          }
+        ]
+      }
+    },
+    "Filters": {
+      "title": "Filters",
+      "type": "object",
+      "properties": {
+        "updatedDateFrom": {
+          "description": "",
+          "type": "string",
+          "example": "2017-07-06T23:55:31Z"
+        },
+        "updatedDateTo": {
+          "description": "",
+          "type": "string",
+          "example": "2017-07-06T23:55:31Z"
+        }
+      },
+      "required": [
+        "updatedDateFrom",
+        "updatedDateTo"
+      ]
+    },
+    "GetJobStatusresponse": {
+      "title": "Get Job StatusResponse",
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "The job id for which is status is being checked",
+          "type": "string",
+          "example": "c1f53a792-0282-4505-be90-558c2e2652561512101983836"
+        },
+        "files": {
+          "description": "File ids generated once job is completed",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "description": "The possible job status are : pending, Inprogress, completed and expired",
+          "type": "string"
+        },
+        "createdDate": {
+          "description": "The job creation time",
+          "type": "string"
+        },
+        "viewTemplateName": {
+          "description": "viewtemplate name with which job is submitted",
+          "type": "string"
+        },
+        "filters": {
+          "$ref": "#/definitions/Filters"
+        },
+        "documentType": {
+          "description": "Analytical document type for which current job is submitted",
+          "type": "string"
+        },
+        "selectAttributesSnap": {
+          "description": "Select attributes defined for the view",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filterExpressionsSnap": {
+          "description": "Filter criteria defined for view",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterExpression"
+          }
+        }
+      },
+      "required": [
+        "jobId",
+        "files",
+        "status",
+        "createdDate",
+        "viewTemplateName",
+        "filters",
+        "documentType",
+        "selectAttributesSnap",
+        "filterExpressionsSnap"
+      ]
+    },
+    "ErrorView": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "InvalidSelectAttr"
+        },
+        "message": {
+          "type": "string",
+          "example": "Invalid select attributes"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorJob": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "JobNotFound"
+        },
+        "message": {
+          "type": "string",
+          "example": "Job not found"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Unauthorized/API key not found"
+        },
+        "message": {
+          "type": "string",
+          "example": "Token Expired/ API Key not found"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "responses": {
+    "InvalidSelectAttributes": {
+      "description": "The select attributes are either not whitelisted/duplicated/customized",
+      "schema": {
+        "$ref": "#/definitions/ErrorView"
+      }
+    },
+    "InvalidJobId": {
+      "description": "Job not found",
+      "schema": {
+        "$ref": "#/definitions/ErrorJob"
+      }
+    },
+    "Unauthorized": {
+      "description": "Unauthorized request",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "Forbidden": {
+      "description": "forbidden",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    }
+  }
+}

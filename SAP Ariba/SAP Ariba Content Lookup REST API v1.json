@@ -1,0 +1,338 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "1.0.0",
+    "title": "Content Lookup API",
+    "description": "This API set enables your application to update lookup and get status for lookup from the SAP Ariba solution. The following APIs enable you to manage lookup using:\n* lookup update, for existing lookup\n* getting lookup status"
+  },
+  "x-sap-shortText": "Enables your application to upload lookup files to Ariba Content Management System (CMS).",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/contentlookup/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/contentlookup/v1/{environment}",
+      "description": "Content Lookup API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "ru.openapi.ariba.com",
+            "mn1.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api-ru.ariba.com",
+            "api.mn1.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "contentlookup",
+      "description": "Content Lookup API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "RU",
+      "description": "RU data center"
+    },
+    {
+      "name": "UAE",
+      "description": "UAE data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    },
+    {
+      "name": "lookup-ext-interface-controller",
+      "description": "Lookup Service APIs"
+    }
+  ],
+  "paths": {
+    "/lookup": {
+      "get": {
+        "tags": [
+          "lookup-ext-interface-controller"
+        ],
+        "summary": "Lookup status for a lookup",
+        "operationId": "lookupStatusUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "header",
+            "description": "Realm",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lookupname",
+            "in": "query",
+            "description": "Lookup Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Lookup id",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lookup Status",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LookupStatusResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/APIErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/APIErrorResponse"
+            }
+          },
+          "412": {
+            "description": "Pre condition failed due to required data not found",
+            "schema": {
+              "$ref": "#/definitions/APIErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden!!!!!"
+          },
+          "404": {
+            "description": "Realm not found",
+            "schema": {
+              "$ref": "#/definitions/APIErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "lookup-ext-interface-controller"
+        ],
+        "summary": "Update lookup by uploading lookup file",
+        "operationId": "updateLookupUsingPOST",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "header",
+            "description": "Realm",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lookupname",
+            "in": "query",
+            "description": "Lookup Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "Lookup File",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lookup Updated",
+            "schema": {
+              "$ref": "#/definitions/LookupUpdateResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/APIErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/APIErrorResponse"
+            }
+          },
+          "412": {
+            "description": "Pre condition failed due to required data not found",
+            "schema": {
+              "$ref": "#/definitions/APIErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Realm not found",
+            "schema": {
+              "$ref": "#/definitions/APIErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "APIErrorResponse": {
+      "type": "object",
+      "required": [
+        "code",
+        "error",
+        "extra_messages",
+        "msg",
+        "service",
+        "status",
+        "timestamp"
+      ],
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "HTTP status code"
+        },
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "error": {
+          "type": "string",
+          "description": "Error"
+        },
+        "service": {
+          "type": "string",
+          "description": "Exception code"
+        },
+        "msg": {
+          "type": "string",
+          "description": "Exception message"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The time the exception occurred"
+        },
+        "extra_messages": {
+          "type": "array",
+          "description": "Additional messages",
+          "items": {
+            "$ref": "#/definitions/MapOfStringOfString"
+          }
+        }
+      }
+    },
+    "LookupStatusResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "lastmodifiedtime": {
+          "type": "string"
+        },
+        "lookupname": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "MapOfStringOfString": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "LookupUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "lookupname": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
