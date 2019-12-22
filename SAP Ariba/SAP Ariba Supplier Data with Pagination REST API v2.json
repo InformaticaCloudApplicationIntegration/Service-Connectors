@@ -1,0 +1,2864 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "2.0.0",
+    "title": "Supplier Data API With Pagination",
+    "description": "Using this API, you can create a client application to extract Supplier data from your SAP Ariba Supplier Lifecycle and Performance or SAP Ariba Supplier Information and Performance Management (new architecture) solution to report on suppliers, including registration, qualification, and preferred statuses and details about their questionnaires and certificates, using pagination to limit the amount of data you extract at one time."
+  },
+  "x-sap-shortText": "Extracts Supplier data from your SLP or SIPM (new architecture) solution to report on suppliers.",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/supplierdatapagination/v2/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/supplierdatapagination/v2/{environment}",
+      "description": "Supplier Data API With Pagination endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "ru.openapi.ariba.com",
+            "mn1.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api-ru.ariba.com",
+            "api.mn1.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "supplierdatapagination",
+      "description": "Supplier Data API With Pagination"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "RU",
+      "description": "RU data center"
+    },
+    {
+      "name": "UAE",
+      "description": "UAE data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    },
+    {
+      "name": "Vendor Details",
+      "description": "Fetch Vendor details."
+    },
+    {
+      "name": "Fetch Documents",
+      "description": "Fetch Questionnaires"
+    },
+    {
+      "name": "Fetch Question & Answers",
+      "description": "Fetch Question & Answers"
+    },
+    {
+      "name": "Fetch Certificates",
+      "description": "Fetch Vendor Certificates"
+    }
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/smv1/vendors/": {
+      "post": {
+        "tags": [
+          "Vendor Details"
+        ],
+        "summary": "This Api will fetch all the Vendor details",
+        "description": "This Api will fetch all the vendor details in incriments of 500 vendors per page in either JSON or CSV specified in request body. Optionally you can pass on additional filter parameters to get only a subset of vendors. Pagination token for next set of records is passed at the end of each page",
+        "operationId": "Fetch_Vendors",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "X-Pagination-Token",
+            "in": "header",
+            "description": "Continuation token for pagination",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportRequest"
+            }
+          },
+          {
+            "name": "previousApiCallTime",
+            "in": "query",
+            "description": "This request parameter takes the previous Api call time timestamp in milliseconds format",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReportRequestResponse"
+            }
+          },
+          "201": {
+            "description": "created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "423": {
+            "description": "Invalid Header",
+            "schema": {
+              "$ref": "#/definitions/InvalidHeader"
+            }
+          }
+        }
+      }
+    },
+    "/smv1/vendors/{vendorId}/workspaces/documents/qna": {
+      "get": {
+        "tags": [
+          "Fetch Question & Answers"
+        ],
+        "summary": "This Api will fetch the Question & Answers \nfor a given vendor specified by SMVendorID.",
+        "description": "This Api will fetch paginated Question and Answers for a given SMVendorID based on the limit configured in the system. Api User has to pass the X-Pagination-Token in the request header to get the response. X-Pagination-Token header is not required for the first request.",
+        "operationId": "getAllQuestionAnswers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "SMVendorID of the vendor",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-Pagination-Token",
+            "in": "header",
+            "description": "Continuation token to fetch next page results",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "previousApiCallTime",
+            "in": "query",
+            "description": "This request parameter takes the previous Api call time timestamp in milliseconds format",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuestionAndAnswersResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "420": {
+            "description": "Vendor not found",
+            "schema": {
+              "$ref": "#/definitions/VendorNotFound"
+            }
+          },
+          "423": {
+            "description": "Invalid Header",
+            "schema": {
+              "$ref": "#/definitions/InvalidHeader"
+            }
+          }
+        }
+      }
+    },
+    "/smv1/vendors/{vendorId}/workspaces/{wid}/documents/qna": {
+      "get": {
+        "tags": [
+          "Fetch Question & Answers"
+        ],
+        "summary": "This Api will fetch the Question & Answers \nfor a given vendor specified by SMVendorID and workspace Id.",
+        "description": "\nThis API will fetch QuestionAnswers for a given SMVendor Id and Workspace Id.It returns paged results  based on the limit configured in system. Api accepts custom header X-Pagination-Token which needs to be passed in the request header to get the next page response. X-Pagination-Token is not required for the first request.",
+        "operationId": "getQuestionAnswersForWorkSpace",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "SMVendorID of the vendor",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "wid",
+            "in": "path",
+            "description": "Workspace Id of the workspace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-Pagination-Token",
+            "in": "header",
+            "description": "Continuation token for pagination",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "previousApiCallTime",
+            "in": "query",
+            "description": "This request parameter takes the previous Api call time timestamp in milliseconds format",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuestionAndAnswersResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "420": {
+            "description": "Vendor not found",
+            "schema": {
+              "$ref": "#/definitions/VendorNotFound"
+            }
+          },
+          "422": {
+            "description": "Invalid or missing workspace id",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceNotFound"
+            }
+          },
+          "423": {
+            "description": "Invalid Header",
+            "schema": {
+              "$ref": "#/definitions/InvalidHeader"
+            }
+          }
+        }
+      }
+    },
+    "/smv1/vendors/{vendorId}/workspaces/documents/{documentId}/qna": {
+      "get": {
+        "tags": [
+          "Fetch Question & Answers"
+        ],
+        "summary": "This Api will fetch the Question & Answers \nfor a given vendor specified by SMVendorID and for a given document id.",
+        "description": "\nThis API will fetch Question & Answers for a given SMVendorID and Document Id. It returns paginated results based on the limit configured in the system.  Api accepts custom header X-Pagination-Token which needs to be passed in the request header to get the next page response. X-Pagination-Token is not required for the first request.",
+        "operationId": "getAllQuestionAnswersForDocument",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "SMVendorID of vendor",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "Document id  of the document",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-Pagination-Token",
+            "in": "header",
+            "description": "Continuation token to fetch next page results",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "previousApiCallTime",
+            "in": "query",
+            "description": "This request parameter takes the previous Api call time timestamp in milliseconds format",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuestionAndAnswersResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "420": {
+            "description": "Vendor not found",
+            "schema": {
+              "$ref": "#/definitions/VendorNotFound"
+            }
+          },
+          "421": {
+            "description": "Document not found",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireNotFound"
+            }
+          },
+          "423": {
+            "description": "Invalid Header",
+            "schema": {
+              "$ref": "#/definitions/InvalidHeader"
+            }
+          }
+        }
+      }
+    },
+    "/smv1/vendors/{vendorId}/workspaces/{wid}/documents/{documentId}/qna": {
+      "get": {
+        "tags": [
+          "Fetch Question & Answers"
+        ],
+        "summary": "Return question & answers for a given SMVendorID, Document id and Workspace Id",
+        "description": "\nThis API will fetch Question & Answers for the given SMVendorID, Workspace Id and DocumentId.It returns paged results based on the limit configured in the system. Api accepts custom header X-Pagination-Token which needs to be passed\n  in the request header to get the next page response. X-Pagination-Token is not required for the first request.",
+        "operationId": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "SMVendorID of the vendor",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "wid",
+            "in": "path",
+            "description": "Workspace Id of the Workspace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "Document Id of the document",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-Pagination-Token",
+            "in": "header",
+            "description": "Continuation token for pagination",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "previousApiCallTime",
+            "in": "query",
+            "description": "This request parameter takes the previous Api call time timestamp in milliseconds format",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuestionAndAnswersResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "420": {
+            "description": "Vendor not found",
+            "schema": {
+              "$ref": "#/definitions/VendorNotFound"
+            }
+          },
+          "421": {
+            "description": "Document not found",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireNotFound"
+            }
+          },
+          "422": {
+            "description": "Invalid or missing workspace id",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceNotFound"
+            }
+          },
+          "423": {
+            "description": "Invalid Header",
+            "schema": {
+              "$ref": "#/definitions/InvalidHeader"
+            }
+          }
+        }
+      }
+    },
+    "/smv1/vendors/{vendorId}/workspaces/documents": {
+      "get": {
+        "tags": [
+          "Fetch Documents"
+        ],
+        "summary": "Fetch Documents by SMVendorID",
+        "description": "This API will fetch paginated details of documents for the given SMVendorID based on the limit configured in the system. Api User has to pass the X-Pagination-Token in the request header to get the response. X-Pagination-Token header will not be present for the first request.",
+        "operationId": "getDocuments",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "SMVendorID of the vendor",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-Pagination-Token",
+            "in": "header",
+            "description": "Continuation token for pagination",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "previousApiCallTime",
+            "in": "query",
+            "description": "This request parameter takes the previous Api call time timestamp in milliseconds format",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DocumentsForVendorResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "420": {
+            "description": "Vendor not found",
+            "schema": {
+              "$ref": "#/definitions/VendorNotFound"
+            }
+          },
+          "423": {
+            "description": "Invalid Header",
+            "schema": {
+              "$ref": "#/definitions/InvalidHeader"
+            }
+          }
+        }
+      }
+    },
+    "/smv1/vendors/{vendorId}/workspaces/{wid}/documents": {
+      "get": {
+        "tags": [
+          "Fetch Documents"
+        ],
+        "summary": "Find Questionnaires by SMVendorID and workspace id",
+        "description": "This API will fetch paginated details of documents for the given SMVendorID and Workspace Id based on the limit configured in the system. Api User has to pass the X-Pagination-Token in the request header to get the response. X-Pagination-Token header will not be present for the first request.",
+        "operationId": "getDocumentsForWorkspace",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "SMVendorID of the vendor",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "wid",
+            "in": "path",
+            "description": "Workspace Id of the workspace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-Pagination-Token",
+            "in": "header",
+            "description": "Continuation token for pagination",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "previousApiCallTime",
+            "in": "query",
+            "description": "This request parameter takes the previous Api call time timestamp in milliseconds format",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DocumentsForVendorResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "420": {
+            "description": "Vendor not found",
+            "schema": {
+              "$ref": "#/definitions/VendorNotFound"
+            }
+          },
+          "422": {
+            "description": "Missing or invalid workspace id",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceNotFound"
+            }
+          },
+          "423": {
+            "description": "Invalid Header",
+            "schema": {
+              "$ref": "#/definitions/InvalidHeader"
+            }
+          }
+        }
+      }
+    },
+    "/smv1/vendors/{vendorId}/workspaces/documents/{documentId}": {
+      "get": {
+        "tags": [
+          "Fetch Documents"
+        ],
+        "summary": "This Api will fetch the Document details for a given SMVendorID and documentId across all workspaces.",
+        "description": "This API will fetch paginated details of documents for the given SMVendorID and Document Id. Api User has to pass the X-Pagination-Token in the request header to get the response. X-Pagination-Token header will not be present for the first request.",
+        "operationId": "getDocumentDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "SMVendorID of the vendor",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "Document Id of the document",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-Pagination-Token",
+            "in": "header",
+            "description": "Continuation token for pagination",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "previousApiCallTime",
+            "in": "query",
+            "description": "This request parameter takes the previous Api call time timestamp in milliseconds format",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DocumentsForVendorAndDocumentResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "420": {
+            "description": "Vendor not found",
+            "schema": {
+              "$ref": "#/definitions/VendorNotFound"
+            }
+          },
+          "421": {
+            "description": "Document not found",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireNotFound"
+            }
+          }
+        }
+      }
+    },
+    "/smv1/vendors/{vendorId}/certificates": {
+      "get": {
+        "tags": [
+          "Fetch Certificates"
+        ],
+        "summary": "This Api will fetch the certificate details for a given SMVendorID.",
+        "description": "\nThis API will fetch Certificate details for the given SMVendorID. It returns paged results based on the limit configured in the system. Api accepts custom header X-Pagination-Token which needs to be passed in the request header to get the next page response. X-Pagination-Token is not required for the first request.",
+        "operationId": "getCertificates",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "SMVendorID of the vendor",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-Pagination-Token",
+            "in": "header",
+            "description": "Continuation token for pagination",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "previousApiCallTime",
+            "in": "query",
+            "description": "This request parameter takes the previous Api call time timestamp in milliseconds format",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CertificatesResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "420": {
+            "description": "Vendor not found",
+            "schema": {
+              "$ref": "#/definitions/VendorNotFound"
+            }
+          },
+          "423": {
+            "description": "Invalid Header",
+            "schema": {
+              "$ref": "#/definitions/InvalidHeader"
+            }
+          }
+        }
+      }
+    },
+    "/smv1/vendors/{vendorId}/workspaces/documents/{documentId}/answers": {
+      "post": {
+        "tags": [
+          "Answers"
+        ],
+        "summary": "API to update answers to the given set of questions in a questionnaire document represented by SMVendorID, Document ID and externalSystemCorrelationId",
+        "operationId": "updateAnswersUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubmitSurveyRequest"
+            }
+          },
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "SMVendorID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "Document ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized. Oauth token invalid /expired"
+          },
+          "403": {
+            "description": "Forbidden. The document is not in a state to update answers."
+          },
+          "404": {
+            "description": "Not Found. Specified Document or Vendor not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/smv1/vendors/{vendorId}/workspaces": {
+      "get": {
+        "tags": [
+          "Fetch Workspaces"
+        ],
+        "summary": "Fetch Workspaces by SMVendorID",
+        "description": "This API will fetch paginated details of workspaces for the given SMVendorID based on the limit configured in the system. Api User has to pass the X-Pagination-Token in the request header to get the response. X-Pagination-Token header will not be present for the first request.",
+        "operationId": "getWorkspaces",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "SMVendorID of the vendor",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-Pagination-Token",
+            "in": "header",
+            "description": "Continuation token for pagination",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "previousApiCallTime",
+            "in": "query",
+            "description": "This request parameter takes the previous Api call time timestamp in milliseconds format",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/WorkspacesResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "420": {
+            "description": "Vendor not found",
+            "schema": {
+              "$ref": "#/definitions/VendorNotFound"
+            }
+          },
+          "423": {
+            "description": "Invalid Header",
+            "schema": {
+              "$ref": "#/definitions/InvalidHeader"
+            }
+          }
+        }
+      }
+    },
+    "/smv1/vendors/{vendorId}/workspaces/{wid}": {
+      "get": {
+        "tags": [
+          "Fetch Workspace Details"
+        ],
+        "summary": "Find Workspace by SMVendorID and workspace id",
+        "description": "This API will fetch paginated details of workspace for the given SMVendorID and Workspace Id based on the limit configured in the system. Api User has to pass the X-Pagination-Token in the request header to get the response. X-Pagination-Token header will not be present for the first request.",
+        "operationId": "getWorkspaceDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "SMVendorID of the vendor",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "wid",
+            "in": "path",
+            "description": "Workspace Id of the workspace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-Pagination-Token",
+            "in": "header",
+            "description": "Continuation token for pagination",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "previousApiCallTime",
+            "in": "query",
+            "description": "This request parameter takes the previous Api call time timestamp in milliseconds format",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceDetailsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "420": {
+            "description": "Vendor not found",
+            "schema": {
+              "$ref": "#/definitions/VendorNotFound"
+            }
+          },
+          "422": {
+            "description": "Missing or invalid workspace id",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceNotFound"
+            }
+          },
+          "423": {
+            "description": "Invalid Header",
+            "schema": {
+              "$ref": "#/definitions/InvalidHeader"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "object"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string"
+              },
+              "rel": {
+                "type": "string"
+              },
+              "templated": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "VendorNotFound": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Not Found"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string",
+          "description": "Vendor Not Found"
+        },
+        "debugMessage": {
+          "type": "string"
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "420"
+        }
+      }
+    },
+    "QuestionnaireNotFound": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Not Found"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string",
+          "description": "Questionnaire Not Found"
+        },
+        "debugMessage": {
+          "type": "string"
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "421"
+        }
+      }
+    },
+    "WorkspaceNotFound": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Not Found"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string",
+          "description": "Missing or Invalid Workspace Id"
+        },
+        "debugMessage": {
+          "type": "string"
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "422"
+        }
+      }
+    },
+    "InvalidHeader": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Bad Request"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string",
+          "description": "Invalid Header"
+        },
+        "debugMessage": {
+          "type": "string"
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "423"
+        }
+      }
+    },
+    "ReportRequest": {
+      "properties": {
+        "smVendorIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "businessUnitList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "categoryList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outputFormat": {
+          "type": "string",
+          "enum": [
+            "CSV",
+            "JSON"
+          ]
+        },
+        "preferredLevelList": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "qualificationStatusList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Unknown",
+              "QualificationRejected",
+              "Disqualified",
+              "InDisqualification",
+              "PendingDisqualificationApproval",
+              "QualificationExpired",
+              "NotQualified",
+              "QualificationStarted",
+              "InQualification",
+              "PendingQualificationApproval",
+              "PendingQualificationResubmit",
+              "QualificationRestricted",
+              "QualifiedForSome",
+              "QualifiedWithException",
+              "Qualified",
+              "None"
+            ]
+          }
+        },
+        "regionList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "registrationStatusList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Unknown",
+              "RegistrationDenied",
+              "PhasedOut",
+              "InCreation",
+              "InExternalApprovalForCreation",
+              "NotInvited",
+              "Invited",
+              "InRegistration",
+              "PendingApproval",
+              "PendingResubmit",
+              "Registered"
+            ]
+          }
+        },
+        "withQuestionnaire": {
+          "type": "boolean"
+        },
+        "withGenericCustomFields": {
+          "type": "boolean"
+        },
+        "pageLimit": {
+          "type": "integer"
+        }
+      }
+    },
+    "SMProjectHeaderUpdateRequest": {
+      "title": "Update Project Header Fields Request",
+      "example": {
+        "regionIds": [
+          "Region1",
+          "Region2"
+        ],
+        "materialIds": [
+          "Material123"
+        ]
+      },
+      "properties": {
+        "materialIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "regionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SubmitSurveyRequest": {
+      "title": "Update Questionnaire Answers Request",
+      "example": {
+        "answers": [
+          {
+            "externalSystemCorrelationId": "KI_80105",
+            "answer": "answer1"
+          },
+          {
+            "externalSystemCorrelationId": "KI_80106",
+            "multiValueAnswer": [
+              "v1",
+              "v2",
+              "v3"
+            ]
+          }
+        ]
+      },
+      "properties": {
+        "answers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemAnswer"
+          }
+        }
+      }
+    },
+    "ItemAnswer": {
+      "title": "Questionnaire Answer Object",
+      "properties": {
+        "externalSystemCorrelationId": {
+          "type": "string",
+          "description": "Unique ID of the question"
+        },
+        "alternative": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "multiValueAnswer": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "addressAnswer": {
+          "$ref": "#/definitions/AddressData"
+        },
+        "attachmentAnswer": {
+          "$ref": "#/definitions/AttachmentData"
+        },
+        "bankAccountAnswer": {
+          "$ref": "#/definitions/BankAccountData"
+        },
+        "certificateAnswer": {
+          "$ref": "#/definitions/CertificateData"
+        },
+        "extendedAddressAnswer": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ExtendedAddressRepData"
+          }
+        },
+        "taxDataAnswer": {
+          "$ref": "#/definitions/TaxData"
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommentData"
+          }
+        },
+        "itemTag": {
+          "type": "string"
+        },
+        "moreValue": {
+          "type": "string"
+        }
+      }
+    },
+    "TaxData": {
+      "properties": {
+        "answers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemAnswer"
+          }
+        },
+        "countryCode": {
+          "type": "string"
+        }
+      }
+    },
+    "ExtendedAddressRepData": {
+      "properties": {
+        "additionalCityName": {
+          "type": "string"
+        },
+        "additionalHouseID": {
+          "type": "string"
+        },
+        "additionalRegionalStructureCityCode": {
+          "type": "string"
+        },
+        "additionalStreetPrefixName": {
+          "type": "string"
+        },
+        "additionalStreetSuffixName": {
+          "type": "string"
+        },
+        "blank": {
+          "type": "boolean"
+        },
+        "buildingID": {
+          "type": "string"
+        },
+        "careOfName": {
+          "type": "string"
+        },
+        "cityName": {
+          "type": "string"
+        },
+        "companyPostalCode": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "districtName": {
+          "type": "string"
+        },
+        "floorID": {
+          "type": "string"
+        },
+        "houseID": {
+          "type": "string"
+        },
+        "poBoxAddressMailNonDeliveryReasonCode": {
+          "type": "string"
+        },
+        "poBoxDeliveryServiceID": {
+          "type": "string"
+        },
+        "poBoxDeliveryServiceTypeCode": {
+          "type": "string"
+        },
+        "poBoxDeviatingCityName": {
+          "type": "string"
+        },
+        "poBoxDeviatingCountryCode": {
+          "type": "string"
+        },
+        "poBoxDeviatingRegionCode": {
+          "type": "string"
+        },
+        "poBoxDeviatingRegionalStructureCityCode": {
+          "type": "string"
+        },
+        "poBoxID": {
+          "type": "string"
+        },
+        "poBoxIDVisibleIndicator": {
+          "type": "boolean"
+        },
+        "poBoxLobbyName": {
+          "type": "string"
+        },
+        "poBoxPostalCode": {
+          "type": "string"
+        },
+        "regionCode": {
+          "type": "string"
+        },
+        "regionalStructureAddressConsistencyStatusCode": {
+          "type": "string"
+        },
+        "regionalStructureCityCode": {
+          "type": "string"
+        },
+        "regionalStructureDistrictCode": {
+          "type": "string"
+        },
+        "regionalStructureElementGroupCode": {
+          "type": "string"
+        },
+        "regionalStructureStreetCode": {
+          "type": "string"
+        },
+        "roomID": {
+          "type": "string"
+        },
+        "streetAddressMailNonDeliveryReasonCode": {
+          "type": "string"
+        },
+        "streetName": {
+          "type": "string"
+        },
+        "streetPostalCode": {
+          "type": "string"
+        },
+        "streetPrefixName": {
+          "type": "string"
+        },
+        "streetSuffixName": {
+          "type": "string"
+        },
+        "taxJurisdictionCode": {
+          "type": "string"
+        },
+        "timeZoneCode": {
+          "type": "string"
+        },
+        "transportationZoneID": {
+          "type": "string"
+        }
+      }
+    },
+    "CommentData": {
+      "properties": {
+        "attachment": {
+          "$ref": "#/definitions/AttachmentData"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "isEdit": {
+          "type": "boolean"
+        }
+      }
+    },
+    "AttachmentData": {
+      "properties": {
+        "comment": {
+          "type": "string"
+        },
+        "downloadUrl": {
+          "type": "string"
+        },
+        "fileContents": {
+          "type": "string"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "fileSize": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "mimeType": {
+          "type": "string"
+        }
+      }
+    },
+    "BankAccountData": {
+      "properties": {
+        "accountName": {
+          "type": "string"
+        },
+        "accountNumber": {
+          "type": "string"
+        },
+        "bankAccountExternalID": {
+          "type": "string"
+        },
+        "bankAccountStandardID": {
+          "type": "string"
+        },
+        "bankAccountType": {
+          "type": "string"
+        },
+        "bankBranch": {
+          "type": "string"
+        },
+        "blank": {
+          "type": "boolean"
+        },
+        "city": {
+          "type": "string"
+        },
+        "collectionAuthorisationIndicator": {
+          "type": "boolean"
+        },
+        "country": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "line1": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "CertificateData": {
+      "properties": {
+        "attachment": {
+          "$ref": "#/definitions/AttachmentData"
+        },
+        "certificateLocation": {
+          "type": "string"
+        },
+        "certificateNumber": {
+          "type": "string"
+        },
+        "certificateType": {
+          "type": "string"
+        },
+        "certified": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "effectiveDate": {
+          "type": "string"
+        },
+        "expirationDate": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "yearOfPublication": {
+          "type": "string"
+        }
+      }
+    },
+    "AddressData": {
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "line3": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        }
+      }
+    },
+    "ReportRequestResponse": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Supplier Name": {
+            "type": "string"
+          },
+          "ERP Vendor ID": {
+            "type": "string"
+          },
+          "SM Vendor ID": {
+            "type": "string"
+          },
+          "An Id": {
+            "type": "string"
+          },
+          "ACM ID": {
+            "type": "string"
+          },
+          "Registration Status": {
+            "type": "string"
+          },
+          "Qualification Status": {
+            "type": "string"
+          },
+          "Integrated to ERP": {
+            "type": "string"
+          },
+          "Address - Line1": {
+            "type": "string"
+          },
+          "Address - City": {
+            "type": "string"
+          },
+          "Address - Country Code": {
+            "type": "string"
+          },
+          "Address - Region Code": {
+            "type": "string"
+          },
+          "Address - Postal Code": {
+            "type": "string"
+          },
+          "qualifications": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Qualification Status": {
+                  "type": "string"
+                },
+                "Preferred Status": {
+                  "type": "string"
+                },
+                "Category": {
+                  "type": "string"
+                },
+                "Region": {
+                  "type": "string"
+                },
+                "Business Unit": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "questionnaires": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "questionnaireId": {
+                  "type": "string"
+                },
+                "questionnaireTitle": {
+                  "type": "string"
+                },
+                "workspaceType": {
+                  "type": "string"
+                },
+                "workspaceId": {
+                  "type": "string"
+                },
+                "matrixInfo": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Status": {
+                        "type": "string"
+                      },
+                      "Category": {
+                        "type": "string"
+                      },
+                      "Business Unit": {
+                        "type": "string"
+                      },
+                      "Region": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "genericCustomFields": {
+            "type": "object",
+            "properties": {
+              "supplierGenericCustomField": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "type": "string"
+                    },
+                    "active": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "businessPartnerGenericCustomField": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "type": "string"
+                    },
+                    "active": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "companyCodeGenericCustomField": {
+                "type": "object",
+                "properties": {
+                  "[object Object]": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "content": {
+                          "type": "string"
+                        },
+                        "active": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "bankInfoGenericCustomField": {
+                "type": "object",
+                "properties": {
+                  "[object Object]": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "content": {
+                          "type": "string"
+                        },
+                        "active": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "WorkspacesResponse": {
+      "type": "object",
+      "properties": {
+        "vendorInfo": {
+          "type": "object",
+          "properties": {
+            "smVendorId": {
+              "type": "string"
+            },
+            "erpVendorId": {
+              "type": "string"
+            },
+            "anId": {
+              "type": "string"
+            },
+            "acmId": {
+              "type": "string"
+            }
+          }
+        },
+        "workspaces": {
+          "type": "object",
+          "properties": {
+            "SupplierRequest": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "statusId": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "requester": {
+                    "type": "string"
+                  },
+                  "matrixInfo": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Category": {
+                          "type": "string"
+                        },
+                        "Business Unit": {
+                          "type": "string"
+                        },
+                        "Region": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "questionnaires": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "questionnaireId": {
+                          "type": "string"
+                        },
+                        "links": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "rel": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Registration": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "statusId": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "requester": {
+                    "type": "string"
+                  },
+                  "invitationCount": {
+                    "type": "string"
+                  },
+                  "updateStatus": {
+                    "type": "string"
+                  },
+                  "matrixInfo": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Category": {
+                          "type": "string"
+                        },
+                        "Business Unit": {
+                          "type": "string"
+                        },
+                        "Region": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "questionnaires": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "questionnaireId": {
+                          "type": "string"
+                        },
+                        "links": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "rel": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Qualification": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "statusId": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "canDisqualify": {
+                    "type": "boolean"
+                  },
+                  "isExpired": {
+                    "type": "boolean"
+                  },
+                  "isRequalificationEligible": {
+                    "type": "boolean"
+                  },
+                  "matrixInfo": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Category": {
+                          "type": "string"
+                        },
+                        "Business Unit": {
+                          "type": "string"
+                        },
+                        "Region": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "questionnaires": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "questionnaireId": {
+                          "type": "string"
+                        },
+                        "links": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "rel": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Disqualification": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "statusId": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "matrixInfo": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Category": {
+                          "type": "string"
+                        },
+                        "Business Unit": {
+                          "type": "string"
+                        },
+                        "Region": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "questionnaires": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "questionnaireId": {
+                          "type": "string"
+                        },
+                        "links": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "rel": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Preferred": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "statusId": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "matrixInfo": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Category": {
+                          "type": "string"
+                        },
+                        "Business Unit": {
+                          "type": "string"
+                        },
+                        "Region": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "questionnaires": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "questionnaireId": {
+                          "type": "string"
+                        },
+                        "links": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "rel": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Segmentation": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "statusId": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "matrixInfo": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Category": {
+                          "type": "string"
+                        },
+                        "Business Unit": {
+                          "type": "string"
+                        },
+                        "Region": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "questionnaires": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "questionnaireId": {
+                          "type": "string"
+                        },
+                        "links": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "rel": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "QualificationRequest": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "statusId": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "matrixInfo": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Category": {
+                          "type": "string"
+                        },
+                        "Business Unit": {
+                          "type": "string"
+                        },
+                        "Region": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "questionnaires": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "questionnaireId": {
+                          "type": "string"
+                        },
+                        "links": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "rel": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "ModularQuestionnaire": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "statusId": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "matrixInfo": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Category": {
+                          "type": "string"
+                        },
+                        "Business Unit": {
+                          "type": "string"
+                        },
+                        "Region": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "questionnaires": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "questionnaireId": {
+                          "type": "string"
+                        },
+                        "links": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "rel": {
+                                "type": "string"
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "links": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "rel": {
+                          "type": "string"
+                        },
+                        "href": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "type": "string"
+              },
+              "href": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "pageMetaData": {
+          "type": "object",
+          "properties": {
+            "size": {
+              "type": "integer"
+            },
+            "totalElements": {
+              "type": "integer"
+            },
+            "totalPages": {
+              "type": "integer"
+            },
+            "number": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "WorkspaceDetailsResponse": {
+      "type": "object",
+      "properties": {
+        "vendorInfo": {
+          "type": "object",
+          "properties": {
+            "smVendorId": {
+              "type": "string"
+            },
+            "erpVendorId": {
+              "type": "string"
+            },
+            "anId": {
+              "type": "string"
+            },
+            "acmId": {
+              "type": "string"
+            }
+          }
+        },
+        "statusId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "smVendorId": {
+          "type": "string"
+        },
+        "requester": {
+          "type": "string"
+        },
+        "matrixInfo": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Category": {
+                "type": "string"
+              },
+              "Business Unit": {
+                "type": "string"
+              },
+              "Region": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "questionnaires": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "questionnaireId": {
+                "type": "string"
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "rel": {
+                      "type": "string"
+                    },
+                    "href": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rel": {
+                "type": "string"
+              },
+              "href": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "DocumentsForVendorResponse": {
+      "type": "object",
+      "properties": {
+        "questionnaireResourceList": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "questionnaireApi": {
+                "type": "object",
+                "properties": {
+                  "statusId": {
+                    "type": "string"
+                  },
+                  "smVendorId": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "docId": {
+                    "type": "string"
+                  },
+                  "docTitle": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "processId": {
+                    "type": "string"
+                  },
+                  "approver": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "links": {
+                "type": "object",
+                "properties": {
+                  "Questionnaire": {
+                    "type": "object",
+                    "properties": {
+                      "href": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "vendorInfo": {
+          "type": "object",
+          "properties": {
+            "smVendorId": {
+              "type": "string"
+            },
+            "erpVendorId": {
+              "type": "string"
+            },
+            "anId": {
+              "type": "string"
+            },
+            "acmId": {
+              "type": "string"
+            }
+          }
+        },
+        "page": {
+          "type": "object",
+          "properties": {
+            "size": {
+              "type": "integer"
+            },
+            "totalElements": {
+              "type": "integer"
+            },
+            "totalPages": {
+              "type": "integer"
+            },
+            "number": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "DocumentsForVendorAndDocumentResponse": {
+      "type": "object",
+      "properties": {
+        "vendorInfo": {
+          "type": "object",
+          "properties": {
+            "smVendorId": {
+              "type": "string"
+            },
+            "erpVendorId": {
+              "type": "string"
+            },
+            "anId": {
+              "type": "string"
+            },
+            "acmId": {
+              "type": "string"
+            }
+          }
+        },
+        "questionnaireApi": {
+          "type": "object",
+          "properties": {
+            "statusId": {
+              "type": "string"
+            },
+            "smVendorId": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "docId": {
+              "type": "string"
+            },
+            "docTitle": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "processId": {
+              "type": "string"
+            },
+            "approver": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          }
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "QuestionAnswers": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "QuestionAndAnswersResponse": {
+      "type": "object",
+      "properties": {
+        "questionAnswerResourceList": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "questionAnswerApi": {
+                "type": "object",
+                "properties": {
+                  "itemId": {
+                    "type": "string"
+                  },
+                  "externalSystemCorrelationId": {
+                    "type": "string"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  },
+                  "answer": {
+                    "type": "string"
+                  },
+                  "dataType": {
+                    "type": "string"
+                  },
+                  "multiValued": {
+                    "type": "boolean"
+                  },
+                  "smVendorId": {
+                    "type": "string"
+                  },
+                  "workspaceType": {
+                    "type": "string"
+                  },
+                  "workspaceId": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "totalQuestions": {
+                    "type": "integer"
+                  },
+                  "questionnaireLabel": {
+                    "type": "string"
+                  },
+                  "questionLabel": {
+                    "type": "string"
+                  },
+                  "answerType": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "vendorInfo": {
+          "type": "object",
+          "properties": {
+            "smVendorId": {
+              "type": "string"
+            },
+            "erpVendorId": {
+              "type": "string"
+            },
+            "anId": {
+              "type": "string"
+            },
+            "acmId": {
+              "type": "string"
+            }
+          }
+        },
+        "page": {
+          "type": "object",
+          "properties": {
+            "size": {
+              "type": "integer"
+            },
+            "totalElements": {
+              "type": "integer"
+            },
+            "totalPages": {
+              "type": "integer"
+            },
+            "number": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "CertificatesResponse": {
+      "type": "object",
+      "properties": {
+        "certificateResourceList": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "vendorCertificateApi": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "effectiveDate": {
+                    "type": "string"
+                  },
+                  "expirationDate": {
+                    "type": "string"
+                  },
+                  "issueDate": {
+                    "type": "string"
+                  },
+                  "certificationNumber": {
+                    "type": "string"
+                  },
+                  "certificationName": {
+                    "type": "string"
+                  },
+                  "certificationLocation": {
+                    "type": "string"
+                  },
+                  "yearValid": {
+                    "type": "string"
+                  },
+                  "fileName": {
+                    "type": "string"
+                  },
+                  "fileSize": {
+                    "type": "string"
+                  },
+                  "fileDescription": {
+                    "type": "string"
+                  },
+                  "fileAbsolutePath": {
+                    "type": "string"
+                  },
+                  "attachmentName": {
+                    "type": "string"
+                  },
+                  "certified": {
+                    "type": "boolean"
+                  },
+                  "workspaceId": {
+                    "type": "string"
+                  },
+                  "workspaceType": {
+                    "type": "string"
+                  },
+                  "docId": {
+                    "type": "string"
+                  },
+                  "smVendorId": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "qualificationStatus": {
+                    "type": "string"
+                  },
+                  "expirationNotificationWindow": {
+                    "type": "integer"
+                  },
+                  "expirationFlag": {
+                    "type": "boolean"
+                  },
+                  "certificationType": {
+                    "type": "string"
+                  }
+                }
+              },
+              "links": {
+                "type": "object",
+                "properties": {
+                  "QuestionAnswers": {
+                    "type": "object",
+                    "properties": {
+                      "href": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "vendorInfo": {
+          "type": "object",
+          "properties": {
+            "smVendorId": {
+              "type": "string"
+            },
+            "erpVendorId": {
+              "type": "string"
+            },
+            "anId": {
+              "type": "string"
+            },
+            "acmId": {
+              "type": "string"
+            }
+          }
+        },
+        "page": {
+          "type": "object",
+          "properties": {
+            "size": {
+              "type": "integer"
+            },
+            "totalElements": {
+              "type": "integer"
+            },
+            "totalPages": {
+              "type": "integer"
+            },
+            "number": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  }
+}

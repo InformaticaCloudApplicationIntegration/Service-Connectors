@@ -1,0 +1,780 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "2.0",
+    "title": "Operational Reporting for Sourcing - View Management API",
+    "description": "The SAP Ariba Operational Reporting APIs for Strategic Sourcing enables you to report on the transactional data that you need to make operational decisions.\nYou use the API to create a client application that extracts reportable data."
+  },
+  "x-sap-shortText": "Enables your application to manipulate view templates that filter results from Operational Reporting API for Sourcing requests.",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/sourcing-reporting-view/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/sourcing-reporting-view/v1/{environment}",
+      "description": "Operational Reporting for Sourcing - View Management API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "ru.openapi.ariba.com",
+            "mn1.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api-ru.ariba.com",
+            "api.mn1.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "sourcing-reporting-view",
+      "description": "Operational Reporting for Sourcing - View Management API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "RU",
+      "description": "RU data center"
+    },
+    {
+      "name": "UAE",
+      "description": "UAE data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    },
+    {
+      "name": "View Management",
+      "description": "Creating/Updating/Listing view templates"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/viewTemplates/{viewTemplateName}": {
+      "post": {
+        "tags": [
+          "View Management"
+        ],
+        "summary": "Creating a view template",
+        "description": "Creating view template for a single Sourcing document with select attrbutes and filter criteria",
+        "operationId": "createViewTemplate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "viewTemplateName",
+            "type": "string",
+            "description": "view template name should be passed in path",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "realm",
+            "type": "string",
+            "description": "Customer realm name",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body for create view template api",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateViewForSourcingDocumentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "View template is created/updated successfully",
+            "schema": {
+              "$ref": "#/definitions/CreateViewTemplateResponse"
+            },
+            "examples": {
+              "documentType": "Organization",
+              "status": "published",
+              "selectAttributes": [
+                "SystemID",
+                "Name",
+                "TimeCreated"
+              ],
+              "filterExpressions": [
+                {
+                  "name": "createdDateFrom",
+                  "field": "TimeCreated",
+                  "op": ">=",
+                  "defaultValue": "2017-11-05T01:01:59Z"
+                },
+                {
+                  "name": "createdDateTo",
+                  "field": "TimeCreated",
+                  "op": "<=",
+                  "defaultValue": "2017-11-06T01:01:59Z"
+                }
+              ]
+            }
+          },
+          "400": {
+            "$ref": "#/responses/InvalidSelectAttributes"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      },
+      "get": {
+        "description": "This API is going to give the metadata for a single view",
+        "summary": "Get A single view metadata",
+        "tags": [
+          "View Management"
+        ],
+        "operationId": "Get A single view metadata",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Realm name for the customer"
+          },
+          {
+            "name": "viewTemplateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the view template you wish to create"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/CreateViewTemplateResponse"
+            },
+            "examples": {}
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/viewTemplates": {
+      "get": {
+        "description": "This API is used list all views for a customer",
+        "summary": "Get All Views for a realm",
+        "tags": [
+          "View Management"
+        ],
+        "operationId": "getAllViewTemplates",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Realm name for the customer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GetAllViewsresponse"
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/viewTemplates/{viewTemplateName}/patch": {
+      "post": {
+        "description": "Each view template can either have below 3 statuses. \"draft\", \"deactivated\", \"published\". We can update status of the view to either \"published\"  or \"deactivated\"",
+        "summary": "Update for ViewTemplate",
+        "tags": [
+          "View Management"
+        ],
+        "operationId": "Status update for View",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Customer realm name"
+          },
+          {
+            "name": "viewTemplateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "viewTemplate name to be updated"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "Request body for update api",
+            "schema": {
+              "$ref": "#/definitions/StatusUpdateForViewrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/CreateViewTemplateResponse"
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/metadata": {
+      "get": {
+        "description": "Lists all fields and filters that are available for a given document type",
+        "tags": [
+          "View Management"
+        ],
+        "operationId": "get fields and filters of given document type",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Customer realm name"
+          },
+          {
+            "name": "product",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Value of this field should always be \"ACM\" while getting metadata information of sourcing document types"
+          },
+          {
+            "name": "documentType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "specify the document type for which the fields and filters needs to be listed. If not provided, it lists all document types's fields and filters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GetAllViewsresponse"
+              },
+              "example": {
+                "documentType": "DocumentTask",
+                "filterFields": [
+                  {
+                    "name": "TimeCreated",
+                    "type": "date",
+                    "size": null,
+                    "allowedValues": null
+                  },
+                  {
+                    "name": "TimeUpdated",
+                    "type": "date",
+                    "size": null,
+                    "allowedValues": null
+                  }
+                ],
+                "selectFields": [
+                  {
+                    "name": "Status",
+                    "type": "string",
+                    "size": 30,
+                    "allowedValues": null
+                  },
+                  {
+                    "name": "TimeCreated",
+                    "type": "date",
+                    "size": null,
+                    "allowedValues": null
+                  },
+                  {
+                    "name": "InternalId",
+                    "type": "string",
+                    "size": 50,
+                    "allowedValues": null
+                  },
+                  {
+                    "name": "Title.DefaultStringTranslation",
+                    "type": "string",
+                    "size": 4000,
+                    "allowedValues": null
+                  },
+                  {
+                    "name": "EndDateTime",
+                    "type": "date",
+                    "size": null,
+                    "allowedValues": null
+                  },
+                  {
+                    "name": "DueDate",
+                    "type": "date",
+                    "size": null,
+                    "allowedValues": null
+                  },
+                  {
+                    "name": "EndDate",
+                    "type": "date",
+                    "size": null,
+                    "allowedValues": null
+                  },
+                  {
+                    "name": "TimeUpdated",
+                    "type": "date",
+                    "size": null,
+                    "allowedValues": null
+                  },
+                  {
+                    "name": "AltStatus",
+                    "type": "string",
+                    "size": 30,
+                    "allowedValues": null
+                  },
+                  {
+                    "name": "BeginDate",
+                    "type": "date",
+                    "size": null,
+                    "allowedValues": null
+                  }
+                ]
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateViewForSourcingDocumentRequest": {
+      "title": "Create View for Sourcing Object",
+      "type": "object",
+      "properties": {
+        "documentType": {
+          "description": "Sourcing transaction document type. See supported document type below in \"Enum\" ",
+          "type": "string",
+          "enum": [
+            "User",
+            "Organization",
+            "SourcingProject",
+            "Task",
+            "RFXItemValue",
+            "DocumentTask",
+            "RFXDocument",
+            "AuditEntry",
+            "ProjectAuditInfo"
+          ]
+        },
+        "status": {
+          "description": "Status of the view template. See status type below in \"Enum\" ",
+          "type": "string",
+          "enum": [
+            "draft",
+            "published",
+            "deactivated"
+          ]
+        },
+        "selectAttributes": {
+          "description": "SAP ariba whitelisted select attributes for each sourcing document",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filterExpressions": {
+          "description": "Fiter criteria for retrieving transaction data",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterExpression"
+          }
+        }
+      },
+      "required": [
+        "documentType",
+        "status",
+        "selectAttributes",
+        "filterExpressions"
+      ],
+      "example": {
+        "documentType": "Organization",
+        "status": "published",
+        "selectAttributes": [
+          "SystemID",
+          "Name",
+          "TimeCreated"
+        ],
+        "filterExpressions": [
+          {
+            "name": "createdDateFrom",
+            "field": "TimeCreated",
+            "op": ">=",
+            "defaultValue": "2017-11-05T01:01:59Z"
+          },
+          {
+            "name": "createdDateTo",
+            "field": "TimeCreated",
+            "op": "<=",
+            "defaultValue": "2017-11-06T01:01:59Z"
+          }
+        ]
+      }
+    },
+    "FilterExpression": {
+      "title": "FilterExpression",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Customized name for the field. This field will be passed while posting a job. e.g TimeCreatedFrom/createdFrom",
+          "type": "string"
+        },
+        "field": {
+          "description": "Field name which is a filter key and defined in whitelist. e.g TimeCreated",
+          "type": "string"
+        },
+        "op": {
+          "description": "Operations allowed. <= >= == <> IN LIKE NOT LIKE",
+          "type": "string"
+        },
+        "defaultValue": {
+          "description": "Passing defaultvalue is optional. Default value can always be overridden.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "field",
+        "op"
+      ],
+      "example": {
+        "filterExpressions": [
+          {
+            "name": "createdDateFrom",
+            "field": "TimeCreated",
+            "op": ">=",
+            "defaultValue": "2017-11-05T01:01:59Z"
+          },
+          {
+            "name": "createdDateTo",
+            "field": "TimeCreated",
+            "op": "<=",
+            "defaultValue": "2017-11-06T01:01:59Z"
+          }
+        ]
+      }
+    },
+    "StatusUpdateForViewrequest": {
+      "title": "Status update for ViewRequest",
+      "example": {
+        "status": "published"
+      },
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of view. draft/published/deactivated",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "StatusUpdateForViewresponse": {
+      "title": "Status update for ViewResponse",
+      "type": "object",
+      "properties": {
+        "viewTemplateName": {
+          "description": "view template name",
+          "type": "string"
+        },
+        "type": {
+          "description": "for custom views it will be - custom.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of view. draft/published/deactivated",
+          "type": "string"
+        },
+        "documentType": {
+          "description": "Sourcing document object for which the view is created/updated",
+          "type": "string"
+        },
+        "selectAttributes": {
+          "description": "The whitelised field names for RDS reporting",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filterExpressions": {
+          "description": "Filter criteria",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterExpression"
+          }
+        }
+      },
+      "required": [
+        "viewTemplateName",
+        "type",
+        "status",
+        "documentType",
+        "selectAttributes",
+        "filterExpressions"
+      ]
+    },
+    "CreateViewTemplateResponse": {
+      "title": "Get A single viewTemplate response",
+      "type": "object",
+      "properties": {
+        "viewTemplateName": {
+          "description": "view template name",
+          "type": "string"
+        },
+        "type": {
+          "description": "for custom views it will be - custom.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of view. draft/published/deactivated",
+          "type": "string"
+        },
+        "documentType": {
+          "description": "Sourcing document object for which the view is created/updated",
+          "type": "string"
+        },
+        "selectAttributes": {
+          "description": "The whitelised field names for RDS reporting",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filterExpressions": {
+          "description": "Filter criteria",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterExpression"
+          }
+        }
+      },
+      "required": [
+        "viewTemplateName",
+        "type",
+        "status",
+        "documentType",
+        "selectAttributes",
+        "filterExpressions"
+      ]
+    },
+    "GetAllViewsresponse": {
+      "title": "Get All ViewTemplatesResponse",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CreateViewTemplateResponse"
+      }
+    },
+    "ErrorView": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "InvalidSelectAttr"
+        },
+        "message": {
+          "type": "string",
+          "example": "Invalid select attributes"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Unauthorized/API key not found"
+        },
+        "message": {
+          "type": "string",
+          "example": "Token Expired/ API Key not found"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorInternal": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Internal Server Error"
+        },
+        "message": {
+          "type": "string",
+          "example": "Internal Server Error"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "responses": {
+    "InvalidSelectAttributes": {
+      "description": "The select attributes are either not whitelisted/duplicated/customized",
+      "schema": {
+        "$ref": "#/definitions/ErrorView"
+      }
+    },
+    "Unauthorized": {
+      "description": "Unauthorized request. Check oauth token is expired or you are not using correct oauth token.",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "InternalServerError": {
+      "description": "If your URL is not constructed properly, you have trailing spaces in URl, request body format is wrong or ARIBA site is temporarily down",
+      "schema": {
+        "$ref": "#/definitions/ErrorInternal"
+      }
+    },
+    "Forbidden": {
+      "description": "forbidden",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    }
+  }
+}

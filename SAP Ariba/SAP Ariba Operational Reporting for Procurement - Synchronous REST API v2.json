@@ -1,0 +1,292 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "2.0",
+    "title": "Operational Reporting for Procurement - Synchronous API",
+    "description": "The SAP Ariba Operational Reporting APIs for procurement enables you to report on the transactional procurement data that you need to make operational decisions. You use the API to create a client application that extracts reportable data.\n\nThe SAP Ariba operational Reporting API can be used synchronously to retrieve smaller data sets for procurement objects. \nIn the synchronous usage, the requested output is batched and paginated and results are returned one page at a time in JSON format. The maximum number of records returned is 10000."
+  },
+  "x-sap-shortText": "Enables you to report on the transactional procurement data needed for operational decisions (synchronous usage).",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/procurement-reporting-details/v2/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/procurement-reporting-details/v2/{environment}",
+      "description": "Operational Reporting for Procurement - Synchronous API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "ru.openapi.ariba.com",
+            "mn1.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api-ru.ariba.com",
+            "api.mn1.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "procurement-reporting-details",
+      "description": "Operational Reporting for Procurement - Synchronous API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "RU",
+      "description": "RU data center"
+    },
+    {
+      "name": "UAE",
+      "description": "UAE data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    },
+    {
+      "name": "Operational Procurement Synchronous API",
+      "description": "synchronous API to get transaction data"
+    }
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/views/{viewTemplateName}": {
+      "get": {
+        "description": "Synchronous API to get procurement transaction data, appropriate for smaller results sets",
+        "summary": "Requested output is batched and paginated and JSON results are returned one page at a time",
+        "tags": [
+          "Operational Procurement Synchronous API"
+        ],
+        "operationId": "GetDetails",
+        "parameters": [
+          {
+            "name": "viewTemplateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "view template name"
+          },
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Customer realm name"
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Filter criteria to query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/SynchronousAPIResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/InvalidFilters"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SynchronousAPIResponse": {
+      "title": "Synchronous API Response",
+      "type": "object",
+      "example": {
+        "Records": [
+          {
+            "ApprovedState": 1,
+            "ApprovalRecords": null,
+            "SourcingStatus": 0,
+            "InitialUniqueName": "PR47",
+            "SubmitDate": "2017-10-03T09:03:06Z",
+            "HoldTillDate": null,
+            "ReceivedState": 1,
+            "ExternalReqId": "",
+            "NumberReceivableOrders": 0,
+            "SentDate": null,
+            "CreateDate": "2017-10-03T08:53:42Z",
+            "ChargeAmount": null,
+            "Name": "Copy of try1",
+            "BlanketOrderID": "",
+            "TotalCost": {
+              "AmountInReportingCurrency": 8220.94,
+              "ApproxAmountInBaseCurrency": 8220.94,
+              "Amount": 8220.936875,
+              "ConversionDate": "2017-10-03T09:02:16Z",
+              "Currency": {
+                "UniqueName": "USD"
+              }
+            },
+            "TimeCreated": "2017-10-03T08:53:47Z",
+            "LastModified": "2017-11-29T08:01:18Z",
+            "ExternalReqUrl": "",
+            "TaxAmount": {
+              "AmountInReportingCurrency": 457.09,
+              "ApproxAmountInBaseCurrency": 457.09,
+              "Amount": 457.091875,
+              "ConversionDate": "2017-10-03T09:02:02Z",
+              "Currency": {
+                "UniqueName": "USD"
+              }
+            },
+            "Requester": {
+              "UniqueName": "cnoll",
+              "PasswordAdapter": "PasswordAdapter1"
+            }
+          }
+        ]
+      }
+    },
+    "ErrorView": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "InvalidSelectAttr"
+        },
+        "message": {
+          "type": "string",
+          "example": "Invalid select attributes"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Unauthorized/API key not found"
+        },
+        "message": {
+          "type": "string",
+          "example": "Token Expired/ API Key not found"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorInternal": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Internal Server Error"
+        },
+        "message": {
+          "type": "string",
+          "example": "Internal Server Error"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "responses": {
+    "InvalidFilters": {
+      "description": "The filters provided are invalid",
+      "schema": {
+        "$ref": "#/definitions/ErrorView"
+      }
+    },
+    "Unauthorized": {
+      "description": "Unauthorized request. Check oauth token is expired or you are not using correct oauth token.",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "InternalServerError": {
+      "description": "If your URL is not constructed properly, you have trailing spaces in URl, request body format is wrong or ARIBA site is temporarily down",
+      "schema": {
+        "$ref": "#/definitions/ErrorInternal"
+      }
+    },
+    "Forbidden": {
+      "description": "forbidden",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    }
+  }
+}

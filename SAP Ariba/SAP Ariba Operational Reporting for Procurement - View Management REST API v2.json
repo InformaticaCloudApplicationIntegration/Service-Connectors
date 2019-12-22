@@ -1,0 +1,1366 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "2.0",
+    "title": "Operational Reporting for Procurement - View Management API",
+    "description": "The SAP Ariba Operational Reporting APIs for procurement enables you to report on the transactional procurement data that you need to make operational decisions. You use the API to create a client application that extracts reportable data.\n\nView Management APIs create/update and deactivate reporting view templates.\n\nThese APIs let you\n\n* Create a reporting view templates.\n* View metadata for a specific view template.\n* List all reporting view templates\n* Update an existing reporting view template (view template name, view template status, select attributes and filter criteria)"
+  },
+  "x-sap-shortText": "Enables your application to manipulate view templates that filter results from Operational Reporting API for Procurement requests.",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/procurement-reporting-view/v2/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/procurement-reporting-view/v2/{environment}",
+      "description": "Operational Reporting for Procurement - View Management API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "ru.openapi.ariba.com",
+            "mn1.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api-ru.ariba.com",
+            "api.mn1.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "procurement-reporting-view",
+      "description": "Operational Reporting for Procurement - View Management API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "RU",
+      "description": "RU data center"
+    },
+    {
+      "name": "UAE",
+      "description": "UAE data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    },
+    {
+      "name": "View Management",
+      "description": "Creating/Updating/Listing view templates"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/viewTemplates/{viewTemplateName}": {
+      "post": {
+        "tags": [
+          "View Management"
+        ],
+        "summary": "Creating a view template",
+        "description": "Creating view template for a single procurement document with select attrbutes and filter criteria",
+        "operationId": "createViewTemplate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "viewTemplateName",
+            "type": "string",
+            "description": "view template name should be passed in path",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "realm",
+            "type": "string",
+            "description": "Customer realm name",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request body for create view template api",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateViewForAnyDocumentTypeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "View template is created/updated successfully",
+            "schema": {
+              "$ref": "#/definitions/CreateViewResponse200"
+            },
+            "examples": {
+              "documentType": "Requisition",
+              "status": "published",
+              "selectAttributes": [
+                "TotalCost",
+                "Active",
+                "TimeCreated",
+                "TimeUpdated",
+                "UniqueName",
+                "Name",
+                "ApprovedState",
+                "Type",
+                "HoldTillDate",
+                "ApprovalRequestsVersion",
+                "Preparer",
+                "Requester",
+                "StatusString",
+                "LastModified",
+                "CreateDate",
+                "SubmitDate",
+                "ApprovedDate",
+                "ResubmitDate",
+                "PreviousVersion",
+                "NextVersion",
+                "VersionNumber",
+                "InitialUniqueName",
+                "ChangedBy",
+                "PreviousApprovalRequestsVersion",
+                "ProcurementUnit",
+                "ChargeAmount",
+                "SourcingStatusString",
+                "TaxAmount",
+                "VATAmount",
+                "PaymentTerms",
+                "ProjectTitle",
+                "OriginatingSystem",
+                "OriginatingSystemReferenceID",
+                "DiscountAmount",
+                "BudgetRefID",
+                "RealTimeBudgetResponse",
+                "Supplier",
+                "OrderedState",
+                "OrderedDate",
+                "ReceivedState",
+                "ReceivedDate",
+                "InvoicedDate",
+                "AmountAccepted",
+                "AmountBilled",
+                "NumberBilled",
+                "AmountCleared",
+                "NumberCleared",
+                "AmountRejected",
+                "AmountInvoiced",
+                "AmountReconciled",
+                "NumberReceivableOrders",
+                "IsServiceOrder",
+                "IsForecast",
+                "AreOrdersStuck",
+                "BlanketOrder",
+                "BlanketOrderID",
+                "BudgetCheckStatus",
+                "LastCheckDate",
+                "BudgetCheckStatusMessage",
+                "PreCollaborationTotalCost",
+                "IsExternalReq",
+                "ExternalReqId",
+                "ExternalReqUrl",
+                "SourcingStatus",
+                "SourcingStatusMessage",
+                "ERPRequisitionID",
+                "IsServiceRequisition",
+                "ReportingCurrency",
+                "ExternalSourcingId",
+                "SentDate",
+                "ProjectID",
+                "CollaborationState",
+                "ApprovalRequests.RuleName",
+                "ApprovalRequests.Creator",
+                "ApprovalRequests.State",
+                "ApprovalRequests.ApprovalRequired",
+                "ApprovalRequests.ActivationDate",
+                "ApprovalRequests.ReportingReason",
+                "ApprovalRequests.Reason",
+                "ApprovalRequests.Approver",
+                "ApprovalRequests.ApprovedBy",
+                "ApprovalRequests.AssignedTo",
+                "ApprovalRequests.AssignedDate",
+                "ApprovalRequests.ManuallyAdded",
+                "ApprovalRequests.IsEscalatedToList",
+                "ApprovalRequests.ApproverComment",
+                "ApprovalRequests.AllowEscalationPeriodExtension",
+                "ApprovalRequests.EscalationWarningDate",
+                "ApprovalRequests.EscalationDate",
+                "ApprovalRequests.IsEscalationExtended",
+                "ApprovalRequests.ExtendEscalationReasonCode",
+                "ApprovalRequests.ReportingExtendEscalationReason",
+                "ApprovalRequests.ExtendEscalationUserComments",
+                "ApprovalRequests.EscalationExtendedByUser",
+                "ApprovalRequests.EscalationExtensionDate",
+                "LineItems.NumberInCollection",
+                "LineItems.Form",
+                "LineItems.Amount",
+                "LineItems.ERPLineItemNumber",
+                "LineItems.Accountings.Type",
+                "LineItems.BillingAddress",
+                "LineItems.TaxAmount",
+                "LineItems.VATAmount",
+                "LineItems.DiscountAmount",
+                "LineItems.ChargeAmount",
+                "LineItems.Quantity",
+                "LineItems.Carrier",
+                "LineItems.CarrierMethod",
+                "LineItems.NumberConfirmedAccepted",
+                "LineItems.NumberConfirmedAcceptedWithChanges",
+                "LineItems.NumberConfirmedRejected",
+                "LineItems.NumberConfirmedBackOrdered",
+                "LineItems.NumberConfirmedSubstituted",
+                "LineItems.NumberShipped",
+                "LineItems.NeedBy",
+                "LineItems.DueOn",
+                "LineItems.SourcingRequest",
+                "LineItems.Description.Description",
+                "LineItems.Description.ItemNumber",
+                "LineItems.Description.SupplierPartNumber",
+                "LineItems.Description.SupplierPartAuxiliaryID",
+                "LineItems.Description.UnitOfMeasure",
+                "LineItems.Description.CommonCommodityCode",
+                "LineItems.Description.Price",
+                "LineItems.Description.CustomPrice",
+                "LineItems.Description.IndexContractPrice",
+                "LineItems.Description.ContractPrice",
+                "LineItems.Description.NonContractPrice",
+                "LineItems.Description.SupplierURL",
+                "LineItems.Description.LeadTime",
+                "LineItems.Description.Language",
+                "LineItems.Description.ShortName",
+                "LineItems.Description.QueryID",
+                "LineItems.Description.ExpirationDate",
+                "LineItems.Description.PriceBasisQuantity",
+                "LineItems.Description.PriceBasisQuantityUOM",
+                "LineItems.Description.ConversionFactor",
+                "LineItems.Description.PriceBasisQuantityDesc",
+                "LineItems.Description.ExtAttributesBitMask",
+                "LineItems.Description.ExtendedDescription",
+                "LineItems.Description.KitUniqueName",
+                "LineItems.ShipTo",
+                "LineItems.DeliverTo",
+                "LineItems.CommodityCode",
+                "LineItems.Supplier",
+                "LineItems.ERSAllowed",
+                "LineItems.SupplierLocation",
+                "LineItems.PaymentTerms",
+                "LineItems.OrderInfo",
+                "LineItems.IsAdHoc",
+                "LineItems.CommodityExportMapEntry",
+                "LineItems.LineType",
+                "LineItems.BasePrice",
+                "LineItems.OriginalPrice",
+                "LineItems.IsPriceModifiedByUser",
+                "LineItems.StartDate",
+                "LineItems.EndDate",
+                "LineItems.IsRecurring",
+                "LineItems.KitRequiredItem",
+                "LineItems.OriginatingSystemLineNumber",
+                "LineItems.ItemMasterID",
+                "LineItems.ParentLineNumber",
+                "LineItems.ServiceDetails.MaxAmount",
+                "LineItems.ServiceDetails.ExpectedAmount",
+                "LineItems.ServiceDetails.RequiresServiceEntry",
+                "LineItems.ServiceDetails.ServiceLine",
+                "LineItems.ServiceDetails.ServiceStartDate",
+                "LineItems.ServiceDetails.ServiceEndDate",
+                "LineItems.BoughtFromPreferredSupplier",
+                "LineItems.TaxCode",
+                "LineItems.TaxDetail.Purpose",
+                "LineItems.TaxDetail.Category",
+                "LineItems.TaxDetail.Percent",
+                "LineItems.TaxDetail.PerUnit",
+                "LineItems.TaxDetail.TaxableAmount",
+                "LineItems.TaxDetail.TaxAmount",
+                "LineItems.TaxDetail.AlternateTaxAmount",
+                "LineItems.TaxDetail.TaxLocation",
+                "LineItems.TaxDetail.Description",
+                "LineItems.TaxDetail.TaxPointDate",
+                "LineItems.TaxDetail.PaymentDate",
+                "LineItems.TaxDetail.ExemptDetail",
+                "LineItems.TaxDetail.IsTriangularTransaction",
+                "LineItems.TaxDetail.TriangularTransactionLawReference",
+                "LineItems.TaxDetail.AbatementPercent",
+                "LineItems.TaxDetail.IsDeductible",
+                "LineItems.TaxDetail.Component",
+                "LineItems.TaxDetail.FormulaString",
+                "LineItems.ChargeDetail.ChargeType",
+                "LineItems.ChargeDetail.ChargeAmount",
+                "LineItems.ChargeDetail.TaxCode",
+                "LineItems.ChargeDetail.TaxAmount",
+                "LineItems.ChargeDetail.ANChargeName",
+                "LineItems.ChargeDetail.ANChargeDescription",
+                "LineItems.NumberOnPO",
+                "LineItems.OrderID",
+                "LineItems.PushStatus",
+                "LineItems.UsedInReqPush",
+                "LineItems.ERPPONumber",
+                "LineItems.MasterAgreement",
+                "LineItems.OriginatingSystem",
+                "LineItems.QuantityInKitItem",
+                "LineItems.BuyerItemMaster",
+                "LineItems.AccountingTemplate",
+                "LineItems.ExternalLineNumber",
+                "LineItems.QuickSourced",
+                "LineItems.QuotePricingTermsNumber",
+                "LineItems.ParentKit",
+                "LineItems.Kit",
+                "LineItems.KitInstanceId",
+                "LineItems.POStatus",
+                "LineItems.BuyerName",
+                "ApprovalRecords.ActivationDate",
+                "ApprovalRecords.User",
+                "ApprovalRecords.RealUser",
+                "ApprovalRecords.Date",
+                "ApprovalRecords.Comment.Date",
+                "ApprovalRecords.Comment.User",
+                "ApprovalRecords.Comment.Title",
+                "ApprovalRecords.Comment.ExternalComment",
+                "ApprovalRecords.ReceivedFromEmail",
+                "ApprovalRecords.State",
+                "LineItems.Accountings.SplitAccountings.NumberInCollection",
+                "LineItems.Accountings.SplitAccountings.Type",
+                "LineItems.Accountings.SplitAccountings.Percentage",
+                "LineItems.Accountings.SplitAccountings.Quantity",
+                "LineItems.Accountings.SplitAccountings.Amount",
+                "LineItems.Accountings.SplitAccountings.ERPSplitValue",
+                "LineItems.Accountings.SplitAccountings.PONumber",
+                "LineItems.Accountings.SplitAccountings.ProcurementUnit",
+                "LineItems.Accountings.SplitAccountings.POLineNumber",
+                "BusinessUnit",
+                "SetId",
+                "LineItems.Accountings.SplitAccountings.Account",
+                "LineItems.Accountings.SplitAccountings.Department",
+                "LineItems.Accountings.SplitAccountings.GLBusinessUnit",
+                "LineItems.Accountings.SplitAccountings.Location",
+                "LineItems.Accountings.SplitAccountings.Project",
+                "LineItems.Accountings.SplitAccountings.Product",
+                "LineItems.Accountings.SplitAccountings.StatisticsCode"
+              ],
+              "filterExpressions": [
+                {
+                  "name": "createdDateFrom",
+                  "field": "TimeCreated",
+                  "op": ">=",
+                  "defaultValue": "2017-11-05T01:01:59Z"
+                },
+                {
+                  "name": "createdDateTo",
+                  "field": "TimeCreated",
+                  "op": "<=",
+                  "defaultValue": "2017-11-06T01:01:59Z"
+                },
+                {
+                  "name": "StatusInList",
+                  "field": "StatusString",
+                  "op": "IN",
+                  "defaultValue": [
+                    "Approved",
+                    "Canceled",
+                    "Canceling",
+                    "Collaborating",
+                    "Collaboration",
+                    "Completed",
+                    "Composing",
+                    "DeniedInvalidOrdered",
+                    "Ordering",
+                    "Received",
+                    "Receiving",
+                    "Submitted"
+                  ]
+                }
+              ]
+            }
+          },
+          "400": {
+            "$ref": "#/responses/InvalidSelectAttributes"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      },
+      "get": {
+        "description": "This API is going to give the metadata for a single view",
+        "summary": "Get A single view metadata",
+        "tags": [
+          "View Management"
+        ],
+        "operationId": "Get A single view metadata",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Realm name for the customer"
+          },
+          {
+            "name": "viewTemplateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the view template you wish to create"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/GetASingleViewMetadataresponse"
+            },
+            "examples": {}
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/viewTemplates": {
+      "get": {
+        "description": "This API is used list all views for a customer",
+        "summary": "Get All Views for a realm",
+        "tags": [
+          "View Management"
+        ],
+        "operationId": "getAllViewTemplates",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Realm name for the customer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GetAllViewsresponse"
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/viewTemplates/{viewTemplateName}/patch": {
+      "post": {
+        "description": "Each view template can either have below 3 statuses. \"draft\", \"deactivated\", \"published\". We can update status of the view to either \"published\"  or \"deactivated\"",
+        "summary": "Update for ViewTemplate",
+        "tags": [
+          "View Management"
+        ],
+        "operationId": "Status update for View",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Customer realm name"
+          },
+          {
+            "name": "viewTemplateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "viewTemplate name to be updated"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "Request body for update api",
+            "schema": {
+              "$ref": "#/definitions/StatusUpdateForViewrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GetAllViewsresponse"
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/metadata": {
+      "get": {
+        "description": "Lists all fields and filters that are available for a given document type",
+        "tags": [
+          "View Management"
+        ],
+        "operationId": "get fields and filters of given document type",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Customer realm name"
+          },
+          {
+            "name": "product",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "buyer",
+              "sourcing"
+            ],
+            "description": "Value of this field should be \"buyer\" or \"sourcing\""
+          },
+          {
+            "name": "documentType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "specify the document type for which the fields and filters needs to be listed. If not provided, it lists all document types's fields and filters"
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "documentType",
+                "filterFields",
+                "selectFields"
+              ],
+              "default": ""
+            },
+            "description": "specify the respose fields (documentType, filterFields, selectFields) to be displayed. Default - display all fields."
+          },
+          {
+            "name": "jsonSchema",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "description": "view metadata in JSON schema format"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GetAllViewsresponse"
+              },
+              "example": {
+                "documentType": "Requisition",
+                "filterFields": [
+                  {
+                    "name": "StatusString",
+                    "type": "string",
+                    "size": 50,
+                    "allowedValues": null,
+                    "precision": null,
+                    "scale": null
+                  },
+                  {
+                    "name": "TimeCreated",
+                    "type": "date",
+                    "size": 50,
+                    "allowedValues": null,
+                    "precision": null,
+                    "scale": null
+                  },
+                  {
+                    "name": "UniqueName",
+                    "type": "string",
+                    "size": 50,
+                    "allowedValues": null,
+                    "precision": null,
+                    "scale": null
+                  },
+                  {
+                    "name": "TimeUpdated",
+                    "type": "date",
+                    "size": null,
+                    "allowedValues": null,
+                    "precision": null,
+                    "scale": null
+                  }
+                ],
+                "selectFields": [
+                  {
+                    "name": "ApprovalRequests.State",
+                    "type": "int",
+                    "size": null,
+                    "allowedValues": [
+                      {
+                        "key": 8,
+                        "value": "Approved"
+                      },
+                      {
+                        "key": 1,
+                        "value": "NotYetActive"
+                      },
+                      {
+                        "key": 2,
+                        "value": "ActiveButNoActionYet"
+                      },
+                      {
+                        "key": 4,
+                        "value": "Denied"
+                      },
+                      {
+                        "key": 16,
+                        "value": "Rejected"
+                      }
+                    ],
+                    "precision": null,
+                    "scale": null
+                  }
+                ]
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateViewForAnyDocumentTypeRequest": {
+      "title": "Create View for Requisition Object for peopleSoft VariantsRequest",
+      "type": "object",
+      "properties": {
+        "documentType": {
+          "description": "Procurement transaction document type. See supported document type below in \"Enum\" ",
+          "type": "string",
+          "enum": [
+            "Requisition",
+            "Invoice",
+            "ERPOrder",
+            "DirectOrder",
+            "CopyOrder",
+            "InvoiceReconciliation",
+            "Receipt"
+          ]
+        },
+        "status": {
+          "description": "Status of the view template. See status type below in \"Enum\" ",
+          "type": "string",
+          "enum": [
+            "draft",
+            "published",
+            "deactivated"
+          ]
+        },
+        "selectAttributes": {
+          "description": "SAP ariba whitelisted select attributes for each procurement document",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filterExpressions": {
+          "description": "Fiter criteria for retrieving transaction data",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterExpression"
+          }
+        }
+      },
+      "required": [
+        "documentType",
+        "status",
+        "selectAttributes",
+        "filterExpressions"
+      ],
+      "example": {
+        "documentType": "Requisition",
+        "status": "published",
+        "selectAttributes": [
+          "TotalCost",
+          "Active",
+          "TimeCreated",
+          "TimeUpdated",
+          "UniqueName",
+          "Name",
+          "ApprovedState",
+          "Type",
+          "HoldTillDate",
+          "ApprovalRequestsVersion",
+          "Preparer",
+          "Requester",
+          "StatusString",
+          "LastModified",
+          "CreateDate",
+          "SubmitDate",
+          "ApprovedDate",
+          "ResubmitDate",
+          "PreviousVersion",
+          "NextVersion",
+          "VersionNumber",
+          "InitialUniqueName",
+          "ChangedBy",
+          "PreviousApprovalRequestsVersion",
+          "ProcurementUnit",
+          "ChargeAmount",
+          "SourcingStatusString",
+          "TaxAmount",
+          "VATAmount",
+          "PaymentTerms",
+          "ProjectTitle",
+          "OriginatingSystem",
+          "OriginatingSystemReferenceID",
+          "DiscountAmount",
+          "BudgetRefID",
+          "RealTimeBudgetResponse",
+          "Supplier",
+          "OrderedState",
+          "OrderedDate",
+          "ReceivedState",
+          "ReceivedDate",
+          "InvoicedDate",
+          "AmountAccepted",
+          "AmountBilled",
+          "NumberBilled",
+          "AmountCleared",
+          "NumberCleared",
+          "AmountRejected",
+          "AmountInvoiced",
+          "AmountReconciled",
+          "NumberReceivableOrders",
+          "IsServiceOrder",
+          "IsForecast",
+          "AreOrdersStuck",
+          "BlanketOrder",
+          "BlanketOrderID",
+          "BudgetCheckStatus",
+          "LastCheckDate",
+          "BudgetCheckStatusMessage",
+          "PreCollaborationTotalCost",
+          "IsExternalReq",
+          "ExternalReqId",
+          "ExternalReqUrl",
+          "SourcingStatus",
+          "SourcingStatusMessage",
+          "ERPRequisitionID",
+          "IsServiceRequisition",
+          "ReportingCurrency",
+          "ExternalSourcingId",
+          "SentDate",
+          "ProjectID",
+          "CollaborationState",
+          "ApprovalRequests.RuleName",
+          "ApprovalRequests.Creator",
+          "ApprovalRequests.State",
+          "ApprovalRequests.ApprovalRequired",
+          "ApprovalRequests.ActivationDate",
+          "ApprovalRequests.ReportingReason",
+          "ApprovalRequests.Reason",
+          "ApprovalRequests.Approver",
+          "ApprovalRequests.ApprovedBy",
+          "ApprovalRequests.AssignedTo",
+          "ApprovalRequests.AssignedDate",
+          "ApprovalRequests.ManuallyAdded",
+          "ApprovalRequests.IsEscalatedToList",
+          "ApprovalRequests.ApproverComment",
+          "ApprovalRequests.AllowEscalationPeriodExtension",
+          "ApprovalRequests.EscalationWarningDate",
+          "ApprovalRequests.EscalationDate",
+          "ApprovalRequests.IsEscalationExtended",
+          "ApprovalRequests.ExtendEscalationReasonCode",
+          "ApprovalRequests.ReportingExtendEscalationReason",
+          "ApprovalRequests.ExtendEscalationUserComments",
+          "ApprovalRequests.EscalationExtendedByUser",
+          "ApprovalRequests.EscalationExtensionDate",
+          "LineItems.NumberInCollection",
+          "LineItems.Form",
+          "LineItems.Amount",
+          "LineItems.ERPLineItemNumber",
+          "LineItems.Accountings.Type",
+          "LineItems.BillingAddress",
+          "LineItems.TaxAmount",
+          "LineItems.VATAmount",
+          "LineItems.DiscountAmount",
+          "LineItems.ChargeAmount",
+          "LineItems.Quantity",
+          "LineItems.Carrier",
+          "LineItems.CarrierMethod",
+          "LineItems.NumberConfirmedAccepted",
+          "LineItems.NumberConfirmedAcceptedWithChanges",
+          "LineItems.NumberConfirmedRejected",
+          "LineItems.NumberConfirmedBackOrdered",
+          "LineItems.NumberConfirmedSubstituted",
+          "LineItems.NumberShipped",
+          "LineItems.NeedBy",
+          "LineItems.DueOn",
+          "LineItems.SourcingRequest",
+          "LineItems.Description.Description",
+          "LineItems.Description.ItemNumber",
+          "LineItems.Description.SupplierPartNumber",
+          "LineItems.Description.SupplierPartAuxiliaryID",
+          "LineItems.Description.UnitOfMeasure",
+          "LineItems.Description.CommonCommodityCode",
+          "LineItems.Description.Price",
+          "LineItems.Description.CustomPrice",
+          "LineItems.Description.IndexContractPrice",
+          "LineItems.Description.ContractPrice",
+          "LineItems.Description.NonContractPrice",
+          "LineItems.Description.SupplierURL",
+          "LineItems.Description.LeadTime",
+          "LineItems.Description.Language",
+          "LineItems.Description.ShortName",
+          "LineItems.Description.QueryID",
+          "LineItems.Description.ExpirationDate",
+          "LineItems.Description.PriceBasisQuantity",
+          "LineItems.Description.PriceBasisQuantityUOM",
+          "LineItems.Description.ConversionFactor",
+          "LineItems.Description.PriceBasisQuantityDesc",
+          "LineItems.Description.ExtAttributesBitMask",
+          "LineItems.Description.ExtendedDescription",
+          "LineItems.Description.KitUniqueName",
+          "LineItems.ShipTo",
+          "LineItems.DeliverTo",
+          "LineItems.CommodityCode",
+          "LineItems.Supplier",
+          "LineItems.ERSAllowed",
+          "LineItems.SupplierLocation",
+          "LineItems.PaymentTerms",
+          "LineItems.OrderInfo",
+          "LineItems.IsAdHoc",
+          "LineItems.CommodityExportMapEntry",
+          "LineItems.LineType",
+          "LineItems.BasePrice",
+          "LineItems.OriginalPrice",
+          "LineItems.IsPriceModifiedByUser",
+          "LineItems.StartDate",
+          "LineItems.EndDate",
+          "LineItems.IsRecurring",
+          "LineItems.KitRequiredItem",
+          "LineItems.OriginatingSystemLineNumber",
+          "LineItems.ItemMasterID",
+          "LineItems.ParentLineNumber",
+          "LineItems.ServiceDetails.MaxAmount",
+          "LineItems.ServiceDetails.ExpectedAmount",
+          "LineItems.ServiceDetails.RequiresServiceEntry",
+          "LineItems.ServiceDetails.ServiceLine",
+          "LineItems.ServiceDetails.ServiceStartDate",
+          "LineItems.ServiceDetails.ServiceEndDate",
+          "LineItems.BoughtFromPreferredSupplier",
+          "LineItems.TaxCode",
+          "LineItems.TaxDetail.Purpose",
+          "LineItems.TaxDetail.Category",
+          "LineItems.TaxDetail.Percent",
+          "LineItems.TaxDetail.PerUnit",
+          "LineItems.TaxDetail.TaxableAmount",
+          "LineItems.TaxDetail.TaxAmount",
+          "LineItems.TaxDetail.AlternateTaxAmount",
+          "LineItems.TaxDetail.TaxLocation",
+          "LineItems.TaxDetail.Description",
+          "LineItems.TaxDetail.TaxPointDate",
+          "LineItems.TaxDetail.PaymentDate",
+          "LineItems.TaxDetail.ExemptDetail",
+          "LineItems.TaxDetail.IsTriangularTransaction",
+          "LineItems.TaxDetail.TriangularTransactionLawReference",
+          "LineItems.TaxDetail.AbatementPercent",
+          "LineItems.TaxDetail.IsDeductible",
+          "LineItems.TaxDetail.Component",
+          "LineItems.TaxDetail.FormulaString",
+          "LineItems.ChargeDetail.ChargeType",
+          "LineItems.ChargeDetail.ChargeAmount",
+          "LineItems.ChargeDetail.TaxCode",
+          "LineItems.ChargeDetail.TaxAmount",
+          "LineItems.ChargeDetail.ANChargeName",
+          "LineItems.ChargeDetail.ANChargeDescription",
+          "LineItems.NumberOnPO",
+          "LineItems.OrderID",
+          "LineItems.PushStatus",
+          "LineItems.UsedInReqPush",
+          "LineItems.ERPPONumber",
+          "LineItems.MasterAgreement",
+          "LineItems.OriginatingSystem",
+          "LineItems.QuantityInKitItem",
+          "LineItems.BuyerItemMaster",
+          "LineItems.AccountingTemplate",
+          "LineItems.ExternalLineNumber",
+          "LineItems.QuickSourced",
+          "LineItems.QuotePricingTermsNumber",
+          "LineItems.ParentKit",
+          "LineItems.Kit",
+          "LineItems.KitInstanceId",
+          "LineItems.POStatus",
+          "LineItems.BuyerName",
+          "ApprovalRecords.ActivationDate",
+          "ApprovalRecords.User",
+          "ApprovalRecords.RealUser",
+          "ApprovalRecords.Date",
+          "ApprovalRecords.Comment.Date",
+          "ApprovalRecords.Comment.User",
+          "ApprovalRecords.Comment.Title",
+          "ApprovalRecords.Comment.ExternalComment",
+          "ApprovalRecords.ReceivedFromEmail",
+          "ApprovalRecords.State",
+          "LineItems.Accountings.SplitAccountings.NumberInCollection",
+          "LineItems.Accountings.SplitAccountings.Type",
+          "LineItems.Accountings.SplitAccountings.Percentage",
+          "LineItems.Accountings.SplitAccountings.Quantity",
+          "LineItems.Accountings.SplitAccountings.Amount",
+          "LineItems.Accountings.SplitAccountings.ERPSplitValue",
+          "LineItems.Accountings.SplitAccountings.PONumber",
+          "LineItems.Accountings.SplitAccountings.ProcurementUnit",
+          "LineItems.Accountings.SplitAccountings.POLineNumber",
+          "BusinessUnit",
+          "SetId",
+          "LineItems.Accountings.SplitAccountings.Account",
+          "LineItems.Accountings.SplitAccountings.Department",
+          "LineItems.Accountings.SplitAccountings.GLBusinessUnit",
+          "LineItems.Accountings.SplitAccountings.Location",
+          "LineItems.Accountings.SplitAccountings.Project",
+          "LineItems.Accountings.SplitAccountings.Product",
+          "LineItems.Accountings.SplitAccountings.StatisticsCode"
+        ],
+        "filterExpressions": [
+          {
+            "name": "createdDateFrom",
+            "field": "TimeCreated",
+            "op": ">=",
+            "defaultValue": "2017-11-05T01:01:59Z"
+          },
+          {
+            "name": "createdDateTo",
+            "field": "TimeCreated",
+            "op": "<=",
+            "defaultValue": "2017-11-06T01:01:59Z"
+          },
+          {
+            "name": "StatusInList",
+            "field": "StatusString",
+            "op": "IN",
+            "defaultValue": [
+              "Approved",
+              "Canceled",
+              "Canceling",
+              "Collaborating",
+              "Collaboration",
+              "Completed",
+              "Composing",
+              "DeniedInvalidOrdered",
+              "Ordering",
+              "Received",
+              "Receiving",
+              "Submitted"
+            ]
+          }
+        ]
+      }
+    },
+    "FilterExpression": {
+      "title": "FilterExpression",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Customized name for the field. This field will be passed while posting a job. e.g TimeCreatedFrom/MyTimeCreated/createdFrom",
+          "type": "string"
+        },
+        "field": {
+          "description": "Field name which is a filter key and defined in whitelist. e.g TimeCreated",
+          "type": "string"
+        },
+        "op": {
+          "description": "Operations allowed. <= >= == <> IN LIKE NOT LIKE",
+          "type": "string"
+        },
+        "defaultValue": {
+          "description": "Passing defaultvalue is optional. Default value can always be overridden.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "field",
+        "op"
+      ],
+      "example": {
+        "filterExpressions": [
+          {
+            "name": "createdDateFrom",
+            "field": "TimeCreated",
+            "op": ">=",
+            "defaultValue": "2017-11-05T01:01:59Z"
+          },
+          {
+            "name": "createdDateTo",
+            "field": "TimeCreated",
+            "op": "<=",
+            "defaultValue": "2017-11-06T01:01:59Z"
+          },
+          {
+            "name": "StatusInList",
+            "field": "StatusString",
+            "op": "IN",
+            "defaultValue": [
+              "Approved",
+              "Canceled",
+              "Canceling",
+              "Collaborating",
+              "Collaboration",
+              "Completed",
+              "Composing",
+              "DeniedInvalidOrdered",
+              "Ordering",
+              "Received",
+              "Receiving",
+              "Submitted"
+            ]
+          }
+        ]
+      }
+    },
+    "CreateViewResponse200": {
+      "title": "Create View for Requisition Object for peopleSoft VariantsRequest",
+      "type": "object",
+      "properties": {
+        "documentType": {
+          "description": "Procurement transaction document type",
+          "type": "string",
+          "example": "Invoice"
+        },
+        "status": {
+          "description": "Status of the view template",
+          "type": "string",
+          "example": "published"
+        },
+        "selectAttributes": {
+          "description": "SAP ariba whitelisted select attributes for each procurement document",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "ApprovalRecords.User"
+          }
+        },
+        "filterExpressions": {
+          "description": "Fiter criteria for retrieving transaction data",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterExpression"
+          }
+        }
+      },
+      "required": [
+        "documentType",
+        "status",
+        "selectAttributes",
+        "filterExpressions"
+      ]
+    },
+    "StatusUpdateForViewrequest": {
+      "title": "Status update for ViewRequest",
+      "example": {
+        "status": "published"
+      },
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of view. draft/published/deactivated",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "StatusUpdateForViewresponse": {
+      "title": "Status update for ViewResponse",
+      "type": "object",
+      "properties": {
+        "viewTemplateName": {
+          "description": "view template name",
+          "type": "string"
+        },
+        "type": {
+          "description": "for custome views it will be - custom. For syetm views the type is - system vsap",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of view. draft/published/deactivated",
+          "type": "string"
+        },
+        "documentType": {
+          "description": "Procurement document object for which the view is created/updated",
+          "type": "string"
+        },
+        "selectAttributes": {
+          "description": "The whitelised field names for RDS reporting",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filterExpressions": {
+          "description": "Filter criteria",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterExpression"
+          }
+        }
+      },
+      "required": [
+        "viewTemplateName",
+        "type",
+        "status",
+        "documentType",
+        "selectAttributes",
+        "filterExpressions"
+      ]
+    },
+    "GetASingleViewMetadataresponse": {
+      "title": "Get A single view metadataResponse",
+      "type": "object",
+      "properties": {
+        "viewTemplateName": {
+          "description": "view template name",
+          "type": "string"
+        },
+        "type": {
+          "description": "for custome views it will be - custom. For syetm views the type is - system vsap",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of view. draft/published/deactivated",
+          "type": "string"
+        },
+        "documentType": {
+          "description": "Procurement document object for which the view is created/updated",
+          "type": "string"
+        },
+        "selectAttributes": {
+          "description": "The whitelised field names for RDS reporting",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filterExpressions": {
+          "description": "Filter criteria",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterExpression"
+          }
+        }
+      },
+      "required": [
+        "viewTemplateName",
+        "type",
+        "status",
+        "documentType",
+        "selectAttributes",
+        "filterExpressions"
+      ]
+    },
+    "GetAllViewsresponse": {
+      "title": "Get All ViewsResponse",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GetASingleViewMetadataresponse"
+      }
+    },
+    "ErrorView": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "InvalidSelectAttr"
+        },
+        "message": {
+          "type": "string",
+          "example": "Invalid select attributes"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Unauthorized/API key not found"
+        },
+        "message": {
+          "type": "string",
+          "example": "Token Expired/ API Key not found"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorInternal": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Internal Server Error"
+        },
+        "message": {
+          "type": "string",
+          "example": "Internal Server Error"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "responses": {
+    "InvalidSelectAttributes": {
+      "description": "The select attributes are either not whitelisted/duplicated/customized",
+      "schema": {
+        "$ref": "#/definitions/ErrorView"
+      }
+    },
+    "Unauthorized": {
+      "description": "Unauthorized request. Check oauth token is expired or you are not using correct oauth token.",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "InternalServerError": {
+      "description": "If your URL is not constructed properly, you have trailing spaces in URl, request body format is wrong or ARIBA site is temporarily down",
+      "schema": {
+        "$ref": "#/definitions/ErrorInternal"
+      }
+    },
+    "Forbidden": {
+      "description": "forbidden",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    }
+  }
+}

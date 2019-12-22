@@ -1,0 +1,254 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "1.0",
+    "title": "Transaction Monitoring API v2",
+    "description": "The SAP Ariba Transaction Monitoring APIs for tracking Supply Chain Collaboration gives Ariba Network a fast and reliable mechanism to monitor Supply Chain Collaboration transactions across the network. This allows a high degree of visibility and traceability into business processes and documents associated with these transactions. This API allows you to trace the lineage of a transaction and perform searches based on time and searchable fields."
+  },
+  "x-sap-shortText": "Gives Ariba Network a fast and reliable mechanism to monitor Supply Chain Collaboration transactions across the network.",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/bizmonservice/v2/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/bizmonservice/v2/{environment}",
+      "description": "Transaction Monitoring API v2 endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "bizmonservice",
+      "description": "Transaction Monitoring API v2"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "bpm-data-retrieval-service-api",
+      "description": "Data Retrieval for event data captured using BPM DataCollector"
+    }
+  ],
+  "paths": {
+    "/events": {
+      "get": {
+        "tags": [
+          "/bpmservice/api/v2/events"
+        ],
+        "description": "Gets all `Event` objects from persistence store\n Mandatory and Optional query param determines to return list of events\n",
+        "operationId": "getEvents",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "EventType",
+            "in": "header",
+            "description": "Type of the event to be fetched, default value is 'ANTransaction'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "PageSize",
+            "in": "header",
+            "description": "Maximum number of events to be returned per call, default value is 10000",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Offset",
+            "in": "header",
+            "description": "Events will be returned starting from this Offset value for this api call, default value is 0",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "rsqlfilter",
+            "in": "query",
+            "description": "Only rsql \"and\" clause is supported. It is represented in rsql via 'and' keyword or ';' semicolon. \n\n Two types of queries are supported - \n 1. `Time bound query` \n 2. Non time bound query \n \n A. Time bound query\n Parameters passed in the time bound query are listed below - \n a) start_date_time (mandatory - int64)- Start date time of events  date range, in epoch date time format \n\n b) end_date_time (mandatory - int64)- End date time of events  date range, in epoch date time format \n\n c) alert_time (optional - string)- Event status ('error' or 'success' or 'warning') \n\n d) process_name (optional - string)- Event specific to process (like TRANSACTION_TRACKING_PURCHASEORDER etc..), refer to predefined process names for more details \n\n e) sender_id (optional - string)- Sender ANID to get specific customer events \n\n f) receiver_id (optional - string)- Receiver ANID to get specific customer events \n\n g) transaction_id (optional - string)- Events to specific transaction (payloadid of cxml document) \n\n\n B. Non time bound query\n Non time bound query support two variation:\n I. Search based on document_id\n Parameters passed in non time bound query search based on document_id are listed below - \n a) document_id (mandatory - string) - Document identifier to be searched \n\n b) all the parameters specified for time bound query are applicable and optional\n \n II. Search based on correlation_id\n Parameters passed in non time bound query search based on correlation_id are listed below - \n a) correlation_id (mandatory - string) - Correlation identifier to be searched \n\n b) all the parameters specified for time bound query are applicable and optional",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errormessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "URL Not Found",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "response": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "items": {
+            "$ref": "#/definitions/transactions"
+          }
+        }
+      }
+    },
+    "transactions": {
+      "type": "object",
+      "properties": {
+        "transaction_id": {
+          "type": "string"
+        },
+        "document_id": {
+          "type": "string"
+        },
+        "sender_id": {
+          "type": "string"
+        },
+        "receiver_id": {
+          "type": "string"
+        },
+        "process_name": {
+          "type": "string"
+        },
+        "changed_by": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/events"
+          }
+        }
+      }
+    },
+    "events": {
+      "type": "object",
+      "properties": {
+        "correlation_id": {
+          "type": "string"
+        },
+        "order_date": {
+          "type": "string"
+        },
+        "alert_type": {
+          "type": "string"
+        },
+        "event_name": {
+          "type": "string"
+        },
+        "event_timestamp": {
+          "type": "string"
+        },
+        "event_id": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "date_happened": {
+          "type": "string"
+        },
+        "reference_payload_id": {
+          "type": "string"
+        },
+        "error_message": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "attachment_document_type": {
+          "type": "string"
+        }
+      }
+    },
+    "errormessage": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,309 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "2.0",
+    "title": "Operational Reporting for Sourcing - Synchronous API",
+    "description": "The SAP Ariba Sourcing Reporting APIs enables you to report on the transactional data that you need to make operational decisions. You use the API to create a client application that extracts reportable data."
+  },
+  "x-sap-shortText": "Enables you to report on the transactional procurement data needed for sourcing decisions (synchronous usage).",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/sourcing-reporting-details/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/sourcing-reporting-details/v1/{environment}",
+      "description": "Operational Reporting for Sourcing - Synchronous API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "ru.openapi.ariba.com",
+            "mn1.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api-ru.ariba.com",
+            "api.mn1.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "sourcing-reporting-details",
+      "description": "Operational Reporting for Sourcing - Synchronous API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "RU",
+      "description": "RU data center"
+    },
+    {
+      "name": "UAE",
+      "description": "UAE data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    },
+    {
+      "name": "Operational Sourcing Synchronous API",
+      "description": "synchronous API to get transaction data"
+    }
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/views/{viewTemplateName}": {
+      "get": {
+        "description": "Synchronous API to get sourcing transaction data, appropriate for smaller results sets",
+        "summary": "Requested output is batched and paginated and JSON results are returned one page at a time",
+        "tags": [
+          "Operational Reporting Synchronous API"
+        ],
+        "operationId": "GetDetails",
+        "parameters": [
+          {
+            "name": "viewTemplateName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "view template name"
+          },
+          {
+            "name": "realm",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Customer realm name"
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filter criteria to query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/SynchronousAPIResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/InvalidFilters"
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SynchronousAPIResponse": {
+      "title": "Synchronous API Response",
+      "type": "object",
+      "example": {
+        "Records": [
+          {
+            "Status": "Active",
+            "InternalId": "WS13133",
+            "Owner": {
+              "UniqueName": "customersupportadmin",
+              "PasswordAdapter": "PasswordAdapter1"
+            },
+            "Title": "Sourcing Project A1",
+            "BaselineSpend": {
+              "Amount": 200,
+              "Currency": {
+                "UniqueName": "USD"
+              }
+            },
+            "TemplateObject": {
+              "InternalId": "SYS0207"
+            },
+            "TimeCreated": "2018-03-18T04:22:35Z",
+            "PlannedStartDate": null,
+            "ParentWorkspace": {
+              "InternalId": "WS13133"
+            },
+            "PlannedEndDate": null,
+            "ParentDocument": {
+              "InternalId": "WS13115"
+            },
+            "ExternalSystemCorrelationId": "",
+            "TargetSavingPct": 2
+          },
+          {
+            "Status": "Active",
+            "InternalId": "WS13153",
+            "Owner": {
+              "UniqueName": "customersupportadmin",
+              "PasswordAdapter": "PasswordAdapter1"
+            },
+            "Title": "Sidd Sourcing Project A2",
+            "BaselineSpend": {
+              "Amount": 202,
+              "Currency": {
+                "UniqueName": "USD"
+              }
+            },
+            "TemplateObject": {
+              "InternalId": "WS11574"
+            },
+            "TimeCreated": "2018-03-18T04:27:07Z",
+            "PlannedStartDate": null,
+            "ParentWorkspace": {
+              "InternalId": "WS13153"
+            },
+            "PlannedEndDate": null,
+            "ParentDocument": {
+              "InternalId": "WS13115"
+            },
+            "ExternalSystemCorrelationId": "",
+            "TargetSavingPct": 22
+          }
+        ]
+      }
+    },
+    "ErrorView": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "InvalidSelectAttr"
+        },
+        "message": {
+          "type": "string",
+          "example": "Invalid select attributes"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Unauthorized/API key not found"
+        },
+        "message": {
+          "type": "string",
+          "example": "Token Expired/ API Key not found"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorInternal": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Internal Server Error"
+        },
+        "message": {
+          "type": "string",
+          "example": "Internal Server Error"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "responses": {
+    "InvalidFilters": {
+      "description": "The filters provided are invalid",
+      "schema": {
+        "$ref": "#/definitions/ErrorView"
+      }
+    },
+    "Unauthorized": {
+      "description": "Unauthorized request. Check oauth token is expired or you are not using correct oauth token.",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "InternalServerError": {
+      "description": "If your URL is not constructed properly, you have trailing spaces in URl, request body format is wrong or ARIBA site is temporarily down",
+      "schema": {
+        "$ref": "#/definitions/ErrorInternal"
+      }
+    },
+    "Forbidden": {
+      "description": "forbidden",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    }
+  }
+}

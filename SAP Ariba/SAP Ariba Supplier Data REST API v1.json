@@ -1,0 +1,1241 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter. ",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "1.0.0",
+    "title": "Supplier Data API",
+    "description": "Using this API, you can create a client application to retrieve supplier data from your SAP Ariba Supplier Lifecycle and Performance or SAP Ariba Supplier Information and Performance Management (new architecture) solution, including supplier names, addresses, registration, qualification, and preferred statuses, and questionnaire details. \n\nReplaced by 'Supplier Data API With Pagination'."
+  },
+  "x-sap-shortText": "Retrieve supplier data",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/supplierdataaccess/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/supplierdataaccess/v1/{environment}",
+      "description": "Supplier Data API-Kept for backward compatibility only endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com",
+            "eu.openapi.ariba.com",
+            "mn1.openapi.ariba.com",
+            "mn2.openapi.ariba.com",
+            "openapi.sapariba.cn"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com",
+            "api-eu.ariba.com",
+            "api.mn1.ariba.com",
+            "api.mn2.ariba.com",
+            "api.sapariba.cn"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "supplierdataaccess",
+      "description": "Supplier Data API-Kept for backward compatibility only"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    },
+    {
+      "name": "EU",
+      "description": "EU data center"
+    },
+    {
+      "name": "UAE",
+      "description": "UAE data center"
+    },
+    {
+      "name": "KSA",
+      "description": "KSA data center"
+    },
+    {
+      "name": "CN",
+      "description": "CN data center"
+    },
+    {
+      "name": "supplier-data-access",
+      "description": "Supplier DATA access API"
+    }
+  ],
+  "paths": {
+    "/searchSupplier": {
+      "post": {
+        "tags": [
+          "supplier-data-access"
+        ],
+        "summary": "Search suppliers",
+        "operationId": "searchSupplierUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchSupplierResponse"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SearchSupplierResponse"
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "401": {
+             "$ref": "#/responses/Unauthorized"
+          },
+          "400": {
+             "$ref": "#/responses/BadRequest"
+          },
+          "404": {
+             "$ref": "#/responses/NotFound"
+          },
+          "500": {
+             "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/queryQuestionnaireDetails": {
+      "post": {
+        "tags": [
+          "supplier-data-access"
+        ],
+        "summary": "Get questionnaire details based on smVendorId and questionnaire id.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuestionAnswerQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuestionAnswerQueryResponse"
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "401": {
+             "$ref": "#/responses/Unauthorized"
+          },
+          "400": {
+             "$ref": "#/responses/BadRequest"
+          },
+          "404": {
+             "$ref": "#/responses/NotFound"
+          },
+          "500": {
+             "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/submitQuestionnaireResponse": {
+      "post": {
+        "tags": [
+          "supplier-data-access"
+        ],
+        "summary": "Submit response for a questionnaire",
+        "operationId": "submitQuestionnaireResponseUsingPOST_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubmitSurveyRequest"
+            }
+          },
+          {
+            "name": "questionnaireId",
+            "in": "query",
+            "description": "questionnaireId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "401": {
+             "$ref": "#/responses/Unauthorized"
+          },
+          "400": {
+             "$ref": "#/responses/BadRequest"
+          },
+          "404": {
+             "$ref": "#/responses/NotFound"
+          },
+          "500": {
+             "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/supplierstatus/updateStatus": {
+      "put": {
+        "tags": [
+          "supplier-data-access"
+        ],
+        "summary": "Update qualification status or preferred level.",
+        "operationId": "updateSupplierStatusUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StatusResponse"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/StatusResponse"
+            }
+          },
+          "403": {
+            "$ref": "#/responses/Forbidden"
+          },
+          "401": {
+             "$ref": "#/responses/Unauthorized"
+          },
+          "400": {
+             "$ref": "#/responses/BadRequest"
+          },
+          "404": {
+             "$ref": "#/responses/NotFound"
+          },
+          "500": {
+             "$ref": "#/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ReportRequest": {
+      "properties": {
+        "businessUnitList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "categoryList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outputFormat": {
+          "type": "string",
+          "enum": [
+            "CSV",
+            "JSON"
+          ]
+        },
+        "preferredLevelList": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "qualificationStatusList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Unknown",
+              "QualificationRejected",
+              "Disqualified",
+              "InDisqualification",
+              "PendingDisqualificationApproval",
+              "QualificationExpired",
+              "NotQualified",
+              "QualificationStarted",
+              "InQualification",
+              "PendingQualificationApproval",
+              "PendingQualificationResubmit",
+              "QualificationRestricted",
+              "QualifiedForSome",
+              "QualifiedWithException",
+              "Qualified",
+              "None"
+            ]
+          }
+        },
+        "regionList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "registrationStatusList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Unknown",
+              "RegistrationDenied",
+              "PhasedOut",
+              "InCreation",
+              "InExternalApprovalForCreation",
+              "NotInvited",
+              "Invited",
+              "InRegistration",
+              "PendingApproval",
+              "PendingResubmit",
+              "Registered"
+            ]
+          }
+        },
+        "withQuestionnaire": {
+          "type": "boolean"
+        }
+      }
+    },
+    "QuestionAnswerQueryRequest": {
+      "type": "object",
+      "properties": {
+        "smVendorId": {
+          "type": "string"
+        },
+        "questionnaireId": {
+          "type": "string"
+        }
+      }
+    },
+    "SearchSupplierResponse": {
+      "title": "Search supplier Response",
+      "example": {
+        "Supplier Name": "Archna1PROD_1217",
+        "ERP Vendor ID": "vdr161001",
+        "SM Vendor ID": "S1057594",
+        "An Id": "AN01051615596-T",
+        "Registration Status": "Registered",
+        "Integrated to ERP": "NotIntegrated",
+        "Address - Line1": "3400 Hillview Avenue",
+        "Address - City": "Palo Alto",
+        "Address - Country Code": "US",
+        "Address - Postal Code": "94304"
+      },
+      "type": "object",
+      "properties": {
+        "ERP Vendor ID": {
+          "description": "",
+          "example": "vdr161001",
+          "type": "string"
+        },
+        "SM Vendor ID": {
+          "description": "",
+          "example": "S1057594",
+          "type": "string"
+        },
+        "Registration Status": {
+          "description": "",
+          "example": "Registered",
+          "type": "string"
+        },
+        "Integrated to ERP": {
+          "description": "",
+          "example": "NotIntegrated",
+          "type": "string"
+        },
+        "Supplier Name": {
+          "description": "",
+          "example": "Archna1PROD_1217",
+          "type": "string"
+        },
+        "An Id": {
+          "description": "",
+          "example": "AN01051615596-T",
+          "type": "string"
+        },
+        "Address - Line1": {
+          "description": "",
+          "example": "3400 Hillview Avenue",
+          "type": "string"
+        },
+        "Address - City": {
+          "description": "",
+          "example": "Palo Alto",
+          "type": "string"
+        },
+        "Address - Country Code": {
+          "description": "",
+          "example": "US",
+          "type": "string"
+        },
+        "Address - Postal Code": {
+          "description": "",
+          "example": "94304",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ERP Vendor ID",
+        "SM Vendor ID",
+        "Registration Status",
+        "Integrated to ERP"
+      ]
+    },
+    "QuestionAnswerQueryResponse": {
+      "type": "object",
+      "properties": {
+        "active": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "alternative": {
+          "type": "string"
+        },
+        "externalSystemCorrelationId": {
+          "type": "string"
+        },
+        "processId": {
+          "type": "string"
+        },
+        "documentId": {
+          "type": "string"
+        },
+        "searchTerm": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "enumerationCodeDelimiters": {
+          "type": "string"
+        },
+        "dataType": {
+          "type": "string"
+        },
+        "multiValued": {
+          "type": "string"
+        },
+        "smVendorId": {
+          "type": "string"
+        },
+        "workspaceType": {
+          "type": "string"
+        },
+        "workspaceId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "totalQuestions": {
+          "type": "string"
+        },
+        "questionnaireLabel": {
+          "type": "string"
+        },
+        "questionLabel": {
+          "type": "string"
+        },
+        "answerType": {
+          "type": "string"
+        }
+      }
+    },
+    "SubmitSurveyRequest": {
+      "properties": {
+        "answers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemAnswer"
+          }
+        }
+      }
+    },
+    "ItemAnswer": {
+      "properties": {
+        "addressAnswer": {
+          "$ref": "#/definitions/AddressData"
+        },
+        "alternative": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "attachmentAnswer": {
+          "$ref": "#/definitions/AttachmentData"
+        },
+        "bankAccountAnswer": {
+          "$ref": "#/definitions/BankAccountData"
+        },
+        "certificateAnswer": {
+          "$ref": "#/definitions/CertificateData"
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommentData"
+          }
+        },
+        "extendedAddressAnswer": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ExtendedAddressRepData"
+          }
+        },
+        "externalSystemCorrelationId": {
+          "type": "string"
+        },
+        "formatErrorMessage": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "itemTag": {
+          "type": "string"
+        },
+        "moreValue": {
+          "type": "string"
+        },
+        "multiValueAnswer": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "regexPattern": {
+          "type": "string"
+        },
+        "taxDataAnswer": {
+          "$ref": "#/definitions/TaxData"
+        }
+      }
+    },
+    "Response": {
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorMessage"
+          }
+        },
+        "errorsByVendor": {
+          "type": "object"
+        },
+        "moreDataAvailable": {
+          "type": "boolean",
+          "description": "If response is limited by batching, this flag indicates if more objects are available"
+        },
+        "nextToken": {
+          "type": "string",
+          "description": "In case of batching, use this as startToken in next request"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "OK",
+            "FAILED",
+            "ERROR"
+          ]
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationException"
+          }
+        }
+      }
+    },
+    "List": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ValidationException": {
+      "properties": {
+        "cause": {
+          "$ref": "#/definitions/Throwable"
+        },
+        "childExceptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationException"
+          }
+        },
+        "exceptionClassName": {
+          "type": "string"
+        },
+        "exceptionClassSimpleName": {
+          "type": "string"
+        },
+        "info": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "type": "string"
+        },
+        "stackTrace": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StackTraceElement"
+          }
+        },
+        "suppressed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Throwable"
+          }
+        },
+        "technicalMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "StackTraceElement": {
+      "properties": {
+        "className": {
+          "type": "string"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "lineNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "methodName": {
+          "type": "string"
+        },
+        "nativeMethod": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Throwable": {
+      "properties": {
+        "localizedMessage": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "stackTrace": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StackTraceElement"
+          }
+        },
+        "suppressed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Throwable"
+          }
+        }
+      }
+    },
+    "ErrorMessage": {
+      "properties": {
+        "cause": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        },
+        "errorType": {
+          "type": "string",
+          "enum": [
+            "Error",
+            "Warning"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "resolution": {
+          "type": "string"
+        }
+      }
+    },
+    "TaxData": {
+      "properties": {
+        "answers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemAnswer"
+          }
+        },
+        "countryCode": {
+          "type": "string"
+        }
+      }
+    },
+    "ExtendedAddressRepData": {
+      "properties": {
+        "additionalCityName": {
+          "type": "string"
+        },
+        "additionalHouseID": {
+          "type": "string"
+        },
+        "additionalRegionalStructureCityCode": {
+          "type": "string"
+        },
+        "additionalStreetPrefixName": {
+          "type": "string"
+        },
+        "additionalStreetSuffixName": {
+          "type": "string"
+        },
+        "blank": {
+          "type": "boolean"
+        },
+        "buildingID": {
+          "type": "string"
+        },
+        "careOfName": {
+          "type": "string"
+        },
+        "cityName": {
+          "type": "string"
+        },
+        "companyPostalCode": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "districtName": {
+          "type": "string"
+        },
+        "floorID": {
+          "type": "string"
+        },
+        "houseID": {
+          "type": "string"
+        },
+        "poBoxAddressMailNonDeliveryReasonCode": {
+          "type": "string"
+        },
+        "poBoxDeliveryServiceID": {
+          "type": "string"
+        },
+        "poBoxDeliveryServiceTypeCode": {
+          "type": "string"
+        },
+        "poBoxDeviatingCityName": {
+          "type": "string"
+        },
+        "poBoxDeviatingCountryCode": {
+          "type": "string"
+        },
+        "poBoxDeviatingRegionCode": {
+          "type": "string"
+        },
+        "poBoxDeviatingRegionalStructureCityCode": {
+          "type": "string"
+        },
+        "poBoxID": {
+          "type": "string"
+        },
+        "poBoxIDVisibleIndicator": {
+          "type": "boolean"
+        },
+        "poBoxLobbyName": {
+          "type": "string"
+        },
+        "poBoxPostalCode": {
+          "type": "string"
+        },
+        "regionCode": {
+          "type": "string"
+        },
+        "regionalStructureAddressConsistencyStatusCode": {
+          "type": "string"
+        },
+        "regionalStructureCityCode": {
+          "type": "string"
+        },
+        "regionalStructureDistrictCode": {
+          "type": "string"
+        },
+        "regionalStructureElementGroupCode": {
+          "type": "string"
+        },
+        "regionalStructureStreetCode": {
+          "type": "string"
+        },
+        "roomID": {
+          "type": "string"
+        },
+        "streetAddressMailNonDeliveryReasonCode": {
+          "type": "string"
+        },
+        "streetName": {
+          "type": "string"
+        },
+        "streetPostalCode": {
+          "type": "string"
+        },
+        "streetPrefixName": {
+          "type": "string"
+        },
+        "streetSuffixName": {
+          "type": "string"
+        },
+        "taxJurisdictionCode": {
+          "type": "string"
+        },
+        "timeZoneCode": {
+          "type": "string"
+        },
+        "transportationZoneID": {
+          "type": "string"
+        }
+      }
+    },
+    "CommentData": {
+      "properties": {
+        "attachment": {
+          "$ref": "#/definitions/AttachmentData"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "isEdit": {
+          "type": "boolean"
+        }
+      }
+    },
+    "AttachmentData": {
+      "properties": {
+        "comment": {
+          "type": "string"
+        },
+        "downloadUrl": {
+          "type": "string"
+        },
+        "fileContents": {
+          "type": "string"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "fileSize": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "mimeType": {
+          "type": "string"
+        }
+      }
+    },
+    "BankAccountData": {
+      "properties": {
+        "accountName": {
+          "type": "string"
+        },
+        "accountNumber": {
+          "type": "string"
+        },
+        "bankAccountExternalID": {
+          "type": "string"
+        },
+        "bankAccountStandardID": {
+          "type": "string"
+        },
+        "bankAccountType": {
+          "type": "string"
+        },
+        "bankBranch": {
+          "type": "string"
+        },
+        "blank": {
+          "type": "boolean"
+        },
+        "city": {
+          "type": "string"
+        },
+        "collectionAuthorisationIndicator": {
+          "type": "boolean"
+        },
+        "country": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "line1": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "CertificateData": {
+      "properties": {
+        "attachment": {
+          "$ref": "#/definitions/AttachmentData"
+        },
+        "certificateLocation": {
+          "type": "string"
+        },
+        "certificateNumber": {
+          "type": "string"
+        },
+        "certificateType": {
+          "type": "string"
+        },
+        "certified": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "effectiveDate": {
+          "type": "string"
+        },
+        "expirationDate": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "yearOfPublication": {
+          "type": "string"
+        }
+      }
+    },
+    "AddressData": {
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "line3": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Unauthorized/API key not found"
+        },
+        "message": {
+          "type": "string",
+          "example": "Token Expired/ API Key not found"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "BadRequest": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "MissinngRealmId"
+        },
+        "message": {
+          "type": "string",
+          "example": "Realm Id is mising"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorInternal": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Internal Server Error"
+        },
+        "message": {
+          "type": "string",
+          "example": "Internal Server Error"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "StatusRequest": {
+      "properties": {
+        "statusList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatusApi"
+          }
+        },
+        "statusType": {
+          "type": "string",
+          "description": "Type of status",
+          "enum": [
+            "Qualification",
+            "Preferred"
+          ]
+        }
+      }
+    },
+    "StatusApi": {
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "description": "If set to false, will inactivate status record"
+        },
+        "businessUnit": {
+          "type": "string",
+          "description": "Department code"
+        },
+        "category": {
+          "type": "string",
+          "description": "Commodity code"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "End date in ISO format"
+        },
+        "erpVendorId": {
+          "type": "string",
+          "description": "ERP vendor id of supplier"
+        },
+        "region": {
+          "type": "string",
+          "description": "Region code"
+        },
+        "requalificationEligibleDate": {
+          "type": "string",
+          "description": "Date after which requalification is allowed"
+        },
+        "smVendorId": {
+          "type": "string",
+          "description": "SM vendor id. If specified, erpVendorId and sourceSystem are ignored."
+        },
+        "sourceSystem": {
+          "type": "string",
+          "description": "Source system for the erp vendor id."
+        },
+        "startDate": {
+          "type": "string",
+          "description": "Start date in ISO format"
+        },
+        "status": {
+          "type": "string",
+          "description": "Qualification status or Preferred level",
+          "enum": [
+            "Qualified",
+            "Disqualified",
+            "Expired",
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "statusQualifier": {
+          "type": "string",
+          "description": "Additional attribute about status"
+        }
+      }
+    },
+    "StatusResponse": {
+      "properties": {
+        "response": {
+          "type": "string"
+        },
+        "successful": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "responses": {
+    "Unauthorized": {
+      "description": "Unauthorized request. Check oauth token is expired or you are not using correct oauth token.",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "InternalServerError": {
+      "description": "If your URL is not constructed properly, you have trailing spaces in URl, request body format is wrong or ARIBA site is temporarily down",
+      "schema": {
+        "$ref": "#/definitions/ErrorInternal"
+      }
+    },
+    "Forbidden": {
+      "description": "You are not able to connnect because of proxy or network issue",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "NotFound": {
+      "description": "The URL you requested does not exist.",
+      "schema": {
+        "$ref": "#/definitions/Error"
+      }
+    },
+    "BadRequest": {
+      "description": "Your request is not processed becuase of an error on server side",
+      "schema": {
+        "$ref": "#/definitions/BadRequest"
+      }
+    }
+  }
+}

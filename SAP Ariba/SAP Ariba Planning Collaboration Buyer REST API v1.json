@@ -1,0 +1,1280 @@
+{
+  "swagger": "2.0",
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this API, you need to obtain the OAuth client credentials (client ID and secret) from SAP Ariba. After that, pass these client credentials to the SAP Ariba API token endpoint to obtain an access token.",
+      "tokenUrl": "https://{regionOauth}/oauth/token",
+      "flow": "application",
+      "scopes": {}
+    }
+  },
+  "externalDocs": {
+    "description": "More information is available at https://developer.ariba.com/api where you can select your region's datacenter.",
+    "url": "https://developer.ariba.com/api"
+  },
+  "info": {
+    "version": "1.0.0",
+    "title": "Planning Collaboration Buyer API",
+    "description": "Retrieve supplier inventory data, supplier-managed inventory data, and forecast and commitment data about your suppliers, directly from Ariba Network."
+  },
+  "x-sap-shortText": "Retrieve data about your suppliers from Ariba Network",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/ariba/api/planning/v1/sandbox",
+  "schemes": [
+    "https"
+  ],
+  "x-servers": [
+    {
+      "url": "https://{region}/api/planning/v1/{environment}",
+      "description": "Planning Collaboration Buyer API endpoint",
+      "templates": {
+        "region": {
+          "enum": [
+            "openapi.ariba.com"
+          ],
+          "default": "openapi.ariba.com",
+          "description": "The SAP Ariba region where the SAP Ariba APIs are used."
+        },
+        "regionOauth": {
+          "enum": [
+            "api.ariba.com"
+          ],
+          "default": "api.ariba.com",
+          "description": "The SAP Ariba regional OAuth server associated with the region where the SAP Ariba APIs are used."
+        },
+        "environment": {
+          "enum": [
+            "sandbox",
+            "prod"
+          ],
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data. For more information, go to the SAP Ariba Developer Portal at https://developer.ariba.com."
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "planning",
+      "description": "Planning Collaboration Buyer API"
+    },
+    {
+      "name": "US",
+      "description": "US data center"
+    }
+  ],
+  "paths": {
+    "/forecast": {
+      "get": {
+        "tags": [
+          "Forecast"
+        ],
+        "summary": "The forecast collaboration feature enables suppliers to make commitments\n        to deliver quantities of goods to supply upcoming demands forecast by\n        buyers. As a part of this process buyers shares the forecast data\n        with suppliers. This API provides forecast commit data changed by suppliers.",
+        "operationId": "getForecastUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "$filter=expression. 'expression' is a combination of resource parameters, values. We use 'eq' as operator to link parameter and value. We use 'and' as operator to link two or more parameters. For example, $filter=a eq 'b' and c eq 'd'. Currently we support the following parameters.<br/>\nplantId            -- Plant's id. <br/>\nvendorId           -- Supplier's vendor ID. <br/>\nbuyerPartNumber    -- Represents an item in buyer system. This identifier is specified by the buyer.<br/>\nsupplierPartNumber -- Represents an item in supplier system. This identifier is specified by the supplier.<br/>\nstartDate          -- The starting date of the period. If derived period if more than 1 year, it will be limited to 1 year.<br/>\nendDate            -- The ending date of the period. If derived period if more than 1 year, it will be limited to 1 year.<br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "vendorId eq 'AS_VEN04' and buyerPartNumber eq 'BP-001'"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "To specify the order of results. $orderby=propertyName asc, $orderby=propertyName desc.<br/>\nThe order can be ascending or descending: asc or desc. If not specified, the default is ascending(asc).<br/>\npropertyName    -- The column to sort on. Either of BUYERLASTUPDATE, SUPPLIERLASTUPDATE,BUYERPARTNO, SUPPLIERPARTNO, LOCATIONID, LOCATIONAME, STOCKONHAND,LEADTIME, PLANTID, PROCESSTYPE. <br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "SUPPLIERLASTUPDATE asc"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "$skip is the number of items to be skipped (offset)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "$top is the number of items to be returned (page size)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "description": "To return the number of elements in a collection inline. The syntax is $count=true<br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/forecast/$count": {
+      "get": {
+        "tags": [
+          "Forecast"
+        ],
+        "summary": "The forecast collaboration feature enables suppliers to make commitments\n        to deliver quantities of goods to supply upcoming demands forecast by\n        buyers. As a part of this process buyers shares the forecast data\n        with suppliers. This API provides count of forecast commit data changed by suppliers.",
+        "operationId": "getForecastCountUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "$filter=expression. 'expression' is a combination of resource parameters, values. We use 'eq' as operator to link parameter and value. We use 'and' as operator to link two or more parameters. For example, $filter=a eq 'b' and c eq 'd'. Currently we support the following parameters.<br/>\nplantId            -- Plant's id. <br/>\nvendorId           -- Supplier's vendor ID. <br/>\nbuyerPartNumber    -- Represents an item in buyer system. This identifier is specified by the buyer.<br/>\nsupplierPartNumber -- Represents an item in supplier system. This identifier is specified by the supplier.<br/>\nstartDate          -- The starting date of the period. If derived period if more than 1 year, it will be limited to 1 year.<br/>\nendDate            -- The ending date of the period. If derived period if more than 1 year, it will be limited to 1 year.<br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "vendorId eq 'AS_VEN04' and buyerPartNumber eq 'BP-001'"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "To specify the order of results. $orderby=propertyName asc, $orderby=propertyName desc.<br/>\nThe order can be ascending or descending: asc or desc. If not specified, the default is ascending(asc).<br/>\npropertyName    -- The column to sort on. Either of BUYERLASTUPDATE, SUPPLIERLASTUPDATE,BUYERPARTNO, SUPPLIERPARTNO, LOCATIONID, LOCATIONAME, STOCKONHAND,LEADTIME, PLANTID, PROCESSTYPE. <br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "SUPPLIERLASTUPDATE asc"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "$skip is the number of items to be skipped (offset)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "$top is the number of items to be returned (page size)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/supplierInventory": {
+      "get": {
+        "tags": [
+          "Supplier Inventory"
+        ],
+        "summary": "Suppliers managed goods that are in their customers warehouses. This API\n        provides inventory data matching to buyer demand on each date.",
+        "operationId": "getSupplierInventoryUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "$filter=expression. 'expression' is a combination of resource parameters, values. We use 'eq' as operator to link parameter and value. We use 'and' as operator to link two or more parameters. For example, $filter=a eq 'b' and c eq 'd'. Currently we support the following parameters.<br/>\nplantId            -- Plant's id. <br/>\nvendorId           -- Supplier's vendor ID. <br/>\nbuyerPartNumber    -- Represents an item in buyer system. This identifier is specified by the buyer.<br/>\nsupplierPartNumber -- Represents an item in supplier system. This identifier is specified by the supplier.<br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "vendorId eq 'AS_VEN04' and buyerPartNumber eq 'BP-001'"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "To specify the order of results. $orderby=propertyName asc, $orderby=propertyName desc.<br/>\nThe order can be ascending or descending: asc or desc. If not specified, the default is ascending(asc).<br/>\npropertyName    -- The column to sort on. Either of BUYERLASTUPDATE, SUPPLIERLASTUPDATE,BUYERPARTNO, SUPPLIERPARTNO, LOCATIONID, LOCATIONAME, STOCKONHAND,LEADTIME, PLANTID, PROCESSTYPE. <br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "SUPPLIERLASTUPDATE asc"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "$skip is the number of items to be skipped (offset)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "$top is the number of items to be returned (page size)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "description": "To return the number of elements in a collection inline. The syntax is $count=true<br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/supplierInventory/$count": {
+      "get": {
+        "tags": [
+          "Supplier Inventory"
+        ],
+        "summary": "Suppliers managed goods that are in their customers warehouses. This API\n        provides count of inventory data matching to buyer demand on each date.",
+        "operationId": "getSupplierInventoryCountUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "$filter=expression. 'expression' is a combination of resource parameters, values. We use 'eq' as operator to link parameter and value. We use 'and' as operator to link two or more parameters. For example, $filter=a eq 'b' and c eq 'd'. Currently we support the following parameters.<br/>\nplantId            -- Plant's id. <br/>\nvendorId           -- Supplier's vendor ID. <br/>\nbuyerPartNumber    -- Represents an item in buyer system. This identifier is specified by the buyer.<br/>\nsupplierPartNumber -- Represents an item in supplier system. This identifier is specified by the supplier.<br/>\nstartDate          -- The starting date of the period. If derived period if more than 1 year, it will be limited to 1 year.<br/>\nendDate            -- The ending date of the period. If derived period if more than 1 year, it will be limited to 1 year.<br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "vendorId eq 'AS_VEN04' and buyerPartNumber eq 'BP-001'"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "To specify the order of results. $orderby=propertyName asc, $orderby=propertyName desc.<br/>\nThe order can be ascending or descending: asc or desc. If not specified, the default is ascending(asc).<br/>\npropertyName    -- The column to sort on. Either of BUYERLASTUPDATE, SUPPLIERLASTUPDATE,BUYERPARTNO, SUPPLIERPARTNO, LOCATIONID, LOCATIONAME, STOCKONHAND,LEADTIME, PLANTID, PROCESSTYPE. <br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "SUPPLIERLASTUPDATE asc"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "$skip is the number of items to be skipped (offset)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "$top is the number of items to be returned (page size)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/supplierManagedInventory": {
+      "get": {
+        "tags": [
+          "Supplier Managed Inventory"
+        ],
+        "summary": "The forecast collaboration feature enables suppliers to make commitments\n        to deliver quantities of goods to supply upcoming demands forecast by\n        buyers. As a part of this process Suppliers shares the inventory data\n        with buyers. This API provides inventory data given by suppliers.",
+        "operationId": "getSupplierManagedInventoryUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "$filter=expression. 'expression' is a combination of resource parameters, values. We use 'eq' as operator to link parameter and value. We use 'and' as operator to link two or more parameters. For example, $filter=a eq 'b' and c eq 'd'. Currently we support the following parameters.<br/>\nplantId            -- Plant's id. <br/>\nvendorId           -- Supplier's vendor ID. <br/>\nbuyerPartNumber    -- Represents an item in buyer system. This identifier is specified by the buyer.<br/>\nsupplierPartNumber -- Represents an item in supplier system. This identifier is specified by the supplier.<br/>\nstartDate          -- The starting date of the period. If derived period if more than 1 year, it will be limited to 1 year.<br/>\nendDate            -- The ending date of the period. If derived period if more than 1 year, it will be limited to 1 year.<br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "vendorId eq 'AS_VEN04' and buyerPartNumber eq 'BP-001'"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "To specify the order of results. $orderby=propertyName asc, $orderby=propertyName desc.<br/>\nThe order can be ascending or descending: asc or desc. If not specified, the default is ascending(asc).<br/>\npropertyName    -- The column to sort on. Either of BUYERLASTUPDATE, SUPPLIERLASTUPDATE,BUYERPARTNO, SUPPLIERPARTNO, LOCATIONID, LOCATIONAME, STOCKONHAND,LEADTIME, PLANTID, PROCESSTYPE. <br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "SUPPLIERLASTUPDATE asc"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "$skip is the number of items to be skipped (offset)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "$top is the number of items to be returned (page size)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "description": "To return the number of elements in a collection inline. The syntax is $count=true<br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/supplierManagedInventory/$count": {
+      "get": {
+        "tags": [
+          "Supplier Managed Inventory"
+        ],
+        "summary": "The forecast collaboration feature enables suppliers to make commitments\n        to deliver quantities of goods to supply upcoming demands forecast by\n        buyers. As a part of this process Suppliers shares the inventory data\n        with buyers. This API provides count of inventory data given by suppliers.",
+        "operationId": "getSupplierManagedInventoryCountUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "$filter=expression. 'expression' is a combination of resource parameters, values. We use 'eq' as operator to link parameter and value. We use 'and' as operator to link two or more parameters. For example, $filter=a eq 'b' and c eq 'd'. Currently we support the following parameters.<br/>\nplantId            -- Plant's id. <br/>\nvendorId           -- Supplier's vendor ID. <br/>\nbuyerPartNumber    -- Represents an item in buyer system. This identifier is specified by the buyer.<br/>\nsupplierPartNumber -- Represents an item in supplier system. This identifier is specified by the supplier.<br/>\nstartDate          -- The starting date of the period. If derived period if more than 1 year, it will be limited to 1 year.<br/>\nendDate            -- The ending date of the period. If derived period if more than 1 year, it will be limited to 1 year.<br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "vendorId eq 'AS_VEN04' and buyerPartNumber eq 'BP-001'"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "To specify the order of results. $orderby=propertyName asc, $orderby=propertyName desc.<br/>\nThe order can be ascending or descending: asc or desc. If not specified, the default is ascending(asc).<br/>\npropertyName    -- The column to sort on. Either of BUYERLASTUPDATE, SUPPLIERLASTUPDATE,BUYERPARTNO, SUPPLIERPARTNO, LOCATIONID, LOCATIONAME, STOCKONHAND,LEADTIME, PLANTID, PROCESSTYPE. <br/>\n",
+            "required": false,
+            "type": "string",
+            "default": "SUPPLIERLASTUPDATE asc"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "$skip is the number of items to be skipped (offset)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "$top is the number of items to be returned (page size)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PlanningPart": {
+      "type": "object",
+      "properties": {
+        "buyerLastUpdate": {
+          "type": "string"
+        },
+        "buyerLocation": {
+          "$ref": "#/definitions/PlanningLocation"
+        },
+        "buyerOrg": {
+          "$ref": "#/definitions/PlanningOrg"
+        },
+        "buyerPartId": {
+          "type": "string"
+        },
+        "buyerPrivateIdentity": {
+          "type": "number",
+          "format": "double"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "lastSent": {
+          "type": "string"
+        },
+        "leadTime": {
+          "$ref": "#/definitions/PlanningTime"
+        },
+        "maxDos": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxDosQty": {
+          "$ref": "#/definitions/PlanningQuantity"
+        },
+        "maxStock": {
+          "$ref": "#/definitions/PlanningQuantity"
+        },
+        "maxStockQty": {
+          "type": "number",
+          "format": "double"
+        },
+        "minDos": {
+          "type": "number",
+          "format": "double"
+        },
+        "minDosQty": {
+          "$ref": "#/definitions/PlanningQuantity"
+        },
+        "minStock": {
+          "$ref": "#/definitions/PlanningQuantity"
+        },
+        "minStockQty": {
+          "type": "number",
+          "format": "double"
+        },
+        "plannedAcceptanceDays": {
+          "$ref": "#/definitions/PlanningTime"
+        },
+        "planner": {
+          "$ref": "#/definitions/PlanningPlanner"
+        },
+        "planningPrice": {
+          "$ref": "#/definitions/PlanningPrice"
+        },
+        "planningStockOnHand": {
+          "$ref": "#/definitions/PlanningStockOnHand"
+        },
+        "processType": {
+          "type": "string"
+        },
+        "projectedStockForecast": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanningProjectedStock"
+          }
+        },
+        "propductGroup": {
+          "$ref": "#/definitions/PlanningProductGroup"
+        },
+        "purchaseOrder": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        },
+        "salesOrderNumber": {
+          "type": "string"
+        },
+        "samePartCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "string"
+        },
+        "stockOnHand": {
+          "type": "number",
+          "format": "double"
+        },
+        "supplierLastUpdate": {
+          "type": "string"
+        },
+        "supplierOrg": {
+          "$ref": "#/definitions/PlanningOrg"
+        },
+        "supplierPartId": {
+          "type": "string"
+        },
+        "systemId": {
+          "type": "string"
+        },
+        "unitOfMeasure": {
+          "type": "string"
+        },
+        "vendor": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningPrice": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string"
+        },
+        "unitPrice": {
+          "$ref": "#/definitions/PlanningQuantity"
+        }
+      }
+    },
+    "PlanningStockOnHand": {
+      "type": "object",
+      "properties": {
+        "blocked": {
+          "type": "number",
+          "format": "double"
+        },
+        "blockedSup": {
+          "type": "number",
+          "format": "double"
+        },
+        "consignmentBlocked": {
+          "type": "number",
+          "format": "double"
+        },
+        "consignmentBlockedSup": {
+          "type": "number",
+          "format": "double"
+        },
+        "consignmentQuality": {
+          "type": "number",
+          "format": "double"
+        },
+        "consignmentQualitySup": {
+          "type": "number",
+          "format": "double"
+        },
+        "consignmentUnRestricted": {
+          "type": "number",
+          "format": "double"
+        },
+        "consignmentUnRestrictedSup": {
+          "type": "number",
+          "format": "double"
+        },
+        "quality": {
+          "type": "number",
+          "format": "double"
+        },
+        "qualitySup": {
+          "type": "number",
+          "format": "double"
+        },
+        "stockInTransfer": {
+          "type": "number",
+          "format": "double"
+        },
+        "stockInTransferSup": {
+          "type": "number",
+          "format": "double"
+        },
+        "stockOnHand": {
+          "$ref": "#/definitions/PlanningQuantity"
+        },
+        "stockOnHandSupplier": {
+          "type": "number",
+          "format": "double"
+        },
+        "subContracting": {
+          "type": "number",
+          "format": "double"
+        },
+        "subContractingSup": {
+          "type": "number",
+          "format": "double"
+        },
+        "unRestricted": {
+          "type": "number",
+          "format": "double"
+        },
+        "unRestrictedSup": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "SupplierInventory": {
+      "type": "object",
+      "properties": {
+        "buyerLastUpdate": {
+          "type": "string"
+        },
+        "buyerLocation": {
+          "$ref": "#/definitions/PlanningLocation"
+        },
+        "buyerOrg": {
+          "$ref": "#/definitions/PlanningOrg"
+        },
+        "buyerPartId": {
+          "type": "string"
+        },
+        "buyerPrivateIdentity": {
+          "type": "number",
+          "format": "double"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "lastSent": {
+          "type": "string"
+        },
+        "leadTime": {
+          "$ref": "#/definitions/PlanningTime"
+        },
+        "maxDos": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxDosQty": {
+          "$ref": "#/definitions/PlanningQuantity"
+        },
+        "maxStock": {
+          "$ref": "#/definitions/PlanningQuantity"
+        },
+        "maxStockQty": {
+          "type": "number",
+          "format": "double"
+        },
+        "minDos": {
+          "type": "number",
+          "format": "double"
+        },
+        "minDosQty": {
+          "$ref": "#/definitions/PlanningQuantity"
+        },
+        "minStock": {
+          "$ref": "#/definitions/PlanningQuantity"
+        },
+        "minStockQty": {
+          "type": "number",
+          "format": "double"
+        },
+        "plannedAcceptanceDays": {
+          "$ref": "#/definitions/PlanningTime"
+        },
+        "planner": {
+          "$ref": "#/definitions/PlanningPlanner"
+        },
+        "planningPrice": {
+          "$ref": "#/definitions/PlanningPrice"
+        },
+        "planningStockOnHand": {
+          "$ref": "#/definitions/PlanningStockOnHand"
+        },
+        "processType": {
+          "type": "string"
+        },
+        "projectedStockForecast": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanningProjectedStock"
+          }
+        },
+        "propductGroup": {
+          "$ref": "#/definitions/PlanningProductGroup"
+        },
+        "purchaseOrder": {
+          "type": "string"
+        },
+        "samePartCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "string"
+        },
+        "stockOnHand": {
+          "type": "number",
+          "format": "double"
+        },
+        "supplierLastUpdate": {
+          "type": "string"
+        },
+        "supplierOrg": {
+          "$ref": "#/definitions/PlanningOrg"
+        },
+        "supplierPartId": {
+          "type": "string"
+        },
+        "systemId": {
+          "type": "string"
+        },
+        "unitOfMeasure": {
+          "type": "string"
+        },
+        "vendor": {
+          "type": "string"
+        }
+      }
+    },
+    "ANForecastAddress": {
+      "type": "object",
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "cityCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "hashId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "municipality": {
+          "type": "string"
+        },
+        "municipalityCode": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "stateCode": {
+          "type": "string"
+        },
+        "street1": {
+          "type": "string"
+        },
+        "street2": {
+          "type": "string"
+        },
+        "street3": {
+          "type": "string"
+        },
+        "street4": {
+          "type": "string"
+        }
+      }
+    },
+    "PageData\u00abSupplierManagedInventory\u00bb": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SupplierManagedInventory"
+          }
+        },
+        "firstPage": {
+          "type": "boolean"
+        },
+        "lastPage": {
+          "type": "boolean"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "PartnerInfoSection": {
+      "type": "object",
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "countryName": {
+          "type": "string"
+        },
+        "emailAddress": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        },
+        "mobilePhone": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningQuantity": {
+      "type": "object",
+      "properties": {
+        "raw": {
+          "type": "number",
+          "format": "double"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "PlanningKeyFigureSeries": {
+      "type": "object",
+      "properties": {
+        "buyerEditable": {
+          "type": "boolean"
+        },
+        "configId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "formula": {
+          "type": "string"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pfeErrorCode": {
+          "type": "string"
+        },
+        "supplierEditable": {
+          "type": "boolean"
+        },
+        "timeSeriesData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanningTimeSeries"
+          }
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningLocation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "plantAddress": {
+          "$ref": "#/definitions/ANForecastAddress"
+        }
+      }
+    },
+    "PlanningProductGroup": {
+      "type": "object",
+      "properties": {
+        "extProgramCode": {
+          "type": "string"
+        },
+        "intProgramCode": {
+          "type": "string"
+        },
+        "lineOfBusiness": {
+          "type": "string"
+        },
+        "manufacturingType": {
+          "type": "string"
+        },
+        "partCategory": {
+          "type": "string"
+        },
+        "partType": {
+          "type": "string"
+        },
+        "productFamily": {
+          "type": "string"
+        },
+        "productSubFamily": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningTimeSeries": {
+      "type": "object",
+      "properties": {
+        "formula": {
+          "type": "string"
+        },
+        "itemCategory": {
+          "type": "string"
+        },
+        "lineNumber": {
+          "type": "string"
+        },
+        "pfeErrorCode": {
+          "type": "string"
+        },
+        "plannedShipmentDate": {
+          "type": "string"
+        },
+        "planningPrice": {
+          "$ref": "#/definitions/PlanningPrice"
+        },
+        "showBlankInCXML": {
+          "type": "boolean"
+        },
+        "timeBucket": {
+          "type": "string"
+        },
+        "timeBucketISO": {
+          "type": "string"
+        },
+        "upsideQuantity": {
+          "$ref": "#/definitions/PlanningQuantity"
+        },
+        "value": {
+          "$ref": "#/definitions/PlanningQuantity"
+        }
+      }
+    },
+    "Forecast": {
+      "$ref": "#/definitions/SupplierManagedInventory"
+    },
+    "PlanningTime": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "SupplierManagedInventory": {
+      "type": "object",
+      "properties": {
+        "buyerHasEntitlement": {
+          "type": "boolean"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "hasSalesOrderRule": {
+          "type": "boolean"
+        },
+        "isToleranceEnabled": {
+          "type": "boolean"
+        },
+        "keyFigures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanningKeyFigureSeries"
+          }
+        },
+        "lastDeletedBy": {
+          "type": "string"
+        },
+        "lastUpdatedBy": {
+          "type": "string"
+        },
+        "localDateFormat": {
+          "type": "string"
+        },
+        "planningHorizon": {
+          "type": "number"
+        },
+        "planningPart": {
+          "$ref": "#/definitions/PlanningPart"
+        },
+        "planningPartId": {
+          "type": "number",
+          "format": "double"
+        },
+        "shipFromAddress": {
+          "$ref": "#/definitions/PartnerInfoSection"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "startDateISOFormat": {
+          "type": "string"
+        },
+        "timeBuckets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "timeBucketsLeadTime": {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "timeBucketsWeekNo": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "timeIndexBuckets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "viewType": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningOrg": {
+      "type": "object",
+      "properties": {
+        "anId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "PageData\u00abForecast\u00bb": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Forecast"
+          }
+        },
+        "firstPage": {
+          "type": "boolean"
+        },
+        "lastPage": {
+          "type": "boolean"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "PlanningProjectedStock": {
+      "type": "object",
+      "properties": {
+        "pfeErrorCode": {
+          "type": "string"
+        },
+        "quantity": {
+          "$ref": "#/definitions/PlanningQuantity"
+        },
+        "timeBucket": {
+          "type": "string"
+        },
+        "timeBucketWeekNo": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "PageData\u00abSupplierInventory\u00bb": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SupplierInventory"
+          }
+        },
+        "firstPage": {
+          "type": "boolean"
+        },
+        "lastPage": {
+          "type": "boolean"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "PlanningPlanner": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
