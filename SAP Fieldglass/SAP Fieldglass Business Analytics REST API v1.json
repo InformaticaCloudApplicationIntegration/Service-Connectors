@@ -1,0 +1,269 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Business Analytics API",
+        "description": "The Business Analytics API allows clients to retrieve report data a user has set up in the SAP Fieldglass application. This includes retrieving a list of all available reports and getting data for a specific report ID.",
+        "termsOfService": "https://www.fieldglass.net/TermsOfUse.en_US.pdf",
+        "contact": {
+            "name": "SAP Fieldglass Business Analytics API",
+            "url": "https://www.fieldglass.com",
+            "email": "Fieldglass_API@sap.com"
+        },
+        "license": {
+            "name": "SAP Fieldglass",
+            "url": "https://www.fieldglass.net/TermsOfUse.en_US.pdf"
+        }
+    },
+    "externalDocs": {
+        "description": "SAP Fieldglass Business Analytics API Specifications",
+        "url": "https://help.sap.com/viewer/14dc6ac8fc7c40f7973346fcfe5ec466/cloud/en-US"
+    },
+    "x-servers": [
+        {
+            "url": "https://{hostname}/api/{suffix}",
+            "description": "REST API",
+            "templates": {
+                "hostname": {
+                    "enum": [
+                        "www.fieldglass.net"
+                    ],
+                    "default": "www.fieldglass.net",
+                    "description": "The SAP Fieldglass region where the SAP Fieldglass APIs are used."
+                },
+                 "suffix": {
+                    "enum": [
+                        "v1",
+                        "vc"
+                    ],
+                    "default": "vc",
+                    "description": "The suffix for the URL."
+                }
+            }
+        }
+    ],
+    "x-sap-shortText": "Allows clients to retrieve analytical data set up in the SAP Fieldglass application.",
+    "host": "sandbox.api.sap.com",
+    "basePath": "/fieldglass/api/vc",
+    "schemes": [
+        "https"
+    ],
+    "securityDefinitions": {
+        "OAuth2": {
+            "type": "oauth2",
+            "description": "To use this REST API, you need to get OAuth client credentials (user credentials and client-specific application key) from an SAP Fieldglass account representative. After that, you need to pass the obtained client credentials to the SAP Fieldglass token endpoint to obtain an access token.",
+            "flow": "application",
+            "tokenUrl": "https://api1.fgvms.com/api/oauth2/v2.0/token?grant_type=client_credentials",
+            "scopes": {
+                "user": "get reports"
+            }
+        }
+    },
+     "security": [
+        {
+            "OAuth2": [
+                "user"
+            ]
+        }
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/report": {
+            "get": {
+                "summary": "Get a list of available reports",
+                "description": "Returns a list of all available reports including the report ID and name.",
+                "security": [
+                    {
+                        "OAuth2": [
+                            "user"
+                        ]
+                    }
+                ],
+                "operationId": "getReports",
+                "tags": [
+                    "Reports"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string",
+                        "description": "Only required for production access when using SAP Fieldglass."
+                    },
+                    {
+                        "name": "X-ApplicationKey",
+                        "in": "header",
+                        "required": false,
+                        "type": "string",
+                        "description": "The company-specific key provided by SAP Fieldglass for API access. Required for production access."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of reports",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/report"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request. This response is returned if the specified URL is invalid, the request is not formatted correctly, or if the request is missing a required field."
+                    },
+                    "401": {
+                        "description": "Unauthorized. User/password or application key is not verified."
+                    },
+                    "403": {
+                        "description": "Forbidden. Token is not verified."
+                    },
+                    "404": {
+                        "description": "Not Found. Service being requested does not exist."
+                    },
+                    "500": {
+                        "description": "Internal Server Error. Server is not available."
+                    },
+                    "default": {
+                        "description": "No Result",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/report/{report_id}": {
+            "get": {
+                "summary": "Get a specific report",
+                "description": "Returns report data for the report ID specified by the user.",
+                "security": [
+                    {
+                        "OAuth2": [
+                            "user"
+                        ]
+                    }
+                ],
+                "tags": [
+                    "Reports"
+                ],
+                "operationId": "getReportById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "report_id",
+                        "in": "path",
+                        "description": "The ID of the report. You can obtain it by getting the list of available reports.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string",
+                        "description": "Only required for production access when using SAP Fieldglass."
+                    },
+                    {
+                        "name": "X-ApplicationKey",
+                        "in": "header",
+                        "required": false,
+                        "type": "string",
+                        "description": "The company-specific key provided by SAP Fieldglass for API access. This is required for production access."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request was received successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/report"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "report": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "maxLength": 24,
+                    "description": "Unique identifier representing a specific report."
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 500,
+                    "description": "Name of the report."
+                },
+                "dataType": {
+                    "type": "string",
+                    "description": "Data type."
+                },
+                "maxLength": {
+                    "type": "string",
+                    "description": "Max length."
+                },
+                "analyticType": {
+                    "type": "string",
+                    "description": "Analytic Type."
+                },
+                "semanticType": {
+                    "type": "string",
+                    "description": "Semantic type."
+                },
+                "measureUnitType": {
+                    "type": "string",
+                    "description": "Measure unit type."
+                },
+                "measureUnits": {
+                    "type": "string",
+                    "description": "Measure units."
+                },
+                "measureAggregation": {
+                    "type": "string",
+                    "description": "Measure aggregation."
+                },
+                "scale": {
+                    "type": "string",
+                    "description": "Scale."
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

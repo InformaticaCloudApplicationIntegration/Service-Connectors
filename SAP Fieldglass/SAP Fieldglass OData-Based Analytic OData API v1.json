@@ -1,0 +1,594 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "SAP Fieldglass OData-Based Analytic API",
+    "description": "The SAP Fieldglass OData-Based Analytic API enables SAP Fieldglass users to remotely access reports stored in the Data Hub and return information from these reports.",
+    "termsOfService": "https://www.fieldglass.net/TermsOfUse.en_US.pdf",
+    "contact": {
+      "name": "SAP Fieldglass OData-Based Analytic API",
+      "url": "http://www.fieldglass.com",
+      "email": "Fieldglass_API@sap.com"
+    },
+    "license": {
+      "name": "SAP Fieldglass",
+      "url": "https://www.fieldglass.net/TermsOfUse.en_US.pdf"
+    }
+  },
+  "externalDocs": {
+    "description": "SAP Fieldglass OData-Based Analytic API",
+    "url": "https://help.sap.com/viewer/d8db40690cb14f08a705f3bc5c9ecbb3/cloud/en-US"
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}/api/data_hub/",
+      "description": "OData API",
+      "templates": {
+        "host": {
+          "default": "www.fieldglass.net",
+          "description": "The SAP Fieldglass region where the SAP Fieldglass APIs are used."
+        },
+          "default": "sandbox",
+          "description": "Public URI Prefix for different environments, prod is Test or Production environment for Cloud Business Applications and sandbox is Mock environment with sample data."
+        }
+      }
+  ],
+  "x-sap-shortText": "Enables you to retrieve data from SAP Fieldglass reports.",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/fieldglass/api/data_hub",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this REST API, you need to get OAuth client credentials (user credentials and client-specific application key) from an SAP Fieldglass account representative. After that, you need to pass the obtained client credentials to the SAP Fieldglass token endpoint to obtain an access token.",
+      "flow": "application",
+      "tokenUrl": "https://{host}/api/oauth2/v2.0/token?grant_type=client_credentials&response_type=token",
+      "scopes": {
+        "user": "get data hub entities"
+      }
+    }
+  },
+  "security": [
+        {
+            "OAuth2": [
+                "user"
+            ]
+        }
+    ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/Providers": {
+      "get": {
+        "tags": [
+          "Get Providers"
+        ],
+        "summary": "Get all available providers.",
+        "description": "Returns available providers. The ProviderID can be used in subsequent operations to retrieve specific metadata and/or data.",
+        "security": [
+          {
+            "OAuth2": [
+              "user"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/headerAuthorization"
+          },
+          {
+            "$ref": "#/parameters/headerApplicationKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets all providers.",
+            "schema": {
+              "$ref": "#/definitions/Providers"
+            }
+          },
+          "400": {
+            "description": "Bad Request. This response is returned if the specified URL is invalid, the request is not formatted correctly, or if the request is missing a required field."
+          },
+          "401": {
+            "description": "Unauthorized. User/password or application key is not verified.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden. Token is not verified."
+          },
+          "404": {
+            "description": "Not Found. Service being requested does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. Server is not available.",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "503": {
+            "description": "Internal Server Error. Server is not available.",
+            "examples": {
+              "text/html": "<html><body><b>Http/1.1 Service Unavailable</b></body> </html>"
+            }
+          }
+        }
+      }
+    },
+    "/{ProviderID}/$metadata": {
+      "get": {
+        "tags": [
+          "Get Metadata"
+        ],
+        "summary": "Get metadata for an entity.",
+        "description": "Returns metadata for the specified ProviderID. A JSON schema is returned representing the metadata.",
+        "security": [
+          {
+            "OAuth2": [
+              "user"
+            ]
+          }
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/headerAuthorization"
+          },
+          {
+            "$ref": "#/parameters/headerApplicationKey"
+          },
+          {
+            "name": "ProviderID",
+            "in": "path",
+            "description": "The ID for the entity (in this case, the report). This is returned when getting all providers.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Metadata information for the given entity. A JSON schema is given as metadata.",
+            "schema": {
+              "$ref": "#/definitions/metaData"
+            }
+          },
+          "400": {
+            "description": "Bad Request. This response is returned if the specified URL is invalid, the request is not formatted correctly, or if the request is missing a required field."
+          },
+          "401": {
+            "description": "Unauthorized. User/password or application key is not verified.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden. Token is not verified."
+          },
+          "404": {
+            "description": "Not Found. Service being requested does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. Server is not available.",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "503": {
+            "description": "Internal Server Error. Server is not available.",
+            "examples": {
+              "text/html": "<html><body><b>Http/1.1 Service Unavailable</b></body> </html>"
+            }
+          }
+        }
+      }
+    },
+    "/{ServiceURL}": {
+      "get": {
+        "tags": [
+          "Get Entities"
+        ],
+        "summary": "Get all available entities.",
+        "description": "Returns all available entities. You can use the name returned in conjunction with the ProviderID to get data about a particular entity.",
+        "security": [
+          {
+            "OAuth2": [
+              "user"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/headerAuthorization"
+          },
+          {
+            "$ref": "#/parameters/headerApplicationKey"
+          },
+          {
+            "name": "ServiceURL",
+            "in": "path",
+            "description": "Service URL from provider. This is returned when getting all providers.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets all entities.",
+            "schema": {
+              "$ref": "#/definitions/ServiceURL"
+            }
+          },
+          "400": {
+            "description": "Bad Request. This response is returned if the specified URL is invalid, the request is not formatted correctly, or if the request is missing a required field."
+          },
+          "401": {
+            "description": "Unauthorized. User/password or application key is not verified.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden. Token is not verified."
+          },
+          "404": {
+            "description": "Not Found. Service being requested does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. Server is not available.",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "503": {
+            "description": "Internal Server Error. Server is not available.",
+            "examples": {
+              "text/html": "<html><body><b>Http/1.1 Service Unavailable</b></body> </html>"
+            }
+          }
+        }
+      }
+    },
+    "/{ProviderID}/{entityName}": {
+      "get": {
+        "tags": [
+          "Get Data"
+        ],
+        "summary": "Get data for an entity.",
+        "description": "Returns data for the specified ProviderID and entity.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/headerAuthorization"
+          },
+          {
+            "$ref": "#/parameters/headerApplicationKey"
+          },
+          {
+            "name": "ProviderID",
+            "in": "path",
+            "description": "The ID for the entity (in this case, the report).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "The name of the entity (report). It can be obtained via the GET /{ServiceURL} operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The property or properties used to order the results. If there is more than one, separate using a comma. You can also specify asc for ascending and desc for descending order. For more information, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629).",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Provide a comma-separated list of the properties to be returned. For more information, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620).",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "packageSize",
+            "type": "string",
+            "in": "query",
+            "description": "Provide the number of rows returned per page.",
+            "default": 100
+          },
+          {
+            "name": "pageNum",
+            "type": "string",
+            "in": "query",
+            "description": "Where returned data spans multiple pages, specify the number of the page to return.",
+            "default": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data for the given entity, returned as a JSON schema.",
+            "schema": {
+              "$ref": "#/definitions/Data"
+            }
+          },
+          "400": {
+            "description": "Bad Request. This response is returned if the specified URL is invalid, the request is not formatted correctly, or if the request is missing a required field."
+          },
+          "401": {
+            "description": "Unauthorized. User/password or application key is not verified.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden. Token is not verified."
+          },
+          "404": {
+            "description": "Not Found. Service being requested does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. Server is not available.",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "503": {
+            "description": "Internal Server Error. Server is not available.",
+            "examples": {
+              "text/html": "<html><body><b>Http/1.1 Service Unavailable</b></body> </html>"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Providers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ProviderID": {
+            "type": "string",
+            "example": "report_Worker"
+          },
+          "NamespaceID": {
+            "type": "string",
+            "example": "fieldglass.insite"
+          },
+          "Description": {
+            "type": "string",
+            "example": "description"
+          },
+          "DeltaMethod": {
+            "type": "string"
+          },
+          "ServiceURL": {
+            "type": "string",
+            "example": "/api/data_hub/report_Worker/"
+          }
+        }
+      }
+    },
+    "ServiceURL": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "workers"
+              },
+              "url": {
+                "type": "string",
+                "example": "workers"
+              }
+            }
+          }
+        }
+      }
+    },
+    "metaData": {
+      "properties": {
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "-Namespace": {
+              "type": "string",
+              "example": "fieldglass.insite"
+            },
+            "-Alias": {
+              "type": "string",
+              "example": "insite"
+            },
+            "EntityType": {
+              "type": "object",
+              "properties": {
+                "-Name": {
+                  "type": "string"
+                },
+                "Key": {
+                  "type": "object",
+                  "properties": {
+                    "PropertyRef": {
+                      "type": "object",
+                      "properties": {
+                        "-Name": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "Property": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "-Name": {
+                        "type": "string",
+                        "example": "business_unit"
+                      },
+                      "-Type": {
+                        "type": "string",
+                        "example": "Edm.String"
+                      },
+                      "-MaxLength": {
+                        "type": "string",
+                        "example": "100"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "EntityContainer": {
+              "type": "object",
+              "properties": {
+                "-Name": {
+                  "type": "string",
+                  "example": "dbContainer"
+                },
+                "EntitySet": {
+                  "type": "object",
+                  "properties": {
+                    "-Name": {
+                      "type": "string",
+                      "example": "job_postings"
+                    },
+                    "-EntityType": {
+                      "type": "string",
+                      "example": "insite.job_posting"
+                    },
+                    "Annotation": {
+                      "type": "object",
+                      "properties": {
+                        "-Term": {
+                          "type": "string",
+                          "example": "Capabilities.Supported"
+                        },
+                        "Record": {
+                          "type": "object",
+                          "properties": {
+                            "PropertyValue": {
+                              "type": "object",
+                              "properties": {
+                                "-Property": {
+                                  "type": "string",
+                                  "example": "Supported"
+                                },
+                                "Bool": {
+                                  "type": "string",
+                                  "example": "false"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Data": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "Status": {
+      "type": "object",
+      "properties": {
+        "TransactionID": {
+          "type": "string",
+          "description": "Transaction ID."
+        },
+        "ReturnCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Return Code"
+        },
+        "Message": {
+          "type": "string",
+          "description": "Message"
+        }
+      }
+    },
+    "Error": {
+      "type": "string"
+    }
+  },
+  "parameters": {
+    "headerAuthorization": {
+      "name": "Authorization",
+      "description": "Only required for production access when using SAP Fieldglass.",
+      "type": "string",
+      "in": "header",
+      "required": false
+    },
+    "headerApplicationKey": {
+      "name": "X-ApplicationKey",
+      "description": "The company-specific key provided by SAP Fieldglass for API access.",
+      "type": "string",
+      "in": "header",
+      "required": false
+    },
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Limits the number of items returned, up to but not exceeding the number specified. For more information, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630).",
+      "type": "integer",
+      "default": 20
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Excludes the number of items specified from the collection. For more information, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631).",
+      "type": "integer"
+    },
+    "filter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Restricts the items returned by property values. For more information, see see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625).",
+      "type": "string"
+    }
+  }
+}

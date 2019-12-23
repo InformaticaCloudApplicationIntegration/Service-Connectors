@@ -1,0 +1,331 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Audit Trail API",
+        "description": "This SAP Fieldglass REST API resource allows clients who use integration monitoring utilities the ability to retrieve and display specific audit trail details associated to the data being integrated and transferred between the external system and the SAP Fieldglass VMS application.",
+        "termsOfService": "https://www.fieldglass.net/TermsOfUse.en_US.pdf",
+        "contact": {
+            "name": "SAP Fieldglass Audit Trail API",
+            "url": "https://www.fieldglass.com",
+            "email": "Fieldglass_API@sap.com"
+        },
+        "license": {
+            "name": "SAP Fieldglass",
+            "url": "https://www.fieldglass.net/TermsOfUse.en_US.pdf"
+        }
+    },
+    "externalDocs": {
+        "description": "SAP Fieldglass REST API Integration",
+        "url": "https://help.sap.com/viewer/1befd97581554895bb7fcfca6049f53e/cloud/en-US"
+    },
+    "x-servers": [
+        {
+            "url": "https://{hostname}/api/{suffix}",
+            "description": "REST API",
+            "templates": {
+                "hostname": {
+                    "enum": [
+                        "www.fieldglass.net"
+                    ],
+                    "default": "www.fieldglass.net",
+                    "description": "The SAP Fieldglass region where the SAP Fieldglass APIs are used."
+                },
+                 "suffix": {
+                    "enum": [
+                        "v1",
+                        "vc"
+                    ],
+                    "default": "vc",
+                    "description": "The suffix for the URL."
+                }
+            }
+        }
+    ],
+    "x-sap-shortText": "Allows clients to retrieve audit trail details for data transferred between external systems and SAP Fieldglass.",
+    "host": "sandbox.api.sap.com",
+    "basePath": "/fieldglass/api/vc",
+    "schemes": [
+        "https"
+    ],
+    "securityDefinitions": {
+        "OAuth2": {
+            "type": "oauth2",
+            "description": "To use this REST API, you need to get OAuth client credentials (user credentials and client-specific application key) from an SAP Fieldglass account representative. After that, you need to pass the obtained client credentials to the SAP Fieldglass token endpoint to obtain an access token.",
+            "flow": "application",
+            "tokenUrl": "https://api1.fgvms.com/api/oauth2/v2.0/token?grant_type=client_credentials",
+            "scopes": {
+                "user": "get audit trail"
+            }
+        }
+    },
+    "security": [
+        {
+            "OAuth2": [
+                "user"
+            ]
+        }
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/auditTrail": {
+            "get": {
+                "summary": "Get audit trail details",
+                "description": "Returns audit trail details. When using this with query parameter pairs for start and stop times, you can limit the results to a particular timeframe.",
+                "tags": [
+                    "Audit Trail"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "type": "string",
+                        "description": "Only required for production access when using SAP Fieldglass."
+                    },
+                    {
+                        "name": "X-ApplicationKey",
+                        "in": "header",
+                        "required": false,
+                        "type": "string",
+                        "description": "The company-specific key provided by SAP Fieldglass for API access. This is required for production access."
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": false,
+                        "type": "string",
+                        "description": "This value is required in production and must be application/x-www-form-urlencoded."
+                    },
+                    {
+                        "name": "TransactionId",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "Transaction ID for transmission."
+                    },
+                    {
+                        "name": "PriorStartTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "Start time of the integration. Pair this with PriorStopTime."
+                    },
+                    {
+                        "name": "CurrentStartTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "Start time of the integration. Pair this with CurrentStopTime."
+                    },
+                    {
+                        "name": "PriorStopTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "Stop time of the integration. Pair this with PriorStartTime."
+                    },
+                    {
+                        "name": "CurrentStopTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "Stop time of the integration. Pair this with CurrentStartTime."
+                    },
+                    {
+                        "name": "Status",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "Error / OK status tied to the integration process to be filtered on."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request was received successfully.",
+                        "schema": {
+                                "$ref": "#/definitions/auditTrail"
+                        }
+                    },
+                    "default": {
+                        "description": "No Result",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "auditTrail": {
+            "type": "object",
+            "properties": {
+                "HEADER": {
+                    "type": "object",
+                    "properties": {
+                        "appVersion": {
+                            "type": "string",
+                            "description": "App Version"
+                        },
+                        "OSUAStr": {
+                            "type": "string",
+                            "description": "App Version"
+                        },
+                        "numRecs": {
+                            "type": "integer",
+                            "description": "Number of records"
+                        },
+                        "status": {
+                            "type": "string",
+                            "description": "Status"
+                        },
+                        "details": {
+                            "type": "string",
+                            "description": "Details"
+                        }
+                    }
+                },
+                "PAYLOAD": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "description": "&gt;- Reflects the type of subscription/delivery method or the type of integration connector being processed."
+                            },
+                            "company": {
+                                "type": "string",
+                                "description": "Client buyer code associated to the subscription/integration."
+                            },
+                            "startTime": {
+                                "type": "string",
+                                "description": "&gt;- Time and date associated to the start time of the subscription process or individual file transfer. Only applicable to integration file errors."
+                            },
+                            "stopTime": {
+                                "type": "string",
+                                "description": "Time and date associated to the stop time of the subscription process or individual file transfer"
+                            },
+                            "user": {
+                                "type": "string",
+                                "description": "Integration User associated to client integration process (systematic/manual)."
+                            },
+                            "category": {
+                                "type": "string",
+                                "description": "Description of source audit trail where the error/exception occurred from (the subscription/delivery audit trail or the integration audit trail of the delivered and processed file)."
+                            },
+                            "ID": {
+                                "type": "string",
+                                "description": "Unique ID associated to the specific integration file being processed within SAP Fieldglass."
+                            },
+                            "Attributes": {
+                                "type": "object",
+                                "properties": {
+                                    "version": {
+                                        "type": "string",
+                                        "description": "Reflects the current version and type of the integration connector."
+                                    },
+                                    "activity": {
+                                        "type": "string",
+                                        "description": "Upload"
+                                    },
+                                    "company": {
+                                        "type": "string",
+                                        "description": "Name of object as defined by user."
+                                    },
+                                    "documentStatus": {
+                                        "type": "string",
+                                        "description": "Status of the delivery of the integration between SAP Fieldglass and external platform."
+                                    },
+                                    "deliveryTime": {
+                                        "type": "integer",
+                                        "description": "Time associated to the subscription delivery of the integration (not the individually processed integration file)."
+                                    },
+                                    "deliveryStatus": {
+                                        "type": "string",
+                                        "description": "Reflected status of the subscription / delivery for the integration."
+                                    },
+                                    "message": {
+                                        "type": "boolean",
+                                        "description": "Detailed message associated to the delivery or document associated to the subscription and delivery of the integration."
+                                    },
+                                    "duration": {
+                                        "type": "string",
+                                        "description": "Amount of time associated to the processing of an integration file within SAP F Fieldglass."
+                                    },
+                                    "serverStatus": {
+                                        "type": "string",
+                                        "description": "Reflects the standard error message associated to the integration file processing."
+                                    },
+                                    "serverMessage": {
+                                        "type": "string",
+                                        "description": "Associated to errors on the subscription and individual integration files processing."
+                                    },
+                                    "recordsProcessed": {
+                                        "type": "string",
+                                        "description": "&gt;- Number of records processed within a file transfer. Not displayed for a subscription error."
+                                    },
+                                    "recordsFailed": {
+                                        "type": "string",
+                                        "description": " Number of records failed within a file transfer. Not displayed for a subscription error."
+                                    },
+                                    "clientReturnCode": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "clientMessage": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "crc32Checksum": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "uploadFile": {
+                                        "type": "string",
+                                        "description": "Name of the file associated to the integration."
+                                    }
+                                }
+                            },
+                            "details": {
+                                "type": "string",
+                                "description": "All ok if response is OK."
+                            },
+                            "status": {
+                                "type": "string",
+                                "description": "Ok if response is OK."
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

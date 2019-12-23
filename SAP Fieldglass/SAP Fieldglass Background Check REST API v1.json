@@ -1,0 +1,333 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "SAP Fieldglass Background Check API",
+    "description": "The SAP Fieldglass Background Check REST API resource allows background check providers to post results back to SAP Fieldglass. This integration is only available on the Contingent Work Order module in SAP Fieldglass.",
+    "termsOfService": "https://www.fieldglass.net/TermsOfUse.en_US.pdf",
+    "contact": {
+      "name": "SAP Fieldglass Background Check API",
+      "url": "http://www.fieldglass.com",
+      "email": "Fieldglass_API@sap.com"
+    },
+    "license": {
+      "name": "SAP Fieldglass",
+      "url": "https://www.fieldglass.net/TermsOfUse.en_US.pdf"
+    }
+  },
+  "externalDocs": {
+    "description": "SAP Fieldglass Background Check API Technical Specifications",
+    "url": "https://help.sap.com/viewer/a0ce6f1caba4472793e6f7a345e5ba37/cloud/en-US"
+  },
+  "x-servers": [
+    {
+      "url": "https://{hostname}/api/v1/bgc",
+      "description": "REST API",
+      "templates": {
+        "hostname": {
+          "enum": [
+            "www.fieldglass.net"
+          ],
+          "default": "www.fieldglass.net",
+          "description": "The SAP Fieldglass region where the SAP Fieldglass APIs are used."
+        } 
+      }
+    }
+  ],
+  "x-sap-shortText": "Enables background check providers to post results back to SAP Fieldglass.",
+  "host": "sandbox.api.sap.com",
+  "basePath": "/fieldglass/api/v1/bgc",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "description": "To use this REST API, you need to get OAuth client credentials",
+      "flow": "application",
+      "tokenUrl": "https://api1.fgvms.com/api/oauth2/v2.0/token?grant_type=client_credentials",
+      "scopes": {
+        "user": "bcheck"
+      }
+    }
+  },
+  "security": [
+    {
+      "OAuth2": [
+        "user"
+      ]
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "definitions": {
+    "OrderConfirmation": {
+      "type": "object",
+      "properties": {
+        "HEADER": {
+          "type": "object",
+          "properties": {
+            "AppVersion": {
+              "type": "string",
+              "description": "App version",
+              "example": "FieldglassAPIServer/1.0"
+            },
+            "OSUAStr": {
+              "type": "string",
+              "description": "Description",
+              "example": "FieldglassAPIServer/1.0"
+            },
+            "NumRecs": {
+              "type": "integer",
+              "description": "Number of records",
+              "example": 1
+            },
+            "Status": {
+              "type": "string",
+              "description": "Status",
+              "example": "ok"
+            },
+            "Details": {
+              "type": "string",
+              "description": "Details",
+              "example": "all ok"
+            }
+          }
+        },
+        "backgroundReportPackage": {
+          "type": "object",
+          "properties": {
+            "clientReferenceId": {
+              "type": "string",
+              "description": "Globally-unique SAP Fieldglass identifier of the object. This is the Work Order ID used for the drill down call in SAP Fieldglass. It is not visible to end users."
+            },
+            "providerReferenceId": {
+              "type": "string",
+              "description": "Candidate ID from background check provider."
+            }
+          }
+        },
+        "Status": {
+          "type": "string",
+          "description": "Status",
+          "example": "ok"
+        },
+        "Details": {
+          "type": "string",
+          "description": "Details",
+          "example": "all ok"
+        }
+      }
+    },
+    "ResultConfirmation": {
+      "type": "object",
+      "properties": {
+        "HEADER": {
+          "type": "object",
+          "properties": {
+            "AppVersion": {
+              "type": "string",
+              "description": "App version",
+              "example": "FieldglassAPIServer/1.0"
+            },
+            "OSUAStr": {
+              "type": "string",
+              "description": "Description",
+              "example": "FieldglassAPIServer/1.0"
+            },
+            "NumRecs": {
+              "type": "integer",
+              "description": "Number of records",
+              "example": 1
+            },
+            "Status": {
+              "type": "string",
+              "description": "Status",
+              "example": "ok"
+            },
+            "Details": {
+              "type": "string",
+              "description": "Details",
+              "example": "all ok"
+            }
+          }
+        },
+        "backgroundReportPackage": {
+          "type": "object",
+          "properties": {
+            "providerReferenceId": {
+              "type": "string",
+              "description": "Background check order ID"
+            },
+            "orderStatus": {
+              "type": "string",
+              "description": "Overall order status"
+            },
+            "resultStatus": {
+              "type": "string",
+              "description": "Overall result status"
+            },
+            "dateOrderReceived": {
+              "type": "string",
+              "description": "Date order received"
+            },
+            "dateOrderCompleted": {
+              "type": "string",
+              "description": "Verification date"
+            },
+            "screenings": {
+              "type": "array",
+              "description": "Details about individual screenings",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Source name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Source detail"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Test name"
+                  },
+                  "screeningStatus": {
+                    "type": "string",
+                    "description": "Screening status"
+                  },
+                  "screeningResultStatus": {
+                    "type": "string",
+                    "description": "Screening result status"
+                  },
+                  "dateOrderReceived": {
+                    "type": "string",
+                    "description": "Verification date"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/order_confirmation": {
+      "post": {
+        "tags": [
+          "Order Confirmation"
+        ],
+        "summary": "Provides confirmation of a background check request",
+        "description": "Posts a background check request acknowledgment to SAP Fieldglass.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "description": "Only required for production access when using SAP Fieldglass.",
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "JSON format is supported. This value is application/json."
+          },
+          {
+            "name": "X-ApplicationKey",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The company-specific key provided by SAP Fieldglass for API access."
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "The body of the request.",
+            "schema": {
+              "$ref": "#/definitions/OrderConfirmation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order Confirmation POST successful"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/result": {
+      "post": {
+        "tags": [
+          "Results"
+        ],
+        "summary": "Provides results for the work order",
+        "description": "Posts results for a specific background check request.",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "description": "Only required for production access when using SAP Fieldglass.",
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "JSON format is supported. This value is application/json."
+          },
+          {
+            "name": "X-ApplicationKey",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The company-specific key provided by SAP Fieldglass for API access."
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "The body of the request.",
+            "schema": {
+              "$ref": "#/definitions/ResultConfirmation"
+            }
+          },
+          {
+            "name": "clientReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Globally-unique SAP Fieldglass identifier of the object. This is the Work Order ID used for the drill-down call in SAP Fieldglass. It is not visible to end users.",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order Result POST successful"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
