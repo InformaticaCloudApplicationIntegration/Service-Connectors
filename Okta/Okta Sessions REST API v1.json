@@ -1,0 +1,422 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Sessions (Okta API)",
+    "description": "The [Okta Session API](/docs/api/rest/sessions.html) provides operations to create and manage authentication sessions with your Okta organization.",
+    "contact": {}
+  },
+  "host": "example.com",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/sessions": {
+      "post": {
+        "description": "TODO: Add Description",
+        "summary": "Create Session with Credentials (Deprecated)",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "CreateSessionwithCredentials(Deprecated)",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "additionalFields",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreateSessionwithCredentials%28Deprecated%29Request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/login/sessionCookieRedirect": {
+      "get": {
+        "description": "TODO: Add Description",
+        "summary": "Set Session with Token Redirect",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "SetSessionwithTokenRedirect",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "redirectUrl",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/v1/sessions/{sessionId}": {
+      "put": {
+        "description": "TODO: Add Description",
+        "summary": "Extend Session",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "ExtendSession",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "get": {
+        "description": "TODO: Add Description",
+        "summary": "Validate Session",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "ValidateSession",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "description": "TODO: Add Description",
+        "summary": "Clear Session",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "ClearSession",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/v1/sessions/me": {
+      "get": {
+        "description": "Get session information for the current user. Use this method in a browser based application to determine if the user is logged in.\n\n> The session `id` returned from `/sessions/me` is an `externalId` and can only be used with the **Refresh Session** endpoint.",
+        "summary": "Get Current Session",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "GetCurrentSession",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "TODO: Add Description",
+        "summary": "Close Current Session",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "CloseCurrentSession",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/v1/sessions/{externalId}/lifecycle/refresh": {
+      "post": {
+        "description": "TODO: Add Description",
+        "summary": "Refresh Session",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "RefreshSession",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "externalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateSessionwithCredentials(Deprecated)Request": {
+      "title": "CreateSessionwithCredentials(Deprecated)Request",
+      "example": {
+        "username": "{{username}}",
+        "password": "{{password}}"
+      },
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    },
+    "CreateSessionwithSessionTokenRequest": {
+      "title": "CreateSessionwithSessionTokenRequest",
+      "example": {
+        "sessionToken": "{{sessionToken}}"
+      },
+      "type": "object",
+      "properties": {
+        "sessionToken": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "sessionToken"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Misc",
+      "description": ""
+    }
+  ]
+}
