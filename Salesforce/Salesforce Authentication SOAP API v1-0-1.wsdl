@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Salesforce.com Authentication Web Services API Version 1.0.1
+
+Copyright 2004-2005 salesforce.com, inc.
+All Rights Reserved
+-->
+
+<definitions targetNamespace="urn:authentication.soap.sforce.com"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="urn:authentication.soap.sforce.com"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <types>
+
+        <schema elementFormDefault="qualified"
+                targetNamespace="urn:authentication.soap.sforce.com"
+                xmlns="http://www.w3.org/2001/XMLSchema">
+
+            <complexType name="Authenticate">
+                <sequence>
+                    <element name="username" type="xsd:string"/>
+                    <element name="password" type="xsd:string"/>
+                    <element name="sourceIp" type="xsd:string"/>
+                    <!-- in future versions of the service we may send extra elements here,
+                         if so they'll be in the same as the existing elements-->
+                    <any namespace="##targetNamespace" maxOccurs="unbounded" minOccurs="0" processContents="lax" />
+                </sequence>
+            </complexType>
+
+            <complexType name="AuthenticateResult">
+                <sequence>
+                    <element name="Authenticated"  type="xsd:boolean"/>
+                </sequence>
+            </complexType>
+
+            <element name="Authenticate" type="tns:Authenticate" />
+            <element name="AuthenticateResult" type="tns:AuthenticateResult" />
+        </schema>
+
+    </types>
+
+    <message name="AuthenticateRequest">
+        <part element="tns:Authenticate" name="parameters"/>
+    </message>
+    <message name="AuthenticateResponse">
+        <part element="tns:AuthenticateResult" name="parameters"/>
+    </message>
+
+    <!-- Soap PortType -->
+    <portType name="AuthenticationPortType">
+        <operation name="Authenticate">
+            <documentation>Are the supplied saleforce.com userId and password valid ?</documentation>
+            <input  message="tns:AuthenticateRequest"/>
+            <output message="tns:AuthenticateResponse"/>
+        </operation>
+    </portType>
+
+    <!-- Soap Binding -->
+    <binding name="AuthenticationBinding" type="tns:AuthenticationPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <operation name="Authenticate">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body parts="parameters" use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <!-- Soap Service Endpoint -->
+    <!-- This is the service you should expose so that Salesforce.com can call it -->
+    <service name="SforceAuthenticationService">
+        <documentation>Sforce Authentication Service</documentation>
+        <port binding="tns:AuthenticationBinding" name="AuthenticationService">
+            <soap:address location="http://localhost/"/>
+        </port>
+    </service>
+
+</definitions>
+
