@@ -3,5 +3,3 @@ This repository houses the Cloud Application Integration Service Connectors that
 
 The content distributed here contains Swagger or WSDL interfaces along with a downloadable ZIP of the service connector definition. Some of these include samples. Check out the README of each folder to learn more. 
 Want to contribute or suggest improvements, please refer https://network.informatica.com/community/informatica-network/products/cloud-integration/cloud-application-integration/blog/2018/10/16/registry-of-service-connectors-your-gateway-to-building-composite-api-using-cloud-application-integration#jive_content_id_How_to_contribute.
-
-Each of the folders needs a readme that lists document and explains what they are. It’s not evident that the json file is a swagger and the zip the service connector package.
