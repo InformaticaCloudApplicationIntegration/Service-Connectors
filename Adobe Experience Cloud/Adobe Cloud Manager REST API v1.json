@@ -1,0 +1,3022 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Cloud Manager API",
+    "description": "This API allows access to Cloud Manager programs, pipelines, and environments by an authorized technical account created through the Adobe I/O Console. The base url for this API is https://cloudmanager.adobe.io, e.g. to get the list of programs for an organization, you would make a GET request to https://cloudmanager.adobe.io/api/programs (with the correct set of headers as described below).",
+    "contact": {}
+  },
+  "host": "cloudmanager.adobe.io",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/programs": {
+      "get": {
+        "description": "Returns all programs that the requesting user has access to",
+        "summary": "getPrograms",
+        "tags": [
+          "Programs"
+        ],
+        "operationId": "getPrograms",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ProgramList"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "The requester is not authorized to access the resource.",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}": {
+      "get": {
+        "description": "Returns a program by its id",
+        "summary": "getProgram",
+        "tags": [
+          "Programs"
+        ],
+        "operationId": "getProgram",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of program",
+            "schema": {
+              "$ref": "#/definitions/Program"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "The requester is not authorized to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Program not found",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/repositories": {
+      "get": {
+        "description": "Lists all Repositories in an program",
+        "summary": "getRepositories",
+        "tags": [
+          "Repositories"
+        ],
+        "operationId": "getRepositories",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RepositoryList"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/repository/{repositoryId}": {
+      "get": {
+        "description": "Returns an repository by its id",
+        "summary": "getRepository",
+        "tags": [
+          "Repositories"
+        ],
+        "operationId": "getRepository",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program"
+          },
+          {
+            "name": "repositoryId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the repository"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Repository"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/repository/{repositoryId}/branches": {
+      "get": {
+        "description": "Returns the list of branches from a repository",
+        "summary": "getBranches",
+        "tags": [
+          "Branches"
+        ],
+        "operationId": "getBranches",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program."
+          },
+          {
+            "name": "repositoryId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the repository"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of the list of repository branches",
+            "schema": {
+              "$ref": "#/definitions/BranchList"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/pipelines": {
+      "get": {
+        "description": "Returns all the pipelines that the requesting user has access to in an program",
+        "summary": "getPipelines",
+        "tags": [
+          "Pipelines"
+        ],
+        "operationId": "getPipelines",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PipelineList"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "The requester is not authorized to access the resource.",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/pipeline/{pipelineId}": {
+      "get": {
+        "description": "Returns a pipeline by its id",
+        "summary": "getPipeline",
+        "tags": [
+          "Pipelines"
+        ],
+        "operationId": "getPipeline",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program"
+          },
+          {
+            "name": "pipelineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the pipeline"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of pipeline",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "The requester is not authorized to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Pipeline not found",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a pipeline. All the data is wiped.",
+        "summary": "deletePipeline",
+        "tags": [
+          "Pipelines"
+        ],
+        "operationId": "deletePipeline",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program"
+          },
+          {
+            "name": "pipelineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the pipeline"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "The requester is not authorized to access the resource.",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      },
+      "patch": {
+        "description": "Patches a pipeline within an program.",
+        "summary": "patchPipeline",
+        "tags": [
+          "Pipelines"
+        ],
+        "operationId": "patchPipeline",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program"
+          },
+          {
+            "name": "pipelineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the pipeline"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The updated Pipeline",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            }
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Must always be application/json"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Pipeline"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "The requester is not authorized to access the resource.",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/pipeline/{pipelineId}/execution": {
+      "get": {
+        "description": "Returns current pipeline execution if any.",
+        "summary": "getCurrentExecution",
+        "tags": [
+          "Pipeline Execution"
+        ],
+        "operationId": "getCurrentExecution",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program."
+          },
+          {
+            "name": "pipelineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the pipeline"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of current execution",
+            "schema": {
+              "$ref": "#/definitions/PipelineExecution"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "The requester is not authorized to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "No pipeline execution exits or unknown pipeline or program",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "409": {
+            "description": "The resource was modified before the call. Client should reload and try again",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      },
+      "put": {
+        "description": "Starts the Pipeline. This works only if the pipeline is not already started.",
+        "summary": "startPipeline",
+        "tags": [
+          "Pipeline Execution"
+        ],
+        "operationId": "startPipeline",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program."
+          },
+          {
+            "name": "pipelineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the pipeline"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Must always be application/json"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful started pipeline execution",
+            "headers": {}
+          },
+          "400": {
+            "description": "Request conflicts with the expected state of pipeline",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "The requester is not authorized to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "No pipeline execution exits or unknown pipeline or application",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "409": {
+            "description": "The resource was modified before the call. Client should reload and try again",
+            "schema": {}
+          },
+          "412": {
+            "description": "Pipeline is busy",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/pipeline/{pipelineId}/execution/{executionId}": {
+      "get": {
+        "description": "Returns a pipeline execution by id",
+        "summary": "getExecution",
+        "tags": [
+          "Pipeline Execution"
+        ],
+        "operationId": "getExecution",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program."
+          },
+          {
+            "name": "pipelineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the pipeline"
+          },
+          {
+            "name": "executionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the execution"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of execution",
+            "schema": {
+              "$ref": "#/definitions/PipelineExecution"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "The requester is not authorized to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "No pipeline execution exits or unknown pipeline or application",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "409": {
+            "description": "The resource was modified before the call. Client should reload and try again",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/pipeline/{pipelineId}/execution/{executionId}/phase/{phaseId}/step/{stepId}": {
+      "get": {
+        "description": "Get step state",
+        "summary": "stepState",
+        "tags": [
+          "Pipeline Execution"
+        ],
+        "operationId": "stepState",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program."
+          },
+          {
+            "name": "pipelineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the pipeline"
+          },
+          {
+            "name": "executionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the execution"
+          },
+          {
+            "name": "phaseId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the phase"
+          },
+          {
+            "name": "stepId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the step"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of step state",
+            "schema": {
+              "$ref": "#/definitions/PipelineExecutionStepState"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "Missing permission for user to read step",
+            "schema": {}
+          },
+          "404": {
+            "description": "Pipeline execution does not exist",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "409": {
+            "description": "The resource was modified before the call. Client should reload and try again",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/pipeline/{pipelineId}/execution/{executionId}/phase/{phaseId}/step/{stepId}/advance": {
+      "put": {
+        "description": "Post to this url in order to advance the current pipeline execution, if paused and waiting for user interaction. Link is present in output only in that case. The input depends on the actual reason for which the pipeline execution stopped.",
+        "summary": "advancePipelineExecution",
+        "tags": [
+          "Pipeline Execution"
+        ],
+        "operationId": "advancePipelineExecution",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program."
+          },
+          {
+            "name": "pipelineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the pipeline"
+          },
+          {
+            "name": "executionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the execution"
+          },
+          {
+            "name": "phaseId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the phase"
+          },
+          {
+            "name": "stepId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the step"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Input for advance. See documentation for details.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Must always be application/json"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successful resume of pipeline execution",
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "Missing permission for user to advance the pipeline execution",
+            "schema": {}
+          },
+          "404": {
+            "description": "No pipeline execution exits or unknown pipeline or program",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "409": {
+            "description": "The resource was modified before the call. Client should reload and try again",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/pipeline/{pipelineId}/execution/{executionId}/phase/{phaseId}/step/{stepId}/cancel": {
+      "put": {
+        "description": "Post to this url in order to cancel the current pipeline execution. Link is present in output only in that case.",
+        "summary": "cancelPipelineExecutionStep",
+        "tags": [
+          "Pipeline Execution"
+        ],
+        "operationId": "cancelPipelineExecutionStep",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program."
+          },
+          {
+            "name": "pipelineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the pipeline"
+          },
+          {
+            "name": "executionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the execution"
+          },
+          {
+            "name": "phaseId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the phase"
+          },
+          {
+            "name": "stepId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the step"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Input for advance. See documentation for details.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Must always be application/json"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successful cancel of pipeline execution",
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "Missing permission for user to cancel the current pipeline execution",
+            "schema": {}
+          },
+          "404": {
+            "description": "No pipeline execution exits or unknown pipeline or program",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "409": {
+            "description": "The resource was modified before the call. Client should reload and try again",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/pipeline/{pipelineId}/execution/{executionId}/phase/{phaseId}/step/{stepId}/logs": {
+      "get": {
+        "description": "Get the logs associated with a step.",
+        "summary": "getStepLogs",
+        "tags": [
+          "Pipeline Execution"
+        ],
+        "operationId": "getStepLogs",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program."
+          },
+          {
+            "name": "pipelineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the pipeline"
+          },
+          {
+            "name": "executionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the execution"
+          },
+          {
+            "name": "phaseId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the phase"
+          },
+          {
+            "name": "stepId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the step"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Specify application/json in this header to receive a JSON response. Otherwise, a 307 response code will be returned with a Location header."
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of logs",
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "Missing permission for user to read logs",
+            "schema": {}
+          },
+          "404": {
+            "description": "Pipeline execution does not exist",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "409": {
+            "description": "The resource was modified before the call. Client should reload and try again",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/pipeline/{pipelineId}/execution/{executionId}/phase/{phaseId}/step/{stepId}/metrics": {
+      "get": {
+        "description": "Get step metrics",
+        "summary": "stepMetric",
+        "tags": [
+          "Pipeline Execution"
+        ],
+        "operationId": "stepMetric",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program."
+          },
+          {
+            "name": "pipelineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the pipeline"
+          },
+          {
+            "name": "executionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the execution"
+          },
+          {
+            "name": "phaseId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the phase"
+          },
+          {
+            "name": "stepId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the step"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of metrics",
+            "schema": {
+              "$ref": "#/definitions/PipelineStepMetrics"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "Missing permission for user to read metrics",
+            "schema": {}
+          },
+          "404": {
+            "description": "Pipeline execution does not exist",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "409": {
+            "description": "The resource was modified before the call. Client should reload and try again",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/pipeline/{pipelineId}/executions": {
+      "get": {
+        "description": "Returns the history of pipeline executions in a newest to oldest order",
+        "summary": "getExecutions",
+        "tags": [
+          "Pipeline Execution"
+        ],
+        "operationId": "getExecutions",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program."
+          },
+          {
+            "name": "pipelineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the pipeline"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Pagination start parameter"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Pagination limit parameter"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of execution history",
+            "schema": {
+              "$ref": "#/definitions/PipelineExecutionListRepresentation"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "Missing permission for user to read executions",
+            "schema": {}
+          },
+          "404": {
+            "description": "Pipeline does not exist",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "409": {
+            "description": "The resource was modified before the call. Client should reload and try again",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/environments": {
+      "get": {
+        "description": "Lists all environments in an program",
+        "summary": "getEnvironments",
+        "tags": [
+          "Environments"
+        ],
+        "operationId": "getEnvironments",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "enum": [
+              "dev",
+              "stage",
+              "prod"
+            ],
+            "type": "string",
+            "description": "Type of the environment"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of environment list",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentList"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "The requester is not authorized to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Program not found",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/api/program/{programId}/environment/{environmentId}": {
+      "get": {
+        "description": "Returns an environment by its id",
+        "summary": "getEnvironment",
+        "tags": [
+          "Environments"
+        ],
+        "operationId": "getEnvironment",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the program"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identifier of the environment"
+          },
+          {
+            "name": "x-gw-ims-org-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS organization ID that the request is being made under."
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Bearer [token] - An access token for the technical account created through integration with Adobe IO"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "IMS Client ID (API Key) which is subscribed to consume services on console.adobe.io"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "The request is malformed.",
+            "schema": {}
+          },
+          "401": {
+            "description": "The request has not been applied because it lacks valid authentication credentials for the target resource.",
+            "schema": {}
+          },
+          "403": {
+            "description": "The requester is not authorized to access the resource.",
+            "schema": {}
+          },
+          "405": {
+            "description": "Client sent a request using a HTTP method that the server doesn't support.",
+            "schema": {}
+          },
+          "406": {
+            "description": "Unacceptable content type. Client sent an Accept header for a content type which does not exist on the server.",
+            "schema": {}
+          },
+          "500": {
+            "description": "This is an indicator of a server-side error.",
+            "schema": {}
+          },
+          "502": {
+            "description": "This is an indicator that the back-end service did not send a valid response.",
+            "schema": {}
+          },
+          "503": {
+            "description": "This is an indicator of a potential server overload.",
+            "schema": {}
+          },
+          "504": {
+            "description": "This is an indicator that the back-end service did not complete a response within an allowed time period.",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProgramList": {
+      "title": "ProgramList",
+      "type": "object",
+      "properties": {
+        "_totalNumberOfItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "_embedded": {
+          "$ref": "#/definitions/Embedded"
+        },
+        "_links": {
+          "$ref": "#/definitions/Links1"
+        }
+      }
+    },
+    "EmbeddedProgram": {
+      "title": "EmbeddedProgram",
+      "description": "Describes an __Embedded Program__",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Identifier of the program. Unique within the space.",
+          "example": "14",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the program",
+          "example": "AcmeCorp Main Site",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Whether this Program has been enabled for Cloud Manager usage",
+          "type": "boolean"
+        },
+        "tenantId": {
+          "description": "Tenant Id",
+          "example": "acmeCorp",
+          "type": "string"
+        },
+        "_links": {
+          "$ref": "#/definitions/Links"
+        }
+      },
+      "required": [
+        "name",
+        "enabled"
+      ]
+    },
+    "Program": {
+      "title": "Program",
+      "description": "Describes a __Program__",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Identifier of the program. Unique within the space.",
+          "example": "14",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the program",
+          "example": "AcmeCorp Main Site",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 255
+        },
+        "enabled": {
+          "description": "Whether this Program has been enabled for Cloud Manager usage",
+          "type": "boolean"
+        },
+        "tenantId": {
+          "description": "Tenant Id",
+          "example": "acmeCorp",
+          "type": "string"
+        },
+        "imsOrgId": {
+          "description": "Organisation Id",
+          "example": "6522A55453334E247F120101@AdobeOrg",
+          "type": "string"
+        },
+        "_links": {
+          "$ref": "#/definitions/Links2"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "HalLink": {
+      "title": "HalLink",
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string"
+        },
+        "templated": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "deprecation": {
+          "type": "string"
+        },
+        "profile": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "hreflang": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Pipeline": {
+      "title": "Pipeline",
+      "description": "Describes a __CI/CD Pipeline__",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Identifier of the pipeline. Unique within the program.",
+          "example": "29",
+          "type": "string"
+        },
+        "programId": {
+          "description": "Identifier of the program. Unique within the space.",
+          "example": "14",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the pipeline",
+          "example": "AcmeCorp Main Pipeline",
+          "type": "string"
+        },
+        "trigger": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdAt": {
+          "description": "Create date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "description": "Update date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastStartedAt": {
+          "description": "Last pipeline execution start",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastFinishedAt": {
+          "description": "Last pipeline execution end",
+          "type": "string",
+          "format": "date-time"
+        },
+        "phases": {
+          "description": "Pipeline phases in execution order",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelinePhase"
+          },
+          "minItems": 1,
+          "maxItems": 100
+        },
+        "_links": {
+          "$ref": "#/definitions/Links3"
+        }
+      },
+      "required": [
+        "name",
+        "phases"
+      ]
+    },
+    "PipelinePhase": {
+      "title": "PipelinePhase",
+      "description": "Describes a phase of a pipeline",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the phase",
+          "example": "DEV Build",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/Type"
+        },
+        "repositoryId": {
+          "description": "Identifier of the source repository. The code from this repository will be build at the start of this phase. \nMandatory if type=BUILD",
+          "type": "string"
+        },
+        "branch": {
+          "description": "Name of the tracked branch or a fully qualified git tag (e.g. refs/tags/v1). \n Assumed to be `master` if missing.",
+          "type": "string"
+        },
+        "environmentId": {
+          "description": "Identifier of the target environment. Mandatory if type=DEPLOY",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "PipelineList": {
+      "title": "PipelineList",
+      "type": "object",
+      "properties": {
+        "_totalNumberOfItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "_embedded": {
+          "$ref": "#/definitions/Embedded1"
+        },
+        "_links": {
+          "$ref": "#/definitions/Links1"
+        }
+      }
+    },
+    "PipelineExecution": {
+      "title": "PipelineExecution",
+      "description": "Wraps a pipeline execution",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Pipeline execution identifier",
+          "type": "string"
+        },
+        "programId": {
+          "description": "Identifier of the program. Unique within the space.",
+          "example": "14",
+          "type": "string"
+        },
+        "pipelineId": {
+          "description": "Identifier of the pipeline. Unique within the space.",
+          "example": "10",
+          "type": "string"
+        },
+        "artifactsVersion": {
+          "description": "Version of the artifacts generated during this execution",
+          "type": "string"
+        },
+        "user": {
+          "description": "AdobeID who started the pipeline. Empty for auto triggered builds",
+          "example": "0123456789ABCDE@AdobeID",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/Status1"
+        },
+        "trigger": {
+          "$ref": "#/definitions/Trigger1"
+        },
+        "createdAt": {
+          "description": "Start time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "description": "Date of last status change",
+          "type": "string",
+          "format": "date-time"
+        },
+        "finishedAt": {
+          "description": "Date the execution reached a final state",
+          "type": "string",
+          "format": "date-time"
+        },
+        "_embedded": {
+          "$ref": "#/definitions/Embedded2"
+        },
+        "_links": {
+          "$ref": "#/definitions/Links6"
+        }
+      }
+    },
+    "PipelineExecutionStepState": {
+      "title": "PipelineExecutionStepState",
+      "description": "Describes the status of a particular pipeline execution step for display purposes",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "stepId": {
+          "type": "string"
+        },
+        "phaseId": {
+          "type": "string"
+        },
+        "action": {
+          "description": "Name of the action",
+          "example": "build",
+          "type": "string"
+        },
+        "repository": {
+          "description": "Target repository",
+          "type": "string"
+        },
+        "branch": {
+          "description": "Target branch",
+          "type": "string"
+        },
+        "environment": {
+          "description": "Target environment",
+          "type": "string"
+        },
+        "environmentType": {
+          "description": "Target environment type",
+          "type": "string"
+        },
+        "startedAt": {
+          "description": "Start time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "finishedAt": {
+          "description": "Date the execution reached a final state",
+          "type": "string",
+          "format": "date-time"
+        },
+        "details": {
+          "description": "Information about step result",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/Status2"
+        },
+        "_links": {
+          "$ref": "#/definitions/Links5"
+        }
+      }
+    },
+    "PipelineExecutionListRepresentation": {
+      "title": "PipelineExecutionListRepresentation",
+      "description": "List of pipeline executions",
+      "type": "object",
+      "properties": {
+        "_totalNumberOfItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "_page": {
+          "$ref": "#/definitions/RequestedPageDetails"
+        },
+        "_embedded": {
+          "$ref": "#/definitions/Embedded3"
+        },
+        "_links": {
+          "$ref": "#/definitions/Links7"
+        }
+      }
+    },
+    "PipelineStepMetrics": {
+      "title": "PipelineStepMetrics",
+      "type": "object",
+      "properties": {
+        "metrics": {
+          "description": "metrics",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          }
+        }
+      }
+    },
+    "Metric": {
+      "title": "Metric",
+      "description": "Describes a __Metric__",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "KPI result identifier",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/definitions/Severity"
+        },
+        "passed": {
+          "description": "Whether metric is considered passed",
+          "type": "boolean"
+        },
+        "override": {
+          "description": "Whether user override the failed metric",
+          "type": "boolean"
+        },
+        "actualValue": {
+          "description": "Expected value for the metric",
+          "type": "string"
+        },
+        "expectedValue": {
+          "description": "Expected value for the metric",
+          "type": "string"
+        },
+        "comparator": {
+          "$ref": "#/definitions/Comparator"
+        },
+        "kpi": {
+          "description": "KPI identifier",
+          "type": "string"
+        }
+      }
+    },
+    "EnvironmentList": {
+      "title": "EnvironmentList",
+      "type": "object",
+      "properties": {
+        "_totalNumberOfItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "_embedded": {
+          "$ref": "#/definitions/Embedded4"
+        },
+        "_links": {
+          "$ref": "#/definitions/Links1"
+        }
+      }
+    },
+    "Environment": {
+      "title": "Environment",
+      "description": "An Environment that",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "id",
+          "type": "string"
+        },
+        "programId": {
+          "description": "Identifier of the program. Unique within the space.",
+          "example": "14",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the environment",
+          "example": "AcmeCorp Dev1 Environment",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the environment",
+          "example": "This is our primary development environment",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/Type1"
+        },
+        "_links": {
+          "$ref": "#/definitions/Links8"
+        }
+      }
+    },
+    "Repository": {
+      "title": "Repository",
+      "description": "A sourcecode repository",
+      "type": "object",
+      "properties": {
+        "repo": {
+          "description": "Repository name",
+          "example": "Adobe-Marketing-Cloud",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9-]*$"
+        },
+        "description": {
+          "description": "description",
+          "example": "Description",
+          "type": "string"
+        },
+        "_links": {
+          "$ref": "#/definitions/Links10"
+        }
+      }
+    },
+    "RepositoryList": {
+      "title": "RepositoryList",
+      "type": "object",
+      "properties": {
+        "_totalNumberOfItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "_embedded": {
+          "$ref": "#/definitions/Embedded5"
+        },
+        "_links": {
+          "$ref": "#/definitions/Links1"
+        }
+      }
+    },
+    "RepositoryBranch": {
+      "title": "RepositoryBranch",
+      "description": "Represents a Git Branch",
+      "type": "object",
+      "properties": {
+        "programId": {
+          "description": "Identifier of the program. Unique within the space",
+          "example": "14",
+          "type": "string"
+        },
+        "repositoryId": {
+          "description": "Identifier of the repository",
+          "example": 2,
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "description": "Name of the branch",
+          "example": "master",
+          "type": "string"
+        },
+        "_links": {
+          "$ref": "#/definitions/Links12"
+        }
+      }
+    },
+    "BranchList": {
+      "title": "BranchList",
+      "type": "object",
+      "properties": {
+        "_totalNumberOfItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "_embedded": {
+          "$ref": "#/definitions/Embedded6"
+        },
+        "_links": {
+          "$ref": "#/definitions/Links1"
+        }
+      }
+    },
+    "RequestedPageDetails": {
+      "title": "RequestedPageDetails",
+      "description": "Filtering and sorting page details",
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "orderBy": {
+          "type": "string"
+        },
+        "property": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "type": "string"
+        },
+        "next": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "prev": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Comparator": {
+      "title": "Comparator",
+      "description": "Comparator used for the metric",
+      "type": "string",
+      "enum": [
+        "GT",
+        "GTE",
+        "LT",
+        "LTE",
+        "EQ",
+        "NEQ"
+      ]
+    },
+    "Embedded": {
+      "title": "Embedded",
+      "type": "object",
+      "properties": {
+        "programs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmbeddedProgram"
+          }
+        }
+      }
+    },
+    "Embedded1": {
+      "title": "Embedded1",
+      "type": "object",
+      "properties": {
+        "pipelines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pipeline"
+          }
+        }
+      }
+    },
+    "Embedded2": {
+      "title": "Embedded2",
+      "type": "object",
+      "properties": {
+        "stepStates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineExecutionStepState"
+          }
+        }
+      }
+    },
+    "Embedded3": {
+      "title": "Embedded3",
+      "type": "object",
+      "properties": {
+        "executions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineExecution"
+          }
+        }
+      }
+    },
+    "Embedded4": {
+      "title": "Embedded4",
+      "type": "object",
+      "properties": {
+        "environments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Environment"
+          }
+        }
+      }
+    },
+    "Embedded5": {
+      "title": "Embedded5",
+      "type": "object",
+      "properties": {
+        "repositories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Repository"
+          }
+        }
+      }
+    },
+    "Embedded6": {
+      "title": "Embedded6",
+      "type": "object",
+      "properties": {
+        "branches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RepositoryBranch"
+          }
+        }
+      }
+    },
+    "Links": {
+      "title": "Links",
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "#/definitions/HalLink"
+        }
+      }
+    },
+    "Links1": {
+      "title": "Links1",
+      "type": "object",
+      "properties": {
+        "next": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "prev": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "self": {
+          "$ref": "#/definitions/HalLink"
+        }
+      }
+    },
+    "Links2": {
+      "title": "Links2",
+      "type": "object",
+      "properties": {
+        "http://ns.adobe.com/adobecloud/rel/pipelines": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/environments": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/repositories": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "self": {
+          "$ref": "#/definitions/HalLink"
+        }
+      }
+    },
+    "Links3": {
+      "title": "Links3",
+      "type": "object",
+      "properties": {
+        "http://ns.adobe.com/adobecloud/rel/program": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/execution": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/executions": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "self": {
+          "$ref": "#/definitions/HalLink"
+        }
+      }
+    },
+    "Links5": {
+      "title": "Links5",
+      "type": "object",
+      "properties": {
+        "http://ns.adobe.com/adobecloud/rel/execution": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/pipeline": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/pipeline/logs": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/pipeline/metrics": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/pipeline/advance": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/pipeline/cancel": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/program": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "self": {
+          "$ref": "#/definitions/HalLink"
+        }
+      }
+    },
+    "Links6": {
+      "title": "Links6",
+      "type": "object",
+      "properties": {
+        "http://ns.adobe.com/adobecloud/rel/program": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/pipeline": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "self": {
+          "$ref": "#/definitions/HalLink"
+        }
+      }
+    },
+    "Links7": {
+      "title": "Links7",
+      "type": "object",
+      "properties": {
+        "next": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "page": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "prev": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "self": {
+          "$ref": "#/definitions/HalLink"
+        }
+      }
+    },
+    "Links8": {
+      "title": "Links8",
+      "type": "object",
+      "properties": {
+        "http://ns.adobe.com/adobecloud/rel/program": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/pipeline": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/author": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/publish": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "self": {
+          "$ref": "#/definitions/HalLink"
+        }
+      }
+    },
+    "Links10": {
+      "title": "Links10",
+      "type": "object",
+      "properties": {
+        "http://ns.adobe.com/adobecloud/rel/program": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/branches": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "self": {
+          "$ref": "#/definitions/HalLink"
+        }
+      }
+    },
+    "Links12": {
+      "title": "Links12",
+      "type": "object",
+      "properties": {
+        "http://ns.adobe.com/adobecloud/rel/program": {
+          "$ref": "#/definitions/HalLink"
+        },
+        "http://ns.adobe.com/adobecloud/rel/repository": {
+          "$ref": "#/definitions/HalLink"
+        }
+      }
+    },
+    "Severity": {
+      "title": "Severity",
+      "description": "Severity of the metric",
+      "type": "string",
+      "enum": [
+        "critical",
+        "important",
+        "informational"
+      ]
+    },
+    "Status": {
+      "title": "Status",
+      "description": "Pipeline status",
+      "type": "string",
+      "enum": [
+        "IDLE",
+        "BUSY",
+        "WAITING"
+      ]
+    },
+    "Status1": {
+      "title": "Status1",
+      "description": "Status of the execution",
+      "type": "string",
+      "enum": [
+        "NOT_STARTED",
+        "RUNNING",
+        "CANCELLING",
+        "CANCELLED",
+        "FINISHED",
+        "ERROR",
+        "FAILED"
+      ]
+    },
+    "Status2": {
+      "title": "Status2",
+      "description": "Action status",
+      "type": "string",
+      "enum": [
+        "NOT_STARTED",
+        "RUNNING",
+        "FINISHED",
+        "ERROR",
+        "ROLLING_BACK",
+        "ROLLED_BACK",
+        "WAITING",
+        "CANCELLED",
+        "FAILED"
+      ]
+    },
+    "Trigger": {
+      "title": "Trigger",
+      "description": "How should the execution be triggered. ON_COMMIT: each time a PR is available and the Pipeline is idle then a execution is triggered. MANUAL: triggerd through UI or API. SCHEDULE: recurring schedule (not yet implemented}",
+      "type": "string",
+      "enum": [
+        "ON_COMMIT",
+        "MANUAL",
+        "SCHEDULE"
+      ]
+    },
+    "Trigger1": {
+      "title": "Trigger1",
+      "description": "How the execution was triggered.",
+      "type": "string",
+      "enum": [
+        "ON_COMMIT",
+        "MANUAL",
+        "SCHEDULE"
+      ]
+    },
+    "Type": {
+      "title": "Type",
+      "description": "Type of the phase",
+      "type": "string",
+      "enum": [
+        "VALIDATE",
+        "BUILD",
+        "DEPLOY"
+      ]
+    },
+    "Type1": {
+      "title": "Type1",
+      "description": "Type of the environment",
+      "type": "string",
+      "enum": [
+        "dev",
+        "stage",
+        "prod"
+      ]
+    },
+    "type2": {
+      "title": "type2",
+      "type": "string",
+      "enum": [
+        "dev",
+        "stage",
+        "prod"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Programs"
+    },
+    {
+      "name": "Repositories"
+    },
+    {
+      "name": "Branches"
+    },
+    {
+      "name": "Pipelines"
+    },
+    {
+      "name": "Pipeline Execution"
+    },
+    {
+      "name": "Environments"
+    }
+  ]
+}
