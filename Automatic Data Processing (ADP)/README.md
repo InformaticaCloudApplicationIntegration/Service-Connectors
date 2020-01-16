@@ -7,6 +7,7 @@ General information on Automatic Data Processing (ADP) can be found [here](https
 ## Table of Contents
 
 | Name  | Description | Specification | Service Connector |
+| ------------- | ------------- | ------------- | ------------- |
 | ADP ATM Locator API v1 | The ATM Locator API returns a list of ATM locations within a specific radius | ADP ATM Locator API v1.json | ADP ATM Locator API v1.zip |
 | ADP Applicant User Feedbacks API v1 | The User Feedbacks Job APIs are used to retrieve a use feedbacks submitted for an application | ADP Applicant User Feedbacks API v1.json | ADP Applicant User Feedbacks API v1.zip |
 | ADP Associate Contacts API v1 | An associate is a person in the context of an organization. The Associate Contacts APIs return the name and contact information for an associate or a collection of associates within an organization | ADP Associate Contacts API v1.json | ADP Associate Contacts API v1.zip |
