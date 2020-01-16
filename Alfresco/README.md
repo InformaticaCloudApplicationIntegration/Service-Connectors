@@ -30,7 +30,7 @@ General information on Alfresco Software and Services can be found [here](https:
     - [Alfresco Insight Engine Search SQL API v1.json](https://github.com/InformaticaCloudApplicationIntegration/Service-Connectors/blob/master/Alfresco/Alfresco%20Insight%20Engine%20Search%20SQL%20API%20v1.json) provides metadata definition (via swagger).
     - [Alfresco Insight Engine Search SQL API v1.zip](https://github.com/InformaticaCloudApplicationIntegration/Service-Connectors/blob/master/Alfresco/Alfresco%20Insight%20Engine%20Search%20SQL%20API%20v1.zip) provides downloadable Service Connector for Cloud Application Integration that provides means to leverage the APIs.
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+| Name  | Description | Files |
+| ------------- | ------------- | ------------- |
+| Alfresco Content Services Authentication API  | Provides access to the authentication features of Alfresco Content Services | Content Cell |
+| Content Cell  | Content Cell  | Content Cell  |
