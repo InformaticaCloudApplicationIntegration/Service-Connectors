@@ -1,6 +1,6 @@
 # APIMATIC
 
-APIMatic is a developer experience platform for web APIs.
+APIMATIC is a developer experience platform for web APIs.
 
 General information on APIMATIC can be found [here](https://www.apimatic.io/).
 
