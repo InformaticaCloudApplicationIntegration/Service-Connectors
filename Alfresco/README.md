@@ -29,3 +29,8 @@ General information on Alfresco Software and Services can be found [here](https:
 * Alfresco Insight Engine Search SQL API - A Solr SQL passthrough, this feature provides the ability to use SQL to query Solr.
     - [Alfresco Insight Engine Search SQL API v1.json](https://github.com/InformaticaCloudApplicationIntegration/Service-Connectors/blob/master/Alfresco/Alfresco%20Insight%20Engine%20Search%20SQL%20API%20v1.json) provides metadata definition (via swagger).
     - [Alfresco Insight Engine Search SQL API v1.zip](https://github.com/InformaticaCloudApplicationIntegration/Service-Connectors/blob/master/Alfresco/Alfresco%20Insight%20Engine%20Search%20SQL%20API%20v1.zip) provides downloadable Service Connector for Cloud Application Integration that provides means to leverage the APIs.
+|Name|Description|Files|
+|:---:|:---:|:---:|
+|A   |F   |I   |
+|S   |G   |J   |
+|D   |H   |K   |
