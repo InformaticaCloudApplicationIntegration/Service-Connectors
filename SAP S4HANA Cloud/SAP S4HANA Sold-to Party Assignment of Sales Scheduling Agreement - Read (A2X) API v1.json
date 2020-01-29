@@ -1,0 +1,444 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Sold-to Party Assignment of Sales Scheduling Agreement - Read (A2X)",
+    "version": "1 ",
+    "description": "This service contains  one entity only. Once the sold-to party assignment  has been retrieved, it is sent in the response. If  there are any issues when retrieving the sold-to  party assignment, the system displays error  messages in the response."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/19/e224a14b034a4798e08bddafd2fe78/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Read sold-to party assignments using this synchronous inbound service",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Sold-to Party Assignment of Sales Scheduling Agreement Integration (SAP_COM_0367)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Sales Scheduling Agreements (3NR)](https://rapid.sap.com/bp/#/scopeitems/3NR \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Business Object",
+      "values": [
+        {
+          "text": "SalesSchedulingAgreement",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_SD_SA_SOLDTOPARTYDETN",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_SD_SA_SOLDTOPARTYDETN",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_DelivSchedSoldToPartyDetn"
+    }
+  ],
+  "paths": {
+    "/A_DelivSchedSoldToPartyDetn": {
+      "get": {
+        "summary": "Get entities from A_DelivSchedSoldToPartyDetn",
+        "tags": [
+          "A_DelivSchedSoldToPartyDetn"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Supplier",
+                "Supplier desc",
+                "PartnerDescription",
+                "PartnerDescription desc",
+                "UnloadingPointName",
+                "UnloadingPointName desc",
+                "SoldToParty",
+                "SoldToParty desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Supplier",
+                "PartnerDescription",
+                "UnloadingPointName",
+                "SoldToParty"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_DelivSchedSoldToPartyDetnType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SD_SA_SOLDTOPARTYDETN.A_DelivSchedSoldToPartyDetnType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_DelivSchedSoldToPartyDetn(Supplier='{Supplier}',PartnerDescription='{PartnerDescription}',UnloadingPointName='{UnloadingPointName}')": {
+      "parameters": [
+        {
+          "name": "Supplier",
+          "in": "path",
+          "required": true,
+          "description": "Supplier Number at Customer Location  \nThe number which the customer has assigned to the supplier.",
+          "type": "string"
+        },
+        {
+          "name": "PartnerDescription",
+          "in": "path",
+          "required": true,
+          "description": "Cust.-Specif. Descr. of Business Partner (Plant, Stor. Loc.)  \nSold-to party number sent in by the customer in delivery schedules.  \nThe system uses this number to automatically determine the ship-to party.",
+          "type": "string"
+        },
+        {
+          "name": "UnloadingPointName",
+          "in": "path",
+          "required": true,
+          "description": "Specifies the point at which the material is to be unloaded (for example, ramp 1).",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_DelivSchedSoldToPartyDetn by key",
+        "tags": [
+          "A_DelivSchedSoldToPartyDetn"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Supplier",
+                "PartnerDescription",
+                "UnloadingPointName",
+                "SoldToParty"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_DelivSchedSoldToPartyDetnType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SD_SA_SOLDTOPARTYDETN.A_DelivSchedSoldToPartyDetnType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET A_DelivSchedSoldToPartyDetn HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_SD_SA_SOLDTOPARTYDETN.A_DelivSchedSoldToPartyDetnType": {
+      "type": "object",
+      "properties": {
+        "Supplier": {
+          "type": "string",
+          "maxLength": 17,
+          "title": "Supplier",
+          "description": "Supplier Number at Customer Location  \nThe number which the customer has assigned to the supplier."
+        },
+        "PartnerDescription": {
+          "type": "string",
+          "maxLength": 30,
+          "title": "Partner Description",
+          "description": "Cust.-Specif. Descr. of Business Partner (Plant, Stor. Loc.)  \nSold-to party number sent in by the customer in delivery schedules.  \nThe system uses this number to automatically determine the ship-to party."
+        },
+        "UnloadingPointName": {
+          "type": "string",
+          "maxLength": 25,
+          "title": "Unloading Point",
+          "description": "Specifies the point at which the material is to be unloaded (for example, ramp 1)."
+        },
+        "SoldToParty": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sold-To Party",
+          "description": "The customer who orders the goods or services. The sold-to party is contractually responsible for sales orders."
+        }
+      },
+      "title": "Sold-to Party Assignment Integration (API)"
+    },
+    "API_SD_SA_SOLDTOPARTYDETN.A_DelivSchedSoldToPartyDetnType-create": {
+      "type": "object",
+      "properties": {
+        "Supplier": {
+          "type": "string",
+          "maxLength": 17,
+          "title": "Supplier",
+          "description": "Supplier Number at Customer Location  \nThe number which the customer has assigned to the supplier."
+        },
+        "PartnerDescription": {
+          "type": "string",
+          "maxLength": 30,
+          "title": "Partner Description",
+          "description": "Cust.-Specif. Descr. of Business Partner (Plant, Stor. Loc.)  \nSold-to party number sent in by the customer in delivery schedules.  \nThe system uses this number to automatically determine the ship-to party."
+        },
+        "UnloadingPointName": {
+          "type": "string",
+          "maxLength": 25,
+          "title": "Unloading Point",
+          "description": "Specifies the point at which the material is to be unloaded (for example, ramp 1)."
+        },
+        "SoldToParty": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sold-To Party",
+          "description": "The customer who orders the goods or services. The sold-to party is contractually responsible for sales orders."
+        }
+      },
+      "required": [
+        "Supplier",
+        "PartnerDescription",
+        "UnloadingPointName"
+      ],
+      "title": "Sold-to Party Assignment Integration (API) (for create)"
+    },
+    "API_SD_SA_SOLDTOPARTYDETN.A_DelivSchedSoldToPartyDetnType-update": {
+      "type": "object",
+      "properties": {
+        "SoldToParty": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sold-To Party",
+          "description": "The customer who orders the goods or services. The sold-to party is contractually responsible for sales orders."
+        }
+      },
+      "title": "Sold-to Party Assignment Integration (API) (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

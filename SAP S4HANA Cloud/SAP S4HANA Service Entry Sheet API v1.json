@@ -1,0 +1,4094 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Service Entry Sheet",
+    "version": "1 ",
+    "description": "\n\nThis service enables a remote  system to read and create service entry  sheets from or in the SAP S/4HANA  system. You can use this service to  submit a service entry sheet for approval,  withdraw it from approval, or revoke  approval of an already approved service  entry sheet."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/0f/17c815dc784fa39b4fc7c0fe9f72b5/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Read, update and delete service entry sheets from or in the SAP S/4HANA system using this synchronous inbound service",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Service Entry Sheet Integration (SAP_COM_0146)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Procurement of Services (22Z)](https://rapid.sap.com/bp/#/scopeitems/22Z \" Link To BP \")",
+          "format": "markdown"
+        },
+        {
+          "text": "[Consumable Purchasing (BNX)](https://rapid.sap.com/bp/#/scopeitems/BNX \" Link To BP \")",
+          "format": "markdown"
+        },
+        {
+          "text": "[Service and Material Procurement - Project-Based Services (J13)](https://rapid.sap.com/bp/#/scopeitems/J13 \" Link To BP \")",
+          "format": "markdown"
+        },
+        {
+          "text": "[Consumable Purchasing (ONX)](https://rapid.sap.com/bp/#/scopeitems/ONX \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_SERVICE_ENTRY_SHEET_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_SERVICE_ENTRY_SHEET_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_ServiceEntrySheet"
+    },
+    {
+      "name": "A_ServiceEntrySheetItem"
+    },
+    {
+      "name": "A_SrvcEntrShtAcctAssignment"
+    }
+  ],
+  "paths": {
+    "/A_ServiceEntrySheet": {
+      "get": {
+        "summary": "Get entities from A_ServiceEntrySheet",
+        "tags": [
+          "A_ServiceEntrySheet"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ServiceEntrySheet",
+                "ServiceEntrySheet desc",
+                "ApprovalDateTime",
+                "ApprovalDateTime desc",
+                "ApprovalStatus",
+                "ApprovalStatus desc",
+                "CreatedByUser",
+                "CreatedByUser desc",
+                "CreationDateTime",
+                "CreationDateTime desc",
+                "PurchasingOrganization",
+                "PurchasingOrganization desc",
+                "PurchasingGroup",
+                "PurchasingGroup desc",
+                "IsEndOfPurposeBlocked",
+                "IsEndOfPurposeBlocked desc",
+                "Currency",
+                "Currency desc",
+                "IsDeleted",
+                "IsDeleted desc",
+                "LastChangeDateTime",
+                "LastChangeDateTime desc",
+                "LastChangedByUser",
+                "LastChangedByUser desc",
+                "MaterialDocument",
+                "MaterialDocument desc",
+                "MaterialDocumentYear",
+                "MaterialDocumentYear desc",
+                "OriginObjectType",
+                "OriginObjectType desc",
+                "PurchaseOrder",
+                "PurchaseOrder desc",
+                "ResponsiblePerson",
+                "ResponsiblePerson desc",
+                "ServiceEntrySheetName",
+                "ServiceEntrySheetName desc",
+                "ServiceEntrySheetUUID",
+                "ServiceEntrySheetUUID desc",
+                "Supplier",
+                "Supplier desc",
+                "PurgDocExternalSystem",
+                "PurgDocExternalSystem desc",
+                "PurgDocExternalReference",
+                "PurgDocExternalReference desc",
+                "ExternalRevisionDateTime",
+                "ExternalRevisionDateTime desc",
+                "PostingDate",
+                "PostingDate desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ServiceEntrySheet",
+                "ApprovalDateTime",
+                "ApprovalStatus",
+                "CreatedByUser",
+                "CreationDateTime",
+                "PurchasingOrganization",
+                "PurchasingGroup",
+                "IsEndOfPurposeBlocked",
+                "Currency",
+                "IsDeleted",
+                "LastChangeDateTime",
+                "LastChangedByUser",
+                "MaterialDocument",
+                "MaterialDocumentYear",
+                "OriginObjectType",
+                "PurchaseOrder",
+                "ResponsiblePerson",
+                "ServiceEntrySheetName",
+                "ServiceEntrySheetUUID",
+                "Supplier",
+                "PurgDocExternalSystem",
+                "PurgDocExternalReference",
+                "ExternalRevisionDateTime",
+                "PostingDate",
+                "to_ServiceEntrySheetItem"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ServiceEntrySheetItem"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ServiceEntrySheetType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to A_ServiceEntrySheet",
+        "tags": [
+          "A_ServiceEntrySheet"
+        ],
+        "parameters": [
+          {
+            "name": "A_ServiceEntrySheetType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_ServiceEntrySheetType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ServiceEntrySheet('{ServiceEntrySheet}')": {
+      "parameters": [
+        {
+          "name": "ServiceEntrySheet",
+          "in": "path",
+          "required": true,
+          "description": "Service Entry Sheet",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_ServiceEntrySheet by key",
+        "tags": [
+          "A_ServiceEntrySheet"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ServiceEntrySheet",
+                "ApprovalDateTime",
+                "ApprovalStatus",
+                "CreatedByUser",
+                "CreationDateTime",
+                "PurchasingOrganization",
+                "PurchasingGroup",
+                "IsEndOfPurposeBlocked",
+                "Currency",
+                "IsDeleted",
+                "LastChangeDateTime",
+                "LastChangedByUser",
+                "MaterialDocument",
+                "MaterialDocumentYear",
+                "OriginObjectType",
+                "PurchaseOrder",
+                "ResponsiblePerson",
+                "ServiceEntrySheetName",
+                "ServiceEntrySheetUUID",
+                "Supplier",
+                "PurgDocExternalSystem",
+                "PurgDocExternalReference",
+                "ExternalRevisionDateTime",
+                "PostingDate",
+                "to_ServiceEntrySheetItem"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ServiceEntrySheetItem"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ServiceEntrySheetType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_ServiceEntrySheet",
+        "tags": [
+          "A_ServiceEntrySheet"
+        ],
+        "parameters": [
+          {
+            "name": "A_ServiceEntrySheetType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_ServiceEntrySheetType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ServiceEntrySheet('{ServiceEntrySheet}')/to_ServiceEntrySheetItem": {
+      "parameters": [
+        {
+          "name": "ServiceEntrySheet",
+          "in": "path",
+          "required": true,
+          "description": "Service Entry Sheet",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_ServiceEntrySheetItem",
+        "tags": [
+          "A_ServiceEntrySheet",
+          "A_ServiceEntrySheetItem"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ServiceEntrySheet",
+                "ServiceEntrySheet desc",
+                "ServiceEntrySheetItem",
+                "ServiceEntrySheetItem desc",
+                "AccountAssignmentCategory",
+                "AccountAssignmentCategory desc",
+                "ConfirmedQuantity",
+                "ConfirmedQuantity desc",
+                "CreatedByUser",
+                "CreatedByUser desc",
+                "CreationDateTime",
+                "CreationDateTime desc",
+                "PurchasingOrganization",
+                "PurchasingOrganization desc",
+                "PurchasingGroup",
+                "PurchasingGroup desc",
+                "Plant",
+                "Plant desc",
+                "Currency",
+                "Currency desc",
+                "IsDeleted",
+                "IsDeleted desc",
+                "LastChangeDateTime",
+                "LastChangeDateTime desc",
+                "LastChangedByUser",
+                "LastChangedByUser desc",
+                "MaterialGroup",
+                "MaterialGroup desc",
+                "MultipleAcctAssgmtDistribution",
+                "MultipleAcctAssgmtDistribution desc",
+                "NetAmount",
+                "NetAmount desc",
+                "NetPriceAmount",
+                "NetPriceAmount desc",
+                "OriginObject",
+                "OriginObject desc",
+                "PurchaseOrder",
+                "PurchaseOrder desc",
+                "PurchaseOrderItem",
+                "PurchaseOrderItem desc",
+                "PurchaseContract",
+                "PurchaseContract desc",
+                "PurchaseContractItem",
+                "PurchaseContractItem desc",
+                "QuantityUnit",
+                "QuantityUnit desc",
+                "Service",
+                "Service desc",
+                "ServiceEntrySheetItemDesc",
+                "ServiceEntrySheetItemDesc desc",
+                "ServiceEntrySheetItemUUID",
+                "ServiceEntrySheetItemUUID desc",
+                "ServiceEntrySheetUUID",
+                "ServiceEntrySheetUUID desc",
+                "ServicePerformanceDate",
+                "ServicePerformanceDate desc",
+                "ServicePerformer",
+                "ServicePerformer desc",
+                "WorkItem",
+                "WorkItem desc",
+                "PurgDocItemExternalReference",
+                "PurgDocItemExternalReference desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ServiceEntrySheet",
+                "ServiceEntrySheetItem",
+                "AccountAssignmentCategory",
+                "ConfirmedQuantity",
+                "CreatedByUser",
+                "CreationDateTime",
+                "PurchasingOrganization",
+                "PurchasingGroup",
+                "Plant",
+                "Currency",
+                "IsDeleted",
+                "LastChangeDateTime",
+                "LastChangedByUser",
+                "MaterialGroup",
+                "MultipleAcctAssgmtDistribution",
+                "NetAmount",
+                "NetPriceAmount",
+                "OriginObject",
+                "PurchaseOrder",
+                "PurchaseOrderItem",
+                "PurchaseContract",
+                "PurchaseContractItem",
+                "QuantityUnit",
+                "Service",
+                "ServiceEntrySheetItemDesc",
+                "ServiceEntrySheetItemUUID",
+                "ServiceEntrySheetUUID",
+                "ServicePerformanceDate",
+                "ServicePerformer",
+                "WorkItem",
+                "PurgDocItemExternalReference",
+                "to_AccountAssignment"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_AccountAssignment"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ServiceEntrySheetItemType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetItemType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ServiceEntrySheetItem": {
+      "get": {
+        "summary": "Get entities from A_ServiceEntrySheetItem",
+        "tags": [
+          "A_ServiceEntrySheetItem"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ServiceEntrySheet",
+                "ServiceEntrySheet desc",
+                "ServiceEntrySheetItem",
+                "ServiceEntrySheetItem desc",
+                "AccountAssignmentCategory",
+                "AccountAssignmentCategory desc",
+                "ConfirmedQuantity",
+                "ConfirmedQuantity desc",
+                "CreatedByUser",
+                "CreatedByUser desc",
+                "CreationDateTime",
+                "CreationDateTime desc",
+                "PurchasingOrganization",
+                "PurchasingOrganization desc",
+                "PurchasingGroup",
+                "PurchasingGroup desc",
+                "Plant",
+                "Plant desc",
+                "Currency",
+                "Currency desc",
+                "IsDeleted",
+                "IsDeleted desc",
+                "LastChangeDateTime",
+                "LastChangeDateTime desc",
+                "LastChangedByUser",
+                "LastChangedByUser desc",
+                "MaterialGroup",
+                "MaterialGroup desc",
+                "MultipleAcctAssgmtDistribution",
+                "MultipleAcctAssgmtDistribution desc",
+                "NetAmount",
+                "NetAmount desc",
+                "NetPriceAmount",
+                "NetPriceAmount desc",
+                "OriginObject",
+                "OriginObject desc",
+                "PurchaseOrder",
+                "PurchaseOrder desc",
+                "PurchaseOrderItem",
+                "PurchaseOrderItem desc",
+                "PurchaseContract",
+                "PurchaseContract desc",
+                "PurchaseContractItem",
+                "PurchaseContractItem desc",
+                "QuantityUnit",
+                "QuantityUnit desc",
+                "Service",
+                "Service desc",
+                "ServiceEntrySheetItemDesc",
+                "ServiceEntrySheetItemDesc desc",
+                "ServiceEntrySheetItemUUID",
+                "ServiceEntrySheetItemUUID desc",
+                "ServiceEntrySheetUUID",
+                "ServiceEntrySheetUUID desc",
+                "ServicePerformanceDate",
+                "ServicePerformanceDate desc",
+                "ServicePerformer",
+                "ServicePerformer desc",
+                "WorkItem",
+                "WorkItem desc",
+                "PurgDocItemExternalReference",
+                "PurgDocItemExternalReference desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ServiceEntrySheet",
+                "ServiceEntrySheetItem",
+                "AccountAssignmentCategory",
+                "ConfirmedQuantity",
+                "CreatedByUser",
+                "CreationDateTime",
+                "PurchasingOrganization",
+                "PurchasingGroup",
+                "Plant",
+                "Currency",
+                "IsDeleted",
+                "LastChangeDateTime",
+                "LastChangedByUser",
+                "MaterialGroup",
+                "MultipleAcctAssgmtDistribution",
+                "NetAmount",
+                "NetPriceAmount",
+                "OriginObject",
+                "PurchaseOrder",
+                "PurchaseOrderItem",
+                "PurchaseContract",
+                "PurchaseContractItem",
+                "QuantityUnit",
+                "Service",
+                "ServiceEntrySheetItemDesc",
+                "ServiceEntrySheetItemUUID",
+                "ServiceEntrySheetUUID",
+                "ServicePerformanceDate",
+                "ServicePerformer",
+                "WorkItem",
+                "PurgDocItemExternalReference",
+                "to_AccountAssignment"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_AccountAssignment"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ServiceEntrySheetItemType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetItemType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ServiceEntrySheetItem(ServiceEntrySheet='{ServiceEntrySheet}',ServiceEntrySheetItem='{ServiceEntrySheetItem}')": {
+      "parameters": [
+        {
+          "name": "ServiceEntrySheet",
+          "in": "path",
+          "required": true,
+          "description": "Service Entry Sheet",
+          "type": "string"
+        },
+        {
+          "name": "ServiceEntrySheetItem",
+          "in": "path",
+          "required": true,
+          "description": "Item Number of Service Entry Sheet",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_ServiceEntrySheetItem by key",
+        "tags": [
+          "A_ServiceEntrySheetItem"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ServiceEntrySheet",
+                "ServiceEntrySheetItem",
+                "AccountAssignmentCategory",
+                "ConfirmedQuantity",
+                "CreatedByUser",
+                "CreationDateTime",
+                "PurchasingOrganization",
+                "PurchasingGroup",
+                "Plant",
+                "Currency",
+                "IsDeleted",
+                "LastChangeDateTime",
+                "LastChangedByUser",
+                "MaterialGroup",
+                "MultipleAcctAssgmtDistribution",
+                "NetAmount",
+                "NetPriceAmount",
+                "OriginObject",
+                "PurchaseOrder",
+                "PurchaseOrderItem",
+                "PurchaseContract",
+                "PurchaseContractItem",
+                "QuantityUnit",
+                "Service",
+                "ServiceEntrySheetItemDesc",
+                "ServiceEntrySheetItemUUID",
+                "ServiceEntrySheetUUID",
+                "ServicePerformanceDate",
+                "ServicePerformer",
+                "WorkItem",
+                "PurgDocItemExternalReference",
+                "to_AccountAssignment"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_AccountAssignment"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ServiceEntrySheetItemType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetItemType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_ServiceEntrySheetItem",
+        "tags": [
+          "A_ServiceEntrySheetItem"
+        ],
+        "parameters": [
+          {
+            "name": "A_ServiceEntrySheetItemType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_ServiceEntrySheetItemType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetItemType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ServiceEntrySheetItem(ServiceEntrySheet='{ServiceEntrySheet}',ServiceEntrySheetItem='{ServiceEntrySheetItem}')/to_AccountAssignment": {
+      "parameters": [
+        {
+          "name": "ServiceEntrySheet",
+          "in": "path",
+          "required": true,
+          "description": "Service Entry Sheet",
+          "type": "string"
+        },
+        {
+          "name": "ServiceEntrySheetItem",
+          "in": "path",
+          "required": true,
+          "description": "Item Number of Service Entry Sheet",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_AccountAssignment",
+        "tags": [
+          "A_ServiceEntrySheetItem",
+          "A_SrvcEntrShtAcctAssignment"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ServiceEntrySheet",
+                "ServiceEntrySheet desc",
+                "ServiceEntrySheetItem",
+                "ServiceEntrySheetItem desc",
+                "AccountAssignment",
+                "AccountAssignment desc",
+                "AccountAssignmentUUID",
+                "AccountAssignmentUUID desc",
+                "PurchasingOrganization",
+                "PurchasingOrganization desc",
+                "PurchasingGroup",
+                "PurchasingGroup desc",
+                "Plant",
+                "Plant desc",
+                "BusinessArea",
+                "BusinessArea desc",
+                "CommitmentItem",
+                "CommitmentItem desc",
+                "ControllingArea",
+                "ControllingArea desc",
+                "CostCenter",
+                "CostCenter desc",
+                "CostObject",
+                "CostObject desc",
+                "CreatedByUser",
+                "CreatedByUser desc",
+                "CreationDateTime",
+                "CreationDateTime desc",
+                "EarmarkedFundsDocument",
+                "EarmarkedFundsDocument desc",
+                "FixedAsset",
+                "FixedAsset desc",
+                "FunctionalArea",
+                "FunctionalArea desc",
+                "Fund",
+                "Fund desc",
+                "FundsCenter",
+                "FundsCenter desc",
+                "GLAccount",
+                "GLAccount desc",
+                "IsDeleted",
+                "IsDeleted desc",
+                "LastChangeDateTime",
+                "LastChangeDateTime desc",
+                "LastChangedByUser",
+                "LastChangedByUser desc",
+                "MasterFixedAsset",
+                "MasterFixedAsset desc",
+                "MultipleAcctAssgmtDistrPercent",
+                "MultipleAcctAssgmtDistrPercent desc",
+                "NetworkActivityInternalID",
+                "NetworkActivityInternalID desc",
+                "OrderID",
+                "OrderID desc",
+                "PartnerAccountNumber",
+                "PartnerAccountNumber desc",
+                "ProfitCenter",
+                "ProfitCenter desc",
+                "ProfitabilitySegment",
+                "ProfitabilitySegment desc",
+                "ProjectNetwork",
+                "ProjectNetwork desc",
+                "ProjectNetworkInternalID",
+                "ProjectNetworkInternalID desc",
+                "Quantity",
+                "Quantity desc",
+                "QuantityUnit",
+                "QuantityUnit desc",
+                "RealEstateObject",
+                "RealEstateObject desc",
+                "RefDocAccountAssignment",
+                "RefDocAccountAssignment desc",
+                "SalesOrder",
+                "SalesOrder desc",
+                "SalesOrderItem",
+                "SalesOrderItem desc",
+                "SalesOrderScheduleLine",
+                "SalesOrderScheduleLine desc",
+                "ServiceEntrySheetItemUUID",
+                "ServiceEntrySheetItemUUID desc",
+                "ServiceEntrySheetUUID",
+                "ServiceEntrySheetUUID desc",
+                "WBSElementInternalID",
+                "WBSElementInternalID desc",
+                "WBSElement",
+                "WBSElement desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ServiceEntrySheet",
+                "ServiceEntrySheetItem",
+                "AccountAssignment",
+                "AccountAssignmentUUID",
+                "PurchasingOrganization",
+                "PurchasingGroup",
+                "Plant",
+                "BusinessArea",
+                "CommitmentItem",
+                "ControllingArea",
+                "CostCenter",
+                "CostObject",
+                "CreatedByUser",
+                "CreationDateTime",
+                "EarmarkedFundsDocument",
+                "FixedAsset",
+                "FunctionalArea",
+                "Fund",
+                "FundsCenter",
+                "GLAccount",
+                "IsDeleted",
+                "LastChangeDateTime",
+                "LastChangedByUser",
+                "MasterFixedAsset",
+                "MultipleAcctAssgmtDistrPercent",
+                "NetworkActivityInternalID",
+                "OrderID",
+                "PartnerAccountNumber",
+                "ProfitCenter",
+                "ProfitabilitySegment",
+                "ProjectNetwork",
+                "ProjectNetworkInternalID",
+                "Quantity",
+                "QuantityUnit",
+                "RealEstateObject",
+                "RefDocAccountAssignment",
+                "SalesOrder",
+                "SalesOrderItem",
+                "SalesOrderScheduleLine",
+                "ServiceEntrySheetItemUUID",
+                "ServiceEntrySheetUUID",
+                "WBSElementInternalID",
+                "WBSElement"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SrvcEntrShtAcctAssignmentType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_SrvcEntrShtAcctAssignmentType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SrvcEntrShtAcctAssignment": {
+      "get": {
+        "summary": "Get entities from A_SrvcEntrShtAcctAssignment",
+        "tags": [
+          "A_SrvcEntrShtAcctAssignment"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ServiceEntrySheet",
+                "ServiceEntrySheet desc",
+                "ServiceEntrySheetItem",
+                "ServiceEntrySheetItem desc",
+                "AccountAssignment",
+                "AccountAssignment desc",
+                "AccountAssignmentUUID",
+                "AccountAssignmentUUID desc",
+                "PurchasingOrganization",
+                "PurchasingOrganization desc",
+                "PurchasingGroup",
+                "PurchasingGroup desc",
+                "Plant",
+                "Plant desc",
+                "BusinessArea",
+                "BusinessArea desc",
+                "CommitmentItem",
+                "CommitmentItem desc",
+                "ControllingArea",
+                "ControllingArea desc",
+                "CostCenter",
+                "CostCenter desc",
+                "CostObject",
+                "CostObject desc",
+                "CreatedByUser",
+                "CreatedByUser desc",
+                "CreationDateTime",
+                "CreationDateTime desc",
+                "EarmarkedFundsDocument",
+                "EarmarkedFundsDocument desc",
+                "FixedAsset",
+                "FixedAsset desc",
+                "FunctionalArea",
+                "FunctionalArea desc",
+                "Fund",
+                "Fund desc",
+                "FundsCenter",
+                "FundsCenter desc",
+                "GLAccount",
+                "GLAccount desc",
+                "IsDeleted",
+                "IsDeleted desc",
+                "LastChangeDateTime",
+                "LastChangeDateTime desc",
+                "LastChangedByUser",
+                "LastChangedByUser desc",
+                "MasterFixedAsset",
+                "MasterFixedAsset desc",
+                "MultipleAcctAssgmtDistrPercent",
+                "MultipleAcctAssgmtDistrPercent desc",
+                "NetworkActivityInternalID",
+                "NetworkActivityInternalID desc",
+                "OrderID",
+                "OrderID desc",
+                "PartnerAccountNumber",
+                "PartnerAccountNumber desc",
+                "ProfitCenter",
+                "ProfitCenter desc",
+                "ProfitabilitySegment",
+                "ProfitabilitySegment desc",
+                "ProjectNetwork",
+                "ProjectNetwork desc",
+                "ProjectNetworkInternalID",
+                "ProjectNetworkInternalID desc",
+                "Quantity",
+                "Quantity desc",
+                "QuantityUnit",
+                "QuantityUnit desc",
+                "RealEstateObject",
+                "RealEstateObject desc",
+                "RefDocAccountAssignment",
+                "RefDocAccountAssignment desc",
+                "SalesOrder",
+                "SalesOrder desc",
+                "SalesOrderItem",
+                "SalesOrderItem desc",
+                "SalesOrderScheduleLine",
+                "SalesOrderScheduleLine desc",
+                "ServiceEntrySheetItemUUID",
+                "ServiceEntrySheetItemUUID desc",
+                "ServiceEntrySheetUUID",
+                "ServiceEntrySheetUUID desc",
+                "WBSElementInternalID",
+                "WBSElementInternalID desc",
+                "WBSElement",
+                "WBSElement desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ServiceEntrySheet",
+                "ServiceEntrySheetItem",
+                "AccountAssignment",
+                "AccountAssignmentUUID",
+                "PurchasingOrganization",
+                "PurchasingGroup",
+                "Plant",
+                "BusinessArea",
+                "CommitmentItem",
+                "ControllingArea",
+                "CostCenter",
+                "CostObject",
+                "CreatedByUser",
+                "CreationDateTime",
+                "EarmarkedFundsDocument",
+                "FixedAsset",
+                "FunctionalArea",
+                "Fund",
+                "FundsCenter",
+                "GLAccount",
+                "IsDeleted",
+                "LastChangeDateTime",
+                "LastChangedByUser",
+                "MasterFixedAsset",
+                "MultipleAcctAssgmtDistrPercent",
+                "NetworkActivityInternalID",
+                "OrderID",
+                "PartnerAccountNumber",
+                "ProfitCenter",
+                "ProfitabilitySegment",
+                "ProjectNetwork",
+                "ProjectNetworkInternalID",
+                "Quantity",
+                "QuantityUnit",
+                "RealEstateObject",
+                "RefDocAccountAssignment",
+                "SalesOrder",
+                "SalesOrderItem",
+                "SalesOrderScheduleLine",
+                "ServiceEntrySheetItemUUID",
+                "ServiceEntrySheetUUID",
+                "WBSElementInternalID",
+                "WBSElement"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SrvcEntrShtAcctAssignmentType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_SrvcEntrShtAcctAssignmentType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SrvcEntrShtAcctAssignment(ServiceEntrySheet='{ServiceEntrySheet}',ServiceEntrySheetItem='{ServiceEntrySheetItem}',AccountAssignment='{AccountAssignment}')": {
+      "parameters": [
+        {
+          "name": "ServiceEntrySheet",
+          "in": "path",
+          "required": true,
+          "description": "Service Entry Sheet",
+          "type": "string"
+        },
+        {
+          "name": "ServiceEntrySheetItem",
+          "in": "path",
+          "required": true,
+          "description": "Item Number of Service Entry Sheet",
+          "type": "string"
+        },
+        {
+          "name": "AccountAssignment",
+          "in": "path",
+          "required": true,
+          "description": "Sequential Number of Account Assignment  \nNumber uniquely defining the account assignment of a purchase document item.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SrvcEntrShtAcctAssignment by key",
+        "tags": [
+          "A_SrvcEntrShtAcctAssignment"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ServiceEntrySheet",
+                "ServiceEntrySheetItem",
+                "AccountAssignment",
+                "AccountAssignmentUUID",
+                "PurchasingOrganization",
+                "PurchasingGroup",
+                "Plant",
+                "BusinessArea",
+                "CommitmentItem",
+                "ControllingArea",
+                "CostCenter",
+                "CostObject",
+                "CreatedByUser",
+                "CreationDateTime",
+                "EarmarkedFundsDocument",
+                "FixedAsset",
+                "FunctionalArea",
+                "Fund",
+                "FundsCenter",
+                "GLAccount",
+                "IsDeleted",
+                "LastChangeDateTime",
+                "LastChangedByUser",
+                "MasterFixedAsset",
+                "MultipleAcctAssgmtDistrPercent",
+                "NetworkActivityInternalID",
+                "OrderID",
+                "PartnerAccountNumber",
+                "ProfitCenter",
+                "ProfitabilitySegment",
+                "ProjectNetwork",
+                "ProjectNetworkInternalID",
+                "Quantity",
+                "QuantityUnit",
+                "RealEstateObject",
+                "RefDocAccountAssignment",
+                "SalesOrder",
+                "SalesOrderItem",
+                "SalesOrderScheduleLine",
+                "ServiceEntrySheetItemUUID",
+                "ServiceEntrySheetUUID",
+                "WBSElementInternalID",
+                "WBSElement"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SrvcEntrShtAcctAssignmentType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_SrvcEntrShtAcctAssignmentType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_SrvcEntrShtAcctAssignment",
+        "tags": [
+          "A_SrvcEntrShtAcctAssignment"
+        ],
+        "parameters": [
+          {
+            "name": "A_SrvcEntrShtAcctAssignmentType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_SrvcEntrShtAcctAssignmentType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_SrvcEntrShtAcctAssignmentType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/SubmitForApproval": {
+      "post": {
+        "summary": "Submit for Approval",
+        "tags": [
+          "Service Operations"
+        ],
+        "parameters": [
+          {
+            "name": "ServiceEntrySheet",
+            "in": "query",
+            "required": true,
+            "description": "Service Entry Sheet  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "ChangeStatusExportParameters",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.ChangeStatusExportParameters"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/RevokeApproval": {
+      "post": {
+        "summary": "Revoke Approval",
+        "tags": [
+          "Service Operations"
+        ],
+        "parameters": [
+          {
+            "name": "ServiceEntrySheet",
+            "in": "query",
+            "required": true,
+            "description": "Service Entry Sheet  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PostingDate",
+            "in": "query",
+            "required": true,
+            "description": "Posting Date  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 10,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "ChangeStatusExportParameters",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.ChangeStatusExportParameters"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/WithdrawFromApproval": {
+      "post": {
+        "summary": "Withdraw from Approval",
+        "tags": [
+          "Service Operations"
+        ],
+        "parameters": [
+          {
+            "name": "ServiceEntrySheet",
+            "in": "query",
+            "required": true,
+            "description": "Service Entry Sheet  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "ChangeStatusExportParameters",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.ChangeStatusExportParameters"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET A_ServiceEntrySheet HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetType": {
+      "type": "object",
+      "properties": {
+        "ServiceEntrySheet": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Service Entry Sheet"
+        },
+        "ApprovalDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Approval Date",
+          "description": "Date and Time of SES Approval (UTC)"
+        },
+        "ApprovalStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Approval Status",
+          "description": "Approval Status for Service Entry Sheet"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "PurchasingOrganization": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Purch. Organization",
+          "description": "Purchasing Organization  \nDenotes the purchasing organization."
+        },
+        "PurchasingGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Purchasing Group",
+          "description": "Key for a buyer or a group of buyers, who is/are responsible for certain purchasing activities.  \nFrequently, purchasing documents (such as purchase orders) are monitored by the purchasing group. Urging letters (in the case of overdue deliveries) fall also within the group's scope of activities.For each purchasing group, statistical analyses can be performed. The purchasing group can be used as a sort criterion when creating purchasing-specific reports."
+        },
+        "IsEndOfPurposeBlocked": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Business Purp Compl",
+          "description": "Business Purpose Completed  \nIndicates whether the end of purpose (EoP) has been reached.  \nThe EoP is the point in time for a data set when the processing of personal data is no longer required for the primary business purpose. After the EoP has been reached, the data is blocked and can only be accessed by users with special authorization"
+        },
+        "Currency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Currency",
+          "description": "Currency Key  \nCurrency key for amounts in the system."
+        },
+        "IsDeleted": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Deletion indicator",
+          "description": "Deletion indicator in purchasing document  \nDetermines whether the item in the purchasing document is deleted or blocked.  \nYou can set the deletion indicator by choosing Edit -> Delete if:You want to cancel an itemAn item is closed and can be archivedYou can set the blocking indicator by selecting the item and then choosing Edit -> Block if you do not want to allow subsequent functions for the item. Note that you must manually remove the indicator as soon as subsequent functions are allowed again.You have entered a purchase order item by mistake. You cancel it by setting the deletion indicator.A purchase order item has been delivered, invoiced, and paid for, and can now be archived. You can set the deletion indicator."
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "MaterialDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Material Document",
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed."
+        },
+        "MaterialDocumentYear": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Material Doc. Year",
+          "description": "Material Document Year  \nCalendar year in which the material document was posted.  \nIn conjunction with the document number, the material document year constitutes the key via which a material document is accessed."
+        },
+        "OriginObjectType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Origin",
+          "description": "Origin of Service Entry Sheet  \nSpecifies the origin of the data of the service entry sheets.  \nA service entry sheet can be created in one of the following ways:Externally using an interface (integration with another system)Manually in your SAP S/4HANA systemBased on a time sheet in your SAP S/4HANA system.Using the filter criterion “Origin”, you can decide which service entry sheets are to be displayed in the list."
+        },
+        "PurchaseOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reference PO",
+          "description": "Reference Purchase Order"
+        },
+        "ResponsiblePerson": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Personnel Number",
+          "description": "The personnel number is the only feature within a client which is unique to an employee. You have to enter a personnel number before you can display and maintain an employee's master data and time data."
+        },
+        "ServiceEntrySheetName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "SES Name",
+          "description": "Name of Service Entry Sheet"
+        },
+        "ServiceEntrySheetUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Account Number of Supplier  \nSpecifies an alphanumeric key that uniquely identifies the supplier in the SAP system."
+        },
+        "PurgDocExternalSystem": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Ext. Ref. System",
+          "description": "ID of External Reference System"
+        },
+        "PurgDocExternalReference": {
+"type": "string",
+"default": "null",
+          "maxLength": 70,
+          "example": "string",
+          "title": "Ext. Reference ID",
+          "description": "External Reference ID  \nRepresents the node of an external document or of a subordinate entity. The ID can refer, for example, to the external document, to the item, or to the condition line of the external document. In any case, the ID must be unique."
+        },
+        "ExternalRevisionDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "External Revision",
+          "description": "Timestamp for Revision of External Calls"
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date for GR",
+          "description": "GR Posting Date  \nDate that is used as the posting date of the goods receipt document.  \nIn the service entry sheet, you can enter the date that is to be used by the system as posting date of the goods receipt document. When the service entry sheet is approved, the goods receipt document is automatically created and the posting date for the goods receipt is adopted.From the posting date, the system derives the fiscal year and the period for which an update of the accounts or cost elements specified in the document is made.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        },
+        "to_ServiceEntrySheetItem": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetItemType"
+              }
+            }
+          }
+        }
+      },
+      "title": " Service Entry Sheet API (Header)"
+    },
+    "API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetType-create": {
+      "type": "object",
+      "properties": {
+        "ServiceEntrySheet": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Service Entry Sheet"
+        },
+        "ApprovalDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Approval Date",
+          "description": "Date and Time of SES Approval (UTC)"
+        },
+        "ApprovalStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Approval Status",
+          "description": "Approval Status for Service Entry Sheet"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "PurchasingOrganization": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Purch. Organization",
+          "description": "Purchasing Organization  \nDenotes the purchasing organization."
+        },
+        "PurchasingGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Purchasing Group",
+          "description": "Key for a buyer or a group of buyers, who is/are responsible for certain purchasing activities.  \nFrequently, purchasing documents (such as purchase orders) are monitored by the purchasing group. Urging letters (in the case of overdue deliveries) fall also within the group's scope of activities.For each purchasing group, statistical analyses can be performed. The purchasing group can be used as a sort criterion when creating purchasing-specific reports."
+        },
+        "IsEndOfPurposeBlocked": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Business Purp Compl",
+          "description": "Business Purpose Completed  \nIndicates whether the end of purpose (EoP) has been reached.  \nThe EoP is the point in time for a data set when the processing of personal data is no longer required for the primary business purpose. After the EoP has been reached, the data is blocked and can only be accessed by users with special authorization"
+        },
+        "Currency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Currency",
+          "description": "Currency Key  \nCurrency key for amounts in the system."
+        },
+        "IsDeleted": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Deletion indicator",
+          "description": "Deletion indicator in purchasing document  \nDetermines whether the item in the purchasing document is deleted or blocked.  \nYou can set the deletion indicator by choosing Edit -> Delete if:You want to cancel an itemAn item is closed and can be archivedYou can set the blocking indicator by selecting the item and then choosing Edit -> Block if you do not want to allow subsequent functions for the item. Note that you must manually remove the indicator as soon as subsequent functions are allowed again.You have entered a purchase order item by mistake. You cancel it by setting the deletion indicator.A purchase order item has been delivered, invoiced, and paid for, and can now be archived. You can set the deletion indicator."
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "MaterialDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Material Document",
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed."
+        },
+        "MaterialDocumentYear": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Material Doc. Year",
+          "description": "Material Document Year  \nCalendar year in which the material document was posted.  \nIn conjunction with the document number, the material document year constitutes the key via which a material document is accessed."
+        },
+        "OriginObjectType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Origin",
+          "description": "Origin of Service Entry Sheet  \nSpecifies the origin of the data of the service entry sheets.  \nA service entry sheet can be created in one of the following ways:Externally using an interface (integration with another system)Manually in your SAP S/4HANA systemBased on a time sheet in your SAP S/4HANA system.Using the filter criterion “Origin”, you can decide which service entry sheets are to be displayed in the list."
+        },
+        "PurchaseOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reference PO",
+          "description": "Reference Purchase Order"
+        },
+        "ResponsiblePerson": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Personnel Number",
+          "description": "The personnel number is the only feature within a client which is unique to an employee. You have to enter a personnel number before you can display and maintain an employee's master data and time data."
+        },
+        "ServiceEntrySheetName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "SES Name",
+          "description": "Name of Service Entry Sheet"
+        },
+        "ServiceEntrySheetUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Account Number of Supplier  \nSpecifies an alphanumeric key that uniquely identifies the supplier in the SAP system."
+        },
+        "PurgDocExternalSystem": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Ext. Ref. System",
+          "description": "ID of External Reference System"
+        },
+        "PurgDocExternalReference": {
+"type": "string",
+"default": "null",
+          "maxLength": 70,
+          "example": "string",
+          "title": "Ext. Reference ID",
+          "description": "External Reference ID  \nRepresents the node of an external document or of a subordinate entity. The ID can refer, for example, to the external document, to the item, or to the condition line of the external document. In any case, the ID must be unique."
+        },
+        "ExternalRevisionDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "External Revision",
+          "description": "Timestamp for Revision of External Calls"
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date for GR",
+          "description": "GR Posting Date  \nDate that is used as the posting date of the goods receipt document.  \nIn the service entry sheet, you can enter the date that is to be used by the system as posting date of the goods receipt document. When the service entry sheet is approved, the goods receipt document is automatically created and the posting date for the goods receipt is adopted.From the posting date, the system derives the fiscal year and the period for which an update of the accounts or cost elements specified in the document is made.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        },
+        "to_ServiceEntrySheetItem": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetItemType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "ServiceEntrySheet"
+      ],
+      "title": " Service Entry Sheet API (Header) (for create)"
+    },
+    "API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetType-update": {
+      "type": "object",
+      "properties": {
+        "ApprovalDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Approval Date",
+          "description": "Date and Time of SES Approval (UTC)"
+        },
+        "ApprovalStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Approval Status",
+          "description": "Approval Status for Service Entry Sheet"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "PurchasingOrganization": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Purch. Organization",
+          "description": "Purchasing Organization  \nDenotes the purchasing organization."
+        },
+        "PurchasingGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Purchasing Group",
+          "description": "Key for a buyer or a group of buyers, who is/are responsible for certain purchasing activities.  \nFrequently, purchasing documents (such as purchase orders) are monitored by the purchasing group. Urging letters (in the case of overdue deliveries) fall also within the group's scope of activities.For each purchasing group, statistical analyses can be performed. The purchasing group can be used as a sort criterion when creating purchasing-specific reports."
+        },
+        "IsEndOfPurposeBlocked": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Business Purp Compl",
+          "description": "Business Purpose Completed  \nIndicates whether the end of purpose (EoP) has been reached.  \nThe EoP is the point in time for a data set when the processing of personal data is no longer required for the primary business purpose. After the EoP has been reached, the data is blocked and can only be accessed by users with special authorization"
+        },
+        "Currency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Currency",
+          "description": "Currency Key  \nCurrency key for amounts in the system."
+        },
+        "IsDeleted": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Deletion indicator",
+          "description": "Deletion indicator in purchasing document  \nDetermines whether the item in the purchasing document is deleted or blocked.  \nYou can set the deletion indicator by choosing Edit -> Delete if:You want to cancel an itemAn item is closed and can be archivedYou can set the blocking indicator by selecting the item and then choosing Edit -> Block if you do not want to allow subsequent functions for the item. Note that you must manually remove the indicator as soon as subsequent functions are allowed again.You have entered a purchase order item by mistake. You cancel it by setting the deletion indicator.A purchase order item has been delivered, invoiced, and paid for, and can now be archived. You can set the deletion indicator."
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "MaterialDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Material Document",
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed."
+        },
+        "MaterialDocumentYear": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Material Doc. Year",
+          "description": "Material Document Year  \nCalendar year in which the material document was posted.  \nIn conjunction with the document number, the material document year constitutes the key via which a material document is accessed."
+        },
+        "OriginObjectType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Origin",
+          "description": "Origin of Service Entry Sheet  \nSpecifies the origin of the data of the service entry sheets.  \nA service entry sheet can be created in one of the following ways:Externally using an interface (integration with another system)Manually in your SAP S/4HANA systemBased on a time sheet in your SAP S/4HANA system.Using the filter criterion “Origin”, you can decide which service entry sheets are to be displayed in the list."
+        },
+        "PurchaseOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reference PO",
+          "description": "Reference Purchase Order"
+        },
+        "ResponsiblePerson": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Personnel Number",
+          "description": "The personnel number is the only feature within a client which is unique to an employee. You have to enter a personnel number before you can display and maintain an employee's master data and time data."
+        },
+        "ServiceEntrySheetName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "SES Name",
+          "description": "Name of Service Entry Sheet"
+        },
+        "ServiceEntrySheetUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Account Number of Supplier  \nSpecifies an alphanumeric key that uniquely identifies the supplier in the SAP system."
+        },
+        "PurgDocExternalSystem": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Ext. Ref. System",
+          "description": "ID of External Reference System"
+        },
+        "PurgDocExternalReference": {
+"type": "string",
+"default": "null",
+          "maxLength": 70,
+          "example": "string",
+          "title": "Ext. Reference ID",
+          "description": "External Reference ID  \nRepresents the node of an external document or of a subordinate entity. The ID can refer, for example, to the external document, to the item, or to the condition line of the external document. In any case, the ID must be unique."
+        },
+        "ExternalRevisionDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "External Revision",
+          "description": "Timestamp for Revision of External Calls"
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date for GR",
+          "description": "GR Posting Date  \nDate that is used as the posting date of the goods receipt document.  \nIn the service entry sheet, you can enter the date that is to be used by the system as posting date of the goods receipt document. When the service entry sheet is approved, the goods receipt document is automatically created and the posting date for the goods receipt is adopted.From the posting date, the system derives the fiscal year and the period for which an update of the accounts or cost elements specified in the document is made.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        }
+      },
+      "title": " Service Entry Sheet API (Header) (for update)"
+    },
+    "API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetItemType": {
+      "type": "object",
+      "properties": {
+        "ServiceEntrySheet": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Service Entry Sheet"
+        },
+        "ServiceEntrySheetItem": {
+          "type": "string",
+          "maxLength": 5,
+          "title": "Item Number of SES",
+          "description": "Item Number of Service Entry Sheet"
+        },
+        "AccountAssignmentCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Acct Assignment Cat.",
+          "description": "Account Assignment Category  \nSpecifies whether accounting for an item is to be effected via an auxiliary account (such as a cost center).  \nThe account assignment category determines which account assignment data (such as cost center, account number and so on) is necessary for the item."
+        },
+        "ConfirmedQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Stated Quantity"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created By (User)",
+          "description": "Created By (User Name) for Service Entry Sheet"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "PurchasingOrganization": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Purch. Organization",
+          "description": "Purchasing Organization  \nDenotes the purchasing organization."
+        },
+        "PurchasingGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Purchasing Group",
+          "description": "Key for a buyer or a group of buyers, who is/are responsible for certain purchasing activities.  \nFrequently, purchasing documents (such as purchase orders) are monitored by the purchasing group. Urging letters (in the case of overdue deliveries) fall also within the group's scope of activities.For each purchasing group, statistical analyses can be performed. The purchasing group can be used as a sort criterion when creating purchasing-specific reports."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Specifies the key for a production facility or branch office within the company (that is, the company code).  \nYou use the plant key to determine, for instance, which plant is to receive ordered goods."
+        },
+        "Currency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Currency",
+          "description": "Currency Key  \nCurrency key for amounts in the system."
+        },
+        "IsDeleted": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Deletion indicator",
+          "description": "Deletion indicator in purchasing document  \nDetermines whether the item in the purchasing document is deleted or blocked.  \nYou can set the deletion indicator by choosing Edit -> Delete if:You want to cancel an itemAn item is closed and can be archivedYou can set the blocking indicator by selecting the item and then choosing Edit -> Block if you do not want to allow subsequent functions for the item. Note that you must manually remove the indicator as soon as subsequent functions are allowed again.You have entered a purchase order item by mistake. You cancel it by setting the deletion indicator.A purchase order item has been delivered, invoiced, and paid for, and can now be archived. You can set the deletion indicator."
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Last Changed (User)",
+          "description": "Last Changed (User Name) for Service Entry Sheet"
+        },
+        "MaterialGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 9,
+          "example": "string",
+          "title": "Product Group",
+          "description": "Key that you use to group together several products or services with the same attributes, and to assign them to a particular product group.  \nYou can use product groups to:Restrict the scope of analysesSearch specifically for product master records via search helpsIf you have not defined a product group hierarchy using the classification system, you maintain product groups in Customizing for the Material Master in Define material groups.If you have defined a product group hierarchy, which is normally the case in retail, you maintain product groups in Customizing for Material Groups or from the initial Retailing screen by choosing Master data -> Material group."
+        },
+        "MultipleAcctAssgmtDistribution": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Distribut. Indicator",
+          "description": "Distribution Indicator for Multiple Account Assignment  \nDefines how the quantity and value of the purchase order item are distributed to individual account assignment items.  \nYou can distribute the purchase order quantity or the net value of a document item, or specify a percentage for each account assignment. The system calculates complementary values. For example, if you choose quantity-based distribution and enter a number of pieces for each account assignment, the system calculates the percentage and net value.If you choose quantity-based or percentage distribution, the quantities that are distributed to an account assignment are rounded to three decimal places, to ensure that the 100% of the item quantity is always distributed.If you choose percentage distribution and change the requested quantity on the item overview screen, the system adjusts the quantities in the associated account assignment items.If you choose amount-based distribution, the system distributes the item quantity to the individual account assignments exactly according to the defined distribution, including very small value amounts. The quantities of individual account assignment items are displayed as rounded, but the system uses the exact quantities."
+        },
+        "NetAmount": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Stated Amount"
+        },
+        "NetPriceAmount": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Price per Unit",
+          "description": "Price per Unit for an SES Item"
+        },
+        "OriginObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Reference Document",
+          "description": "External Reference Document"
+        },
+        "PurchaseOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reference PO",
+          "description": "Reference Purchase Order"
+        },
+        "PurchaseOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Ref. PO Item",
+          "description": "Referenced Purchase Order Item"
+        },
+        "PurchaseContract": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Contract for Limit",
+          "description": "Purchase Contract for Enhanced Limit  \nIdentifies the purchase contract for the enhanced limit.  \nThe contract for the enhanced limit enables the following process:In a purchase contract, you define potential services for a service provider.In the purchase order item, you define a limit (Overall Limit and Expected Value) and you assign the purchase contract to this limit.In the service entry sheet that refers to this limit item, the purchaser can only select services from the assigned contract."
+        },
+        "PurchaseContractItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Purchase Contract Item",
+          "description": "Specifies the number of the outline agreement item to which this purchase order or purchase requisition refers."
+        },
+        "QuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Measure",
+          "description": "Unit of Measure for Service Entry Statement"
+        },
+        "Service": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Product"
+        },
+        "ServiceEntrySheetItemDesc": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Item Description",
+          "description": "Item Description for Service Entry Sheet"
+        },
+        "ServiceEntrySheetItemUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "ServiceEntrySheetUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "ServicePerformanceDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Performance Date",
+          "description": "Date of Service Performance"
+        },
+        "ServicePerformer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Service Performer"
+        },
+        "WorkItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Work Item ID"
+        },
+        "PurgDocItemExternalReference": {
+"type": "string",
+"default": "null",
+          "maxLength": 70,
+          "example": "string",
+          "title": "Ext. Reference ID",
+          "description": "External Reference ID  \nRepresents the node of an external document or of a subordinate entity. The ID can refer, for example, to the external document, to the item, or to the condition line of the external document. In any case, the ID must be unique."
+        },
+        "to_AccountAssignment": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_SrvcEntrShtAcctAssignmentType"
+              }
+            }
+          }
+        }
+      },
+      "title": "Service Entry Sheet Item API"
+    },
+    "API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetItemType-create": {
+      "type": "object",
+      "properties": {
+        "ServiceEntrySheet": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Service Entry Sheet"
+        },
+        "ServiceEntrySheetItem": {
+          "type": "string",
+          "maxLength": 5,
+          "title": "Item Number of SES",
+          "description": "Item Number of Service Entry Sheet"
+        },
+        "AccountAssignmentCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Acct Assignment Cat.",
+          "description": "Account Assignment Category  \nSpecifies whether accounting for an item is to be effected via an auxiliary account (such as a cost center).  \nThe account assignment category determines which account assignment data (such as cost center, account number and so on) is necessary for the item."
+        },
+        "ConfirmedQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Stated Quantity"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created By (User)",
+          "description": "Created By (User Name) for Service Entry Sheet"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "PurchasingOrganization": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Purch. Organization",
+          "description": "Purchasing Organization  \nDenotes the purchasing organization."
+        },
+        "PurchasingGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Purchasing Group",
+          "description": "Key for a buyer or a group of buyers, who is/are responsible for certain purchasing activities.  \nFrequently, purchasing documents (such as purchase orders) are monitored by the purchasing group. Urging letters (in the case of overdue deliveries) fall also within the group's scope of activities.For each purchasing group, statistical analyses can be performed. The purchasing group can be used as a sort criterion when creating purchasing-specific reports."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Specifies the key for a production facility or branch office within the company (that is, the company code).  \nYou use the plant key to determine, for instance, which plant is to receive ordered goods."
+        },
+        "Currency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Currency",
+          "description": "Currency Key  \nCurrency key for amounts in the system."
+        },
+        "IsDeleted": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Deletion indicator",
+          "description": "Deletion indicator in purchasing document  \nDetermines whether the item in the purchasing document is deleted or blocked.  \nYou can set the deletion indicator by choosing Edit -> Delete if:You want to cancel an itemAn item is closed and can be archivedYou can set the blocking indicator by selecting the item and then choosing Edit -> Block if you do not want to allow subsequent functions for the item. Note that you must manually remove the indicator as soon as subsequent functions are allowed again.You have entered a purchase order item by mistake. You cancel it by setting the deletion indicator.A purchase order item has been delivered, invoiced, and paid for, and can now be archived. You can set the deletion indicator."
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Last Changed (User)",
+          "description": "Last Changed (User Name) for Service Entry Sheet"
+        },
+        "MaterialGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 9,
+          "example": "string",
+          "title": "Product Group",
+          "description": "Key that you use to group together several products or services with the same attributes, and to assign them to a particular product group.  \nYou can use product groups to:Restrict the scope of analysesSearch specifically for product master records via search helpsIf you have not defined a product group hierarchy using the classification system, you maintain product groups in Customizing for the Material Master in Define material groups.If you have defined a product group hierarchy, which is normally the case in retail, you maintain product groups in Customizing for Material Groups or from the initial Retailing screen by choosing Master data -> Material group."
+        },
+        "MultipleAcctAssgmtDistribution": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Distribut. Indicator",
+          "description": "Distribution Indicator for Multiple Account Assignment  \nDefines how the quantity and value of the purchase order item are distributed to individual account assignment items.  \nYou can distribute the purchase order quantity or the net value of a document item, or specify a percentage for each account assignment. The system calculates complementary values. For example, if you choose quantity-based distribution and enter a number of pieces for each account assignment, the system calculates the percentage and net value.If you choose quantity-based or percentage distribution, the quantities that are distributed to an account assignment are rounded to three decimal places, to ensure that the 100% of the item quantity is always distributed.If you choose percentage distribution and change the requested quantity on the item overview screen, the system adjusts the quantities in the associated account assignment items.If you choose amount-based distribution, the system distributes the item quantity to the individual account assignments exactly according to the defined distribution, including very small value amounts. The quantities of individual account assignment items are displayed as rounded, but the system uses the exact quantities."
+        },
+        "NetAmount": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Stated Amount"
+        },
+        "NetPriceAmount": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Price per Unit",
+          "description": "Price per Unit for an SES Item"
+        },
+        "OriginObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Reference Document",
+          "description": "External Reference Document"
+        },
+        "PurchaseOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reference PO",
+          "description": "Reference Purchase Order"
+        },
+        "PurchaseOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Ref. PO Item",
+          "description": "Referenced Purchase Order Item"
+        },
+        "PurchaseContract": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Contract for Limit",
+          "description": "Purchase Contract for Enhanced Limit  \nIdentifies the purchase contract for the enhanced limit.  \nThe contract for the enhanced limit enables the following process:In a purchase contract, you define potential services for a service provider.In the purchase order item, you define a limit (Overall Limit and Expected Value) and you assign the purchase contract to this limit.In the service entry sheet that refers to this limit item, the purchaser can only select services from the assigned contract."
+        },
+        "PurchaseContractItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Purchase Contract Item",
+          "description": "Specifies the number of the outline agreement item to which this purchase order or purchase requisition refers."
+        },
+        "QuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Measure",
+          "description": "Unit of Measure for Service Entry Statement"
+        },
+        "Service": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Product"
+        },
+        "ServiceEntrySheetItemDesc": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Item Description",
+          "description": "Item Description for Service Entry Sheet"
+        },
+        "ServiceEntrySheetItemUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "ServiceEntrySheetUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "ServicePerformanceDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Performance Date",
+          "description": "Date of Service Performance"
+        },
+        "ServicePerformer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Service Performer"
+        },
+        "WorkItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Work Item ID"
+        },
+        "PurgDocItemExternalReference": {
+"type": "string",
+"default": "null",
+          "maxLength": 70,
+          "example": "string",
+          "title": "Ext. Reference ID",
+          "description": "External Reference ID  \nRepresents the node of an external document or of a subordinate entity. The ID can refer, for example, to the external document, to the item, or to the condition line of the external document. In any case, the ID must be unique."
+        },
+        "to_AccountAssignment": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SERVICE_ENTRY_SHEET_SRV.A_SrvcEntrShtAcctAssignmentType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "ServiceEntrySheet",
+        "ServiceEntrySheetItem"
+      ],
+      "title": "Service Entry Sheet Item API (for create)"
+    },
+    "API_SERVICE_ENTRY_SHEET_SRV.A_ServiceEntrySheetItemType-update": {
+      "type": "object",
+      "properties": {
+        "AccountAssignmentCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Acct Assignment Cat.",
+          "description": "Account Assignment Category  \nSpecifies whether accounting for an item is to be effected via an auxiliary account (such as a cost center).  \nThe account assignment category determines which account assignment data (such as cost center, account number and so on) is necessary for the item."
+        },
+        "ConfirmedQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Stated Quantity"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created By (User)",
+          "description": "Created By (User Name) for Service Entry Sheet"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "PurchasingOrganization": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Purch. Organization",
+          "description": "Purchasing Organization  \nDenotes the purchasing organization."
+        },
+        "PurchasingGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Purchasing Group",
+          "description": "Key for a buyer or a group of buyers, who is/are responsible for certain purchasing activities.  \nFrequently, purchasing documents (such as purchase orders) are monitored by the purchasing group. Urging letters (in the case of overdue deliveries) fall also within the group's scope of activities.For each purchasing group, statistical analyses can be performed. The purchasing group can be used as a sort criterion when creating purchasing-specific reports."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Specifies the key for a production facility or branch office within the company (that is, the company code).  \nYou use the plant key to determine, for instance, which plant is to receive ordered goods."
+        },
+        "Currency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Currency",
+          "description": "Currency Key  \nCurrency key for amounts in the system."
+        },
+        "IsDeleted": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Deletion indicator",
+          "description": "Deletion indicator in purchasing document  \nDetermines whether the item in the purchasing document is deleted or blocked.  \nYou can set the deletion indicator by choosing Edit -> Delete if:You want to cancel an itemAn item is closed and can be archivedYou can set the blocking indicator by selecting the item and then choosing Edit -> Block if you do not want to allow subsequent functions for the item. Note that you must manually remove the indicator as soon as subsequent functions are allowed again.You have entered a purchase order item by mistake. You cancel it by setting the deletion indicator.A purchase order item has been delivered, invoiced, and paid for, and can now be archived. You can set the deletion indicator."
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Last Changed (User)",
+          "description": "Last Changed (User Name) for Service Entry Sheet"
+        },
+        "MaterialGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 9,
+          "example": "string",
+          "title": "Product Group",
+          "description": "Key that you use to group together several products or services with the same attributes, and to assign them to a particular product group.  \nYou can use product groups to:Restrict the scope of analysesSearch specifically for product master records via search helpsIf you have not defined a product group hierarchy using the classification system, you maintain product groups in Customizing for the Material Master in Define material groups.If you have defined a product group hierarchy, which is normally the case in retail, you maintain product groups in Customizing for Material Groups or from the initial Retailing screen by choosing Master data -> Material group."
+        },
+        "MultipleAcctAssgmtDistribution": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Distribut. Indicator",
+          "description": "Distribution Indicator for Multiple Account Assignment  \nDefines how the quantity and value of the purchase order item are distributed to individual account assignment items.  \nYou can distribute the purchase order quantity or the net value of a document item, or specify a percentage for each account assignment. The system calculates complementary values. For example, if you choose quantity-based distribution and enter a number of pieces for each account assignment, the system calculates the percentage and net value.If you choose quantity-based or percentage distribution, the quantities that are distributed to an account assignment are rounded to three decimal places, to ensure that the 100% of the item quantity is always distributed.If you choose percentage distribution and change the requested quantity on the item overview screen, the system adjusts the quantities in the associated account assignment items.If you choose amount-based distribution, the system distributes the item quantity to the individual account assignments exactly according to the defined distribution, including very small value amounts. The quantities of individual account assignment items are displayed as rounded, but the system uses the exact quantities."
+        },
+        "NetAmount": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Stated Amount"
+        },
+        "NetPriceAmount": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Price per Unit",
+          "description": "Price per Unit for an SES Item"
+        },
+        "OriginObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Reference Document",
+          "description": "External Reference Document"
+        },
+        "PurchaseOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reference PO",
+          "description": "Reference Purchase Order"
+        },
+        "PurchaseOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Ref. PO Item",
+          "description": "Referenced Purchase Order Item"
+        },
+        "PurchaseContract": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Contract for Limit",
+          "description": "Purchase Contract for Enhanced Limit  \nIdentifies the purchase contract for the enhanced limit.  \nThe contract for the enhanced limit enables the following process:In a purchase contract, you define potential services for a service provider.In the purchase order item, you define a limit (Overall Limit and Expected Value) and you assign the purchase contract to this limit.In the service entry sheet that refers to this limit item, the purchaser can only select services from the assigned contract."
+        },
+        "PurchaseContractItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Purchase Contract Item",
+          "description": "Specifies the number of the outline agreement item to which this purchase order or purchase requisition refers."
+        },
+        "QuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Measure",
+          "description": "Unit of Measure for Service Entry Statement"
+        },
+        "Service": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Product"
+        },
+        "ServiceEntrySheetItemDesc": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Item Description",
+          "description": "Item Description for Service Entry Sheet"
+        },
+        "ServiceEntrySheetItemUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "ServiceEntrySheetUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "ServicePerformanceDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Performance Date",
+          "description": "Date of Service Performance"
+        },
+        "ServicePerformer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Service Performer"
+        },
+        "WorkItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Work Item ID"
+        },
+        "PurgDocItemExternalReference": {
+"type": "string",
+"default": "null",
+          "maxLength": 70,
+          "example": "string",
+          "title": "Ext. Reference ID",
+          "description": "External Reference ID  \nRepresents the node of an external document or of a subordinate entity. The ID can refer, for example, to the external document, to the item, or to the condition line of the external document. In any case, the ID must be unique."
+        }
+      },
+      "title": "Service Entry Sheet Item API (for update)"
+    },
+    "API_SERVICE_ENTRY_SHEET_SRV.A_SrvcEntrShtAcctAssignmentType": {
+      "type": "object",
+      "properties": {
+        "ServiceEntrySheet": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Service Entry Sheet"
+        },
+        "ServiceEntrySheetItem": {
+          "type": "string",
+          "maxLength": 5,
+          "title": "Item Number of SES",
+          "description": "Item Number of Service Entry Sheet"
+        },
+        "AccountAssignment": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Account Assgmt No.",
+          "description": "Sequential Number of Account Assignment  \nNumber uniquely defining the account assignment of a purchase document item."
+        },
+        "AccountAssignmentUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "PurchasingOrganization": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Purch. Organization",
+          "description": "Purchasing Organization  \nDenotes the purchasing organization."
+        },
+        "PurchasingGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Purchasing Group",
+          "description": "Key for a buyer or a group of buyers, who is/are responsible for certain purchasing activities.  \nFrequently, purchasing documents (such as purchase orders) are monitored by the purchasing group. Urging letters (in the case of overdue deliveries) fall also within the group's scope of activities.For each purchasing group, statistical analyses can be performed. The purchasing group can be used as a sort criterion when creating purchasing-specific reports."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Specifies the key for a production facility or branch office within the company (that is, the company code).  \nYou use the plant key to determine, for instance, which plant is to receive ordered goods."
+        },
+        "BusinessArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Business Area",
+          "description": "Key that uniquely identifies a business area."
+        },
+        "CommitmentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "Commitment item",
+          "description": "Commitment Item  \nAlphanumeric code of the commitment item you are creating, changing, displaying, or to which you are assigning budget."
+        },
+        "ControllingArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Controlling Area",
+          "description": "Uniquely identifies a controlling area.  \nThe controlling area is the highest organizational unit in Controlling.Whether controlling area and company code are in a 1:1 relationship or a 1:n relationship, the number of posting periods in both controlling area and company code(s) must be identical. However, special periods may vary."
+        },
+        "CostCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cost Center",
+          "description": "A key that uniquely identifies a cost center."
+        },
+        "CostObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Cost Object",
+          "description": "Term identifying the cost object ID.  \nCost objects are the activity units of business whose costs are assigned based on the cost origins. The R/3 System distinguishes between the following types of cost objects:Cost objects represented by a cost object IDCost objects represented by objects from other components, such as production orders or sales order itemsCost objects in the following areas are represented by cost object IDs:Activity-Based Costing (CO-OM-ABC)In Activity-Based Costing, overhead is first assigned to cost centers and then to business processes. From there, the overhead is assigned to cost objects as process costs.Costs for Intangible Goods and Services (CO-PC-OBJ)In Costs for Intangible Goods and Services, costs can be analyzed on general cost objects.Product Cost by Period (CO-PC-OBJ)In Product Cost by Period you can create a cost object hierarchy to record actual costs that cannot be recorded at the material or order level. You can distribute the costs assigned to the nodes of a cost object hierarchy directly to the individual objects in the lowest cost object nodes at period-end closing (for example, product cost collectors) or you can settle the costs directly from the cost object hierarchy to a price difference account.Product Cost Controlling Information System (CO-PC)You can create further cost object IDs in the Product Cost Controlling Information System for CO product groups. You can create a cost object ID for each group, and assign materials to the cost object ID. The costs of the assigned materials appear in summarized form in the information system by product group.You can use CO product groups for product drilldown reports.The cost object type determines which functions can be used with the cost object. Functions for cost object hierarchies are performed on the assumption that the given cost object indicates the top node of the hierarchy."
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "EarmarkedFundsDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Earmarked Funds",
+          "description": "Document Number for Earmarked Funds  \nNumber uniquely identifying a document."
+        },
+        "FixedAsset": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Subnumber",
+          "description": "Asset Subnumber  \nThis is the number which, together with the main asset number, uniquely identifies a fixed asset in Asset Accounting.  \nUsing the asset sub-number, you can:Provide for separate management of later acquisitions to assets.Represent complex fixed assets with their component parts.In contrast to the main asset number, the asset sub-number must be numerical."
+        },
+        "FunctionalArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Functional Area",
+          "description": "Structure criterion for an enterprise or government based on functional aspects.  \nUse for Cost-of-Sales AccountingThe functional area is required to create a profit and loss account in Financial Accounting using cost-of-sales accounting. The following are examples of structure criteria:ManufacturingAdministrationSalesResearch and developmentUse for GovernmentThe functional area is needed for Funds Management to meet legal requirements for reporting with functional aspects. You can use the functional area to represent the global targets and goals (such as public safety or city development), in particular the expenses of your organization.Use in cost-of-sales accountingSee the documentation on Filling the Functional Area Field.For comprehensive information on cost-of-sales accounting and on the functional area, see the SAP Library under Accounting -> Financial Accounting -> General Ledger -> Cost-of-Sales Accounting.Use in governmentFor more information on the functional area, see the implementation Guide for Funds Management Government in the section Activate Account Assignment Elements."
+        },
+        "Fund": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Fund",
+          "description": "Key which uniquely identifies the fund.  \nIf you assign the budget to a fund, you can obtain a detailed list of origin for the amounts involved."
+        },
+        "FundsCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Funds Center",
+          "description": "Alphanumeric code for the funds center, which you are creating, changing, or displaying, or to which you are assigning budget."
+        },
+        "GLAccount": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "G/L Account",
+          "description": "G/L Account Number  \nThe G/L account number identifies the G/L account in a chart of accounts."
+        },
+        "IsDeleted": {
+"type": "boolean",
+"default": "null",
+          "title": "Deletion Indicator",
+          "description": "Deletion Indicator: Purchasing Document Account Assignment  \nShows that the account assignment item has been deleted."
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "MasterFixedAsset": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Asset",
+          "description": "Main Asset Number  \nThis is the number which, together with the asset sub-number, identifies a fixed asset in Asset Accounting."
+        },
+        "MultipleAcctAssgmtDistrPercent": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.1,
+          "minimum": -99.9,
+          "maximum": 99.9,
+          "example": "0",
+          "title": "Distribution (%)",
+          "description": "Distribution percentage in the case of multiple acct assgt  \nPercentage of the total order quantity that you want to allocate to this account assignment item.  \nThe percentage entered determines what percentage of the costs are to be distributed to this account assignment item.The total of the percentages must equal 100%."
+        },
+        "NetworkActivityInternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Counter",
+          "description": "Internal counter  \nIdentifies the activity posting."
+        },
+        "OrderID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Order",
+          "description": "Order Number  \nKey that uniquely identifies an order within a client."
+        },
+        "PartnerAccountNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Partner",
+          "description": "Partner account number"
+        },
+        "ProfitCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profit Center",
+          "description": "Key which together with the controlling area uniquely identifies a profit center."
+        },
+        "ProfitabilitySegment": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profitab. Segmt No.",
+          "description": "Profitability Segment Number (CO-PA)  \nSee glossary  \nExamples:Customer '123'/Product '4710'         Profitability segment no. 1Customer '123'/Product '4712'         Profitability segment no. 2Country 'USA'/Region 'NORTH'          Profitability segment no. 3"
+        },
+        "ProjectNetwork": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Network",
+          "description": "Network Number for Account Assignment  \nA network can structure an entire project or a task within a project.  \nNumbers are used to differentiate these project structures.When you specify a network, for example, when you are entering attendances, you can define that the network is debited when the sender cost center is credited.Use the possible entries pushbutton to select the network number for the required project structure."
+        },
+        "ProjectNetworkInternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Opertn task list no.",
+          "description": "Routing number of operations in the order  \nNumber of the routing or reference operation set used in the order."
+        },
+        "Quantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Quantity",
+          "description": "Portion of total purchase order quantity that you wish to allocate to this account assignment item.  \nThe quantity entered determines which portion of the costs you wish to distribute to this account assignment item."
+        },
+        "QuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Measure",
+          "description": "Unit of Measure for Service Entry Statement"
+        },
+        "RealEstateObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Real Estate Key",
+          "description": "Internal Key for Real Estate Object"
+        },
+        "RefDocAccountAssignment": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "PO Item Acc Ass",
+          "description": "Account Assignment Number of the Referenced PO Item"
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "SD Document",
+          "description": "Sales and Distribution Document Number  \nThe number that uniquely identifies the sales, delivery, or billing document."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Item",
+          "description": "Sales Document Item  \nThe number that uniquely identifies the item in the sales document."
+        },
+        "SalesOrderScheduleLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Schedule Line Number",
+          "description": "The number that uniquely identifies the schedule line in the sales document.  \nWhen an item has more than one schedule line, the system automatically assigns a unique number to each line. The number is displayed in the details screens for schedule lines.The schedule line number serves internal purposes and does not, for example, determine the sequence of schedule lines in the overview screen. The schedule lines on the overview screen are sorted by date."
+        },
+        "ServiceEntrySheetItemUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "ServiceEntrySheetUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "WBSElementInternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Key identifying a WBS element."
+        },
+        "WBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        }
+      },
+      "title": "Service Entry Sheet Account Assignment API"
+    },
+    "API_SERVICE_ENTRY_SHEET_SRV.A_SrvcEntrShtAcctAssignmentType-create": {
+      "type": "object",
+      "properties": {
+        "ServiceEntrySheet": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Service Entry Sheet"
+        },
+        "ServiceEntrySheetItem": {
+          "type": "string",
+          "maxLength": 5,
+          "title": "Item Number of SES",
+          "description": "Item Number of Service Entry Sheet"
+        },
+        "AccountAssignment": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Account Assgmt No.",
+          "description": "Sequential Number of Account Assignment  \nNumber uniquely defining the account assignment of a purchase document item."
+        },
+        "AccountAssignmentUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "PurchasingOrganization": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Purch. Organization",
+          "description": "Purchasing Organization  \nDenotes the purchasing organization."
+        },
+        "PurchasingGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Purchasing Group",
+          "description": "Key for a buyer or a group of buyers, who is/are responsible for certain purchasing activities.  \nFrequently, purchasing documents (such as purchase orders) are monitored by the purchasing group. Urging letters (in the case of overdue deliveries) fall also within the group's scope of activities.For each purchasing group, statistical analyses can be performed. The purchasing group can be used as a sort criterion when creating purchasing-specific reports."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Specifies the key for a production facility or branch office within the company (that is, the company code).  \nYou use the plant key to determine, for instance, which plant is to receive ordered goods."
+        },
+        "BusinessArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Business Area",
+          "description": "Key that uniquely identifies a business area."
+        },
+        "CommitmentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "Commitment item",
+          "description": "Commitment Item  \nAlphanumeric code of the commitment item you are creating, changing, displaying, or to which you are assigning budget."
+        },
+        "ControllingArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Controlling Area",
+          "description": "Uniquely identifies a controlling area.  \nThe controlling area is the highest organizational unit in Controlling.Whether controlling area and company code are in a 1:1 relationship or a 1:n relationship, the number of posting periods in both controlling area and company code(s) must be identical. However, special periods may vary."
+        },
+        "CostCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cost Center",
+          "description": "A key that uniquely identifies a cost center."
+        },
+        "CostObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Cost Object",
+          "description": "Term identifying the cost object ID.  \nCost objects are the activity units of business whose costs are assigned based on the cost origins. The R/3 System distinguishes between the following types of cost objects:Cost objects represented by a cost object IDCost objects represented by objects from other components, such as production orders or sales order itemsCost objects in the following areas are represented by cost object IDs:Activity-Based Costing (CO-OM-ABC)In Activity-Based Costing, overhead is first assigned to cost centers and then to business processes. From there, the overhead is assigned to cost objects as process costs.Costs for Intangible Goods and Services (CO-PC-OBJ)In Costs for Intangible Goods and Services, costs can be analyzed on general cost objects.Product Cost by Period (CO-PC-OBJ)In Product Cost by Period you can create a cost object hierarchy to record actual costs that cannot be recorded at the material or order level. You can distribute the costs assigned to the nodes of a cost object hierarchy directly to the individual objects in the lowest cost object nodes at period-end closing (for example, product cost collectors) or you can settle the costs directly from the cost object hierarchy to a price difference account.Product Cost Controlling Information System (CO-PC)You can create further cost object IDs in the Product Cost Controlling Information System for CO product groups. You can create a cost object ID for each group, and assign materials to the cost object ID. The costs of the assigned materials appear in summarized form in the information system by product group.You can use CO product groups for product drilldown reports.The cost object type determines which functions can be used with the cost object. Functions for cost object hierarchies are performed on the assumption that the given cost object indicates the top node of the hierarchy."
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "EarmarkedFundsDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Earmarked Funds",
+          "description": "Document Number for Earmarked Funds  \nNumber uniquely identifying a document."
+        },
+        "FixedAsset": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Subnumber",
+          "description": "Asset Subnumber  \nThis is the number which, together with the main asset number, uniquely identifies a fixed asset in Asset Accounting.  \nUsing the asset sub-number, you can:Provide for separate management of later acquisitions to assets.Represent complex fixed assets with their component parts.In contrast to the main asset number, the asset sub-number must be numerical."
+        },
+        "FunctionalArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Functional Area",
+          "description": "Structure criterion for an enterprise or government based on functional aspects.  \nUse for Cost-of-Sales AccountingThe functional area is required to create a profit and loss account in Financial Accounting using cost-of-sales accounting. The following are examples of structure criteria:ManufacturingAdministrationSalesResearch and developmentUse for GovernmentThe functional area is needed for Funds Management to meet legal requirements for reporting with functional aspects. You can use the functional area to represent the global targets and goals (such as public safety or city development), in particular the expenses of your organization.Use in cost-of-sales accountingSee the documentation on Filling the Functional Area Field.For comprehensive information on cost-of-sales accounting and on the functional area, see the SAP Library under Accounting -> Financial Accounting -> General Ledger -> Cost-of-Sales Accounting.Use in governmentFor more information on the functional area, see the implementation Guide for Funds Management Government in the section Activate Account Assignment Elements."
+        },
+        "Fund": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Fund",
+          "description": "Key which uniquely identifies the fund.  \nIf you assign the budget to a fund, you can obtain a detailed list of origin for the amounts involved."
+        },
+        "FundsCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Funds Center",
+          "description": "Alphanumeric code for the funds center, which you are creating, changing, or displaying, or to which you are assigning budget."
+        },
+        "GLAccount": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "G/L Account",
+          "description": "G/L Account Number  \nThe G/L account number identifies the G/L account in a chart of accounts."
+        },
+        "IsDeleted": {
+"type": "boolean",
+"default": "null",
+          "title": "Deletion Indicator",
+          "description": "Deletion Indicator: Purchasing Document Account Assignment  \nShows that the account assignment item has been deleted."
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "MasterFixedAsset": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Asset",
+          "description": "Main Asset Number  \nThis is the number which, together with the asset sub-number, identifies a fixed asset in Asset Accounting."
+        },
+        "MultipleAcctAssgmtDistrPercent": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.1,
+          "minimum": -99.9,
+          "maximum": 99.9,
+          "example": "0",
+          "title": "Distribution (%)",
+          "description": "Distribution percentage in the case of multiple acct assgt  \nPercentage of the total order quantity that you want to allocate to this account assignment item.  \nThe percentage entered determines what percentage of the costs are to be distributed to this account assignment item.The total of the percentages must equal 100%."
+        },
+        "NetworkActivityInternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Counter",
+          "description": "Internal counter  \nIdentifies the activity posting."
+        },
+        "OrderID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Order",
+          "description": "Order Number  \nKey that uniquely identifies an order within a client."
+        },
+        "PartnerAccountNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Partner",
+          "description": "Partner account number"
+        },
+        "ProfitCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profit Center",
+          "description": "Key which together with the controlling area uniquely identifies a profit center."
+        },
+        "ProfitabilitySegment": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profitab. Segmt No.",
+          "description": "Profitability Segment Number (CO-PA)  \nSee glossary  \nExamples:Customer '123'/Product '4710'         Profitability segment no. 1Customer '123'/Product '4712'         Profitability segment no. 2Country 'USA'/Region 'NORTH'          Profitability segment no. 3"
+        },
+        "ProjectNetwork": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Network",
+          "description": "Network Number for Account Assignment  \nA network can structure an entire project or a task within a project.  \nNumbers are used to differentiate these project structures.When you specify a network, for example, when you are entering attendances, you can define that the network is debited when the sender cost center is credited.Use the possible entries pushbutton to select the network number for the required project structure."
+        },
+        "ProjectNetworkInternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Opertn task list no.",
+          "description": "Routing number of operations in the order  \nNumber of the routing or reference operation set used in the order."
+        },
+        "Quantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Quantity",
+          "description": "Portion of total purchase order quantity that you wish to allocate to this account assignment item.  \nThe quantity entered determines which portion of the costs you wish to distribute to this account assignment item."
+        },
+        "QuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Measure",
+          "description": "Unit of Measure for Service Entry Statement"
+        },
+        "RealEstateObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Real Estate Key",
+          "description": "Internal Key for Real Estate Object"
+        },
+        "RefDocAccountAssignment": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "PO Item Acc Ass",
+          "description": "Account Assignment Number of the Referenced PO Item"
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "SD Document",
+          "description": "Sales and Distribution Document Number  \nThe number that uniquely identifies the sales, delivery, or billing document."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Item",
+          "description": "Sales Document Item  \nThe number that uniquely identifies the item in the sales document."
+        },
+        "SalesOrderScheduleLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Schedule Line Number",
+          "description": "The number that uniquely identifies the schedule line in the sales document.  \nWhen an item has more than one schedule line, the system automatically assigns a unique number to each line. The number is displayed in the details screens for schedule lines.The schedule line number serves internal purposes and does not, for example, determine the sequence of schedule lines in the overview screen. The schedule lines on the overview screen are sorted by date."
+        },
+        "ServiceEntrySheetItemUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "ServiceEntrySheetUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "WBSElementInternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Key identifying a WBS element."
+        },
+        "WBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        }
+      },
+      "required": [
+        "ServiceEntrySheet",
+        "ServiceEntrySheetItem",
+        "AccountAssignment"
+      ],
+      "title": "Service Entry Sheet Account Assignment API (for create)"
+    },
+    "API_SERVICE_ENTRY_SHEET_SRV.A_SrvcEntrShtAcctAssignmentType-update": {
+      "type": "object",
+      "properties": {
+        "AccountAssignmentUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "PurchasingOrganization": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Purch. Organization",
+          "description": "Purchasing Organization  \nDenotes the purchasing organization."
+        },
+        "PurchasingGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Purchasing Group",
+          "description": "Key for a buyer or a group of buyers, who is/are responsible for certain purchasing activities.  \nFrequently, purchasing documents (such as purchase orders) are monitored by the purchasing group. Urging letters (in the case of overdue deliveries) fall also within the group's scope of activities.For each purchasing group, statistical analyses can be performed. The purchasing group can be used as a sort criterion when creating purchasing-specific reports."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Specifies the key for a production facility or branch office within the company (that is, the company code).  \nYou use the plant key to determine, for instance, which plant is to receive ordered goods."
+        },
+        "BusinessArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Business Area",
+          "description": "Key that uniquely identifies a business area."
+        },
+        "CommitmentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "Commitment item",
+          "description": "Commitment Item  \nAlphanumeric code of the commitment item you are creating, changing, displaying, or to which you are assigning budget."
+        },
+        "ControllingArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Controlling Area",
+          "description": "Uniquely identifies a controlling area.  \nThe controlling area is the highest organizational unit in Controlling.Whether controlling area and company code are in a 1:1 relationship or a 1:n relationship, the number of posting periods in both controlling area and company code(s) must be identical. However, special periods may vary."
+        },
+        "CostCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cost Center",
+          "description": "A key that uniquely identifies a cost center."
+        },
+        "CostObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Cost Object",
+          "description": "Term identifying the cost object ID.  \nCost objects are the activity units of business whose costs are assigned based on the cost origins. The R/3 System distinguishes between the following types of cost objects:Cost objects represented by a cost object IDCost objects represented by objects from other components, such as production orders or sales order itemsCost objects in the following areas are represented by cost object IDs:Activity-Based Costing (CO-OM-ABC)In Activity-Based Costing, overhead is first assigned to cost centers and then to business processes. From there, the overhead is assigned to cost objects as process costs.Costs for Intangible Goods and Services (CO-PC-OBJ)In Costs for Intangible Goods and Services, costs can be analyzed on general cost objects.Product Cost by Period (CO-PC-OBJ)In Product Cost by Period you can create a cost object hierarchy to record actual costs that cannot be recorded at the material or order level. You can distribute the costs assigned to the nodes of a cost object hierarchy directly to the individual objects in the lowest cost object nodes at period-end closing (for example, product cost collectors) or you can settle the costs directly from the cost object hierarchy to a price difference account.Product Cost Controlling Information System (CO-PC)You can create further cost object IDs in the Product Cost Controlling Information System for CO product groups. You can create a cost object ID for each group, and assign materials to the cost object ID. The costs of the assigned materials appear in summarized form in the information system by product group.You can use CO product groups for product drilldown reports.The cost object type determines which functions can be used with the cost object. Functions for cost object hierarchies are performed on the assumption that the given cost object indicates the top node of the hierarchy."
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "EarmarkedFundsDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Earmarked Funds",
+          "description": "Document Number for Earmarked Funds  \nNumber uniquely identifying a document."
+        },
+        "FixedAsset": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Subnumber",
+          "description": "Asset Subnumber  \nThis is the number which, together with the main asset number, uniquely identifies a fixed asset in Asset Accounting.  \nUsing the asset sub-number, you can:Provide for separate management of later acquisitions to assets.Represent complex fixed assets with their component parts.In contrast to the main asset number, the asset sub-number must be numerical."
+        },
+        "FunctionalArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Functional Area",
+          "description": "Structure criterion for an enterprise or government based on functional aspects.  \nUse for Cost-of-Sales AccountingThe functional area is required to create a profit and loss account in Financial Accounting using cost-of-sales accounting. The following are examples of structure criteria:ManufacturingAdministrationSalesResearch and developmentUse for GovernmentThe functional area is needed for Funds Management to meet legal requirements for reporting with functional aspects. You can use the functional area to represent the global targets and goals (such as public safety or city development), in particular the expenses of your organization.Use in cost-of-sales accountingSee the documentation on Filling the Functional Area Field.For comprehensive information on cost-of-sales accounting and on the functional area, see the SAP Library under Accounting -> Financial Accounting -> General Ledger -> Cost-of-Sales Accounting.Use in governmentFor more information on the functional area, see the implementation Guide for Funds Management Government in the section Activate Account Assignment Elements."
+        },
+        "Fund": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Fund",
+          "description": "Key which uniquely identifies the fund.  \nIf you assign the budget to a fund, you can obtain a detailed list of origin for the amounts involved."
+        },
+        "FundsCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Funds Center",
+          "description": "Alphanumeric code for the funds center, which you are creating, changing, or displaying, or to which you are assigning budget."
+        },
+        "GLAccount": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "G/L Account",
+          "description": "G/L Account Number  \nThe G/L account number identifies the G/L account in a chart of accounts."
+        },
+        "IsDeleted": {
+"type": "boolean",
+"default": "null",
+          "title": "Deletion Indicator",
+          "description": "Deletion Indicator: Purchasing Document Account Assignment  \nShows that the account assignment item has been deleted."
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "MasterFixedAsset": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Asset",
+          "description": "Main Asset Number  \nThis is the number which, together with the asset sub-number, identifies a fixed asset in Asset Accounting."
+        },
+        "MultipleAcctAssgmtDistrPercent": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.1,
+          "minimum": -99.9,
+          "maximum": 99.9,
+          "example": "0",
+          "title": "Distribution (%)",
+          "description": "Distribution percentage in the case of multiple acct assgt  \nPercentage of the total order quantity that you want to allocate to this account assignment item.  \nThe percentage entered determines what percentage of the costs are to be distributed to this account assignment item.The total of the percentages must equal 100%."
+        },
+        "NetworkActivityInternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Counter",
+          "description": "Internal counter  \nIdentifies the activity posting."
+        },
+        "OrderID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Order",
+          "description": "Order Number  \nKey that uniquely identifies an order within a client."
+        },
+        "PartnerAccountNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Partner",
+          "description": "Partner account number"
+        },
+        "ProfitCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profit Center",
+          "description": "Key which together with the controlling area uniquely identifies a profit center."
+        },
+        "ProfitabilitySegment": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profitab. Segmt No.",
+          "description": "Profitability Segment Number (CO-PA)  \nSee glossary  \nExamples:Customer '123'/Product '4710'         Profitability segment no. 1Customer '123'/Product '4712'         Profitability segment no. 2Country 'USA'/Region 'NORTH'          Profitability segment no. 3"
+        },
+        "ProjectNetwork": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Network",
+          "description": "Network Number for Account Assignment  \nA network can structure an entire project or a task within a project.  \nNumbers are used to differentiate these project structures.When you specify a network, for example, when you are entering attendances, you can define that the network is debited when the sender cost center is credited.Use the possible entries pushbutton to select the network number for the required project structure."
+        },
+        "ProjectNetworkInternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Opertn task list no.",
+          "description": "Routing number of operations in the order  \nNumber of the routing or reference operation set used in the order."
+        },
+        "Quantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Quantity",
+          "description": "Portion of total purchase order quantity that you wish to allocate to this account assignment item.  \nThe quantity entered determines which portion of the costs you wish to distribute to this account assignment item."
+        },
+        "QuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Measure",
+          "description": "Unit of Measure for Service Entry Statement"
+        },
+        "RealEstateObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Real Estate Key",
+          "description": "Internal Key for Real Estate Object"
+        },
+        "RefDocAccountAssignment": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "PO Item Acc Ass",
+          "description": "Account Assignment Number of the Referenced PO Item"
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "SD Document",
+          "description": "Sales and Distribution Document Number  \nThe number that uniquely identifies the sales, delivery, or billing document."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Item",
+          "description": "Sales Document Item  \nThe number that uniquely identifies the item in the sales document."
+        },
+        "SalesOrderScheduleLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Schedule Line Number",
+          "description": "The number that uniquely identifies the schedule line in the sales document.  \nWhen an item has more than one schedule line, the system automatically assigns a unique number to each line. The number is displayed in the details screens for schedule lines.The schedule line number serves internal purposes and does not, for example, determine the sequence of schedule lines in the overview screen. The schedule lines on the overview screen are sorted by date."
+        },
+        "ServiceEntrySheetItemUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "ServiceEntrySheetUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Key",
+          "description": "UUID serving as key (parent key, root key)"
+        },
+        "WBSElementInternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Key identifying a WBS element."
+        },
+        "WBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        }
+      },
+      "title": "Service Entry Sheet Account Assignment API (for update)"
+    },
+    "API_SERVICE_ENTRY_SHEET_SRV.ChangeStatusExportParameters": {
+      "type": "object",
+      "properties": {
+        "Approvalstatus": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Approval Status",
+          "description": "Approval Status for Service Entry Sheet"
+        }
+      },
+      "title": "ChangeStatusExportParameters"
+    },
+    "API_SERVICE_ENTRY_SHEET_SRV.ChangeStatusExportParameters-create": {
+      "type": "object",
+      "title": "ChangeStatusExportParameters (for create)"
+    },
+    "API_SERVICE_ENTRY_SHEET_SRV.ChangeStatusExportParameters-update": {
+      "type": "object",
+      "title": "ChangeStatusExportParameters (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

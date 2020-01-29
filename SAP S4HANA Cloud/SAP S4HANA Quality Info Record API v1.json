@@ -1,0 +1,762 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Quality Info Record",
+    "version": "1 ",
+    "description": "\n\nThe data related to a quality  info record has one entity type. For read  operations, filter information must be sent according  to the OData protocol. All filter information is utilized  when retrieving quality info records. The detailed  entity data is sent in the response. If any issues  arise when quality info records are retrieved, the  system displays error messages in the response."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/a5/77b05467254dd6a186e78c9acd1f7b/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Create, read, update, and delete data related to quality info records through this synchronous inbound service",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Quality Info Record Integration (SAP_COM_0358)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Quality Management in Procurement (1FM)](https://rapid.sap.com/bp/#/scopeitems/1FM \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509, OAuth2",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_QUALITYINFORECORD_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_QUALITYINFORECORD_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "QualityInProcurement"
+    }
+  ],
+  "paths": {
+    "/QualityInProcurement": {
+      "get": {
+        "summary": "Get entities from QualityInProcurement",
+        "tags": [
+          "QualityInProcurement"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Material",
+                "Material desc",
+                "QltyInProcmtIntID",
+                "QltyInProcmtIntID desc",
+                "Supplier",
+                "Supplier desc",
+                "Plant",
+                "Plant desc",
+                "MaterialRevisionLevel",
+                "MaterialRevisionLevel desc",
+                "QltyInProcmtReleaseValidTo",
+                "QltyInProcmtReleaseValidTo desc",
+                "BaseUnit",
+                "BaseUnit desc",
+                "ReleasedQuantity",
+                "ReleasedQuantity desc",
+                "BlockReason",
+                "BlockReason desc",
+                "ProcurementBlock",
+                "ProcurementBlock desc",
+                "QltyInProcmtRelQtyIsActive",
+                "QltyInProcmtRelQtyIsActive desc",
+                "QltyInProcmtInspControl",
+                "QltyInProcmtInspControl desc",
+                "IsDeleted",
+                "IsDeleted desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Material",
+                "QltyInProcmtIntID",
+                "Supplier",
+                "Plant",
+                "MaterialRevisionLevel",
+                "QltyInProcmtReleaseValidTo",
+                "BaseUnit",
+                "ReleasedQuantity",
+                "BlockReason",
+                "ProcurementBlock",
+                "QltyInProcmtRelQtyIsActive",
+                "QltyInProcmtInspControl",
+                "IsDeleted"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of QualityInProcurementType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/cds_api_qualityinforecord_srv.QualityInProcurementType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to QualityInProcurement",
+        "tags": [
+          "QualityInProcurement"
+        ],
+        "parameters": [
+          {
+            "name": "QualityInProcurementType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/cds_api_qualityinforecord_srv.QualityInProcurementType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "QualityInProcurementType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/cds_api_qualityinforecord_srv.QualityInProcurementType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/QualityInProcurement(Material='{Material}',QltyInProcmtIntID='{QltyInProcmtIntID}')": {
+      "parameters": [
+        {
+          "name": "Material",
+          "in": "path",
+          "required": true,
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material.",
+          "type": "string"
+        },
+        {
+          "name": "QltyInProcmtIntID",
+          "in": "path",
+          "required": true,
+          "description": "Internal Counter for DB Objects",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from QualityInProcurement by key",
+        "tags": [
+          "QualityInProcurement"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Material",
+                "QltyInProcmtIntID",
+                "Supplier",
+                "Plant",
+                "MaterialRevisionLevel",
+                "QltyInProcmtReleaseValidTo",
+                "BaseUnit",
+                "ReleasedQuantity",
+                "BlockReason",
+                "ProcurementBlock",
+                "QltyInProcmtRelQtyIsActive",
+                "QltyInProcmtInspControl",
+                "IsDeleted"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "QualityInProcurementType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/cds_api_qualityinforecord_srv.QualityInProcurementType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in QualityInProcurement",
+        "tags": [
+          "QualityInProcurement"
+        ],
+        "parameters": [
+          {
+            "name": "QualityInProcurementType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified QualityInProcurementType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/cds_api_qualityinforecord_srv.QualityInProcurementType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete entity from QualityInProcurement",
+        "tags": [
+          "QualityInProcurement"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET QualityInProcurement HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "cds_api_qualityinforecord_srv.QualityInProcurementType": {
+      "type": "object",
+      "properties": {
+        "Material": {
+          "type": "string",
+          "maxLength": 18,
+          "title": "Material",
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material."
+        },
+        "QltyInProcmtIntID": {
+          "type": "string",
+          "maxLength": 6,
+          "title": "Counter",
+          "description": "Internal Counter for DB Objects"
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "MaterialRevisionLevel": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Revision Level"
+        },
+        "QltyInProcmtReleaseValidTo": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Release Until",
+          "description": "Date Until Which the Release Is Valid  \nLatest date, on which the material for the plant can be ordered from the supplier."
+        },
+        "BaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Measure",
+          "description": "Base Unit of Measure for the Material"
+        },
+        "ReleasedQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Release Quantity",
+          "description": "Quantity Released for the Material  \nIf a release quantity is required, this quantity is entered in this field.  \nThe system also displays the sum of the ordered quantities .If you reset the ordered quantity, the system no longer shows the ordered quantity and notes the reset date."
+        },
+        "BlockReason": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Block Reason",
+          "description": "Blocking reason  \nYou can enter a text here, explaining why the vendor relationship is blocked."
+        },
+        "ProcurementBlock": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Block Function",
+          "description": "Function That Will Be Blocked  \nKey that determines which procurement functions (for example, request for quotation, purchase order, or goods receipt) should be blocked for quality reasons.  \nYou can enter a block key in the:Supplier master recordIn this case, the supplier block applies to all materials and plants.Quality info record for QM in procurementIn this case, the supplier block applies to a single material and plant.A block for quality reasons applies only to those materials for which QM in procurement is active."
+        },
+        "QltyInProcmtRelQtyIsActive": {
+"type": "boolean",
+"default": "null",
+          "title": "Release Quantity Is Active"
+        },
+        "QltyInProcmtInspControl": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Inspection Control",
+          "description": "Inspection Control in the QM Info Record  \nThis identifier in the quality info record controls whether an inspection lot is created. The following settings are available:  \n\"Inspection active, if vendor is not certified\"An inspection lot is created if the settings in the material master require this, and if there is no other overriding control function.\"No inspection\"No inspection lot is created, although the material master requires an inspection.\"Inspection active, independent of vendor certification\"An inspection lot is created, although a skip lot is scheduled for the vendor as a result of the vendor's QM system."
+        },
+        "IsDeleted": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Deletion Flag",
+          "description": "The current data record has been marked for deletion.  \nThis data record will be deleted, depending on additional settings, in the next archiving run."
+        }
+      },
+      "title": "Quality Info Record API View"
+    },
+    "cds_api_qualityinforecord_srv.QualityInProcurementType-create": {
+      "type": "object",
+      "properties": {
+        "Material": {
+          "type": "string",
+          "maxLength": 18,
+          "title": "Material",
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material."
+        },
+        "QltyInProcmtIntID": {
+          "type": "string",
+          "maxLength": 6,
+          "title": "Counter",
+          "description": "Internal Counter for DB Objects"
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "MaterialRevisionLevel": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Revision Level"
+        },
+        "QltyInProcmtReleaseValidTo": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Release Until",
+          "description": "Date Until Which the Release Is Valid  \nLatest date, on which the material for the plant can be ordered from the supplier."
+        },
+        "BaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Measure",
+          "description": "Base Unit of Measure for the Material"
+        },
+        "ReleasedQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Release Quantity",
+          "description": "Quantity Released for the Material  \nIf a release quantity is required, this quantity is entered in this field.  \nThe system also displays the sum of the ordered quantities .If you reset the ordered quantity, the system no longer shows the ordered quantity and notes the reset date."
+        },
+        "BlockReason": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Block Reason",
+          "description": "Blocking reason  \nYou can enter a text here, explaining why the vendor relationship is blocked."
+        },
+        "ProcurementBlock": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Block Function",
+          "description": "Function That Will Be Blocked  \nKey that determines which procurement functions (for example, request for quotation, purchase order, or goods receipt) should be blocked for quality reasons.  \nYou can enter a block key in the:Supplier master recordIn this case, the supplier block applies to all materials and plants.Quality info record for QM in procurementIn this case, the supplier block applies to a single material and plant.A block for quality reasons applies only to those materials for which QM in procurement is active."
+        },
+        "QltyInProcmtRelQtyIsActive": {
+"type": "boolean",
+"default": "null",
+          "title": "Release Quantity Is Active"
+        },
+        "QltyInProcmtInspControl": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Inspection Control",
+          "description": "Inspection Control in the QM Info Record  \nThis identifier in the quality info record controls whether an inspection lot is created. The following settings are available:  \n\"Inspection active, if vendor is not certified\"An inspection lot is created if the settings in the material master require this, and if there is no other overriding control function.\"No inspection\"No inspection lot is created, although the material master requires an inspection.\"Inspection active, independent of vendor certification\"An inspection lot is created, although a skip lot is scheduled for the vendor as a result of the vendor's QM system."
+        },
+        "IsDeleted": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Deletion Flag",
+          "description": "The current data record has been marked for deletion.  \nThis data record will be deleted, depending on additional settings, in the next archiving run."
+        }
+      },
+      "required": [
+        "Material",
+        "QltyInProcmtIntID"
+      ],
+      "title": "Quality Info Record API View (for create)"
+    },
+    "cds_api_qualityinforecord_srv.QualityInProcurementType-update": {
+      "type": "object",
+      "properties": {
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "MaterialRevisionLevel": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Revision Level"
+        },
+        "QltyInProcmtReleaseValidTo": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Release Until",
+          "description": "Date Until Which the Release Is Valid  \nLatest date, on which the material for the plant can be ordered from the supplier."
+        },
+        "BaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Measure",
+          "description": "Base Unit of Measure for the Material"
+        },
+        "ReleasedQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Release Quantity",
+          "description": "Quantity Released for the Material  \nIf a release quantity is required, this quantity is entered in this field.  \nThe system also displays the sum of the ordered quantities .If you reset the ordered quantity, the system no longer shows the ordered quantity and notes the reset date."
+        },
+        "BlockReason": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Block Reason",
+          "description": "Blocking reason  \nYou can enter a text here, explaining why the vendor relationship is blocked."
+        },
+        "ProcurementBlock": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Block Function",
+          "description": "Function That Will Be Blocked  \nKey that determines which procurement functions (for example, request for quotation, purchase order, or goods receipt) should be blocked for quality reasons.  \nYou can enter a block key in the:Supplier master recordIn this case, the supplier block applies to all materials and plants.Quality info record for QM in procurementIn this case, the supplier block applies to a single material and plant.A block for quality reasons applies only to those materials for which QM in procurement is active."
+        },
+        "QltyInProcmtRelQtyIsActive": {
+"type": "boolean",
+"default": "null",
+          "title": "Release Quantity Is Active"
+        },
+        "QltyInProcmtInspControl": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Inspection Control",
+          "description": "Inspection Control in the QM Info Record  \nThis identifier in the quality info record controls whether an inspection lot is created. The following settings are available:  \n\"Inspection active, if vendor is not certified\"An inspection lot is created if the settings in the material master require this, and if there is no other overriding control function.\"No inspection\"No inspection lot is created, although the material master requires an inspection.\"Inspection active, independent of vendor certification\"An inspection lot is created, although a skip lot is scheduled for the vendor as a result of the vendor's QM system."
+        },
+        "IsDeleted": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Deletion Flag",
+          "description": "The current data record has been marked for deletion.  \nThis data record will be deleted, depending on additional settings, in the next archiving run."
+        }
+      },
+      "title": "Quality Info Record API View (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

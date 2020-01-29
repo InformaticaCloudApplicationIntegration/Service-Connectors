@@ -1,0 +1,3570 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Product Allocation Object",
+    "version": "1 ",
+    "description": " You can use this service to read the data from product allocation objects as well as read, edit and delete characteristic value combinations and their corresponding time series (planned allocation quantities per period).\n"
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com/viewer/46723284fb544082a5b9ede023fd1820/latest/en-US/ac8316e52e5347b0b5259757b7faf2e4.html"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Use this service to read, edit and delete product allocation object data",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Product Allocation Object Integration (SAP_COM_0152)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Advanced Available-to-Promise Processing (1JW)](https://rapid.sap.com/bp/#/scopeitems/1JW \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_PRODUCT_ALLOCATION_OBJECT_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_PRODUCT_ALLOCATION_OBJECT_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_ProdAllocationObject"
+    },
+    {
+      "name": "A_ProdAllocationObjectT"
+    },
+    {
+      "name": "A_ProdAllocCharcMetaData"
+    },
+    {
+      "name": "A_ProdAllocCharcValCombn"
+    },
+    {
+      "name": "A_ProdAllocObjTimeSeries"
+    }
+  ],
+  "paths": {
+    "/A_ProdAllocationObject": {
+      "get": {
+        "summary": "Get entities from A_ProdAllocationObject",
+        "tags": [
+          "A_ProdAllocationObject"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObjectUUID desc",
+                "ProductAllocationObject",
+                "ProductAllocationObject desc",
+                "ProductAllocationObject_Text",
+                "ProductAllocationObject_Text desc",
+                "ProductAllocationPeriodType",
+                "ProductAllocationPeriodType desc",
+                "ProdAllocationPeriodTimeZone",
+                "ProdAllocationPeriodTimeZone desc",
+                "FactoryCalendar",
+                "FactoryCalendar desc",
+                "ProdAllocCheckDateTimeType",
+                "ProdAllocCheckDateTimeType desc",
+                "ProductAllocationQuantityUnit",
+                "ProductAllocationQuantityUnit desc",
+                "CollectiveAllocationType",
+                "CollectiveAllocationType desc",
+                "CreationDateTime",
+                "CreationDateTime desc",
+                "CreatedByUser",
+                "CreatedByUser desc",
+                "LastChangeDateTime",
+                "LastChangeDateTime desc",
+                "LastChangedByUser",
+                "LastChangedByUser desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObject",
+                "ProductAllocationObject_Text",
+                "ProductAllocationPeriodType",
+                "ProdAllocationPeriodTimeZone",
+                "FactoryCalendar",
+                "ProdAllocCheckDateTimeType",
+                "ProductAllocationQuantityUnit",
+                "CollectiveAllocationType",
+                "CreationDateTime",
+                "CreatedByUser",
+                "LastChangeDateTime",
+                "LastChangedByUser",
+                "to_ProdAllocationObjectTTP",
+                "to_ProdAllocCharcMetaDataTP",
+                "to_ProdAllocCharcValCombnTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTTP",
+                "to_ProdAllocCharcMetaDataTP",
+                "to_ProdAllocCharcValCombnTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ProdAllocationObjectType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocationObject({ProductAllocationObjectUUID})": {
+      "parameters": [
+        {
+          "name": "ProductAllocationObjectUUID",
+          "in": "path",
+          "required": true,
+          "description": "Product Allocation Object UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_ProdAllocationObject by key",
+        "tags": [
+          "A_ProdAllocationObject"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObject",
+                "ProductAllocationObject_Text",
+                "ProductAllocationPeriodType",
+                "ProdAllocationPeriodTimeZone",
+                "FactoryCalendar",
+                "ProdAllocCheckDateTimeType",
+                "ProductAllocationQuantityUnit",
+                "CollectiveAllocationType",
+                "CreationDateTime",
+                "CreatedByUser",
+                "LastChangeDateTime",
+                "LastChangedByUser",
+                "to_ProdAllocationObjectTTP",
+                "to_ProdAllocCharcMetaDataTP",
+                "to_ProdAllocCharcValCombnTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTTP",
+                "to_ProdAllocCharcMetaDataTP",
+                "to_ProdAllocCharcValCombnTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ProdAllocationObjectType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocationObject({ProductAllocationObjectUUID})/to_ProdAllocationObjectTTP": {
+      "parameters": [
+        {
+          "name": "ProductAllocationObjectUUID",
+          "in": "path",
+          "required": true,
+          "description": "Product Allocation Object UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_ProdAllocationObjectTTP",
+        "tags": [
+          "A_ProdAllocationObject",
+          "A_ProdAllocationObjectT"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObjectUUID desc",
+                "Language",
+                "Language desc",
+                "ProdAllocObjectDescription",
+                "ProdAllocObjectDescription desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProductAllocationObjectUUID",
+                "Language",
+                "ProdAllocObjectDescription",
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ProdAllocationObjectTType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectTType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocationObject({ProductAllocationObjectUUID})/to_ProdAllocCharcMetaDataTP": {
+      "parameters": [
+        {
+          "name": "ProductAllocationObjectUUID",
+          "in": "path",
+          "required": true,
+          "description": "Product Allocation Object UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_ProdAllocCharcMetaDataTP",
+        "tags": [
+          "A_ProdAllocationObject",
+          "A_ProdAllocCharcMetaData"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CharacteristicsMetaDataUUID",
+                "CharacteristicsMetaDataUUID desc",
+                "CharacteristicsMetaDataUUID_Text",
+                "CharacteristicsMetaDataUUID_Text desc",
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObjectUUID desc",
+                "ProductAllocationObject",
+                "ProductAllocationObject desc",
+                "ProdAllocOrdinalNumberValue",
+                "ProdAllocOrdinalNumberValue desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CharacteristicsMetaDataUUID",
+                "CharacteristicsMetaDataUUID_Text",
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObject",
+                "ProdAllocOrdinalNumberValue",
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ProdAllocCharcMetaDataType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcMetaDataType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocationObject({ProductAllocationObjectUUID})/to_ProdAllocCharcValCombnTP": {
+      "parameters": [
+        {
+          "name": "ProductAllocationObjectUUID",
+          "in": "path",
+          "required": true,
+          "description": "Product Allocation Object UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_ProdAllocCharcValCombnTP",
+        "tags": [
+          "A_ProdAllocationObject",
+          "A_ProdAllocCharcValCombn"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CharcValueCombinationUUID",
+                "CharcValueCombinationUUID desc",
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObjectUUID desc",
+                "ProductAllocationObject",
+                "ProductAllocationObject desc",
+                "ProdAllocCharcConstraintStatus",
+                "ProdAllocCharcConstraintStatus desc",
+                "ProdAllocationActivationStatus",
+                "ProdAllocationActivationStatus desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CharcValueCombinationUUID",
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObject",
+                "ProdAllocCharc01",
+                "ProdAllocCharc02",
+                "ProdAllocCharc03",
+                "ProdAllocCharc04",
+                "ProdAllocCharc05",
+                "ProdAllocCharc06",
+                "ProdAllocCharc07",
+                "ProdAllocCharc08",
+                "ProdAllocCharc09",
+                "ProdAllocCharc10",
+                "ProdAllocCharcConstraintStatus",
+                "ProdAllocationActivationStatus",
+                "to_ProdAllocationObjectTP",
+                "to_ProdAllocObjTimeSeriesTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTP",
+                "to_ProdAllocObjTimeSeriesTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ProdAllocCharcValCombnType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to related to_ProdAllocCharcValCombnTP",
+        "tags": [
+          "A_ProdAllocationObject",
+          "A_ProdAllocCharcValCombn"
+        ],
+        "parameters": [
+          {
+            "name": "A_ProdAllocCharcValCombnType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_ProdAllocCharcValCombnType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocationObjectT": {
+      "get": {
+        "summary": "Get entities from A_ProdAllocationObjectT",
+        "tags": [
+          "A_ProdAllocationObjectT"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObjectUUID desc",
+                "Language",
+                "Language desc",
+                "ProdAllocObjectDescription",
+                "ProdAllocObjectDescription desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProductAllocationObjectUUID",
+                "Language",
+                "ProdAllocObjectDescription",
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ProdAllocationObjectTType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectTType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocationObjectT(ProductAllocationObjectUUID={ProductAllocationObjectUUID},Language='{Language}')": {
+      "parameters": [
+        {
+          "name": "ProductAllocationObjectUUID",
+          "in": "path",
+          "required": true,
+          "description": "Product Allocation Object UUID",
+          "type": "string"
+        },
+        {
+          "name": "Language",
+          "in": "path",
+          "required": true,
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_ProdAllocationObjectT by key",
+        "tags": [
+          "A_ProdAllocationObjectT"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProductAllocationObjectUUID",
+                "Language",
+                "ProdAllocObjectDescription",
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ProdAllocationObjectTType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectTType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocationObjectT(ProductAllocationObjectUUID={ProductAllocationObjectUUID},Language='{Language}')/to_ProdAllocationObjectTP": {
+      "parameters": [
+        {
+          "name": "ProductAllocationObjectUUID",
+          "in": "path",
+          "required": true,
+          "description": "Product Allocation Object UUID",
+          "type": "string"
+        },
+        {
+          "name": "Language",
+          "in": "path",
+          "required": true,
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_ProdAllocationObjectTP",
+        "tags": [
+          "A_ProdAllocationObjectT",
+          "A_ProdAllocationObject"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObject",
+                "ProductAllocationObject_Text",
+                "ProductAllocationPeriodType",
+                "ProdAllocationPeriodTimeZone",
+                "FactoryCalendar",
+                "ProdAllocCheckDateTimeType",
+                "ProductAllocationQuantityUnit",
+                "CollectiveAllocationType",
+                "CreationDateTime",
+                "CreatedByUser",
+                "LastChangeDateTime",
+                "LastChangedByUser",
+                "to_ProdAllocationObjectTTP",
+                "to_ProdAllocCharcMetaDataTP",
+                "to_ProdAllocCharcValCombnTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTTP",
+                "to_ProdAllocCharcMetaDataTP",
+                "to_ProdAllocCharcValCombnTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ProdAllocationObjectType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocCharcMetaData": {
+      "get": {
+        "summary": "Get entities from A_ProdAllocCharcMetaData",
+        "tags": [
+          "A_ProdAllocCharcMetaData"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CharacteristicsMetaDataUUID",
+                "CharacteristicsMetaDataUUID desc",
+                "CharacteristicsMetaDataUUID_Text",
+                "CharacteristicsMetaDataUUID_Text desc",
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObjectUUID desc",
+                "ProductAllocationObject",
+                "ProductAllocationObject desc",
+                "ProdAllocOrdinalNumberValue",
+                "ProdAllocOrdinalNumberValue desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CharacteristicsMetaDataUUID",
+                "CharacteristicsMetaDataUUID_Text",
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObject",
+                "ProdAllocOrdinalNumberValue",
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ProdAllocCharcMetaDataType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcMetaDataType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocCharcMetaData({CharacteristicsMetaDataUUID})": {
+      "parameters": [
+        {
+          "name": "CharacteristicsMetaDataUUID",
+          "in": "path",
+          "required": true,
+          "description": "Characteristic Meta Data UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_ProdAllocCharcMetaData by key",
+        "tags": [
+          "A_ProdAllocCharcMetaData"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CharacteristicsMetaDataUUID",
+                "CharacteristicsMetaDataUUID_Text",
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObject",
+                "ProdAllocOrdinalNumberValue",
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ProdAllocCharcMetaDataType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcMetaDataType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocCharcMetaData({CharacteristicsMetaDataUUID})/to_ProdAllocationObjectTP": {
+      "parameters": [
+        {
+          "name": "CharacteristicsMetaDataUUID",
+          "in": "path",
+          "required": true,
+          "description": "Characteristic Meta Data UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_ProdAllocationObjectTP",
+        "tags": [
+          "A_ProdAllocCharcMetaData",
+          "A_ProdAllocationObject"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObject",
+                "ProductAllocationObject_Text",
+                "ProductAllocationPeriodType",
+                "ProdAllocationPeriodTimeZone",
+                "FactoryCalendar",
+                "ProdAllocCheckDateTimeType",
+                "ProductAllocationQuantityUnit",
+                "CollectiveAllocationType",
+                "CreationDateTime",
+                "CreatedByUser",
+                "LastChangeDateTime",
+                "LastChangedByUser",
+                "to_ProdAllocationObjectTTP",
+                "to_ProdAllocCharcMetaDataTP",
+                "to_ProdAllocCharcValCombnTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTTP",
+                "to_ProdAllocCharcMetaDataTP",
+                "to_ProdAllocCharcValCombnTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ProdAllocationObjectType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocCharcValCombn": {
+      "get": {
+        "summary": "Get entities from A_ProdAllocCharcValCombn",
+        "tags": [
+          "A_ProdAllocCharcValCombn"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CharcValueCombinationUUID",
+                "CharcValueCombinationUUID desc",
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObjectUUID desc",
+                "ProductAllocationObject",
+                "ProductAllocationObject desc",
+                "ProdAllocCharcConstraintStatus",
+                "ProdAllocCharcConstraintStatus desc",
+                "ProdAllocationActivationStatus",
+                "ProdAllocationActivationStatus desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CharcValueCombinationUUID",
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObject",
+                "ProdAllocCharc01",
+                "ProdAllocCharc02",
+                "ProdAllocCharc03",
+                "ProdAllocCharc04",
+                "ProdAllocCharc05",
+                "ProdAllocCharc06",
+                "ProdAllocCharc07",
+                "ProdAllocCharc08",
+                "ProdAllocCharc09",
+                "ProdAllocCharc10",
+                "ProdAllocCharcConstraintStatus",
+                "ProdAllocationActivationStatus",
+                "to_ProdAllocationObjectTP",
+                "to_ProdAllocObjTimeSeriesTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTP",
+                "to_ProdAllocObjTimeSeriesTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ProdAllocCharcValCombnType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to A_ProdAllocCharcValCombn",
+        "tags": [
+          "A_ProdAllocCharcValCombn"
+        ],
+        "parameters": [
+          {
+            "name": "A_ProdAllocCharcValCombnType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_ProdAllocCharcValCombnType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocCharcValCombn({CharcValueCombinationUUID})": {
+      "parameters": [
+        {
+          "name": "CharcValueCombinationUUID",
+          "in": "path",
+          "required": true,
+          "description": "Characteristic Value Combination UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_ProdAllocCharcValCombn by key",
+        "tags": [
+          "A_ProdAllocCharcValCombn"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CharcValueCombinationUUID",
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObject",
+                "ProdAllocCharc01",
+                "ProdAllocCharc02",
+                "ProdAllocCharc03",
+                "ProdAllocCharc04",
+                "ProdAllocCharc05",
+                "ProdAllocCharc06",
+                "ProdAllocCharc07",
+                "ProdAllocCharc08",
+                "ProdAllocCharc09",
+                "ProdAllocCharc10",
+                "ProdAllocCharcConstraintStatus",
+                "ProdAllocationActivationStatus",
+                "to_ProdAllocationObjectTP",
+                "to_ProdAllocObjTimeSeriesTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTP",
+                "to_ProdAllocObjTimeSeriesTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ProdAllocCharcValCombnType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_ProdAllocCharcValCombn",
+        "tags": [
+          "A_ProdAllocCharcValCombn"
+        ],
+        "parameters": [
+          {
+            "name": "A_ProdAllocCharcValCombnType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_ProdAllocCharcValCombnType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocCharcValCombn({CharcValueCombinationUUID})/to_ProdAllocationObjectTP": {
+      "parameters": [
+        {
+          "name": "CharcValueCombinationUUID",
+          "in": "path",
+          "required": true,
+          "description": "Characteristic Value Combination UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_ProdAllocationObjectTP",
+        "tags": [
+          "A_ProdAllocCharcValCombn",
+          "A_ProdAllocationObject"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObject",
+                "ProductAllocationObject_Text",
+                "ProductAllocationPeriodType",
+                "ProdAllocationPeriodTimeZone",
+                "FactoryCalendar",
+                "ProdAllocCheckDateTimeType",
+                "ProductAllocationQuantityUnit",
+                "CollectiveAllocationType",
+                "CreationDateTime",
+                "CreatedByUser",
+                "LastChangeDateTime",
+                "LastChangedByUser",
+                "to_ProdAllocationObjectTTP",
+                "to_ProdAllocCharcMetaDataTP",
+                "to_ProdAllocCharcValCombnTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTTP",
+                "to_ProdAllocCharcMetaDataTP",
+                "to_ProdAllocCharcValCombnTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ProdAllocationObjectType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocCharcValCombn({CharcValueCombinationUUID})/to_ProdAllocObjTimeSeriesTP": {
+      "parameters": [
+        {
+          "name": "CharcValueCombinationUUID",
+          "in": "path",
+          "required": true,
+          "description": "Characteristic Value Combination UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_ProdAllocObjTimeSeriesTP",
+        "tags": [
+          "A_ProdAllocCharcValCombn",
+          "A_ProdAllocObjTimeSeries"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProdAllocationTimeSeriesUUID",
+                "ProdAllocationTimeSeriesUUID desc",
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObjectUUID desc",
+                "CharcValueCombinationUUID",
+                "CharcValueCombinationUUID desc",
+                "ProdAllocPerdStartUTCDateTime",
+                "ProdAllocPerdStartUTCDateTime desc",
+                "ProdAllocPeriodStartTimeZone",
+                "ProdAllocPeriodStartTimeZone desc",
+                "ProdAllocPeriodEndUTCDateTime",
+                "ProdAllocPeriodEndUTCDateTime desc",
+                "ProdAllocPeriodEndTimeZone",
+                "ProdAllocPeriodEndTimeZone desc",
+                "ProductAllocationQuantity",
+                "ProductAllocationQuantity desc",
+                "ProductAllocationQuantityUnit",
+                "ProductAllocationQuantityUnit desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProdAllocationTimeSeriesUUID",
+                "ProductAllocationObjectUUID",
+                "CharcValueCombinationUUID",
+                "ProdAllocPerdStartUTCDateTime",
+                "ProdAllocPeriodStartTimeZone",
+                "ProdAllocPeriodEndUTCDateTime",
+                "ProdAllocPeriodEndTimeZone",
+                "ProductAllocationQuantity",
+                "ProductAllocationQuantityUnit",
+                "to_ProdAllocCharcValCombnTP",
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocCharcValCombnTP",
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ProdAllocObjTimeSeriesType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocObjTimeSeriesType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to related to_ProdAllocObjTimeSeriesTP",
+        "tags": [
+          "A_ProdAllocCharcValCombn",
+          "A_ProdAllocObjTimeSeries"
+        ],
+        "parameters": [
+          {
+            "name": "A_ProdAllocObjTimeSeriesType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocObjTimeSeriesType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_ProdAllocObjTimeSeriesType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocObjTimeSeriesType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocObjTimeSeries": {
+      "get": {
+        "summary": "Get entities from A_ProdAllocObjTimeSeries",
+        "tags": [
+          "A_ProdAllocObjTimeSeries"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProdAllocationTimeSeriesUUID",
+                "ProdAllocationTimeSeriesUUID desc",
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObjectUUID desc",
+                "CharcValueCombinationUUID",
+                "CharcValueCombinationUUID desc",
+                "ProdAllocPerdStartUTCDateTime",
+                "ProdAllocPerdStartUTCDateTime desc",
+                "ProdAllocPeriodStartTimeZone",
+                "ProdAllocPeriodStartTimeZone desc",
+                "ProdAllocPeriodEndUTCDateTime",
+                "ProdAllocPeriodEndUTCDateTime desc",
+                "ProdAllocPeriodEndTimeZone",
+                "ProdAllocPeriodEndTimeZone desc",
+                "ProductAllocationQuantity",
+                "ProductAllocationQuantity desc",
+                "ProductAllocationQuantityUnit",
+                "ProductAllocationQuantityUnit desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProdAllocationTimeSeriesUUID",
+                "ProductAllocationObjectUUID",
+                "CharcValueCombinationUUID",
+                "ProdAllocPerdStartUTCDateTime",
+                "ProdAllocPeriodStartTimeZone",
+                "ProdAllocPeriodEndUTCDateTime",
+                "ProdAllocPeriodEndTimeZone",
+                "ProductAllocationQuantity",
+                "ProductAllocationQuantityUnit",
+                "to_ProdAllocCharcValCombnTP",
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocCharcValCombnTP",
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ProdAllocObjTimeSeriesType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocObjTimeSeriesType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to A_ProdAllocObjTimeSeries",
+        "tags": [
+          "A_ProdAllocObjTimeSeries"
+        ],
+        "parameters": [
+          {
+            "name": "A_ProdAllocObjTimeSeriesType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocObjTimeSeriesType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_ProdAllocObjTimeSeriesType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocObjTimeSeriesType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocObjTimeSeries({ProdAllocationTimeSeriesUUID})": {
+      "parameters": [
+        {
+          "name": "ProdAllocationTimeSeriesUUID",
+          "in": "path",
+          "required": true,
+          "description": "Product Allocation Time SeriesUUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_ProdAllocObjTimeSeries by key",
+        "tags": [
+          "A_ProdAllocObjTimeSeries"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProdAllocationTimeSeriesUUID",
+                "ProductAllocationObjectUUID",
+                "CharcValueCombinationUUID",
+                "ProdAllocPerdStartUTCDateTime",
+                "ProdAllocPeriodStartTimeZone",
+                "ProdAllocPeriodEndUTCDateTime",
+                "ProdAllocPeriodEndTimeZone",
+                "ProductAllocationQuantity",
+                "ProductAllocationQuantityUnit",
+                "to_ProdAllocCharcValCombnTP",
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocCharcValCombnTP",
+                "to_ProdAllocationObjectTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ProdAllocObjTimeSeriesType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocObjTimeSeriesType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_ProdAllocObjTimeSeries",
+        "tags": [
+          "A_ProdAllocObjTimeSeries"
+        ],
+        "parameters": [
+          {
+            "name": "A_ProdAllocObjTimeSeriesType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_ProdAllocObjTimeSeriesType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocObjTimeSeriesType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocObjTimeSeries({ProdAllocationTimeSeriesUUID})/to_ProdAllocCharcValCombnTP": {
+      "parameters": [
+        {
+          "name": "ProdAllocationTimeSeriesUUID",
+          "in": "path",
+          "required": true,
+          "description": "Product Allocation Time SeriesUUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_ProdAllocCharcValCombnTP",
+        "tags": [
+          "A_ProdAllocObjTimeSeries",
+          "A_ProdAllocCharcValCombn"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CharcValueCombinationUUID",
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObject",
+                "ProdAllocCharc01",
+                "ProdAllocCharc02",
+                "ProdAllocCharc03",
+                "ProdAllocCharc04",
+                "ProdAllocCharc05",
+                "ProdAllocCharc06",
+                "ProdAllocCharc07",
+                "ProdAllocCharc08",
+                "ProdAllocCharc09",
+                "ProdAllocCharc10",
+                "ProdAllocCharcConstraintStatus",
+                "ProdAllocationActivationStatus",
+                "to_ProdAllocationObjectTP",
+                "to_ProdAllocObjTimeSeriesTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTP",
+                "to_ProdAllocObjTimeSeriesTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ProdAllocCharcValCombnType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProdAllocObjTimeSeries({ProdAllocationTimeSeriesUUID})/to_ProdAllocationObjectTP": {
+      "parameters": [
+        {
+          "name": "ProdAllocationTimeSeriesUUID",
+          "in": "path",
+          "required": true,
+          "description": "Product Allocation Time SeriesUUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_ProdAllocationObjectTP",
+        "tags": [
+          "A_ProdAllocObjTimeSeries",
+          "A_ProdAllocationObject"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ProductAllocationObjectUUID",
+                "ProductAllocationObject",
+                "ProductAllocationObject_Text",
+                "ProductAllocationPeriodType",
+                "ProdAllocationPeriodTimeZone",
+                "FactoryCalendar",
+                "ProdAllocCheckDateTimeType",
+                "ProductAllocationQuantityUnit",
+                "CollectiveAllocationType",
+                "CreationDateTime",
+                "CreatedByUser",
+                "LastChangeDateTime",
+                "LastChangedByUser",
+                "to_ProdAllocationObjectTTP",
+                "to_ProdAllocCharcMetaDataTP",
+                "to_ProdAllocCharcValCombnTP"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdAllocationObjectTTP",
+                "to_ProdAllocCharcMetaDataTP",
+                "to_ProdAllocCharcValCombnTP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ProdAllocationObjectType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/DeleteActvCharcValCombination": {
+      "post": {
+        "summary": "Invoke action DeleteActvCharcValCombination",
+        "tags": [
+          "A_ProdAllocCharcValCombn"
+        ],
+        "parameters": [
+          {
+            "name": "CharcValueCombinationUUID",
+            "in": "query",
+            "required": true,
+            "description": "Characteristic Value Combination UUID  \n(Value needs to be enclosed in single quotes and prefixed with `guid`, e.g. `guid'01234567-0123-0123-0123-0123456789ab'`)",
+            "type": "string",
+            "pattern": "^guid'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'$"
+          },
+          {
+            "name": "Isdeleteqa",
+            "in": "query",
+            "required": true,
+            "description": "TRUE",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "A_ProdAllocCharcValCombnType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/SetLifecycleStatusToActive": {
+      "post": {
+        "summary": "Invoke action SetLifecycleStatusToActive",
+        "tags": [
+          "A_ProdAllocCharcValCombn"
+        ],
+        "parameters": [
+          {
+            "name": "CharcValueCombinationUUID",
+            "in": "query",
+            "required": true,
+            "description": "Characteristic Value Combination UUID  \n(Value needs to be enclosed in single quotes and prefixed with `guid`, e.g. `guid'01234567-0123-0123-0123-0123456789ab'`)",
+            "type": "string",
+            "pattern": "^guid'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "DummyFunctionImportResult",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.DummyFunctionImportResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/SetLifecycleStatusToInactive": {
+      "post": {
+        "summary": "Invoke action SetLifecycleStatusToInactive",
+        "tags": [
+          "A_ProdAllocCharcValCombn"
+        ],
+        "parameters": [
+          {
+            "name": "CharcValueCombinationUUID",
+            "in": "query",
+            "required": true,
+            "description": "Characteristic Value Combination UUID  \n(Value needs to be enclosed in single quotes and prefixed with `guid`, e.g. `guid'01234567-0123-0123-0123-0123456789ab'`)",
+            "type": "string",
+            "pattern": "^guid'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "DummyFunctionImportResult",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.DummyFunctionImportResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/DeleteActiveTimeSeries": {
+      "post": {
+        "summary": "Invoke action DeleteActiveTimeSeries",
+        "tags": [
+          "A_ProdAllocObjTimeSeries"
+        ],
+        "parameters": [
+          {
+            "name": "ProdAllocationTimeSeriesUUID",
+            "in": "query",
+            "required": true,
+            "description": "Product Allocation Time SeriesUUID  \n(Value needs to be enclosed in single quotes and prefixed with `guid`, e.g. `guid'01234567-0123-0123-0123-0123456789ab'`)",
+            "type": "string",
+            "pattern": "^guid'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'$"
+          },
+          {
+            "name": "Isdeleteqa",
+            "in": "query",
+            "required": true,
+            "description": "TRUE",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "A_ProdAllocObjTimeSeriesType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocObjTimeSeriesType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET A_ProdAllocationObject HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType": {
+      "type": "object",
+      "properties": {
+        "ProductAllocationObjectUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Product Allocation Object UUID"
+        },
+        "ProductAllocationObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Allocation Object",
+          "description": "Product Allocation Object"
+        },
+        "ProductAllocationObject_Text": {
+"type": "string",
+"default": "null",
+          "maxLength": 255,
+          "example": "string",
+          "title": "Description",
+          "description": "Product Allocation Object Description"
+        },
+        "ProductAllocationPeriodType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Period Type",
+          "description": "Product Allocation Period Type"
+        },
+        "ProdAllocationPeriodTimeZone": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Period Time Zone",
+          "description": "Product Allocation Period Time Zone"
+        },
+        "FactoryCalendar": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Factory Calendar",
+          "description": "Factory calendar key  \nKey that uniquely identifies the factory calendar that is valid for this plant."
+        },
+        "ProdAllocCheckDateTimeType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Check Date Time Type",
+          "description": "Product Allocation Check Date Time Type"
+        },
+        "ProductAllocationQuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Quantity Unit",
+          "description": "Product Allocation Quantity Unit"
+        },
+        "CollectiveAllocationType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Collective",
+          "description": "Collective Allocation Type"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Creation Date Time"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created by User"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Last Change Date Time"
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Last Changed by User"
+        },
+        "to_ProdAllocationObjectTTP": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectTType"
+              }
+            }
+          }
+        },
+        "to_ProdAllocCharcMetaDataTP": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcMetaDataType"
+              }
+            }
+          }
+        },
+        "to_ProdAllocCharcValCombnTP": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API view for Product Allocation Object"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType-create": {
+      "type": "object",
+      "properties": {
+        "ProductAllocationObjectUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Product Allocation Object UUID"
+        },
+        "ProductAllocationObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Allocation Object",
+          "description": "Product Allocation Object"
+        },
+        "ProductAllocationPeriodType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Period Type",
+          "description": "Product Allocation Period Type"
+        },
+        "ProdAllocationPeriodTimeZone": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Period Time Zone",
+          "description": "Product Allocation Period Time Zone"
+        },
+        "FactoryCalendar": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Factory Calendar",
+          "description": "Factory calendar key  \nKey that uniquely identifies the factory calendar that is valid for this plant."
+        },
+        "ProdAllocCheckDateTimeType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Check Date Time Type",
+          "description": "Product Allocation Check Date Time Type"
+        },
+        "ProductAllocationQuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Quantity Unit",
+          "description": "Product Allocation Quantity Unit"
+        },
+        "CollectiveAllocationType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Collective",
+          "description": "Collective Allocation Type"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Creation Date Time"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created by User"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Last Change Date Time"
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Last Changed by User"
+        },
+        "to_ProdAllocationObjectTTP": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectTType-create"
+              }
+            }
+          }
+        },
+        "to_ProdAllocCharcMetaDataTP": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcMetaDataType-create"
+              }
+            }
+          }
+        },
+        "to_ProdAllocCharcValCombnTP": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "ProductAllocationObjectUUID"
+      ],
+      "title": "API view for Product Allocation Object (for create)"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType-update": {
+      "type": "object",
+      "properties": {
+        "ProductAllocationObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Allocation Object",
+          "description": "Product Allocation Object"
+        },
+        "ProductAllocationPeriodType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Period Type",
+          "description": "Product Allocation Period Type"
+        },
+        "ProdAllocationPeriodTimeZone": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Period Time Zone",
+          "description": "Product Allocation Period Time Zone"
+        },
+        "FactoryCalendar": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Factory Calendar",
+          "description": "Factory calendar key  \nKey that uniquely identifies the factory calendar that is valid for this plant."
+        },
+        "ProdAllocCheckDateTimeType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Check Date Time Type",
+          "description": "Product Allocation Check Date Time Type"
+        },
+        "ProductAllocationQuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Quantity Unit",
+          "description": "Product Allocation Quantity Unit"
+        },
+        "CollectiveAllocationType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Collective",
+          "description": "Collective Allocation Type"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Creation Date Time"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created by User"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Last Change Date Time"
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Last Changed by User"
+        }
+      },
+      "title": "API view for Product Allocation Object (for update)"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectTType": {
+      "type": "object",
+      "properties": {
+        "ProductAllocationObjectUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Product Allocation Object UUID"
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "ProdAllocObjectDescription": {
+"type": "string",
+"default": "null",
+          "maxLength": 255,
+          "example": "string",
+          "title": "Description",
+          "description": "Product Allocation Object Description"
+        },
+        "to_ProdAllocationObjectTP": {
+          "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType"
+        }
+      },
+      "title": "API view for Product Allocation Object Description"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectTType-create": {
+      "type": "object",
+      "properties": {
+        "ProductAllocationObjectUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Product Allocation Object UUID"
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "ProdAllocObjectDescription": {
+"type": "string",
+"default": "null",
+          "maxLength": 255,
+          "example": "string",
+          "title": "Description",
+          "description": "Product Allocation Object Description"
+        },
+        "to_ProdAllocationObjectTP": {
+          "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType-create"
+        }
+      },
+      "required": [
+        "ProductAllocationObjectUUID",
+        "Language"
+      ],
+      "title": "API view for Product Allocation Object Description (for create)"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectTType-update": {
+      "type": "object",
+      "properties": {
+        "ProdAllocObjectDescription": {
+"type": "string",
+"default": "null",
+          "maxLength": 255,
+          "example": "string",
+          "title": "Description",
+          "description": "Product Allocation Object Description"
+        }
+      },
+      "title": "API view for Product Allocation Object Description (for update)"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcMetaDataType": {
+      "type": "object",
+      "properties": {
+        "CharacteristicsMetaDataUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Characteristic Meta Data UUID"
+        },
+        "CharacteristicsMetaDataUUID_Text": {
+"type": "string",
+"default": "null",
+          "maxLength": 83,
+          "example": "string",
+          "title": "Catalog Path Description",
+          "description": "Catalog Path Description (83 long for API)"
+        },
+        "ProductAllocationObjectUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Product Allocation Object UUID"
+        },
+        "ProductAllocationObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Allocation Object",
+          "description": "Product Allocation Object"
+        },
+        "ProdAllocOrdinalNumberValue": {
+"type": "integer",
+"default": "null",
+          "format": "uint8",
+          "title": "Ordinal Number",
+          "description": "Product Allocation Ordinal Number Value"
+        },
+        "to_ProdAllocationObjectTP": {
+          "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType"
+        }
+      },
+      "title": "API view for Product Allocation Object Metadata"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcMetaDataType-create": {
+      "type": "object",
+      "properties": {
+        "CharacteristicsMetaDataUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Characteristic Meta Data UUID"
+        },
+        "ProductAllocationObjectUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Product Allocation Object UUID"
+        },
+        "ProductAllocationObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Allocation Object",
+          "description": "Product Allocation Object"
+        },
+        "ProdAllocOrdinalNumberValue": {
+"type": "integer",
+"default": "null",
+          "format": "uint8",
+          "title": "Ordinal Number",
+          "description": "Product Allocation Ordinal Number Value"
+        },
+        "to_ProdAllocationObjectTP": {
+          "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType-create"
+        }
+      },
+      "required": [
+        "CharacteristicsMetaDataUUID"
+      ],
+      "title": "API view for Product Allocation Object Metadata (for create)"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcMetaDataType-update": {
+      "type": "object",
+      "properties": {
+        "ProductAllocationObjectUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Product Allocation Object UUID"
+        },
+        "ProductAllocationObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Allocation Object",
+          "description": "Product Allocation Object"
+        },
+        "ProdAllocOrdinalNumberValue": {
+"type": "integer",
+"default": "null",
+          "format": "uint8",
+          "title": "Ordinal Number",
+          "description": "Product Allocation Ordinal Number Value"
+        }
+      },
+      "title": "API view for Product Allocation Object Metadata (for update)"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType": {
+      "type": "object",
+      "properties": {
+        "CharcValueCombinationUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Characteristic Value Combination UUID"
+        },
+        "ProductAllocationObjectUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Product Allocation Object UUID"
+        },
+        "ProductAllocationObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Allocation Object",
+          "description": "Product Allocation Object"
+        },
+        "ProdAllocCharc01": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc02": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc03": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc04": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc05": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc06": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc07": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc08": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc09": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc10": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharcConstraintStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Constraint Status",
+          "description": "Product Allocation Characteristic Constraint Status"
+        },
+        "ProdAllocationActivationStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Activation Status",
+          "description": "Product Allocation Activation Status"
+        },
+        "to_ProdAllocationObjectTP": {
+          "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType"
+        },
+        "to_ProdAllocObjTimeSeriesTP": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocObjTimeSeriesType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API view for Product Allocation Object CVC"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType-create": {
+      "type": "object",
+      "properties": {
+        "CharcValueCombinationUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Characteristic Value Combination UUID"
+        },
+        "ProductAllocationObjectUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Product Allocation Object UUID"
+        },
+        "ProductAllocationObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Allocation Object",
+          "description": "Product Allocation Object"
+        },
+        "ProdAllocCharc01": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc02": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc03": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc04": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc05": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc06": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc07": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc08": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc09": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc10": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharcConstraintStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Constraint Status",
+          "description": "Product Allocation Characteristic Constraint Status"
+        },
+        "to_ProdAllocationObjectTP": {
+          "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType-create"
+        },
+        "to_ProdAllocObjTimeSeriesTP": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocObjTimeSeriesType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "CharcValueCombinationUUID"
+      ],
+      "title": "API view for Product Allocation Object CVC (for create)"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType-update": {
+      "type": "object",
+      "properties": {
+        "ProductAllocationObjectUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Product Allocation Object UUID"
+        },
+        "ProductAllocationObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Allocation Object",
+          "description": "Product Allocation Object"
+        },
+        "ProdAllocCharc01": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc02": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc03": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc04": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc05": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc06": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc07": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc08": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc09": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharc10": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Characteristic Value",
+          "description": "Product Allocation Characteristic"
+        },
+        "ProdAllocCharcConstraintStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Constraint Status",
+          "description": "Product Allocation Characteristic Constraint Status"
+        }
+      },
+      "title": "API view for Product Allocation Object CVC (for update)"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocObjTimeSeriesType": {
+      "type": "object",
+      "properties": {
+        "ProdAllocationTimeSeriesUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Product Allocation Time SeriesUUID"
+        },
+        "ProductAllocationObjectUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Product Allocation Object UUID"
+        },
+        "CharcValueCombinationUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Characteristic Value Combination UUID"
+        },
+        "ProdAllocPerdStartUTCDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Period Start Date Time",
+          "description": "Product Allocation Period Start UTC Date Time"
+        },
+        "ProdAllocPeriodStartTimeZone": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Period Start Time Zone",
+          "description": "Product Allocation Period Start Time Zone"
+        },
+        "ProdAllocPeriodEndUTCDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Period End Date Time",
+          "description": "Product Allocation Period End UTC Date Time"
+        },
+        "ProdAllocPeriodEndTimeZone": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Period End Time Zone",
+          "description": "Product Allocation Period End Time Zone"
+        },
+        "ProductAllocationQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Allocation Quantity",
+          "description": "Product Allocation Quantity"
+        },
+        "ProductAllocationQuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Quantity Unit",
+          "description": "Product Allocation Quantity Unit"
+        },
+        "to_ProdAllocCharcValCombnTP": {
+          "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType"
+        },
+        "to_ProdAllocationObjectTP": {
+          "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType"
+        }
+      },
+      "title": "API view for Product Allocation Object CVC Time Series"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocObjTimeSeriesType-create": {
+      "type": "object",
+      "properties": {
+        "ProdAllocationTimeSeriesUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Product Allocation Time SeriesUUID"
+        },
+        "ProductAllocationObjectUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Product Allocation Object UUID"
+        },
+        "CharcValueCombinationUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Characteristic Value Combination UUID"
+        },
+        "ProdAllocPerdStartUTCDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Period Start Date Time",
+          "description": "Product Allocation Period Start UTC Date Time"
+        },
+        "ProdAllocPeriodStartTimeZone": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Period Start Time Zone",
+          "description": "Product Allocation Period Start Time Zone"
+        },
+        "ProdAllocPeriodEndUTCDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Period End Date Time",
+          "description": "Product Allocation Period End UTC Date Time"
+        },
+        "ProdAllocPeriodEndTimeZone": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Period End Time Zone",
+          "description": "Product Allocation Period End Time Zone"
+        },
+        "ProductAllocationQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Allocation Quantity",
+          "description": "Product Allocation Quantity"
+        },
+        "ProductAllocationQuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Quantity Unit",
+          "description": "Product Allocation Quantity Unit"
+        },
+        "to_ProdAllocCharcValCombnTP": {
+          "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocCharcValCombnType-create"
+        },
+        "to_ProdAllocationObjectTP": {
+          "$ref": "#/definitions/API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocationObjectType-create"
+        }
+      },
+      "required": [
+        "ProdAllocationTimeSeriesUUID"
+      ],
+      "title": "API view for Product Allocation Object CVC Time Series (for create)"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.A_ProdAllocObjTimeSeriesType-update": {
+      "type": "object",
+      "properties": {
+        "ProductAllocationObjectUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Product Allocation Object UUID"
+        },
+        "CharcValueCombinationUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "description": "Characteristic Value Combination UUID"
+        },
+        "ProdAllocPerdStartUTCDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Period Start Date Time",
+          "description": "Product Allocation Period Start UTC Date Time"
+        },
+        "ProdAllocPeriodStartTimeZone": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Period Start Time Zone",
+          "description": "Product Allocation Period Start Time Zone"
+        },
+        "ProdAllocPeriodEndUTCDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Period End Date Time",
+          "description": "Product Allocation Period End UTC Date Time"
+        },
+        "ProdAllocPeriodEndTimeZone": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Period End Time Zone",
+          "description": "Product Allocation Period End Time Zone"
+        },
+        "ProductAllocationQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Allocation Quantity",
+          "description": "Product Allocation Quantity"
+        },
+        "ProductAllocationQuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Quantity Unit",
+          "description": "Product Allocation Quantity Unit"
+        }
+      },
+      "title": "API view for Product Allocation Object CVC Time Series (for update)"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.DummyFunctionImportResult": {
+      "type": "object",
+      "properties": {
+        "IsInvalid": {
+"type": "boolean",
+"default": "null",
+          "title": "TRUE",
+          "description": "Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"
+        }
+      },
+      "title": "DummyFunctionImportResult"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.DummyFunctionImportResult-create": {
+      "type": "object",
+      "properties": {
+        "IsInvalid": {
+"type": "boolean",
+"default": "null",
+          "title": "TRUE",
+          "description": "Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"
+        }
+      },
+      "title": "DummyFunctionImportResult (for create)"
+    },
+    "API_PRODUCT_ALLOCATION_OBJECT_SRV.DummyFunctionImportResult-update": {
+      "type": "object",
+      "properties": {
+        "IsInvalid": {
+"type": "boolean",
+"default": "null",
+          "title": "TRUE",
+          "description": "Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"
+        }
+      },
+      "title": "DummyFunctionImportResult (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

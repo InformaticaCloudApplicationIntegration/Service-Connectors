@@ -1,0 +1,3212 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Process Material Documents",
+    "version": "1 ",
+    "description": "Example - to post a  goods receipt for a purchase order or to  document the transfer of materials  between two storage locations.  Additionally, the service allows to cancel  existing material documents or single  items. It can be consumed by external  systems and user interfaces."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/d4/c919581bc30a02e10000000a44147b/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "This service enables you to retrieve and create material documents",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Material Document Integration (SAP_COM_0108)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Core Inventory Management (BMC)](https://rapid.sap.com/bp/#/scopeitems/BMC \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_MaterialDocumentHeader"
+    },
+    {
+      "name": "A_MaterialDocumentItem"
+    }
+  ],
+  "paths": {
+    "/A_MaterialDocumentHeader": {
+      "get": {
+        "summary": "Get entities from A_MaterialDocumentHeader",
+        "tags": [
+          "A_MaterialDocumentHeader"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialDocumentYear",
+                "MaterialDocumentYear desc",
+                "MaterialDocument",
+                "MaterialDocument desc",
+                "InventoryTransactionType",
+                "InventoryTransactionType desc",
+                "DocumentDate",
+                "DocumentDate desc",
+                "PostingDate",
+                "PostingDate desc",
+                "CreationDate",
+                "CreationDate desc",
+                "CreationTime",
+                "CreationTime desc",
+                "CreatedByUser",
+                "CreatedByUser desc",
+                "MaterialDocumentHeaderText",
+                "MaterialDocumentHeaderText desc",
+                "ReferenceDocument",
+                "ReferenceDocument desc",
+                "GoodsMovementCode",
+                "GoodsMovementCode desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialDocumentYear",
+                "MaterialDocument",
+                "InventoryTransactionType",
+                "DocumentDate",
+                "PostingDate",
+                "CreationDate",
+                "CreationTime",
+                "CreatedByUser",
+                "MaterialDocumentHeaderText",
+                "ReferenceDocument",
+                "GoodsMovementCode",
+                "to_MaterialDocumentItem"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_MaterialDocumentItem"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_MaterialDocumentHeaderType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentHeaderType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to A_MaterialDocumentHeader",
+        "tags": [
+          "A_MaterialDocumentHeader"
+        ],
+        "parameters": [
+          {
+            "name": "A_MaterialDocumentHeaderType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentHeaderType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_MaterialDocumentHeaderType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentHeaderType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_MaterialDocumentHeader(MaterialDocumentYear='{MaterialDocumentYear}',MaterialDocument='{MaterialDocument}')": {
+      "parameters": [
+        {
+          "name": "MaterialDocumentYear",
+          "in": "path",
+          "required": true,
+          "description": "Material Document Year",
+          "type": "string"
+        },
+        {
+          "name": "MaterialDocument",
+          "in": "path",
+          "required": true,
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_MaterialDocumentHeader by key",
+        "tags": [
+          "A_MaterialDocumentHeader"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialDocumentYear",
+                "MaterialDocument",
+                "InventoryTransactionType",
+                "DocumentDate",
+                "PostingDate",
+                "CreationDate",
+                "CreationTime",
+                "CreatedByUser",
+                "MaterialDocumentHeaderText",
+                "ReferenceDocument",
+                "GoodsMovementCode",
+                "to_MaterialDocumentItem"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_MaterialDocumentItem"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_MaterialDocumentHeaderType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentHeaderType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_MaterialDocumentHeader(MaterialDocumentYear='{MaterialDocumentYear}',MaterialDocument='{MaterialDocument}')/to_MaterialDocumentItem": {
+      "parameters": [
+        {
+          "name": "MaterialDocumentYear",
+          "in": "path",
+          "required": true,
+          "description": "Material Document Year",
+          "type": "string"
+        },
+        {
+          "name": "MaterialDocument",
+          "in": "path",
+          "required": true,
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_MaterialDocumentItem",
+        "tags": [
+          "A_MaterialDocumentHeader",
+          "A_MaterialDocumentItem"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialDocumentYear",
+                "MaterialDocumentYear desc",
+                "MaterialDocument",
+                "MaterialDocument desc",
+                "MaterialDocumentItem",
+                "MaterialDocumentItem desc",
+                "Material",
+                "Material desc",
+                "Plant",
+                "Plant desc",
+                "StorageLocation",
+                "StorageLocation desc",
+                "Batch",
+                "Batch desc",
+                "GoodsMovementType",
+                "GoodsMovementType desc",
+                "InventoryStockType",
+                "InventoryStockType desc",
+                "InventoryValuationType",
+                "InventoryValuationType desc",
+                "InventorySpecialStockType",
+                "InventorySpecialStockType desc",
+                "Supplier",
+                "Supplier desc",
+                "Customer",
+                "Customer desc",
+                "SalesOrder",
+                "SalesOrder desc",
+                "SalesOrderItem",
+                "SalesOrderItem desc",
+                "SalesOrderScheduleLine",
+                "SalesOrderScheduleLine desc",
+                "PurchaseOrder",
+                "PurchaseOrder desc",
+                "PurchaseOrderItem",
+                "PurchaseOrderItem desc",
+                "WBSElement",
+                "WBSElement desc",
+                "ManufacturingOrder",
+                "ManufacturingOrder desc",
+                "ManufacturingOrderItem",
+                "ManufacturingOrderItem desc",
+                "GoodsMovementRefDocType",
+                "GoodsMovementRefDocType desc",
+                "GoodsMovementReasonCode",
+                "GoodsMovementReasonCode desc",
+                "AccountAssignmentCategory",
+                "AccountAssignmentCategory desc",
+                "CostCenter",
+                "CostCenter desc",
+                "ControllingArea",
+                "ControllingArea desc",
+                "CostObject",
+                "CostObject desc",
+                "ProfitabilitySegment",
+                "ProfitabilitySegment desc",
+                "ProfitCenter",
+                "ProfitCenter desc",
+                "GLAccount",
+                "GLAccount desc",
+                "FunctionalArea",
+                "FunctionalArea desc",
+                "MaterialBaseUnit",
+                "MaterialBaseUnit desc",
+                "QuantityInBaseUnit",
+                "QuantityInBaseUnit desc",
+                "EntryUnit",
+                "EntryUnit desc",
+                "QuantityInEntryUnit",
+                "QuantityInEntryUnit desc",
+                "CompanyCodeCurrency",
+                "CompanyCodeCurrency desc",
+                "GdsMvtExtAmtInCoCodeCrcy",
+                "GdsMvtExtAmtInCoCodeCrcy desc",
+                "SlsPrcAmtInclVATInCoCodeCrcy",
+                "SlsPrcAmtInclVATInCoCodeCrcy desc",
+                "FiscalYear",
+                "FiscalYear desc",
+                "FiscalYearPeriod",
+                "FiscalYearPeriod desc",
+                "FiscalYearVariant",
+                "FiscalYearVariant desc",
+                "IssgOrRcvgMaterial",
+                "IssgOrRcvgMaterial desc",
+                "IssgOrRcvgBatch",
+                "IssgOrRcvgBatch desc",
+                "IssuingOrReceivingPlant",
+                "IssuingOrReceivingPlant desc",
+                "IssuingOrReceivingStorageLoc",
+                "IssuingOrReceivingStorageLoc desc",
+                "IssuingOrReceivingStockType",
+                "IssuingOrReceivingStockType desc",
+                "IssgOrRcvgSpclStockInd",
+                "IssgOrRcvgSpclStockInd desc",
+                "IssuingOrReceivingValType",
+                "IssuingOrReceivingValType desc",
+                "IsCompletelyDelivered",
+                "IsCompletelyDelivered desc",
+                "MaterialDocumentItemText",
+                "MaterialDocumentItemText desc",
+                "UnloadingPointName",
+                "UnloadingPointName desc",
+                "ShelfLifeExpirationDate",
+                "ShelfLifeExpirationDate desc",
+                "ManufactureDate",
+                "ManufactureDate desc",
+                "Reservation",
+                "Reservation desc",
+                "ReservationItem",
+                "ReservationItem desc",
+                "ReservationIsFinallyIssued",
+                "ReservationIsFinallyIssued desc",
+                "SpecialStockIdfgSalesOrder",
+                "SpecialStockIdfgSalesOrder desc",
+                "SpecialStockIdfgSalesOrderItem",
+                "SpecialStockIdfgSalesOrderItem desc",
+                "SpecialStockIdfgWBSElement",
+                "SpecialStockIdfgWBSElement desc",
+                "IsAutomaticallyCreated",
+                "IsAutomaticallyCreated desc",
+                "MaterialDocumentLine",
+                "MaterialDocumentLine desc",
+                "MaterialDocumentParentLine",
+                "MaterialDocumentParentLine desc",
+                "HierarchyNodeLevel",
+                "HierarchyNodeLevel desc",
+                "GoodsMovementIsCancelled",
+                "GoodsMovementIsCancelled desc",
+                "ReversedMaterialDocumentYear",
+                "ReversedMaterialDocumentYear desc",
+                "ReversedMaterialDocument",
+                "ReversedMaterialDocument desc",
+                "ReversedMaterialDocumentItem",
+                "ReversedMaterialDocumentItem desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialDocumentYear",
+                "MaterialDocument",
+                "MaterialDocumentItem",
+                "Material",
+                "Plant",
+                "StorageLocation",
+                "Batch",
+                "GoodsMovementType",
+                "InventoryStockType",
+                "InventoryValuationType",
+                "InventorySpecialStockType",
+                "Supplier",
+                "Customer",
+                "SalesOrder",
+                "SalesOrderItem",
+                "SalesOrderScheduleLine",
+                "PurchaseOrder",
+                "PurchaseOrderItem",
+                "WBSElement",
+                "ManufacturingOrder",
+                "ManufacturingOrderItem",
+                "GoodsMovementRefDocType",
+                "GoodsMovementReasonCode",
+                "AccountAssignmentCategory",
+                "CostCenter",
+                "ControllingArea",
+                "CostObject",
+                "ProfitabilitySegment",
+                "ProfitCenter",
+                "GLAccount",
+                "FunctionalArea",
+                "MaterialBaseUnit",
+                "QuantityInBaseUnit",
+                "EntryUnit",
+                "QuantityInEntryUnit",
+                "CompanyCodeCurrency",
+                "GdsMvtExtAmtInCoCodeCrcy",
+                "SlsPrcAmtInclVATInCoCodeCrcy",
+                "FiscalYear",
+                "FiscalYearPeriod",
+                "FiscalYearVariant",
+                "IssgOrRcvgMaterial",
+                "IssgOrRcvgBatch",
+                "IssuingOrReceivingPlant",
+                "IssuingOrReceivingStorageLoc",
+                "IssuingOrReceivingStockType",
+                "IssgOrRcvgSpclStockInd",
+                "IssuingOrReceivingValType",
+                "IsCompletelyDelivered",
+                "MaterialDocumentItemText",
+                "UnloadingPointName",
+                "ShelfLifeExpirationDate",
+                "ManufactureDate",
+                "Reservation",
+                "ReservationItem",
+                "ReservationIsFinallyIssued",
+                "SpecialStockIdfgSalesOrder",
+                "SpecialStockIdfgSalesOrderItem",
+                "SpecialStockIdfgWBSElement",
+                "IsAutomaticallyCreated",
+                "MaterialDocumentLine",
+                "MaterialDocumentParentLine",
+                "HierarchyNodeLevel",
+                "GoodsMovementIsCancelled",
+                "ReversedMaterialDocumentYear",
+                "ReversedMaterialDocument",
+                "ReversedMaterialDocumentItem",
+                "to_MaterialDocumentHeader"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_MaterialDocumentHeader"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_MaterialDocumentItemType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentItemType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_MaterialDocumentItem": {
+      "get": {
+        "summary": "Get entities from A_MaterialDocumentItem",
+        "tags": [
+          "A_MaterialDocumentItem"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialDocumentYear",
+                "MaterialDocumentYear desc",
+                "MaterialDocument",
+                "MaterialDocument desc",
+                "MaterialDocumentItem",
+                "MaterialDocumentItem desc",
+                "Material",
+                "Material desc",
+                "Plant",
+                "Plant desc",
+                "StorageLocation",
+                "StorageLocation desc",
+                "Batch",
+                "Batch desc",
+                "GoodsMovementType",
+                "GoodsMovementType desc",
+                "InventoryStockType",
+                "InventoryStockType desc",
+                "InventoryValuationType",
+                "InventoryValuationType desc",
+                "InventorySpecialStockType",
+                "InventorySpecialStockType desc",
+                "Supplier",
+                "Supplier desc",
+                "Customer",
+                "Customer desc",
+                "SalesOrder",
+                "SalesOrder desc",
+                "SalesOrderItem",
+                "SalesOrderItem desc",
+                "SalesOrderScheduleLine",
+                "SalesOrderScheduleLine desc",
+                "PurchaseOrder",
+                "PurchaseOrder desc",
+                "PurchaseOrderItem",
+                "PurchaseOrderItem desc",
+                "WBSElement",
+                "WBSElement desc",
+                "ManufacturingOrder",
+                "ManufacturingOrder desc",
+                "ManufacturingOrderItem",
+                "ManufacturingOrderItem desc",
+                "GoodsMovementRefDocType",
+                "GoodsMovementRefDocType desc",
+                "GoodsMovementReasonCode",
+                "GoodsMovementReasonCode desc",
+                "AccountAssignmentCategory",
+                "AccountAssignmentCategory desc",
+                "CostCenter",
+                "CostCenter desc",
+                "ControllingArea",
+                "ControllingArea desc",
+                "CostObject",
+                "CostObject desc",
+                "ProfitabilitySegment",
+                "ProfitabilitySegment desc",
+                "ProfitCenter",
+                "ProfitCenter desc",
+                "GLAccount",
+                "GLAccount desc",
+                "FunctionalArea",
+                "FunctionalArea desc",
+                "MaterialBaseUnit",
+                "MaterialBaseUnit desc",
+                "QuantityInBaseUnit",
+                "QuantityInBaseUnit desc",
+                "EntryUnit",
+                "EntryUnit desc",
+                "QuantityInEntryUnit",
+                "QuantityInEntryUnit desc",
+                "CompanyCodeCurrency",
+                "CompanyCodeCurrency desc",
+                "GdsMvtExtAmtInCoCodeCrcy",
+                "GdsMvtExtAmtInCoCodeCrcy desc",
+                "SlsPrcAmtInclVATInCoCodeCrcy",
+                "SlsPrcAmtInclVATInCoCodeCrcy desc",
+                "FiscalYear",
+                "FiscalYear desc",
+                "FiscalYearPeriod",
+                "FiscalYearPeriod desc",
+                "FiscalYearVariant",
+                "FiscalYearVariant desc",
+                "IssgOrRcvgMaterial",
+                "IssgOrRcvgMaterial desc",
+                "IssgOrRcvgBatch",
+                "IssgOrRcvgBatch desc",
+                "IssuingOrReceivingPlant",
+                "IssuingOrReceivingPlant desc",
+                "IssuingOrReceivingStorageLoc",
+                "IssuingOrReceivingStorageLoc desc",
+                "IssuingOrReceivingStockType",
+                "IssuingOrReceivingStockType desc",
+                "IssgOrRcvgSpclStockInd",
+                "IssgOrRcvgSpclStockInd desc",
+                "IssuingOrReceivingValType",
+                "IssuingOrReceivingValType desc",
+                "IsCompletelyDelivered",
+                "IsCompletelyDelivered desc",
+                "MaterialDocumentItemText",
+                "MaterialDocumentItemText desc",
+                "UnloadingPointName",
+                "UnloadingPointName desc",
+                "ShelfLifeExpirationDate",
+                "ShelfLifeExpirationDate desc",
+                "ManufactureDate",
+                "ManufactureDate desc",
+                "Reservation",
+                "Reservation desc",
+                "ReservationItem",
+                "ReservationItem desc",
+                "ReservationIsFinallyIssued",
+                "ReservationIsFinallyIssued desc",
+                "SpecialStockIdfgSalesOrder",
+                "SpecialStockIdfgSalesOrder desc",
+                "SpecialStockIdfgSalesOrderItem",
+                "SpecialStockIdfgSalesOrderItem desc",
+                "SpecialStockIdfgWBSElement",
+                "SpecialStockIdfgWBSElement desc",
+                "IsAutomaticallyCreated",
+                "IsAutomaticallyCreated desc",
+                "MaterialDocumentLine",
+                "MaterialDocumentLine desc",
+                "MaterialDocumentParentLine",
+                "MaterialDocumentParentLine desc",
+                "HierarchyNodeLevel",
+                "HierarchyNodeLevel desc",
+                "GoodsMovementIsCancelled",
+                "GoodsMovementIsCancelled desc",
+                "ReversedMaterialDocumentYear",
+                "ReversedMaterialDocumentYear desc",
+                "ReversedMaterialDocument",
+                "ReversedMaterialDocument desc",
+                "ReversedMaterialDocumentItem",
+                "ReversedMaterialDocumentItem desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialDocumentYear",
+                "MaterialDocument",
+                "MaterialDocumentItem",
+                "Material",
+                "Plant",
+                "StorageLocation",
+                "Batch",
+                "GoodsMovementType",
+                "InventoryStockType",
+                "InventoryValuationType",
+                "InventorySpecialStockType",
+                "Supplier",
+                "Customer",
+                "SalesOrder",
+                "SalesOrderItem",
+                "SalesOrderScheduleLine",
+                "PurchaseOrder",
+                "PurchaseOrderItem",
+                "WBSElement",
+                "ManufacturingOrder",
+                "ManufacturingOrderItem",
+                "GoodsMovementRefDocType",
+                "GoodsMovementReasonCode",
+                "AccountAssignmentCategory",
+                "CostCenter",
+                "ControllingArea",
+                "CostObject",
+                "ProfitabilitySegment",
+                "ProfitCenter",
+                "GLAccount",
+                "FunctionalArea",
+                "MaterialBaseUnit",
+                "QuantityInBaseUnit",
+                "EntryUnit",
+                "QuantityInEntryUnit",
+                "CompanyCodeCurrency",
+                "GdsMvtExtAmtInCoCodeCrcy",
+                "SlsPrcAmtInclVATInCoCodeCrcy",
+                "FiscalYear",
+                "FiscalYearPeriod",
+                "FiscalYearVariant",
+                "IssgOrRcvgMaterial",
+                "IssgOrRcvgBatch",
+                "IssuingOrReceivingPlant",
+                "IssuingOrReceivingStorageLoc",
+                "IssuingOrReceivingStockType",
+                "IssgOrRcvgSpclStockInd",
+                "IssuingOrReceivingValType",
+                "IsCompletelyDelivered",
+                "MaterialDocumentItemText",
+                "UnloadingPointName",
+                "ShelfLifeExpirationDate",
+                "ManufactureDate",
+                "Reservation",
+                "ReservationItem",
+                "ReservationIsFinallyIssued",
+                "SpecialStockIdfgSalesOrder",
+                "SpecialStockIdfgSalesOrderItem",
+                "SpecialStockIdfgWBSElement",
+                "IsAutomaticallyCreated",
+                "MaterialDocumentLine",
+                "MaterialDocumentParentLine",
+                "HierarchyNodeLevel",
+                "GoodsMovementIsCancelled",
+                "ReversedMaterialDocumentYear",
+                "ReversedMaterialDocument",
+                "ReversedMaterialDocumentItem",
+                "to_MaterialDocumentHeader"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_MaterialDocumentHeader"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_MaterialDocumentItemType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentItemType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_MaterialDocumentItem(MaterialDocumentYear='{MaterialDocumentYear}',MaterialDocument='{MaterialDocument}',MaterialDocumentItem='{MaterialDocumentItem}')": {
+      "parameters": [
+        {
+          "name": "MaterialDocumentYear",
+          "in": "path",
+          "required": true,
+          "description": "Material Document Year",
+          "type": "string"
+        },
+        {
+          "name": "MaterialDocument",
+          "in": "path",
+          "required": true,
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed.",
+          "type": "string"
+        },
+        {
+          "name": "MaterialDocumentItem",
+          "in": "path",
+          "required": true,
+          "description": "Material Document Item",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_MaterialDocumentItem by key",
+        "tags": [
+          "A_MaterialDocumentItem"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialDocumentYear",
+                "MaterialDocument",
+                "MaterialDocumentItem",
+                "Material",
+                "Plant",
+                "StorageLocation",
+                "Batch",
+                "GoodsMovementType",
+                "InventoryStockType",
+                "InventoryValuationType",
+                "InventorySpecialStockType",
+                "Supplier",
+                "Customer",
+                "SalesOrder",
+                "SalesOrderItem",
+                "SalesOrderScheduleLine",
+                "PurchaseOrder",
+                "PurchaseOrderItem",
+                "WBSElement",
+                "ManufacturingOrder",
+                "ManufacturingOrderItem",
+                "GoodsMovementRefDocType",
+                "GoodsMovementReasonCode",
+                "AccountAssignmentCategory",
+                "CostCenter",
+                "ControllingArea",
+                "CostObject",
+                "ProfitabilitySegment",
+                "ProfitCenter",
+                "GLAccount",
+                "FunctionalArea",
+                "MaterialBaseUnit",
+                "QuantityInBaseUnit",
+                "EntryUnit",
+                "QuantityInEntryUnit",
+                "CompanyCodeCurrency",
+                "GdsMvtExtAmtInCoCodeCrcy",
+                "SlsPrcAmtInclVATInCoCodeCrcy",
+                "FiscalYear",
+                "FiscalYearPeriod",
+                "FiscalYearVariant",
+                "IssgOrRcvgMaterial",
+                "IssgOrRcvgBatch",
+                "IssuingOrReceivingPlant",
+                "IssuingOrReceivingStorageLoc",
+                "IssuingOrReceivingStockType",
+                "IssgOrRcvgSpclStockInd",
+                "IssuingOrReceivingValType",
+                "IsCompletelyDelivered",
+                "MaterialDocumentItemText",
+                "UnloadingPointName",
+                "ShelfLifeExpirationDate",
+                "ManufactureDate",
+                "Reservation",
+                "ReservationItem",
+                "ReservationIsFinallyIssued",
+                "SpecialStockIdfgSalesOrder",
+                "SpecialStockIdfgSalesOrderItem",
+                "SpecialStockIdfgWBSElement",
+                "IsAutomaticallyCreated",
+                "MaterialDocumentLine",
+                "MaterialDocumentParentLine",
+                "HierarchyNodeLevel",
+                "GoodsMovementIsCancelled",
+                "ReversedMaterialDocumentYear",
+                "ReversedMaterialDocument",
+                "ReversedMaterialDocumentItem",
+                "to_MaterialDocumentHeader"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_MaterialDocumentHeader"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_MaterialDocumentItemType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentItemType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_MaterialDocumentItem(MaterialDocumentYear='{MaterialDocumentYear}',MaterialDocument='{MaterialDocument}',MaterialDocumentItem='{MaterialDocumentItem}')/to_MaterialDocumentHeader": {
+      "parameters": [
+        {
+          "name": "MaterialDocumentYear",
+          "in": "path",
+          "required": true,
+          "description": "Material Document Year",
+          "type": "string"
+        },
+        {
+          "name": "MaterialDocument",
+          "in": "path",
+          "required": true,
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed.",
+          "type": "string"
+        },
+        {
+          "name": "MaterialDocumentItem",
+          "in": "path",
+          "required": true,
+          "description": "Material Document Item",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_MaterialDocumentHeader",
+        "tags": [
+          "A_MaterialDocumentItem",
+          "A_MaterialDocumentHeader"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialDocumentYear",
+                "MaterialDocument",
+                "InventoryTransactionType",
+                "DocumentDate",
+                "PostingDate",
+                "CreationDate",
+                "CreationTime",
+                "CreatedByUser",
+                "MaterialDocumentHeaderText",
+                "ReferenceDocument",
+                "GoodsMovementCode",
+                "to_MaterialDocumentItem"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_MaterialDocumentItem"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_MaterialDocumentHeaderType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentHeaderType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/Cancel": {
+      "post": {
+        "summary": "Invoke action Cancel",
+        "tags": [
+          "A_MaterialDocumentHeader"
+        ],
+        "parameters": [
+          {
+            "name": "MaterialDocumentYear",
+            "in": "query",
+            "required": true,
+            "description": "Material Doc. Year  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "MaterialDocument",
+            "in": "query",
+            "required": true,
+            "description": "Material Document  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PostingDate",
+            "in": "query",
+            "description": "Posting Date  \n(Value needs to be enclosed in single quotes and prefixed with `datetime`, e.g. `datetime'2017-12-31T00:00'`)",
+            "type": "string",
+            "pattern": "^datetime'[0-9]{4}-[0-9]{2}-[0-9]{2}T00:00'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "A_MaterialDocumentHeaderType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentHeaderType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/CancelItem": {
+      "post": {
+        "summary": "Invoke action CancelItem",
+        "tags": [
+          "A_MaterialDocumentItem"
+        ],
+        "parameters": [
+          {
+            "name": "MaterialDocumentYear",
+            "in": "query",
+            "required": true,
+            "description": "Material Doc. Year  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "MaterialDocument",
+            "in": "query",
+            "required": true,
+            "description": "Material Document  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "MaterialDocumentItem",
+            "in": "query",
+            "required": true,
+            "description": "Material Doc.Item  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PostingDate",
+            "in": "query",
+            "description": "Posting Date  \n(Value needs to be enclosed in single quotes and prefixed with `datetime`, e.g. `datetime'2017-12-31T00:00'`)",
+            "type": "string",
+            "pattern": "^datetime'[0-9]{4}-[0-9]{2}-[0-9]{2}T00:00'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "A_MaterialDocumentItemType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentItemType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET A_MaterialDocumentHeader HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentHeaderType": {
+      "type": "object",
+      "properties": {
+        "MaterialDocumentYear": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Material Document Year"
+        },
+        "MaterialDocument": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Material Document",
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed."
+        },
+        "InventoryTransactionType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Trans./Event Type",
+          "description": "Transaction/Event Type  \nIdentifier for a certain transaction or event. (Example: GR for \"Goods receipt against a purchase order\".)"
+        },
+        "DocumentDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Document Date",
+          "description": "Document Date in Document  \nThe document date is the date on which the original document was issued."
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date",
+          "description": "Posting Date in the Document  \nDate which is used when entering the document in Financial Accounting or Controlling.  \nThe fiscal year and the period for which an update of the accounts specified in the document or cost elements is made, are derived from the posting date.When entering documents, the system checks whether the posting date entered is allowed by means of the posting period permitted.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        },
+        "CreationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Entry Date",
+          "description": "Day On Which Accounting Document Was Entered  \nSpecifies the date on which the accounting document is entered.  \nNoteThe posting date can differ from the entry date (date of entry in the system) and the document date."
+        },
+        "CreationTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Time of Entry"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "MaterialDocumentHeaderText": {
+"type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Document Header Text",
+          "description": "The document header text contains explanations or notes which apply to the document as a whole, that is, not only for certain line items."
+        },
+        "ReferenceDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Reference",
+          "description": "Reference Document Number  \nThe reference document number can contain the document number of the customer/vendor. However it may contain a different value.  \nThe reference document number is used as a search criterion when displaying or changing documents. In correspondence, the reference document number is sometimes printed in place of the document number.Enter the number specified by the business partner. If the document was created in-house and you do not know the business partner document number, you can copy the document number into the reference number field by entering \"*\"."
+        },
+        "GoodsMovementCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Goods Movement Code"
+        },
+        "to_MaterialDocumentItem": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentItemType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API exposure Material Document Header"
+    },
+    "API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentHeaderType-create": {
+      "type": "object",
+      "properties": {
+        "MaterialDocumentYear": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Material Document Year"
+        },
+        "MaterialDocument": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Material Document",
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed."
+        },
+        "InventoryTransactionType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Trans./Event Type",
+          "description": "Transaction/Event Type  \nIdentifier for a certain transaction or event. (Example: GR for \"Goods receipt against a purchase order\".)"
+        },
+        "DocumentDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Document Date",
+          "description": "Document Date in Document  \nThe document date is the date on which the original document was issued."
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date",
+          "description": "Posting Date in the Document  \nDate which is used when entering the document in Financial Accounting or Controlling.  \nThe fiscal year and the period for which an update of the accounts specified in the document or cost elements is made, are derived from the posting date.When entering documents, the system checks whether the posting date entered is allowed by means of the posting period permitted.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        },
+        "CreationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Entry Date",
+          "description": "Day On Which Accounting Document Was Entered  \nSpecifies the date on which the accounting document is entered.  \nNoteThe posting date can differ from the entry date (date of entry in the system) and the document date."
+        },
+        "CreationTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Time of Entry"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "MaterialDocumentHeaderText": {
+"type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Document Header Text",
+          "description": "The document header text contains explanations or notes which apply to the document as a whole, that is, not only for certain line items."
+        },
+        "ReferenceDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Reference",
+          "description": "Reference Document Number  \nThe reference document number can contain the document number of the customer/vendor. However it may contain a different value.  \nThe reference document number is used as a search criterion when displaying or changing documents. In correspondence, the reference document number is sometimes printed in place of the document number.Enter the number specified by the business partner. If the document was created in-house and you do not know the business partner document number, you can copy the document number into the reference number field by entering \"*\"."
+        },
+        "GoodsMovementCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Goods Movement Code"
+        },
+        "to_MaterialDocumentItem": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentItemType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "MaterialDocumentYear",
+        "MaterialDocument"
+      ],
+      "title": "API exposure Material Document Header (for create)"
+    },
+    "API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentHeaderType-update": {
+      "type": "object",
+      "properties": {
+        "InventoryTransactionType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Trans./Event Type",
+          "description": "Transaction/Event Type  \nIdentifier for a certain transaction or event. (Example: GR for \"Goods receipt against a purchase order\".)"
+        },
+        "DocumentDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Document Date",
+          "description": "Document Date in Document  \nThe document date is the date on which the original document was issued."
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date",
+          "description": "Posting Date in the Document  \nDate which is used when entering the document in Financial Accounting or Controlling.  \nThe fiscal year and the period for which an update of the accounts specified in the document or cost elements is made, are derived from the posting date.When entering documents, the system checks whether the posting date entered is allowed by means of the posting period permitted.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        },
+        "CreationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Entry Date",
+          "description": "Day On Which Accounting Document Was Entered  \nSpecifies the date on which the accounting document is entered.  \nNoteThe posting date can differ from the entry date (date of entry in the system) and the document date."
+        },
+        "CreationTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Time of Entry"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User Name"
+        },
+        "MaterialDocumentHeaderText": {
+"type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Document Header Text",
+          "description": "The document header text contains explanations or notes which apply to the document as a whole, that is, not only for certain line items."
+        },
+        "ReferenceDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Reference",
+          "description": "Reference Document Number  \nThe reference document number can contain the document number of the customer/vendor. However it may contain a different value.  \nThe reference document number is used as a search criterion when displaying or changing documents. In correspondence, the reference document number is sometimes printed in place of the document number.Enter the number specified by the business partner. If the document was created in-house and you do not know the business partner document number, you can copy the document number into the reference number field by entering \"*\"."
+        },
+        "GoodsMovementCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Goods Movement Code"
+        }
+      },
+      "title": "API exposure Material Document Header (for update)"
+    },
+    "API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentItemType": {
+      "type": "object",
+      "properties": {
+        "MaterialDocumentYear": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Material Document Year"
+        },
+        "MaterialDocument": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Material Document",
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed."
+        },
+        "MaterialDocumentItem": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Material Document Item"
+        },
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location",
+          "description": "Number of the storage location in which the material is stored. A plant may contain one or more storage locations."
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch",
+          "description": "Batch Number  \nAssigns a material that is manufactured in batches or production lots to a specific batch."
+        },
+        "GoodsMovementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Goods Movement Type",
+          "description": "Goods Movement Type (Inventory Management)  \nSpecifies a key for the type of goods movement. Each goods movement (for example, purchase order to warehouse) is allocated to a movement type in the system."
+        },
+        "InventoryStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Stock Type",
+          "description": "Stock Type of Goods Movement (Stock Identifier)  \nUnique stock type that identifies the purpose of the stock.  \nNoteThe system determines the stock on the basis of stock identifiers.The following keys are possible for this field:01: Unrestricted-Use Stock02: Stock in Quality Inspection03: Returns04: Stock Transfer (Storage Location)05: Stock Transfer (Plant)06: Stock in Transit07: Blocked Stock08: Restricted-Use Stock09: Tied Empties10: Valuated Goods Receipt Blocked Stock"
+        },
+        "InventoryValuationType": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Valuation Type",
+          "description": "Uniquely identifies separately valuated stocks of a material.  \nThe valuation types allowed for a material are determined by the valuation category.If a material is valuated according to its origin (valuation category H), you can define the possible countries of origin as valuation types."
+        },
+        "InventorySpecialStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special Stock Type"
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "Customer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Account number of customer  \nUniquely identifies a customer.  \nThis customer number is used for managing customer special stocks."
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order",
+          "description": "Sales Order Number  \nUniquely identifies a sales order.  \nThe selection of postprocessing records via the sales order number is only possible for non-valuated sales order stock."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales Order Item"
+        },
+        "SalesOrderScheduleLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Order Schedule"
+        },
+        "PurchaseOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Purchase Order",
+          "description": "Purchase Order Number  \nAlphanumeric key uniquely identifying the document.  \n1Number of the purchase order to which the entry of services performed relates."
+        },
+        "PurchaseOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Purchase Order Item",
+          "description": "Item Number of Purchasing Document"
+        },
+        "WBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        },
+        "ManufacturingOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Order",
+          "description": "Order Number  \nKey that uniquely identifies an order within a client."
+        },
+        "ManufacturingOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Order Item"
+        },
+        "GoodsMovementRefDocType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Reference Doc. Type",
+          "description": "Goods movement ref doc type"
+        },
+        "GoodsMovementReasonCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reason for Movement",
+          "description": "Specifies a key you can use to call up a standard text stipulating the reason for a goods movement (for example, reason for a return delivery)."
+        },
+        "AccountAssignmentCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Account Assignment Category"
+        },
+        "CostCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cost Center",
+          "description": "A key that uniquely identifies a cost center."
+        },
+        "ControllingArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Controlling Area",
+          "description": "Uniquely identifies a controlling area.  \nThe controlling area is the highest organizational unit in Controlling.Whether controlling area and company code are in a 1:1 relationship or a 1:n relationship, the number of posting periods in both controlling area and company code(s) must be identical. However, special periods may vary."
+        },
+        "CostObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Cost Object",
+          "description": "Term identifying the cost object ID.  \nCost objects are the activity units of business whose costs are assigned based on the cost origins. The R/3 System distinguishes between the following types of cost objects:Cost objects represented by a cost object IDCost objects represented by objects from other components, such as production orders or sales order itemsCost objects in the following areas are represented by cost object IDs:Activity-Based Costing (CO-OM-ABC)In Activity-Based Costing, overhead is first assigned to cost centers and then to business processes. From there, the overhead is assigned to cost objects as process costs.Costs for Intangible Goods and Services (CO-PC-OBJ)In Costs for Intangible Goods and Services, costs can be analyzed on general cost objects.Product Cost by Period (CO-PC-OBJ)In Product Cost by Period you can create a cost object hierarchy to record actual costs that cannot be recorded at the material or order level. You can distribute the costs assigned to the nodes of a cost object hierarchy directly to the individual objects in the lowest cost object nodes at period-end closing (for example, product cost collectors) or you can settle the costs directly from the cost object hierarchy to a price difference account.Product Cost Controlling Information System (CO-PC)You can create further cost object IDs in the Product Cost Controlling Information System for CO product groups. You can create a cost object ID for each group, and assign materials to the cost object ID. The costs of the assigned materials appear in summarized form in the information system by product group.You can use CO product groups for product drilldown reports.The cost object type determines which functions can be used with the cost object. Functions for cost object hierarchies are performed on the assumption that the given cost object indicates the top node of the hierarchy."
+        },
+        "ProfitabilitySegment": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profitability Segment"
+        },
+        "ProfitCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profit Center",
+          "description": "Key which together with the controlling area uniquely identifies a profit center."
+        },
+        "GLAccount": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "G/L Account",
+          "description": "G/L Account Number  \nThe G/L account number identifies the G/L account in a chart of accounts."
+        },
+        "FunctionalArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Functional Area",
+          "description": "Structure criterion for an enterprise or government based on functional aspects.  \nUse for Cost-of-Sales AccountingThe functional area is required to create a profit and loss account in Financial Accounting using cost-of-sales accounting. The following are examples of structure criteria:ManufacturingAdministrationSalesResearch and developmentUse for GovernmentThe functional area is needed for Funds Management to meet legal requirements for reporting with functional aspects. You can use the functional area to represent the global targets and goals (such as public safety or city development), in particular the expenses of your organization.Use in cost-of-sales accountingSee the documentation on Filling the Functional Area Field.For comprehensive information on cost-of-sales accounting and on the functional area, see the SAP Library under Accounting -> Financial Accounting -> General Ledger -> Cost-of-Sales Accounting.Use in governmentFor more information on the functional area, see the implementation Guide for Funds Management Government in the section Activate Account Assignment Elements."
+        },
+        "MaterialBaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit of Measure",
+          "description": "Unit of measure in which stocks of the material are managed. The system converts all the quantities you enter in other units of measure (alternative units of measure) to the base unit of measure.  \nYou define the base unit of measure and also alternative units of measure and their conversion factors in the material master record.Since all data is updated in the base unit of measure, your entry is particularly important for the conversion of alternative units of measure. A quantity in the alternative unit of measure can only be shown precisely if its value can be shown with the decimal places available. To ensure this, please note the following:The base unit of measure is the unit satisfying the highest necessary requirement for precision.The conversion of alternative units of measure to the base unit should result in simple decimal fractions (not, for example, 1/3 = 0.333...).Inventory ManagementIn Inventory Management, the base unit of measure is the same as the stockkeeping unit.ServicesServices have units of measure of their own, including the following:Service unitUnit of measure at the higher item level. The precise quantities of the individual services are each at the detailed service line level.BlanketUnit of measure at service line level for services to be provided once only, and for which no precise quantities can or are to be specified."
+        },
+        "QuantityInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Quantity",
+          "description": "Portion of total purchase order quantity that you wish to allocate to this account assignment item.  \nThe quantity entered determines which portion of the costs you wish to distribute to this account assignment item."
+        },
+        "EntryUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Entry",
+          "description": "Unit of entry  \nSpecifies the unit of measure in which the goods movement or inventory count is entered.  \nEnter a unit of measure here only if it differs from the default unit of measure.There are the following default units of measure:the order unit for goods receipts with reference to purchase ordersthe production unit for goods receipts with reference to production ordersthe unit of issue for other goods movementsIf the default unit of measure has not been defined in the material master record, the system will suggest the stockkeeping unit."
+        },
+        "QuantityInEntryUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Qty in unit of entry",
+          "description": "Quantity in unit of entry  \nSpecifies the quantity to be moved in the unit of entry. The quantity is automatically converted to the stockkeeping unit (base unit of measure).  \nEnter the quantity to be moved in any unit of measure for the material.If the relevant unit of measure has not been defined in the material master record, the system uses the stockkeeping unit.If you do not enter a unit of measure, the system uses the following units of measure:order unit  in goods receipts against purchase ordersproduction unit  in goods receipts against production ordersunit of issue  in other goods movements"
+        },
+        "CompanyCodeCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Company Code Currency"
+        },
+        "GdsMvtExtAmtInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Ext. Amount in LC",
+          "description": "Externally Entered Posting Amount in Local Currency  \nIndicates the amount of the document item in the local currency of the company code.  \nThe value of the movement is calculated automatically by the system. However, it is possible to enter an amount manually if the item is to be valuated at a different price."
+        },
+        "SlsPrcAmtInclVATInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Sales Value inc. VAT",
+          "description": "Value at Sales Prices Including Value-Added Tax  \nSpecifies the value at sales prices including tax."
+        },
+        "FiscalYear": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Fiscal Year",
+          "description": "Period, 12 months as a rule, for which the company is to create its inventory and balance sheet. The fiscal year can be the same as the calendar year, but does not have to be."
+        },
+        "FiscalYearPeriod": {
+"type": "string",
+"default": "null",
+          "maxLength": 7,
+          "example": "string",
+          "title": "Fiscal Year & Period",
+          "description": "Period Year"
+        },
+        "FiscalYearVariant": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Fiscal Year Variant",
+          "description": "The fiscal year variant is used to define the fiscal year.  \nYou can define the following using a fiscal year variant:How many posting periods are in a fiscal yearHow many special periods you requireHow the system determines the posting periods when postingIn the definition, you allocate your posting periods to the calendar year.Allocation control requires the same number of posting periods in the company code and in the assigned controlling area.This means that the number of posting periods in the fiscal year variants must be the same in the company code and in the controlling area. The period limits for the two fiscal year variants must also coincide.You must define which fiscal year variant is to be used for each company code. To do this, you must define the appropriate fiscal year variant. It must contain no more than 16 periods.Note:The company codes delivered with the standard system are allocated to the fiscal year variant that corresponds to the calendar year and which also uses four special periods.You define fiscal year variants as well as the allocation of fiscal year variant to the company code in Financial Accounting customizing."
+        },
+        "IssgOrRcvgMaterial": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Transfer Material"
+        },
+        "IssgOrRcvgBatch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Transfer Batch"
+        },
+        "IssuingOrReceivingPlant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Rec/Iss Plant",
+          "description": "Receiving/Issuing Plant"
+        },
+        "IssuingOrReceivingStorageLoc": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving stor. loc.",
+          "description": "Receiving/issuing storage location  \nIndicates the receiving or the issuing storage location.  \nThe receiving storage location is the storage location that is to receive the goods.The issuing storage location is the storage location that issues the goods."
+        },
+        "IssuingOrReceivingStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Transfer Stock Type"
+        },
+        "IssgOrRcvgSpclStockInd": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Transfer Special Stock Type"
+        },
+        "IssuingOrReceivingValType": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Val. Type Tfr Batch",
+          "description": "Valuation Type of Transfer Batch  \nKey used in the split valuation of materials (that is, the separate valuation of different stocks of the same material) to permit stocks of a transfer batch to be differentiated according to different criteria."
+        },
+        "IsCompletelyDelivered": {
+"type": "boolean",
+"default": "null",
+          "title": "Delivery Completed",
+          "description": "\"Delivery Completed\" Indicator  \nIndicates that the item is to be regarded as closed."
+        },
+        "MaterialDocumentItemText": {
+"type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Text",
+          "description": "Item Text  \nContains an explanatory text on the line item.  \nLine item texts can be used internally and externally. To be able to distinguish between these, you must begin texts for external use with \"*\". These texts can then be printed on all correspondence, dunning notices, payment advice notes, etc. The asterisk is removed when the text is printed.This function is only available in the FI component. It cannot be used in Materials Management."
+        },
+        "UnloadingPointName": {
+"type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Unloading Point",
+          "description": "Specifies the point at which the material is to be unloaded (for example, ramp 1)."
+        },
+        "ShelfLifeExpirationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "SLED/BBD",
+          "description": "Shelf Life Expiration or Best-Before Date  \nThe date is set upon goods receipt in one of the following ways:  \nYou enter it yourself.You enter a date of production, and the system calculates the shelf life expiration date from the date of production plus the shelf life in days (from the material master record).NoteThis date can still be changed upon receipt of the usage decision for an inspection lot."
+        },
+        "ManufactureDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Date of Manufacture"
+        },
+        "Reservation": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reservation",
+          "description": "Number of reservation/dependent requirements  \nAlphanumeric key uniquely identifying the document."
+        },
+        "ReservationItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reservation Item",
+          "description": "Item Number of Reservation / Dependent Requirements"
+        },
+        "ReservationIsFinallyIssued": {
+"type": "boolean",
+"default": "null",
+          "title": "Res Final Issue",
+          "description": "Final Issue for Reservation"
+        },
+        "SpecialStockIdfgSalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales order",
+          "description": "Sales order number of valuated sales order stock  \nUniquely identifies a sales order."
+        },
+        "SpecialStockIdfgSalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales order item",
+          "description": "Sales Order Item of Valuated Sales Order Stock  \nUniquely identifies an item in a sales order."
+        },
+        "SpecialStockIdfgWBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        },
+        "IsAutomaticallyCreated": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Automat. Created",
+          "description": "Item Automatically Created Indicator"
+        },
+        "MaterialDocumentLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Line ID",
+          "description": "Unique Identification of Document Line"
+        },
+        "MaterialDocumentParentLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Parent line ID",
+          "description": "Identifier of immediately superior line  \nIndicates the line ID of the immediately superior line in the document.  \nLines that do not contain an initial value in this field may be, for example:Components of a subcontracting itemAutomatic lines for a stock transferEmpties items for the full productAt present we do not plan to fill this field in the interface structure IMSEG (except if it is called up in MM-IM). Filling the field would cause an error.Documentation of the data elements MB_LINE_ID and MB_LINE_DEPTH.WarningThis indicator is used for internal program control.Please do not change the entry in this field.Any changes made could lead to program errors or terminations."
+        },
+        "HierarchyNodeLevel": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Hierarchy level",
+          "description": "Hierarchy level of line in document  \nFor document items with the same superior line, this is used to differentiate between a real subitem and an automatically created line of the same level (for example, for stock transfers of a full product).  \nDocumentation of data elements MB_LINE_ID and MB_PARENT_ID.WarningThis indicator is used for internal program control.Please do not change the entry in this field.Any changes made could lead to program errors or terminations."
+        },
+        "GoodsMovementIsCancelled": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Item Cancelled",
+          "description": "Item has been Cancelled  \nIndicator that shows whether a specific material document item has been cancelled."
+        },
+        "ReversedMaterialDocumentYear": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reversed Doc Year",
+          "description": "Reversed Material Document Year"
+        },
+        "ReversedMaterialDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reversed Mat Doc",
+          "description": "Reversed Material Document"
+        },
+        "ReversedMaterialDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reversed Doc Item",
+          "description": "Reversed Material Document Item"
+        },
+        "to_MaterialDocumentHeader": {
+          "$ref": "#/definitions/API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentHeaderType"
+        }
+      },
+      "title": "API exposure Material Document Item"
+    },
+    "API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentItemType-create": {
+      "type": "object",
+      "properties": {
+        "MaterialDocumentYear": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Material Document Year"
+        },
+        "MaterialDocument": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Material Document",
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed."
+        },
+        "MaterialDocumentItem": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Material Document Item"
+        },
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location",
+          "description": "Number of the storage location in which the material is stored. A plant may contain one or more storage locations."
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch",
+          "description": "Batch Number  \nAssigns a material that is manufactured in batches or production lots to a specific batch."
+        },
+        "GoodsMovementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Goods Movement Type",
+          "description": "Goods Movement Type (Inventory Management)  \nSpecifies a key for the type of goods movement. Each goods movement (for example, purchase order to warehouse) is allocated to a movement type in the system."
+        },
+        "InventoryStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Stock Type",
+          "description": "Stock Type of Goods Movement (Stock Identifier)  \nUnique stock type that identifies the purpose of the stock.  \nNoteThe system determines the stock on the basis of stock identifiers.The following keys are possible for this field:01: Unrestricted-Use Stock02: Stock in Quality Inspection03: Returns04: Stock Transfer (Storage Location)05: Stock Transfer (Plant)06: Stock in Transit07: Blocked Stock08: Restricted-Use Stock09: Tied Empties10: Valuated Goods Receipt Blocked Stock"
+        },
+        "InventoryValuationType": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Valuation Type",
+          "description": "Uniquely identifies separately valuated stocks of a material.  \nThe valuation types allowed for a material are determined by the valuation category.If a material is valuated according to its origin (valuation category H), you can define the possible countries of origin as valuation types."
+        },
+        "InventorySpecialStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special Stock Type"
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "Customer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Account number of customer  \nUniquely identifies a customer.  \nThis customer number is used for managing customer special stocks."
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order",
+          "description": "Sales Order Number  \nUniquely identifies a sales order.  \nThe selection of postprocessing records via the sales order number is only possible for non-valuated sales order stock."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales Order Item"
+        },
+        "SalesOrderScheduleLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Order Schedule"
+        },
+        "PurchaseOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Purchase Order",
+          "description": "Purchase Order Number  \nAlphanumeric key uniquely identifying the document.  \n1Number of the purchase order to which the entry of services performed relates."
+        },
+        "PurchaseOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Purchase Order Item",
+          "description": "Item Number of Purchasing Document"
+        },
+        "WBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        },
+        "ManufacturingOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Order",
+          "description": "Order Number  \nKey that uniquely identifies an order within a client."
+        },
+        "ManufacturingOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Order Item"
+        },
+        "GoodsMovementRefDocType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Reference Doc. Type",
+          "description": "Goods movement ref doc type"
+        },
+        "GoodsMovementReasonCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reason for Movement",
+          "description": "Specifies a key you can use to call up a standard text stipulating the reason for a goods movement (for example, reason for a return delivery)."
+        },
+        "AccountAssignmentCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Account Assignment Category"
+        },
+        "CostCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cost Center",
+          "description": "A key that uniquely identifies a cost center."
+        },
+        "ControllingArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Controlling Area",
+          "description": "Uniquely identifies a controlling area.  \nThe controlling area is the highest organizational unit in Controlling.Whether controlling area and company code are in a 1:1 relationship or a 1:n relationship, the number of posting periods in both controlling area and company code(s) must be identical. However, special periods may vary."
+        },
+        "CostObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Cost Object",
+          "description": "Term identifying the cost object ID.  \nCost objects are the activity units of business whose costs are assigned based on the cost origins. The R/3 System distinguishes between the following types of cost objects:Cost objects represented by a cost object IDCost objects represented by objects from other components, such as production orders or sales order itemsCost objects in the following areas are represented by cost object IDs:Activity-Based Costing (CO-OM-ABC)In Activity-Based Costing, overhead is first assigned to cost centers and then to business processes. From there, the overhead is assigned to cost objects as process costs.Costs for Intangible Goods and Services (CO-PC-OBJ)In Costs for Intangible Goods and Services, costs can be analyzed on general cost objects.Product Cost by Period (CO-PC-OBJ)In Product Cost by Period you can create a cost object hierarchy to record actual costs that cannot be recorded at the material or order level. You can distribute the costs assigned to the nodes of a cost object hierarchy directly to the individual objects in the lowest cost object nodes at period-end closing (for example, product cost collectors) or you can settle the costs directly from the cost object hierarchy to a price difference account.Product Cost Controlling Information System (CO-PC)You can create further cost object IDs in the Product Cost Controlling Information System for CO product groups. You can create a cost object ID for each group, and assign materials to the cost object ID. The costs of the assigned materials appear in summarized form in the information system by product group.You can use CO product groups for product drilldown reports.The cost object type determines which functions can be used with the cost object. Functions for cost object hierarchies are performed on the assumption that the given cost object indicates the top node of the hierarchy."
+        },
+        "ProfitabilitySegment": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profitability Segment"
+        },
+        "ProfitCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profit Center",
+          "description": "Key which together with the controlling area uniquely identifies a profit center."
+        },
+        "GLAccount": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "G/L Account",
+          "description": "G/L Account Number  \nThe G/L account number identifies the G/L account in a chart of accounts."
+        },
+        "FunctionalArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Functional Area",
+          "description": "Structure criterion for an enterprise or government based on functional aspects.  \nUse for Cost-of-Sales AccountingThe functional area is required to create a profit and loss account in Financial Accounting using cost-of-sales accounting. The following are examples of structure criteria:ManufacturingAdministrationSalesResearch and developmentUse for GovernmentThe functional area is needed for Funds Management to meet legal requirements for reporting with functional aspects. You can use the functional area to represent the global targets and goals (such as public safety or city development), in particular the expenses of your organization.Use in cost-of-sales accountingSee the documentation on Filling the Functional Area Field.For comprehensive information on cost-of-sales accounting and on the functional area, see the SAP Library under Accounting -> Financial Accounting -> General Ledger -> Cost-of-Sales Accounting.Use in governmentFor more information on the functional area, see the implementation Guide for Funds Management Government in the section Activate Account Assignment Elements."
+        },
+        "MaterialBaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit of Measure",
+          "description": "Unit of measure in which stocks of the material are managed. The system converts all the quantities you enter in other units of measure (alternative units of measure) to the base unit of measure.  \nYou define the base unit of measure and also alternative units of measure and their conversion factors in the material master record.Since all data is updated in the base unit of measure, your entry is particularly important for the conversion of alternative units of measure. A quantity in the alternative unit of measure can only be shown precisely if its value can be shown with the decimal places available. To ensure this, please note the following:The base unit of measure is the unit satisfying the highest necessary requirement for precision.The conversion of alternative units of measure to the base unit should result in simple decimal fractions (not, for example, 1/3 = 0.333...).Inventory ManagementIn Inventory Management, the base unit of measure is the same as the stockkeeping unit.ServicesServices have units of measure of their own, including the following:Service unitUnit of measure at the higher item level. The precise quantities of the individual services are each at the detailed service line level.BlanketUnit of measure at service line level for services to be provided once only, and for which no precise quantities can or are to be specified."
+        },
+        "QuantityInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Quantity",
+          "description": "Portion of total purchase order quantity that you wish to allocate to this account assignment item.  \nThe quantity entered determines which portion of the costs you wish to distribute to this account assignment item."
+        },
+        "EntryUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Entry",
+          "description": "Unit of entry  \nSpecifies the unit of measure in which the goods movement or inventory count is entered.  \nEnter a unit of measure here only if it differs from the default unit of measure.There are the following default units of measure:the order unit for goods receipts with reference to purchase ordersthe production unit for goods receipts with reference to production ordersthe unit of issue for other goods movementsIf the default unit of measure has not been defined in the material master record, the system will suggest the stockkeeping unit."
+        },
+        "QuantityInEntryUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Qty in unit of entry",
+          "description": "Quantity in unit of entry  \nSpecifies the quantity to be moved in the unit of entry. The quantity is automatically converted to the stockkeeping unit (base unit of measure).  \nEnter the quantity to be moved in any unit of measure for the material.If the relevant unit of measure has not been defined in the material master record, the system uses the stockkeeping unit.If you do not enter a unit of measure, the system uses the following units of measure:order unit  in goods receipts against purchase ordersproduction unit  in goods receipts against production ordersunit of issue  in other goods movements"
+        },
+        "CompanyCodeCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Company Code Currency"
+        },
+        "GdsMvtExtAmtInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Ext. Amount in LC",
+          "description": "Externally Entered Posting Amount in Local Currency  \nIndicates the amount of the document item in the local currency of the company code.  \nThe value of the movement is calculated automatically by the system. However, it is possible to enter an amount manually if the item is to be valuated at a different price."
+        },
+        "SlsPrcAmtInclVATInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Sales Value inc. VAT",
+          "description": "Value at Sales Prices Including Value-Added Tax  \nSpecifies the value at sales prices including tax."
+        },
+        "FiscalYear": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Fiscal Year",
+          "description": "Period, 12 months as a rule, for which the company is to create its inventory and balance sheet. The fiscal year can be the same as the calendar year, but does not have to be."
+        },
+        "FiscalYearPeriod": {
+"type": "string",
+"default": "null",
+          "maxLength": 7,
+          "example": "string",
+          "title": "Fiscal Year & Period",
+          "description": "Period Year"
+        },
+        "FiscalYearVariant": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Fiscal Year Variant",
+          "description": "The fiscal year variant is used to define the fiscal year.  \nYou can define the following using a fiscal year variant:How many posting periods are in a fiscal yearHow many special periods you requireHow the system determines the posting periods when postingIn the definition, you allocate your posting periods to the calendar year.Allocation control requires the same number of posting periods in the company code and in the assigned controlling area.This means that the number of posting periods in the fiscal year variants must be the same in the company code and in the controlling area. The period limits for the two fiscal year variants must also coincide.You must define which fiscal year variant is to be used for each company code. To do this, you must define the appropriate fiscal year variant. It must contain no more than 16 periods.Note:The company codes delivered with the standard system are allocated to the fiscal year variant that corresponds to the calendar year and which also uses four special periods.You define fiscal year variants as well as the allocation of fiscal year variant to the company code in Financial Accounting customizing."
+        },
+        "IssgOrRcvgMaterial": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Transfer Material"
+        },
+        "IssgOrRcvgBatch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Transfer Batch"
+        },
+        "IssuingOrReceivingPlant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Rec/Iss Plant",
+          "description": "Receiving/Issuing Plant"
+        },
+        "IssuingOrReceivingStorageLoc": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving stor. loc.",
+          "description": "Receiving/issuing storage location  \nIndicates the receiving or the issuing storage location.  \nThe receiving storage location is the storage location that is to receive the goods.The issuing storage location is the storage location that issues the goods."
+        },
+        "IssuingOrReceivingStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Transfer Stock Type"
+        },
+        "IssgOrRcvgSpclStockInd": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Transfer Special Stock Type"
+        },
+        "IssuingOrReceivingValType": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Val. Type Tfr Batch",
+          "description": "Valuation Type of Transfer Batch  \nKey used in the split valuation of materials (that is, the separate valuation of different stocks of the same material) to permit stocks of a transfer batch to be differentiated according to different criteria."
+        },
+        "IsCompletelyDelivered": {
+"type": "boolean",
+"default": "null",
+          "title": "Delivery Completed",
+          "description": "\"Delivery Completed\" Indicator  \nIndicates that the item is to be regarded as closed."
+        },
+        "MaterialDocumentItemText": {
+"type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Text",
+          "description": "Item Text  \nContains an explanatory text on the line item.  \nLine item texts can be used internally and externally. To be able to distinguish between these, you must begin texts for external use with \"*\". These texts can then be printed on all correspondence, dunning notices, payment advice notes, etc. The asterisk is removed when the text is printed.This function is only available in the FI component. It cannot be used in Materials Management."
+        },
+        "UnloadingPointName": {
+"type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Unloading Point",
+          "description": "Specifies the point at which the material is to be unloaded (for example, ramp 1)."
+        },
+        "ShelfLifeExpirationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "SLED/BBD",
+          "description": "Shelf Life Expiration or Best-Before Date  \nThe date is set upon goods receipt in one of the following ways:  \nYou enter it yourself.You enter a date of production, and the system calculates the shelf life expiration date from the date of production plus the shelf life in days (from the material master record).NoteThis date can still be changed upon receipt of the usage decision for an inspection lot."
+        },
+        "ManufactureDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Date of Manufacture"
+        },
+        "Reservation": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reservation",
+          "description": "Number of reservation/dependent requirements  \nAlphanumeric key uniquely identifying the document."
+        },
+        "ReservationItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reservation Item",
+          "description": "Item Number of Reservation / Dependent Requirements"
+        },
+        "ReservationIsFinallyIssued": {
+"type": "boolean",
+"default": "null",
+          "title": "Res Final Issue",
+          "description": "Final Issue for Reservation"
+        },
+        "SpecialStockIdfgSalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales order",
+          "description": "Sales order number of valuated sales order stock  \nUniquely identifies a sales order."
+        },
+        "SpecialStockIdfgSalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales order item",
+          "description": "Sales Order Item of Valuated Sales Order Stock  \nUniquely identifies an item in a sales order."
+        },
+        "SpecialStockIdfgWBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        },
+        "IsAutomaticallyCreated": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Automat. Created",
+          "description": "Item Automatically Created Indicator"
+        },
+        "MaterialDocumentLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Line ID",
+          "description": "Unique Identification of Document Line"
+        },
+        "MaterialDocumentParentLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Parent line ID",
+          "description": "Identifier of immediately superior line  \nIndicates the line ID of the immediately superior line in the document.  \nLines that do not contain an initial value in this field may be, for example:Components of a subcontracting itemAutomatic lines for a stock transferEmpties items for the full productAt present we do not plan to fill this field in the interface structure IMSEG (except if it is called up in MM-IM). Filling the field would cause an error.Documentation of the data elements MB_LINE_ID and MB_LINE_DEPTH.WarningThis indicator is used for internal program control.Please do not change the entry in this field.Any changes made could lead to program errors or terminations."
+        },
+        "HierarchyNodeLevel": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Hierarchy level",
+          "description": "Hierarchy level of line in document  \nFor document items with the same superior line, this is used to differentiate between a real subitem and an automatically created line of the same level (for example, for stock transfers of a full product).  \nDocumentation of data elements MB_LINE_ID and MB_PARENT_ID.WarningThis indicator is used for internal program control.Please do not change the entry in this field.Any changes made could lead to program errors or terminations."
+        },
+        "GoodsMovementIsCancelled": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Item Cancelled",
+          "description": "Item has been Cancelled  \nIndicator that shows whether a specific material document item has been cancelled."
+        },
+        "ReversedMaterialDocumentYear": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reversed Doc Year",
+          "description": "Reversed Material Document Year"
+        },
+        "ReversedMaterialDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reversed Mat Doc",
+          "description": "Reversed Material Document"
+        },
+        "ReversedMaterialDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reversed Doc Item",
+          "description": "Reversed Material Document Item"
+        },
+        "to_MaterialDocumentHeader": {
+          "$ref": "#/definitions/API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentHeaderType-create"
+        }
+      },
+      "required": [
+        "MaterialDocumentYear",
+        "MaterialDocument",
+        "MaterialDocumentItem"
+      ],
+      "title": "API exposure Material Document Item (for create)"
+    },
+    "API_MATERIAL_DOCUMENT_SRV.A_MaterialDocumentItemType-update": {
+      "type": "object",
+      "properties": {
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location",
+          "description": "Number of the storage location in which the material is stored. A plant may contain one or more storage locations."
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch",
+          "description": "Batch Number  \nAssigns a material that is manufactured in batches or production lots to a specific batch."
+        },
+        "GoodsMovementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Goods Movement Type",
+          "description": "Goods Movement Type (Inventory Management)  \nSpecifies a key for the type of goods movement. Each goods movement (for example, purchase order to warehouse) is allocated to a movement type in the system."
+        },
+        "InventoryStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Stock Type",
+          "description": "Stock Type of Goods Movement (Stock Identifier)  \nUnique stock type that identifies the purpose of the stock.  \nNoteThe system determines the stock on the basis of stock identifiers.The following keys are possible for this field:01: Unrestricted-Use Stock02: Stock in Quality Inspection03: Returns04: Stock Transfer (Storage Location)05: Stock Transfer (Plant)06: Stock in Transit07: Blocked Stock08: Restricted-Use Stock09: Tied Empties10: Valuated Goods Receipt Blocked Stock"
+        },
+        "InventoryValuationType": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Valuation Type",
+          "description": "Uniquely identifies separately valuated stocks of a material.  \nThe valuation types allowed for a material are determined by the valuation category.If a material is valuated according to its origin (valuation category H), you can define the possible countries of origin as valuation types."
+        },
+        "InventorySpecialStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special Stock Type"
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "Customer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Account number of customer  \nUniquely identifies a customer.  \nThis customer number is used for managing customer special stocks."
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order",
+          "description": "Sales Order Number  \nUniquely identifies a sales order.  \nThe selection of postprocessing records via the sales order number is only possible for non-valuated sales order stock."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales Order Item"
+        },
+        "SalesOrderScheduleLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Order Schedule"
+        },
+        "PurchaseOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Purchase Order",
+          "description": "Purchase Order Number  \nAlphanumeric key uniquely identifying the document.  \n1Number of the purchase order to which the entry of services performed relates."
+        },
+        "PurchaseOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Purchase Order Item",
+          "description": "Item Number of Purchasing Document"
+        },
+        "WBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        },
+        "ManufacturingOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Order",
+          "description": "Order Number  \nKey that uniquely identifies an order within a client."
+        },
+        "ManufacturingOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Order Item"
+        },
+        "GoodsMovementRefDocType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Reference Doc. Type",
+          "description": "Goods movement ref doc type"
+        },
+        "GoodsMovementReasonCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reason for Movement",
+          "description": "Specifies a key you can use to call up a standard text stipulating the reason for a goods movement (for example, reason for a return delivery)."
+        },
+        "AccountAssignmentCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Account Assignment Category"
+        },
+        "CostCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cost Center",
+          "description": "A key that uniquely identifies a cost center."
+        },
+        "ControllingArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Controlling Area",
+          "description": "Uniquely identifies a controlling area.  \nThe controlling area is the highest organizational unit in Controlling.Whether controlling area and company code are in a 1:1 relationship or a 1:n relationship, the number of posting periods in both controlling area and company code(s) must be identical. However, special periods may vary."
+        },
+        "CostObject": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Cost Object",
+          "description": "Term identifying the cost object ID.  \nCost objects are the activity units of business whose costs are assigned based on the cost origins. The R/3 System distinguishes between the following types of cost objects:Cost objects represented by a cost object IDCost objects represented by objects from other components, such as production orders or sales order itemsCost objects in the following areas are represented by cost object IDs:Activity-Based Costing (CO-OM-ABC)In Activity-Based Costing, overhead is first assigned to cost centers and then to business processes. From there, the overhead is assigned to cost objects as process costs.Costs for Intangible Goods and Services (CO-PC-OBJ)In Costs for Intangible Goods and Services, costs can be analyzed on general cost objects.Product Cost by Period (CO-PC-OBJ)In Product Cost by Period you can create a cost object hierarchy to record actual costs that cannot be recorded at the material or order level. You can distribute the costs assigned to the nodes of a cost object hierarchy directly to the individual objects in the lowest cost object nodes at period-end closing (for example, product cost collectors) or you can settle the costs directly from the cost object hierarchy to a price difference account.Product Cost Controlling Information System (CO-PC)You can create further cost object IDs in the Product Cost Controlling Information System for CO product groups. You can create a cost object ID for each group, and assign materials to the cost object ID. The costs of the assigned materials appear in summarized form in the information system by product group.You can use CO product groups for product drilldown reports.The cost object type determines which functions can be used with the cost object. Functions for cost object hierarchies are performed on the assumption that the given cost object indicates the top node of the hierarchy."
+        },
+        "ProfitabilitySegment": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profitability Segment"
+        },
+        "ProfitCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profit Center",
+          "description": "Key which together with the controlling area uniquely identifies a profit center."
+        },
+        "GLAccount": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "G/L Account",
+          "description": "G/L Account Number  \nThe G/L account number identifies the G/L account in a chart of accounts."
+        },
+        "FunctionalArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Functional Area",
+          "description": "Structure criterion for an enterprise or government based on functional aspects.  \nUse for Cost-of-Sales AccountingThe functional area is required to create a profit and loss account in Financial Accounting using cost-of-sales accounting. The following are examples of structure criteria:ManufacturingAdministrationSalesResearch and developmentUse for GovernmentThe functional area is needed for Funds Management to meet legal requirements for reporting with functional aspects. You can use the functional area to represent the global targets and goals (such as public safety or city development), in particular the expenses of your organization.Use in cost-of-sales accountingSee the documentation on Filling the Functional Area Field.For comprehensive information on cost-of-sales accounting and on the functional area, see the SAP Library under Accounting -> Financial Accounting -> General Ledger -> Cost-of-Sales Accounting.Use in governmentFor more information on the functional area, see the implementation Guide for Funds Management Government in the section Activate Account Assignment Elements."
+        },
+        "MaterialBaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit of Measure",
+          "description": "Unit of measure in which stocks of the material are managed. The system converts all the quantities you enter in other units of measure (alternative units of measure) to the base unit of measure.  \nYou define the base unit of measure and also alternative units of measure and their conversion factors in the material master record.Since all data is updated in the base unit of measure, your entry is particularly important for the conversion of alternative units of measure. A quantity in the alternative unit of measure can only be shown precisely if its value can be shown with the decimal places available. To ensure this, please note the following:The base unit of measure is the unit satisfying the highest necessary requirement for precision.The conversion of alternative units of measure to the base unit should result in simple decimal fractions (not, for example, 1/3 = 0.333...).Inventory ManagementIn Inventory Management, the base unit of measure is the same as the stockkeeping unit.ServicesServices have units of measure of their own, including the following:Service unitUnit of measure at the higher item level. The precise quantities of the individual services are each at the detailed service line level.BlanketUnit of measure at service line level for services to be provided once only, and for which no precise quantities can or are to be specified."
+        },
+        "QuantityInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Quantity",
+          "description": "Portion of total purchase order quantity that you wish to allocate to this account assignment item.  \nThe quantity entered determines which portion of the costs you wish to distribute to this account assignment item."
+        },
+        "EntryUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Entry",
+          "description": "Unit of entry  \nSpecifies the unit of measure in which the goods movement or inventory count is entered.  \nEnter a unit of measure here only if it differs from the default unit of measure.There are the following default units of measure:the order unit for goods receipts with reference to purchase ordersthe production unit for goods receipts with reference to production ordersthe unit of issue for other goods movementsIf the default unit of measure has not been defined in the material master record, the system will suggest the stockkeeping unit."
+        },
+        "QuantityInEntryUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Qty in unit of entry",
+          "description": "Quantity in unit of entry  \nSpecifies the quantity to be moved in the unit of entry. The quantity is automatically converted to the stockkeeping unit (base unit of measure).  \nEnter the quantity to be moved in any unit of measure for the material.If the relevant unit of measure has not been defined in the material master record, the system uses the stockkeeping unit.If you do not enter a unit of measure, the system uses the following units of measure:order unit  in goods receipts against purchase ordersproduction unit  in goods receipts against production ordersunit of issue  in other goods movements"
+        },
+        "CompanyCodeCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Company Code Currency"
+        },
+        "GdsMvtExtAmtInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Ext. Amount in LC",
+          "description": "Externally Entered Posting Amount in Local Currency  \nIndicates the amount of the document item in the local currency of the company code.  \nThe value of the movement is calculated automatically by the system. However, it is possible to enter an amount manually if the item is to be valuated at a different price."
+        },
+        "SlsPrcAmtInclVATInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Sales Value inc. VAT",
+          "description": "Value at Sales Prices Including Value-Added Tax  \nSpecifies the value at sales prices including tax."
+        },
+        "FiscalYear": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Fiscal Year",
+          "description": "Period, 12 months as a rule, for which the company is to create its inventory and balance sheet. The fiscal year can be the same as the calendar year, but does not have to be."
+        },
+        "FiscalYearPeriod": {
+"type": "string",
+"default": "null",
+          "maxLength": 7,
+          "example": "string",
+          "title": "Fiscal Year & Period",
+          "description": "Period Year"
+        },
+        "FiscalYearVariant": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Fiscal Year Variant",
+          "description": "The fiscal year variant is used to define the fiscal year.  \nYou can define the following using a fiscal year variant:How many posting periods are in a fiscal yearHow many special periods you requireHow the system determines the posting periods when postingIn the definition, you allocate your posting periods to the calendar year.Allocation control requires the same number of posting periods in the company code and in the assigned controlling area.This means that the number of posting periods in the fiscal year variants must be the same in the company code and in the controlling area. The period limits for the two fiscal year variants must also coincide.You must define which fiscal year variant is to be used for each company code. To do this, you must define the appropriate fiscal year variant. It must contain no more than 16 periods.Note:The company codes delivered with the standard system are allocated to the fiscal year variant that corresponds to the calendar year and which also uses four special periods.You define fiscal year variants as well as the allocation of fiscal year variant to the company code in Financial Accounting customizing."
+        },
+        "IssgOrRcvgMaterial": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Transfer Material"
+        },
+        "IssgOrRcvgBatch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Transfer Batch"
+        },
+        "IssuingOrReceivingPlant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Rec/Iss Plant",
+          "description": "Receiving/Issuing Plant"
+        },
+        "IssuingOrReceivingStorageLoc": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving stor. loc.",
+          "description": "Receiving/issuing storage location  \nIndicates the receiving or the issuing storage location.  \nThe receiving storage location is the storage location that is to receive the goods.The issuing storage location is the storage location that issues the goods."
+        },
+        "IssuingOrReceivingStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Transfer Stock Type"
+        },
+        "IssgOrRcvgSpclStockInd": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Transfer Special Stock Type"
+        },
+        "IssuingOrReceivingValType": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Val. Type Tfr Batch",
+          "description": "Valuation Type of Transfer Batch  \nKey used in the split valuation of materials (that is, the separate valuation of different stocks of the same material) to permit stocks of a transfer batch to be differentiated according to different criteria."
+        },
+        "IsCompletelyDelivered": {
+"type": "boolean",
+"default": "null",
+          "title": "Delivery Completed",
+          "description": "\"Delivery Completed\" Indicator  \nIndicates that the item is to be regarded as closed."
+        },
+        "MaterialDocumentItemText": {
+"type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Text",
+          "description": "Item Text  \nContains an explanatory text on the line item.  \nLine item texts can be used internally and externally. To be able to distinguish between these, you must begin texts for external use with \"*\". These texts can then be printed on all correspondence, dunning notices, payment advice notes, etc. The asterisk is removed when the text is printed.This function is only available in the FI component. It cannot be used in Materials Management."
+        },
+        "UnloadingPointName": {
+"type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Unloading Point",
+          "description": "Specifies the point at which the material is to be unloaded (for example, ramp 1)."
+        },
+        "ShelfLifeExpirationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "SLED/BBD",
+          "description": "Shelf Life Expiration or Best-Before Date  \nThe date is set upon goods receipt in one of the following ways:  \nYou enter it yourself.You enter a date of production, and the system calculates the shelf life expiration date from the date of production plus the shelf life in days (from the material master record).NoteThis date can still be changed upon receipt of the usage decision for an inspection lot."
+        },
+        "ManufactureDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Date of Manufacture"
+        },
+        "Reservation": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reservation",
+          "description": "Number of reservation/dependent requirements  \nAlphanumeric key uniquely identifying the document."
+        },
+        "ReservationItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reservation Item",
+          "description": "Item Number of Reservation / Dependent Requirements"
+        },
+        "ReservationIsFinallyIssued": {
+"type": "boolean",
+"default": "null",
+          "title": "Res Final Issue",
+          "description": "Final Issue for Reservation"
+        },
+        "SpecialStockIdfgSalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales order",
+          "description": "Sales order number of valuated sales order stock  \nUniquely identifies a sales order."
+        },
+        "SpecialStockIdfgSalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales order item",
+          "description": "Sales Order Item of Valuated Sales Order Stock  \nUniquely identifies an item in a sales order."
+        },
+        "SpecialStockIdfgWBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        },
+        "IsAutomaticallyCreated": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Automat. Created",
+          "description": "Item Automatically Created Indicator"
+        },
+        "MaterialDocumentLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Line ID",
+          "description": "Unique Identification of Document Line"
+        },
+        "MaterialDocumentParentLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Parent line ID",
+          "description": "Identifier of immediately superior line  \nIndicates the line ID of the immediately superior line in the document.  \nLines that do not contain an initial value in this field may be, for example:Components of a subcontracting itemAutomatic lines for a stock transferEmpties items for the full productAt present we do not plan to fill this field in the interface structure IMSEG (except if it is called up in MM-IM). Filling the field would cause an error.Documentation of the data elements MB_LINE_ID and MB_LINE_DEPTH.WarningThis indicator is used for internal program control.Please do not change the entry in this field.Any changes made could lead to program errors or terminations."
+        },
+        "HierarchyNodeLevel": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Hierarchy level",
+          "description": "Hierarchy level of line in document  \nFor document items with the same superior line, this is used to differentiate between a real subitem and an automatically created line of the same level (for example, for stock transfers of a full product).  \nDocumentation of data elements MB_LINE_ID and MB_PARENT_ID.WarningThis indicator is used for internal program control.Please do not change the entry in this field.Any changes made could lead to program errors or terminations."
+        },
+        "GoodsMovementIsCancelled": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Item Cancelled",
+          "description": "Item has been Cancelled  \nIndicator that shows whether a specific material document item has been cancelled."
+        },
+        "ReversedMaterialDocumentYear": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reversed Doc Year",
+          "description": "Reversed Material Document Year"
+        },
+        "ReversedMaterialDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reversed Mat Doc",
+          "description": "Reversed Material Document"
+        },
+        "ReversedMaterialDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reversed Doc Item",
+          "description": "Reversed Material Document Item"
+        }
+      },
+      "title": "API exposure Material Document Item (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

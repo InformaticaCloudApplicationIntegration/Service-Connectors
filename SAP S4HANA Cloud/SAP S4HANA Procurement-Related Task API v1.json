@@ -1,0 +1,2537 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Procurement-Related Task",
+    "version": "1 ",
+    "description": " This service  enables you to create, update and delete  procurement-related tasks from or within  the SAP S/4HANA system through an API  call."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/95/e05385472d444e8ae8a830459d6986/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Read, update and delete procurement-related tasks from or in the SAP S/4HANA system using this service",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Supplier Activity Task Integration (SAP_COM_0138)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Activity Management in Procurement (19C)](https://rapid.sap.com/bp/#/scopeitems/19C \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Business Object",
+      "values": [
+        {
+          "text": "SupplierActivity",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_SUPPLIER_ACTIVITY_TASK_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_SUPPLIER_ACTIVITY_TASK_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_SuplrActyTskActyReference"
+    },
+    {
+      "name": "A_SuplrActyTskCommText"
+    },
+    {
+      "name": "A_SuplrActyTskDescription"
+    },
+    {
+      "name": "A_SuplrActyTskMessageText"
+    },
+    {
+      "name": "A_SuplrActyTskProcessor"
+    },
+    {
+      "name": "A_SuplrActyTskPurchaserResp"
+    },
+    {
+      "name": "A_SuplrActyTskSupplier"
+    },
+    {
+      "name": "A_SupplierActivityTask"
+    }
+  ],
+  "paths": {
+    "/A_SuplrActyTskActyReference": {
+      "get": {
+        "summary": "Get entities from A_SuplrActyTskActyReference",
+        "tags": [
+          "A_SuplrActyTskActyReference"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskReferenceUUID",
+                "SuplrActyTaskReferenceUUID desc",
+                "SuplrActyTaskUUID",
+                "SuplrActyTaskUUID desc",
+                "SuplrActyUUID",
+                "SuplrActyUUID desc",
+                "SupplierActivity",
+                "SupplierActivity desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskReferenceUUID",
+                "SuplrActyTaskUUID",
+                "SuplrActyUUID",
+                "SupplierActivity"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SuplrActyTskActyReferenceType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskActyReferenceType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyTskActyReference({SuplrActyTaskReferenceUUID})": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskReferenceUUID",
+          "in": "path",
+          "required": true,
+          "description": "Task ReferenceUUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SuplrActyTskActyReference by key",
+        "tags": [
+          "A_SuplrActyTskActyReference"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskReferenceUUID",
+                "SuplrActyTaskUUID",
+                "SuplrActyUUID",
+                "SupplierActivity"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyTskActyReferenceType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskActyReferenceType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyTskCommText": {
+      "get": {
+        "summary": "Get entities from A_SuplrActyTskCommText",
+        "tags": [
+          "A_SuplrActyTskCommText"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "SuplrActyTaskUUID desc",
+                "Language",
+                "Language desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "Language",
+                "SuplrActyTskCommunicationText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SuplrActyTskCommTextType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskCommTextType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyTskCommText(SuplrActyTaskUUID={SuplrActyTaskUUID},Language='{Language}')": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskUUID",
+          "in": "path",
+          "required": true,
+          "description": "Task UUID",
+          "type": "string"
+        },
+        {
+          "name": "Language",
+          "in": "path",
+          "required": true,
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SuplrActyTskCommText by key",
+        "tags": [
+          "A_SuplrActyTskCommText"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "Language",
+                "SuplrActyTskCommunicationText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyTskCommTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskCommTextType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyTskDescription": {
+      "get": {
+        "summary": "Get entities from A_SuplrActyTskDescription",
+        "tags": [
+          "A_SuplrActyTskDescription"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "SuplrActyTaskUUID desc",
+                "Language",
+                "Language desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "Language",
+                "SuplrActyTskDescription"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SuplrActyTskDescriptionType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskDescriptionType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyTskDescription(SuplrActyTaskUUID={SuplrActyTaskUUID},Language='{Language}')": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskUUID",
+          "in": "path",
+          "required": true,
+          "description": "Task UUID",
+          "type": "string"
+        },
+        {
+          "name": "Language",
+          "in": "path",
+          "required": true,
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SuplrActyTskDescription by key",
+        "tags": [
+          "A_SuplrActyTskDescription"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "Language",
+                "SuplrActyTskDescription"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyTskDescriptionType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskDescriptionType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyTskMessageText": {
+      "get": {
+        "summary": "Get entities from A_SuplrActyTskMessageText",
+        "tags": [
+          "A_SuplrActyTskMessageText"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "SuplrActyTaskUUID desc",
+                "Language",
+                "Language desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "Language",
+                "SuplrActyTskMessageText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SuplrActyTskMessageTextType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskMessageTextType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyTskMessageText(SuplrActyTaskUUID={SuplrActyTaskUUID},Language='{Language}')": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskUUID",
+          "in": "path",
+          "required": true,
+          "description": "Task UUID",
+          "type": "string"
+        },
+        {
+          "name": "Language",
+          "in": "path",
+          "required": true,
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SuplrActyTskMessageText by key",
+        "tags": [
+          "A_SuplrActyTskMessageText"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "Language",
+                "SuplrActyTskMessageText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyTskMessageTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskMessageTextType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyTskProcessor": {
+      "get": {
+        "summary": "Get entities from A_SuplrActyTskProcessor",
+        "tags": [
+          "A_SuplrActyTskProcessor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskPartyUUID",
+                "SuplrActyTaskPartyUUID desc",
+                "SuplrActyTaskUUID",
+                "SuplrActyTaskUUID desc",
+                "UserID",
+                "UserID desc",
+                "EmailAddress",
+                "EmailAddress desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskPartyUUID",
+                "SuplrActyTaskUUID",
+                "UserID",
+                "EmailAddress"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SuplrActyTskProcessorType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskProcessorType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyTskProcessor({SuplrActyTaskPartyUUID})": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskPartyUUID",
+          "in": "path",
+          "required": true,
+          "description": "Task Party UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SuplrActyTskProcessor by key",
+        "tags": [
+          "A_SuplrActyTskProcessor"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskPartyUUID",
+                "SuplrActyTaskUUID",
+                "UserID",
+                "EmailAddress"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyTskProcessorType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskProcessorType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyTskPurchaserResp": {
+      "get": {
+        "summary": "Get entities from A_SuplrActyTskPurchaserResp",
+        "tags": [
+          "A_SuplrActyTskPurchaserResp"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskPartyUUID",
+                "SuplrActyTaskPartyUUID desc",
+                "SuplrActyTaskUUID",
+                "SuplrActyTaskUUID desc",
+                "UserID",
+                "UserID desc",
+                "EmailAddress",
+                "EmailAddress desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskPartyUUID",
+                "SuplrActyTaskUUID",
+                "UserID",
+                "EmailAddress"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SuplrActyTskPurchaserRespType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskPurchaserRespType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyTskPurchaserResp({SuplrActyTaskPartyUUID})": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskPartyUUID",
+          "in": "path",
+          "required": true,
+          "description": "Task Party UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SuplrActyTskPurchaserResp by key",
+        "tags": [
+          "A_SuplrActyTskPurchaserResp"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskPartyUUID",
+                "SuplrActyTaskUUID",
+                "UserID",
+                "EmailAddress"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyTskPurchaserRespType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskPurchaserRespType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyTskSupplier": {
+      "get": {
+        "summary": "Get entities from A_SuplrActyTskSupplier",
+        "tags": [
+          "A_SuplrActyTskSupplier"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskPartyUUID",
+                "SuplrActyTaskPartyUUID desc",
+                "SuplrActyTaskUUID",
+                "SuplrActyTaskUUID desc",
+                "BusinessPartner",
+                "BusinessPartner desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskPartyUUID",
+                "SuplrActyTaskUUID",
+                "BusinessPartner"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SuplrActyTskSupplierType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskSupplierType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyTskSupplier({SuplrActyTaskPartyUUID})": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskPartyUUID",
+          "in": "path",
+          "required": true,
+          "description": "Activity Party UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SuplrActyTskSupplier by key",
+        "tags": [
+          "A_SuplrActyTskSupplier"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskPartyUUID",
+                "SuplrActyTaskUUID",
+                "BusinessPartner"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyTskSupplierType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskSupplierType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivityTask": {
+      "get": {
+        "summary": "Get entities from A_SupplierActivityTask",
+        "tags": [
+          "A_SupplierActivityTask"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "SuplrActyTaskUUID desc",
+                "SupplierActivityTask",
+                "SupplierActivityTask desc",
+                "SuplrActyTaskName",
+                "SuplrActyTaskName desc",
+                "CreationDateTime",
+                "CreationDateTime desc",
+                "CreatedByUser",
+                "CreatedByUser desc",
+                "LastChangedByUser",
+                "LastChangedByUser desc",
+                "EndDate",
+                "EndDate desc",
+                "Language",
+                "Language desc",
+                "SuplrActyTaskPriority",
+                "SuplrActyTaskPriority desc",
+                "SuplrActyTaskLifecycleStatus",
+                "SuplrActyTaskLifecycleStatus desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "SupplierActivityTask",
+                "SuplrActyTaskName",
+                "CreationDateTime",
+                "CreatedByUser",
+                "LastChangedByUser",
+                "EndDate",
+                "Language",
+                "SuplrActyTaskPriority",
+                "SuplrActyTaskLifecycleStatus",
+                "to_SuplrActyTskActyReference",
+                "to_SuplrActyTskCommText",
+                "to_SuplrActyTskDescription",
+                "to_SuplrActyTskMessageText",
+                "to_SuplrActyTskProcessor",
+                "to_SuplrActyTskPurchaserResp",
+                "to_SuplrActyTskSupplier"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_SuplrActyTskActyReference",
+                "to_SuplrActyTskCommText",
+                "to_SuplrActyTskDescription",
+                "to_SuplrActyTskMessageText",
+                "to_SuplrActyTskProcessor",
+                "to_SuplrActyTskPurchaserResp",
+                "to_SuplrActyTskSupplier"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SupplierActivityTaskType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SupplierActivityTaskType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivityTask({SuplrActyTaskUUID})": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskUUID",
+          "in": "path",
+          "required": true,
+          "description": "Task UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SupplierActivityTask by key",
+        "tags": [
+          "A_SupplierActivityTask"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "SupplierActivityTask",
+                "SuplrActyTaskName",
+                "CreationDateTime",
+                "CreatedByUser",
+                "LastChangedByUser",
+                "EndDate",
+                "Language",
+                "SuplrActyTaskPriority",
+                "SuplrActyTaskLifecycleStatus",
+                "to_SuplrActyTskActyReference",
+                "to_SuplrActyTskCommText",
+                "to_SuplrActyTskDescription",
+                "to_SuplrActyTskMessageText",
+                "to_SuplrActyTskProcessor",
+                "to_SuplrActyTskPurchaserResp",
+                "to_SuplrActyTskSupplier"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_SuplrActyTskActyReference",
+                "to_SuplrActyTskCommText",
+                "to_SuplrActyTskDescription",
+                "to_SuplrActyTskMessageText",
+                "to_SuplrActyTskProcessor",
+                "to_SuplrActyTskPurchaserResp",
+                "to_SuplrActyTskSupplier"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SupplierActivityTaskType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SupplierActivityTaskType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivityTask({SuplrActyTaskUUID})/to_SuplrActyTskActyReference": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskUUID",
+          "in": "path",
+          "required": true,
+          "description": "Task UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_SuplrActyTskActyReference",
+        "tags": [
+          "A_SupplierActivityTask",
+          "A_SuplrActyTskActyReference"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskReferenceUUID",
+                "SuplrActyTaskUUID",
+                "SuplrActyUUID",
+                "SupplierActivity"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyTskActyReferenceType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskActyReferenceType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivityTask({SuplrActyTaskUUID})/to_SuplrActyTskCommText": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskUUID",
+          "in": "path",
+          "required": true,
+          "description": "Task UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_SuplrActyTskCommText",
+        "tags": [
+          "A_SupplierActivityTask",
+          "A_SuplrActyTskCommText"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "Language",
+                "SuplrActyTskCommunicationText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyTskCommTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskCommTextType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivityTask({SuplrActyTaskUUID})/to_SuplrActyTskDescription": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskUUID",
+          "in": "path",
+          "required": true,
+          "description": "Task UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_SuplrActyTskDescription",
+        "tags": [
+          "A_SupplierActivityTask",
+          "A_SuplrActyTskDescription"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "Language",
+                "SuplrActyTskDescription"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyTskDescriptionType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskDescriptionType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivityTask({SuplrActyTaskUUID})/to_SuplrActyTskMessageText": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskUUID",
+          "in": "path",
+          "required": true,
+          "description": "Task UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_SuplrActyTskMessageText",
+        "tags": [
+          "A_SupplierActivityTask",
+          "A_SuplrActyTskMessageText"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskUUID",
+                "Language",
+                "SuplrActyTskMessageText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyTskMessageTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskMessageTextType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivityTask({SuplrActyTaskUUID})/to_SuplrActyTskProcessor": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskUUID",
+          "in": "path",
+          "required": true,
+          "description": "Task UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_SuplrActyTskProcessor",
+        "tags": [
+          "A_SupplierActivityTask",
+          "A_SuplrActyTskProcessor"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskPartyUUID",
+                "SuplrActyTaskUUID",
+                "UserID",
+                "EmailAddress"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyTskProcessorType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskProcessorType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivityTask({SuplrActyTaskUUID})/to_SuplrActyTskPurchaserResp": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskUUID",
+          "in": "path",
+          "required": true,
+          "description": "Task UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_SuplrActyTskPurchaserResp",
+        "tags": [
+          "A_SupplierActivityTask",
+          "A_SuplrActyTskPurchaserResp"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskPartyUUID",
+                "SuplrActyTaskUUID",
+                "UserID",
+                "EmailAddress"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyTskPurchaserRespType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskPurchaserRespType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivityTask({SuplrActyTaskUUID})/to_SuplrActyTskSupplier": {
+      "parameters": [
+        {
+          "name": "SuplrActyTaskUUID",
+          "in": "path",
+          "required": true,
+          "description": "Task UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_SuplrActyTskSupplier",
+        "tags": [
+          "A_SupplierActivityTask",
+          "A_SuplrActyTskSupplier"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskPartyUUID",
+                "SuplrActyTaskPartyUUID desc",
+                "SuplrActyTaskUUID",
+                "SuplrActyTaskUUID desc",
+                "BusinessPartner",
+                "BusinessPartner desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyTaskPartyUUID",
+                "SuplrActyTaskUUID",
+                "BusinessPartner"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SuplrActyTskSupplierType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskSupplierType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/Send": {
+      "post": {
+        "summary": "Invoke action Send",
+        "tags": [
+          "Service Operations"
+        ],
+        "parameters": [
+          {
+            "name": "SuplrActyTaskUUID",
+            "in": "query",
+            "required": true,
+            "description": "UUID  \n(Value needs to be enclosed in single quotes and prefixed with `guid`, e.g. `guid'01234567-0123-0123-0123-0123456789ab'`)",
+            "type": "string",
+            "pattern": "^guid'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "SendSuplrActyTskExportParameters",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.SendSuplrActyTskExportParameters"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/Submit": {
+      "post": {
+        "summary": "Invoke action Submit",
+        "tags": [
+          "Service Operations"
+        ],
+        "parameters": [
+          {
+            "name": "SuplrActyTaskUUID",
+            "in": "query",
+            "required": true,
+            "description": "UUID  \n(Value needs to be enclosed in single quotes and prefixed with `guid`, e.g. `guid'01234567-0123-0123-0123-0123456789ab'`)",
+            "type": "string",
+            "pattern": "^guid'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "SubmitSuplrActyTskExportParameters",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.SubmitSuplrActyTskExportParameters"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/Complete": {
+      "post": {
+        "summary": "Invoke action Complete",
+        "tags": [
+          "Service Operations"
+        ],
+        "parameters": [
+          {
+            "name": "SuplrActyTaskUUID",
+            "in": "query",
+            "required": true,
+            "description": "UUID  \n(Value needs to be enclosed in single quotes and prefixed with `guid`, e.g. `guid'01234567-0123-0123-0123-0123456789ab'`)",
+            "type": "string",
+            "pattern": "^guid'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "CompleteSuplrActyTskExportParameters",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.CompleteSuplrActyTskExportParameters"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/RequestClarification": {
+      "post": {
+        "summary": "Invoke action RequestClarification",
+        "tags": [
+          "Service Operations"
+        ],
+        "parameters": [
+          {
+            "name": "SuplrActyTaskUUID",
+            "in": "query",
+            "required": true,
+            "description": "UUID  \n(Value needs to be enclosed in single quotes and prefixed with `guid`, e.g. `guid'01234567-0123-0123-0123-0123456789ab'`)",
+            "type": "string",
+            "pattern": "^guid'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "ReqClrfctnSuplrActyTskExportParameters",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.ReqClrfctnSuplrActyTskExportParameters"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET A_SuplrActyTskActyReference HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskActyReferenceType": {
+      "type": "object",
+      "properties": {
+        "SuplrActyTaskReferenceUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Task Ref. UUID",
+          "description": "Task ReferenceUUID"
+        },
+        "SuplrActyTaskUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Task UUID"
+        },
+        "SuplrActyUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Activity UUID"
+        },
+        "SupplierActivity": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Activity"
+        }
+      },
+      "title": "API for Procurement Related Task Activity Reference"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskActyReferenceType-create": {
+      "type": "object",
+      "title": "API for Procurement Related Task Activity Reference (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskActyReferenceType-update": {
+      "type": "object",
+      "title": "API for Procurement Related Task Activity Reference (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskCommTextType": {
+      "type": "object",
+      "properties": {
+        "SuplrActyTaskUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Task UUID"
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "SuplrActyTskCommunicationText": {
+"type": "string",
+"default": "null",
+          "example": "string",
+          "title": "Content",
+          "description": "Text Content"
+        }
+      },
+      "title": "API for Procurement Related TSK Text Type Collaboration Note"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskCommTextType-create": {
+      "type": "object",
+      "properties": {
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        }
+      },
+      "required": [
+        "Language"
+      ],
+      "title": "API for Procurement Related TSK Text Type Collaboration Note (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskCommTextType-update": {
+      "type": "object",
+      "title": "API for Procurement Related TSK Text Type Collaboration Note (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskDescriptionType": {
+      "type": "object",
+      "properties": {
+        "SuplrActyTaskUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Task UUID"
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "SuplrActyTskDescription": {
+"type": "string",
+"default": "null",
+          "example": "string",
+          "title": "Content",
+          "description": "Text Content"
+        }
+      },
+      "title": "API for Procurement Related Task Text Type Detailed Descr."
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskDescriptionType-create": {
+      "type": "object",
+      "title": "API for Procurement Related Task Text Type Detailed Descr. (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskDescriptionType-update": {
+      "type": "object",
+      "title": "API for Procurement Related Task Text Type Detailed Descr. (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskMessageTextType": {
+      "type": "object",
+      "properties": {
+        "SuplrActyTaskUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Task UUID"
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "SuplrActyTskMessageText": {
+"type": "string",
+"default": "null",
+          "example": "string",
+          "title": "Content",
+          "description": "Text Content"
+        }
+      },
+      "title": "API for Procurement Related Task Text Type Note"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskMessageTextType-create": {
+      "type": "object",
+      "title": "API for Procurement Related Task Text Type Note (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskMessageTextType-update": {
+      "type": "object",
+      "title": "API for Procurement Related Task Text Type Note (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskProcessorType": {
+      "type": "object",
+      "properties": {
+        "SuplrActyTaskPartyUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Task Party UUID"
+        },
+        "SuplrActyTaskUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Task UUID"
+        },
+        "UserID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User",
+          "description": "User ID"
+        },
+        "EmailAddress": {
+"type": "string",
+"default": "null",
+          "maxLength": 241,
+          "example": "string",
+          "title": "Email Address",
+          "description": "Internet mail address, also called e-mail address.  \nExample: user.name@company.comThe Internet mail address is used to send mail via the Internet world-wide; the protocol used is SMTP (Simple Mail Transfer Protocol).The Internet mail address format is specified in various RFCs (Internet Request for Comment), including RFCs 821 and 822.This is not an IP address (192.56.30.6)."
+        }
+      },
+      "title": "API for Procurement Related Task Processor"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskProcessorType-create": {
+      "type": "object",
+      "properties": {
+        "EmailAddress": {
+"type": "string",
+"default": "null",
+          "maxLength": 241,
+          "example": "string",
+          "title": "Email Address",
+          "description": "Internet mail address, also called e-mail address.  \nExample: user.name@company.comThe Internet mail address is used to send mail via the Internet world-wide; the protocol used is SMTP (Simple Mail Transfer Protocol).The Internet mail address format is specified in various RFCs (Internet Request for Comment), including RFCs 821 and 822.This is not an IP address (192.56.30.6)."
+        }
+      },
+      "title": "API for Procurement Related Task Processor (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskProcessorType-update": {
+      "type": "object",
+      "properties": {
+        "EmailAddress": {
+"type": "string",
+"default": "null",
+          "maxLength": 241,
+          "example": "string",
+          "title": "Email Address",
+          "description": "Internet mail address, also called e-mail address.  \nExample: user.name@company.comThe Internet mail address is used to send mail via the Internet world-wide; the protocol used is SMTP (Simple Mail Transfer Protocol).The Internet mail address format is specified in various RFCs (Internet Request for Comment), including RFCs 821 and 822.This is not an IP address (192.56.30.6)."
+        }
+      },
+      "title": "API for Procurement Related Task Processor (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskPurchaserRespType": {
+      "type": "object",
+      "properties": {
+        "SuplrActyTaskPartyUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Task Party UUID"
+        },
+        "SuplrActyTaskUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Task UUID"
+        },
+        "UserID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User",
+          "description": "User ID"
+        },
+        "EmailAddress": {
+"type": "string",
+"default": "null",
+          "maxLength": 241,
+          "example": "string",
+          "title": "Email Address",
+          "description": "Internet mail address, also called e-mail address.  \nExample: user.name@company.comThe Internet mail address is used to send mail via the Internet world-wide; the protocol used is SMTP (Simple Mail Transfer Protocol).The Internet mail address format is specified in various RFCs (Internet Request for Comment), including RFCs 821 and 822.This is not an IP address (192.56.30.6)."
+        }
+      },
+      "title": "Supplier Activity Task Purchaser Resp"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskPurchaserRespType-create": {
+      "type": "object",
+      "properties": {
+        "EmailAddress": {
+"type": "string",
+"default": "null",
+          "maxLength": 241,
+          "example": "string",
+          "title": "Email Address",
+          "description": "Internet mail address, also called e-mail address.  \nExample: user.name@company.comThe Internet mail address is used to send mail via the Internet world-wide; the protocol used is SMTP (Simple Mail Transfer Protocol).The Internet mail address format is specified in various RFCs (Internet Request for Comment), including RFCs 821 and 822.This is not an IP address (192.56.30.6)."
+        }
+      },
+      "title": "Supplier Activity Task Purchaser Resp (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskPurchaserRespType-update": {
+      "type": "object",
+      "properties": {
+        "EmailAddress": {
+"type": "string",
+"default": "null",
+          "maxLength": 241,
+          "example": "string",
+          "title": "Email Address",
+          "description": "Internet mail address, also called e-mail address.  \nExample: user.name@company.comThe Internet mail address is used to send mail via the Internet world-wide; the protocol used is SMTP (Simple Mail Transfer Protocol).The Internet mail address format is specified in various RFCs (Internet Request for Comment), including RFCs 821 and 822.This is not an IP address (192.56.30.6)."
+        }
+      },
+      "title": "Supplier Activity Task Purchaser Resp (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskSupplierType": {
+      "type": "object",
+      "properties": {
+        "SuplrActyTaskPartyUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Activity Party UUID"
+        },
+        "SuplrActyTaskUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Activity UUID"
+        },
+        "BusinessPartner": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Business Partner",
+          "description": "Business Partner Number  \nKey identifying a business partner in the SAP system. The key is unique within a client."
+        }
+      },
+      "title": "API for Procurement Related Task Supplier"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskSupplierType-create": {
+      "type": "object",
+      "title": "API for Procurement Related Task Supplier (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskSupplierType-update": {
+      "type": "object",
+      "title": "API for Procurement Related Task Supplier (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SupplierActivityTaskType": {
+      "type": "object",
+      "properties": {
+        "SuplrActyTaskUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Task UUID"
+        },
+        "SupplierActivityTask": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Task ID"
+        },
+        "SuplrActyTaskName": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Task Name"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Created On"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Created By",
+          "description": "Created-By Name"
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Changed By",
+          "description": "Changed-By Name"
+        },
+        "EndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Due Date"
+        },
+        "Language": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Language"
+        },
+        "SuplrActyTaskPriority": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Priority",
+          "description": "Priority of a Task"
+        },
+        "SuplrActyTaskLifecycleStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Lifecycle Status",
+          "description": "Lifecycle Status Code for Tasks"
+        },
+        "to_SuplrActyTskActyReference": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskActyReferenceType"
+        },
+        "to_SuplrActyTskCommText": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskCommTextType"
+        },
+        "to_SuplrActyTskDescription": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskDescriptionType"
+        },
+        "to_SuplrActyTskMessageText": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskMessageTextType"
+        },
+        "to_SuplrActyTskProcessor": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskProcessorType"
+        },
+        "to_SuplrActyTskPurchaserResp": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskPurchaserRespType"
+        },
+        "to_SuplrActyTskSupplier": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskSupplierType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API for Procurement Related Task"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SupplierActivityTaskType-create": {
+      "type": "object",
+      "properties": {
+        "SuplrActyTaskName": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Task Name"
+        },
+        "Language": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Language"
+        },
+        "to_SuplrActyTskActyReference": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskActyReferenceType-create"
+        },
+        "to_SuplrActyTskCommText": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskCommTextType-create"
+        },
+        "to_SuplrActyTskDescription": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskDescriptionType-create"
+        },
+        "to_SuplrActyTskMessageText": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskMessageTextType-create"
+        },
+        "to_SuplrActyTskProcessor": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskProcessorType-create"
+        },
+        "to_SuplrActyTskPurchaserResp": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskPurchaserRespType-create"
+        },
+        "to_SuplrActyTskSupplier": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_TASK_SRV.A_SuplrActyTskSupplierType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "SuplrActyTaskName",
+        "Language"
+      ],
+      "title": "API for Procurement Related Task (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.A_SupplierActivityTaskType-update": {
+      "type": "object",
+      "properties": {
+        "SuplrActyTaskName": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Task Name"
+        },
+        "Language": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Language"
+        }
+      },
+      "title": "API for Procurement Related Task (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.ReqClrfctnSuplrActyTskExportParameters": {
+      "type": "object",
+      "properties": {
+        "InClarification": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Lifecycle Status",
+          "description": "Lifecycle Status Code for Tasks"
+        }
+      },
+      "title": "ReqClrfctnSuplrActyTskExportParameters"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.ReqClrfctnSuplrActyTskExportParameters-create": {
+      "type": "object",
+      "title": "ReqClrfctnSuplrActyTskExportParameters (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.ReqClrfctnSuplrActyTskExportParameters-update": {
+      "type": "object",
+      "title": "ReqClrfctnSuplrActyTskExportParameters (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.CompleteSuplrActyTskExportParameters": {
+      "type": "object",
+      "properties": {
+        "Complete": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Lifecycle Status",
+          "description": "Lifecycle Status Code for Tasks"
+        }
+      },
+      "title": "CompleteSuplrActyTskExportParameters"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.CompleteSuplrActyTskExportParameters-create": {
+      "type": "object",
+      "title": "CompleteSuplrActyTskExportParameters (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.CompleteSuplrActyTskExportParameters-update": {
+      "type": "object",
+      "title": "CompleteSuplrActyTskExportParameters (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.SendSuplrActyTskExportParameters": {
+      "type": "object",
+      "properties": {
+        "Send": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Lifecycle Status",
+          "description": "Lifecycle Status Code for Tasks"
+        }
+      },
+      "title": "SendSuplrActyTskExportParameters"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.SendSuplrActyTskExportParameters-create": {
+      "type": "object",
+      "title": "SendSuplrActyTskExportParameters (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.SendSuplrActyTskExportParameters-update": {
+      "type": "object",
+      "title": "SendSuplrActyTskExportParameters (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.SubmitSuplrActyTskExportParameters": {
+      "type": "object",
+      "properties": {
+        "Submit": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Lifecycle Status",
+          "description": "Lifecycle Status Code for Tasks"
+        }
+      },
+      "title": "SubmitSuplrActyTskExportParameters"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.SubmitSuplrActyTskExportParameters-create": {
+      "type": "object",
+      "title": "SubmitSuplrActyTskExportParameters (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_TASK_SRV.SubmitSuplrActyTskExportParameters-update": {
+      "type": "object",
+      "title": "SubmitSuplrActyTskExportParameters (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

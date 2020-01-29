@@ -1,0 +1,573 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Read Chart of Accounts",
+    "version": "1 ",
+    "description": "This service enables you to read chart  of accounts master data in an API call. It is based  on the OData protocol, and can be consumed in  Fiori apps and on other user interfaces."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com/viewer/013315319e86435ba85ae4fafebeba69/latest/en-US/50e66ad51f064c23aceb9513891663ef.html"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "This service enables you to read chart  of accounts master data in an API call.",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "SAP Business Objects Cloud for Planning Integration (SAP_COM_0087)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[oData Integration with SAP Business Objects Cloud for Planning (1YB)](https://rapid.sap.com/bp/#/scopeitems/1YB \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_CHARTOFACCOUNTS_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_CHARTOFACCOUNTS_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_ChartOfAccounts"
+    },
+    {
+      "name": "A_ChartOfAccountsText"
+    }
+  ],
+  "paths": {
+    "/A_ChartOfAccounts": {
+      "get": {
+        "summary": "Get entities from A_ChartOfAccounts",
+        "tags": [
+          "A_ChartOfAccounts"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ChartOfAccounts",
+                "ChartOfAccounts desc",
+                "CorporateGroupChartOfAccounts",
+                "CorporateGroupChartOfAccounts desc",
+                "ChartOfAcctsIsBlocked",
+                "ChartOfAcctsIsBlocked desc",
+                "MaintenanceLanguage",
+                "MaintenanceLanguage desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ChartOfAccounts",
+                "CorporateGroupChartOfAccounts",
+                "ChartOfAcctsIsBlocked",
+                "MaintenanceLanguage",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ChartOfAccountsType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_CHARTOFACCOUNTS_SRV.A_ChartOfAccountsType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ChartOfAccounts('{ChartOfAccounts}')": {
+      "get": {
+        "summary": "Get entity from A_ChartOfAccounts by key",
+        "tags": [
+          "A_ChartOfAccounts"
+        ],
+        "parameters": [
+          {
+            "name": "ChartOfAccounts",
+            "in": "path",
+            "required": true,
+            "description": "Chart of Accounts",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ChartOfAccounts",
+                "CorporateGroupChartOfAccounts",
+                "ChartOfAcctsIsBlocked",
+                "MaintenanceLanguage",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ChartOfAccountsType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_CHARTOFACCOUNTS_SRV.A_ChartOfAccountsType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ChartOfAccountsText": {
+      "get": {
+        "summary": "Get entities from A_ChartOfAccountsText",
+        "tags": [
+          "A_ChartOfAccountsText"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ChartOfAccounts",
+                "ChartOfAccounts desc",
+                "Language",
+                "Language desc",
+                "ChartOfAccountsName",
+                "ChartOfAccountsName desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ChartOfAccounts",
+                "Language",
+                "ChartOfAccountsName",
+                "to_ChartOfAccounts"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ChartOfAccounts"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ChartOfAccountsTextType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_CHARTOFACCOUNTS_SRV.A_ChartOfAccountsTextType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ChartOfAccountsText(ChartOfAccounts='{ChartOfAccounts}',Language='{Language}')": {
+      "get": {
+        "summary": "Get entity from A_ChartOfAccountsText by key",
+        "tags": [
+          "A_ChartOfAccountsText"
+        ],
+        "parameters": [
+          {
+            "name": "ChartOfAccounts",
+            "in": "path",
+            "required": true,
+            "description": "Key that uniquely identifies a chart of accounts.",
+            "type": "string"
+          },
+          {
+            "name": "Language",
+            "in": "path",
+            "required": true,
+            "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ChartOfAccounts",
+                "Language",
+                "ChartOfAccountsName",
+                "to_ChartOfAccounts"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ChartOfAccounts"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ChartOfAccountsTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_CHARTOFACCOUNTS_SRV.A_ChartOfAccountsTextType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_CHARTOFACCOUNTS_SRV.A_ChartOfAccountsType": {
+      "type": "object",
+      "properties": {
+        "ChartOfAccounts": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Chart of Accounts",
+          "description": "Chart of Accounts"
+        },
+        "CorporateGroupChartOfAccounts": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Group Chart of Accts",
+          "description": "Chart of accounts which is used in the corporate group.  \nYou can enter a group account number as additional information in the G/L accounts of the chart of accounts you are using. The system checks whether the group account number exists in the corporate chart of accounts.If the structure of the chart of accounts is predetermined by national legal requirements, you can define a corporate chart of accounts. All accounts receive a group account number which is the same for all accounts of that particular type in various different charts of accounts.For consolidation purposes, you can define the balance sheet and P+L by using group account numbers, i.e. they do not need to be defined differently per country."
+        },
+        "ChartOfAcctsIsBlocked": {
+"type": "boolean",
+"default": "null",
+          "title": "Blocked",
+          "description": "Indicator: Is the Chart of Accounts Blocked ?  \nIndicator which blocks the chart of accounts from being released i.e. no G/L accounts can be created for this chart of accounts in the company codes.  \nThis is only advisable if charts of accounts are created centrally and accounts are created locally. If this is the case, then the block prevents accounts from being created in the company codes for a chart of accounts that is not yet completed."
+        },
+        "MaintenanceLanguage": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Maint.Language",
+          "description": "Maintenance Language for the Chart of Accounts  \nLanguage in which the chart of accounts is created.  \nAll accounts have a description in this language. Master data can only be displayed or maintained in this language.If you carry out functions with the account, the account name can be displayed both in the maintenance language and in the available alternative languages."
+        },
+        "to_Text": {
+          "title": "Collection of A_ChartOfAccountsTextType",
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_CHARTOFACCOUNTS_SRV.A_ChartOfAccountsTextType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API Chart Of Accounts",
+      "description": "API Chart Of Accounts"
+    },
+    "API_CHARTOFACCOUNTS_SRV.A_ChartOfAccountsTextType": {
+      "type": "object",
+      "properties": {
+        "ChartOfAccounts": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Chart of Accounts",
+          "description": "Key that uniquely identifies a chart of accounts."
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "ChartOfAccountsName": {
+"type": "string",
+"default": "null",
+          "maxLength": 50,
+          "title": "Description",
+          "description": "Chart of Accounts Description  \nYou enter a descriptive name for the chart of accounts here."
+        },
+        "to_ChartOfAccounts": {
+          "$ref": "#/definitions/API_CHARTOFACCOUNTS_SRV.A_ChartOfAccountsType"
+        }
+      },
+      "title": "API Chart Of Accounts Text",
+      "description": "API Chart Of Accounts Text"
+    },
+    "odata.error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/odata.error.main"
+        }
+      }
+    },
+    "odata.error.main": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "$ref": "#/definitions/odata.error.message"
+        },
+        "innererror": {
+          "type": "object",
+          "description": "The structure of this object is service-specific"
+        }
+      }
+    },
+    "odata.error.message": {
+      "type": "object",
+      "required": [
+        "lang",
+        "value"
+      ],
+      "properties": {
+        "lang": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [OData Count](http://www.odata.org/documentation/odata-version-2-0/uri-conventions/#InlinecountSystemQueryOption)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    },
+    "filter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+      "type": "string"
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/odata.error"
+      }
+    }
+  }
+}

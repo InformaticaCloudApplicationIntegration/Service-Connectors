@@ -1,0 +1,3432 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Transaction Data for Group Reporting - Read",
+    "version": "1 ",
+    "description": " With this  service you can retrieve consolidated data  including intercompany elimination and  consolidation entries."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/87/fde46ffd0742639ef0a9d7c5631a5a/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Select transaction data in SAP S/4HANA Cloud for group reporting using this synchronous inbound service",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Finance - Cloud Consolidation Transaction Data for Group Reporting Integration (SAP_COM_0348)",
+          "format": "plain"
+        },
+        {
+          "text": "Finance - Group Reporting Planning Integration (SAP_COM_0370)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Group Reporting - Data from External Systems (2U6)](https://rapid.sap.com/bp/#/scopeitems/2U6 \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509, OAuth2",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_GRTRANSACTIONDATA_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_GRTRANSACTIONDATA_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "GRTransactionDataResults"
+    },
+    {
+      "name": "GRTransactionData"
+    }
+  ],
+  "paths": {
+    "/GRTransactionDataResults('{ID}')": {
+      "parameters": [
+        {
+          "name": "ID",
+          "in": "path",
+          "required": true,
+          "description": "key: ID",
+          "type": "string"
+        }
+      ]
+    },
+    "/GRTransactionDataResults('{ID}')/Parameters": {
+      "parameters": [
+        {
+          "name": "ID",
+          "in": "path",
+          "required": true,
+          "description": "key: ID",
+          "type": "string"
+        }
+      ]
+    },
+    "/GRTransactionData(P_ConsolidationUnitHierId='{P_ConsolidationUnitHierId}',P_ConsolidationSegmentHierId='{P_ConsolidationSegmentHierId}',P_ConsolidationPrftCtrHierId='{P_ConsolidationPrftCtrHierId}',P_KeyDate={P_KeyDate})": {
+      "parameters": [
+        {
+          "name": "P_ConsolidationUnitHierId",
+          "in": "path",
+          "required": true,
+          "description": "Consolidation Unit Hierarchy",
+          "type": "string"
+        },
+        {
+          "name": "P_ConsolidationSegmentHierId",
+          "in": "path",
+          "required": true,
+          "description": "Segment Hierarchy",
+          "type": "string"
+        },
+        {
+          "name": "P_ConsolidationPrftCtrHierId",
+          "in": "path",
+          "required": true,
+          "description": "Profit Center Hierarchy",
+          "type": "string"
+        },
+        {
+          "name": "P_KeyDate",
+          "in": "path",
+          "required": true,
+          "description": "Valid To Date  \nDate indicating up to when an entry is valid.",
+          "type": "string"
+        }
+      ]
+    },
+    "/GRTransactionData(P_ConsolidationUnitHierId='{P_ConsolidationUnitHierId}',P_ConsolidationSegmentHierId='{P_ConsolidationSegmentHierId}',P_ConsolidationPrftCtrHierId='{P_ConsolidationPrftCtrHierId}',P_KeyDate={P_KeyDate})/Results": {
+      "parameters": [
+        {
+          "name": "P_ConsolidationUnitHierId",
+          "in": "path",
+          "required": true,
+          "description": "Consolidation Unit Hierarchy",
+          "type": "string"
+        },
+        {
+          "name": "P_ConsolidationSegmentHierId",
+          "in": "path",
+          "required": true,
+          "description": "Segment Hierarchy",
+          "type": "string"
+        },
+        {
+          "name": "P_ConsolidationPrftCtrHierId",
+          "in": "path",
+          "required": true,
+          "description": "Profit Center Hierarchy",
+          "type": "string"
+        },
+        {
+          "name": "P_KeyDate",
+          "in": "path",
+          "required": true,
+          "description": "Valid To Date  \nDate indicating up to when an entry is valid.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related Results",
+        "tags": [
+          "GRTransactionData",
+          "GRTransactionDataResults"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ConsolidationLedger",
+                "ConsolidationLedger desc",
+                "ConsolidationLedger_Text",
+                "ConsolidationLedger_Text desc",
+                "FiscalYear",
+                "FiscalYear desc",
+                "ConsolidationDocumentNumber",
+                "ConsolidationDocumentNumber desc",
+                "ConsolidationPostingItem",
+                "ConsolidationPostingItem desc",
+                "GLRecordType",
+                "GLRecordType desc",
+                "GLRecordType_Text",
+                "GLRecordType_Text desc",
+                "ConsolidationVersion",
+                "ConsolidationVersion desc",
+                "ConsolidationVersion_Text",
+                "ConsolidationVersion_Text desc",
+                "TransactionCurrency",
+                "TransactionCurrency desc",
+                "TransactionCurrency_Text",
+                "TransactionCurrency_Text desc",
+                "LocalCurrency",
+                "LocalCurrency desc",
+                "LocalCurrency_Text",
+                "LocalCurrency_Text desc",
+                "GroupCurrency",
+                "GroupCurrency desc",
+                "GroupCurrency_Text",
+                "GroupCurrency_Text desc",
+                "BaseUnit",
+                "BaseUnit desc",
+                "BaseUnit_Text",
+                "BaseUnit_Text desc",
+                "FiscalPeriod",
+                "FiscalPeriod desc",
+                "FiscalYearPeriod",
+                "FiscalYearPeriod desc",
+                "FiscalYearVariant",
+                "FiscalYearVariant desc",
+                "PeriodMode",
+                "PeriodMode desc",
+                "ConsolidationDocumentType",
+                "ConsolidationDocumentType desc",
+                "ConsolidationDocumentType_Text",
+                "ConsolidationDocumentType_Text desc",
+                "DebitCreditCode",
+                "DebitCreditCode desc",
+                "DebitCreditCode_Text",
+                "DebitCreditCode_Text desc",
+                "Company",
+                "Company desc",
+                "ConsolidationUnit",
+                "ConsolidationUnit desc",
+                "ConsolidationUnit_Text",
+                "ConsolidationUnit_Text desc",
+                "ConsolidationUnitForElim",
+                "ConsolidationUnitForElim desc",
+                "ConsolidationUnitForElim_Text",
+                "ConsolidationUnitForElim_Text desc",
+                "ConsolidationChartOfAccounts",
+                "ConsolidationChartOfAccounts desc",
+                "ConsolidationChartOfAccounts_Text",
+                "ConsolidationChartOfAccounts_Text desc",
+                "FinancialStatementItem",
+                "FinancialStatementItem desc",
+                "FinancialStatementItem_Text",
+                "FinancialStatementItem_Text desc",
+                "PartnerConsolidationUnit",
+                "PartnerConsolidationUnit desc",
+                "PartnerConsolidationUnit_Text",
+                "PartnerConsolidationUnit_Text desc",
+                "ConsolidationGroup",
+                "ConsolidationGroup desc",
+                "ConsolidationGroup_Text",
+                "ConsolidationGroup_Text desc",
+                "CompanyCode",
+                "CompanyCode desc",
+                "CompanyCode_Text",
+                "CompanyCode_Text desc",
+                "SubItemCategory",
+                "SubItemCategory desc",
+                "SubItemCategory_Text",
+                "SubItemCategory_Text desc",
+                "SubItem",
+                "SubItem desc",
+                "SubItem_Text",
+                "SubItem_Text desc",
+                "PostingLevel",
+                "PostingLevel desc",
+                "PostingLevel_Text",
+                "PostingLevel_Text desc",
+                "ConsolidationApportionment",
+                "ConsolidationApportionment desc",
+                "CurrencyConversionsDiffType",
+                "CurrencyConversionsDiffType desc",
+                "CurrencyConversionsDiffType_Text",
+                "CurrencyConversionsDiffType_Text desc",
+                "ConsolidationAcquisitionYear",
+                "ConsolidationAcquisitionYear desc",
+                "ConsolidationAcquisitionPeriod",
+                "ConsolidationAcquisitionPeriod desc",
+                "InvesteeConsolidationUnit",
+                "InvesteeConsolidationUnit desc",
+                "InvesteeConsolidationUnit_Text",
+                "InvesteeConsolidationUnit_Text desc",
+                "AmountInTransactionCurrency",
+                "AmountInTransactionCurrency desc",
+                "AmountInLocalCurrency",
+                "AmountInLocalCurrency desc",
+                "AmountInGroupCurrency",
+                "AmountInGroupCurrency desc",
+                "QuantityInBaseUnit",
+                "QuantityInBaseUnit desc",
+                "DocumentItemText",
+                "DocumentItemText desc",
+                "ConsolidationPostgItemAutoFlag",
+                "ConsolidationPostgItemAutoFlag desc",
+                "BusinessTransactionType",
+                "BusinessTransactionType desc",
+                "PostingDate",
+                "PostingDate desc",
+                "CurrencyTranslationDate",
+                "CurrencyTranslationDate desc",
+                "RefConsolidationDocumentNumber",
+                "RefConsolidationDocumentNumber desc",
+                "ReferenceFiscalYear",
+                "ReferenceFiscalYear desc",
+                "RefConsolidationPostingItem",
+                "RefConsolidationPostingItem desc",
+                "RefConsolidationDocumentType",
+                "RefConsolidationDocumentType desc",
+                "RefBusinessTransactionType",
+                "RefBusinessTransactionType desc",
+                "CreationDate",
+                "CreationDate desc",
+                "CreationTime",
+                "CreationTime desc",
+                "UserID",
+                "UserID desc",
+                "ReverseDocument",
+                "ReverseDocument desc",
+                "ReversedDocument",
+                "ReversedDocument desc",
+                "InvestmentActivityType",
+                "InvestmentActivityType desc",
+                "InvestmentActivity",
+                "InvestmentActivity desc",
+                "ConsolidationDocReversalYear",
+                "ConsolidationDocReversalYear desc",
+                "ReferenceDocumentType",
+                "ReferenceDocumentType desc",
+                "ReferenceDocumentContext",
+                "ReferenceDocumentContext desc",
+                "LogicalSystem",
+                "LogicalSystem desc",
+                "ChartOfAccounts",
+                "ChartOfAccounts desc",
+                "ChartOfAccounts_Text",
+                "ChartOfAccounts_Text desc",
+                "GLAccount",
+                "GLAccount desc",
+                "GLAccount_Text",
+                "GLAccount_Text desc",
+                "AssignmentReference",
+                "AssignmentReference desc",
+                "CostCenter",
+                "CostCenter desc",
+                "CostCenter_Text",
+                "CostCenter_Text desc",
+                "ProfitCenter",
+                "ProfitCenter desc",
+                "ProfitCenter_Text",
+                "ProfitCenter_Text desc",
+                "ConsolidationPrftCtrForElim",
+                "ConsolidationPrftCtrForElim desc",
+                "ConsolidationPrftCtrForElim_Text",
+                "ConsolidationPrftCtrForElim_Text desc",
+                "FunctionalArea",
+                "FunctionalArea desc",
+                "FunctionalArea_Text",
+                "FunctionalArea_Text desc",
+                "BusinessArea",
+                "BusinessArea desc",
+                "BusinessArea_Text",
+                "BusinessArea_Text desc",
+                "ControllingArea",
+                "ControllingArea desc",
+                "ControllingArea_Text",
+                "ControllingArea_Text desc",
+                "Segment",
+                "Segment desc",
+                "Segment_Text",
+                "Segment_Text desc",
+                "ConsolidationSegmentForElim",
+                "ConsolidationSegmentForElim desc",
+                "ConsolidationSegmentForElim_Text",
+                "ConsolidationSegmentForElim_Text desc",
+                "PartnerCostCenter",
+                "PartnerCostCenter desc",
+                "PartnerCostCenter_Text",
+                "PartnerCostCenter_Text desc",
+                "PartnerProfitCenter",
+                "PartnerProfitCenter desc",
+                "PartnerProfitCenter_Text",
+                "PartnerProfitCenter_Text desc",
+                "PartnerFunctionalArea",
+                "PartnerFunctionalArea desc",
+                "PartnerFunctionalArea_Text",
+                "PartnerFunctionalArea_Text desc",
+                "PartnerBusinessArea",
+                "PartnerBusinessArea desc",
+                "PartnerBusinessArea_Text",
+                "PartnerBusinessArea_Text desc",
+                "PartnerCompany",
+                "PartnerCompany desc",
+                "PartnerCompany_Text",
+                "PartnerCompany_Text desc",
+                "PartnerSegment",
+                "PartnerSegment desc",
+                "PartnerSegment_Text",
+                "PartnerSegment_Text desc",
+                "OrderID",
+                "OrderID desc",
+                "OrderID_Text",
+                "OrderID_Text desc",
+                "Customer",
+                "Customer desc",
+                "Customer_Text",
+                "Customer_Text desc",
+                "Supplier",
+                "Supplier desc",
+                "Supplier_Text",
+                "Supplier_Text desc",
+                "Material",
+                "Material desc",
+                "Material_Text",
+                "Material_Text desc",
+                "Plant",
+                "Plant desc",
+                "Plant_Text",
+                "Plant_Text desc",
+                "FinancialTransactionType",
+                "FinancialTransactionType desc",
+                "FinancialTransactionType_Text",
+                "FinancialTransactionType_Text desc",
+                "WBSElementInternalID",
+                "WBSElementInternalID desc",
+                "WBSDescription",
+                "WBSDescription desc",
+                "WBSElementExternalID",
+                "WBSElementExternalID desc",
+                "WBSElementExternalID_Text",
+                "WBSElementExternalID_Text desc",
+                "Project",
+                "Project desc",
+                "Project_Text",
+                "Project_Text desc",
+                "BillingDocumentType",
+                "BillingDocumentType desc",
+                "BillingDocumentType_Text",
+                "BillingDocumentType_Text desc",
+                "SalesOrganization",
+                "SalesOrganization desc",
+                "SalesOrganization_Text",
+                "SalesOrganization_Text desc",
+                "DistributionChannel",
+                "DistributionChannel desc",
+                "DistributionChannel_Text",
+                "DistributionChannel_Text desc",
+                "OrganizationDivision",
+                "OrganizationDivision desc",
+                "OrganizationDivision_Text",
+                "OrganizationDivision_Text desc",
+                "MaterialGroup",
+                "MaterialGroup desc",
+                "MaterialGroup_Text",
+                "MaterialGroup_Text desc",
+                "SoldProduct",
+                "SoldProduct desc",
+                "SoldProduct_Text",
+                "SoldProduct_Text desc",
+                "SoldProductGroup",
+                "SoldProductGroup desc",
+                "SoldProductGroup_Text",
+                "SoldProductGroup_Text desc",
+                "CustomerGroup",
+                "CustomerGroup desc",
+                "CustomerGroup_Text",
+                "CustomerGroup_Text desc",
+                "CustomerSupplierCountry",
+                "CustomerSupplierCountry desc",
+                "CustomerSupplierCountry_Text",
+                "CustomerSupplierCountry_Text desc",
+                "CustomerSupplierIndustry",
+                "CustomerSupplierIndustry desc",
+                "CustomerSupplierIndustry_Text",
+                "CustomerSupplierIndustry_Text desc",
+                "SalesDistrict",
+                "SalesDistrict desc",
+                "SalesDistrict_Text",
+                "SalesDistrict_Text desc",
+                "BillToParty",
+                "BillToParty desc",
+                "BillToParty_Text",
+                "BillToParty_Text desc",
+                "ShipToParty",
+                "ShipToParty desc",
+                "ShipToParty_Text",
+                "ShipToParty_Text desc",
+                "CustomerSupplierCorporateGroup",
+                "CustomerSupplierCorporateGroup desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ID",
+                "ConsolidationLedger",
+                "ConsolidationLedger_Text",
+                "FiscalYear",
+                "ConsolidationDocumentNumber",
+                "ConsolidationPostingItem",
+                "GLRecordType",
+                "GLRecordType_Text",
+                "ConsolidationVersion",
+                "ConsolidationVersion_Text",
+                "TransactionCurrency",
+                "TransactionCurrency_Text",
+                "LocalCurrency",
+                "LocalCurrency_Text",
+                "GroupCurrency",
+                "GroupCurrency_Text",
+                "BaseUnit",
+                "BaseUnit_Text",
+                "FiscalPeriod",
+                "FiscalYearPeriod",
+                "FiscalYearVariant",
+                "PeriodMode",
+                "ConsolidationDocumentType",
+                "ConsolidationDocumentType_Text",
+                "DebitCreditCode",
+                "DebitCreditCode_Text",
+                "Company",
+                "ConsolidationUnit",
+                "ConsolidationUnit_Text",
+                "ConsolidationUnitForElim",
+                "ConsolidationUnitForElim_Text",
+                "ConsolidationChartOfAccounts",
+                "ConsolidationChartOfAccounts_Text",
+                "FinancialStatementItem",
+                "FinancialStatementItem_Text",
+                "PartnerConsolidationUnit",
+                "PartnerConsolidationUnit_Text",
+                "ConsolidationGroup",
+                "ConsolidationGroup_Text",
+                "CompanyCode",
+                "CompanyCode_Text",
+                "SubItemCategory",
+                "SubItemCategory_Text",
+                "SubItem",
+                "SubItem_Text",
+                "PostingLevel",
+                "PostingLevel_Text",
+                "ConsolidationApportionment",
+                "CurrencyConversionsDiffType",
+                "CurrencyConversionsDiffType_Text",
+                "ConsolidationAcquisitionYear",
+                "ConsolidationAcquisitionPeriod",
+                "InvesteeConsolidationUnit",
+                "InvesteeConsolidationUnit_Text",
+                "AmountInTransactionCurrency",
+                "AmountInLocalCurrency",
+                "AmountInGroupCurrency",
+                "QuantityInBaseUnit",
+                "DocumentItemText",
+                "ConsolidationPostgItemAutoFlag",
+                "BusinessTransactionType",
+                "PostingDate",
+                "CurrencyTranslationDate",
+                "RefConsolidationDocumentNumber",
+                "ReferenceFiscalYear",
+                "RefConsolidationPostingItem",
+                "RefConsolidationDocumentType",
+                "RefBusinessTransactionType",
+                "CreationDate",
+                "CreationTime",
+                "UserID",
+                "ReverseDocument",
+                "ReversedDocument",
+                "InvestmentActivityType",
+                "InvestmentActivity",
+                "ConsolidationDocReversalYear",
+                "ReferenceDocumentType",
+                "ReferenceDocumentContext",
+                "LogicalSystem",
+                "ChartOfAccounts",
+                "ChartOfAccounts_Text",
+                "GLAccount",
+                "GLAccount_Text",
+                "AssignmentReference",
+                "CostCenter",
+                "CostCenter_Text",
+                "ProfitCenter",
+                "ProfitCenter_Text",
+                "ConsolidationPrftCtrForElim",
+                "ConsolidationPrftCtrForElim_Text",
+                "FunctionalArea",
+                "FunctionalArea_Text",
+                "BusinessArea",
+                "BusinessArea_Text",
+                "ControllingArea",
+                "ControllingArea_Text",
+                "Segment",
+                "Segment_Text",
+                "ConsolidationSegmentForElim",
+                "ConsolidationSegmentForElim_Text",
+                "PartnerCostCenter",
+                "PartnerCostCenter_Text",
+                "PartnerProfitCenter",
+                "PartnerProfitCenter_Text",
+                "PartnerFunctionalArea",
+                "PartnerFunctionalArea_Text",
+                "PartnerBusinessArea",
+                "PartnerBusinessArea_Text",
+                "PartnerCompany",
+                "PartnerCompany_Text",
+                "PartnerSegment",
+                "PartnerSegment_Text",
+                "OrderID",
+                "OrderID_Text",
+                "Customer",
+                "Customer_Text",
+                "Supplier",
+                "Supplier_Text",
+                "Material",
+                "Material_Text",
+                "Plant",
+                "Plant_Text",
+                "FinancialTransactionType",
+                "FinancialTransactionType_Text",
+                "WBSElementInternalID",
+                "WBSDescription",
+                "WBSElementExternalID",
+                "WBSElementExternalID_Text",
+                "Project",
+                "Project_Text",
+                "BillingDocumentType",
+                "BillingDocumentType_Text",
+                "SalesOrganization",
+                "SalesOrganization_Text",
+                "DistributionChannel",
+                "DistributionChannel_Text",
+                "OrganizationDivision",
+                "OrganizationDivision_Text",
+                "MaterialGroup",
+                "MaterialGroup_Text",
+                "SoldProduct",
+                "SoldProduct_Text",
+                "SoldProductGroup",
+                "SoldProductGroup_Text",
+                "CustomerGroup",
+                "CustomerGroup_Text",
+                "CustomerSupplierCountry",
+                "CustomerSupplierCountry_Text",
+                "CustomerSupplierIndustry",
+                "CustomerSupplierIndustry_Text",
+                "SalesDistrict",
+                "SalesDistrict_Text",
+                "BillToParty",
+                "BillToParty_Text",
+                "ShipToParty",
+                "ShipToParty_Text",
+                "CustomerSupplierCorporateGroup",
+                "Parameters"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Parameters"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of GRTransactionDataResult",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_GRTRANSACTIONDATA_SRV.GRTransactionDataResult"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET GRTransactionDataResults HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_GRTRANSACTIONDATA_SRV.GRTransactionDataResult": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "ConsolidationLedger": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Consolidation Ledger"
+        },
+        "ConsolidationLedger_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 30,
+          "example": "string",
+          "title": "Consolidation Ledger Description"
+        },
+        "FiscalYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Fiscal Year",
+          "description": "Period, 12 months as a rule, for which the company is to create its inventory and balance sheet. The fiscal year can be the same as the calendar year, but does not have to be."
+        },
+        "ConsolidationDocumentNumber": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Consolidation Document Number"
+        },
+        "ConsolidationPostingItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Consolidation Document Line Item"
+        },
+        "GLRecordType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "G/L Record Type"
+        },
+        "GLRecordType_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "G/L Record Type Description"
+        },
+        "ConsolidationVersion": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Consolidation Version"
+        },
+        "ConsolidationVersion_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 30,
+          "example": "string",
+          "title": "Consolidation Version Description"
+        },
+        "TransactionCurrency": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Transaction Currency"
+        },
+        "TransactionCurrency_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Transaction Currency Description"
+        },
+        "LocalCurrency": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Local Currency"
+        },
+        "LocalCurrency_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Transaction Currency Description"
+        },
+        "GroupCurrency": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Group Currency"
+        },
+        "GroupCurrency_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Transaction Currency Description"
+        },
+        "BaseUnit": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit"
+        },
+        "BaseUnit_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Base Unit Description"
+        },
+        "FiscalPeriod": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Fiscal Period"
+        },
+        "FiscalYearPeriod": {
+          "type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Fiscal Year Period"
+        },
+        "FiscalYearVariant": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Fiscal Year Variant"
+        },
+        "PeriodMode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Period Mode"
+        },
+        "ConsolidationDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Document Type"
+        },
+        "ConsolidationDocumentType_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 30,
+          "example": "string",
+          "title": "Document Type Description"
+        },
+        "DebitCreditCode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Debit/Credit Code"
+        },
+        "DebitCreditCode_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Debit/Credit Code Description"
+        },
+        "Company": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Company",
+          "description": "Unique company ID of a company within your corporate group."
+        },
+        "ConsolidationUnit": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Consolidation Unit"
+        },
+        "ConsolidationUnit_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Consolidation Unit Description"
+        },
+        "ConsolidationUnitForElim": {
+          "type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Consolidation Unit for Elimination"
+        },
+        "ConsolidationUnitForElim_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Consolidation Unit for Elimination Desc.",
+          "description": "Consolidation Unit for Elimination Description"
+        },
+        "ConsolidationChartOfAccounts": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Consolidation Chart of Accounts"
+        },
+        "ConsolidationChartOfAccounts_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 30,
+          "example": "string",
+          "title": "Consolidation Chart of Accounts Desc.",
+          "description": "Consolidation Chart of Accounts Description"
+        },
+        "FinancialStatementItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Financial Statement Item"
+        },
+        "FinancialStatementItem_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Financial Statement Item Description"
+        },
+        "PartnerConsolidationUnit": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Partner Unit"
+        },
+        "PartnerConsolidationUnit_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Partner Unit Description"
+        },
+        "ConsolidationGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Cons. Group",
+          "description": "Consolidation Group  \nEnter a Consolidation Group"
+        },
+        "ConsolidationGroup_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 30,
+          "example": "string",
+          "title": "Consolidation Group Description"
+        },
+        "CompanyCode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Company Code"
+        },
+        "CompanyCode_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Company Code Description"
+        },
+        "SubItemCategory": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Subitem Category"
+        },
+        "SubItemCategory_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 30,
+          "example": "string",
+          "title": "Subitem Category Description"
+        },
+        "SubItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Subitem"
+        },
+        "SubItem_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 30,
+          "example": "string",
+          "title": "Subitem Description"
+        },
+        "PostingLevel": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Posting Level"
+        },
+        "PostingLevel_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Posting Level Description"
+        },
+        "ConsolidationApportionment": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Consolidation Apportionment"
+        },
+        "CurrencyConversionsDiffType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Currency Translation Indicator"
+        },
+        "CurrencyConversionsDiffType_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Currency Translation Indicator Desc.",
+          "description": "Currency Translation Indicator Description"
+        },
+        "ConsolidationAcquisitionYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Year of Acquisition"
+        },
+        "ConsolidationAcquisitionPeriod": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Period of Acquisition"
+        },
+        "InvesteeConsolidationUnit": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Investee Unit"
+        },
+        "InvesteeConsolidationUnit_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Investee Unit Description"
+        },
+        "AmountInTransactionCurrency": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Amount in Transaction Currency"
+        },
+        "AmountInLocalCurrency": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Amount in Local Currency"
+        },
+        "AmountInGroupCurrency": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Amount in Group Currency"
+        },
+        "QuantityInBaseUnit": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Quantity"
+        },
+        "DocumentItemText": {
+          "type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Document Text"
+        },
+        "ConsolidationPostgItemAutoFlag": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Automatic Posting Indicator"
+        },
+        "BusinessTransactionType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Business Transaction Type"
+        },
+        "PostingDate": {
+          "type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date",
+          "description": "Posting Date in the Document  \nDate which is used when entering the document in Financial Accounting or Controlling.  \nThe fiscal year and the period for which an update of the accounts specified in the document or cost elements is made, are derived from the posting date.When entering documents, the system checks whether the posting date entered is allowed by means of the posting period permitted.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        },
+        "CurrencyTranslationDate": {
+          "type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Currency Translation Date"
+        },
+        "RefConsolidationDocumentNumber": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reference Consolidation Document Number"
+        },
+        "ReferenceFiscalYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reference Fiscal Year"
+        },
+        "RefConsolidationPostingItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Reference Consolidation Posting Item"
+        },
+        "RefConsolidationDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Reference Document Category"
+        },
+        "RefBusinessTransactionType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reference Business Transaction Type"
+        },
+        "CreationDate": {
+          "type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Created On"
+        },
+        "CreationTime": {
+          "type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Created At"
+        },
+        "UserID": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User ID"
+        },
+        "ReverseDocument": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reversal Document"
+        },
+        "ReversedDocument": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reversed Document"
+        },
+        "InvestmentActivityType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Investment Activity Type"
+        },
+        "InvestmentActivity": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Investment Activity"
+        },
+        "ConsolidationDocReversalYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Year of Reversal Document"
+        },
+        "ReferenceDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Reference Transaction"
+        },
+        "ReferenceDocumentContext": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reference Organizational Unit"
+        },
+        "LogicalSystem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Logical System",
+          "description": "System in which applications run integrated on a shared data basis.  \nThe distribution of data between systems requires that each system in the network has a unique identification. The logical system is used for this purpose.In the SAP System the client corresponds to a logical system. You can assign a logical system to a client in the client maintenance (choose Goto -> Detail).The logical system is relevant in the following SAP areas:ALE  general: two or more logical systems communicate with one another.ALE - ALE business processes (for example, cost center accounting): definition of a system where a specific application runs. Changes to master data can only be made in this system, for example.Workflow objects: the logical system in which the object is located is always included in an object's key.When maintaining the logical system, note the following:The logical system must be unique company-wide. It must not be used by any other system in the ALE integrated group. In a production system, the logical system must not be changed. If the logical system of a document reference is not set to initial and does not match your own, the system assumes the document is located in a different system."
+        },
+        "ChartOfAccounts": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "G/L Chart of Accounts"
+        },
+        "ChartOfAccounts_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "G/L Chart of Accounts Description"
+        },
+        "GLAccount": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "G/L Account"
+        },
+        "GLAccount_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "G/L Account Description"
+        },
+        "AssignmentReference": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Assignment Reference Number"
+        },
+        "CostCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cost Center"
+        },
+        "CostCenter_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Cost Center Description"
+        },
+        "ProfitCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profit Center"
+        },
+        "ProfitCenter_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Profit Center Description"
+        },
+        "ConsolidationPrftCtrForElim": {
+          "type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Profit Center for Elimination"
+        },
+        "ConsolidationPrftCtrForElim_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Profit Center for Elimination Desc.",
+          "description": "Profit Center for Elimination Description"
+        },
+        "FunctionalArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Functional Area"
+        },
+        "FunctionalArea_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Functional Area Description"
+        },
+        "BusinessArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Business Area"
+        },
+        "BusinessArea_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 30,
+          "example": "string",
+          "title": "Business Area Description"
+        },
+        "ControllingArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Controlling Area"
+        },
+        "ControllingArea_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Controlling Area Description"
+        },
+        "Segment": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Segment"
+        },
+        "Segment_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Segment Description"
+        },
+        "ConsolidationSegmentForElim": {
+          "type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Segment for Elimination"
+        },
+        "ConsolidationSegmentForElim_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Segment for Elimination Description"
+        },
+        "PartnerCostCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Partner Cost Center"
+        },
+        "PartnerCostCenter_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Partner Cost Center Description"
+        },
+        "PartnerProfitCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Partner Profit Center"
+        },
+        "PartnerProfitCenter_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Partner Profit Center Description"
+        },
+        "PartnerFunctionalArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Partner Functional Area"
+        },
+        "PartnerFunctionalArea_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Partner Functional Area Description"
+        },
+        "PartnerBusinessArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Partner Business Area"
+        },
+        "PartnerBusinessArea_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 30,
+          "example": "string",
+          "title": "Partner Business Area Description"
+        },
+        "PartnerCompany": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Partner Company"
+        },
+        "PartnerCompany_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 30,
+          "example": "string",
+          "title": "Partner Company Description"
+        },
+        "PartnerSegment": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Partner Segment"
+        },
+        "PartnerSegment_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Partner Segment Description"
+        },
+        "OrderID": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Order ID"
+        },
+        "OrderID_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Order ID Description"
+        },
+        "Customer": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Customer Number  \nGives an alphanumeric key, which clearly identifies the customer or vendor in the SAP system."
+        },
+        "Customer_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 80,
+          "example": "string",
+          "title": "Customer Description"
+        },
+        "Supplier": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier"
+        },
+        "Supplier_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 80,
+          "example": "string",
+          "title": "Supplier Description"
+        },
+        "Material": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material"
+        },
+        "Material_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material Description"
+        },
+        "Plant": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant"
+        },
+        "Plant_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 30,
+          "example": "string",
+          "title": "Plant Description"
+        },
+        "FinancialTransactionType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Financial Transaction Type"
+        },
+        "FinancialTransactionType_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Financial Transaction Type Description"
+        },
+        "WBSElementInternalID": {
+          "type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Key identifying a WBS element."
+        },
+        "WBSDescription": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "WBS Element Internal ID Description"
+        },
+        "WBSElementExternalID": {
+          "type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element External ID"
+        },
+        "WBSElementExternalID_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "WBS Element External ID Description"
+        },
+        "Project": {
+          "type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "Project Definition"
+        },
+        "Project_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Project Definition Description"
+        },
+        "BillingDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Billing Document Type"
+        },
+        "BillingDocumentType_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Billing Document Type Description"
+        },
+        "SalesOrganization": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Organization"
+        },
+        "SalesOrganization_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Sales Organization Description"
+        },
+        "DistributionChannel": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Distribution Channel"
+        },
+        "DistributionChannel_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Distribution Channel Description"
+        },
+        "OrganizationDivision": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Division"
+        },
+        "OrganizationDivision_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Division Description"
+        },
+        "MaterialGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 9,
+          "example": "string",
+          "title": "Material Group"
+        },
+        "MaterialGroup_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Material Group Description"
+        },
+        "SoldProduct": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Product Sold"
+        },
+        "SoldProduct_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Product Sold Description"
+        },
+        "SoldProductGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 9,
+          "example": "string",
+          "title": "Product Sold Group"
+        },
+        "SoldProductGroup_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Product Sold Group Description"
+        },
+        "CustomerGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Customer Group"
+        },
+        "CustomerGroup_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Customer Group Description"
+        },
+        "CustomerSupplierCountry": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Customer/Supplier Country/Region"
+        },
+        "CustomerSupplierCountry_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Customer/Supplier Country/Region Desc.",
+          "description": "Customer/Supplier Country/Region Description"
+        },
+        "CustomerSupplierIndustry": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Customer/Supplier Industry"
+        },
+        "CustomerSupplierIndustry_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Customer/Supplier Industry Description"
+        },
+        "SalesDistrict": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales District"
+        },
+        "SalesDistrict_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Sales District Description"
+        },
+        "BillToParty": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Bill-To Party"
+        },
+        "BillToParty_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 80,
+          "example": "string",
+          "title": "Bill-To Party Description"
+        },
+        "ShipToParty": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Ship-To Party"
+        },
+        "ShipToParty_Text": {
+          "type": "string",
+"default": "null",
+          "maxLength": 80,
+          "example": "string",
+          "title": "Ship-To Party Description"
+        },
+        "CustomerSupplierCorporateGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer/Supplier Corporate Group"
+        },
+        "Parameters": {
+          "$ref": "#/definitions/API_GRTRANSACTIONDATA_SRV.GRTransactionDataParameters"
+        }
+      },
+      "title": "Consolidation - Transactional Data for Group Reporting"
+    },
+    "API_GRTRANSACTIONDATA_SRV.GRTransactionDataResult-create": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "ConsolidationLedger": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Consolidation Ledger"
+        },
+        "FiscalYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Fiscal Year",
+          "description": "Period, 12 months as a rule, for which the company is to create its inventory and balance sheet. The fiscal year can be the same as the calendar year, but does not have to be."
+        },
+        "ConsolidationDocumentNumber": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Consolidation Document Number"
+        },
+        "ConsolidationPostingItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Consolidation Document Line Item"
+        },
+        "GLRecordType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "G/L Record Type"
+        },
+        "ConsolidationVersion": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Consolidation Version"
+        },
+        "TransactionCurrency": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Transaction Currency"
+        },
+        "LocalCurrency": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Local Currency"
+        },
+        "GroupCurrency": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Group Currency"
+        },
+        "BaseUnit": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit"
+        },
+        "FiscalPeriod": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Fiscal Period"
+        },
+        "FiscalYearPeriod": {
+          "type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Fiscal Year Period"
+        },
+        "FiscalYearVariant": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Fiscal Year Variant"
+        },
+        "PeriodMode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Period Mode"
+        },
+        "ConsolidationDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Document Type"
+        },
+        "DebitCreditCode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Debit/Credit Code"
+        },
+        "Company": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Company",
+          "description": "Unique company ID of a company within your corporate group."
+        },
+        "ConsolidationUnit": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Consolidation Unit"
+        },
+        "ConsolidationUnitForElim": {
+          "type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Consolidation Unit for Elimination"
+        },
+        "ConsolidationChartOfAccounts": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Consolidation Chart of Accounts"
+        },
+        "FinancialStatementItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Financial Statement Item"
+        },
+        "PartnerConsolidationUnit": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Partner Unit"
+        },
+        "ConsolidationGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Cons. Group",
+          "description": "Consolidation Group  \nEnter a Consolidation Group"
+        },
+        "CompanyCode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Company Code"
+        },
+        "SubItemCategory": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Subitem Category"
+        },
+        "SubItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Subitem"
+        },
+        "PostingLevel": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Posting Level"
+        },
+        "ConsolidationApportionment": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Consolidation Apportionment"
+        },
+        "CurrencyConversionsDiffType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Currency Translation Indicator"
+        },
+        "ConsolidationAcquisitionYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Year of Acquisition"
+        },
+        "ConsolidationAcquisitionPeriod": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Period of Acquisition"
+        },
+        "InvesteeConsolidationUnit": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Investee Unit"
+        },
+        "AmountInTransactionCurrency": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Amount in Transaction Currency"
+        },
+        "AmountInLocalCurrency": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Amount in Local Currency"
+        },
+        "AmountInGroupCurrency": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Amount in Group Currency"
+        },
+        "QuantityInBaseUnit": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Quantity"
+        },
+        "DocumentItemText": {
+          "type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Document Text"
+        },
+        "ConsolidationPostgItemAutoFlag": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Automatic Posting Indicator"
+        },
+        "BusinessTransactionType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Business Transaction Type"
+        },
+        "PostingDate": {
+          "type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date",
+          "description": "Posting Date in the Document  \nDate which is used when entering the document in Financial Accounting or Controlling.  \nThe fiscal year and the period for which an update of the accounts specified in the document or cost elements is made, are derived from the posting date.When entering documents, the system checks whether the posting date entered is allowed by means of the posting period permitted.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        },
+        "CurrencyTranslationDate": {
+          "type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Currency Translation Date"
+        },
+        "RefConsolidationDocumentNumber": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reference Consolidation Document Number"
+        },
+        "ReferenceFiscalYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reference Fiscal Year"
+        },
+        "RefConsolidationPostingItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Reference Consolidation Posting Item"
+        },
+        "RefConsolidationDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Reference Document Category"
+        },
+        "RefBusinessTransactionType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reference Business Transaction Type"
+        },
+        "CreationDate": {
+          "type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Created On"
+        },
+        "CreationTime": {
+          "type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Created At"
+        },
+        "UserID": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User ID"
+        },
+        "ReverseDocument": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reversal Document"
+        },
+        "ReversedDocument": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reversed Document"
+        },
+        "InvestmentActivityType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Investment Activity Type"
+        },
+        "InvestmentActivity": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Investment Activity"
+        },
+        "ConsolidationDocReversalYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Year of Reversal Document"
+        },
+        "ReferenceDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Reference Transaction"
+        },
+        "ReferenceDocumentContext": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reference Organizational Unit"
+        },
+        "LogicalSystem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Logical System",
+          "description": "System in which applications run integrated on a shared data basis.  \nThe distribution of data between systems requires that each system in the network has a unique identification. The logical system is used for this purpose.In the SAP System the client corresponds to a logical system. You can assign a logical system to a client in the client maintenance (choose Goto -> Detail).The logical system is relevant in the following SAP areas:ALE  general: two or more logical systems communicate with one another.ALE - ALE business processes (for example, cost center accounting): definition of a system where a specific application runs. Changes to master data can only be made in this system, for example.Workflow objects: the logical system in which the object is located is always included in an object's key.When maintaining the logical system, note the following:The logical system must be unique company-wide. It must not be used by any other system in the ALE integrated group. In a production system, the logical system must not be changed. If the logical system of a document reference is not set to initial and does not match your own, the system assumes the document is located in a different system."
+        },
+        "ChartOfAccounts": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "G/L Chart of Accounts"
+        },
+        "GLAccount": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "G/L Account"
+        },
+        "AssignmentReference": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Assignment Reference Number"
+        },
+        "CostCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cost Center"
+        },
+        "ProfitCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profit Center"
+        },
+        "ConsolidationPrftCtrForElim": {
+          "type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Profit Center for Elimination"
+        },
+        "FunctionalArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Functional Area"
+        },
+        "BusinessArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Business Area"
+        },
+        "ControllingArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Controlling Area"
+        },
+        "Segment": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Segment"
+        },
+        "ConsolidationSegmentForElim": {
+          "type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Segment for Elimination"
+        },
+        "PartnerCostCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Partner Cost Center"
+        },
+        "PartnerProfitCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Partner Profit Center"
+        },
+        "PartnerFunctionalArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Partner Functional Area"
+        },
+        "PartnerBusinessArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Partner Business Area"
+        },
+        "PartnerCompany": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Partner Company"
+        },
+        "PartnerSegment": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Partner Segment"
+        },
+        "OrderID": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Order ID"
+        },
+        "Customer": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Customer Number  \nGives an alphanumeric key, which clearly identifies the customer or vendor in the SAP system."
+        },
+        "Supplier": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier"
+        },
+        "Material": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material"
+        },
+        "Plant": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant"
+        },
+        "FinancialTransactionType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Financial Transaction Type"
+        },
+        "WBSElementInternalID": {
+          "type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Key identifying a WBS element."
+        },
+        "WBSDescription": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "WBS Element Internal ID Description"
+        },
+        "WBSElementExternalID": {
+          "type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element External ID"
+        },
+        "Project": {
+          "type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "Project Definition"
+        },
+        "BillingDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Billing Document Type"
+        },
+        "SalesOrganization": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Organization"
+        },
+        "DistributionChannel": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Distribution Channel"
+        },
+        "OrganizationDivision": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Division"
+        },
+        "MaterialGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 9,
+          "example": "string",
+          "title": "Material Group"
+        },
+        "SoldProduct": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Product Sold"
+        },
+        "SoldProductGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 9,
+          "example": "string",
+          "title": "Product Sold Group"
+        },
+        "CustomerGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Customer Group"
+        },
+        "CustomerSupplierCountry": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Customer/Supplier Country/Region"
+        },
+        "CustomerSupplierIndustry": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Customer/Supplier Industry"
+        },
+        "SalesDistrict": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales District"
+        },
+        "BillToParty": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Bill-To Party"
+        },
+        "ShipToParty": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Ship-To Party"
+        },
+        "CustomerSupplierCorporateGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer/Supplier Corporate Group"
+        },
+        "Parameters": {
+          "$ref": "#/definitions/API_GRTRANSACTIONDATA_SRV.GRTransactionDataParameters-create"
+        }
+      },
+      "required": [
+        "ID"
+      ],
+      "title": "Consolidation - Transactional Data for Group Reporting (for create)"
+    },
+    "API_GRTRANSACTIONDATA_SRV.GRTransactionDataResult-update": {
+      "type": "object",
+      "properties": {
+        "ConsolidationLedger": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Consolidation Ledger"
+        },
+        "FiscalYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Fiscal Year",
+          "description": "Period, 12 months as a rule, for which the company is to create its inventory and balance sheet. The fiscal year can be the same as the calendar year, but does not have to be."
+        },
+        "ConsolidationDocumentNumber": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Consolidation Document Number"
+        },
+        "ConsolidationPostingItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Consolidation Document Line Item"
+        },
+        "GLRecordType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "G/L Record Type"
+        },
+        "ConsolidationVersion": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Consolidation Version"
+        },
+        "TransactionCurrency": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Transaction Currency"
+        },
+        "LocalCurrency": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Local Currency"
+        },
+        "GroupCurrency": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Group Currency"
+        },
+        "BaseUnit": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit"
+        },
+        "FiscalPeriod": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Fiscal Period"
+        },
+        "FiscalYearPeriod": {
+          "type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Fiscal Year Period"
+        },
+        "FiscalYearVariant": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Fiscal Year Variant"
+        },
+        "PeriodMode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Period Mode"
+        },
+        "ConsolidationDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Document Type"
+        },
+        "DebitCreditCode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Debit/Credit Code"
+        },
+        "Company": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Company",
+          "description": "Unique company ID of a company within your corporate group."
+        },
+        "ConsolidationUnit": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Consolidation Unit"
+        },
+        "ConsolidationUnitForElim": {
+          "type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Consolidation Unit for Elimination"
+        },
+        "ConsolidationChartOfAccounts": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Consolidation Chart of Accounts"
+        },
+        "FinancialStatementItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Financial Statement Item"
+        },
+        "PartnerConsolidationUnit": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Partner Unit"
+        },
+        "ConsolidationGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Cons. Group",
+          "description": "Consolidation Group  \nEnter a Consolidation Group"
+        },
+        "CompanyCode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Company Code"
+        },
+        "SubItemCategory": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Subitem Category"
+        },
+        "SubItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Subitem"
+        },
+        "PostingLevel": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Posting Level"
+        },
+        "ConsolidationApportionment": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Consolidation Apportionment"
+        },
+        "CurrencyConversionsDiffType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Currency Translation Indicator"
+        },
+        "ConsolidationAcquisitionYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Year of Acquisition"
+        },
+        "ConsolidationAcquisitionPeriod": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Period of Acquisition"
+        },
+        "InvesteeConsolidationUnit": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Investee Unit"
+        },
+        "AmountInTransactionCurrency": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Amount in Transaction Currency"
+        },
+        "AmountInLocalCurrency": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Amount in Local Currency"
+        },
+        "AmountInGroupCurrency": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Amount in Group Currency"
+        },
+        "QuantityInBaseUnit": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Quantity"
+        },
+        "DocumentItemText": {
+          "type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Document Text"
+        },
+        "ConsolidationPostgItemAutoFlag": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Automatic Posting Indicator"
+        },
+        "BusinessTransactionType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Business Transaction Type"
+        },
+        "PostingDate": {
+          "type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date",
+          "description": "Posting Date in the Document  \nDate which is used when entering the document in Financial Accounting or Controlling.  \nThe fiscal year and the period for which an update of the accounts specified in the document or cost elements is made, are derived from the posting date.When entering documents, the system checks whether the posting date entered is allowed by means of the posting period permitted.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        },
+        "CurrencyTranslationDate": {
+          "type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Currency Translation Date"
+        },
+        "RefConsolidationDocumentNumber": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reference Consolidation Document Number"
+        },
+        "ReferenceFiscalYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reference Fiscal Year"
+        },
+        "RefConsolidationPostingItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Reference Consolidation Posting Item"
+        },
+        "RefConsolidationDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Reference Document Category"
+        },
+        "RefBusinessTransactionType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reference Business Transaction Type"
+        },
+        "CreationDate": {
+          "type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Created On"
+        },
+        "CreationTime": {
+          "type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Created At"
+        },
+        "UserID": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User ID"
+        },
+        "ReverseDocument": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reversal Document"
+        },
+        "ReversedDocument": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reversed Document"
+        },
+        "InvestmentActivityType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Investment Activity Type"
+        },
+        "InvestmentActivity": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Investment Activity"
+        },
+        "ConsolidationDocReversalYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Year of Reversal Document"
+        },
+        "ReferenceDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Reference Transaction"
+        },
+        "ReferenceDocumentContext": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reference Organizational Unit"
+        },
+        "LogicalSystem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Logical System",
+          "description": "System in which applications run integrated on a shared data basis.  \nThe distribution of data between systems requires that each system in the network has a unique identification. The logical system is used for this purpose.In the SAP System the client corresponds to a logical system. You can assign a logical system to a client in the client maintenance (choose Goto -> Detail).The logical system is relevant in the following SAP areas:ALE  general: two or more logical systems communicate with one another.ALE - ALE business processes (for example, cost center accounting): definition of a system where a specific application runs. Changes to master data can only be made in this system, for example.Workflow objects: the logical system in which the object is located is always included in an object's key.When maintaining the logical system, note the following:The logical system must be unique company-wide. It must not be used by any other system in the ALE integrated group. In a production system, the logical system must not be changed. If the logical system of a document reference is not set to initial and does not match your own, the system assumes the document is located in a different system."
+        },
+        "ChartOfAccounts": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "G/L Chart of Accounts"
+        },
+        "GLAccount": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "G/L Account"
+        },
+        "AssignmentReference": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Assignment Reference Number"
+        },
+        "CostCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cost Center"
+        },
+        "ProfitCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Profit Center"
+        },
+        "ConsolidationPrftCtrForElim": {
+          "type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Profit Center for Elimination"
+        },
+        "FunctionalArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Functional Area"
+        },
+        "BusinessArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Business Area"
+        },
+        "ControllingArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Controlling Area"
+        },
+        "Segment": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Segment"
+        },
+        "ConsolidationSegmentForElim": {
+          "type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Segment for Elimination"
+        },
+        "PartnerCostCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Partner Cost Center"
+        },
+        "PartnerProfitCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Partner Profit Center"
+        },
+        "PartnerFunctionalArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Partner Functional Area"
+        },
+        "PartnerBusinessArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Partner Business Area"
+        },
+        "PartnerCompany": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Partner Company"
+        },
+        "PartnerSegment": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Partner Segment"
+        },
+        "OrderID": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Order ID"
+        },
+        "Customer": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Customer Number  \nGives an alphanumeric key, which clearly identifies the customer or vendor in the SAP system."
+        },
+        "Supplier": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier"
+        },
+        "Material": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material"
+        },
+        "Plant": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant"
+        },
+        "FinancialTransactionType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Financial Transaction Type"
+        },
+        "WBSElementInternalID": {
+          "type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Key identifying a WBS element."
+        },
+        "WBSDescription": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "WBS Element Internal ID Description"
+        },
+        "WBSElementExternalID": {
+          "type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element External ID"
+        },
+        "Project": {
+          "type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "Project Definition"
+        },
+        "BillingDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Billing Document Type"
+        },
+        "SalesOrganization": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Organization"
+        },
+        "DistributionChannel": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Distribution Channel"
+        },
+        "OrganizationDivision": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Division"
+        },
+        "MaterialGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 9,
+          "example": "string",
+          "title": "Material Group"
+        },
+        "SoldProduct": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Product Sold"
+        },
+        "SoldProductGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 9,
+          "example": "string",
+          "title": "Product Sold Group"
+        },
+        "CustomerGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Customer Group"
+        },
+        "CustomerSupplierCountry": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Customer/Supplier Country/Region"
+        },
+        "CustomerSupplierIndustry": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Customer/Supplier Industry"
+        },
+        "SalesDistrict": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales District"
+        },
+        "BillToParty": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Bill-To Party"
+        },
+        "ShipToParty": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Ship-To Party"
+        },
+        "CustomerSupplierCorporateGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer/Supplier Corporate Group"
+        }
+      },
+      "title": "Consolidation - Transactional Data for Group Reporting (for update)"
+    },
+    "API_GRTRANSACTIONDATA_SRV.GRTransactionDataParameters": {
+      "type": "object",
+      "properties": {
+        "P_ConsolidationUnitHierId": {
+          "type": "string",
+          "maxLength": 40,
+          "title": "Consolidation Unit Hierarchy"
+        },
+        "P_ConsolidationSegmentHierId": {
+          "type": "string",
+          "maxLength": 40,
+          "title": "Segment Hierarchy"
+        },
+        "P_ConsolidationPrftCtrHierId": {
+          "type": "string",
+          "maxLength": 40,
+          "title": "Profit Center Hier.",
+          "description": "Profit Center Hierarchy"
+        },
+        "P_KeyDate": {
+          "type": "string",
+          "example": "/Date(1492041600000)/",
+          "title": "Valid To",
+          "description": "Valid To Date  \nDate indicating up to when an entry is valid."
+        },
+        "Results": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_GRTRANSACTIONDATA_SRV.GRTransactionDataResult"
+              }
+            }
+          }
+        }
+      },
+      "title": "GRTransactionDataParameters"
+    },
+    "API_GRTRANSACTIONDATA_SRV.GRTransactionDataParameters-create": {
+      "type": "object",
+      "properties": {
+        "Results": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_GRTRANSACTIONDATA_SRV.GRTransactionDataResult-create"
+              }
+            }
+          }
+        }
+      },
+      "title": "GRTransactionDataParameters (for create)"
+    },
+    "API_GRTRANSACTIONDATA_SRV.GRTransactionDataParameters-update": {
+      "type": "object",
+      "title": "GRTransactionDataParameters (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

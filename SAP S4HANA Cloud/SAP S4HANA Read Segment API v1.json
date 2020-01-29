@@ -1,0 +1,541 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Read Segment",
+    "version": "1 ",
+    "description": "This service enables you to read  segment master data in an API call. It is based on  the OData protocol, and can be consumed in Fiori  apps and on other user interfaces."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com/viewer/9f5615e034314902ab9279775919b4d0/latest/en-US/f2c665d7d7cf423d910c111f8fb558cd.html"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "This service enables you to read  segment master data in an API call.",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "SAP Business Objects Cloud for Planning Integration (SAP_COM_0087)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[oData Integration with SAP Business Objects Cloud for Planning (1YB)](https://rapid.sap.com/bp/#/scopeitems/1YB \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_SEGMENT_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_SEGMENT_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_Segment"
+    },
+    {
+      "name": "A_SegmentText"
+    }
+  ],
+  "paths": {
+    "/A_Segment": {
+      "get": {
+        "summary": "Get entities from A_Segment",
+        "tags": [
+          "A_Segment"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Segment",
+                "Segment desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Segment",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SegmentType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SEGMENT_SRV.A_SegmentType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_Segment('{Segment}')": {
+      "get": {
+        "summary": "Get entity from A_Segment by key",
+        "tags": [
+          "A_Segment"
+        ],
+        "parameters": [
+          {
+            "name": "Segment",
+            "in": "path",
+            "required": true,
+            "description": "Segment for Segmental Reporting",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Segment",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SegmentType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SEGMENT_SRV.A_SegmentType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SegmentText": {
+      "get": {
+        "summary": "Get entities from A_SegmentText",
+        "tags": [
+          "A_SegmentText"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Language",
+                "Language desc",
+                "Segment",
+                "Segment desc",
+                "SegmentName",
+                "SegmentName desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Language",
+                "Segment",
+                "SegmentName",
+                "to_Segment"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Segment"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SegmentTextType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SEGMENT_SRV.A_SegmentTextType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SegmentText(Language='{Language}',Segment='{Segment}')": {
+      "get": {
+        "summary": "Get entity from A_SegmentText by key",
+        "tags": [
+          "A_SegmentText"
+        ],
+        "parameters": [
+          {
+            "name": "Language",
+            "in": "path",
+            "required": true,
+            "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+            "type": "string"
+          },
+          {
+            "name": "Segment",
+            "in": "path",
+            "required": true,
+            "description": "Segment for Segmental Reporting",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Language",
+                "Segment",
+                "SegmentName",
+                "to_Segment"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Segment"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SegmentTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SEGMENT_SRV.A_SegmentTextType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_SEGMENT_SRV.A_SegmentType": {
+      "type": "object",
+      "properties": {
+        "Segment": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Segment",
+          "description": "Segment for Segmental Reporting"
+        },
+        "to_Text": {
+          "title": "Collection of A_SegmentTextType",
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SEGMENT_SRV.A_SegmentTextType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API Segment",
+      "description": "API Segment"
+    },
+    "API_SEGMENT_SRV.A_SegmentTextType": {
+      "type": "object",
+      "properties": {
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "Segment": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Segment",
+          "description": "Segment for Segmental Reporting"
+        },
+        "SegmentName": {
+"type": "string",
+"default": "null",
+          "maxLength": 50,
+          "title": "Segment Name",
+          "description": "Segment Name"
+        },
+        "to_Segment": {
+          "$ref": "#/definitions/API_SEGMENT_SRV.A_SegmentType"
+        }
+      },
+      "title": "API Segment Text",
+      "description": "API Segment Text"
+    },
+    "odata.error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/odata.error.main"
+        }
+      }
+    },
+    "odata.error.main": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "$ref": "#/definitions/odata.error.message"
+        },
+        "innererror": {
+          "type": "object",
+          "description": "The structure of this object is service-specific"
+        }
+      }
+    },
+    "odata.error.message": {
+      "type": "object",
+      "required": [
+        "lang",
+        "value"
+      ],
+      "properties": {
+        "lang": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [OData Count](http://www.odata.org/documentation/odata-version-2-0/uri-conventions/#InlinecountSystemQueryOption)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    },
+    "filter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+      "type": "string"
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/odata.error"
+      }
+    }
+  }
+}

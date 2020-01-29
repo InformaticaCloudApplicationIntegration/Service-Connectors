@@ -1,0 +1,2134 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Reservation Document - Read, Create, Delete",
+    "version": "1 ",
+    "description": "  For example, a user might create a  reservation for a material with some  quantity and assign that reserved material  to a cost center, a sales order or an  asset. A reservation can also be created  for a transfer posting from one plant to  another. The service also allows to delete  existing reservation documents. It can be  consumed by external systems and user  interfaces."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/51/86af9bebab426984f5c399a5b2664b/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "This service enables you to retrieve, create and delete reservation documents",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Reservation Integration (SAP_COM_0112)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Core Inventory Management (BMC)](https://rapid.sap.com/bp/#/scopeitems/BMC \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_RESERVATION_DOCUMENT_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_RESERVATION_DOCUMENT_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_ReservationDocumentHeader"
+    },
+    {
+      "name": "A_ReservationDocumentItem"
+    }
+  ],
+  "paths": {
+    "/A_ReservationDocumentHeader": {
+      "get": {
+        "summary": "Get entities from A_ReservationDocumentHeader",
+        "tags": [
+          "A_ReservationDocumentHeader"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Reservation",
+                "Reservation desc",
+                "OrderID",
+                "OrderID desc",
+                "GoodsMovementType",
+                "GoodsMovementType desc",
+                "CostCenter",
+                "CostCenter desc",
+                "GoodsRecipientName",
+                "GoodsRecipientName desc",
+                "ReservationDate",
+                "ReservationDate desc",
+                "IsCheckedAgainstFactoryCal",
+                "IsCheckedAgainstFactoryCal desc",
+                "Customer",
+                "Customer desc",
+                "WBSElement",
+                "WBSElement desc",
+                "ControllingArea",
+                "ControllingArea desc",
+                "SalesOrder",
+                "SalesOrder desc",
+                "SalesOrderItem",
+                "SalesOrderItem desc",
+                "SalesOrderScheduleLine",
+                "SalesOrderScheduleLine desc",
+                "AssetNumber",
+                "AssetNumber desc",
+                "AssetSubNumber",
+                "AssetSubNumber desc",
+                "NetworkNumberForAcctAssgmt",
+                "NetworkNumberForAcctAssgmt desc",
+                "IssuingOrReceivingPlant",
+                "IssuingOrReceivingPlant desc",
+                "IssuingOrReceivingStorageLoc",
+                "IssuingOrReceivingStorageLoc desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Reservation",
+                "OrderID",
+                "GoodsMovementType",
+                "CostCenter",
+                "GoodsRecipientName",
+                "ReservationDate",
+                "IsCheckedAgainstFactoryCal",
+                "Customer",
+                "WBSElement",
+                "ControllingArea",
+                "SalesOrder",
+                "SalesOrderItem",
+                "SalesOrderScheduleLine",
+                "AssetNumber",
+                "AssetSubNumber",
+                "NetworkNumberForAcctAssgmt",
+                "IssuingOrReceivingPlant",
+                "IssuingOrReceivingStorageLoc",
+                "to_ReservationDocumentItem"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ReservationDocumentItem"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ReservationDocumentHeaderType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentHeaderType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to A_ReservationDocumentHeader",
+        "tags": [
+          "A_ReservationDocumentHeader"
+        ],
+        "parameters": [
+          {
+            "name": "A_ReservationDocumentHeaderType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentHeaderType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_ReservationDocumentHeaderType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentHeaderType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ReservationDocumentHeader('{Reservation}')": {
+      "parameters": [
+        {
+          "name": "Reservation",
+          "in": "path",
+          "required": true,
+          "description": "Number of reservation/dependent requirements  \nAlphanumeric key uniquely identifying the document.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_ReservationDocumentHeader by key",
+        "tags": [
+          "A_ReservationDocumentHeader"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Reservation",
+                "OrderID",
+                "GoodsMovementType",
+                "CostCenter",
+                "GoodsRecipientName",
+                "ReservationDate",
+                "IsCheckedAgainstFactoryCal",
+                "Customer",
+                "WBSElement",
+                "ControllingArea",
+                "SalesOrder",
+                "SalesOrderItem",
+                "SalesOrderScheduleLine",
+                "AssetNumber",
+                "AssetSubNumber",
+                "NetworkNumberForAcctAssgmt",
+                "IssuingOrReceivingPlant",
+                "IssuingOrReceivingStorageLoc",
+                "to_ReservationDocumentItem"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ReservationDocumentItem"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ReservationDocumentHeaderType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentHeaderType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete entity from A_ReservationDocumentHeader",
+        "tags": [
+          "A_ReservationDocumentHeader"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ReservationDocumentHeader('{Reservation}')/to_ReservationDocumentItem": {
+      "parameters": [
+        {
+          "name": "Reservation",
+          "in": "path",
+          "required": true,
+          "description": "Number of reservation/dependent requirements  \nAlphanumeric key uniquely identifying the document.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_ReservationDocumentItem",
+        "tags": [
+          "A_ReservationDocumentHeader",
+          "A_ReservationDocumentItem"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Reservation",
+                "Reservation desc",
+                "ReservationItem",
+                "ReservationItem desc",
+                "RecordType",
+                "RecordType desc",
+                "Product",
+                "Product desc",
+                "RequirementType",
+                "RequirementType desc",
+                "MatlCompRequirementDate",
+                "MatlCompRequirementDate desc",
+                "Plant",
+                "Plant desc",
+                "ManufacturingOrderOperation",
+                "ManufacturingOrderOperation desc",
+                "GoodsMovementIsAllowed",
+                "GoodsMovementIsAllowed desc",
+                "StorageLocation",
+                "StorageLocation desc",
+                "Batch",
+                "Batch desc",
+                "DebitCreditCode",
+                "DebitCreditCode desc",
+                "BaseUnit",
+                "BaseUnit desc",
+                "GLAccount",
+                "GLAccount desc",
+                "GoodsMovementType",
+                "GoodsMovementType desc",
+                "EntryUnit",
+                "EntryUnit desc",
+                "QuantityIsFixed",
+                "QuantityIsFixed desc",
+                "CompanyCodeCurrency",
+                "CompanyCodeCurrency desc",
+                "IssuingOrReceivingPlant",
+                "IssuingOrReceivingPlant desc",
+                "IssuingOrReceivingStorageLoc",
+                "IssuingOrReceivingStorageLoc desc",
+                "PurchasingDocument",
+                "PurchasingDocument desc",
+                "PurchasingDocumentItem",
+                "PurchasingDocumentItem desc",
+                "Supplier",
+                "Supplier desc",
+                "ResvnItmRequiredQtyInBaseUnit",
+                "ResvnItmRequiredQtyInBaseUnit desc",
+                "ReservationItemIsFinallyIssued",
+                "ReservationItemIsFinallyIssued desc",
+                "ReservationItmIsMarkedForDeltn",
+                "ReservationItmIsMarkedForDeltn desc",
+                "ResvnItmRequiredQtyInEntryUnit",
+                "ResvnItmRequiredQtyInEntryUnit desc",
+                "ResvnItmWithdrawnQtyInBaseUnit",
+                "ResvnItmWithdrawnQtyInBaseUnit desc",
+                "ResvnItmWithdrawnAmtInCCCrcy",
+                "ResvnItmWithdrawnAmtInCCCrcy desc",
+                "GoodsRecipientName",
+                "GoodsRecipientName desc",
+                "UnloadingPointName",
+                "UnloadingPointName desc",
+                "ReservationItemText",
+                "ReservationItemText desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Reservation",
+                "ReservationItem",
+                "RecordType",
+                "Product",
+                "RequirementType",
+                "MatlCompRequirementDate",
+                "Plant",
+                "ManufacturingOrderOperation",
+                "GoodsMovementIsAllowed",
+                "StorageLocation",
+                "Batch",
+                "DebitCreditCode",
+                "BaseUnit",
+                "GLAccount",
+                "GoodsMovementType",
+                "EntryUnit",
+                "QuantityIsFixed",
+                "CompanyCodeCurrency",
+                "IssuingOrReceivingPlant",
+                "IssuingOrReceivingStorageLoc",
+                "PurchasingDocument",
+                "PurchasingDocumentItem",
+                "Supplier",
+                "ResvnItmRequiredQtyInBaseUnit",
+                "ReservationItemIsFinallyIssued",
+                "ReservationItmIsMarkedForDeltn",
+                "ResvnItmRequiredQtyInEntryUnit",
+                "ResvnItmWithdrawnQtyInBaseUnit",
+                "ResvnItmWithdrawnAmtInCCCrcy",
+                "GoodsRecipientName",
+                "UnloadingPointName",
+                "ReservationItemText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ReservationDocumentItemType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentItemType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ReservationDocumentItem": {
+      "get": {
+        "summary": "Get entities from A_ReservationDocumentItem",
+        "tags": [
+          "A_ReservationDocumentItem"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Reservation",
+                "Reservation desc",
+                "ReservationItem",
+                "ReservationItem desc",
+                "RecordType",
+                "RecordType desc",
+                "Product",
+                "Product desc",
+                "RequirementType",
+                "RequirementType desc",
+                "MatlCompRequirementDate",
+                "MatlCompRequirementDate desc",
+                "Plant",
+                "Plant desc",
+                "ManufacturingOrderOperation",
+                "ManufacturingOrderOperation desc",
+                "GoodsMovementIsAllowed",
+                "GoodsMovementIsAllowed desc",
+                "StorageLocation",
+                "StorageLocation desc",
+                "Batch",
+                "Batch desc",
+                "DebitCreditCode",
+                "DebitCreditCode desc",
+                "BaseUnit",
+                "BaseUnit desc",
+                "GLAccount",
+                "GLAccount desc",
+                "GoodsMovementType",
+                "GoodsMovementType desc",
+                "EntryUnit",
+                "EntryUnit desc",
+                "QuantityIsFixed",
+                "QuantityIsFixed desc",
+                "CompanyCodeCurrency",
+                "CompanyCodeCurrency desc",
+                "IssuingOrReceivingPlant",
+                "IssuingOrReceivingPlant desc",
+                "IssuingOrReceivingStorageLoc",
+                "IssuingOrReceivingStorageLoc desc",
+                "PurchasingDocument",
+                "PurchasingDocument desc",
+                "PurchasingDocumentItem",
+                "PurchasingDocumentItem desc",
+                "Supplier",
+                "Supplier desc",
+                "ResvnItmRequiredQtyInBaseUnit",
+                "ResvnItmRequiredQtyInBaseUnit desc",
+                "ReservationItemIsFinallyIssued",
+                "ReservationItemIsFinallyIssued desc",
+                "ReservationItmIsMarkedForDeltn",
+                "ReservationItmIsMarkedForDeltn desc",
+                "ResvnItmRequiredQtyInEntryUnit",
+                "ResvnItmRequiredQtyInEntryUnit desc",
+                "ResvnItmWithdrawnQtyInBaseUnit",
+                "ResvnItmWithdrawnQtyInBaseUnit desc",
+                "ResvnItmWithdrawnAmtInCCCrcy",
+                "ResvnItmWithdrawnAmtInCCCrcy desc",
+                "GoodsRecipientName",
+                "GoodsRecipientName desc",
+                "UnloadingPointName",
+                "UnloadingPointName desc",
+                "ReservationItemText",
+                "ReservationItemText desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Reservation",
+                "ReservationItem",
+                "RecordType",
+                "Product",
+                "RequirementType",
+                "MatlCompRequirementDate",
+                "Plant",
+                "ManufacturingOrderOperation",
+                "GoodsMovementIsAllowed",
+                "StorageLocation",
+                "Batch",
+                "DebitCreditCode",
+                "BaseUnit",
+                "GLAccount",
+                "GoodsMovementType",
+                "EntryUnit",
+                "QuantityIsFixed",
+                "CompanyCodeCurrency",
+                "IssuingOrReceivingPlant",
+                "IssuingOrReceivingStorageLoc",
+                "PurchasingDocument",
+                "PurchasingDocumentItem",
+                "Supplier",
+                "ResvnItmRequiredQtyInBaseUnit",
+                "ReservationItemIsFinallyIssued",
+                "ReservationItmIsMarkedForDeltn",
+                "ResvnItmRequiredQtyInEntryUnit",
+                "ResvnItmWithdrawnQtyInBaseUnit",
+                "ResvnItmWithdrawnAmtInCCCrcy",
+                "GoodsRecipientName",
+                "UnloadingPointName",
+                "ReservationItemText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ReservationDocumentItemType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentItemType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ReservationDocumentItem(Reservation='{Reservation}',ReservationItem='{ReservationItem}',RecordType='{RecordType}')": {
+      "parameters": [
+        {
+          "name": "Reservation",
+          "in": "path",
+          "required": true,
+          "description": "Number of reservation/dependent requirements  \nAlphanumeric key uniquely identifying the document.",
+          "type": "string"
+        },
+        {
+          "name": "ReservationItem",
+          "in": "path",
+          "required": true,
+          "description": "Item Number of Reservation / Dependent Requirements  \nSpecifies the number that uniquely identifies an item in .",
+          "type": "string"
+        },
+        {
+          "name": "RecordType",
+          "in": "path",
+          "required": true,
+          "description": "Record type",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_ReservationDocumentItem by key",
+        "tags": [
+          "A_ReservationDocumentItem"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Reservation",
+                "ReservationItem",
+                "RecordType",
+                "Product",
+                "RequirementType",
+                "MatlCompRequirementDate",
+                "Plant",
+                "ManufacturingOrderOperation",
+                "GoodsMovementIsAllowed",
+                "StorageLocation",
+                "Batch",
+                "DebitCreditCode",
+                "BaseUnit",
+                "GLAccount",
+                "GoodsMovementType",
+                "EntryUnit",
+                "QuantityIsFixed",
+                "CompanyCodeCurrency",
+                "IssuingOrReceivingPlant",
+                "IssuingOrReceivingStorageLoc",
+                "PurchasingDocument",
+                "PurchasingDocumentItem",
+                "Supplier",
+                "ResvnItmRequiredQtyInBaseUnit",
+                "ReservationItemIsFinallyIssued",
+                "ReservationItmIsMarkedForDeltn",
+                "ResvnItmRequiredQtyInEntryUnit",
+                "ResvnItmWithdrawnQtyInBaseUnit",
+                "ResvnItmWithdrawnAmtInCCCrcy",
+                "GoodsRecipientName",
+                "UnloadingPointName",
+                "ReservationItemText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ReservationDocumentItemType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentItemType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET A_ReservationDocumentHeader HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentHeaderType": {
+      "type": "object",
+      "properties": {
+        "Reservation": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Reservation",
+          "description": "Number of reservation/dependent requirements  \nAlphanumeric key uniquely identifying the document."
+        },
+        "OrderID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Order",
+          "description": "Order Number  \nKey that uniquely identifies an order within a client."
+        },
+        "GoodsMovementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Goods Movement Type",
+          "description": "Goods Movement Type (Inventory Management)  \nSpecifies a key for the type of goods movement. Each goods movement (for example, purchase order to warehouse) is allocated to a movement type in the system."
+        },
+        "CostCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cost Center",
+          "description": "A key that uniquely identifies a cost center."
+        },
+        "GoodsRecipientName": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Goods recipient",
+          "description": "Specifies the recipient for whom the material or the service is destined."
+        },
+        "ReservationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Base date",
+          "description": "Base date for reservation  \nSpecifies the date for which the goods movement is planned."
+        },
+        "IsCheckedAgainstFactoryCal": {
+"type": "boolean",
+"default": "null",
+          "title": "Check against cal.",
+          "description": "Check date against factory calendar  \nSpecifies if the reservation is to be checked against the factory calendar.  \nThe system checks the factory calendar to determine whether the dates in the reservation are valid workdays."
+        },
+        "Customer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Account number of customer  \nUniquely identifies a customer.  \nThis customer number is used for managing customer special stocks."
+        },
+        "WBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        },
+        "ControllingArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Controlling Area",
+          "description": "Uniquely identifies a controlling area.  \nThe controlling area is the highest organizational unit in Controlling.Whether controlling area and company code are in a 1:1 relationship or a 1:n relationship, the number of posting periods in both controlling area and company code(s) must be identical. However, special periods may vary."
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order",
+          "description": "Sales Order Number  \nUniquely identifies a sales order.  \nThe selection of postprocessing records via the sales order number is only possible for non-valuated sales order stock."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales order item",
+          "description": "Item number in Sales Order  \nUniquely identifies an item within a sales order."
+        },
+        "SalesOrderScheduleLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales order schedule",
+          "description": "Delivery schedule for sales order  \nSpecifies the number that uniquely identifies an item in ."
+        },
+        "AssetNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Asset",
+          "description": "Main Asset Number  \nThis is the number which, together with the asset sub-number, identifies a fixed asset in Asset Accounting."
+        },
+        "AssetSubNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Subnumber",
+          "description": "Asset Subnumber  \nThis is the number which, together with the main asset number, uniquely identifies a fixed asset in Asset Accounting.  \nUsing the asset sub-number, you can:Provide for separate management of later acquisitions to assets.Represent complex fixed assets with their component parts.In contrast to the main asset number, the asset sub-number must be numerical."
+        },
+        "NetworkNumberForAcctAssgmt": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Network",
+          "description": "Network Number for Account Assignment  \nA network can structure an entire project or a task within a project.  \nNumbers are used to differentiate these project structures.When you specify a network, for example, when you are entering attendances, you can define that the network is debited when the sender cost center is credited.Use the possible entries pushbutton to select the network number for the required project structure."
+        },
+        "IssuingOrReceivingPlant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving plant",
+          "description": "Receiving plant/issuing plant  \nIndicates the receiving or issuing plant.  \nThe receiving plant is the plant or internal organizational unit that is to receive the goods.The issuing plant is the plant that issues the goods.NoteThe value of the transfer posting is determined not by the plant entered here but by the plant specified in the Plant field."
+        },
+        "IssuingOrReceivingStorageLoc": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving stor. loc.",
+          "description": "Receiving/issuing storage location  \nIndicates the receiving or the issuing storage location.  \nThe receiving storage location is the storage location that is to receive the goods.The issuing storage location is the storage location that issues the goods."
+        },
+        "to_ReservationDocumentItem": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentItemType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API View for Reservation Document Header"
+    },
+    "API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentHeaderType-create": {
+      "type": "object",
+      "properties": {
+        "Reservation": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Reservation",
+          "description": "Number of reservation/dependent requirements  \nAlphanumeric key uniquely identifying the document."
+        },
+        "OrderID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Order",
+          "description": "Order Number  \nKey that uniquely identifies an order within a client."
+        },
+        "GoodsMovementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Goods Movement Type",
+          "description": "Goods Movement Type (Inventory Management)  \nSpecifies a key for the type of goods movement. Each goods movement (for example, purchase order to warehouse) is allocated to a movement type in the system."
+        },
+        "CostCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cost Center",
+          "description": "A key that uniquely identifies a cost center."
+        },
+        "GoodsRecipientName": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Goods recipient",
+          "description": "Specifies the recipient for whom the material or the service is destined."
+        },
+        "ReservationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Base date",
+          "description": "Base date for reservation  \nSpecifies the date for which the goods movement is planned."
+        },
+        "IsCheckedAgainstFactoryCal": {
+"type": "boolean",
+"default": "null",
+          "title": "Check against cal.",
+          "description": "Check date against factory calendar  \nSpecifies if the reservation is to be checked against the factory calendar.  \nThe system checks the factory calendar to determine whether the dates in the reservation are valid workdays."
+        },
+        "Customer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Account number of customer  \nUniquely identifies a customer.  \nThis customer number is used for managing customer special stocks."
+        },
+        "WBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        },
+        "ControllingArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Controlling Area",
+          "description": "Uniquely identifies a controlling area.  \nThe controlling area is the highest organizational unit in Controlling.Whether controlling area and company code are in a 1:1 relationship or a 1:n relationship, the number of posting periods in both controlling area and company code(s) must be identical. However, special periods may vary."
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order",
+          "description": "Sales Order Number  \nUniquely identifies a sales order.  \nThe selection of postprocessing records via the sales order number is only possible for non-valuated sales order stock."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales order item",
+          "description": "Item number in Sales Order  \nUniquely identifies an item within a sales order."
+        },
+        "SalesOrderScheduleLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales order schedule",
+          "description": "Delivery schedule for sales order  \nSpecifies the number that uniquely identifies an item in ."
+        },
+        "AssetNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Asset",
+          "description": "Main Asset Number  \nThis is the number which, together with the asset sub-number, identifies a fixed asset in Asset Accounting."
+        },
+        "AssetSubNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Subnumber",
+          "description": "Asset Subnumber  \nThis is the number which, together with the main asset number, uniquely identifies a fixed asset in Asset Accounting.  \nUsing the asset sub-number, you can:Provide for separate management of later acquisitions to assets.Represent complex fixed assets with their component parts.In contrast to the main asset number, the asset sub-number must be numerical."
+        },
+        "NetworkNumberForAcctAssgmt": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Network",
+          "description": "Network Number for Account Assignment  \nA network can structure an entire project or a task within a project.  \nNumbers are used to differentiate these project structures.When you specify a network, for example, when you are entering attendances, you can define that the network is debited when the sender cost center is credited.Use the possible entries pushbutton to select the network number for the required project structure."
+        },
+        "IssuingOrReceivingPlant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving plant",
+          "description": "Receiving plant/issuing plant  \nIndicates the receiving or issuing plant.  \nThe receiving plant is the plant or internal organizational unit that is to receive the goods.The issuing plant is the plant that issues the goods.NoteThe value of the transfer posting is determined not by the plant entered here but by the plant specified in the Plant field."
+        },
+        "IssuingOrReceivingStorageLoc": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving stor. loc.",
+          "description": "Receiving/issuing storage location  \nIndicates the receiving or the issuing storage location.  \nThe receiving storage location is the storage location that is to receive the goods.The issuing storage location is the storage location that issues the goods."
+        },
+        "to_ReservationDocumentItem": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentItemType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "Reservation"
+      ],
+      "title": "API View for Reservation Document Header (for create)"
+    },
+    "API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentHeaderType-update": {
+      "type": "object",
+      "properties": {
+        "OrderID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Order",
+          "description": "Order Number  \nKey that uniquely identifies an order within a client."
+        },
+        "GoodsMovementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Goods Movement Type",
+          "description": "Goods Movement Type (Inventory Management)  \nSpecifies a key for the type of goods movement. Each goods movement (for example, purchase order to warehouse) is allocated to a movement type in the system."
+        },
+        "CostCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cost Center",
+          "description": "A key that uniquely identifies a cost center."
+        },
+        "GoodsRecipientName": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Goods recipient",
+          "description": "Specifies the recipient for whom the material or the service is destined."
+        },
+        "ReservationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Base date",
+          "description": "Base date for reservation  \nSpecifies the date for which the goods movement is planned."
+        },
+        "IsCheckedAgainstFactoryCal": {
+"type": "boolean",
+"default": "null",
+          "title": "Check against cal.",
+          "description": "Check date against factory calendar  \nSpecifies if the reservation is to be checked against the factory calendar.  \nThe system checks the factory calendar to determine whether the dates in the reservation are valid workdays."
+        },
+        "Customer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Account number of customer  \nUniquely identifies a customer.  \nThis customer number is used for managing customer special stocks."
+        },
+        "WBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        },
+        "ControllingArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Controlling Area",
+          "description": "Uniquely identifies a controlling area.  \nThe controlling area is the highest organizational unit in Controlling.Whether controlling area and company code are in a 1:1 relationship or a 1:n relationship, the number of posting periods in both controlling area and company code(s) must be identical. However, special periods may vary."
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order",
+          "description": "Sales Order Number  \nUniquely identifies a sales order.  \nThe selection of postprocessing records via the sales order number is only possible for non-valuated sales order stock."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales order item",
+          "description": "Item number in Sales Order  \nUniquely identifies an item within a sales order."
+        },
+        "SalesOrderScheduleLine": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales order schedule",
+          "description": "Delivery schedule for sales order  \nSpecifies the number that uniquely identifies an item in ."
+        },
+        "AssetNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Asset",
+          "description": "Main Asset Number  \nThis is the number which, together with the asset sub-number, identifies a fixed asset in Asset Accounting."
+        },
+        "AssetSubNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Subnumber",
+          "description": "Asset Subnumber  \nThis is the number which, together with the main asset number, uniquely identifies a fixed asset in Asset Accounting.  \nUsing the asset sub-number, you can:Provide for separate management of later acquisitions to assets.Represent complex fixed assets with their component parts.In contrast to the main asset number, the asset sub-number must be numerical."
+        },
+        "NetworkNumberForAcctAssgmt": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Network",
+          "description": "Network Number for Account Assignment  \nA network can structure an entire project or a task within a project.  \nNumbers are used to differentiate these project structures.When you specify a network, for example, when you are entering attendances, you can define that the network is debited when the sender cost center is credited.Use the possible entries pushbutton to select the network number for the required project structure."
+        },
+        "IssuingOrReceivingPlant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving plant",
+          "description": "Receiving plant/issuing plant  \nIndicates the receiving or issuing plant.  \nThe receiving plant is the plant or internal organizational unit that is to receive the goods.The issuing plant is the plant that issues the goods.NoteThe value of the transfer posting is determined not by the plant entered here but by the plant specified in the Plant field."
+        },
+        "IssuingOrReceivingStorageLoc": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving stor. loc.",
+          "description": "Receiving/issuing storage location  \nIndicates the receiving or the issuing storage location.  \nThe receiving storage location is the storage location that is to receive the goods.The issuing storage location is the storage location that issues the goods."
+        }
+      },
+      "title": "API View for Reservation Document Header (for update)"
+    },
+    "API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentItemType": {
+      "type": "object",
+      "properties": {
+        "Reservation": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Reservation",
+          "description": "Number of reservation/dependent requirements  \nAlphanumeric key uniquely identifying the document."
+        },
+        "ReservationItem": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Item no.",
+          "description": "Item Number of Reservation / Dependent Requirements  \nSpecifies the number that uniquely identifies an item in ."
+        },
+        "RecordType": {
+          "type": "string",
+          "maxLength": 1,
+          "title": "Record type"
+        },
+        "Product": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material."
+        },
+        "RequirementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Requirement type",
+          "description": "Determines the way in which the system handles requirements planning.  \nYou can use the requirement type to control, for example, lot sizing, inventory management, and storage costs. When you create a sales order, for example, you can specify a requirement type for each schedule line. During sales order and delivery processing, the requirement type, in combination with the planning type controls whether the systemGenerates requirementsChecks availabilityThe schedule line category determines the requirements type. You cannot change the requirements type during sales order processing."
+        },
+        "MatlCompRequirementDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Requirements date",
+          "description": "Requirements date for the component  \nSpecifies the date on which the requested quantity of material is required."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "ManufacturingOrderOperation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Activity",
+          "description": "Operation/Activity Number  \nProduction Planning  \nDetermines in which order the operations of a sequence are carried out.Project SystemNumber that identifies an activity."
+        },
+        "GoodsMovementIsAllowed": {
+"type": "boolean",
+"default": "null",
+          "title": "Movement Allowed",
+          "description": "Goods Movement for Reservation Allowed  \nSpecifies that goods movements are allowed for the reservation item."
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location",
+          "description": "Number of the storage location in which the material is stored. A plant may contain one or more storage locations."
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch",
+          "description": "Batch Number  \nAssigns a material that is manufactured in batches or production lots to a specific batch."
+        },
+        "DebitCreditCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Debit/Credit ind",
+          "description": "Debit/Credit Indicator  \nShows on which side of the account (S = debit, H = credit) the transaction figures are updated."
+        },
+        "BaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit of Measure",
+          "description": "Unit of measure in which stocks of the material are managed. The system converts all the quantities you enter in other units of measure (alternative units of measure) to the base unit of measure.  \nYou define the base unit of measure and also alternative units of measure and their conversion factors in the material master record.Since all data is updated in the base unit of measure, your entry is particularly important for the conversion of alternative units of measure. A quantity in the alternative unit of measure can only be shown precisely if its value can be shown with the decimal places available. To ensure this, please note the following:The base unit of measure is the unit satisfying the highest necessary requirement for precision.The conversion of alternative units of measure to the base unit should result in simple decimal fractions (not, for example, 1/3 = 0.333...).Inventory ManagementIn Inventory Management, the base unit of measure is the same as the stockkeeping unit.ServicesServices have units of measure of their own, including the following:Service unitUnit of measure at the higher item level. The precise quantities of the individual services are each at the detailed service line level.BlanketUnit of measure at service line level for services to be provided once only, and for which no precise quantities can or are to be specified."
+        },
+        "GLAccount": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "G/L Account",
+          "description": "G/L Account Number  \nThe G/L account number identifies the G/L account in a chart of accounts."
+        },
+        "GoodsMovementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Goods Movement Type",
+          "description": "Goods Movement Type (Inventory Management)  \nSpecifies a key for the type of goods movement. Each goods movement (for example, purchase order to warehouse) is allocated to a movement type in the system."
+        },
+        "EntryUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Entry",
+          "description": "Unit of entry  \nSpecifies the unit of measure in which the goods movement or inventory count is entered.  \nEnter a unit of measure here only if it differs from the default unit of measure.There are the following default units of measure:the order unit for goods receipts with reference to purchase ordersthe production unit for goods receipts with reference to production ordersthe unit of issue for other goods movementsIf the default unit of measure has not been defined in the material master record, the system will suggest the stockkeeping unit."
+        },
+        "QuantityIsFixed": {
+"type": "boolean",
+"default": "null",
+          "title": "Quantity is fixed",
+          "description": "Determines that the quantity of an item is constant.  \nSet this indicator if the quantity in a relational system does not change.If an item of a BOM is marked as being fixed and the quantity of the finished product to be manufactured is changed, the quantity of this item does not change.If a \"materials to be provided\" item is not marked as being fixed, and the quantity of the subcontracted item is changed, the quantity of the material to be provided to the subcontractor changes proportionately."
+        },
+        "CompanyCodeCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Currency",
+          "description": "Currency Key  \nCurrency key for amounts in the system."
+        },
+        "IssuingOrReceivingPlant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving plant",
+          "description": "Receiving plant/issuing plant  \nIndicates the receiving or issuing plant.  \nThe receiving plant is the plant or internal organizational unit that is to receive the goods.The issuing plant is the plant that issues the goods.NoteThe value of the transfer posting is determined not by the plant entered here but by the plant specified in the Plant field."
+        },
+        "IssuingOrReceivingStorageLoc": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving stor. loc.",
+          "description": "Receiving/issuing storage location  \nIndicates the receiving or the issuing storage location.  \nThe receiving storage location is the storage location that is to receive the goods.The issuing storage location is the storage location that issues the goods."
+        },
+        "PurchasingDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Purchasing Document",
+          "description": "Purchasing Document Number  \nAlphanumeric key uniquely identifying the document."
+        },
+        "PurchasingDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Item",
+          "description": "Item Number of Purchasing Document  \nSpecifies the number that uniquely identifies an item in ."
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Account Number of Supplier  \nSpecifies an alphanumeric key that uniquely identifies the supplier in the SAP system."
+        },
+        "ResvnItmRequiredQtyInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Requirement Quantity",
+          "description": "Specifies the quantity in the base unit of measure, which can have various meanings, depending on the situation:  \nIn the case of a planned order or a production order, this is the quantity of the material component required to manufacture the planned order quantity.In the case of a reservation, this is the quantity reserved."
+        },
+        "ReservationItemIsFinallyIssued": {
+"type": "boolean",
+"default": "null",
+          "title": "Final Issue",
+          "description": "Final Issue for Reservation  \nIndicates that a reservation item is completed.  \nFurther goods movements in respect of this reservation item are not anticipated, although they are still possible.The indicator is set automatically for a goods movement when the total reserved quantity has been withdrawn or delivered. In the case of a partial delivery, you can manually set the indicator if no further goods movements are expected in respect of the relevant reservation item."
+        },
+        "ReservationItmIsMarkedForDeltn": {
+"type": "boolean",
+"default": "null",
+          "title": "Item deleted",
+          "description": "Item is deleted  \nSpecifies whether the item has already been deleted."
+        },
+        "ResvnItmRequiredQtyInEntryUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Qty in unit of entry",
+          "description": "Quantity in unit of entry  \nSpecifies the quantity to be moved in the unit of entry. The quantity is automatically converted to the stockkeeping unit (base unit of measure).  \nEnter the quantity to be moved in any unit of measure for the material.If the relevant unit of measure has not been defined in the material master record, the system uses the stockkeeping unit.If you do not enter a unit of measure, the system uses the following units of measure:order unit  in goods receipts against purchase ordersproduction unit  in goods receipts against production ordersunit of issue  in other goods movements"
+        },
+        "ResvnItmWithdrawnQtyInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Quantity withdrawn",
+          "description": "Specifies the quantity already withdrawn."
+        },
+        "ResvnItmWithdrawnAmtInCCCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Value Withdrawn",
+          "description": "Indicates the value of the quantity withdrawn from storage."
+        },
+        "GoodsRecipientName": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Goods recipient",
+          "description": "Specifies the recipient for whom the material or the service is destined."
+        },
+        "UnloadingPointName": {
+"type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Unloading Point",
+          "description": "Specifies the point at which the material is to be unloaded (for example, ramp 1)."
+        },
+        "ReservationItemText": {
+"type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Text",
+          "description": "Item Text  \nContains an explanatory text on the line item.  \nLine item texts can be used internally and externally. To be able to distinguish between these, you must begin texts for external use with \"*\". These texts can then be printed on all correspondence, dunning notices, payment advice notes, etc. The asterisk is removed when the text is printed.This function is only available in the FI component. It cannot be used in Materials Management."
+        }
+      },
+      "title": "API View for Reservation Document Item"
+    },
+    "API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentItemType-create": {
+      "type": "object",
+      "properties": {
+        "Reservation": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Reservation",
+          "description": "Number of reservation/dependent requirements  \nAlphanumeric key uniquely identifying the document."
+        },
+        "ReservationItem": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Item no.",
+          "description": "Item Number of Reservation / Dependent Requirements  \nSpecifies the number that uniquely identifies an item in ."
+        },
+        "RecordType": {
+          "type": "string",
+          "maxLength": 1,
+          "title": "Record type"
+        },
+        "Product": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material."
+        },
+        "RequirementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Requirement type",
+          "description": "Determines the way in which the system handles requirements planning.  \nYou can use the requirement type to control, for example, lot sizing, inventory management, and storage costs. When you create a sales order, for example, you can specify a requirement type for each schedule line. During sales order and delivery processing, the requirement type, in combination with the planning type controls whether the systemGenerates requirementsChecks availabilityThe schedule line category determines the requirements type. You cannot change the requirements type during sales order processing."
+        },
+        "MatlCompRequirementDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Requirements date",
+          "description": "Requirements date for the component  \nSpecifies the date on which the requested quantity of material is required."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "ManufacturingOrderOperation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Activity",
+          "description": "Operation/Activity Number  \nProduction Planning  \nDetermines in which order the operations of a sequence are carried out.Project SystemNumber that identifies an activity."
+        },
+        "GoodsMovementIsAllowed": {
+"type": "boolean",
+"default": "null",
+          "title": "Movement Allowed",
+          "description": "Goods Movement for Reservation Allowed  \nSpecifies that goods movements are allowed for the reservation item."
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location",
+          "description": "Number of the storage location in which the material is stored. A plant may contain one or more storage locations."
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch",
+          "description": "Batch Number  \nAssigns a material that is manufactured in batches or production lots to a specific batch."
+        },
+        "DebitCreditCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Debit/Credit ind",
+          "description": "Debit/Credit Indicator  \nShows on which side of the account (S = debit, H = credit) the transaction figures are updated."
+        },
+        "BaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit of Measure",
+          "description": "Unit of measure in which stocks of the material are managed. The system converts all the quantities you enter in other units of measure (alternative units of measure) to the base unit of measure.  \nYou define the base unit of measure and also alternative units of measure and their conversion factors in the material master record.Since all data is updated in the base unit of measure, your entry is particularly important for the conversion of alternative units of measure. A quantity in the alternative unit of measure can only be shown precisely if its value can be shown with the decimal places available. To ensure this, please note the following:The base unit of measure is the unit satisfying the highest necessary requirement for precision.The conversion of alternative units of measure to the base unit should result in simple decimal fractions (not, for example, 1/3 = 0.333...).Inventory ManagementIn Inventory Management, the base unit of measure is the same as the stockkeeping unit.ServicesServices have units of measure of their own, including the following:Service unitUnit of measure at the higher item level. The precise quantities of the individual services are each at the detailed service line level.BlanketUnit of measure at service line level for services to be provided once only, and for which no precise quantities can or are to be specified."
+        },
+        "GLAccount": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "G/L Account",
+          "description": "G/L Account Number  \nThe G/L account number identifies the G/L account in a chart of accounts."
+        },
+        "GoodsMovementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Goods Movement Type",
+          "description": "Goods Movement Type (Inventory Management)  \nSpecifies a key for the type of goods movement. Each goods movement (for example, purchase order to warehouse) is allocated to a movement type in the system."
+        },
+        "EntryUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Entry",
+          "description": "Unit of entry  \nSpecifies the unit of measure in which the goods movement or inventory count is entered.  \nEnter a unit of measure here only if it differs from the default unit of measure.There are the following default units of measure:the order unit for goods receipts with reference to purchase ordersthe production unit for goods receipts with reference to production ordersthe unit of issue for other goods movementsIf the default unit of measure has not been defined in the material master record, the system will suggest the stockkeeping unit."
+        },
+        "QuantityIsFixed": {
+"type": "boolean",
+"default": "null",
+          "title": "Quantity is fixed",
+          "description": "Determines that the quantity of an item is constant.  \nSet this indicator if the quantity in a relational system does not change.If an item of a BOM is marked as being fixed and the quantity of the finished product to be manufactured is changed, the quantity of this item does not change.If a \"materials to be provided\" item is not marked as being fixed, and the quantity of the subcontracted item is changed, the quantity of the material to be provided to the subcontractor changes proportionately."
+        },
+        "CompanyCodeCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Currency",
+          "description": "Currency Key  \nCurrency key for amounts in the system."
+        },
+        "IssuingOrReceivingPlant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving plant",
+          "description": "Receiving plant/issuing plant  \nIndicates the receiving or issuing plant.  \nThe receiving plant is the plant or internal organizational unit that is to receive the goods.The issuing plant is the plant that issues the goods.NoteThe value of the transfer posting is determined not by the plant entered here but by the plant specified in the Plant field."
+        },
+        "IssuingOrReceivingStorageLoc": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving stor. loc.",
+          "description": "Receiving/issuing storage location  \nIndicates the receiving or the issuing storage location.  \nThe receiving storage location is the storage location that is to receive the goods.The issuing storage location is the storage location that issues the goods."
+        },
+        "PurchasingDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Purchasing Document",
+          "description": "Purchasing Document Number  \nAlphanumeric key uniquely identifying the document."
+        },
+        "PurchasingDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Item",
+          "description": "Item Number of Purchasing Document  \nSpecifies the number that uniquely identifies an item in ."
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Account Number of Supplier  \nSpecifies an alphanumeric key that uniquely identifies the supplier in the SAP system."
+        },
+        "ResvnItmRequiredQtyInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Requirement Quantity",
+          "description": "Specifies the quantity in the base unit of measure, which can have various meanings, depending on the situation:  \nIn the case of a planned order or a production order, this is the quantity of the material component required to manufacture the planned order quantity.In the case of a reservation, this is the quantity reserved."
+        },
+        "ReservationItemIsFinallyIssued": {
+"type": "boolean",
+"default": "null",
+          "title": "Final Issue",
+          "description": "Final Issue for Reservation  \nIndicates that a reservation item is completed.  \nFurther goods movements in respect of this reservation item are not anticipated, although they are still possible.The indicator is set automatically for a goods movement when the total reserved quantity has been withdrawn or delivered. In the case of a partial delivery, you can manually set the indicator if no further goods movements are expected in respect of the relevant reservation item."
+        },
+        "ReservationItmIsMarkedForDeltn": {
+"type": "boolean",
+"default": "null",
+          "title": "Item deleted",
+          "description": "Item is deleted  \nSpecifies whether the item has already been deleted."
+        },
+        "ResvnItmRequiredQtyInEntryUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Qty in unit of entry",
+          "description": "Quantity in unit of entry  \nSpecifies the quantity to be moved in the unit of entry. The quantity is automatically converted to the stockkeeping unit (base unit of measure).  \nEnter the quantity to be moved in any unit of measure for the material.If the relevant unit of measure has not been defined in the material master record, the system uses the stockkeeping unit.If you do not enter a unit of measure, the system uses the following units of measure:order unit  in goods receipts against purchase ordersproduction unit  in goods receipts against production ordersunit of issue  in other goods movements"
+        },
+        "ResvnItmWithdrawnQtyInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Quantity withdrawn",
+          "description": "Specifies the quantity already withdrawn."
+        },
+        "ResvnItmWithdrawnAmtInCCCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Value Withdrawn",
+          "description": "Indicates the value of the quantity withdrawn from storage."
+        },
+        "GoodsRecipientName": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Goods recipient",
+          "description": "Specifies the recipient for whom the material or the service is destined."
+        },
+        "UnloadingPointName": {
+"type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Unloading Point",
+          "description": "Specifies the point at which the material is to be unloaded (for example, ramp 1)."
+        },
+        "ReservationItemText": {
+"type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Text",
+          "description": "Item Text  \nContains an explanatory text on the line item.  \nLine item texts can be used internally and externally. To be able to distinguish between these, you must begin texts for external use with \"*\". These texts can then be printed on all correspondence, dunning notices, payment advice notes, etc. The asterisk is removed when the text is printed.This function is only available in the FI component. It cannot be used in Materials Management."
+        }
+      },
+      "required": [
+        "Reservation",
+        "ReservationItem",
+        "RecordType"
+      ],
+      "title": "API View for Reservation Document Item (for create)"
+    },
+    "API_RESERVATION_DOCUMENT_SRV.A_ReservationDocumentItemType-update": {
+      "type": "object",
+      "properties": {
+        "Product": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material."
+        },
+        "RequirementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Requirement type",
+          "description": "Determines the way in which the system handles requirements planning.  \nYou can use the requirement type to control, for example, lot sizing, inventory management, and storage costs. When you create a sales order, for example, you can specify a requirement type for each schedule line. During sales order and delivery processing, the requirement type, in combination with the planning type controls whether the systemGenerates requirementsChecks availabilityThe schedule line category determines the requirements type. You cannot change the requirements type during sales order processing."
+        },
+        "MatlCompRequirementDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Requirements date",
+          "description": "Requirements date for the component  \nSpecifies the date on which the requested quantity of material is required."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "ManufacturingOrderOperation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Activity",
+          "description": "Operation/Activity Number  \nProduction Planning  \nDetermines in which order the operations of a sequence are carried out.Project SystemNumber that identifies an activity."
+        },
+        "GoodsMovementIsAllowed": {
+"type": "boolean",
+"default": "null",
+          "title": "Movement Allowed",
+          "description": "Goods Movement for Reservation Allowed  \nSpecifies that goods movements are allowed for the reservation item."
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location",
+          "description": "Number of the storage location in which the material is stored. A plant may contain one or more storage locations."
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch",
+          "description": "Batch Number  \nAssigns a material that is manufactured in batches or production lots to a specific batch."
+        },
+        "DebitCreditCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Debit/Credit ind",
+          "description": "Debit/Credit Indicator  \nShows on which side of the account (S = debit, H = credit) the transaction figures are updated."
+        },
+        "BaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit of Measure",
+          "description": "Unit of measure in which stocks of the material are managed. The system converts all the quantities you enter in other units of measure (alternative units of measure) to the base unit of measure.  \nYou define the base unit of measure and also alternative units of measure and their conversion factors in the material master record.Since all data is updated in the base unit of measure, your entry is particularly important for the conversion of alternative units of measure. A quantity in the alternative unit of measure can only be shown precisely if its value can be shown with the decimal places available. To ensure this, please note the following:The base unit of measure is the unit satisfying the highest necessary requirement for precision.The conversion of alternative units of measure to the base unit should result in simple decimal fractions (not, for example, 1/3 = 0.333...).Inventory ManagementIn Inventory Management, the base unit of measure is the same as the stockkeeping unit.ServicesServices have units of measure of their own, including the following:Service unitUnit of measure at the higher item level. The precise quantities of the individual services are each at the detailed service line level.BlanketUnit of measure at service line level for services to be provided once only, and for which no precise quantities can or are to be specified."
+        },
+        "GLAccount": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "G/L Account",
+          "description": "G/L Account Number  \nThe G/L account number identifies the G/L account in a chart of accounts."
+        },
+        "GoodsMovementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Goods Movement Type",
+          "description": "Goods Movement Type (Inventory Management)  \nSpecifies a key for the type of goods movement. Each goods movement (for example, purchase order to warehouse) is allocated to a movement type in the system."
+        },
+        "EntryUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Entry",
+          "description": "Unit of entry  \nSpecifies the unit of measure in which the goods movement or inventory count is entered.  \nEnter a unit of measure here only if it differs from the default unit of measure.There are the following default units of measure:the order unit for goods receipts with reference to purchase ordersthe production unit for goods receipts with reference to production ordersthe unit of issue for other goods movementsIf the default unit of measure has not been defined in the material master record, the system will suggest the stockkeeping unit."
+        },
+        "QuantityIsFixed": {
+"type": "boolean",
+"default": "null",
+          "title": "Quantity is fixed",
+          "description": "Determines that the quantity of an item is constant.  \nSet this indicator if the quantity in a relational system does not change.If an item of a BOM is marked as being fixed and the quantity of the finished product to be manufactured is changed, the quantity of this item does not change.If a \"materials to be provided\" item is not marked as being fixed, and the quantity of the subcontracted item is changed, the quantity of the material to be provided to the subcontractor changes proportionately."
+        },
+        "CompanyCodeCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Currency",
+          "description": "Currency Key  \nCurrency key for amounts in the system."
+        },
+        "IssuingOrReceivingPlant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving plant",
+          "description": "Receiving plant/issuing plant  \nIndicates the receiving or issuing plant.  \nThe receiving plant is the plant or internal organizational unit that is to receive the goods.The issuing plant is the plant that issues the goods.NoteThe value of the transfer posting is determined not by the plant entered here but by the plant specified in the Plant field."
+        },
+        "IssuingOrReceivingStorageLoc": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Receiving stor. loc.",
+          "description": "Receiving/issuing storage location  \nIndicates the receiving or the issuing storage location.  \nThe receiving storage location is the storage location that is to receive the goods.The issuing storage location is the storage location that issues the goods."
+        },
+        "PurchasingDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Purchasing Document",
+          "description": "Purchasing Document Number  \nAlphanumeric key uniquely identifying the document."
+        },
+        "PurchasingDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Item",
+          "description": "Item Number of Purchasing Document  \nSpecifies the number that uniquely identifies an item in ."
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Account Number of Supplier  \nSpecifies an alphanumeric key that uniquely identifies the supplier in the SAP system."
+        },
+        "ResvnItmRequiredQtyInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Requirement Quantity",
+          "description": "Specifies the quantity in the base unit of measure, which can have various meanings, depending on the situation:  \nIn the case of a planned order or a production order, this is the quantity of the material component required to manufacture the planned order quantity.In the case of a reservation, this is the quantity reserved."
+        },
+        "ReservationItemIsFinallyIssued": {
+"type": "boolean",
+"default": "null",
+          "title": "Final Issue",
+          "description": "Final Issue for Reservation  \nIndicates that a reservation item is completed.  \nFurther goods movements in respect of this reservation item are not anticipated, although they are still possible.The indicator is set automatically for a goods movement when the total reserved quantity has been withdrawn or delivered. In the case of a partial delivery, you can manually set the indicator if no further goods movements are expected in respect of the relevant reservation item."
+        },
+        "ReservationItmIsMarkedForDeltn": {
+"type": "boolean",
+"default": "null",
+          "title": "Item deleted",
+          "description": "Item is deleted  \nSpecifies whether the item has already been deleted."
+        },
+        "ResvnItmRequiredQtyInEntryUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Qty in unit of entry",
+          "description": "Quantity in unit of entry  \nSpecifies the quantity to be moved in the unit of entry. The quantity is automatically converted to the stockkeeping unit (base unit of measure).  \nEnter the quantity to be moved in any unit of measure for the material.If the relevant unit of measure has not been defined in the material master record, the system uses the stockkeeping unit.If you do not enter a unit of measure, the system uses the following units of measure:order unit  in goods receipts against purchase ordersproduction unit  in goods receipts against production ordersunit of issue  in other goods movements"
+        },
+        "ResvnItmWithdrawnQtyInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Quantity withdrawn",
+          "description": "Specifies the quantity already withdrawn."
+        },
+        "ResvnItmWithdrawnAmtInCCCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Value Withdrawn",
+          "description": "Indicates the value of the quantity withdrawn from storage."
+        },
+        "GoodsRecipientName": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Goods recipient",
+          "description": "Specifies the recipient for whom the material or the service is destined."
+        },
+        "UnloadingPointName": {
+"type": "string",
+"default": "null",
+          "maxLength": 25,
+          "example": "string",
+          "title": "Unloading Point",
+          "description": "Specifies the point at which the material is to be unloaded (for example, ramp 1)."
+        },
+        "ReservationItemText": {
+"type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Text",
+          "description": "Item Text  \nContains an explanatory text on the line item.  \nLine item texts can be used internally and externally. To be able to distinguish between these, you must begin texts for external use with \"*\". These texts can then be printed on all correspondence, dunning notices, payment advice notes, etc. The asterisk is removed when the text is printed.This function is only available in the FI component. It cannot be used in Materials Management."
+        }
+      },
+      "title": "API View for Reservation Document Item (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

@@ -1,0 +1,376 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Workforce Person SkillTag – Create, Read and Delete",
+    "version": "1 ",
+    "description": "This service enables you to  create, read or delete the  skill tag information of a person in S/4HANA system.\n"
+  },
+  "externalDocs": {
+    "url": "https://help.sap.com/viewer/7e48134517314f97b76156f53a4a94d2/latest/en-US/020fc037c7c24657912e88a055187f5a.html"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "This service enables you to  create, read or delete the skill tag information of a person in S/4HANA system",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "External HR Workforce Integration (SAP_COM_0301)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Employee Integration - SAP S/4HANA Enablement (1FD)](https://rapid.sap.com/bp/#/scopeitems/1FD \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/shcm/API_MANAGE_SKILLTAGS_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/shcm/API_MANAGE_SKILLTAGS_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "SkillTagSet"
+    }
+  ],
+  "paths": {
+    "/SkillTagSet": {
+      "get": {
+        "summary": "Get entities from SkillTagSet",
+        "tags": [
+          "SkillTagSet"
+        ],
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "PersonExternalId",
+                "Tag"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of SkillTag",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/SHCM.API_MANAGE_SKILLTAGS_SRV.SkillTag"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to SkillTagSet",
+        "tags": [
+          "SkillTagSet"
+        ],
+        "parameters": [
+          {
+            "name": "SkillTag",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/SHCM.API_MANAGE_SKILLTAGS_SRV.SkillTag-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "Created SkillTag",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/SHCM.API_MANAGE_SKILLTAGS_SRV.SkillTag"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/SkillTagSet('{PersonExternalId}')": {
+      "get": {
+        "summary": "Get entity from SkillTagSet by key",
+        "tags": [
+          "SkillTagSet"
+        ],
+        "parameters": [
+          {
+            "name": "PersonExternalId",
+            "in": "path",
+            "required": true,
+            "description": "Model S: Employee Ext ID",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "PersonExternalId",
+                "Tag"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "SkillTag",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/SHCM.API_MANAGE_SKILLTAGS_SRV.SkillTag"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete entity from SkillTagSet",
+        "tags": [
+          "SkillTagSet"
+        ],
+        "parameters": [
+          {
+            "name": "PersonExternalId",
+            "in": "path",
+            "required": true,
+            "description": "Model S: Employee Ext ID",
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SHCM.API_MANAGE_SKILLTAGS_SRV.SkillTag": {
+      "type": "object",
+      "properties": {
+        "PersonExternalId": {
+          "type": "string",
+          "maxLength": 60,
+          "title": "Employee ID",
+          "description": "Model S: Employee Ext ID"
+        },
+        "Tag": {
+          "type": "string",
+          "title": "Tag",
+          "description": "Tag"
+        }
+      },
+      "title": "SkillTag"
+    },
+    "SHCM.API_MANAGE_SKILLTAGS_SRV.SkillTag-create": {
+      "type": "object",
+      "properties": {
+        "PersonExternalId": {
+          "type": "string",
+          "maxLength": 60,
+          "title": "Employee ID",
+          "description": "Model S: Employee Ext ID"
+        },
+        "Tag": {
+          "type": "string",
+          "title": "Tag",
+          "description": "Tag"
+        }
+      },
+      "required": [
+        "PersonExternalId"
+      ],
+      "title": "SkillTag (for create)"
+    },
+    "SHCM.API_MANAGE_SKILLTAGS_SRV.SkillTag-update": {
+      "type": "object",
+      "title": "SkillTag (for update)"
+    },
+    "odata.error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/odata.error.main"
+        }
+      }
+    },
+    "odata.error.main": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "$ref": "#/definitions/odata.error.message"
+        },
+        "innererror": {
+          "type": "object",
+          "description": "The structure of this object is service-specific"
+        }
+      }
+    },
+    "odata.error.message": {
+      "type": "object",
+      "required": [
+        "lang",
+        "value"
+      ],
+      "properties": {
+        "lang": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [OData Count](http://www.odata.org/documentation/odata-version-2-0/uri-conventions/#InlinecountSystemQueryOption)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/odata.error"
+      }
+    }
+  }
+}

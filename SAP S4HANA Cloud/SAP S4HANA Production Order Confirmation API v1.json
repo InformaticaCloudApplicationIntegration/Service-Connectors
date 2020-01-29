@@ -1,0 +1,4211 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Production Order Confirmation",
+    "version": "1 ",
+    "description": " You can create time  ticket confirmations and confirmations on  order level, read them, and cancel the  confirmations on time ticket or order  level."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/e7/7b762e243b4045ad1f1f048f6aab87/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Create, read, and cancel confirmations for production orders using this synchronous inbound service",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Production Planning Integration (SAP_COM_0104)",
+          "format": "plain"
+        },
+        {
+          "text": "Manufacturing Execution - Order and Confirmation Integration (SAP_COM_0522)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[ Make-to-Stock Production - Discrete Manufacturing (BJ5)](https://rapid.sap.com/bp/#/scopeitems/BJ5 \" Link To BP \")",
+          "format": "markdown"
+        },
+        {
+          "text": "[Make-to-Stock - Process Manufacturing Based on Process Order (BJ8)](https://rapid.sap.com/bp/#/scopeitems/BJ8 \" Link To BP \")",
+          "format": "markdown"
+        },
+        {
+          "text": "[Material Requirements Planning (J44)](https://rapid.sap.com/bp/#/scopeitems/J44 \" Link To BP \")",
+          "format": "markdown"
+        },
+        {
+          "text": "[Third-Party Shop Floor Execution - Process Industry (3W3)](https://rapid.sap.com/bp/#/scopeitems/3W3 \" Link To BP \")",
+          "format": "markdown"
+        },
+        {
+          "text": "[Third-Party Shop Floor Execution - Discrete Industry (3W4)](https://rapid.sap.com/bp/#/scopeitems/3W4 \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Business Object",
+      "values": [
+        {
+          "text": "ProductionOrder",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_PROD_ORDER_CONFIRMATION_2_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_PROD_ORDER_CONFIRMATION_2_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "ProdnOrdConfMatlDocItm"
+    },
+    {
+      "name": "ProdnOrdConf2"
+    }
+  ],
+  "paths": {
+    "/ProdnOrdConfMatlDocItm": {
+      "get": {
+        "summary": "Get entities from ProdnOrdConfMatlDocItm",
+        "tags": [
+          "ProdnOrdConfMatlDocItm"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ConfirmationGroup",
+                "ConfirmationGroup desc",
+                "ConfirmationCount",
+                "ConfirmationCount desc",
+                "MaterialDocument",
+                "MaterialDocument desc",
+                "MaterialDocumentItem",
+                "MaterialDocumentItem desc",
+                "MaterialDocumentYear",
+                "MaterialDocumentYear desc",
+                "OrderType",
+                "OrderType desc",
+                "OrderID",
+                "OrderID desc",
+                "OrderItem",
+                "OrderItem desc",
+                "Material",
+                "Material desc",
+                "Plant",
+                "Plant desc",
+                "Reservation",
+                "Reservation desc",
+                "ReservationItem",
+                "ReservationItem desc",
+                "StorageLocation",
+                "StorageLocation desc",
+                "Batch",
+                "Batch desc",
+                "InventoryValuationType",
+                "InventoryValuationType desc",
+                "GoodsMovementType",
+                "GoodsMovementType desc",
+                "GoodsMovementRefDocType",
+                "GoodsMovementRefDocType desc",
+                "InventoryUsabilityCode",
+                "InventoryUsabilityCode desc",
+                "InventorySpecialStockType",
+                "InventorySpecialStockType desc",
+                "SalesOrder",
+                "SalesOrder desc",
+                "SalesOrderItem",
+                "SalesOrderItem desc",
+                "WBSElementExternalID",
+                "WBSElementExternalID desc",
+                "Supplier",
+                "Supplier desc",
+                "Customer",
+                "Customer desc",
+                "ReservationIsFinallyIssued",
+                "ReservationIsFinallyIssued desc",
+                "IsCompletelyDelivered",
+                "IsCompletelyDelivered desc",
+                "ShelfLifeExpirationDate",
+                "ShelfLifeExpirationDate desc",
+                "ManufactureDate",
+                "ManufactureDate desc",
+                "StorageType",
+                "StorageType desc",
+                "StorageBin",
+                "StorageBin desc",
+                "MaterialDocumentItemText",
+                "MaterialDocumentItemText desc",
+                "EntryUnit",
+                "EntryUnit desc",
+                "QuantityInEntryUnit",
+                "QuantityInEntryUnit desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ConfirmationGroup",
+                "ConfirmationCount",
+                "MaterialDocument",
+                "MaterialDocumentItem",
+                "MaterialDocumentYear",
+                "OrderType",
+                "OrderID",
+                "OrderItem",
+                "Material",
+                "Plant",
+                "Reservation",
+                "ReservationItem",
+                "StorageLocation",
+                "Batch",
+                "InventoryValuationType",
+                "GoodsMovementType",
+                "GoodsMovementRefDocType",
+                "InventoryUsabilityCode",
+                "InventorySpecialStockType",
+                "SalesOrder",
+                "SalesOrderItem",
+                "WBSElementExternalID",
+                "Supplier",
+                "Customer",
+                "ReservationIsFinallyIssued",
+                "IsCompletelyDelivered",
+                "ShelfLifeExpirationDate",
+                "ManufactureDate",
+                "StorageType",
+                "StorageBin",
+                "MaterialDocumentItemText",
+                "EntryUnit",
+                "QuantityInEntryUnit"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of ProdnOrdConfMatlDocItmType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConfMatlDocItmType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to ProdnOrdConfMatlDocItm",
+        "tags": [
+          "ProdnOrdConfMatlDocItm"
+        ],
+        "parameters": [
+          {
+            "name": "ProdnOrdConfMatlDocItmType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConfMatlDocItmType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "ProdnOrdConfMatlDocItmType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConfMatlDocItmType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/ProdnOrdConfMatlDocItm(ConfirmationGroup='{ConfirmationGroup}',ConfirmationCount='{ConfirmationCount}',MaterialDocument='{MaterialDocument}',MaterialDocumentItem='{MaterialDocumentItem}',MaterialDocumentYear='{MaterialDocumentYear}')": {
+      "parameters": [
+        {
+          "name": "ConfirmationGroup",
+          "in": "path",
+          "required": true,
+          "description": "Collective ID of Order Confirmations",
+          "type": "string"
+        },
+        {
+          "name": "ConfirmationCount",
+          "in": "path",
+          "required": true,
+          "description": "Identifier of Single Order Confirmation",
+          "type": "string"
+        },
+        {
+          "name": "MaterialDocument",
+          "in": "path",
+          "required": true,
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed.",
+          "type": "string"
+        },
+        {
+          "name": "MaterialDocumentItem",
+          "in": "path",
+          "required": true,
+          "description": "Item in Material Document  \nSpecifies the number that uniquely identifies an item in .",
+          "type": "string"
+        },
+        {
+          "name": "MaterialDocumentYear",
+          "in": "path",
+          "required": true,
+          "description": "Material Document Year  \nCalendar year in which the material document was posted.  \nIn conjunction with the document number, the material document year constitutes the key via which a material document is accessed.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from ProdnOrdConfMatlDocItm by key",
+        "tags": [
+          "ProdnOrdConfMatlDocItm"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ConfirmationGroup",
+                "ConfirmationCount",
+                "MaterialDocument",
+                "MaterialDocumentItem",
+                "MaterialDocumentYear",
+                "OrderType",
+                "OrderID",
+                "OrderItem",
+                "Material",
+                "Plant",
+                "Reservation",
+                "ReservationItem",
+                "StorageLocation",
+                "Batch",
+                "InventoryValuationType",
+                "GoodsMovementType",
+                "GoodsMovementRefDocType",
+                "InventoryUsabilityCode",
+                "InventorySpecialStockType",
+                "SalesOrder",
+                "SalesOrderItem",
+                "WBSElementExternalID",
+                "Supplier",
+                "Customer",
+                "ReservationIsFinallyIssued",
+                "IsCompletelyDelivered",
+                "ShelfLifeExpirationDate",
+                "ManufactureDate",
+                "StorageType",
+                "StorageBin",
+                "MaterialDocumentItemText",
+                "EntryUnit",
+                "QuantityInEntryUnit"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "ProdnOrdConfMatlDocItmType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConfMatlDocItmType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/ProdnOrdConf2": {
+      "get": {
+        "summary": "Get entities from ProdnOrdConf2",
+        "tags": [
+          "ProdnOrdConf2"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ConfirmationGroup",
+                "ConfirmationGroup desc",
+                "ConfirmationCount",
+                "ConfirmationCount desc",
+                "OrderID",
+                "OrderID desc",
+                "Sequence",
+                "Sequence desc",
+                "OrderOperation",
+                "OrderOperation desc",
+                "OrderSuboperation",
+                "OrderSuboperation desc",
+                "OrderType",
+                "OrderType desc",
+                "OrderOperationInternalID",
+                "OrderOperationInternalID desc",
+                "ConfirmationText",
+                "ConfirmationText desc",
+                "Language",
+                "Language desc",
+                "Material",
+                "Material desc",
+                "OrderPlannedTotalQty",
+                "OrderPlannedTotalQty desc",
+                "ProductionUnit",
+                "ProductionUnit desc",
+                "FinalConfirmationType",
+                "FinalConfirmationType desc",
+                "IsFinalConfirmation",
+                "IsFinalConfirmation desc",
+                "OpenReservationsIsCleared",
+                "OpenReservationsIsCleared desc",
+                "IsReversed",
+                "IsReversed desc",
+                "IsReversal",
+                "IsReversal desc",
+                "APIConfHasNoGoodsMovements",
+                "APIConfHasNoGoodsMovements desc",
+                "ConfirmationEntryDate",
+                "ConfirmationEntryDate desc",
+                "ConfirmationEntryTime",
+                "ConfirmationEntryTime desc",
+                "EnteredByUser",
+                "EnteredByUser desc",
+                "LastChangeDate",
+                "LastChangeDate desc",
+                "LastChangedByUser",
+                "LastChangedByUser desc",
+                "ConfirmationExternalEntryDate",
+                "ConfirmationExternalEntryDate desc",
+                "ConfirmationExternalEntryTime",
+                "ConfirmationExternalEntryTime desc",
+                "EnteredByExternalUser",
+                "EnteredByExternalUser desc",
+                "ExternalSystemConfirmation",
+                "ExternalSystemConfirmation desc",
+                "Plant",
+                "Plant desc",
+                "WorkCenterTypeCode",
+                "WorkCenterTypeCode desc",
+                "WorkCenter",
+                "WorkCenter desc",
+                "CapacityRequirementSplit",
+                "CapacityRequirementSplit desc",
+                "Personnel",
+                "Personnel desc",
+                "TimeRecording",
+                "TimeRecording desc",
+                "EmployeeWageType",
+                "EmployeeWageType desc",
+                "EmployeeWageGroup",
+                "EmployeeWageGroup desc",
+                "BreakDurationUnit",
+                "BreakDurationUnit desc",
+                "BreakDurationUnitISOCode",
+                "BreakDurationUnitISOCode desc",
+                "ConfirmedBreakDuration",
+                "ConfirmedBreakDuration desc",
+                "EmployeeSuitability",
+                "EmployeeSuitability desc",
+                "NumberOfEmployees",
+                "NumberOfEmployees desc",
+                "PostingDate",
+                "PostingDate desc",
+                "ConfirmedExecutionStartDate",
+                "ConfirmedExecutionStartDate desc",
+                "ConfirmedExecutionStartTime",
+                "ConfirmedExecutionStartTime desc",
+                "ConfirmedSetupEndDate",
+                "ConfirmedSetupEndDate desc",
+                "ConfirmedSetupEndTime",
+                "ConfirmedSetupEndTime desc",
+                "ConfirmedProcessingStartDate",
+                "ConfirmedProcessingStartDate desc",
+                "ConfirmedProcessingStartTime",
+                "ConfirmedProcessingStartTime desc",
+                "ConfirmedProcessingEndDate",
+                "ConfirmedProcessingEndDate desc",
+                "ConfirmedProcessingEndTime",
+                "ConfirmedProcessingEndTime desc",
+                "ConfirmedTeardownStartDate",
+                "ConfirmedTeardownStartDate desc",
+                "ConfirmedTeardownStartTime",
+                "ConfirmedTeardownStartTime desc",
+                "ConfirmedExecutionEndDate",
+                "ConfirmedExecutionEndDate desc",
+                "ConfirmedExecutionEndTime",
+                "ConfirmedExecutionEndTime desc",
+                "ConfirmationUnit",
+                "ConfirmationUnit desc",
+                "ConfirmationUnitISOCode",
+                "ConfirmationUnitISOCode desc",
+                "ConfirmationYieldQuantity",
+                "ConfirmationYieldQuantity desc",
+                "ConfirmationScrapQuantity",
+                "ConfirmationScrapQuantity desc",
+                "ConfirmationReworkQuantity",
+                "ConfirmationReworkQuantity desc",
+                "VarianceReasonCode",
+                "VarianceReasonCode desc",
+                "OpWorkQuantityUnit1",
+                "OpWorkQuantityUnit1 desc",
+                "WorkQuantityUnit1ISOCode",
+                "WorkQuantityUnit1ISOCode desc",
+                "OpConfirmedWorkQuantity1",
+                "OpConfirmedWorkQuantity1 desc",
+                "NoFurtherOpWorkQuantity1IsExpd",
+                "NoFurtherOpWorkQuantity1IsExpd desc",
+                "OpWorkQuantityUnit2",
+                "OpWorkQuantityUnit2 desc",
+                "WorkQuantityUnit2ISOCode",
+                "WorkQuantityUnit2ISOCode desc",
+                "OpConfirmedWorkQuantity2",
+                "OpConfirmedWorkQuantity2 desc",
+                "NoFurtherOpWorkQuantity2IsExpd",
+                "NoFurtherOpWorkQuantity2IsExpd desc",
+                "OpWorkQuantityUnit3",
+                "OpWorkQuantityUnit3 desc",
+                "WorkQuantityUnit3ISOCode",
+                "WorkQuantityUnit3ISOCode desc",
+                "OpConfirmedWorkQuantity3",
+                "OpConfirmedWorkQuantity3 desc",
+                "NoFurtherOpWorkQuantity3IsExpd",
+                "NoFurtherOpWorkQuantity3IsExpd desc",
+                "OpWorkQuantityUnit4",
+                "OpWorkQuantityUnit4 desc",
+                "WorkQuantityUnit4ISOCode",
+                "WorkQuantityUnit4ISOCode desc",
+                "OpConfirmedWorkQuantity4",
+                "OpConfirmedWorkQuantity4 desc",
+                "NoFurtherOpWorkQuantity4IsExpd",
+                "NoFurtherOpWorkQuantity4IsExpd desc",
+                "OpWorkQuantityUnit5",
+                "OpWorkQuantityUnit5 desc",
+                "WorkQuantityUnit5ISOCode",
+                "WorkQuantityUnit5ISOCode desc",
+                "OpConfirmedWorkQuantity5",
+                "OpConfirmedWorkQuantity5 desc",
+                "NoFurtherOpWorkQuantity5IsExpd",
+                "NoFurtherOpWorkQuantity5IsExpd desc",
+                "OpWorkQuantityUnit6",
+                "OpWorkQuantityUnit6 desc",
+                "WorkQuantityUnit6ISOCode",
+                "WorkQuantityUnit6ISOCode desc",
+                "OpConfirmedWorkQuantity6",
+                "OpConfirmedWorkQuantity6 desc",
+                "NoFurtherOpWorkQuantity6IsExpd",
+                "NoFurtherOpWorkQuantity6IsExpd desc",
+                "BusinessProcessEntryUnit",
+                "BusinessProcessEntryUnit desc",
+                "BusProcessEntrUnitISOCode",
+                "BusProcessEntrUnitISOCode desc",
+                "BusinessProcessConfirmedQty",
+                "BusinessProcessConfirmedQty desc",
+                "NoFurtherBusinessProcQtyIsExpd",
+                "NoFurtherBusinessProcQtyIsExpd desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ConfirmationGroup",
+                "ConfirmationCount",
+                "OrderID",
+                "Sequence",
+                "OrderOperation",
+                "OrderSuboperation",
+                "OrderType",
+                "OrderOperationInternalID",
+                "ConfirmationText",
+                "Language",
+                "Material",
+                "OrderPlannedTotalQty",
+                "ProductionUnit",
+                "FinalConfirmationType",
+                "IsFinalConfirmation",
+                "OpenReservationsIsCleared",
+                "IsReversed",
+                "IsReversal",
+                "APIConfHasNoGoodsMovements",
+                "ConfirmationEntryDate",
+                "ConfirmationEntryTime",
+                "EnteredByUser",
+                "LastChangeDate",
+                "LastChangedByUser",
+                "ConfirmationExternalEntryDate",
+                "ConfirmationExternalEntryTime",
+                "EnteredByExternalUser",
+                "ExternalSystemConfirmation",
+                "Plant",
+                "WorkCenterTypeCode",
+                "WorkCenter",
+                "CapacityRequirementSplit",
+                "Personnel",
+                "TimeRecording",
+                "EmployeeWageType",
+                "EmployeeWageGroup",
+                "BreakDurationUnit",
+                "BreakDurationUnitISOCode",
+                "ConfirmedBreakDuration",
+                "EmployeeSuitability",
+                "NumberOfEmployees",
+                "PostingDate",
+                "ConfirmedExecutionStartDate",
+                "ConfirmedExecutionStartTime",
+                "ConfirmedSetupEndDate",
+                "ConfirmedSetupEndTime",
+                "ConfirmedProcessingStartDate",
+                "ConfirmedProcessingStartTime",
+                "ConfirmedProcessingEndDate",
+                "ConfirmedProcessingEndTime",
+                "ConfirmedTeardownStartDate",
+                "ConfirmedTeardownStartTime",
+                "ConfirmedExecutionEndDate",
+                "ConfirmedExecutionEndTime",
+                "ConfirmationUnit",
+                "ConfirmationUnitISOCode",
+                "ConfirmationYieldQuantity",
+                "ConfirmationScrapQuantity",
+                "ConfirmationReworkQuantity",
+                "VarianceReasonCode",
+                "OpWorkQuantityUnit1",
+                "WorkQuantityUnit1ISOCode",
+                "OpConfirmedWorkQuantity1",
+                "NoFurtherOpWorkQuantity1IsExpd",
+                "OpWorkQuantityUnit2",
+                "WorkQuantityUnit2ISOCode",
+                "OpConfirmedWorkQuantity2",
+                "NoFurtherOpWorkQuantity2IsExpd",
+                "OpWorkQuantityUnit3",
+                "WorkQuantityUnit3ISOCode",
+                "OpConfirmedWorkQuantity3",
+                "NoFurtherOpWorkQuantity3IsExpd",
+                "OpWorkQuantityUnit4",
+                "WorkQuantityUnit4ISOCode",
+                "OpConfirmedWorkQuantity4",
+                "NoFurtherOpWorkQuantity4IsExpd",
+                "OpWorkQuantityUnit5",
+                "WorkQuantityUnit5ISOCode",
+                "OpConfirmedWorkQuantity5",
+                "NoFurtherOpWorkQuantity5IsExpd",
+                "OpWorkQuantityUnit6",
+                "WorkQuantityUnit6ISOCode",
+                "OpConfirmedWorkQuantity6",
+                "NoFurtherOpWorkQuantity6IsExpd",
+                "BusinessProcessEntryUnit",
+                "BusProcessEntrUnitISOCode",
+                "BusinessProcessConfirmedQty",
+                "NoFurtherBusinessProcQtyIsExpd",
+                "to_ProdnOrdConfMatlDocItm"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdnOrdConfMatlDocItm"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of ProdnOrdConf2Type",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConf2Type"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to ProdnOrdConf2",
+        "tags": [
+          "ProdnOrdConf2"
+        ],
+        "parameters": [
+          {
+            "name": "ProdnOrdConf2Type",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConf2Type-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "ProdnOrdConf2Type",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConf2Type"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/ProdnOrdConf2(ConfirmationGroup='{ConfirmationGroup}',ConfirmationCount='{ConfirmationCount}')": {
+      "parameters": [
+        {
+          "name": "ConfirmationGroup",
+          "in": "path",
+          "required": true,
+          "description": "Collective ID of Order Confirmations",
+          "type": "string"
+        },
+        {
+          "name": "ConfirmationCount",
+          "in": "path",
+          "required": true,
+          "description": "Identifier of Single Order Confirmation",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from ProdnOrdConf2 by key",
+        "tags": [
+          "ProdnOrdConf2"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ConfirmationGroup",
+                "ConfirmationCount",
+                "OrderID",
+                "Sequence",
+                "OrderOperation",
+                "OrderSuboperation",
+                "OrderType",
+                "OrderOperationInternalID",
+                "ConfirmationText",
+                "Language",
+                "Material",
+                "OrderPlannedTotalQty",
+                "ProductionUnit",
+                "FinalConfirmationType",
+                "IsFinalConfirmation",
+                "OpenReservationsIsCleared",
+                "IsReversed",
+                "IsReversal",
+                "APIConfHasNoGoodsMovements",
+                "ConfirmationEntryDate",
+                "ConfirmationEntryTime",
+                "EnteredByUser",
+                "LastChangeDate",
+                "LastChangedByUser",
+                "ConfirmationExternalEntryDate",
+                "ConfirmationExternalEntryTime",
+                "EnteredByExternalUser",
+                "ExternalSystemConfirmation",
+                "Plant",
+                "WorkCenterTypeCode",
+                "WorkCenter",
+                "CapacityRequirementSplit",
+                "Personnel",
+                "TimeRecording",
+                "EmployeeWageType",
+                "EmployeeWageGroup",
+                "BreakDurationUnit",
+                "BreakDurationUnitISOCode",
+                "ConfirmedBreakDuration",
+                "EmployeeSuitability",
+                "NumberOfEmployees",
+                "PostingDate",
+                "ConfirmedExecutionStartDate",
+                "ConfirmedExecutionStartTime",
+                "ConfirmedSetupEndDate",
+                "ConfirmedSetupEndTime",
+                "ConfirmedProcessingStartDate",
+                "ConfirmedProcessingStartTime",
+                "ConfirmedProcessingEndDate",
+                "ConfirmedProcessingEndTime",
+                "ConfirmedTeardownStartDate",
+                "ConfirmedTeardownStartTime",
+                "ConfirmedExecutionEndDate",
+                "ConfirmedExecutionEndTime",
+                "ConfirmationUnit",
+                "ConfirmationUnitISOCode",
+                "ConfirmationYieldQuantity",
+                "ConfirmationScrapQuantity",
+                "ConfirmationReworkQuantity",
+                "VarianceReasonCode",
+                "OpWorkQuantityUnit1",
+                "WorkQuantityUnit1ISOCode",
+                "OpConfirmedWorkQuantity1",
+                "NoFurtherOpWorkQuantity1IsExpd",
+                "OpWorkQuantityUnit2",
+                "WorkQuantityUnit2ISOCode",
+                "OpConfirmedWorkQuantity2",
+                "NoFurtherOpWorkQuantity2IsExpd",
+                "OpWorkQuantityUnit3",
+                "WorkQuantityUnit3ISOCode",
+                "OpConfirmedWorkQuantity3",
+                "NoFurtherOpWorkQuantity3IsExpd",
+                "OpWorkQuantityUnit4",
+                "WorkQuantityUnit4ISOCode",
+                "OpConfirmedWorkQuantity4",
+                "NoFurtherOpWorkQuantity4IsExpd",
+                "OpWorkQuantityUnit5",
+                "WorkQuantityUnit5ISOCode",
+                "OpConfirmedWorkQuantity5",
+                "NoFurtherOpWorkQuantity5IsExpd",
+                "OpWorkQuantityUnit6",
+                "WorkQuantityUnit6ISOCode",
+                "OpConfirmedWorkQuantity6",
+                "NoFurtherOpWorkQuantity6IsExpd",
+                "BusinessProcessEntryUnit",
+                "BusProcessEntrUnitISOCode",
+                "BusinessProcessConfirmedQty",
+                "NoFurtherBusinessProcQtyIsExpd",
+                "to_ProdnOrdConfMatlDocItm"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_ProdnOrdConfMatlDocItm"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "ProdnOrdConf2Type",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConf2Type"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/ProdnOrdConf2(ConfirmationGroup='{ConfirmationGroup}',ConfirmationCount='{ConfirmationCount}')/to_ProdnOrdConfMatlDocItm": {
+      "parameters": [
+        {
+          "name": "ConfirmationGroup",
+          "in": "path",
+          "required": true,
+          "description": "Collective ID of Order Confirmations",
+          "type": "string"
+        },
+        {
+          "name": "ConfirmationCount",
+          "in": "path",
+          "required": true,
+          "description": "Identifier of Single Order Confirmation",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_ProdnOrdConfMatlDocItm",
+        "tags": [
+          "ProdnOrdConf2",
+          "ProdnOrdConfMatlDocItm"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ConfirmationGroup",
+                "ConfirmationGroup desc",
+                "ConfirmationCount",
+                "ConfirmationCount desc",
+                "MaterialDocument",
+                "MaterialDocument desc",
+                "MaterialDocumentItem",
+                "MaterialDocumentItem desc",
+                "MaterialDocumentYear",
+                "MaterialDocumentYear desc",
+                "OrderType",
+                "OrderType desc",
+                "OrderID",
+                "OrderID desc",
+                "OrderItem",
+                "OrderItem desc",
+                "Material",
+                "Material desc",
+                "Plant",
+                "Plant desc",
+                "Reservation",
+                "Reservation desc",
+                "ReservationItem",
+                "ReservationItem desc",
+                "StorageLocation",
+                "StorageLocation desc",
+                "Batch",
+                "Batch desc",
+                "InventoryValuationType",
+                "InventoryValuationType desc",
+                "GoodsMovementType",
+                "GoodsMovementType desc",
+                "GoodsMovementRefDocType",
+                "GoodsMovementRefDocType desc",
+                "InventoryUsabilityCode",
+                "InventoryUsabilityCode desc",
+                "InventorySpecialStockType",
+                "InventorySpecialStockType desc",
+                "SalesOrder",
+                "SalesOrder desc",
+                "SalesOrderItem",
+                "SalesOrderItem desc",
+                "WBSElementExternalID",
+                "WBSElementExternalID desc",
+                "Supplier",
+                "Supplier desc",
+                "Customer",
+                "Customer desc",
+                "ReservationIsFinallyIssued",
+                "ReservationIsFinallyIssued desc",
+                "IsCompletelyDelivered",
+                "IsCompletelyDelivered desc",
+                "ShelfLifeExpirationDate",
+                "ShelfLifeExpirationDate desc",
+                "ManufactureDate",
+                "ManufactureDate desc",
+                "StorageType",
+                "StorageType desc",
+                "StorageBin",
+                "StorageBin desc",
+                "MaterialDocumentItemText",
+                "MaterialDocumentItemText desc",
+                "EntryUnit",
+                "EntryUnit desc",
+                "QuantityInEntryUnit",
+                "QuantityInEntryUnit desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ConfirmationGroup",
+                "ConfirmationCount",
+                "MaterialDocument",
+                "MaterialDocumentItem",
+                "MaterialDocumentYear",
+                "OrderType",
+                "OrderID",
+                "OrderItem",
+                "Material",
+                "Plant",
+                "Reservation",
+                "ReservationItem",
+                "StorageLocation",
+                "Batch",
+                "InventoryValuationType",
+                "GoodsMovementType",
+                "GoodsMovementRefDocType",
+                "InventoryUsabilityCode",
+                "InventorySpecialStockType",
+                "SalesOrder",
+                "SalesOrderItem",
+                "WBSElementExternalID",
+                "Supplier",
+                "Customer",
+                "ReservationIsFinallyIssued",
+                "IsCompletelyDelivered",
+                "ShelfLifeExpirationDate",
+                "ManufactureDate",
+                "StorageType",
+                "StorageBin",
+                "MaterialDocumentItemText",
+                "EntryUnit",
+                "QuantityInEntryUnit"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of ProdnOrdConfMatlDocItmType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConfMatlDocItmType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to related to_ProdnOrdConfMatlDocItm",
+        "tags": [
+          "ProdnOrdConf2",
+          "ProdnOrdConfMatlDocItm"
+        ],
+        "parameters": [
+          {
+            "name": "ProdnOrdConfMatlDocItmType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConfMatlDocItmType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "ProdnOrdConfMatlDocItmType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConfMatlDocItmType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/CancelProdnOrdConf": {
+      "post": {
+        "summary": "Invoke action CancelProdnOrdConf",
+        "tags": [
+          "ProdnOrdConf2"
+        ],
+        "parameters": [
+          {
+            "name": "ConfirmationGroup",
+            "in": "query",
+            "required": true,
+            "description": "Confirmation Group  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "ConfirmationCount",
+            "in": "query",
+            "required": true,
+            "description": "Order Confirmation  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 10,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PostingDate",
+            "in": "query",
+            "description": "Posting Date  \n(Value needs to be enclosed in single quotes and prefixed with `datetime`, e.g. `datetime'2017-12-31T00:00'`)",
+            "type": "string",
+            "pattern": "^datetime'[0-9]{4}-[0-9]{2}-[0-9]{2}T00:00'$"
+          },
+          {
+            "name": "ConfirmationText",
+            "in": "query",
+            "description": "Confirmation Text  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 42,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "ExternalSystemConfirmation",
+            "in": "query",
+            "description": "External Key  \n(Value needs to be enclosed in single quotes and prefixed with `guid`, e.g. `guid'01234567-0123-0123-0123-0123456789ab'`)",
+            "type": "string",
+            "pattern": "^guid'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "ProdnOrdConf2Type",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConf2Type"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET ProdnOrdConfMatlDocItm HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConfMatlDocItmType": {
+      "type": "object",
+      "properties": {
+        "ConfirmationGroup": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Confirmation Group",
+          "description": "Collective ID of Order Confirmations"
+        },
+        "ConfirmationCount": {
+          "type": "string",
+          "maxLength": 8,
+          "title": "Order Confirmation",
+          "description": "Identifier of Single Order Confirmation"
+        },
+        "MaterialDocument": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Material Document",
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed."
+        },
+        "MaterialDocumentItem": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Material Doc.Item",
+          "description": "Item in Material Document  \nSpecifies the number that uniquely identifies an item in ."
+        },
+        "MaterialDocumentYear": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Material Doc. Year",
+          "description": "Material Document Year  \nCalendar year in which the material document was posted.  \nIn conjunction with the document number, the material document year constitutes the key via which a material document is accessed."
+        },
+        "OrderType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Order Type",
+          "description": "Manufacturing Order Type"
+        },
+        "OrderID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Manufacturing Order",
+          "description": "Manufacturing Order ID"
+        },
+        "OrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Order Item"
+        },
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number for Order  \nNumber of the material that is to be produced with this order."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "Reservation": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reservation",
+          "description": "Number of reservation/dependent requirements  \nAlphanumeric key uniquely identifying the document."
+        },
+        "ReservationItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reservation Item",
+          "description": "Item Number of Reservation / Dependent Requirements"
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location"
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch",
+          "description": "Batch Number  \nAssigns a material that is manufactured in batches or production lots to a specific batch."
+        },
+        "InventoryValuationType": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Valuation Type",
+          "description": "Inventory Valuation Type"
+        },
+        "GoodsMovementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Goods Movement Type"
+        },
+        "GoodsMovementRefDocType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Reference Doc. Type",
+          "description": "Goods movement ref doc type"
+        },
+        "InventoryUsabilityCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Inventory Usability",
+          "description": "Inventory Usability Code"
+        },
+        "InventorySpecialStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special Stock Type",
+          "description": "Inventory Special Stock Type"
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order",
+          "description": "Number of the sales order to which the order is to be settled."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales Order Item",
+          "description": "Item in the sales order to which the order is to be settled."
+        },
+        "WBSElementExternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element) Edited  \nExternal 24-character name of an operative WBS element without a conversion routine stored in the domain."
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "Customer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Account number of customer  \nUniquely identifies a customer.  \nThis customer number is used for managing customer special stocks."
+        },
+        "ReservationIsFinallyIssued": {
+"type": "boolean",
+"default": "null",
+          "title": "Res Final Issue",
+          "description": "Final Issue for Reservation"
+        },
+        "IsCompletelyDelivered": {
+"type": "boolean",
+"default": "null",
+          "title": "Delivery Completed",
+          "description": "\"Delivery Completed\" Indicator  \nIndicates that the item is to be regarded as closed."
+        },
+        "ShelfLifeExpirationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "SLED/BBD",
+          "description": "Shelf Life Expiration or Best-Before Date  \nThe date is set upon goods receipt in one of the following ways:  \nYou enter it yourself.You enter a date of production, and the system calculates the shelf life expiration date from the date of production plus the shelf life in days (from the material master record).NoteThis date can still be changed upon receipt of the usage decision for an inspection lot."
+        },
+        "ManufactureDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Date of Manufacture"
+        },
+        "StorageType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Storage Type",
+          "description": "The storage type is a subdivision of a complex, physical warehouse. Different storage types are identified by their warehousing technique, form of organization, or their function.  \nA typical warehouse could have the following storage types:Goods receipt areaPicking areaHigh-rack storage areaBulk storage areaOpen storage areaGoods issue area"
+        },
+        "StorageBin": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Storage Bin",
+          "description": "The storage bin (sometimes referred to as a \"slot\") is the smallest addressable unit in a warehouse. It identifies the exact location in the warehouse where goods can be stored.  \nA storage bin can be further sub-divided into bin sections. Several different materials (quants) can be stored in one bin at the same time."
+        },
+        "MaterialDocumentItemText": {
+"type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Text",
+          "description": "Item Text  \nContains an explanatory text on the line item.  \nLine item texts can be used internally and externally. To be able to distinguish between these, you must begin texts for external use with \"*\". These texts can then be printed on all correspondence, dunning notices, payment advice notes, etc. The asterisk is removed when the text is printed.This function is only available in the FI component. It cannot be used in Materials Management."
+        },
+        "EntryUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Entry",
+          "description": "Unit of entry  \nSpecifies the unit of measure in which the goods movement or inventory count is entered.  \nEnter a unit of measure here only if it differs from the default unit of measure.There are the following default units of measure:the order unit for goods receipts with reference to purchase ordersthe production unit for goods receipts with reference to production ordersthe unit of issue for other goods movementsIf the default unit of measure has not been defined in the material master record, the system will suggest the stockkeeping unit."
+        },
+        "QuantityInEntryUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Quantity in Unit of Entry"
+        }
+      },
+      "title": "API Prodn Ord Confirmation Material Document Item Assgmt"
+    },
+    "API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConfMatlDocItmType-create": {
+      "type": "object",
+      "properties": {
+        "ConfirmationGroup": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Confirmation Group",
+          "description": "Collective ID of Order Confirmations"
+        },
+        "ConfirmationCount": {
+          "type": "string",
+          "maxLength": 8,
+          "title": "Order Confirmation",
+          "description": "Identifier of Single Order Confirmation"
+        },
+        "MaterialDocument": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Material Document",
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed."
+        },
+        "MaterialDocumentItem": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Material Doc.Item",
+          "description": "Item in Material Document  \nSpecifies the number that uniquely identifies an item in ."
+        },
+        "MaterialDocumentYear": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Material Doc. Year",
+          "description": "Material Document Year  \nCalendar year in which the material document was posted.  \nIn conjunction with the document number, the material document year constitutes the key via which a material document is accessed."
+        },
+        "OrderType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Order Type",
+          "description": "Manufacturing Order Type"
+        },
+        "OrderID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Manufacturing Order",
+          "description": "Manufacturing Order ID"
+        },
+        "OrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Order Item"
+        },
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number for Order  \nNumber of the material that is to be produced with this order."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "Reservation": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reservation",
+          "description": "Number of reservation/dependent requirements  \nAlphanumeric key uniquely identifying the document."
+        },
+        "ReservationItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reservation Item",
+          "description": "Item Number of Reservation / Dependent Requirements"
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location"
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch",
+          "description": "Batch Number  \nAssigns a material that is manufactured in batches or production lots to a specific batch."
+        },
+        "InventoryValuationType": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Valuation Type",
+          "description": "Inventory Valuation Type"
+        },
+        "GoodsMovementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Goods Movement Type"
+        },
+        "GoodsMovementRefDocType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Reference Doc. Type",
+          "description": "Goods movement ref doc type"
+        },
+        "InventoryUsabilityCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Inventory Usability",
+          "description": "Inventory Usability Code"
+        },
+        "InventorySpecialStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special Stock Type",
+          "description": "Inventory Special Stock Type"
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order",
+          "description": "Number of the sales order to which the order is to be settled."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales Order Item",
+          "description": "Item in the sales order to which the order is to be settled."
+        },
+        "WBSElementExternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element) Edited  \nExternal 24-character name of an operative WBS element without a conversion routine stored in the domain."
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "Customer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Account number of customer  \nUniquely identifies a customer.  \nThis customer number is used for managing customer special stocks."
+        },
+        "ReservationIsFinallyIssued": {
+"type": "boolean",
+"default": "null",
+          "title": "Res Final Issue",
+          "description": "Final Issue for Reservation"
+        },
+        "IsCompletelyDelivered": {
+"type": "boolean",
+"default": "null",
+          "title": "Delivery Completed",
+          "description": "\"Delivery Completed\" Indicator  \nIndicates that the item is to be regarded as closed."
+        },
+        "ShelfLifeExpirationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "SLED/BBD",
+          "description": "Shelf Life Expiration or Best-Before Date  \nThe date is set upon goods receipt in one of the following ways:  \nYou enter it yourself.You enter a date of production, and the system calculates the shelf life expiration date from the date of production plus the shelf life in days (from the material master record).NoteThis date can still be changed upon receipt of the usage decision for an inspection lot."
+        },
+        "ManufactureDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Date of Manufacture"
+        },
+        "StorageType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Storage Type",
+          "description": "The storage type is a subdivision of a complex, physical warehouse. Different storage types are identified by their warehousing technique, form of organization, or their function.  \nA typical warehouse could have the following storage types:Goods receipt areaPicking areaHigh-rack storage areaBulk storage areaOpen storage areaGoods issue area"
+        },
+        "StorageBin": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Storage Bin",
+          "description": "The storage bin (sometimes referred to as a \"slot\") is the smallest addressable unit in a warehouse. It identifies the exact location in the warehouse where goods can be stored.  \nA storage bin can be further sub-divided into bin sections. Several different materials (quants) can be stored in one bin at the same time."
+        },
+        "MaterialDocumentItemText": {
+"type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Text",
+          "description": "Item Text  \nContains an explanatory text on the line item.  \nLine item texts can be used internally and externally. To be able to distinguish between these, you must begin texts for external use with \"*\". These texts can then be printed on all correspondence, dunning notices, payment advice notes, etc. The asterisk is removed when the text is printed.This function is only available in the FI component. It cannot be used in Materials Management."
+        },
+        "EntryUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Entry",
+          "description": "Unit of entry  \nSpecifies the unit of measure in which the goods movement or inventory count is entered.  \nEnter a unit of measure here only if it differs from the default unit of measure.There are the following default units of measure:the order unit for goods receipts with reference to purchase ordersthe production unit for goods receipts with reference to production ordersthe unit of issue for other goods movementsIf the default unit of measure has not been defined in the material master record, the system will suggest the stockkeeping unit."
+        },
+        "QuantityInEntryUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Quantity in Unit of Entry"
+        }
+      },
+      "required": [
+        "ConfirmationGroup",
+        "ConfirmationCount",
+        "MaterialDocument",
+        "MaterialDocumentItem",
+        "MaterialDocumentYear"
+      ],
+      "title": "API Prodn Ord Confirmation Material Document Item Assgmt (for create)"
+    },
+    "API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConfMatlDocItmType-update": {
+      "type": "object",
+      "properties": {
+        "OrderType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Order Type",
+          "description": "Manufacturing Order Type"
+        },
+        "OrderID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Manufacturing Order",
+          "description": "Manufacturing Order ID"
+        },
+        "OrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Order Item"
+        },
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number for Order  \nNumber of the material that is to be produced with this order."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "Reservation": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Reservation",
+          "description": "Number of reservation/dependent requirements  \nAlphanumeric key uniquely identifying the document."
+        },
+        "ReservationItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Reservation Item",
+          "description": "Item Number of Reservation / Dependent Requirements"
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location"
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch",
+          "description": "Batch Number  \nAssigns a material that is manufactured in batches or production lots to a specific batch."
+        },
+        "InventoryValuationType": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Valuation Type",
+          "description": "Inventory Valuation Type"
+        },
+        "GoodsMovementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Goods Movement Type"
+        },
+        "GoodsMovementRefDocType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Reference Doc. Type",
+          "description": "Goods movement ref doc type"
+        },
+        "InventoryUsabilityCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Inventory Usability",
+          "description": "Inventory Usability Code"
+        },
+        "InventorySpecialStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special Stock Type",
+          "description": "Inventory Special Stock Type"
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order",
+          "description": "Number of the sales order to which the order is to be settled."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales Order Item",
+          "description": "Item in the sales order to which the order is to be settled."
+        },
+        "WBSElementExternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element) Edited  \nExternal 24-character name of an operative WBS element without a conversion routine stored in the domain."
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "Customer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Account number of customer  \nUniquely identifies a customer.  \nThis customer number is used for managing customer special stocks."
+        },
+        "ReservationIsFinallyIssued": {
+"type": "boolean",
+"default": "null",
+          "title": "Res Final Issue",
+          "description": "Final Issue for Reservation"
+        },
+        "IsCompletelyDelivered": {
+"type": "boolean",
+"default": "null",
+          "title": "Delivery Completed",
+          "description": "\"Delivery Completed\" Indicator  \nIndicates that the item is to be regarded as closed."
+        },
+        "ShelfLifeExpirationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "SLED/BBD",
+          "description": "Shelf Life Expiration or Best-Before Date  \nThe date is set upon goods receipt in one of the following ways:  \nYou enter it yourself.You enter a date of production, and the system calculates the shelf life expiration date from the date of production plus the shelf life in days (from the material master record).NoteThis date can still be changed upon receipt of the usage decision for an inspection lot."
+        },
+        "ManufactureDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Date of Manufacture"
+        },
+        "StorageType": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Storage Type",
+          "description": "The storage type is a subdivision of a complex, physical warehouse. Different storage types are identified by their warehousing technique, form of organization, or their function.  \nA typical warehouse could have the following storage types:Goods receipt areaPicking areaHigh-rack storage areaBulk storage areaOpen storage areaGoods issue area"
+        },
+        "StorageBin": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Storage Bin",
+          "description": "The storage bin (sometimes referred to as a \"slot\") is the smallest addressable unit in a warehouse. It identifies the exact location in the warehouse where goods can be stored.  \nA storage bin can be further sub-divided into bin sections. Several different materials (quants) can be stored in one bin at the same time."
+        },
+        "MaterialDocumentItemText": {
+"type": "string",
+"default": "null",
+          "maxLength": 50,
+          "example": "string",
+          "title": "Text",
+          "description": "Item Text  \nContains an explanatory text on the line item.  \nLine item texts can be used internally and externally. To be able to distinguish between these, you must begin texts for external use with \"*\". These texts can then be printed on all correspondence, dunning notices, payment advice notes, etc. The asterisk is removed when the text is printed.This function is only available in the FI component. It cannot be used in Materials Management."
+        },
+        "EntryUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Unit of Entry",
+          "description": "Unit of entry  \nSpecifies the unit of measure in which the goods movement or inventory count is entered.  \nEnter a unit of measure here only if it differs from the default unit of measure.There are the following default units of measure:the order unit for goods receipts with reference to purchase ordersthe production unit for goods receipts with reference to production ordersthe unit of issue for other goods movementsIf the default unit of measure has not been defined in the material master record, the system will suggest the stockkeeping unit."
+        },
+        "QuantityInEntryUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Quantity in Unit of Entry"
+        }
+      },
+      "title": "API Prodn Ord Confirmation Material Document Item Assgmt (for update)"
+    },
+    "API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConf2Type": {
+      "type": "object",
+      "properties": {
+        "ConfirmationGroup": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Confirmation Group",
+          "description": "Collective ID of Order Confirmations"
+        },
+        "ConfirmationCount": {
+          "type": "string",
+          "maxLength": 8,
+          "title": "Order Confirmation",
+          "description": "Identifier of Single Order Confirmation"
+        },
+        "OrderID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Manufacturing Order",
+          "description": "Manufacturing Order ID"
+        },
+        "Sequence": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sequence",
+          "description": "Manufacturing Order Sequence"
+        },
+        "OrderOperation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Operation",
+          "description": "Manufacturing Order Operation"
+        },
+        "OrderSuboperation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Suboperation",
+          "description": "Manufacturing Order Suboperation"
+        },
+        "OrderType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Order Type",
+          "description": "Manufacturing Order Type"
+        },
+        "OrderOperationInternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Operation Internal ID",
+          "description": "Internal Identifier of an Operation or Activity"
+        },
+        "ConfirmationText": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Confirmation Text"
+        },
+        "Language": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number for Order  \nNumber of the material that is to be produced with this order."
+        },
+        "OrderPlannedTotalQty": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Total Quantity",
+          "description": "Manufacturing Order Planned Total Quantity"
+        },
+        "ProductionUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Production Unit",
+          "description": "Production Unit of Measure"
+        },
+        "FinalConfirmationType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Final Confirmation Type"
+        },
+        "IsFinalConfirmation": {
+"type": "boolean",
+"default": "null",
+          "title": "Final Confirmation",
+          "description": "Activation of Final Confirmation  \nSpecifies that no further confirmations are required.  \nThe system assigns the 'finally confirmed' system status."
+        },
+        "OpenReservationsIsCleared": {
+"type": "boolean",
+"default": "null",
+          "title": "Clear Open Reservs.",
+          "description": "Clear Open Reservations  \nIndicator specifying that with a final confirmation, the indicator \"delivery completed\" is set for all open reservations that are assigned to the confirmed operation.  \nThe indicator is only set for the open reservations of the components that are not to be backflushed and for batch summary records for the components to be backflushed.The operation is given the system status \"finally delivered\" as well as the system status \"finally confirmed\"."
+        },
+        "IsReversed": {
+"type": "boolean",
+"default": "null",
+          "title": "Reversed",
+          "description": "Indicator: Document was reversed"
+        },
+        "IsReversal": {
+"type": "boolean",
+"default": "null",
+          "title": "Is a Cancellation",
+          "description": "Confirmation record is a Cancellation"
+        },
+        "APIConfHasNoGoodsMovements": {
+"type": "boolean",
+"default": "null",
+          "title": "No Goods Movement",
+          "description": "Confirmation: No Goods Movement via API"
+        },
+        "ConfirmationEntryDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Entry Date",
+          "description": "Entry Date of Confirmation"
+        },
+        "ConfirmationEntryTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Entry Time",
+          "description": "Confirmation Entry Time"
+        },
+        "EnteredByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Entered by User",
+          "description": "User who Entered the Confirmation"
+        },
+        "LastChangeDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Last Change",
+          "description": "Date of Last Change  \nDate on which this rate was last changed."
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Changed By",
+          "description": "Name of Person who Changed Object"
+        },
+        "ConfirmationExternalEntryDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Created on",
+          "description": "External date of entry for confirmation  \nCreation date of the record."
+        },
+        "ConfirmationExternalEntryTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Time",
+          "description": "External time of entry for confirmation  \nTime at which the document was posted and saved in the system."
+        },
+        "EnteredByExternalUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created by",
+          "description": "External creator of confirmation  \nName of the person, who originally enetered the confirmation, if it was created in a non-SAP system or using SAP fast entry for confirmations."
+        },
+        "ExternalSystemConfirmation": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "External Key",
+          "description": "External Key for Confirmation (for example, from PDC System)"
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "WorkCenterTypeCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Resource Object Type",
+          "description": "Object Type of the Resource"
+        },
+        "WorkCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Work Center"
+        },
+        "CapacityRequirementSplit": {
+"type": "integer",
+"default": "null",
+          "format": "uint8",
+          "title": "Split Number",
+          "description": "Capacity Split Number"
+        },
+        "Personnel": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Personnel",
+          "description": "Personnel Number"
+        },
+        "TimeRecording": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Time Recording",
+          "description": "Time Recording ID"
+        },
+        "EmployeeWageType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Employee Wage Type"
+        },
+        "EmployeeWageGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Employee Wage Group"
+        },
+        "BreakDurationUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Break Time Unit",
+          "description": "Unit for a Break Time"
+        },
+        "BreakDurationUnitISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "ConfirmedBreakDuration": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999.999,
+          "maximum": 999999.999,
+          "example": "0",
+          "title": "Confirmed Break Time",
+          "description": "Specified the confirmed break time for the operation."
+        },
+        "EmployeeSuitability": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Employee Suitability"
+        },
+        "NumberOfEmployees": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Number of Employees"
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date"
+        },
+        "ConfirmedExecutionStartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Start of Execution",
+          "description": "Confirmed Start Date of Execution  \nDate on which the execution/setup of the operation started."
+        },
+        "ConfirmedExecutionStartTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Actual Start (Time)",
+          "description": "Confirmed Time for 'Start Execution'"
+        },
+        "ConfirmedSetupEndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Finish Setup",
+          "description": "Confirmed Date for 'Finish Setup'"
+        },
+        "ConfirmedSetupEndTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Finish Setup",
+          "description": "Confirmed Time for 'Finish Setup'"
+        },
+        "ConfirmedProcessingStartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Start of Processing",
+          "description": "Confirmed Date for 'Start Processing'"
+        },
+        "ConfirmedProcessingStartTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Start of Processing",
+          "description": "Confirmed Time for 'Start Processing'"
+        },
+        "ConfirmedProcessingEndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Finish Processing",
+          "description": "Confirmed Date for 'Finish Processing\""
+        },
+        "ConfirmedProcessingEndTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Finish Processing",
+          "description": "Confirmed Time for 'Finish Processing'"
+        },
+        "ConfirmedTeardownStartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Start of Teardown",
+          "description": "Confirmed Date for 'Start Teardown'"
+        },
+        "ConfirmedTeardownStartTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Start of Teardown",
+          "description": "Confirmed Time for 'Start Teardown'"
+        },
+        "ConfirmedExecutionEndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Finish Execution",
+          "description": "Confirmed Finish Date of Execution  \nDate on which the execution / teardown of the operation finished."
+        },
+        "ConfirmedExecutionEndTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Actual finish (time)",
+          "description": "Confirmed Time for 'Finish Execution'"
+        },
+        "ConfirmationUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Confirmation Unit",
+          "description": "Confirmation Unit of Measure  \nUnit in which the yield/scrap is confirmed."
+        },
+        "ConfirmationUnitISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "ConfirmationYieldQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Yield Quantity",
+          "description": "Yield to be Confirmed  \nYield that you want to confirm for the operation."
+        },
+        "ConfirmationScrapQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Scrap Quantity",
+          "description": "Scrap to Be Confirmed  \nScrap that you want to confirm for this operation."
+        },
+        "ConfirmationReworkQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Rework Quantity",
+          "description": "Current Confirmation Rework Quantity  \nIndicates which rework quantity is currently to be confirmed.  \nThe rework quantity has the following effect:When you insert a reference operation set into the current order from the confirmation (using trigger points) the confirmed rework quantity is transferred as the operation quantity to the inserted rework operations.When you create a new order from the confirmation (using trigger points) the confirmed rework quantity is used as the order quantity for the rework order.A trigger point is not triggered when you enter a rework quantity; it is triggered when you set or reset a system status or when you set a user status."
+        },
+        "VarianceReasonCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Variance Reason",
+          "description": "Reason for Variance"
+        },
+        "OpWorkQuantityUnit1": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit1ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity1": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity1IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit2": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit2ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity2": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity2IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit3": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit3ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity3": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity3IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit4": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit4ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity4": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity4IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit5": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit5ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity5": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity5IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit6": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit6ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity6": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity6IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "BusinessProcessEntryUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Process Unit",
+          "description": "Unit of Measure for Business Process Quantity  \nUnit in which work is confirmed."
+        },
+        "BusProcessEntrUnitISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "BusinessProcessConfirmedQty": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Process Quantity",
+          "description": "Current Quantity for Business Process  \nActivity that you want to confirm for this business process."
+        },
+        "NoFurtherBusinessProcQtyIsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "No Remaining Quantity Expected for Business Process  \nIndicates that you do not expect any further confirmation for this business process."
+        },
+        "to_ProdnOrdConfMatlDocItm": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConfMatlDocItmType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API Prodn Order Confirmation 2"
+    },
+    "API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConf2Type-create": {
+      "type": "object",
+      "properties": {
+        "ConfirmationGroup": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Confirmation Group",
+          "description": "Collective ID of Order Confirmations"
+        },
+        "ConfirmationCount": {
+          "type": "string",
+          "maxLength": 8,
+          "title": "Order Confirmation",
+          "description": "Identifier of Single Order Confirmation"
+        },
+        "OrderID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Manufacturing Order",
+          "description": "Manufacturing Order ID"
+        },
+        "Sequence": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sequence",
+          "description": "Manufacturing Order Sequence"
+        },
+        "OrderOperation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Operation",
+          "description": "Manufacturing Order Operation"
+        },
+        "OrderSuboperation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Suboperation",
+          "description": "Manufacturing Order Suboperation"
+        },
+        "OrderType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Order Type",
+          "description": "Manufacturing Order Type"
+        },
+        "OrderOperationInternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Operation Internal ID",
+          "description": "Internal Identifier of an Operation or Activity"
+        },
+        "ConfirmationText": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Confirmation Text"
+        },
+        "Language": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number for Order  \nNumber of the material that is to be produced with this order."
+        },
+        "OrderPlannedTotalQty": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Total Quantity",
+          "description": "Manufacturing Order Planned Total Quantity"
+        },
+        "ProductionUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Production Unit",
+          "description": "Production Unit of Measure"
+        },
+        "FinalConfirmationType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Final Confirmation Type"
+        },
+        "IsFinalConfirmation": {
+"type": "boolean",
+"default": "null",
+          "title": "Final Confirmation",
+          "description": "Activation of Final Confirmation  \nSpecifies that no further confirmations are required.  \nThe system assigns the 'finally confirmed' system status."
+        },
+        "OpenReservationsIsCleared": {
+"type": "boolean",
+"default": "null",
+          "title": "Clear Open Reservs.",
+          "description": "Clear Open Reservations  \nIndicator specifying that with a final confirmation, the indicator \"delivery completed\" is set for all open reservations that are assigned to the confirmed operation.  \nThe indicator is only set for the open reservations of the components that are not to be backflushed and for batch summary records for the components to be backflushed.The operation is given the system status \"finally delivered\" as well as the system status \"finally confirmed\"."
+        },
+        "IsReversed": {
+"type": "boolean",
+"default": "null",
+          "title": "Reversed",
+          "description": "Indicator: Document was reversed"
+        },
+        "IsReversal": {
+"type": "boolean",
+"default": "null",
+          "title": "Is a Cancellation",
+          "description": "Confirmation record is a Cancellation"
+        },
+        "APIConfHasNoGoodsMovements": {
+"type": "boolean",
+"default": "null",
+          "title": "No Goods Movement",
+          "description": "Confirmation: No Goods Movement via API"
+        },
+        "ConfirmationEntryDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Entry Date",
+          "description": "Entry Date of Confirmation"
+        },
+        "ConfirmationEntryTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Entry Time",
+          "description": "Confirmation Entry Time"
+        },
+        "EnteredByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Entered by User",
+          "description": "User who Entered the Confirmation"
+        },
+        "LastChangeDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Last Change",
+          "description": "Date of Last Change  \nDate on which this rate was last changed."
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Changed By",
+          "description": "Name of Person who Changed Object"
+        },
+        "ConfirmationExternalEntryDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Created on",
+          "description": "External date of entry for confirmation  \nCreation date of the record."
+        },
+        "ConfirmationExternalEntryTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Time",
+          "description": "External time of entry for confirmation  \nTime at which the document was posted and saved in the system."
+        },
+        "EnteredByExternalUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created by",
+          "description": "External creator of confirmation  \nName of the person, who originally enetered the confirmation, if it was created in a non-SAP system or using SAP fast entry for confirmations."
+        },
+        "ExternalSystemConfirmation": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "External Key",
+          "description": "External Key for Confirmation (for example, from PDC System)"
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "WorkCenterTypeCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Resource Object Type",
+          "description": "Object Type of the Resource"
+        },
+        "WorkCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Work Center"
+        },
+        "CapacityRequirementSplit": {
+"type": "integer",
+"default": "null",
+          "format": "uint8",
+          "title": "Split Number",
+          "description": "Capacity Split Number"
+        },
+        "Personnel": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Personnel",
+          "description": "Personnel Number"
+        },
+        "TimeRecording": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Time Recording",
+          "description": "Time Recording ID"
+        },
+        "EmployeeWageType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Employee Wage Type"
+        },
+        "EmployeeWageGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Employee Wage Group"
+        },
+        "BreakDurationUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Break Time Unit",
+          "description": "Unit for a Break Time"
+        },
+        "BreakDurationUnitISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "ConfirmedBreakDuration": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999.999,
+          "maximum": 999999.999,
+          "example": "0",
+          "title": "Confirmed Break Time",
+          "description": "Specified the confirmed break time for the operation."
+        },
+        "EmployeeSuitability": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Employee Suitability"
+        },
+        "NumberOfEmployees": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Number of Employees"
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date"
+        },
+        "ConfirmedExecutionStartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Start of Execution",
+          "description": "Confirmed Start Date of Execution  \nDate on which the execution/setup of the operation started."
+        },
+        "ConfirmedExecutionStartTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Actual Start (Time)",
+          "description": "Confirmed Time for 'Start Execution'"
+        },
+        "ConfirmedSetupEndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Finish Setup",
+          "description": "Confirmed Date for 'Finish Setup'"
+        },
+        "ConfirmedSetupEndTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Finish Setup",
+          "description": "Confirmed Time for 'Finish Setup'"
+        },
+        "ConfirmedProcessingStartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Start of Processing",
+          "description": "Confirmed Date for 'Start Processing'"
+        },
+        "ConfirmedProcessingStartTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Start of Processing",
+          "description": "Confirmed Time for 'Start Processing'"
+        },
+        "ConfirmedProcessingEndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Finish Processing",
+          "description": "Confirmed Date for 'Finish Processing\""
+        },
+        "ConfirmedProcessingEndTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Finish Processing",
+          "description": "Confirmed Time for 'Finish Processing'"
+        },
+        "ConfirmedTeardownStartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Start of Teardown",
+          "description": "Confirmed Date for 'Start Teardown'"
+        },
+        "ConfirmedTeardownStartTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Start of Teardown",
+          "description": "Confirmed Time for 'Start Teardown'"
+        },
+        "ConfirmedExecutionEndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Finish Execution",
+          "description": "Confirmed Finish Date of Execution  \nDate on which the execution / teardown of the operation finished."
+        },
+        "ConfirmedExecutionEndTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Actual finish (time)",
+          "description": "Confirmed Time for 'Finish Execution'"
+        },
+        "ConfirmationUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Confirmation Unit",
+          "description": "Confirmation Unit of Measure  \nUnit in which the yield/scrap is confirmed."
+        },
+        "ConfirmationUnitISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "ConfirmationYieldQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Yield Quantity",
+          "description": "Yield to be Confirmed  \nYield that you want to confirm for the operation."
+        },
+        "ConfirmationScrapQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Scrap Quantity",
+          "description": "Scrap to Be Confirmed  \nScrap that you want to confirm for this operation."
+        },
+        "ConfirmationReworkQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Rework Quantity",
+          "description": "Current Confirmation Rework Quantity  \nIndicates which rework quantity is currently to be confirmed.  \nThe rework quantity has the following effect:When you insert a reference operation set into the current order from the confirmation (using trigger points) the confirmed rework quantity is transferred as the operation quantity to the inserted rework operations.When you create a new order from the confirmation (using trigger points) the confirmed rework quantity is used as the order quantity for the rework order.A trigger point is not triggered when you enter a rework quantity; it is triggered when you set or reset a system status or when you set a user status."
+        },
+        "VarianceReasonCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Variance Reason",
+          "description": "Reason for Variance"
+        },
+        "OpWorkQuantityUnit1": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit1ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity1": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity1IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit2": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit2ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity2": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity2IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit3": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit3ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity3": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity3IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit4": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit4ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity4": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity4IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit5": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit5ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity5": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity5IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit6": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit6ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity6": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity6IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "BusinessProcessEntryUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Process Unit",
+          "description": "Unit of Measure for Business Process Quantity  \nUnit in which work is confirmed."
+        },
+        "BusProcessEntrUnitISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "BusinessProcessConfirmedQty": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Process Quantity",
+          "description": "Current Quantity for Business Process  \nActivity that you want to confirm for this business process."
+        },
+        "NoFurtherBusinessProcQtyIsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "No Remaining Quantity Expected for Business Process  \nIndicates that you do not expect any further confirmation for this business process."
+        },
+        "to_ProdnOrdConfMatlDocItm": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConfMatlDocItmType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "ConfirmationGroup",
+        "ConfirmationCount"
+      ],
+      "title": "API Prodn Order Confirmation 2 (for create)"
+    },
+    "API_PROD_ORDER_CONFIRMATION_2_SRV.ProdnOrdConf2Type-update": {
+      "type": "object",
+      "properties": {
+        "OrderID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Manufacturing Order",
+          "description": "Manufacturing Order ID"
+        },
+        "Sequence": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sequence",
+          "description": "Manufacturing Order Sequence"
+        },
+        "OrderOperation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Operation",
+          "description": "Manufacturing Order Operation"
+        },
+        "OrderSuboperation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Suboperation",
+          "description": "Manufacturing Order Suboperation"
+        },
+        "OrderType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Order Type",
+          "description": "Manufacturing Order Type"
+        },
+        "OrderOperationInternalID": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Operation Internal ID",
+          "description": "Internal Identifier of an Operation or Activity"
+        },
+        "ConfirmationText": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Confirmation Text"
+        },
+        "Language": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number for Order  \nNumber of the material that is to be produced with this order."
+        },
+        "OrderPlannedTotalQty": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Total Quantity",
+          "description": "Manufacturing Order Planned Total Quantity"
+        },
+        "ProductionUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Production Unit",
+          "description": "Production Unit of Measure"
+        },
+        "FinalConfirmationType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Final Confirmation Type"
+        },
+        "IsFinalConfirmation": {
+"type": "boolean",
+"default": "null",
+          "title": "Final Confirmation",
+          "description": "Activation of Final Confirmation  \nSpecifies that no further confirmations are required.  \nThe system assigns the 'finally confirmed' system status."
+        },
+        "OpenReservationsIsCleared": {
+"type": "boolean",
+"default": "null",
+          "title": "Clear Open Reservs.",
+          "description": "Clear Open Reservations  \nIndicator specifying that with a final confirmation, the indicator \"delivery completed\" is set for all open reservations that are assigned to the confirmed operation.  \nThe indicator is only set for the open reservations of the components that are not to be backflushed and for batch summary records for the components to be backflushed.The operation is given the system status \"finally delivered\" as well as the system status \"finally confirmed\"."
+        },
+        "IsReversed": {
+"type": "boolean",
+"default": "null",
+          "title": "Reversed",
+          "description": "Indicator: Document was reversed"
+        },
+        "IsReversal": {
+"type": "boolean",
+"default": "null",
+          "title": "Is a Cancellation",
+          "description": "Confirmation record is a Cancellation"
+        },
+        "APIConfHasNoGoodsMovements": {
+"type": "boolean",
+"default": "null",
+          "title": "No Goods Movement",
+          "description": "Confirmation: No Goods Movement via API"
+        },
+        "ConfirmationEntryDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Entry Date",
+          "description": "Entry Date of Confirmation"
+        },
+        "ConfirmationEntryTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Entry Time",
+          "description": "Confirmation Entry Time"
+        },
+        "EnteredByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Entered by User",
+          "description": "User who Entered the Confirmation"
+        },
+        "LastChangeDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Last Change",
+          "description": "Date of Last Change  \nDate on which this rate was last changed."
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Changed By",
+          "description": "Name of Person who Changed Object"
+        },
+        "ConfirmationExternalEntryDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Created on",
+          "description": "External date of entry for confirmation  \nCreation date of the record."
+        },
+        "ConfirmationExternalEntryTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Time",
+          "description": "External time of entry for confirmation  \nTime at which the document was posted and saved in the system."
+        },
+        "EnteredByExternalUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created by",
+          "description": "External creator of confirmation  \nName of the person, who originally enetered the confirmation, if it was created in a non-SAP system or using SAP fast entry for confirmations."
+        },
+        "ExternalSystemConfirmation": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "External Key",
+          "description": "External Key for Confirmation (for example, from PDC System)"
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "WorkCenterTypeCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Resource Object Type",
+          "description": "Object Type of the Resource"
+        },
+        "WorkCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Work Center"
+        },
+        "CapacityRequirementSplit": {
+"type": "integer",
+"default": "null",
+          "format": "uint8",
+          "title": "Split Number",
+          "description": "Capacity Split Number"
+        },
+        "Personnel": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Personnel",
+          "description": "Personnel Number"
+        },
+        "TimeRecording": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Time Recording",
+          "description": "Time Recording ID"
+        },
+        "EmployeeWageType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Employee Wage Type"
+        },
+        "EmployeeWageGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Employee Wage Group"
+        },
+        "BreakDurationUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Break Time Unit",
+          "description": "Unit for a Break Time"
+        },
+        "BreakDurationUnitISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "ConfirmedBreakDuration": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999.999,
+          "maximum": 999999.999,
+          "example": "0",
+          "title": "Confirmed Break Time",
+          "description": "Specified the confirmed break time for the operation."
+        },
+        "EmployeeSuitability": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Employee Suitability"
+        },
+        "NumberOfEmployees": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Number of Employees"
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date"
+        },
+        "ConfirmedExecutionStartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Start of Execution",
+          "description": "Confirmed Start Date of Execution  \nDate on which the execution/setup of the operation started."
+        },
+        "ConfirmedExecutionStartTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Actual Start (Time)",
+          "description": "Confirmed Time for 'Start Execution'"
+        },
+        "ConfirmedSetupEndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Finish Setup",
+          "description": "Confirmed Date for 'Finish Setup'"
+        },
+        "ConfirmedSetupEndTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Finish Setup",
+          "description": "Confirmed Time for 'Finish Setup'"
+        },
+        "ConfirmedProcessingStartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Start of Processing",
+          "description": "Confirmed Date for 'Start Processing'"
+        },
+        "ConfirmedProcessingStartTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Start of Processing",
+          "description": "Confirmed Time for 'Start Processing'"
+        },
+        "ConfirmedProcessingEndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Finish Processing",
+          "description": "Confirmed Date for 'Finish Processing\""
+        },
+        "ConfirmedProcessingEndTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Finish Processing",
+          "description": "Confirmed Time for 'Finish Processing'"
+        },
+        "ConfirmedTeardownStartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Start of Teardown",
+          "description": "Confirmed Date for 'Start Teardown'"
+        },
+        "ConfirmedTeardownStartTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Start of Teardown",
+          "description": "Confirmed Time for 'Start Teardown'"
+        },
+        "ConfirmedExecutionEndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Finish Execution",
+          "description": "Confirmed Finish Date of Execution  \nDate on which the execution / teardown of the operation finished."
+        },
+        "ConfirmedExecutionEndTime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Actual finish (time)",
+          "description": "Confirmed Time for 'Finish Execution'"
+        },
+        "ConfirmationUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Confirmation Unit",
+          "description": "Confirmation Unit of Measure  \nUnit in which the yield/scrap is confirmed."
+        },
+        "ConfirmationUnitISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "ConfirmationYieldQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Yield Quantity",
+          "description": "Yield to be Confirmed  \nYield that you want to confirm for the operation."
+        },
+        "ConfirmationScrapQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Scrap Quantity",
+          "description": "Scrap to Be Confirmed  \nScrap that you want to confirm for this operation."
+        },
+        "ConfirmationReworkQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Rework Quantity",
+          "description": "Current Confirmation Rework Quantity  \nIndicates which rework quantity is currently to be confirmed.  \nThe rework quantity has the following effect:When you insert a reference operation set into the current order from the confirmation (using trigger points) the confirmed rework quantity is transferred as the operation quantity to the inserted rework operations.When you create a new order from the confirmation (using trigger points) the confirmed rework quantity is used as the order quantity for the rework order.A trigger point is not triggered when you enter a rework quantity; it is triggered when you set or reset a system status or when you set a user status."
+        },
+        "VarianceReasonCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Variance Reason",
+          "description": "Reason for Variance"
+        },
+        "OpWorkQuantityUnit1": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit1ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity1": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity1IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit2": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit2ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity2": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity2IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit3": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit3ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity3": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity3IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit4": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit4ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity4": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity4IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit5": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit5ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity5": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity5IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "OpWorkQuantityUnit6": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Activity Unit of Measure",
+          "description": "Unit of Measure for the Activity in Confirmation"
+        },
+        "WorkQuantityUnit6ISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "OpConfirmedWorkQuantity6": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Act. t/b Confirmed",
+          "description": "Activity Currently to be Confirmed  \nActivity that you want to confirm for this operation."
+        },
+        "NoFurtherOpWorkQuantity6IsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "Indicator: No Remaining Activity Expected  \nSpecifies that you do not expect any more confirmations for this activity."
+        },
+        "BusinessProcessEntryUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Process Unit",
+          "description": "Unit of Measure for Business Process Quantity  \nUnit in which work is confirmed."
+        },
+        "BusProcessEntrUnitISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "ISO code",
+          "description": "ISO code for unit of measurement  \nISO code for measurement units. An ISO code can be assigned to several internal measurement units of a dimension.  \nThe ISO code is important for EDI. It is used to convert the internal SAP measurement units into standard measurement units. Data exchange via EDI requires internal measurement units to be converted into standard measurement units.A list of the current internationally agreed ISO codes can be ordered from the UN commission responsible (WP.4 Trade Facilitation Recommendations, Recommendation 20):UN Economic Commission for EuropeInformation OfficePalais des Nations1211 GenevaSwitzerlande-mail: info.ece@unece.orgor viewed directly on the Internet:http://www.unece.org/cefact/codesfortrade/codes_index.htmFor more information, see SAP Note 69063."
+        },
+        "BusinessProcessConfirmedQty": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Process Quantity",
+          "description": "Current Quantity for Business Process  \nActivity that you want to confirm for this business process."
+        },
+        "NoFurtherBusinessProcQtyIsExpd": {
+"type": "boolean",
+"default": "null",
+          "title": "No Remaining Act.",
+          "description": "No Remaining Quantity Expected for Business Process  \nIndicates that you do not expect any further confirmation for this business process."
+        }
+      },
+      "title": "API Prodn Order Confirmation 2 (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

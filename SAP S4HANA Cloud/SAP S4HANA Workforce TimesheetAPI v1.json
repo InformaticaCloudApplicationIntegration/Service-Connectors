@@ -1,0 +1,909 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Workforce Timesheet",
+    "version": "1 ",
+    "description": "  This service enables you to create, read, update, and  delete (CRUD) data related to timesheet of a workforce  (Employees or Contingent Workers) with the data  provided in a payload, in an API call. This service also  supports automatic posting of timesheet data to the  controlling module synchronously."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/fa/198e62c6d24788bd1f82082feb3096/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Manage Timesheet records using this inbound service",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Workforce Timesheet Integration (SAP_COM_0027)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Time Recording (1Q4)](https://rapid.sap.com/bp/#/scopeitems/1Q4 \" Link To BP \")",
+          "format": "markdown"
+        },
+        {
+          "text": "[Time Recording - Project-Based Services (J12)](https://rapid.sap.com/bp/#/scopeitems/J12 \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "TimeSheetEntryCollection"
+    }
+  ],
+  "paths": {
+    "/TimeSheetEntryCollection": {
+      "get": {
+        "summary": "Get entities from TimeSheetEntryCollection",
+        "tags": [
+          "TimeSheetEntryCollection"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "TimeSheetDataFields",
+                "TimeSheetDataFields desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "TimeSheetDataFields",
+                "PersonWorkAgreementExternalID",
+                "CompanyCode",
+                "TimeSheetRecord",
+                "PersonWorkAgreement",
+                "TimeSheetDate",
+                "TimeSheetIsReleasedOnSave",
+                "TimeSheetPredecessorRecord",
+                "TimeSheetStatus",
+                "TimeSheetIsExecutedInTestRun",
+                "TimeSheetOperation"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of TimeSheetEntry",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to TimeSheetEntryCollection",
+        "tags": [
+          "TimeSheetEntryCollection"
+        ],
+        "parameters": [
+          {
+            "name": "TimeSheetEntry",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "TimeSheetEntry",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/TimeSheetEntryCollection(PersonWorkAgreementExternalID='{PersonWorkAgreementExternalID}',CompanyCode='{CompanyCode}',TimeSheetRecord='{TimeSheetRecord}')": {
+      "parameters": [
+        {
+          "name": "PersonWorkAgreementExternalID",
+          "in": "path",
+          "required": true,
+          "description": "Work Agreement External ID",
+          "type": "string"
+        },
+        {
+          "name": "CompanyCode",
+          "in": "path",
+          "required": true,
+          "description": "The company code is an organizational unit within financial accounting.",
+          "type": "string"
+        },
+        {
+          "name": "TimeSheetRecord",
+          "in": "path",
+          "required": true,
+          "description": "Counter for Records in Time Recording  \nThe system assigns time sheet records a counter. The counter represents a record's unique database ID.  \nIf you change a record that has already been approved, the original record retains this ID; the changed record is assigned another unique ID.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from TimeSheetEntryCollection by key",
+        "tags": [
+          "TimeSheetEntryCollection"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "TimeSheetDataFields",
+                "PersonWorkAgreementExternalID",
+                "CompanyCode",
+                "TimeSheetRecord",
+                "PersonWorkAgreement",
+                "TimeSheetDate",
+                "TimeSheetIsReleasedOnSave",
+                "TimeSheetPredecessorRecord",
+                "TimeSheetStatus",
+                "TimeSheetIsExecutedInTestRun",
+                "TimeSheetOperation"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "TimeSheetEntry",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET TimeSheetEntryCollection HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry": {
+      "type": "object",
+      "properties": {
+        "TimeSheetDataFields": {
+          "$ref": "#/definitions/API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetDataFields"
+        },
+        "PersonWorkAgreementExternalID": {
+          "type": "string",
+          "maxLength": 20,
+          "title": "Person Work Agreement External ID",
+          "description": "Work Agreement External ID"
+        },
+        "CompanyCode": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Company Code",
+          "description": "The company code is an organizational unit within financial accounting."
+        },
+        "TimeSheetRecord": {
+          "type": "string",
+          "maxLength": 12,
+          "title": "Time Sheet Record",
+          "description": "Counter for Records in Time Recording  \nThe system assigns time sheet records a counter. The counter represents a record's unique database ID.  \nIf you change a record that has already been approved, the original record retains this ID; the changed record is assigned another unique ID."
+        },
+        "PersonWorkAgreement": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Person Work Agreement",
+          "description": "Object ID  \nContains a unique eight-digit numerical code, that represents a specific object (for example, an organizational unit, qualification or business event).  \nWhen you work with infotype records, this field allows you to use the Fast entry feature. Fast entry enables you to create numerous infotype records without having to exit and re-enter the infotype window.To select the object that the infotype record should belong to, either:Enter the object's eight-digit codeUse the matchcode feature to search for the object"
+        },
+        "TimeSheetDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Sheet Date",
+          "description": "Date"
+        },
+        "TimeSheetIsReleasedOnSave": {
+"type": "boolean",
+"default": "null",
+          "title": "Time sheet Is Released On Save",
+          "description": "Release Records on Saving  \nDetermines that the system releases changed data records immediately when you save them. You do not have to release them manually."
+        },
+        "TimeSheetPredecessorRecord": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Time Sheet Predecessor Record",
+          "description": "Reference Counter for Record to be Changed  \nThe reference counter is assigned to a record that was created when an existing record was changed. The new record is assigned a new counter and, as a reference counter, the ID of the original record. The reference counter provides a link between the new and original record."
+        },
+        "TimeSheetStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Time Sheet Status",
+          "description": "Processing Status  \nEach time sheet record is assigned a status. This status indicates the processing status of the selected record.  \nStatus   IndicatorIn process     10Released for approval     20Approved     30Approval rejected     40Changed after approval     50Cancelled     60"
+        },
+        "TimeSheetIsExecutedInTestRun": {
+"type": "boolean",
+"default": "null",
+          "title": "Times Sheet Is Executed In Test Run",
+          "description": "Yes/No Switch with Values 'SPACE' and 'X'"
+        },
+        "TimeSheetOperation": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Time Sheet Operation",
+          "description": "CATS Operations : 'C' , 'U' , 'D'"
+        }
+      },
+      "title": "TimeSheetEntry"
+    },
+    "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry-create": {
+      "type": "object",
+      "properties": {
+        "TimeSheetDataFields": {
+          "$ref": "#/definitions/API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetDataFields-create"
+        },
+        "PersonWorkAgreementExternalID": {
+          "type": "string",
+          "maxLength": 20,
+          "title": "Person Work Agreement External ID",
+          "description": "Work Agreement External ID"
+        },
+        "CompanyCode": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Company Code",
+          "description": "The company code is an organizational unit within financial accounting."
+        },
+        "TimeSheetRecord": {
+          "type": "string",
+          "maxLength": 12,
+          "title": "Time Sheet Record",
+          "description": "Counter for Records in Time Recording  \nThe system assigns time sheet records a counter. The counter represents a record's unique database ID.  \nIf you change a record that has already been approved, the original record retains this ID; the changed record is assigned another unique ID."
+        },
+        "PersonWorkAgreement": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Person Work Agreement",
+          "description": "Object ID  \nContains a unique eight-digit numerical code, that represents a specific object (for example, an organizational unit, qualification or business event).  \nWhen you work with infotype records, this field allows you to use the Fast entry feature. Fast entry enables you to create numerous infotype records without having to exit and re-enter the infotype window.To select the object that the infotype record should belong to, either:Enter the object's eight-digit codeUse the matchcode feature to search for the object"
+        },
+        "TimeSheetDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Sheet Date",
+          "description": "Date"
+        },
+        "TimeSheetIsReleasedOnSave": {
+"type": "boolean",
+"default": "null",
+          "title": "Time sheet Is Released On Save",
+          "description": "Release Records on Saving  \nDetermines that the system releases changed data records immediately when you save them. You do not have to release them manually."
+        },
+        "TimeSheetPredecessorRecord": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Time Sheet Predecessor Record",
+          "description": "Reference Counter for Record to be Changed  \nThe reference counter is assigned to a record that was created when an existing record was changed. The new record is assigned a new counter and, as a reference counter, the ID of the original record. The reference counter provides a link between the new and original record."
+        },
+        "TimeSheetStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Time Sheet Status",
+          "description": "Processing Status  \nEach time sheet record is assigned a status. This status indicates the processing status of the selected record.  \nStatus   IndicatorIn process     10Released for approval     20Approved     30Approval rejected     40Changed after approval     50Cancelled     60"
+        },
+        "TimeSheetIsExecutedInTestRun": {
+"type": "boolean",
+"default": "null",
+          "title": "Times Sheet Is Executed In Test Run",
+          "description": "Yes/No Switch with Values 'SPACE' and 'X'"
+        },
+        "TimeSheetOperation": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Time Sheet Operation",
+          "description": "CATS Operations : 'C' , 'U' , 'D'"
+        }
+      },
+      "required": [
+        "PersonWorkAgreementExternalID",
+        "CompanyCode",
+        "TimeSheetRecord"
+      ],
+      "title": "TimeSheetEntry (for create)"
+    },
+    "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry-update": {
+      "type": "object",
+      "properties": {
+        "TimeSheetDataFields": {
+          "$ref": "#/definitions/API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetDataFields-update"
+        }
+      },
+      "title": "TimeSheetEntry (for update)"
+    },
+    "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetDataFields": {
+      "type": "object",
+      "properties": {
+        "ControllingArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Controlling Area",
+          "description": "Uniquely identifies a controlling area.  \nThe controlling area is the highest organizational unit in Controlling.Whether controlling area and company code are in a 1:1 relationship or a 1:n relationship, the number of posting periods in both controlling area and company code(s) must be identical. However, special periods may vary."
+        },
+        "SenderCostCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sender Cost Center",
+          "description": "Identifies the cost center you selected as the sender object."
+        },
+        "ReceiverCostCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Receiver Cost Center",
+          "description": "Key specifically identifying the cost center selected as the receiver object."
+        },
+        "InternalOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Internal Order",
+          "description": "Receiver Order  \nKey specifically identifying the order selected as the receiver object."
+        },
+        "ActivityType": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Activity Type",
+          "description": "Key uniquely identifying .  \nActivity types describe the activity produced by a cost center and are measured in units of time or quantity.In activity type planning, control data determines whether the activity price for evaluation of the activity type is manually set or is derived iteratively through activity price calculation."
+        },
+        "WBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        },
+        "WorkItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Work Item",
+          "description": "Work Item ID"
+        },
+        "BillingControlCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Billing Control Category"
+        },
+        "PurchaseOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Purchase Order",
+          "description": "Sending purchase order  \nSpecifies an alphanumeric key that uniquely identifies the Sender purchase order."
+        },
+        "PurchaseOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Purchase Order Item",
+          "description": "Sending purchase order item  \nSpecifies a number that uniquely identifies the item within the purchasing document."
+        },
+        "TimeSheetTaskType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Time Sheet Task Type",
+          "description": "Task Type  \nCharacterisation of content of a specific task that an employee performs, for example \"consulting\" or \"instructor function\". Specific task components are usual for each task type.  \nIn the Cross-Application Time Sheet (SAP CATS), the task type, task component, and task level fields enable you to specify the task elements that are relevant for valuation. For example, elements that are relevant for valuation are entered for the following business processes:Payroll (wage types, attendance types)Controlling and billing (activity types, statistical key figures)Invoice verification for external employees (activity numbers)The SAP R/3 system can derive the following working time attributes from the combination of task types, components, and levels:Attendance/absence typesWage typesActivity typesStatistical key figuresActivity numbersSender business processesYou can replace these input fields on your time sheet user interface with the task type, task component, and task level input fields, which are tailored to suit task recording needs. You can also valuate the task type, component, and level in reporting.You can make the relevant settings in the Implementation Guide (IMG), under Cross-Application Components -> Time Sheet-> Time Recording -> Task Levels, Components, and Categories.ExampleAt a consultancy, employees record their tasks. The data recorded is then used for creating invoices.Task type: consultingTask components for consulting: working hours, overtime, number of kilometers drivenTask levels for consulting: junior, seniorThe SAP R/3 system valuates the \"overtime\" task component for the \"junior\" task level with a specific activity type. The SAP R/3 system valuates the \"overtime\" task component for the \"senior\" task level with a different activity type with a higher price."
+        },
+        "TimeSheetTaskLevel": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Time Sheet Task Level",
+          "description": "Task Level  \nDifferentiation between an employee's tasks depending on the level of valuation.  \nSpecific task levels are allowed for each task type. The task levels determine the valuation level for each task component.In the Cross-Application Time Sheet (SAP CATS), the task type, task component, and task level fields enable you to specify the task elements that are relevant for valuation. For example, elements that are relevant for valuation are entered for the following business processes:Payroll (wage types, attendance types)Controlling and billing (activity types, statistical key figures)Invoice verification for external employees (activity numbers)The SAP R/3 system can derive the following working time attributes from the combination of task types, components, and levels:Attendance/absence typesWage typesActivity typesStatistical key figuresActivity numbersSender business processesYou can replace these input fields on your time sheet user interface with the task type, task component, and task level input fields, which are tailored to suit task recording needs. You can also valuate the task type, component, and level in reporting.You can make the relevant settings in the Implementation Guide (IMG), under Cross-Application Components -> Time Sheet-> Time Recording -> Task Levels, Components, and Categories.ExampleAt a consultancy, employees record their tasks. The data recorded is then used for creating invoices.Task type: consultingTask components for consulting: working hours, overtime, number of kilometers drivenTask levels for consulting: junior, seniorThe SAP R/3 system valuates the \"overtime\" task component for the \"junior\" task level with a specific activity type. The SAP R/3 system valuates the \"overtime\" task component for the \"senior\" task level with a different activity type with a higher price."
+        },
+        "TimeSheetTaskComponent": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Time Sheet Task Component",
+          "description": "Task component  \nTask element that is relevant for valuation.  \nA task generally comprises more than one task component, for example, normal working hours, overtime, or travel hours. Specific task components are usual for each task type.In the Cross-Application Time Sheet (SAP CATS), the task type, task component, and task level fields enable you to specify the task elements that are relevant for valuation. For example, elements that are relevant for valuation are entered for the following business processes:Payroll (wage types, attendance types)Controlling and billing (activity types, statistical key figures)Invoice verification for external employees (activity numbers)The SAP R/3 system can derive the following working time attributes from the combination of task types, components, and levels:Attendance/absence typesWage typesActivity typesStatistical key figuresActivity numbersSender business processesYou can replace these input fields on your time sheet user interface with the task type, task component, and task level input fields, which are tailored to suit task recording needs. You can also valuate the task type, component, and level in reporting.You can make the relevant settings in the Implementation Guide (IMG), under Cross-Application Components -> Time Sheet-> Time Recording -> Task Levels, Components, and Categories.ExampleAt a consultancy, employees record their tasks. The data recorded is then used for creating invoices.Task type: consultingTask components for consulting: working hours, overtime, number of kilometers drivenTask levels for consulting: junior, seniorThe SAP R/3 system valuates the \"overtime\" task component for the \"junior\" task level with a specific activity type. The SAP R/3 system valuates the \"overtime\" task component for the \"senior\" task level with a different activity type with a higher price."
+        },
+        "TimeSheetNote": {
+"type": "string",
+"default": "null",
+          "example": "string",
+          "title": "Time Sheet Note"
+        },
+        "RecordedHours": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -99.99,
+          "maximum": 99.99,
+          "example": "0",
+          "title": "Recorded Hours",
+          "description": "Hours  \nThe duration of an activity or absence in hours.  \nWhen you maintain the time sheet, one data record is stored for each entry you make in the Hours field - that is, per day and account assignment (order number, attendance/absence type, purchase order number)."
+        },
+        "RecordedQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Recorded Quantity",
+          "description": "Time Sheet: Number (Unit of Measure)  \nSpecifies the number of units entered for the unit of measure."
+        },
+        "HoursUnitOfMeasure": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Hours Unit Of Measure",
+          "description": "Unit of Measure for Display  \nSpecifies the unit of measure in which the quantity represented  is displayed."
+        },
+        "RejectionReason": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Rejection Reason",
+          "description": "Reason for rejection  \nComment line that can go back to the person who entered the data when an approval is rejected."
+        },
+        "TimeSheetWrkLocCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Time Sheet Work Location Code",
+          "description": "Tax area work center  \nEmployees current work center for tax calculation (USA). The current work center is used to determine the appropriate tax authorities."
+        },
+        "TimeSheetOvertimeCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Time Sheet Overtime Category",
+          "description": "Overtime Category  \nOvertime is defined as the time an employee works outside the regular working times. Overtime Category is the classification of the overtime hours.  \nIt is used in the Manage My Timesheet app to efficiently create time entries."
+        }
+      },
+      "title": "TimeSheetDataFields"
+    },
+    "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetDataFields-create": {
+      "type": "object",
+      "properties": {
+        "ControllingArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Controlling Area",
+          "description": "Uniquely identifies a controlling area.  \nThe controlling area is the highest organizational unit in Controlling.Whether controlling area and company code are in a 1:1 relationship or a 1:n relationship, the number of posting periods in both controlling area and company code(s) must be identical. However, special periods may vary."
+        },
+        "SenderCostCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sender Cost Center",
+          "description": "Identifies the cost center you selected as the sender object."
+        },
+        "ReceiverCostCenter": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Receiver Cost Center",
+          "description": "Key specifically identifying the cost center selected as the receiver object."
+        },
+        "InternalOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Internal Order",
+          "description": "Receiver Order  \nKey specifically identifying the order selected as the receiver object."
+        },
+        "ActivityType": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Activity Type",
+          "description": "Key uniquely identifying .  \nActivity types describe the activity produced by a cost center and are measured in units of time or quantity.In activity type planning, control data determines whether the activity price for evaluation of the activity type is manually set or is derived iteratively through activity price calculation."
+        },
+        "WBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        },
+        "WorkItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Work Item",
+          "description": "Work Item ID"
+        },
+        "BillingControlCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Billing Control Category"
+        },
+        "PurchaseOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Purchase Order",
+          "description": "Sending purchase order  \nSpecifies an alphanumeric key that uniquely identifies the Sender purchase order."
+        },
+        "PurchaseOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Purchase Order Item",
+          "description": "Sending purchase order item  \nSpecifies a number that uniquely identifies the item within the purchasing document."
+        },
+        "TimeSheetTaskType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Time Sheet Task Type",
+          "description": "Task Type  \nCharacterisation of content of a specific task that an employee performs, for example \"consulting\" or \"instructor function\". Specific task components are usual for each task type.  \nIn the Cross-Application Time Sheet (SAP CATS), the task type, task component, and task level fields enable you to specify the task elements that are relevant for valuation. For example, elements that are relevant for valuation are entered for the following business processes:Payroll (wage types, attendance types)Controlling and billing (activity types, statistical key figures)Invoice verification for external employees (activity numbers)The SAP R/3 system can derive the following working time attributes from the combination of task types, components, and levels:Attendance/absence typesWage typesActivity typesStatistical key figuresActivity numbersSender business processesYou can replace these input fields on your time sheet user interface with the task type, task component, and task level input fields, which are tailored to suit task recording needs. You can also valuate the task type, component, and level in reporting.You can make the relevant settings in the Implementation Guide (IMG), under Cross-Application Components -> Time Sheet-> Time Recording -> Task Levels, Components, and Categories.ExampleAt a consultancy, employees record their tasks. The data recorded is then used for creating invoices.Task type: consultingTask components for consulting: working hours, overtime, number of kilometers drivenTask levels for consulting: junior, seniorThe SAP R/3 system valuates the \"overtime\" task component for the \"junior\" task level with a specific activity type. The SAP R/3 system valuates the \"overtime\" task component for the \"senior\" task level with a different activity type with a higher price."
+        },
+        "TimeSheetTaskLevel": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Time Sheet Task Level",
+          "description": "Task Level  \nDifferentiation between an employee's tasks depending on the level of valuation.  \nSpecific task levels are allowed for each task type. The task levels determine the valuation level for each task component.In the Cross-Application Time Sheet (SAP CATS), the task type, task component, and task level fields enable you to specify the task elements that are relevant for valuation. For example, elements that are relevant for valuation are entered for the following business processes:Payroll (wage types, attendance types)Controlling and billing (activity types, statistical key figures)Invoice verification for external employees (activity numbers)The SAP R/3 system can derive the following working time attributes from the combination of task types, components, and levels:Attendance/absence typesWage typesActivity typesStatistical key figuresActivity numbersSender business processesYou can replace these input fields on your time sheet user interface with the task type, task component, and task level input fields, which are tailored to suit task recording needs. You can also valuate the task type, component, and level in reporting.You can make the relevant settings in the Implementation Guide (IMG), under Cross-Application Components -> Time Sheet-> Time Recording -> Task Levels, Components, and Categories.ExampleAt a consultancy, employees record their tasks. The data recorded is then used for creating invoices.Task type: consultingTask components for consulting: working hours, overtime, number of kilometers drivenTask levels for consulting: junior, seniorThe SAP R/3 system valuates the \"overtime\" task component for the \"junior\" task level with a specific activity type. The SAP R/3 system valuates the \"overtime\" task component for the \"senior\" task level with a different activity type with a higher price."
+        },
+        "TimeSheetTaskComponent": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Time Sheet Task Component",
+          "description": "Task component  \nTask element that is relevant for valuation.  \nA task generally comprises more than one task component, for example, normal working hours, overtime, or travel hours. Specific task components are usual for each task type.In the Cross-Application Time Sheet (SAP CATS), the task type, task component, and task level fields enable you to specify the task elements that are relevant for valuation. For example, elements that are relevant for valuation are entered for the following business processes:Payroll (wage types, attendance types)Controlling and billing (activity types, statistical key figures)Invoice verification for external employees (activity numbers)The SAP R/3 system can derive the following working time attributes from the combination of task types, components, and levels:Attendance/absence typesWage typesActivity typesStatistical key figuresActivity numbersSender business processesYou can replace these input fields on your time sheet user interface with the task type, task component, and task level input fields, which are tailored to suit task recording needs. You can also valuate the task type, component, and level in reporting.You can make the relevant settings in the Implementation Guide (IMG), under Cross-Application Components -> Time Sheet-> Time Recording -> Task Levels, Components, and Categories.ExampleAt a consultancy, employees record their tasks. The data recorded is then used for creating invoices.Task type: consultingTask components for consulting: working hours, overtime, number of kilometers drivenTask levels for consulting: junior, seniorThe SAP R/3 system valuates the \"overtime\" task component for the \"junior\" task level with a specific activity type. The SAP R/3 system valuates the \"overtime\" task component for the \"senior\" task level with a different activity type with a higher price."
+        },
+        "TimeSheetNote": {
+"type": "string",
+"default": "null",
+          "example": "string",
+          "title": "Time Sheet Note"
+        },
+        "RecordedHours": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -99.99,
+          "maximum": 99.99,
+          "example": "0",
+          "title": "Recorded Hours",
+          "description": "Hours  \nThe duration of an activity or absence in hours.  \nWhen you maintain the time sheet, one data record is stored for each entry you make in the Hours field - that is, per day and account assignment (order number, attendance/absence type, purchase order number)."
+        },
+        "RecordedQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Recorded Quantity",
+          "description": "Time Sheet: Number (Unit of Measure)  \nSpecifies the number of units entered for the unit of measure."
+        },
+        "HoursUnitOfMeasure": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Hours Unit Of Measure",
+          "description": "Unit of Measure for Display  \nSpecifies the unit of measure in which the quantity represented  is displayed."
+        },
+        "RejectionReason": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Rejection Reason",
+          "description": "Reason for rejection  \nComment line that can go back to the person who entered the data when an approval is rejected."
+        },
+        "TimeSheetWrkLocCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Time Sheet Work Location Code",
+          "description": "Tax area work center  \nEmployees current work center for tax calculation (USA). The current work center is used to determine the appropriate tax authorities."
+        },
+        "TimeSheetOvertimeCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Time Sheet Overtime Category",
+          "description": "Overtime Category  \nOvertime is defined as the time an employee works outside the regular working times. Overtime Category is the classification of the overtime hours.  \nIt is used in the Manage My Timesheet app to efficiently create time entries."
+        }
+      },
+      "title": "TimeSheetDataFields (for create)"
+    },
+    "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetDataFields-update": {
+      "type": "object",
+      "title": "TimeSheetDataFields (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

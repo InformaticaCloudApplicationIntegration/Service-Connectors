@@ -1,0 +1,573 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Read Ledger",
+    "version": "1 ",
+    "description": "This service enables you to read  ledger master data in an API call. It is based on the  OData protocol, and can be consumed in Fiori apps  and on other user interfaces."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com/viewer/7e1d0e4b22244555ad29554632f2b95d/latest/en-US/613fc05ef3cc4505a12a7f1d6b49cc0d.html"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "This service enables you to read  ledger master data in an API call.",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "SAP Business Objects Cloud for Planning Integration (SAP_COM_0087)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[oData Integration with SAP Business Objects Cloud for Planning (1YB)](https://rapid.sap.com/bp/#/scopeitems/1YB \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_LEDGER_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_LEDGER_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_Ledger"
+    },
+    {
+      "name": "A_LedgerText"
+    }
+  ],
+  "paths": {
+    "/A_Ledger": {
+      "get": {
+        "summary": "Get entities from A_Ledger",
+        "tags": [
+          "A_Ledger"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Ledger",
+                "Ledger desc",
+                "IsLeadingLedger",
+                "IsLeadingLedger desc",
+                "LedgerApplication",
+                "LedgerApplication desc",
+                "LedgerSubApplication",
+                "LedgerSubApplication desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Ledger",
+                "IsLeadingLedger",
+                "LedgerApplication",
+                "LedgerSubApplication",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_LedgerType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_LEDGER_SRV.A_LedgerType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_Ledger('{Ledger}')": {
+      "get": {
+        "summary": "Get entity from A_Ledger by key",
+        "tags": [
+          "A_Ledger"
+        ],
+        "parameters": [
+          {
+            "name": "Ledger",
+            "in": "path",
+            "required": true,
+            "description": "Ledger in General Ledger Accounting  \nIdentifies a ledger in General Ledger Accounting.",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Ledger",
+                "IsLeadingLedger",
+                "LedgerApplication",
+                "LedgerSubApplication",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_LedgerType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_LEDGER_SRV.A_LedgerType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_LedgerText": {
+      "get": {
+        "summary": "Get entities from A_LedgerText",
+        "tags": [
+          "A_LedgerText"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Ledger",
+                "Ledger desc",
+                "Language",
+                "Language desc",
+                "LedgerName",
+                "LedgerName desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Ledger",
+                "Language",
+                "LedgerName",
+                "to_Ledger"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Ledger"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_LedgerTextType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_LEDGER_SRV.A_LedgerTextType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_LedgerText(Ledger='{Ledger}',Language='{Language}')": {
+      "get": {
+        "summary": "Get entity from A_LedgerText by key",
+        "tags": [
+          "A_LedgerText"
+        ],
+        "parameters": [
+          {
+            "name": "Ledger",
+            "in": "path",
+            "required": true,
+            "description": "Ledger in General Ledger Accounting  \nIdentifies a ledger in General Ledger Accounting.",
+            "type": "string"
+          },
+          {
+            "name": "Language",
+            "in": "path",
+            "required": true,
+            "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Ledger",
+                "Language",
+                "LedgerName",
+                "to_Ledger"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Ledger"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_LedgerTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_LEDGER_SRV.A_LedgerTextType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_LEDGER_SRV.A_LedgerType": {
+      "type": "object",
+      "properties": {
+        "Ledger": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Ledger",
+          "description": "Ledger in General Ledger Accounting  \nIdentifies a ledger in General Ledger Accounting."
+        },
+        "IsLeadingLedger": {
+"type": "boolean",
+"default": "null",
+          "title": "Leading Ledger",
+          "description": "Indicator: Leading Ledger  \nIdentifies one of your ledgers as the leading ledger.  \nYou must designate one of your ledgers as the leading ledger. However, it is not possible to designate more than one ledger as the leading ledger.Caution:As soon as the leading ledger contains transaction data, the Leading indicator can no longer be deselected."
+        },
+        "LedgerApplication": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Application",
+          "description": "Owner application  \nApplication to which this object (table or ledger) belongs."
+        },
+        "LedgerSubApplication": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "title": "Subapplication",
+          "description": "Subapplication"
+        },
+        "to_Text": {
+          "title": "Collection of A_LedgerTextType",
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_LEDGER_SRV.A_LedgerTextType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API Ledger",
+      "description": "API Ledger"
+    },
+    "API_LEDGER_SRV.A_LedgerTextType": {
+      "type": "object",
+      "properties": {
+        "Ledger": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Ledger",
+          "description": "Ledger in General Ledger Accounting  \nIdentifies a ledger in General Ledger Accounting."
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "LedgerName": {
+"type": "string",
+"default": "null",
+          "maxLength": 30,
+          "title": "Ledger Name",
+          "description": "Ledger Name"
+        },
+        "to_Ledger": {
+          "$ref": "#/definitions/API_LEDGER_SRV.A_LedgerType"
+        }
+      },
+      "title": "API Ledger Text",
+      "description": "API Ledger Text"
+    },
+    "odata.error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/odata.error.main"
+        }
+      }
+    },
+    "odata.error.main": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "$ref": "#/definitions/odata.error.message"
+        },
+        "innererror": {
+          "type": "object",
+          "description": "The structure of this object is service-specific"
+        }
+      }
+    },
+    "odata.error.message": {
+      "type": "object",
+      "required": [
+        "lang",
+        "value"
+      ],
+      "properties": {
+        "lang": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [OData Count](http://www.odata.org/documentation/odata-version-2-0/uri-conventions/#InlinecountSystemQueryOption)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    },
+    "filter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+      "type": "string"
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/odata.error"
+      }
+    }
+  }
+}

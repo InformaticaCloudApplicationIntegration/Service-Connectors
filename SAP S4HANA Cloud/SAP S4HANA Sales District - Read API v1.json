@@ -1,0 +1,797 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Sales District - Read",
+    "version": "1 ",
+    "description": " The service contains sales  district and sales district text nodes."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/ae/06955b5a0d4005a65680bb4ca61553/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Read sales district master data using this inbound service",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "SAP Analytics Cloud for Planning Integration (SAP_COM_0087)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Import Connection setup with SAP Analytics Cloud (1YB)](https://rapid.sap.com/bp/#/scopeitems/1YB \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_SALESDISTRICT_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_SALESDISTRICT_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_SalesDistrict"
+    },
+    {
+      "name": "A_SalesDistrictText"
+    }
+  ],
+  "paths": {
+    "/A_SalesDistrict": {
+      "get": {
+        "summary": "Get entities from A_SalesDistrict",
+        "tags": [
+          "A_SalesDistrict"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDistrict",
+                "SalesDistrict desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDistrict",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SalesDistrictType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SALESDISTRICT_SRV.A_SalesDistrictType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SalesDistrict('{SalesDistrict}')": {
+      "parameters": [
+        {
+          "name": "SalesDistrict",
+          "in": "path",
+          "required": true,
+          "description": "A geographical sales district or region.  \nEach customer can be assigned to a sales district. You can use sales districts to apply pricing conditions. When you want to generate sales statistics, you can use sales districts as a selection criteria.The system can propose a value from the customer master record of the sold-to party. You can change the value manually in the document at the header or item level.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SalesDistrict by key",
+        "tags": [
+          "A_SalesDistrict"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDistrict",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SalesDistrictType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SALESDISTRICT_SRV.A_SalesDistrictType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SalesDistrict('{SalesDistrict}')/to_Text": {
+      "parameters": [
+        {
+          "name": "SalesDistrict",
+          "in": "path",
+          "required": true,
+          "description": "A geographical sales district or region.  \nEach customer can be assigned to a sales district. You can use sales districts to apply pricing conditions. When you want to generate sales statistics, you can use sales districts as a selection criteria.The system can propose a value from the customer master record of the sold-to party. You can change the value manually in the document at the header or item level.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_Text",
+        "tags": [
+          "A_SalesDistrict",
+          "A_SalesDistrictText"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDistrict",
+                "SalesDistrict desc",
+                "Language",
+                "Language desc",
+                "SalesDistrictName",
+                "SalesDistrictName desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDistrict",
+                "Language",
+                "SalesDistrictName",
+                "to_SalesDistrict"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_SalesDistrict"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SalesDistrictTextType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SALESDISTRICT_SRV.A_SalesDistrictTextType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SalesDistrictText": {
+      "get": {
+        "summary": "Get entities from A_SalesDistrictText",
+        "tags": [
+          "A_SalesDistrictText"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDistrict",
+                "SalesDistrict desc",
+                "Language",
+                "Language desc",
+                "SalesDistrictName",
+                "SalesDistrictName desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDistrict",
+                "Language",
+                "SalesDistrictName",
+                "to_SalesDistrict"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_SalesDistrict"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SalesDistrictTextType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SALESDISTRICT_SRV.A_SalesDistrictTextType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SalesDistrictText(SalesDistrict='{SalesDistrict}',Language='{Language}')": {
+      "parameters": [
+        {
+          "name": "SalesDistrict",
+          "in": "path",
+          "required": true,
+          "description": "A geographical sales district or region.  \nEach customer can be assigned to a sales district. You can use sales districts to apply pricing conditions. When you want to generate sales statistics, you can use sales districts as a selection criteria.The system can propose a value from the customer master record of the sold-to party. You can change the value manually in the document at the header or item level.",
+          "type": "string"
+        },
+        {
+          "name": "Language",
+          "in": "path",
+          "required": true,
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SalesDistrictText by key",
+        "tags": [
+          "A_SalesDistrictText"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDistrict",
+                "Language",
+                "SalesDistrictName",
+                "to_SalesDistrict"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_SalesDistrict"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SalesDistrictTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SALESDISTRICT_SRV.A_SalesDistrictTextType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SalesDistrictText(SalesDistrict='{SalesDistrict}',Language='{Language}')/to_SalesDistrict": {
+      "parameters": [
+        {
+          "name": "SalesDistrict",
+          "in": "path",
+          "required": true,
+          "description": "A geographical sales district or region.  \nEach customer can be assigned to a sales district. You can use sales districts to apply pricing conditions. When you want to generate sales statistics, you can use sales districts as a selection criteria.The system can propose a value from the customer master record of the sold-to party. You can change the value manually in the document at the header or item level.",
+          "type": "string"
+        },
+        {
+          "name": "Language",
+          "in": "path",
+          "required": true,
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_SalesDistrict",
+        "tags": [
+          "A_SalesDistrictText",
+          "A_SalesDistrict"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDistrict",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SalesDistrictType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SALESDISTRICT_SRV.A_SalesDistrictType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_SALESDISTRICT_SRV.A_SalesDistrictType": {
+      "type": "object",
+      "properties": {
+        "SalesDistrict": {
+          "type": "string",
+          "maxLength": 6,
+          "title": "Sales District",
+          "description": "A geographical sales district or region.  \nEach customer can be assigned to a sales district. You can use sales districts to apply pricing conditions. When you want to generate sales statistics, you can use sales districts as a selection criteria.The system can propose a value from the customer master record of the sold-to party. You can change the value manually in the document at the header or item level."
+        },
+        "to_Text": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SALESDISTRICT_SRV.A_SalesDistrictTextType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API Sales District"
+    },
+    "API_SALESDISTRICT_SRV.A_SalesDistrictType-create": {
+      "type": "object",
+      "properties": {
+        "SalesDistrict": {
+          "type": "string",
+          "maxLength": 6,
+          "title": "Sales District",
+          "description": "A geographical sales district or region.  \nEach customer can be assigned to a sales district. You can use sales districts to apply pricing conditions. When you want to generate sales statistics, you can use sales districts as a selection criteria.The system can propose a value from the customer master record of the sold-to party. You can change the value manually in the document at the header or item level."
+        },
+        "to_Text": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SALESDISTRICT_SRV.A_SalesDistrictTextType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "SalesDistrict"
+      ],
+      "title": "API Sales District (for create)"
+    },
+    "API_SALESDISTRICT_SRV.A_SalesDistrictType-update": {
+      "type": "object",
+      "title": "API Sales District (for update)"
+    },
+    "API_SALESDISTRICT_SRV.A_SalesDistrictTextType": {
+      "type": "object",
+      "properties": {
+        "SalesDistrict": {
+          "type": "string",
+          "maxLength": 6,
+          "title": "Sales District",
+          "description": "A geographical sales district or region.  \nEach customer can be assigned to a sales district. You can use sales districts to apply pricing conditions. When you want to generate sales statistics, you can use sales districts as a selection criteria.The system can propose a value from the customer master record of the sold-to party. You can change the value manually in the document at the header or item level."
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "SalesDistrictName": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "District name",
+          "description": "Name of the district"
+        },
+        "to_SalesDistrict": {
+          "$ref": "#/definitions/API_SALESDISTRICT_SRV.A_SalesDistrictType"
+        }
+      },
+      "title": "API Sales District Text"
+    },
+    "API_SALESDISTRICT_SRV.A_SalesDistrictTextType-create": {
+      "type": "object",
+      "properties": {
+        "SalesDistrict": {
+          "type": "string",
+          "maxLength": 6,
+          "title": "Sales District",
+          "description": "A geographical sales district or region.  \nEach customer can be assigned to a sales district. You can use sales districts to apply pricing conditions. When you want to generate sales statistics, you can use sales districts as a selection criteria.The system can propose a value from the customer master record of the sold-to party. You can change the value manually in the document at the header or item level."
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "SalesDistrictName": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "District name",
+          "description": "Name of the district"
+        },
+        "to_SalesDistrict": {
+          "$ref": "#/definitions/API_SALESDISTRICT_SRV.A_SalesDistrictType-create"
+        }
+      },
+      "required": [
+        "SalesDistrict",
+        "Language"
+      ],
+      "title": "API Sales District Text (for create)"
+    },
+    "API_SALESDISTRICT_SRV.A_SalesDistrictTextType-update": {
+      "type": "object",
+      "properties": {
+        "SalesDistrictName": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "District name",
+          "description": "Name of the district"
+        }
+      },
+      "title": "API Sales District Text (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

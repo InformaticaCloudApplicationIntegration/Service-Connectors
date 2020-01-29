@@ -1,0 +1,602 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Warehouse Resource - Create, Read, Update, Delete (A2X)",
+    "version": "1 ",
+    "description": "You can use this service to integrate external  applications with warehouse resources in SAP S/4HANA  Cloud. In every API call, you can make use of the  following operations:\n - You can retrieve warehouse  resources. Apply any of the filters provided or retrieve  all existing data.\n - You can create and delete  warehouse resources.\n - You can update existing  warehouse resources (log on, log off)."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com/viewer/0484525e527f4f289399abb5a67ac1dc/latest/en-US/bdd0b88001154ebcb47de632c68ce0fb.html"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "You can use this service to integrate external applications with warehouse resources in SAP S/4HANA Cloud",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Warehousing - Process Warehouse Task Integration (SAP_COM_0353)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Resource Management in Warehousing (3W0)](https://rapid.sap.com/bp/#/scopeitems/3W0 \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509, OAuth2",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Business Object",
+      "values": [
+        {
+          "text": "WarehouseResource",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_WAREHOUSE_RESOURCE",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_WAREHOUSE_RESOURCE",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "WarehouseResource"
+    }
+  ],
+  "paths": {
+    "/WarehouseResource": {
+      "get": {
+        "summary": "Get entities from WarehouseResource",
+        "tags": [
+          "WarehouseResource"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "Warehouse desc",
+                "WarehouseResource",
+                "WarehouseResource desc",
+                "UserName",
+                "UserName desc",
+                "ResourceLogonDateTime",
+                "ResourceLogonDateTime desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "WarehouseResource",
+                "UserName",
+                "ResourceLogonDateTime"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of WarehouseResourceType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/cds_api_warehouse_resource.WarehouseResourceType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to WarehouseResource",
+        "tags": [
+          "WarehouseResource"
+        ],
+        "parameters": [
+          {
+            "name": "WarehouseResourceType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/cds_api_warehouse_resource.WarehouseResourceType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "WarehouseResourceType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/cds_api_warehouse_resource.WarehouseResourceType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/WarehouseResource(Warehouse='{Warehouse}',WarehouseResource='{WarehouseResource}')": {
+      "get": {
+        "summary": "Get entity from WarehouseResource by key",
+        "tags": [
+          "WarehouseResource"
+        ],
+        "parameters": [
+          {
+            "name": "Warehouse",
+            "in": "path",
+            "required": true,
+            "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number.",
+            "type": "string"
+          },
+          {
+            "name": "WarehouseResource",
+            "in": "path",
+            "required": true,
+            "description": "Resource (Means of Transportation or User)",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "WarehouseResource",
+                "UserName",
+                "ResourceLogonDateTime"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "WarehouseResourceType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/cds_api_warehouse_resource.WarehouseResourceType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete entity from WarehouseResource",
+        "tags": [
+          "WarehouseResource"
+        ],
+        "parameters": [
+          {
+            "name": "Warehouse",
+            "in": "path",
+            "required": true,
+            "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number.",
+            "type": "string"
+          },
+          {
+            "name": "WarehouseResource",
+            "in": "path",
+            "required": true,
+            "description": "Resource (Means of Transportation or User)",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/LogoffFromWarehouseResource": {
+      "post": {
+        "summary": "Invoke action LogoffFromWarehouseResource",
+        "tags": [
+          "WarehouseResource"
+        ],
+        "parameters": [
+          {
+            "name": "Warehouse",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Number  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WarehouseResource",
+            "in": "query",
+            "required": true,
+            "description": "Resource  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "WarehouseResourceType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/cds_api_warehouse_resource.WarehouseResourceType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/LogonToWarehouseResource": {
+      "post": {
+        "summary": "Invoke action LogonToWarehouseResource",
+        "tags": [
+          "WarehouseResource"
+        ],
+        "parameters": [
+          {
+            "name": "Warehouse",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Number  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WarehouseResource",
+            "in": "query",
+            "required": true,
+            "description": "Resource  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "WarehouseResourceType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/cds_api_warehouse_resource.WarehouseResourceType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET WarehouseResource HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "cds_api_warehouse_resource.WarehouseResourceType": {
+      "type": "object",
+      "properties": {
+        "Warehouse": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Warehouse Number",
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number."
+        },
+        "WarehouseResource": {
+          "type": "string",
+          "maxLength": 18,
+          "title": "Resource",
+          "description": "Resource (Means of Transportation or User)"
+        },
+        "UserName": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User",
+          "description": "User Name in User Master Record"
+        },
+        "ResourceLogonDateTime": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1,
+          "minimum": -999999999999999,
+          "maximum": 999999999999999,
+          "example": "0"
+        }
+      },
+      "title": "WarehouseResource"
+    },
+    "cds_api_warehouse_resource.WarehouseResourceType-create": {
+      "type": "object",
+      "properties": {
+        "Warehouse": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Warehouse Number",
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number."
+        },
+        "WarehouseResource": {
+          "type": "string",
+          "maxLength": 18,
+          "title": "Resource",
+          "description": "Resource (Means of Transportation or User)"
+        },
+        "UserName": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User",
+          "description": "User Name in User Master Record"
+        },
+        "ResourceLogonDateTime": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1,
+          "minimum": -999999999999999,
+          "maximum": 999999999999999,
+          "example": "0"
+        }
+      },
+      "required": [
+        "Warehouse",
+        "WarehouseResource"
+      ],
+      "title": "WarehouseResource (for create)"
+    },
+    "cds_api_warehouse_resource.WarehouseResourceType-update": {
+      "type": "object",
+      "properties": {
+        "UserName": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User",
+          "description": "User Name in User Master Record"
+        },
+        "ResourceLogonDateTime": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1,
+          "minimum": -999999999999999,
+          "maximum": 999999999999999,
+          "example": "0"
+        }
+      },
+      "title": "WarehouseResource (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Count](http://www.odata.org/documentation/odata-version-2-0/uri-conventions/#InlinecountSystemQueryOption)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

@@ -1,0 +1,714 @@
+{
+  "x-odata-version": "2.0",
+  "swagger": "2.0",
+  "info": {
+    "title": "Read Cost Center Data",
+    "version": "1",
+    "description": "Cost Center Data Provider"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Cost Center Data Provider",
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/FCO_PI_COST_CENTER",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/FCO_PI_COST_CENTER",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "definitions": {
+    "odata.error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/odata.error.main"
+        }
+      }
+    },
+    "odata.error.main": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/odata.error.detail"
+          }
+        },
+        "innererror": {
+          "description": "The contents of this object are service-defined"
+        }
+      }
+    },
+    "odata.error.detail": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    },
+    "FCO_PI_COST_CENTER.CostCenter": {
+      "type": "object",
+      "x-keys": [
+        "CompanyCode",
+        "CostCenterID",
+        "ValidityEndDate"
+      ],
+      "properties": {
+        "CompanyCode": {
+          "type": "string",
+          "maxLength": 4,
+          "x-annotations": {
+            "@Common.Label": "Company Code"
+          }
+        },
+        "CostCenterID": {
+          "type": "string",
+          "maxLength": 10,
+          "x-annotations": {
+            "@Common.Label": "Cost Center"
+          }
+        },
+        "ValidityEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "x-precision": 0,
+          "x-annotations": {
+            "@Common.Label": "Valid To"
+          }
+        },
+        "ValidityStartDate": {
+"type": "string",
+"default": "null",
+          "x-nullable": true,
+          "format": "date-time",
+          "x-precision": 0,
+          "x-annotations": {
+            "@Common.Label": "Valid From"
+          }
+        },
+        "Status": {
+"type": "string",
+"default": "null",
+          "x-nullable": true,
+          "maxLength": 10,
+          "x-annotations": {
+            "@Common.Label": "Character Field Length = 10"
+          }
+        },
+        "Category": {
+"type": "string",
+"default": "null",
+          "x-nullable": true,
+          "maxLength": 1,
+          "x-annotations": {
+            "@Common.Label": "CCtr Category"
+          }
+        },
+        "Language": {
+"type": "string",
+"default": "null",
+          "x-nullable": true,
+          "maxLength": 2,
+          "x-annotations": {
+            "@Common.Label": "Language Key"
+          }
+        },
+        "CostCenterName": {
+"type": "string",
+"default": "null",
+          "x-nullable": true,
+          "maxLength": 20,
+          "x-annotations": {
+            "@Common.Label": "Name"
+          }
+        },
+        "CostCenterDescription": {
+"type": "string",
+"default": "null",
+          "x-nullable": true,
+          "maxLength": 40,
+          "x-annotations": {
+            "@Common.Label": "Long Text"
+          }
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "x-nullable": true,
+          "format": "date-time",
+          "x-precision": 0,
+          "x-annotations": {
+            "@Common.Label": "Time Stamp"
+          }
+        },
+        "CostCenterTexts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FCO_PI_COST_CENTER.CostCenterText"
+          },
+          "x-relationship": {}
+        }
+      }
+    },
+    "FCO_PI_COST_CENTER.CostCenterText": {
+      "type": "object",
+      "x-keys": [
+        "CompanyCode",
+        "CostCenterID",
+        "ValidityEndDate",
+        "Language"
+      ],
+      "properties": {
+        "CompanyCode": {
+          "type": "string",
+          "maxLength": 4,
+          "x-annotations": {
+            "@Common.Label": "Company Code"
+          }
+        },
+        "CostCenterID": {
+          "type": "string",
+          "maxLength": 10,
+          "x-annotations": {
+            "@Common.Label": "Cost Center"
+          }
+        },
+        "ValidityEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "x-precision": 0,
+          "x-annotations": {
+            "@Common.Label": "Valid To"
+          }
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "x-annotations": {
+            "@Common.Label": "Language Key"
+          }
+        },
+        "CostCenterName": {
+"type": "string",
+"default": "null",
+          "x-nullable": true,
+          "maxLength": 20,
+          "x-annotations": {
+            "@Common.Label": "Name"
+          }
+        },
+        "CostCenterDescription": {
+"type": "string",
+"default": "null",
+          "x-nullable": true,
+          "maxLength": 40,
+          "x-annotations": {
+            "@Common.Label": "Long Text"
+          }
+        }
+      }
+    }
+  },
+  "x-schemas": {
+    "Org.OData.Core.V1": {
+      "uri": "http://localhost/examples/Org.OData.Core.V1.openapi.json"
+    },
+    "Core": {
+      "aliasFor": "Org.OData.Core.V1"
+    },
+    "Org.OData.Capabilities.V1": {
+      "uri": "http://localhost/examples/Org.OData.Capabilities.V1.openapi.json"
+    },
+    "Capabilities": {
+      "aliasFor": "Org.OData.Capabilities.V1"
+    },
+    "FCO_PI_COST_CENTER": {}
+  },
+  "x-entityContainer": {
+    "name": "FCO_PI_COST_CENTER_Entities",
+    "resources": {
+      "CostCenterCollection": {
+        "kind": "EntitySet",
+        "entityType": "FCO_PI_COST_CENTER.CostCenter",
+        "navigationPropertyBindings": {
+          "CostCenterTexts": "CostCenterTextCollection"
+        },
+        "@Capabilities.InsertRestrictions": {
+          "Insertable": false
+        },
+        "@Capabilities.UpdateRestrictions": {
+          "Updatable": false
+        },
+        "@Capabilities.DeleteRestrictions": {
+          "Deletable": false
+        }
+      },
+      "CostCenterTextCollection": {
+        "kind": "EntitySet",
+        "entityType": "FCO_PI_COST_CENTER.CostCenterText",
+        "@Capabilities.InsertRestrictions": {
+          "Insertable": false
+        },
+        "@Capabilities.UpdateRestrictions": {
+          "Updatable": false
+        },
+        "@Capabilities.DeleteRestrictions": {
+          "Deletable": false
+        }
+      }
+    },
+    "@TODO.supported_formats": "atom json xlsx"
+  },
+  "paths": {
+    "/CostCenterCollection": {
+      "get": {
+        "summary": "Get entities from entity set CostCenterCollection",
+        "description": "Get entities from entity set CostCenterCollection",
+        "tags": [
+          "CostCenterCollection"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398305)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            },
+            "enum": [
+              "CompanyCode",
+              "CompanyCode desc",
+              "CostCenterID",
+              "CostCenterID desc",
+              "ValidityEndDate",
+              "ValidityEndDate desc",
+              "ValidityStartDate",
+              "ValidityStartDate desc",
+              "Status",
+              "Status desc",
+              "Category",
+              "Category desc",
+              "Language",
+              "Language desc",
+              "CostCenterName",
+              "CostCenterName desc",
+              "CostCenterDescription",
+              "CostCenterDescription desc",
+              "LastChangeDateTime",
+              "LastChangeDateTime desc"
+            ]
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398297)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            },
+            "enum": [
+              "CompanyCode",
+              "CostCenterID",
+              "ValidityEndDate",
+              "ValidityStartDate",
+              "Status",
+              "Category",
+              "Language",
+              "CostCenterName",
+              "CostCenterDescription",
+              "LastChangeDateTime"
+            ]
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398298)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            },
+            "enum": [
+              "CostCenterTexts"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "EntitySet CostCenterCollection",
+            "schema": {
+              "type": "object",
+              "title": "Collection of FCO_PI_COST_CENTER.CostCenter",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/FCO_PI_COST_CENTER.CostCenter"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        }
+      }
+    },
+    "/CostCenterCollection(CompanyCode='{CompanyCode}',CostCenterID='{CostCenterID}',ValidityEndDate={ValidityEndDate})": {
+      "get": {
+        "summary": "Get entity from CostCenterCollection by key.",
+        "description": "Returns the entity with the key from CostCenterCollection",
+        "tags": [
+          "CostCenterCollection"
+        ],
+        "parameters": [
+          {
+            "name": "CompanyCode",
+            "in": "path",
+            "required": true,
+            "description": "key: CompanyCode",
+            "type": "string"
+          },
+          {
+            "name": "CostCenterID",
+            "in": "path",
+            "required": true,
+            "description": "key: CostCenterID",
+            "type": "string"
+          },
+          {
+            "name": "ValidityEndDate",
+            "in": "path",
+            "required": true,
+            "description": "key: ValidityEndDate",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398297)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            },
+            "enum": [
+              "CompanyCode",
+              "CostCenterID",
+              "ValidityEndDate",
+              "ValidityStartDate",
+              "Status",
+              "Category",
+              "Language",
+              "CostCenterName",
+              "CostCenterDescription",
+              "LastChangeDateTime"
+            ]
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398298)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            },
+            "enum": [
+              "CostCenterTexts"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "EntitySet CostCenterCollection",
+            "schema": {
+              "$ref": "#/definitions/FCO_PI_COST_CENTER.CostCenter"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        }
+      }
+    },
+    "/CostCenterTextCollection": {
+      "get": {
+        "summary": "Get entities from entity set CostCenterTextCollection",
+        "description": "Get entities from entity set CostCenterTextCollection",
+        "tags": [
+          "CostCenterTextCollection"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398305)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            },
+            "enum": [
+              "CompanyCode",
+              "CompanyCode desc",
+              "CostCenterID",
+              "CostCenterID desc",
+              "ValidityEndDate",
+              "ValidityEndDate desc",
+              "Language",
+              "Language desc",
+              "CostCenterName",
+              "CostCenterName desc",
+              "CostCenterDescription",
+              "CostCenterDescription desc"
+            ]
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398297)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            },
+            "enum": [
+              "CompanyCode",
+              "CostCenterID",
+              "ValidityEndDate",
+              "Language",
+              "CostCenterName",
+              "CostCenterDescription"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "EntitySet CostCenterTextCollection",
+            "schema": {
+              "type": "object",
+              "title": "Collection of FCO_PI_COST_CENTER.CostCenterText",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/FCO_PI_COST_CENTER.CostCenterText"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        }
+      }
+    },
+    "/CostCenterTextCollection(CompanyCode='{CompanyCode}',CostCenterID='{CostCenterID}',ValidityEndDate={ValidityEndDate},Language='{Language}')": {
+      "get": {
+        "summary": "Get entity from CostCenterTextCollection by key.",
+        "description": "Returns the entity with the key from CostCenterTextCollection",
+        "tags": [
+          "CostCenterTextCollection"
+        ],
+        "parameters": [
+          {
+            "name": "CompanyCode",
+            "in": "path",
+            "required": true,
+            "description": "key: CompanyCode",
+            "type": "string"
+          },
+          {
+            "name": "CostCenterID",
+            "in": "path",
+            "required": true,
+            "description": "key: CostCenterID",
+            "type": "string"
+          },
+          {
+            "name": "ValidityEndDate",
+            "in": "path",
+            "required": true,
+            "description": "key: ValidityEndDate",
+            "type": "string"
+          },
+          {
+            "name": "Language",
+            "in": "path",
+            "required": true,
+            "description": "key: Language",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398297)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            },
+            "enum": [
+              "CompanyCode",
+              "CostCenterID",
+              "ValidityEndDate",
+              "Language",
+              "CostCenterName",
+              "CostCenterDescription"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "EntitySet CostCenterTextCollection",
+            "schema": {
+              "$ref": "#/definitions/FCO_PI_COST_CENTER.CostCenterText"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/odata.error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "expand": {
+      "name": "$expand",
+      "in": "query",
+      "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398298)",
+      "type": "string"
+    },
+    "select": {
+      "name": "$select",
+      "in": "query",
+      "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398297)",
+      "type": "string"
+    },
+    "orderby": {
+      "name": "$orderby",
+      "in": "query",
+      "description": "Order by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398305)",
+      "type": "string"
+    },
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n elements, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398306)",
+      "type": "integer"
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n elements, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398307)",
+      "type": "integer"
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [OData Count](http://www.odata.org/documentation/odata-version-2-0/uri-conventions/#InlinecountSystemQueryOption)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    },
+    "filter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Filter elements by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398301)",
+      "type": "string"
+    },
+    "search": {
+      "name": "search",
+      "in": "query",
+      "description": "Search elements by search phrases, see [OData Searching](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html#_Toc406398309)",
+      "type": "string"
+    }
+  }
+}

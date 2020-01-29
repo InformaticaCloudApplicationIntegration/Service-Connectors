@@ -1,0 +1,859 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Product Group - Read",
+    "version": "1 ",
+    "description": " The service contains  product group and product group text  nodes."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/9e/784f0993264356b10ae4c6897204c0/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Read product group master data using this inbound service",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "SAP Analytics Cloud for Planning Integration (SAP_COM_0087)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Import Connection setup with SAP Analytics Cloud (1YB)](https://rapid.sap.com/bp/#/scopeitems/1YB \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_PRODUCTGROUP_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_PRODUCTGROUP_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_ProductGroup"
+    },
+    {
+      "name": "A_ProductGroupText"
+    }
+  ],
+  "paths": {
+    "/A_ProductGroup": {
+      "get": {
+        "summary": "Get entities from A_ProductGroup",
+        "tags": [
+          "A_ProductGroup"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialGroup",
+                "MaterialGroup desc",
+                "AuthorizationGroup",
+                "AuthorizationGroup desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialGroup",
+                "AuthorizationGroup",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ProductGroupType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PRODUCTGROUP_SRV.A_ProductGroupType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProductGroup('{MaterialGroup}')": {
+      "parameters": [
+        {
+          "name": "MaterialGroup",
+          "in": "path",
+          "required": true,
+          "description": "Key that you use to group together several products or services with the same attributes, and to assign them to a particular product group.  \nYou can use product groups to:Restrict the scope of analysesSearch specifically for product master records via search helpsIf you have not defined a product group hierarchy using the classification system, you maintain product groups in Customizing for the Material Master in Define material groups.If you have defined a product group hierarchy, which is normally the case in retail, you maintain product groups in Customizing for Material Groups or from the initial Retailing screen by choosing Master data -> Material group.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_ProductGroup by key",
+        "tags": [
+          "A_ProductGroup"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialGroup",
+                "AuthorizationGroup",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ProductGroupType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCTGROUP_SRV.A_ProductGroupType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProductGroup('{MaterialGroup}')/to_Text": {
+      "parameters": [
+        {
+          "name": "MaterialGroup",
+          "in": "path",
+          "required": true,
+          "description": "Key that you use to group together several products or services with the same attributes, and to assign them to a particular product group.  \nYou can use product groups to:Restrict the scope of analysesSearch specifically for product master records via search helpsIf you have not defined a product group hierarchy using the classification system, you maintain product groups in Customizing for the Material Master in Define material groups.If you have defined a product group hierarchy, which is normally the case in retail, you maintain product groups in Customizing for Material Groups or from the initial Retailing screen by choosing Master data -> Material group.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_Text",
+        "tags": [
+          "A_ProductGroup",
+          "A_ProductGroupText"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialGroup",
+                "MaterialGroup desc",
+                "Language",
+                "Language desc",
+                "MaterialGroupName",
+                "MaterialGroupName desc",
+                "MaterialGroupText",
+                "MaterialGroupText desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialGroup",
+                "Language",
+                "MaterialGroupName",
+                "MaterialGroupText",
+                "to_MaterialGroup"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_MaterialGroup"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ProductGroupTextType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PRODUCTGROUP_SRV.A_ProductGroupTextType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProductGroupText": {
+      "get": {
+        "summary": "Get entities from A_ProductGroupText",
+        "tags": [
+          "A_ProductGroupText"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialGroup",
+                "MaterialGroup desc",
+                "Language",
+                "Language desc",
+                "MaterialGroupName",
+                "MaterialGroupName desc",
+                "MaterialGroupText",
+                "MaterialGroupText desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialGroup",
+                "Language",
+                "MaterialGroupName",
+                "MaterialGroupText",
+                "to_MaterialGroup"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_MaterialGroup"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_ProductGroupTextType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PRODUCTGROUP_SRV.A_ProductGroupTextType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProductGroupText(MaterialGroup='{MaterialGroup}',Language='{Language}')": {
+      "parameters": [
+        {
+          "name": "MaterialGroup",
+          "in": "path",
+          "required": true,
+          "description": "Key that you use to group together several products or services with the same attributes, and to assign them to a particular product group.  \nYou can use product groups to:Restrict the scope of analysesSearch specifically for product master records via search helpsIf you have not defined a product group hierarchy using the classification system, you maintain product groups in Customizing for the Material Master in Define material groups.If you have defined a product group hierarchy, which is normally the case in retail, you maintain product groups in Customizing for Material Groups or from the initial Retailing screen by choosing Master data -> Material group.",
+          "type": "string"
+        },
+        {
+          "name": "Language",
+          "in": "path",
+          "required": true,
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_ProductGroupText by key",
+        "tags": [
+          "A_ProductGroupText"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialGroup",
+                "Language",
+                "MaterialGroupName",
+                "MaterialGroupText",
+                "to_MaterialGroup"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_MaterialGroup"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ProductGroupTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCTGROUP_SRV.A_ProductGroupTextType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_ProductGroupText(MaterialGroup='{MaterialGroup}',Language='{Language}')/to_MaterialGroup": {
+      "parameters": [
+        {
+          "name": "MaterialGroup",
+          "in": "path",
+          "required": true,
+          "description": "Key that you use to group together several products or services with the same attributes, and to assign them to a particular product group.  \nYou can use product groups to:Restrict the scope of analysesSearch specifically for product master records via search helpsIf you have not defined a product group hierarchy using the classification system, you maintain product groups in Customizing for the Material Master in Define material groups.If you have defined a product group hierarchy, which is normally the case in retail, you maintain product groups in Customizing for Material Groups or from the initial Retailing screen by choosing Master data -> Material group.",
+          "type": "string"
+        },
+        {
+          "name": "Language",
+          "in": "path",
+          "required": true,
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_MaterialGroup",
+        "tags": [
+          "A_ProductGroupText",
+          "A_ProductGroup"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "MaterialGroup",
+                "AuthorizationGroup",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_ProductGroupType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PRODUCTGROUP_SRV.A_ProductGroupType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_PRODUCTGROUP_SRV.A_ProductGroupType": {
+      "type": "object",
+      "properties": {
+        "MaterialGroup": {
+          "type": "string",
+          "maxLength": 9,
+          "title": "Product Group",
+          "description": "Key that you use to group together several products or services with the same attributes, and to assign them to a particular product group.  \nYou can use product groups to:Restrict the scope of analysesSearch specifically for product master records via search helpsIf you have not defined a product group hierarchy using the classification system, you maintain product groups in Customizing for the Material Master in Define material groups.If you have defined a product group hierarchy, which is normally the case in retail, you maintain product groups in Customizing for Material Groups or from the initial Retailing screen by choosing Master data -> Material group."
+        },
+        "AuthorizationGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Authorization Group",
+          "description": "The authorization group enables you protect access to certain objects.  \nIn order to carry out a specific activity, the user must have authorization for the combination of the activity and the authorization group."
+        },
+        "to_Text": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PRODUCTGROUP_SRV.A_ProductGroupTextType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API Product Group Value Help"
+    },
+    "API_PRODUCTGROUP_SRV.A_ProductGroupType-create": {
+      "type": "object",
+      "properties": {
+        "MaterialGroup": {
+          "type": "string",
+          "maxLength": 9,
+          "title": "Product Group",
+          "description": "Key that you use to group together several products or services with the same attributes, and to assign them to a particular product group.  \nYou can use product groups to:Restrict the scope of analysesSearch specifically for product master records via search helpsIf you have not defined a product group hierarchy using the classification system, you maintain product groups in Customizing for the Material Master in Define material groups.If you have defined a product group hierarchy, which is normally the case in retail, you maintain product groups in Customizing for Material Groups or from the initial Retailing screen by choosing Master data -> Material group."
+        },
+        "AuthorizationGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Authorization Group",
+          "description": "The authorization group enables you protect access to certain objects.  \nIn order to carry out a specific activity, the user must have authorization for the combination of the activity and the authorization group."
+        },
+        "to_Text": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PRODUCTGROUP_SRV.A_ProductGroupTextType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "MaterialGroup"
+      ],
+      "title": "API Product Group Value Help (for create)"
+    },
+    "API_PRODUCTGROUP_SRV.A_ProductGroupType-update": {
+      "type": "object",
+      "properties": {
+        "AuthorizationGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Authorization Group",
+          "description": "The authorization group enables you protect access to certain objects.  \nIn order to carry out a specific activity, the user must have authorization for the combination of the activity and the authorization group."
+        }
+      },
+      "title": "API Product Group Value Help (for update)"
+    },
+    "API_PRODUCTGROUP_SRV.A_ProductGroupTextType": {
+      "type": "object",
+      "properties": {
+        "MaterialGroup": {
+          "type": "string",
+          "maxLength": 9,
+          "title": "Product Group",
+          "description": "Key that you use to group together several products or services with the same attributes, and to assign them to a particular product group.  \nYou can use product groups to:Restrict the scope of analysesSearch specifically for product master records via search helpsIf you have not defined a product group hierarchy using the classification system, you maintain product groups in Customizing for the Material Master in Define material groups.If you have defined a product group hierarchy, which is normally the case in retail, you maintain product groups in Customizing for Material Groups or from the initial Retailing screen by choosing Master data -> Material group."
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "MaterialGroupName": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Prod Grp Desc.",
+          "description": "Product Group Description"
+        },
+        "MaterialGroupText": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Mat.Grp Desc. 2",
+          "description": "Description of the Material Group  \nAdditional full name for the material group."
+        },
+        "to_MaterialGroup": {
+          "$ref": "#/definitions/API_PRODUCTGROUP_SRV.A_ProductGroupType"
+        }
+      },
+      "title": "API Product Group Value Help Text"
+    },
+    "API_PRODUCTGROUP_SRV.A_ProductGroupTextType-create": {
+      "type": "object",
+      "properties": {
+        "MaterialGroup": {
+          "type": "string",
+          "maxLength": 9,
+          "title": "Product Group",
+          "description": "Key that you use to group together several products or services with the same attributes, and to assign them to a particular product group.  \nYou can use product groups to:Restrict the scope of analysesSearch specifically for product master records via search helpsIf you have not defined a product group hierarchy using the classification system, you maintain product groups in Customizing for the Material Master in Define material groups.If you have defined a product group hierarchy, which is normally the case in retail, you maintain product groups in Customizing for Material Groups or from the initial Retailing screen by choosing Master data -> Material group."
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "MaterialGroupName": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Prod Grp Desc.",
+          "description": "Product Group Description"
+        },
+        "MaterialGroupText": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Mat.Grp Desc. 2",
+          "description": "Description of the Material Group  \nAdditional full name for the material group."
+        },
+        "to_MaterialGroup": {
+          "$ref": "#/definitions/API_PRODUCTGROUP_SRV.A_ProductGroupType-create"
+        }
+      },
+      "required": [
+        "MaterialGroup",
+        "Language"
+      ],
+      "title": "API Product Group Value Help Text (for create)"
+    },
+    "API_PRODUCTGROUP_SRV.A_ProductGroupTextType-update": {
+      "type": "object",
+      "properties": {
+        "MaterialGroupName": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Prod Grp Desc.",
+          "description": "Product Group Description"
+        },
+        "MaterialGroupText": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Mat.Grp Desc. 2",
+          "description": "Description of the Material Group  \nAdditional full name for the material group."
+        }
+      },
+      "title": "API Product Group Value Help Text (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

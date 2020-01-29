@@ -1,0 +1,629 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Read Country",
+    "version": "1 ",
+    "description": "This service enables you to read  country master data in an API call. It is based on  the OData protocol, and can be consumed in Fiori  apps and on other user interfaces."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com/viewer/5481b98735ce445cba413bec2e7b2272/latest/en-US/78fb82519e564b14a659f8e029713b74.html"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "This service enables you to read  country master data in an API call.",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "SAP Business Objects Cloud for Planning Integration (SAP_COM_0087)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[oData Integration with SAP Business Objects Cloud for Planning (1YB)](https://rapid.sap.com/bp/#/scopeitems/1YB \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_COUNTRY_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_COUNTRY_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_Country"
+    },
+    {
+      "name": "A_CountryText"
+    }
+  ],
+  "paths": {
+    "/A_Country": {
+      "get": {
+        "summary": "Get entities from A_Country",
+        "tags": [
+          "A_Country"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Country",
+                "Country desc",
+                "CountryCurrency",
+                "CountryCurrency desc",
+                "IndexBasedCurrency",
+                "IndexBasedCurrency desc",
+                "HardCurrency",
+                "HardCurrency desc",
+                "TaxCalculationProcedure",
+                "TaxCalculationProcedure desc",
+                "CountryThreeLetterISOCode",
+                "CountryThreeLetterISOCode desc",
+                "CountryThreeDigitISOCode",
+                "CountryThreeDigitISOCode desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Country",
+                "CountryCurrency",
+                "IndexBasedCurrency",
+                "HardCurrency",
+                "TaxCalculationProcedure",
+                "CountryThreeLetterISOCode",
+                "CountryThreeDigitISOCode",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_CountryType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_COUNTRY_SRV.A_CountryType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_Country('{Country}')": {
+      "get": {
+        "summary": "Get entity from A_Country by key",
+        "tags": [
+          "A_Country"
+        ],
+        "parameters": [
+          {
+            "name": "Country",
+            "in": "path",
+            "required": true,
+            "description": "Country Key  \nHere you specify the country key for the customer or vendor.",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Country",
+                "CountryCurrency",
+                "IndexBasedCurrency",
+                "HardCurrency",
+                "TaxCalculationProcedure",
+                "CountryThreeLetterISOCode",
+                "CountryThreeDigitISOCode",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_CountryType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_COUNTRY_SRV.A_CountryType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_CountryText": {
+      "get": {
+        "summary": "Get entities from A_CountryText",
+        "tags": [
+          "A_CountryText"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Country",
+                "Country desc",
+                "Language",
+                "Language desc",
+                "CountryName",
+                "CountryName desc",
+                "NationalityName",
+                "NationalityName desc",
+                "NationalityLongName",
+                "NationalityLongName desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Country",
+                "Language",
+                "CountryName",
+                "NationalityName",
+                "NationalityLongName",
+                "to_Country"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Country"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_CountryTextType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_COUNTRY_SRV.A_CountryTextType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_CountryText(Country='{Country}',Language='{Language}')": {
+      "get": {
+        "summary": "Get entity from A_CountryText by key",
+        "tags": [
+          "A_CountryText"
+        ],
+        "parameters": [
+          {
+            "name": "Country",
+            "in": "path",
+            "required": true,
+            "description": "The country key contains information which the system uses to check entries such as the length of the postal code or bank account number.  \nThe two-character ISO code in accordance with ISO 3166, which is delivered by SAP as a default, is usually used.It could also be the vehicle license plate country-code or a typical country key, for example, in Germany the Federal statistics office key.The country keys are determined at system installation in the global settings.The definition of the country key in the SAP system does not have to match political or government entities.Since the country key does not have to correspond to the ISO code in all installations, programs that differ according to certain values of the country key cannot query the country key T005-LAND1, but have to program based on the ISO code T005 INTCA.",
+            "type": "string"
+          },
+          {
+            "name": "Language",
+            "in": "path",
+            "required": true,
+            "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Country",
+                "Language",
+                "CountryName",
+                "NationalityName",
+                "NationalityLongName",
+                "to_Country"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Country"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_CountryTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_COUNTRY_SRV.A_CountryTextType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_COUNTRY_SRV.A_CountryType": {
+      "type": "object",
+      "properties": {
+        "Country": {
+          "type": "string",
+          "maxLength": 3,
+          "title": "Country",
+          "description": "Country Key  \nHere you specify the country key for the customer or vendor."
+        },
+        "CountryCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Country Currency",
+          "description": "Key for the country currency.  \nIf the tax amounts for particular codes are reported in a country other than the company code country, then it is necessary to translate them into the corresponding country currency. The currency key specified here is used for this translation.The \"Plants abroad\" parameter must be active in order to use this field."
+        },
+        "IndexBasedCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Index-Based Currency",
+          "description": "Currency Key of the Index-Based Currency  \nSpecifies the country-specific, fictitious currency.  \nAn index-based currency is stipulated for external reporting (for example, tax returns), in some countries with high inflation."
+        },
+        "HardCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Hard Currency",
+          "description": "Currency Key of the Hard Currency  \nSpecifies the country-specific second currency.  \nA hard currency is used in countries with high inflation."
+        },
+        "TaxCalculationProcedure": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "Procedure",
+          "description": "Procedure (Pricing, Output Control, Acct. Det., Costing,...)  \nSpecifies the conditions that are allowed for a document and defines the sequence in which they are used.  \nProcedures are used, for example, in the following applications:Pricing in Sales and DistributionAccount determinationCalculating taxes on sales/purchases"
+        },
+        "CountryThreeLetterISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "title": "ISO Code 3 Char",
+          "description": "ISO Country Code 3 Characters  \nInternational standardized 3-character country key  \nThe key is used, e.g. for data exchange with banks via OFX (Open Financial Exchange).It is not the same as the more commonly used 2-character ISO country code or the 3-character numeric INTRASTAT country code.Enter the 3-character ISO country code for all countries if you want to exchange data with banks via OFX."
+        },
+        "CountryThreeDigitISOCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "title": "ISO Code Num. 3",
+          "description": "ISO Country Code Numeric 3-Characters  \n3-character numeric ISO country code  \nThis 3-character numeric ISO country code is listed for all countries, for example, in the Internet under the address  http://www.un.org/Depts/unsd/methods/m49alpha.htm.The code is not to be confused with the 2-character ISO country code, which is more frequently used, the 3-character numeric INTRASTAT country code, or the  3-character non-numeric ISO country code.The use of this 3-character numeric ISO code is required by law in countries such as Romania and Croatia."
+        },
+        "to_Text": {
+          "title": "Collection of A_CountryTextType",
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_COUNTRY_SRV.A_CountryTextType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API Country",
+      "description": "API Country"
+    },
+    "API_COUNTRY_SRV.A_CountryTextType": {
+      "type": "object",
+      "properties": {
+        "Country": {
+          "type": "string",
+          "maxLength": 3,
+          "title": "Country Key",
+          "description": "The country key contains information which the system uses to check entries such as the length of the postal code or bank account number.  \nThe two-character ISO code in accordance with ISO 3166, which is delivered by SAP as a default, is usually used.It could also be the vehicle license plate country-code or a typical country key, for example, in Germany the Federal statistics office key.The country keys are determined at system installation in the global settings.The definition of the country key in the SAP system does not have to match political or government entities.Since the country key does not have to correspond to the ISO code in all installations, programs that differ according to certain values of the country key cannot query the country key T005-LAND1, but have to program based on the ISO code T005 INTCA."
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "CountryName": {
+"type": "string",
+"default": "null",
+          "maxLength": 50,
+          "title": "Country Long Name",
+          "description": "Country Long Name"
+        },
+        "NationalityName": {
+"type": "string",
+"default": "null",
+          "maxLength": 15,
+          "title": "Nationality",
+          "description": "Nationality"
+        },
+        "NationalityLongName": {
+"type": "string",
+"default": "null",
+          "maxLength": 50,
+          "title": "Nationality (Long)",
+          "description": "Nationality (Max. 50 Characters)"
+        },
+        "to_Country": {
+          "$ref": "#/definitions/API_COUNTRY_SRV.A_CountryType"
+        }
+      },
+      "title": "API Country Text",
+      "description": "API Country Text"
+    },
+    "odata.error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/odata.error.main"
+        }
+      }
+    },
+    "odata.error.main": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "$ref": "#/definitions/odata.error.message"
+        },
+        "innererror": {
+          "type": "object",
+          "description": "The structure of this object is service-specific"
+        }
+      }
+    },
+    "odata.error.message": {
+      "type": "object",
+      "required": [
+        "lang",
+        "value"
+      ],
+      "properties": {
+        "lang": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [OData Count](http://www.odata.org/documentation/odata-version-2-0/uri-conventions/#InlinecountSystemQueryOption)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    },
+    "filter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+      "type": "string"
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/odata.error"
+      }
+    }
+  }
+}

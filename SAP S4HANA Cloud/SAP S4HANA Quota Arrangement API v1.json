@@ -1,0 +1,1731 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Quota Arrangement",
+    "version": "1 ",
+    "description": " This service helps you to create, read,  update, and delete quota arrangements through an  API call from a source system outside SAP  S/4HANA Cloud or SAP S/4HANA. The service  contains quota arrangement header and item. The  information is sent in the request as a payload. The  information is used when creating, reading or  updating a quota arrangement, with appropriate  checks for restricted values and authorizations."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/4a/a0343345884bd2bf7195f1072d9679/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Create, read, update, and delete quota arrangements through an API call from a source system outside SAP S/4HANA Cloud or SAP S/4HANA",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Purchasing Quota Arrangement Integration (SAP_COM_0166)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Scheduling Agreements in Procurement (BMR)](https://rapid.sap.com/bp/#/scopeitems/BMR \" Link To BP \")",
+          "format": "markdown"
+        },
+        {
+          "text": "[Physical Inventory - Inventory Count and Adjustment (OML)](https://rapid.sap.com/bp/#/scopeitems/OML \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Business Object",
+      "values": [
+        {
+          "text": "PurchasingQuotaArrangement",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_PUR_QUOTA_ARRANGEMENT_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_PUR_QUOTA_ARRANGEMENT_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_PurchasingQuotaArrangement"
+    },
+    {
+      "name": "A_PurgQuotaArrangementItem"
+    }
+  ],
+  "paths": {
+    "/A_PurchasingQuotaArrangement": {
+      "get": {
+        "summary": "Get entities from A_PurchasingQuotaArrangement",
+        "tags": [
+          "A_PurchasingQuotaArrangement"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "QuotaArrangement",
+                "QuotaArrangement desc",
+                "Material",
+                "Material desc",
+                "Plant",
+                "Plant desc",
+                "ValidityEndDate",
+                "ValidityEndDate desc",
+                "ValidityStartDate",
+                "ValidityStartDate desc",
+                "CreationDate",
+                "CreationDate desc",
+                "CreatedByUser",
+                "CreatedByUser desc",
+                "MinQtyForSpltQuota",
+                "MinQtyForSpltQuota desc",
+                "LastChangeDateTime",
+                "LastChangeDateTime desc",
+                "UserDescription",
+                "UserDescription desc",
+                "MaterialBaseUnit",
+                "MaterialBaseUnit desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "QuotaArrangement",
+                "Material",
+                "Plant",
+                "ValidityEndDate",
+                "ValidityStartDate",
+                "CreationDate",
+                "CreatedByUser",
+                "MinQtyForSpltQuota",
+                "LastChangeDateTime",
+                "UserDescription",
+                "MaterialBaseUnit",
+                "to_PurgQuotaArrangementItem"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_PurgQuotaArrangementItem"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_PurchasingQuotaArrangementType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurchasingQuotaArrangementType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to A_PurchasingQuotaArrangement",
+        "tags": [
+          "A_PurchasingQuotaArrangement"
+        ],
+        "parameters": [
+          {
+            "name": "A_PurchasingQuotaArrangementType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurchasingQuotaArrangementType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_PurchasingQuotaArrangementType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurchasingQuotaArrangementType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_PurchasingQuotaArrangement('{QuotaArrangement}')": {
+      "parameters": [
+        {
+          "name": "QuotaArrangement",
+          "in": "path",
+          "required": true,
+          "description": "Number of quota arrangement  \nUniquely identifies the quota arrangement.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_PurchasingQuotaArrangement by key",
+        "tags": [
+          "A_PurchasingQuotaArrangement"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "QuotaArrangement",
+                "Material",
+                "Plant",
+                "ValidityEndDate",
+                "ValidityStartDate",
+                "CreationDate",
+                "CreatedByUser",
+                "MinQtyForSpltQuota",
+                "LastChangeDateTime",
+                "UserDescription",
+                "MaterialBaseUnit",
+                "to_PurgQuotaArrangementItem"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_PurgQuotaArrangementItem"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_PurchasingQuotaArrangementType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurchasingQuotaArrangementType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_PurchasingQuotaArrangement",
+        "tags": [
+          "A_PurchasingQuotaArrangement"
+        ],
+        "parameters": [
+          {
+            "name": "A_PurchasingQuotaArrangementType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_PurchasingQuotaArrangementType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurchasingQuotaArrangementType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete entity from A_PurchasingQuotaArrangement",
+        "tags": [
+          "A_PurchasingQuotaArrangement"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_PurchasingQuotaArrangement('{QuotaArrangement}')/to_PurgQuotaArrangementItem": {
+      "parameters": [
+        {
+          "name": "QuotaArrangement",
+          "in": "path",
+          "required": true,
+          "description": "Number of quota arrangement  \nUniquely identifies the quota arrangement.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_PurgQuotaArrangementItem",
+        "tags": [
+          "A_PurchasingQuotaArrangement",
+          "A_PurgQuotaArrangementItem"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "QuotaArrangement",
+                "QuotaArrangement desc",
+                "QuotaArrangementItem",
+                "QuotaArrangementItem desc",
+                "MaterialProcurementCategory",
+                "MaterialProcurementCategory desc",
+                "MaterialProcurementType",
+                "MaterialProcurementType desc",
+                "Supplier",
+                "Supplier desc",
+                "SupplyingPlant",
+                "SupplyingPlant desc",
+                "PurchasingSourceQuota",
+                "PurchasingSourceQuota desc",
+                "QuotaBaseQuantity",
+                "QuotaBaseQuantity desc",
+                "QuotaAllocatedQuantity",
+                "QuotaAllocatedQuantity desc",
+                "QuotaMaximumQuantity",
+                "QuotaMaximumQuantity desc",
+                "ProductionVersion",
+                "ProductionVersion desc",
+                "MaterialMaxLotSizeQuantity",
+                "MaterialMaxLotSizeQuantity desc",
+                "MaterialMinLotSizeQuantity",
+                "MaterialMinLotSizeQuantity desc",
+                "MaterialRoundingProfile",
+                "MaterialRoundingProfile desc",
+                "SourceOfSupplyIsAssignedOnce",
+                "SourceOfSupplyIsAssignedOnce desc",
+                "MaximumReleaseQuantity",
+                "MaximumReleaseQuantity desc",
+                "QuotaReleasePeriodType",
+                "QuotaReleasePeriodType desc",
+                "NumberOfPeriodsPerRelQuantity",
+                "NumberOfPeriodsPerRelQuantity desc",
+                "QuotaDeterminationPriority",
+                "QuotaDeterminationPriority desc",
+                "ManufacturerMaterial",
+                "ManufacturerMaterial desc",
+                "PlannedDeliveryDurationInDays",
+                "PlannedDeliveryDurationInDays desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "QuotaArrangement",
+                "QuotaArrangementItem",
+                "MaterialProcurementCategory",
+                "MaterialProcurementType",
+                "Supplier",
+                "SupplyingPlant",
+                "PurchasingSourceQuota",
+                "QuotaBaseQuantity",
+                "QuotaAllocatedQuantity",
+                "QuotaMaximumQuantity",
+                "ProductionVersion",
+                "MaterialMaxLotSizeQuantity",
+                "MaterialMinLotSizeQuantity",
+                "MaterialRoundingProfile",
+                "SourceOfSupplyIsAssignedOnce",
+                "MaximumReleaseQuantity",
+                "QuotaReleasePeriodType",
+                "NumberOfPeriodsPerRelQuantity",
+                "QuotaDeterminationPriority",
+                "ManufacturerMaterial",
+                "PlannedDeliveryDurationInDays",
+                "to_PurchasingQuotaArrangement"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_PurchasingQuotaArrangement"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_PurgQuotaArrangementItemType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurgQuotaArrangementItemType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_PurgQuotaArrangementItem": {
+      "get": {
+        "summary": "Get entities from A_PurgQuotaArrangementItem",
+        "tags": [
+          "A_PurgQuotaArrangementItem"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "QuotaArrangement",
+                "QuotaArrangement desc",
+                "QuotaArrangementItem",
+                "QuotaArrangementItem desc",
+                "MaterialProcurementCategory",
+                "MaterialProcurementCategory desc",
+                "MaterialProcurementType",
+                "MaterialProcurementType desc",
+                "Supplier",
+                "Supplier desc",
+                "SupplyingPlant",
+                "SupplyingPlant desc",
+                "PurchasingSourceQuota",
+                "PurchasingSourceQuota desc",
+                "QuotaBaseQuantity",
+                "QuotaBaseQuantity desc",
+                "QuotaAllocatedQuantity",
+                "QuotaAllocatedQuantity desc",
+                "QuotaMaximumQuantity",
+                "QuotaMaximumQuantity desc",
+                "ProductionVersion",
+                "ProductionVersion desc",
+                "MaterialMaxLotSizeQuantity",
+                "MaterialMaxLotSizeQuantity desc",
+                "MaterialMinLotSizeQuantity",
+                "MaterialMinLotSizeQuantity desc",
+                "MaterialRoundingProfile",
+                "MaterialRoundingProfile desc",
+                "SourceOfSupplyIsAssignedOnce",
+                "SourceOfSupplyIsAssignedOnce desc",
+                "MaximumReleaseQuantity",
+                "MaximumReleaseQuantity desc",
+                "QuotaReleasePeriodType",
+                "QuotaReleasePeriodType desc",
+                "NumberOfPeriodsPerRelQuantity",
+                "NumberOfPeriodsPerRelQuantity desc",
+                "QuotaDeterminationPriority",
+                "QuotaDeterminationPriority desc",
+                "ManufacturerMaterial",
+                "ManufacturerMaterial desc",
+                "PlannedDeliveryDurationInDays",
+                "PlannedDeliveryDurationInDays desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "QuotaArrangement",
+                "QuotaArrangementItem",
+                "MaterialProcurementCategory",
+                "MaterialProcurementType",
+                "Supplier",
+                "SupplyingPlant",
+                "PurchasingSourceQuota",
+                "QuotaBaseQuantity",
+                "QuotaAllocatedQuantity",
+                "QuotaMaximumQuantity",
+                "ProductionVersion",
+                "MaterialMaxLotSizeQuantity",
+                "MaterialMinLotSizeQuantity",
+                "MaterialRoundingProfile",
+                "SourceOfSupplyIsAssignedOnce",
+                "MaximumReleaseQuantity",
+                "QuotaReleasePeriodType",
+                "NumberOfPeriodsPerRelQuantity",
+                "QuotaDeterminationPriority",
+                "ManufacturerMaterial",
+                "PlannedDeliveryDurationInDays",
+                "to_PurchasingQuotaArrangement"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_PurchasingQuotaArrangement"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_PurgQuotaArrangementItemType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurgQuotaArrangementItemType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_PurgQuotaArrangementItem(QuotaArrangement='{QuotaArrangement}',QuotaArrangementItem='{QuotaArrangementItem}')": {
+      "parameters": [
+        {
+          "name": "QuotaArrangement",
+          "in": "path",
+          "required": true,
+          "description": "Number of quota arrangement  \nUniquely identifies the quota arrangement.",
+          "type": "string"
+        },
+        {
+          "name": "QuotaArrangementItem",
+          "in": "path",
+          "required": true,
+          "description": "Quota arrangement item  \nUniquely identifies the quota arrangement item within a quota arrangement period.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_PurgQuotaArrangementItem by key",
+        "tags": [
+          "A_PurgQuotaArrangementItem"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "QuotaArrangement",
+                "QuotaArrangementItem",
+                "MaterialProcurementCategory",
+                "MaterialProcurementType",
+                "Supplier",
+                "SupplyingPlant",
+                "PurchasingSourceQuota",
+                "QuotaBaseQuantity",
+                "QuotaAllocatedQuantity",
+                "QuotaMaximumQuantity",
+                "ProductionVersion",
+                "MaterialMaxLotSizeQuantity",
+                "MaterialMinLotSizeQuantity",
+                "MaterialRoundingProfile",
+                "SourceOfSupplyIsAssignedOnce",
+                "MaximumReleaseQuantity",
+                "QuotaReleasePeriodType",
+                "NumberOfPeriodsPerRelQuantity",
+                "QuotaDeterminationPriority",
+                "ManufacturerMaterial",
+                "PlannedDeliveryDurationInDays",
+                "to_PurchasingQuotaArrangement"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_PurchasingQuotaArrangement"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_PurgQuotaArrangementItemType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurgQuotaArrangementItemType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_PurgQuotaArrangementItem",
+        "tags": [
+          "A_PurgQuotaArrangementItem"
+        ],
+        "parameters": [
+          {
+            "name": "A_PurgQuotaArrangementItemType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_PurgQuotaArrangementItemType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurgQuotaArrangementItemType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete entity from A_PurgQuotaArrangementItem",
+        "tags": [
+          "A_PurgQuotaArrangementItem"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_PurgQuotaArrangementItem(QuotaArrangement='{QuotaArrangement}',QuotaArrangementItem='{QuotaArrangementItem}')/to_PurchasingQuotaArrangement": {
+      "parameters": [
+        {
+          "name": "QuotaArrangement",
+          "in": "path",
+          "required": true,
+          "description": "Number of quota arrangement  \nUniquely identifies the quota arrangement.",
+          "type": "string"
+        },
+        {
+          "name": "QuotaArrangementItem",
+          "in": "path",
+          "required": true,
+          "description": "Quota arrangement item  \nUniquely identifies the quota arrangement item within a quota arrangement period.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_PurchasingQuotaArrangement",
+        "tags": [
+          "A_PurgQuotaArrangementItem",
+          "A_PurchasingQuotaArrangement"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "QuotaArrangement",
+                "Material",
+                "Plant",
+                "ValidityEndDate",
+                "ValidityStartDate",
+                "CreationDate",
+                "CreatedByUser",
+                "MinQtyForSpltQuota",
+                "LastChangeDateTime",
+                "UserDescription",
+                "MaterialBaseUnit",
+                "to_PurgQuotaArrangementItem"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_PurgQuotaArrangementItem"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_PurchasingQuotaArrangementType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurchasingQuotaArrangementType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurchasingQuotaArrangementType": {
+      "type": "object",
+      "properties": {
+        "QuotaArrangement": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Quota arrangement",
+          "description": "Number of quota arrangement  \nUniquely identifies the quota arrangement."
+        },
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "ValidityEndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Valid to",
+          "description": "Quota arrangement period valid until  \nDate until which the  quota arrangement is valid."
+        },
+        "ValidityStartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Valid from",
+          "description": "Quota arrangement period valid from  \nDate specifying when the  \nquota arrangement becomes valid."
+        },
+        "CreationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Created On",
+          "description": "Date on Which Record Was Created"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created By",
+          "description": "Name of Person Who Created Object"
+        },
+        "MinQtyForSpltQuota": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Minimum Qty",
+          "description": "Minimum Quantity for Splitting Quota  \nSpecifies for the splitting quota the minimum quantity that a lot must have in order to be apportioned among several sources of supply in the planning run.  \nIf the lot is smaller than or equal to the minimum quantity, the system will proceed on the basis of the usual quota arrangement logic.Allocation by quota using splitting quotas is only carried out via a requirement planning run, subject to the following preconditions:Through the appropriate entry in the field Quota arrangement usage (on the MRP data screen 2 or Purchasing screen) it must have been specified that a quota arrangement is to be applied in the planning run.The indicator for the splitting quota must be set for the the lot-sizing procedure used for materials planning purposes in Customizing."
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)  \nThe UTC timestamp displays date and time according to UTC (Universal Coordinated Time).  \nIn order to convert local time into a UTC time stamp, which makes it easier to compare times, the local time must be converted according to your time zone. The ABAP command convert is available for this purpose.Even if the time zone that the conversion is based on can be redetermined from Customizing or master data, we still recommend that you save the time zone.The internal structure of the high-resolution UTC time stamp is logically organized in date and time sections in a packed decimal format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day, hour,second, millisecond, microsecond and the first decimal of the nanoseconds. Please note that the hardware that is normally used does not fully support a resolution of 100 nanoseconds, which is available in the structure.See also GET TIME STAMPA UTC time stamp in short form is also available."
+        },
+        "UserDescription": {
+"type": "string",
+"default": "null",
+          "maxLength": 80,
+          "example": "string",
+          "title": "Description",
+          "description": "Description of the Technical User Account"
+        },
+        "MaterialBaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit of Measure",
+          "description": "Unit of measure in which stocks of the material are managed. The system converts all the quantities you enter in other units of measure (alternative units of measure) to the base unit of measure.  \nYou define the base unit of measure and also alternative units of measure and their conversion factors in the material master record.Since all data is updated in the base unit of measure, your entry is particularly important for the conversion of alternative units of measure. A quantity in the alternative unit of measure can only be shown precisely if its value can be shown with the decimal places available. To ensure this, please note the following:The base unit of measure is the unit satisfying the highest necessary requirement for precision.The conversion of alternative units of measure to the base unit should result in simple decimal fractions (not, for example, 1/3 = 0.333...).Inventory ManagementIn Inventory Management, the base unit of measure is the same as the stockkeeping unit.ServicesServices have units of measure of their own, including the following:Service unitUnit of measure at the higher item level. The precise quantities of the individual services are each at the detailed service line level.BlanketUnit of measure at service line level for services to be provided once only, and for which no precise quantities can or are to be specified."
+        },
+        "to_PurgQuotaArrangementItem": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurgQuotaArrangementItemType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API for Quota Arrangement"
+    },
+    "API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurchasingQuotaArrangementType-create": {
+      "type": "object",
+      "properties": {
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "ValidityEndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Valid to",
+          "description": "Quota arrangement period valid until  \nDate until which the  quota arrangement is valid."
+        },
+        "ValidityStartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Valid from",
+          "description": "Quota arrangement period valid from  \nDate specifying when the  \nquota arrangement becomes valid."
+        },
+        "MinQtyForSpltQuota": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Minimum Qty",
+          "description": "Minimum Quantity for Splitting Quota  \nSpecifies for the splitting quota the minimum quantity that a lot must have in order to be apportioned among several sources of supply in the planning run.  \nIf the lot is smaller than or equal to the minimum quantity, the system will proceed on the basis of the usual quota arrangement logic.Allocation by quota using splitting quotas is only carried out via a requirement planning run, subject to the following preconditions:Through the appropriate entry in the field Quota arrangement usage (on the MRP data screen 2 or Purchasing screen) it must have been specified that a quota arrangement is to be applied in the planning run.The indicator for the splitting quota must be set for the the lot-sizing procedure used for materials planning purposes in Customizing."
+        },
+        "to_PurgQuotaArrangementItem": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurgQuotaArrangementItemType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "Material",
+        "Plant",
+        "ValidityEndDate",
+        "ValidityStartDate"
+      ],
+      "title": "API for Quota Arrangement (for create)"
+    },
+    "API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurchasingQuotaArrangementType-update": {
+      "type": "object",
+      "properties": {
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material."
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "ValidityEndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Valid to",
+          "description": "Quota arrangement period valid until  \nDate until which the  quota arrangement is valid."
+        },
+        "ValidityStartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Valid from",
+          "description": "Quota arrangement period valid from  \nDate specifying when the  \nquota arrangement becomes valid."
+        },
+        "MinQtyForSpltQuota": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Minimum Qty",
+          "description": "Minimum Quantity for Splitting Quota  \nSpecifies for the splitting quota the minimum quantity that a lot must have in order to be apportioned among several sources of supply in the planning run.  \nIf the lot is smaller than or equal to the minimum quantity, the system will proceed on the basis of the usual quota arrangement logic.Allocation by quota using splitting quotas is only carried out via a requirement planning run, subject to the following preconditions:Through the appropriate entry in the field Quota arrangement usage (on the MRP data screen 2 or Purchasing screen) it must have been specified that a quota arrangement is to be applied in the planning run.The indicator for the splitting quota must be set for the the lot-sizing procedure used for materials planning purposes in Customizing."
+        }
+      },
+      "title": "API for Quota Arrangement (for update)"
+    },
+    "API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurgQuotaArrangementItemType": {
+      "type": "object",
+      "properties": {
+        "QuotaArrangement": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Quota arrangement",
+          "description": "Number of quota arrangement  \nUniquely identifies the quota arrangement."
+        },
+        "QuotaArrangementItem": {
+          "type": "string",
+          "maxLength": 3,
+          "title": "Quota arrangemt.item",
+          "description": "Quota arrangement item  \nUniquely identifies the quota arrangement item within a quota arrangement period."
+        },
+        "MaterialProcurementCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Procurement Type",
+          "description": "Indicates the type of procurement (that is, in-house manufacture, i.e. \"making in\", or external procurement, i.e. \"buying out\") for the quota arrangement item."
+        },
+        "MaterialProcurementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special procurement",
+          "description": "Special procurement type  \nIndicator that determines the procurement type of the material and, consequently, how the material is procured.  \nA material which is procured externally can be acquired viaa delivery schedule ora consignment order"
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "SupplyingPlant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Procurement Plant",
+          "description": "Plant from Which Material is Procured  \nKey for the factory or branch of a company (that is, a company code), from which the material is to be procured.  \nYou can only enter one supplier number or one  plant per  quota arrangement item.In the case of process orders, this field should remain empty if the quota arrangement is being used to select a production version."
+        },
+        "PurchasingSourceQuota": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1,
+          "minimum": -999,
+          "maximum": 999,
+          "example": "0",
+          "title": "Quota",
+          "description": "Number specifying which portion of a requirement is to be procured from a given   source of supply.  \nIf a certain material is to be procured alternately from different suppliers, you can create aquota arrangement item for each supplier and assign a quota to each such item. The system then selects the effective source of supply at any given time by means of the following formula:quota rating = quota base quantity + quota-allocated quantity----------------------------------------------quotaThis quota rating is calculated for all sources of supply included in the quota arrangement. The source then selected is the one with the lowest rating.Which supplier or item of an outline purchase agreement is valid at a certain point in time is determined via the  source list.Enter the portion of the material requirement that is to be procured from the source. The value is automatically converted into a percentage.If the quota is to be temporarily excluded from the quota arrangement, you can set the quota to '_'.The requirement of a material is to be evenly distributed among three suppliers. That is, the system is to allocate a third of the total requirement to each supplier.Enter 1 as quota for each supplier; the quota per supplier will then automatically be converted to 33%."
+        },
+        "QuotaBaseQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Quota Base Quantity",
+          "description": "Quota Base Quantity of Quota Arrangement Item  \nControl quantity for a quota arrangement.  \nUsing the quota base quantity, you can regulate the quota arrangement without having to change the quota if, for example, a new source is to be included in the arrangement.You can set the quota base quantity manually or have it determined by the system."
+        },
+        "QuotaAllocatedQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Allocated Quantity",
+          "description": "Allocated Quantity of Quota Arrangement Item  \nTotal quantity procured to date from the quota arrangement item source.  \nThis value is updated in planned orders, purchase requisitions, purchase orders, and scheduling agreement delivery schedule lines."
+        },
+        "QuotaMaximumQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Maximum quantity",
+          "description": "Maximum Quantity of Quota Arrangement Item  \nA  quota arrangement item is no longer suggested as the source if the quota-allocated quantity is equal to or exceeds the maximum quantity."
+        },
+        "ProductionVersion": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Production Version",
+          "description": "Key which determines the various production techniques according to which a material can be manufactured.  \nThe production version determines the following:the BOM alternative for a BOM explosionthe task list type, the task list group and the task list group counter for allocation to task listslot-size restrictions for repetitive manufacturing"
+        },
+        "MaterialMaxLotSizeQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Maximum Lot Size",
+          "description": "Maximum Lot Size per Quota Item  \nMaximum PO quantity that may be allocated to a source of supply per order proposal in the planning run.  \nIf the shortage (undercoverage) quantity exceeds the maximum lot size, the quota system is re-applied to the remaining quantity."
+        },
+        "MaterialMinLotSizeQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Minimum Lot Size",
+          "description": "Minimum Lot Size per Quota Item  \nMinimum order quantity that may be allocated to a source of supply per order proposal in the planning run.  \nIf the shortage (undercoverage) quantity is less than the minimum lot size, the latter quantity will be allocated to the source instead of the former."
+        },
+        "MaterialRoundingProfile": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Rounding Profile",
+          "description": "Key that the system uses to adjust the order proposal quantity to deliverable units.  \nIn Customizing, enter a threshold value from which the system should round up to the next value per deliverable unit:If the requirements value exceeds the first threshold value, the system always rounds up to the next multiple of the level foundIf the requirements value falls below the first threshold value, the system copies the original requirements value.Two other types of rounding exist:Dynamic rounding profile:These profiles are used to round up quantities to logistical units of measure (for example, layers). The contents of a logistical unit of measure does not have to be know when creating the rounding profile. It is determined by the master data from the material master.Rounding profile with quantity to be added/subtractedWith these profiles, the given quantity is changed either by adding a percentage or subtracting a percentage.Only static rounding profiles are taken into account in requirements planning. Neither dynamic rounding profiles not quantity addition/ subtraction are taken into account.A material's base unit of measure is 1 unit; the purchase order is to be delivered in layers (1 layer corresponds to 5 units) or in pallets (1 pallet corresponds to 8 layers which contains 40 units).You maintain the profile as follows:From a requirements of 2 units, the system is to round up to 5; from a requirement of 32 units, the system is to round up to 40.This results in the following order proposal quantities:Requirement from 1 -> 1  requirement from 31 -> 30Requirement from 2 -> 5  requirement from 32 -> 40Requirement from 6 -> 10 requirement from 74 -> 80Requirement from 7 -> 10If no rounding profile has been entered, the system uses the rounding value entered in the material master record for the planning run."
+        },
+        "SourceOfSupplyIsAssignedOnce": {
+"type": "boolean",
+"default": "null",
+          "title": "\"1x Only\" Ind.",
+          "description": "Indicator: \"Once-Only\"  \nSpecifies that a source may only be taken into account once in the apportionment of a lot.  \nIf a maximum lot size is specified for a source of supply, and if this source has a much lower quota rating than other sources, the following happens: the lot is split up into several order proposals (each of which amounts to the maximum lot size) which are all assigned to the the source in question.To avoid this, you can set the \"once-only\" indicator. This will cause the source to be taken into account once only for an amount equal to the maximum lot size. The remaining quantity will be assigned to the next source."
+        },
+        "MaximumReleaseQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Max. Release Qty",
+          "description": "Maximum Release Quantity per Period  \nThe \"maximum release quantity\" defines the maximum quantity that a source of supply can make available/supply within a specified timeframe.  \nIf a source with a maximum release quantity is next in line in a quota arrangement, in total no more than this maximum figure can be allocated to it within the specified period. If the lot in question exceeds this maximum, it will be split. The source in question will receive an order covering the difference between the quantity already released and the maximum release quantity. The balance of the lot will be allocated to the next source.The maximum release quantity is only taken into account in the planning run within MRP, not when purchase requisitions or planned orders are created manually."
+        },
+        "QuotaReleasePeriodType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Per. Rel. Qty",
+          "description": "Period to Which the Release Quantity Relates"
+        },
+        "NumberOfPeriodsPerRelQuantity": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Number of Periods",
+          "description": "Number of Periods to Which the Release Quantity Relates  \nIn this field, you determine the number of periods for which the maximum release quantity is valid."
+        },
+        "QuotaDeterminationPriority": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Priority",
+          "description": "Priority for Determination of Sequence  \nThe priority determines the sequence in which the individual sources of supply are used. Items with priority are always taken into consideration first, before the items for which no priority has been entered.  \nExample without splitting quota:If, for example, you enter priority one along with a maximum release quantity, then this source of supply is always selected until its maximum release quantity has been exhausted. Only then is the next source of supply selected.If no maximum release quantity was entered for the item with priority one, this item would always receive the complete requirement quantity.Example with splitting quota:In this procedure, the items are selected in the order of the quota. This sequence can be overridden using priorities.Please note that the splitting quantity is always based on the quota."
+        },
+        "ManufacturerMaterial": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "MPN material",
+          "description": "Material number corresponding to manufacturer part number  \nUniquely identifies an MPN material."
+        },
+        "PlannedDeliveryDurationInDays": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1,
+          "minimum": -999,
+          "maximum": 999,
+          "example": "0",
+          "title": "Planned Deliv. Time",
+          "description": "Planned Delivery Time in Days  \nNumber of calendar days needed to obtain the material or service if it is procured externally.  \nIf you have different vendors for a material, you must specify an average value. The same applies if you order the material from a fixed vendor that has varying delivery times.If you use the SAP Retail System, the planned delivery time can be suggested from the vendor sub-range in the vendor master record."
+        },
+        "to_PurchasingQuotaArrangement": {
+          "$ref": "#/definitions/API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurchasingQuotaArrangementType"
+        }
+      },
+      "title": "API for Quota Arrangement Item"
+    },
+    "API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurgQuotaArrangementItemType-create": {
+      "type": "object",
+      "properties": {
+        "MaterialProcurementCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Procurement Type",
+          "description": "Indicates the type of procurement (that is, in-house manufacture, i.e. \"making in\", or external procurement, i.e. \"buying out\") for the quota arrangement item."
+        },
+        "MaterialProcurementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special procurement",
+          "description": "Special procurement type  \nIndicator that determines the procurement type of the material and, consequently, how the material is procured.  \nA material which is procured externally can be acquired viaa delivery schedule ora consignment order"
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "SupplyingPlant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Procurement Plant",
+          "description": "Plant from Which Material is Procured  \nKey for the factory or branch of a company (that is, a company code), from which the material is to be procured.  \nYou can only enter one supplier number or one  plant per  quota arrangement item.In the case of process orders, this field should remain empty if the quota arrangement is being used to select a production version."
+        },
+        "PurchasingSourceQuota": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1,
+          "minimum": -999,
+          "maximum": 999,
+          "example": "0",
+          "title": "Quota",
+          "description": "Number specifying which portion of a requirement is to be procured from a given   source of supply.  \nIf a certain material is to be procured alternately from different suppliers, you can create aquota arrangement item for each supplier and assign a quota to each such item. The system then selects the effective source of supply at any given time by means of the following formula:quota rating = quota base quantity + quota-allocated quantity----------------------------------------------quotaThis quota rating is calculated for all sources of supply included in the quota arrangement. The source then selected is the one with the lowest rating.Which supplier or item of an outline purchase agreement is valid at a certain point in time is determined via the  source list.Enter the portion of the material requirement that is to be procured from the source. The value is automatically converted into a percentage.If the quota is to be temporarily excluded from the quota arrangement, you can set the quota to '_'.The requirement of a material is to be evenly distributed among three suppliers. That is, the system is to allocate a third of the total requirement to each supplier.Enter 1 as quota for each supplier; the quota per supplier will then automatically be converted to 33%."
+        },
+        "QuotaBaseQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Quota Base Quantity",
+          "description": "Quota Base Quantity of Quota Arrangement Item  \nControl quantity for a quota arrangement.  \nUsing the quota base quantity, you can regulate the quota arrangement without having to change the quota if, for example, a new source is to be included in the arrangement.You can set the quota base quantity manually or have it determined by the system."
+        },
+        "QuotaMaximumQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Maximum quantity",
+          "description": "Maximum Quantity of Quota Arrangement Item  \nA  quota arrangement item is no longer suggested as the source if the quota-allocated quantity is equal to or exceeds the maximum quantity."
+        },
+        "ProductionVersion": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Production Version",
+          "description": "Key which determines the various production techniques according to which a material can be manufactured.  \nThe production version determines the following:the BOM alternative for a BOM explosionthe task list type, the task list group and the task list group counter for allocation to task listslot-size restrictions for repetitive manufacturing"
+        },
+        "MaterialMaxLotSizeQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Maximum Lot Size",
+          "description": "Maximum Lot Size per Quota Item  \nMaximum PO quantity that may be allocated to a source of supply per order proposal in the planning run.  \nIf the shortage (undercoverage) quantity exceeds the maximum lot size, the quota system is re-applied to the remaining quantity."
+        },
+        "MaterialMinLotSizeQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Minimum Lot Size",
+          "description": "Minimum Lot Size per Quota Item  \nMinimum order quantity that may be allocated to a source of supply per order proposal in the planning run.  \nIf the shortage (undercoverage) quantity is less than the minimum lot size, the latter quantity will be allocated to the source instead of the former."
+        },
+        "MaterialRoundingProfile": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Rounding Profile",
+          "description": "Key that the system uses to adjust the order proposal quantity to deliverable units.  \nIn Customizing, enter a threshold value from which the system should round up to the next value per deliverable unit:If the requirements value exceeds the first threshold value, the system always rounds up to the next multiple of the level foundIf the requirements value falls below the first threshold value, the system copies the original requirements value.Two other types of rounding exist:Dynamic rounding profile:These profiles are used to round up quantities to logistical units of measure (for example, layers). The contents of a logistical unit of measure does not have to be know when creating the rounding profile. It is determined by the master data from the material master.Rounding profile with quantity to be added/subtractedWith these profiles, the given quantity is changed either by adding a percentage or subtracting a percentage.Only static rounding profiles are taken into account in requirements planning. Neither dynamic rounding profiles not quantity addition/ subtraction are taken into account.A material's base unit of measure is 1 unit; the purchase order is to be delivered in layers (1 layer corresponds to 5 units) or in pallets (1 pallet corresponds to 8 layers which contains 40 units).You maintain the profile as follows:From a requirements of 2 units, the system is to round up to 5; from a requirement of 32 units, the system is to round up to 40.This results in the following order proposal quantities:Requirement from 1 -> 1  requirement from 31 -> 30Requirement from 2 -> 5  requirement from 32 -> 40Requirement from 6 -> 10 requirement from 74 -> 80Requirement from 7 -> 10If no rounding profile has been entered, the system uses the rounding value entered in the material master record for the planning run."
+        },
+        "SourceOfSupplyIsAssignedOnce": {
+"type": "boolean",
+"default": "null",
+          "title": "\"1x Only\" Ind.",
+          "description": "Indicator: \"Once-Only\"  \nSpecifies that a source may only be taken into account once in the apportionment of a lot.  \nIf a maximum lot size is specified for a source of supply, and if this source has a much lower quota rating than other sources, the following happens: the lot is split up into several order proposals (each of which amounts to the maximum lot size) which are all assigned to the the source in question.To avoid this, you can set the \"once-only\" indicator. This will cause the source to be taken into account once only for an amount equal to the maximum lot size. The remaining quantity will be assigned to the next source."
+        },
+        "MaximumReleaseQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Max. Release Qty",
+          "description": "Maximum Release Quantity per Period  \nThe \"maximum release quantity\" defines the maximum quantity that a source of supply can make available/supply within a specified timeframe.  \nIf a source with a maximum release quantity is next in line in a quota arrangement, in total no more than this maximum figure can be allocated to it within the specified period. If the lot in question exceeds this maximum, it will be split. The source in question will receive an order covering the difference between the quantity already released and the maximum release quantity. The balance of the lot will be allocated to the next source.The maximum release quantity is only taken into account in the planning run within MRP, not when purchase requisitions or planned orders are created manually."
+        },
+        "QuotaReleasePeriodType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Per. Rel. Qty",
+          "description": "Period to Which the Release Quantity Relates"
+        },
+        "NumberOfPeriodsPerRelQuantity": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Number of Periods",
+          "description": "Number of Periods to Which the Release Quantity Relates  \nIn this field, you determine the number of periods for which the maximum release quantity is valid."
+        },
+        "QuotaDeterminationPriority": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Priority",
+          "description": "Priority for Determination of Sequence  \nThe priority determines the sequence in which the individual sources of supply are used. Items with priority are always taken into consideration first, before the items for which no priority has been entered.  \nExample without splitting quota:If, for example, you enter priority one along with a maximum release quantity, then this source of supply is always selected until its maximum release quantity has been exhausted. Only then is the next source of supply selected.If no maximum release quantity was entered for the item with priority one, this item would always receive the complete requirement quantity.Example with splitting quota:In this procedure, the items are selected in the order of the quota. This sequence can be overridden using priorities.Please note that the splitting quantity is always based on the quota."
+        },
+        "ManufacturerMaterial": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "MPN material",
+          "description": "Material number corresponding to manufacturer part number  \nUniquely identifies an MPN material."
+        },
+        "PlannedDeliveryDurationInDays": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1,
+          "minimum": -999,
+          "maximum": 999,
+          "example": "0",
+          "title": "Planned Deliv. Time",
+          "description": "Planned Delivery Time in Days  \nNumber of calendar days needed to obtain the material or service if it is procured externally.  \nIf you have different vendors for a material, you must specify an average value. The same applies if you order the material from a fixed vendor that has varying delivery times.If you use the SAP Retail System, the planned delivery time can be suggested from the vendor sub-range in the vendor master record."
+        },
+        "to_PurchasingQuotaArrangement": {
+          "$ref": "#/definitions/API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurchasingQuotaArrangementType-create"
+        }
+      },
+      "required": [
+        "MaterialProcurementCategory",
+        "MaterialProcurementType"
+      ],
+      "title": "API for Quota Arrangement Item (for create)"
+    },
+    "API_PUR_QUOTA_ARRANGEMENT_SRV.A_PurgQuotaArrangementItemType-update": {
+      "type": "object",
+      "properties": {
+        "MaterialProcurementCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Procurement Type",
+          "description": "Indicates the type of procurement (that is, in-house manufacture, i.e. \"making in\", or external procurement, i.e. \"buying out\") for the quota arrangement item."
+        },
+        "MaterialProcurementType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special procurement",
+          "description": "Special procurement type  \nIndicator that determines the procurement type of the material and, consequently, how the material is procured.  \nA material which is procured externally can be acquired viaa delivery schedule ora consignment order"
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "SupplyingPlant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Procurement Plant",
+          "description": "Plant from Which Material is Procured  \nKey for the factory or branch of a company (that is, a company code), from which the material is to be procured.  \nYou can only enter one supplier number or one  plant per  quota arrangement item.In the case of process orders, this field should remain empty if the quota arrangement is being used to select a production version."
+        },
+        "PurchasingSourceQuota": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1,
+          "minimum": -999,
+          "maximum": 999,
+          "example": "0",
+          "title": "Quota",
+          "description": "Number specifying which portion of a requirement is to be procured from a given   source of supply.  \nIf a certain material is to be procured alternately from different suppliers, you can create aquota arrangement item for each supplier and assign a quota to each such item. The system then selects the effective source of supply at any given time by means of the following formula:quota rating = quota base quantity + quota-allocated quantity----------------------------------------------quotaThis quota rating is calculated for all sources of supply included in the quota arrangement. The source then selected is the one with the lowest rating.Which supplier or item of an outline purchase agreement is valid at a certain point in time is determined via the  source list.Enter the portion of the material requirement that is to be procured from the source. The value is automatically converted into a percentage.If the quota is to be temporarily excluded from the quota arrangement, you can set the quota to '_'.The requirement of a material is to be evenly distributed among three suppliers. That is, the system is to allocate a third of the total requirement to each supplier.Enter 1 as quota for each supplier; the quota per supplier will then automatically be converted to 33%."
+        },
+        "QuotaBaseQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Quota Base Quantity",
+          "description": "Quota Base Quantity of Quota Arrangement Item  \nControl quantity for a quota arrangement.  \nUsing the quota base quantity, you can regulate the quota arrangement without having to change the quota if, for example, a new source is to be included in the arrangement.You can set the quota base quantity manually or have it determined by the system."
+        },
+        "QuotaMaximumQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Maximum quantity",
+          "description": "Maximum Quantity of Quota Arrangement Item  \nA  quota arrangement item is no longer suggested as the source if the quota-allocated quantity is equal to or exceeds the maximum quantity."
+        },
+        "ProductionVersion": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Production Version",
+          "description": "Key which determines the various production techniques according to which a material can be manufactured.  \nThe production version determines the following:the BOM alternative for a BOM explosionthe task list type, the task list group and the task list group counter for allocation to task listslot-size restrictions for repetitive manufacturing"
+        },
+        "MaterialMaxLotSizeQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Maximum Lot Size",
+          "description": "Maximum Lot Size per Quota Item  \nMaximum PO quantity that may be allocated to a source of supply per order proposal in the planning run.  \nIf the shortage (undercoverage) quantity exceeds the maximum lot size, the quota system is re-applied to the remaining quantity."
+        },
+        "MaterialMinLotSizeQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Minimum Lot Size",
+          "description": "Minimum Lot Size per Quota Item  \nMinimum order quantity that may be allocated to a source of supply per order proposal in the planning run.  \nIf the shortage (undercoverage) quantity is less than the minimum lot size, the latter quantity will be allocated to the source instead of the former."
+        },
+        "MaterialRoundingProfile": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Rounding Profile",
+          "description": "Key that the system uses to adjust the order proposal quantity to deliverable units.  \nIn Customizing, enter a threshold value from which the system should round up to the next value per deliverable unit:If the requirements value exceeds the first threshold value, the system always rounds up to the next multiple of the level foundIf the requirements value falls below the first threshold value, the system copies the original requirements value.Two other types of rounding exist:Dynamic rounding profile:These profiles are used to round up quantities to logistical units of measure (for example, layers). The contents of a logistical unit of measure does not have to be know when creating the rounding profile. It is determined by the master data from the material master.Rounding profile with quantity to be added/subtractedWith these profiles, the given quantity is changed either by adding a percentage or subtracting a percentage.Only static rounding profiles are taken into account in requirements planning. Neither dynamic rounding profiles not quantity addition/ subtraction are taken into account.A material's base unit of measure is 1 unit; the purchase order is to be delivered in layers (1 layer corresponds to 5 units) or in pallets (1 pallet corresponds to 8 layers which contains 40 units).You maintain the profile as follows:From a requirements of 2 units, the system is to round up to 5; from a requirement of 32 units, the system is to round up to 40.This results in the following order proposal quantities:Requirement from 1 -> 1  requirement from 31 -> 30Requirement from 2 -> 5  requirement from 32 -> 40Requirement from 6 -> 10 requirement from 74 -> 80Requirement from 7 -> 10If no rounding profile has been entered, the system uses the rounding value entered in the material master record for the planning run."
+        },
+        "SourceOfSupplyIsAssignedOnce": {
+"type": "boolean",
+"default": "null",
+          "title": "\"1x Only\" Ind.",
+          "description": "Indicator: \"Once-Only\"  \nSpecifies that a source may only be taken into account once in the apportionment of a lot.  \nIf a maximum lot size is specified for a source of supply, and if this source has a much lower quota rating than other sources, the following happens: the lot is split up into several order proposals (each of which amounts to the maximum lot size) which are all assigned to the the source in question.To avoid this, you can set the \"once-only\" indicator. This will cause the source to be taken into account once only for an amount equal to the maximum lot size. The remaining quantity will be assigned to the next source."
+        },
+        "MaximumReleaseQuantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Max. Release Qty",
+          "description": "Maximum Release Quantity per Period  \nThe \"maximum release quantity\" defines the maximum quantity that a source of supply can make available/supply within a specified timeframe.  \nIf a source with a maximum release quantity is next in line in a quota arrangement, in total no more than this maximum figure can be allocated to it within the specified period. If the lot in question exceeds this maximum, it will be split. The source in question will receive an order covering the difference between the quantity already released and the maximum release quantity. The balance of the lot will be allocated to the next source.The maximum release quantity is only taken into account in the planning run within MRP, not when purchase requisitions or planned orders are created manually."
+        },
+        "QuotaReleasePeriodType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Per. Rel. Qty",
+          "description": "Period to Which the Release Quantity Relates"
+        },
+        "NumberOfPeriodsPerRelQuantity": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Number of Periods",
+          "description": "Number of Periods to Which the Release Quantity Relates  \nIn this field, you determine the number of periods for which the maximum release quantity is valid."
+        },
+        "QuotaDeterminationPriority": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Priority",
+          "description": "Priority for Determination of Sequence  \nThe priority determines the sequence in which the individual sources of supply are used. Items with priority are always taken into consideration first, before the items for which no priority has been entered.  \nExample without splitting quota:If, for example, you enter priority one along with a maximum release quantity, then this source of supply is always selected until its maximum release quantity has been exhausted. Only then is the next source of supply selected.If no maximum release quantity was entered for the item with priority one, this item would always receive the complete requirement quantity.Example with splitting quota:In this procedure, the items are selected in the order of the quota. This sequence can be overridden using priorities.Please note that the splitting quantity is always based on the quota."
+        },
+        "ManufacturerMaterial": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "MPN material",
+          "description": "Material number corresponding to manufacturer part number  \nUniquely identifies an MPN material."
+        },
+        "PlannedDeliveryDurationInDays": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1,
+          "minimum": -999,
+          "maximum": 999,
+          "example": "0",
+          "title": "Planned Deliv. Time",
+          "description": "Planned Delivery Time in Days  \nNumber of calendar days needed to obtain the material or service if it is procured externally.  \nIf you have different vendors for a material, you must specify an average value. The same applies if you order the material from a fixed vendor that has varying delivery times.If you use the SAP Retail System, the planned delivery time can be suggested from the vendor sub-range in the vendor master record."
+        }
+      },
+      "title": "API for Quota Arrangement Item (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

@@ -1,0 +1,1382 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Sales Document with Credit Block - Read, Check, Release, Reject (A2X)",
+    "version": "1 ",
+    "description": "The service contains entities for credit  blocked sales document and reject reason. The  information is sent in the request as a URL. Once  the sales document has been checked, released, or  rejected, a success message containing the  document number is sent in the response. Once  the credit blocked sales document has been  retrieved, the data is sent in the response. If there  are any issues when reading, checking, releasing, or  rejecting the credit blocked sales document, the  system displays error messages in the response."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/4f/6bd74343554c3cbaa43df5ff34363d/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Read, check, release, and reject credit blocked sales documents using this synchronous inbound service",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Sales Credit Management Integration (SAP_COM_0325)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Basic Credit Management (BD6)](https://rapid.sap.com/bp/#/scopeitems/BD6 \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_SLS_DOC_WITH_CREDIT_BLOCK",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_SLS_DOC_WITH_CREDIT_BLOCK",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_CreditBlockedSalesDocument"
+    },
+    {
+      "name": "A_SalesDocumentRjcnReason"
+    }
+  ],
+  "paths": {
+    "/A_CreditBlockedSalesDocument": {
+      "get": {
+        "summary": "Get entities from A_CreditBlockedSalesDocument",
+        "tags": [
+          "A_CreditBlockedSalesDocument"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDocument",
+                "SalesDocument desc",
+                "SDDocumentCategory",
+                "SDDocumentCategory desc",
+                "SalesDocumentType",
+                "SalesDocumentType desc",
+                "SalesOrganization",
+                "SalesOrganization desc",
+                "DistributionChannel",
+                "DistributionChannel desc",
+                "OrganizationDivision",
+                "OrganizationDivision desc",
+                "SalesOffice",
+                "SalesOffice desc",
+                "SalesGroup",
+                "SalesGroup desc",
+                "CreatedByUser",
+                "CreatedByUser desc",
+                "CreationDate",
+                "CreationDate desc",
+                "LastChangedByUser",
+                "LastChangedByUser desc",
+                "LastChangeDate",
+                "LastChangeDate desc",
+                "SoldToParty",
+                "SoldToParty desc",
+                "TotalNetAmount",
+                "TotalNetAmount desc",
+                "TransactionCurrency",
+                "TransactionCurrency desc",
+                "CustomerCreditAccount",
+                "CustomerCreditAccount desc",
+                "ControllingAreaCurrency",
+                "ControllingAreaCurrency desc",
+                "ReleasedCreditAmount",
+                "ReleasedCreditAmount desc",
+                "CreditBlockReleaseDate",
+                "CreditBlockReleaseDate desc",
+                "NextShippingDate",
+                "NextShippingDate desc",
+                "NextCreditCheckDate",
+                "NextCreditCheckDate desc",
+                "FinDocCreditCheckStatus",
+                "FinDocCreditCheckStatus desc",
+                "TotalCreditCheckStatus",
+                "TotalCreditCheckStatus desc",
+                "OverallSDProcessStatus",
+                "OverallSDProcessStatus desc",
+                "CentralCreditCheckStatus",
+                "CentralCreditCheckStatus desc",
+                "CentralCreditChkTechErrSts",
+                "CentralCreditChkTechErrSts desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDocument",
+                "SDDocumentCategory",
+                "SalesDocumentType",
+                "SalesOrganization",
+                "DistributionChannel",
+                "OrganizationDivision",
+                "SalesOffice",
+                "SalesGroup",
+                "CreatedByUser",
+                "CreationDate",
+                "LastChangedByUser",
+                "LastChangeDate",
+                "SoldToParty",
+                "TotalNetAmount",
+                "TransactionCurrency",
+                "CustomerCreditAccount",
+                "ControllingAreaCurrency",
+                "ReleasedCreditAmount",
+                "CreditBlockReleaseDate",
+                "NextShippingDate",
+                "NextCreditCheckDate",
+                "FinDocCreditCheckStatus",
+                "TotalCreditCheckStatus",
+                "OverallSDProcessStatus",
+                "CentralCreditCheckStatus",
+                "CentralCreditChkTechErrSts"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_CreditBlockedSalesDocumentType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SLS_DOC_WITH_CREDIT_BLOCK.A_CreditBlockedSalesDocumentType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_CreditBlockedSalesDocument('{SalesDocument}')": {
+      "parameters": [
+        {
+          "name": "SalesDocument",
+          "in": "path",
+          "required": true,
+          "description": "The number that uniquely identifies the sales document.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_CreditBlockedSalesDocument by key",
+        "tags": [
+          "A_CreditBlockedSalesDocument"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDocument",
+                "SDDocumentCategory",
+                "SalesDocumentType",
+                "SalesOrganization",
+                "DistributionChannel",
+                "OrganizationDivision",
+                "SalesOffice",
+                "SalesGroup",
+                "CreatedByUser",
+                "CreationDate",
+                "LastChangedByUser",
+                "LastChangeDate",
+                "SoldToParty",
+                "TotalNetAmount",
+                "TransactionCurrency",
+                "CustomerCreditAccount",
+                "ControllingAreaCurrency",
+                "ReleasedCreditAmount",
+                "CreditBlockReleaseDate",
+                "NextShippingDate",
+                "NextCreditCheckDate",
+                "FinDocCreditCheckStatus",
+                "TotalCreditCheckStatus",
+                "OverallSDProcessStatus",
+                "CentralCreditCheckStatus",
+                "CentralCreditChkTechErrSts"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_CreditBlockedSalesDocumentType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SLS_DOC_WITH_CREDIT_BLOCK.A_CreditBlockedSalesDocumentType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SalesDocumentRjcnReason": {
+      "get": {
+        "summary": "Get entities from A_SalesDocumentRjcnReason",
+        "tags": [
+          "A_SalesDocumentRjcnReason"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDocumentRjcnReason",
+                "SalesDocumentRjcnReason desc",
+                "SalesDocumentRjcnReason_Text",
+                "SalesDocumentRjcnReason_Text desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDocumentRjcnReason",
+                "SalesDocumentRjcnReason_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SalesDocumentRjcnReasonType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SLS_DOC_WITH_CREDIT_BLOCK.A_SalesDocumentRjcnReasonType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SalesDocumentRjcnReason('{SalesDocumentRjcnReason}')": {
+      "parameters": [
+        {
+          "name": "SalesDocumentRjcnReason",
+          "in": "path",
+          "required": true,
+          "description": "Reason for Rejection of Sales Documents  \nThe reason for rejecting a sales document (for example, a sales quotation or a sales order).  \nThe rejection can come from your organization (for example, you can reject a customer request for a credit memo because it is unreasonable) or from the customer (for example, the customer rejects a quotation because the price is too high). The following list shows the effects on different document types after you enter a reason for rejection:Inquiries and quotations: no further references by other documentsSales orders: no further delivery of itemsContracts: no further creation of release ordersCredit and debit memo requests: no further processing of credit or debit memosEnter one of the values predefined for your system.If you enter a reason for rejection, the system automatically cancels any MRP requirements previously generated for the items.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SalesDocumentRjcnReason by key",
+        "tags": [
+          "A_SalesDocumentRjcnReason"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesDocumentRjcnReason",
+                "SalesDocumentRjcnReason_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SalesDocumentRjcnReasonType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SLS_DOC_WITH_CREDIT_BLOCK.A_SalesDocumentRjcnReasonType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/CheckCreditBlock": {
+      "post": {
+        "summary": "Check",
+        "tags": [
+          "Service Operations"
+        ],
+        "parameters": [
+          {
+            "name": "SalesDocument",
+            "in": "query",
+            "required": true,
+            "description": "Value needs to be enclosed in single quotes",
+            "type": "string",
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "SDDocumentCategory",
+            "in": "query",
+            "required": true,
+            "description": "Value needs to be enclosed in single quotes",
+            "type": "string",
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "ReturnMessage",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SLS_DOC_WITH_CREDIT_BLOCK.ReturnMessage"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/RejectCreditBlock": {
+      "post": {
+        "summary": "Reject",
+        "tags": [
+          "Service Operations"
+        ],
+        "parameters": [
+          {
+            "name": "SalesDocument",
+            "in": "query",
+            "required": true,
+            "description": "Value needs to be enclosed in single quotes",
+            "type": "string",
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "SalesDocumentRjcnReason",
+            "in": "query",
+            "required": true,
+            "description": "Value needs to be enclosed in single quotes",
+            "type": "string",
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "SDDocumentCategory",
+            "in": "query",
+            "required": true,
+            "description": "Value needs to be enclosed in single quotes",
+            "type": "string",
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "ReturnMessage",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SLS_DOC_WITH_CREDIT_BLOCK.ReturnMessage"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/ReleaseCreditBlock": {
+      "post": {
+        "summary": "Release",
+        "tags": [
+          "Service Operations"
+        ],
+        "parameters": [
+          {
+            "name": "SDDocumentCategory",
+            "in": "query",
+            "required": true,
+            "description": "Value needs to be enclosed in single quotes",
+            "type": "string",
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "SalesDocument",
+            "in": "query",
+            "required": true,
+            "description": "Value needs to be enclosed in single quotes",
+            "type": "string",
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "ReturnMessage",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SLS_DOC_WITH_CREDIT_BLOCK.ReturnMessage"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET A_CreditBlockedSalesDocument HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_SLS_DOC_WITH_CREDIT_BLOCK.A_CreditBlockedSalesDocumentType": {
+      "type": "object",
+      "properties": {
+        "SalesDocument": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Sales Document",
+          "description": "The number that uniquely identifies the sales document."
+        },
+        "SDDocumentCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "SD Document Category",
+          "description": "A classification for the different types of documents that you can process, for example, quotations, sales orders, deliveries, and invoices.  \nThe document category determines how the system stores and keeps track of document data. It enables the system to provide you with status information about delivery processing, billing, and documents that are used for reference (for example, inquiries and quotations)."
+        },
+        "SalesDocumentType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Document Type",
+          "description": "A classification that distinguishes between different types of sales documents.  \nThe sales document type determines how the system processes the sales document. For example, depending on the sales document type, the system determines which screens to present and which data to ask you for."
+        },
+        "SalesOrganization": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Organization",
+          "description": "An organizational unit responsible for the sale of certain products or services. The responsibility of a sales organization may include legal liability for products and customer claims.  \nYou can assign any number of distribution channels and divisions to a sales organization. A particular combination of sales organization, distribution channel, and division is known as a sales area."
+        },
+        "DistributionChannel": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Distribution Channel",
+          "description": "The way in which products or services reach the customer. Typical examples of distribution channels are wholesale, retail, or direct sales.  \nYou can maintain information about customers and materials by sales organization and distribution channel. Within a sales organization you can deliver goods to a given customer through more than one distribution channel.You can assign a distribution channel to one or more sales organizations. If, for example, you have numerous sales organizations, each sales organization may use the \"Wholesale\" distribution channel.For each combination of sales organization and distribution channel, you can further assign one or more of the divisions that are defined for the sales organization. You can, for example, assign \"Food\" and \"Non-food\" divisions to the \"Wholesale\" distribution channel. A particular combination of sales organization, distribution channel, and division is known as a sales area."
+        },
+        "OrganizationDivision": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Division",
+          "description": "A way of grouping materials, products, or services. The system uses divisions to determine the sales areas and the business areas for a material, product, or service.  \nA product or service is always assigned to just one division. From the point of view of sales and distribution, the use of divisions lets you organize your sales structure around groups of similar products or product lines. This allows the people in a division who process orders and service customers to specialize within a manageable area of expertise.If a sales organization sells food and non-food products through both retail and wholesaledistribution channels each distribution channel could then be further split into food and non-food divisions."
+        },
+        "SalesOffice": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Office",
+          "description": "A physical location (for example, a branch office) that has responsibility for the sale of certain products or services within a given geographical area.  \nWhen you create sales statistics, you can use a sales office as one of the selection criteria. When you print out order confirmations, you can include the address of the sales office.You can assign each customer to a sales office in the customer master record.Within a sales office you can establish sales groups (for example, departments) with specific sales responsibilities. Each person who works in the sales office can be assigned to a sales group in his or her user master record. Each customer can also be assigned to a particular sales group in the customer master record."
+        },
+        "SalesGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Sales Group",
+          "description": "A group of sales people who are responsible for processing sales of certain products or services.  \nBy using sales groups you can designate different areas of responsibility within a sales office.  When you generate sales statistics, you can use the sales group as one of the selection criteria.If sales office personnel service both retail and wholesale markets, you can assign a sales group to each market.You assign each salesperson to a sales group in his or her user master record. You assign each customer to a particular sales group in the customer's master record."
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created By",
+          "description": "Name of Person Who Created Object"
+        },
+        "CreationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Created On",
+          "description": "Date on Which Record Was Created"
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Last Changed By",
+          "description": "User Who Last Changed the Business Document"
+        },
+        "LastChangeDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Changed On",
+          "description": "Date of Last Change"
+        },
+        "SoldToParty": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sold-To Party",
+          "description": "The customer who orders the goods or services. The sold-to party is contractually responsible for sales orders."
+        },
+        "TotalNetAmount": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Net Value",
+          "description": "Net Value of the Sales Order in Document Currency  \nThe total value of all items in the sales document, after any discounts and surcharges are taken into account. The value is expressed in the document currency."
+        },
+        "TransactionCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Document Currency",
+          "description": "SD document currency  \nThe currency that applies to the document (for example, to a sales order or an invoice).  \nThe system proposes the document currency from the customer master record of the sold-to party. You can change the currency manually in the document. If you change the currency, the system recalculates prices for the entire document."
+        },
+        "CustomerCreditAccount": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Credit Account",
+          "description": "Customer's Account Number with Credit Limit Reference  \nCustomer account that the system uses to monitor the credit limit.  \nYou need this field if you want to assign the credit limit for a group of customers, instead of one customer. In this case you assign the credit limit to one of the customers in the group. All other customers in the group use this field to link to reference to this customer."
+        },
+        "ControllingAreaCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Currency",
+          "description": "Currency key of credit control area  \nIdentifies the currency of the amounts that are being transacted. The currency is the currency of the credit control area."
+        },
+        "ReleasedCreditAmount": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Rel. credit value",
+          "description": "Released credit value of the document  \nSpecifies the credit value of a sales order or a delivery at the time of release.  \norder: the basis for calculating this value is the cumulated confirmed quantityIf changes are made to the document after release, the system uses the released credit value to determine whether the document requires a further credit check."
+        },
+        "CreditBlockReleaseDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Release date",
+          "description": "Release date of the document determined by credit management  \nSpecifies the date on which the sales order or delivery was released after being blocked for credit reasons."
+        },
+        "NextShippingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Next date",
+          "description": "In the sales order header, this field specifies the next planned delivery date.  \nIn the delivery header, the field specifies the next planned picking or goods issue date.Using these dates in the headers of sales documents and deliveries, the system is able to recognize those documents for which processing time is critical."
+        },
+        "NextCreditCheckDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Next Credit Check",
+          "description": "Date of Next Credit Check of Document  \nSpecifies the date of the next credit check required for the document.  \nThe system stores this date if, during a dynamic credit check, some items or schedule lines in the document lie outside the credit horizon."
+        },
+        "FinDocCreditCheckStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Financial Document",
+          "description": "Status of Credit Check Against Financial Document"
+        },
+        "TotalCreditCheckStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Credit Status",
+          "description": "Overall Status of Credit Checks"
+        },
+        "OverallSDProcessStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Overall Status",
+          "description": "Overall Processing Status (Header/All Items)  \nThe processing status of the entire sales document.  \nThe system determines the status of the entire sales document by taking into account the status of all header-related information and the status of all individual items. The status message tells you whether processing of the sales document is open, in progress, or complete."
+        },
+        "CentralCreditCheckStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "SAP Cred. Mgmt",
+          "description": "Status of Credit Check SAP Credit Management"
+        },
+        "CentralCreditChkTechErrSts": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "CrMa TE Status",
+          "description": "Status of Technical Error SAP Credit Management  \nThe technical error status of the sales document for SAP Credit Management.  \nThe technical error status of the sales document indicates whether the sales order was blocked due to a technical error during the sales document creation or changing."
+        }
+      },
+      "title": "Credit Blocked Sales Document"
+    },
+    "API_SLS_DOC_WITH_CREDIT_BLOCK.A_CreditBlockedSalesDocumentType-create": {
+      "type": "object",
+      "properties": {
+        "SalesDocument": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Sales Document",
+          "description": "The number that uniquely identifies the sales document."
+        },
+        "SDDocumentCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "SD Document Category",
+          "description": "A classification for the different types of documents that you can process, for example, quotations, sales orders, deliveries, and invoices.  \nThe document category determines how the system stores and keeps track of document data. It enables the system to provide you with status information about delivery processing, billing, and documents that are used for reference (for example, inquiries and quotations)."
+        },
+        "SalesDocumentType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Document Type",
+          "description": "A classification that distinguishes between different types of sales documents.  \nThe sales document type determines how the system processes the sales document. For example, depending on the sales document type, the system determines which screens to present and which data to ask you for."
+        },
+        "SalesOrganization": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Organization",
+          "description": "An organizational unit responsible for the sale of certain products or services. The responsibility of a sales organization may include legal liability for products and customer claims.  \nYou can assign any number of distribution channels and divisions to a sales organization. A particular combination of sales organization, distribution channel, and division is known as a sales area."
+        },
+        "DistributionChannel": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Distribution Channel",
+          "description": "The way in which products or services reach the customer. Typical examples of distribution channels are wholesale, retail, or direct sales.  \nYou can maintain information about customers and materials by sales organization and distribution channel. Within a sales organization you can deliver goods to a given customer through more than one distribution channel.You can assign a distribution channel to one or more sales organizations. If, for example, you have numerous sales organizations, each sales organization may use the \"Wholesale\" distribution channel.For each combination of sales organization and distribution channel, you can further assign one or more of the divisions that are defined for the sales organization. You can, for example, assign \"Food\" and \"Non-food\" divisions to the \"Wholesale\" distribution channel. A particular combination of sales organization, distribution channel, and division is known as a sales area."
+        },
+        "OrganizationDivision": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Division",
+          "description": "A way of grouping materials, products, or services. The system uses divisions to determine the sales areas and the business areas for a material, product, or service.  \nA product or service is always assigned to just one division. From the point of view of sales and distribution, the use of divisions lets you organize your sales structure around groups of similar products or product lines. This allows the people in a division who process orders and service customers to specialize within a manageable area of expertise.If a sales organization sells food and non-food products through both retail and wholesaledistribution channels each distribution channel could then be further split into food and non-food divisions."
+        },
+        "SalesOffice": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Office",
+          "description": "A physical location (for example, a branch office) that has responsibility for the sale of certain products or services within a given geographical area.  \nWhen you create sales statistics, you can use a sales office as one of the selection criteria. When you print out order confirmations, you can include the address of the sales office.You can assign each customer to a sales office in the customer master record.Within a sales office you can establish sales groups (for example, departments) with specific sales responsibilities. Each person who works in the sales office can be assigned to a sales group in his or her user master record. Each customer can also be assigned to a particular sales group in the customer master record."
+        },
+        "SalesGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Sales Group",
+          "description": "A group of sales people who are responsible for processing sales of certain products or services.  \nBy using sales groups you can designate different areas of responsibility within a sales office.  When you generate sales statistics, you can use the sales group as one of the selection criteria.If sales office personnel service both retail and wholesale markets, you can assign a sales group to each market.You assign each salesperson to a sales group in his or her user master record. You assign each customer to a particular sales group in the customer's master record."
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created By",
+          "description": "Name of Person Who Created Object"
+        },
+        "CreationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Created On",
+          "description": "Date on Which Record Was Created"
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Last Changed By",
+          "description": "User Who Last Changed the Business Document"
+        },
+        "LastChangeDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Changed On",
+          "description": "Date of Last Change"
+        },
+        "SoldToParty": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sold-To Party",
+          "description": "The customer who orders the goods or services. The sold-to party is contractually responsible for sales orders."
+        },
+        "TotalNetAmount": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Net Value",
+          "description": "Net Value of the Sales Order in Document Currency  \nThe total value of all items in the sales document, after any discounts and surcharges are taken into account. The value is expressed in the document currency."
+        },
+        "TransactionCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Document Currency",
+          "description": "SD document currency  \nThe currency that applies to the document (for example, to a sales order or an invoice).  \nThe system proposes the document currency from the customer master record of the sold-to party. You can change the currency manually in the document. If you change the currency, the system recalculates prices for the entire document."
+        },
+        "CustomerCreditAccount": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Credit Account",
+          "description": "Customer's Account Number with Credit Limit Reference  \nCustomer account that the system uses to monitor the credit limit.  \nYou need this field if you want to assign the credit limit for a group of customers, instead of one customer. In this case you assign the credit limit to one of the customers in the group. All other customers in the group use this field to link to reference to this customer."
+        },
+        "ControllingAreaCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Currency",
+          "description": "Currency key of credit control area  \nIdentifies the currency of the amounts that are being transacted. The currency is the currency of the credit control area."
+        },
+        "ReleasedCreditAmount": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Rel. credit value",
+          "description": "Released credit value of the document  \nSpecifies the credit value of a sales order or a delivery at the time of release.  \norder: the basis for calculating this value is the cumulated confirmed quantityIf changes are made to the document after release, the system uses the released credit value to determine whether the document requires a further credit check."
+        },
+        "CreditBlockReleaseDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Release date",
+          "description": "Release date of the document determined by credit management  \nSpecifies the date on which the sales order or delivery was released after being blocked for credit reasons."
+        },
+        "NextShippingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Next date",
+          "description": "In the sales order header, this field specifies the next planned delivery date.  \nIn the delivery header, the field specifies the next planned picking or goods issue date.Using these dates in the headers of sales documents and deliveries, the system is able to recognize those documents for which processing time is critical."
+        },
+        "NextCreditCheckDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Next Credit Check",
+          "description": "Date of Next Credit Check of Document  \nSpecifies the date of the next credit check required for the document.  \nThe system stores this date if, during a dynamic credit check, some items or schedule lines in the document lie outside the credit horizon."
+        },
+        "FinDocCreditCheckStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Financial Document",
+          "description": "Status of Credit Check Against Financial Document"
+        },
+        "TotalCreditCheckStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Credit Status",
+          "description": "Overall Status of Credit Checks"
+        },
+        "OverallSDProcessStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Overall Status",
+          "description": "Overall Processing Status (Header/All Items)  \nThe processing status of the entire sales document.  \nThe system determines the status of the entire sales document by taking into account the status of all header-related information and the status of all individual items. The status message tells you whether processing of the sales document is open, in progress, or complete."
+        },
+        "CentralCreditCheckStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "SAP Cred. Mgmt",
+          "description": "Status of Credit Check SAP Credit Management"
+        },
+        "CentralCreditChkTechErrSts": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "CrMa TE Status",
+          "description": "Status of Technical Error SAP Credit Management  \nThe technical error status of the sales document for SAP Credit Management.  \nThe technical error status of the sales document indicates whether the sales order was blocked due to a technical error during the sales document creation or changing."
+        }
+      },
+      "required": [
+        "SalesDocument"
+      ],
+      "title": "Credit Blocked Sales Document (for create)"
+    },
+    "API_SLS_DOC_WITH_CREDIT_BLOCK.A_CreditBlockedSalesDocumentType-update": {
+      "type": "object",
+      "properties": {
+        "SDDocumentCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "SD Document Category",
+          "description": "A classification for the different types of documents that you can process, for example, quotations, sales orders, deliveries, and invoices.  \nThe document category determines how the system stores and keeps track of document data. It enables the system to provide you with status information about delivery processing, billing, and documents that are used for reference (for example, inquiries and quotations)."
+        },
+        "SalesDocumentType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Document Type",
+          "description": "A classification that distinguishes between different types of sales documents.  \nThe sales document type determines how the system processes the sales document. For example, depending on the sales document type, the system determines which screens to present and which data to ask you for."
+        },
+        "SalesOrganization": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Organization",
+          "description": "An organizational unit responsible for the sale of certain products or services. The responsibility of a sales organization may include legal liability for products and customer claims.  \nYou can assign any number of distribution channels and divisions to a sales organization. A particular combination of sales organization, distribution channel, and division is known as a sales area."
+        },
+        "DistributionChannel": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Distribution Channel",
+          "description": "The way in which products or services reach the customer. Typical examples of distribution channels are wholesale, retail, or direct sales.  \nYou can maintain information about customers and materials by sales organization and distribution channel. Within a sales organization you can deliver goods to a given customer through more than one distribution channel.You can assign a distribution channel to one or more sales organizations. If, for example, you have numerous sales organizations, each sales organization may use the \"Wholesale\" distribution channel.For each combination of sales organization and distribution channel, you can further assign one or more of the divisions that are defined for the sales organization. You can, for example, assign \"Food\" and \"Non-food\" divisions to the \"Wholesale\" distribution channel. A particular combination of sales organization, distribution channel, and division is known as a sales area."
+        },
+        "OrganizationDivision": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Division",
+          "description": "A way of grouping materials, products, or services. The system uses divisions to determine the sales areas and the business areas for a material, product, or service.  \nA product or service is always assigned to just one division. From the point of view of sales and distribution, the use of divisions lets you organize your sales structure around groups of similar products or product lines. This allows the people in a division who process orders and service customers to specialize within a manageable area of expertise.If a sales organization sells food and non-food products through both retail and wholesaledistribution channels each distribution channel could then be further split into food and non-food divisions."
+        },
+        "SalesOffice": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Sales Office",
+          "description": "A physical location (for example, a branch office) that has responsibility for the sale of certain products or services within a given geographical area.  \nWhen you create sales statistics, you can use a sales office as one of the selection criteria. When you print out order confirmations, you can include the address of the sales office.You can assign each customer to a sales office in the customer master record.Within a sales office you can establish sales groups (for example, departments) with specific sales responsibilities. Each person who works in the sales office can be assigned to a sales group in his or her user master record. Each customer can also be assigned to a particular sales group in the customer master record."
+        },
+        "SalesGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Sales Group",
+          "description": "A group of sales people who are responsible for processing sales of certain products or services.  \nBy using sales groups you can designate different areas of responsibility within a sales office.  When you generate sales statistics, you can use the sales group as one of the selection criteria.If sales office personnel service both retail and wholesale markets, you can assign a sales group to each market.You assign each salesperson to a sales group in his or her user master record. You assign each customer to a particular sales group in the customer's master record."
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created By",
+          "description": "Name of Person Who Created Object"
+        },
+        "CreationDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Created On",
+          "description": "Date on Which Record Was Created"
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Last Changed By",
+          "description": "User Who Last Changed the Business Document"
+        },
+        "LastChangeDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Changed On",
+          "description": "Date of Last Change"
+        },
+        "SoldToParty": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sold-To Party",
+          "description": "The customer who orders the goods or services. The sold-to party is contractually responsible for sales orders."
+        },
+        "TotalNetAmount": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Net Value",
+          "description": "Net Value of the Sales Order in Document Currency  \nThe total value of all items in the sales document, after any discounts and surcharges are taken into account. The value is expressed in the document currency."
+        },
+        "TransactionCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Document Currency",
+          "description": "SD document currency  \nThe currency that applies to the document (for example, to a sales order or an invoice).  \nThe system proposes the document currency from the customer master record of the sold-to party. You can change the currency manually in the document. If you change the currency, the system recalculates prices for the entire document."
+        },
+        "CustomerCreditAccount": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Credit Account",
+          "description": "Customer's Account Number with Credit Limit Reference  \nCustomer account that the system uses to monitor the credit limit.  \nYou need this field if you want to assign the credit limit for a group of customers, instead of one customer. In this case you assign the credit limit to one of the customers in the group. All other customers in the group use this field to link to reference to this customer."
+        },
+        "ControllingAreaCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Currency",
+          "description": "Currency key of credit control area  \nIdentifies the currency of the amounts that are being transacted. The currency is the currency of the credit control area."
+        },
+        "ReleasedCreditAmount": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "example": "0",
+          "title": "Rel. credit value",
+          "description": "Released credit value of the document  \nSpecifies the credit value of a sales order or a delivery at the time of release.  \norder: the basis for calculating this value is the cumulated confirmed quantityIf changes are made to the document after release, the system uses the released credit value to determine whether the document requires a further credit check."
+        },
+        "CreditBlockReleaseDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Release date",
+          "description": "Release date of the document determined by credit management  \nSpecifies the date on which the sales order or delivery was released after being blocked for credit reasons."
+        },
+        "NextShippingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Next date",
+          "description": "In the sales order header, this field specifies the next planned delivery date.  \nIn the delivery header, the field specifies the next planned picking or goods issue date.Using these dates in the headers of sales documents and deliveries, the system is able to recognize those documents for which processing time is critical."
+        },
+        "NextCreditCheckDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Next Credit Check",
+          "description": "Date of Next Credit Check of Document  \nSpecifies the date of the next credit check required for the document.  \nThe system stores this date if, during a dynamic credit check, some items or schedule lines in the document lie outside the credit horizon."
+        },
+        "FinDocCreditCheckStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Financial Document",
+          "description": "Status of Credit Check Against Financial Document"
+        },
+        "TotalCreditCheckStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Credit Status",
+          "description": "Overall Status of Credit Checks"
+        },
+        "OverallSDProcessStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Overall Status",
+          "description": "Overall Processing Status (Header/All Items)  \nThe processing status of the entire sales document.  \nThe system determines the status of the entire sales document by taking into account the status of all header-related information and the status of all individual items. The status message tells you whether processing of the sales document is open, in progress, or complete."
+        },
+        "CentralCreditCheckStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "SAP Cred. Mgmt",
+          "description": "Status of Credit Check SAP Credit Management"
+        },
+        "CentralCreditChkTechErrSts": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "CrMa TE Status",
+          "description": "Status of Technical Error SAP Credit Management  \nThe technical error status of the sales document for SAP Credit Management.  \nThe technical error status of the sales document indicates whether the sales order was blocked due to a technical error during the sales document creation or changing."
+        }
+      },
+      "title": "Credit Blocked Sales Document (for update)"
+    },
+    "API_SLS_DOC_WITH_CREDIT_BLOCK.A_SalesDocumentRjcnReasonType": {
+      "type": "object",
+      "properties": {
+        "SalesDocumentRjcnReason": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Reason for Rejection",
+          "description": "Reason for Rejection of Sales Documents  \nThe reason for rejecting a sales document (for example, a sales quotation or a sales order).  \nThe rejection can come from your organization (for example, you can reject a customer request for a credit memo because it is unreasonable) or from the customer (for example, the customer rejects a quotation because the price is too high). The following list shows the effects on different document types after you enter a reason for rejection:Inquiries and quotations: no further references by other documentsSales orders: no further delivery of itemsContracts: no further creation of release ordersCredit and debit memo requests: no further processing of credit or debit memosEnter one of the values predefined for your system.If you enter a reason for rejection, the system automatically cancels any MRP requirements previously generated for the items."
+        },
+        "SalesDocumentRjcnReason_Text": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description",
+          "description": "Enter text here that best describes the module."
+        }
+      },
+      "title": "Sales Document Rejection Reason"
+    },
+    "API_SLS_DOC_WITH_CREDIT_BLOCK.A_SalesDocumentRjcnReasonType-create": {
+      "type": "object",
+      "properties": {
+        "SalesDocumentRjcnReason": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Reason for Rejection",
+          "description": "Reason for Rejection of Sales Documents  \nThe reason for rejecting a sales document (for example, a sales quotation or a sales order).  \nThe rejection can come from your organization (for example, you can reject a customer request for a credit memo because it is unreasonable) or from the customer (for example, the customer rejects a quotation because the price is too high). The following list shows the effects on different document types after you enter a reason for rejection:Inquiries and quotations: no further references by other documentsSales orders: no further delivery of itemsContracts: no further creation of release ordersCredit and debit memo requests: no further processing of credit or debit memosEnter one of the values predefined for your system.If you enter a reason for rejection, the system automatically cancels any MRP requirements previously generated for the items."
+        }
+      },
+      "required": [
+        "SalesDocumentRjcnReason"
+      ],
+      "title": "Sales Document Rejection Reason (for create)"
+    },
+    "API_SLS_DOC_WITH_CREDIT_BLOCK.A_SalesDocumentRjcnReasonType-update": {
+      "type": "object",
+      "title": "Sales Document Rejection Reason (for update)"
+    },
+    "API_SLS_DOC_WITH_CREDIT_BLOCK.ReturnMessage": {
+      "type": "object",
+      "properties": {
+        "MessageType": {
+          "type": "string",
+          "title": "Message Type"
+        },
+        "Message": {
+          "type": "string",
+          "title": "Message"
+        }
+      },
+      "title": "ReturnMessage"
+    },
+    "API_SLS_DOC_WITH_CREDIT_BLOCK.ReturnMessage-create": {
+      "type": "object",
+      "title": "ReturnMessage (for create)"
+    },
+    "API_SLS_DOC_WITH_CREDIT_BLOCK.ReturnMessage-update": {
+      "type": "object",
+      "title": "ReturnMessage (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

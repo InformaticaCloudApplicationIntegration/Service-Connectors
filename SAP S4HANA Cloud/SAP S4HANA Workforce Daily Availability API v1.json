@@ -1,0 +1,758 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Workforce Daily Availability",
+    "version": "1 ",
+    "description": " This service enables you to  create, read, update, and delete the (CRUD) daily  availability information into the S/4HANA system  from your external HR system when you are not  using the SAP SuccessFactors Employee Central  system.\n\n# \n"
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/b1/d0a7e300b244dda5f77890ba66ba82/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Manage Daily Availability data for Workforce using this inbound service",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Employee Integration (SAP_COM_0001)",
+          "format": "plain"
+        },
+        {
+          "text": "External HR Workforce Integration (SAP_COM_0301)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Core HR with SAP SuccessFactors Employee Central (JB1)](https://rapid.sap.com/bp/#/scopeitems/JB1 \" Link To BP \")",
+          "format": "markdown"
+        },
+        {
+          "text": "[Employee Integration - SAP S/4HANA Enablement (1FD)](https://rapid.sap.com/bp/#/scopeitems/1FD \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "x509",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/shcm/API_MANAGE_WF_AVAILABILITY",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/shcm/API_MANAGE_WF_AVAILABILITY",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "TimeOverviewSet"
+    }
+  ],
+  "paths": {
+    "/TimeOverviewSet": {
+      "get": {
+        "summary": "Get entities from TimeOverviewSet",
+        "tags": [
+          "TimeOverviewSet"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Personworkagreementexternalid",
+                "Personworkagreementexternalid desc",
+                "Personworkagreement",
+                "Personworkagreement desc",
+                "Calendardate",
+                "Calendardate desc",
+                "Plannedworkinghours",
+                "Plannedworkinghours desc",
+                "Plannedstarttime",
+                "Plannedstarttime desc",
+                "Plannedendtime",
+                "Plannedendtime desc",
+                "Publicholidayclass",
+                "Publicholidayclass desc",
+                "Isnonworkingday",
+                "Isnonworkingday desc",
+                "Absencehours",
+                "Absencehours desc",
+                "Attendancehours",
+                "Attendancehours desc",
+                "Overtimehours",
+                "Overtimehours desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Personworkagreementexternalid",
+                "Companycode",
+                "Personworkagreement",
+                "Calendardate",
+                "Plannedworkinghours",
+                "Plannedstarttime",
+                "Plannedendtime",
+                "Publicholidayclass",
+                "Isnonworkingday",
+                "Absencehours",
+                "Attendancehours",
+                "Overtimehours"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of TimeOverview",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/SHCM.API_MANAGE_WF_AVAILABILITY.TimeOverview"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to TimeOverviewSet",
+        "tags": [
+          "TimeOverviewSet"
+        ],
+        "parameters": [
+          {
+            "name": "TimeOverview",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/SHCM.API_MANAGE_WF_AVAILABILITY.TimeOverview-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "TimeOverview",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/SHCM.API_MANAGE_WF_AVAILABILITY.TimeOverview"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/TimeOverviewSet(Personworkagreementexternalid='{Personworkagreementexternalid}',Companycode='{Companycode}',Calendardate={Calendardate})": {
+      "parameters": [
+        {
+          "name": "Personworkagreementexternalid",
+          "in": "path",
+          "required": true,
+          "description": "Work Agreement External ID",
+          "type": "string"
+        },
+        {
+          "name": "Companycode",
+          "in": "path",
+          "required": true,
+          "description": "The company code is an organizational unit within financial accounting.",
+          "type": "string"
+        },
+        {
+          "name": "Calendardate",
+          "in": "path",
+          "required": true,
+          "description": "Validity Date  \nThis field contains the date on which the corresponding data record is valid.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from TimeOverviewSet by key",
+        "tags": [
+          "TimeOverviewSet"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Personworkagreementexternalid",
+                "Companycode",
+                "Personworkagreement",
+                "Calendardate",
+                "Plannedworkinghours",
+                "Plannedstarttime",
+                "Plannedendtime",
+                "Publicholidayclass",
+                "Isnonworkingday",
+                "Absencehours",
+                "Attendancehours",
+                "Overtimehours"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "TimeOverview",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/SHCM.API_MANAGE_WF_AVAILABILITY.TimeOverview"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in TimeOverviewSet",
+        "tags": [
+          "TimeOverviewSet"
+        ],
+        "parameters": [
+          {
+            "name": "TimeOverview",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified TimeOverview",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/SHCM.API_MANAGE_WF_AVAILABILITY.TimeOverview-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete entity from TimeOverviewSet",
+        "tags": [
+          "TimeOverviewSet"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET TimeOverviewSet HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SHCM.API_MANAGE_WF_AVAILABILITY.TimeOverview": {
+      "type": "object",
+      "properties": {
+        "Personworkagreementexternalid": {
+          "type": "string",
+          "maxLength": 20,
+          "title": "Work Agreement Ext ID",
+          "description": "Work Agreement External ID"
+        },
+        "Companycode": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Company Code",
+          "description": "The company code is an organizational unit within financial accounting."
+        },
+        "Personworkagreement": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Person Work Agreement",
+          "description": "Object ID  \nContains a unique eight-digit numerical code, that represents a specific object (for example, an organizational unit, qualification or business event).  \nWhen you work with infotype records, this field allows you to use the Fast entry feature. Fast entry enables you to create numerous infotype records without having to exit and re-enter the infotype window.To select the object that the infotype record should belong to, either:Enter the object's eight-digit codeUse the matchcode feature to search for the object"
+        },
+        "Calendardate": {
+          "type": "string",
+          "example": "/Date(1492098664000)/",
+          "title": "Calendar Date",
+          "description": "Validity Date  \nThis field contains the date on which the corresponding data record is valid."
+        },
+        "Plannedworkinghours": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Working hours",
+          "description": "Normal working hours of an employee on one day  \nThe entire number of an employee's working hours on a given calendar day. The number of actual hours worked can differ from the hours entered here, however."
+        },
+        "Plannedstarttime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Work Start",
+          "description": "Normal start of employee's working time  \nThe starting time of an employee's regular working time on a given calendar day. The actual starting time can differ from the time entered here, however."
+        },
+        "Plannedendtime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "End of Work",
+          "description": "Normal End of an Employee's Working Time  \nThe end time of an employee's regular working time on any given calendar day. The actual end of working time can differ from the time entered here, however."
+        },
+        "Publicholidayclass": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Holiday class",
+          "description": "The holiday class specifies the holiday type (optional).  \nHoliday classes are only used in Human Resources Management. They can be used to determine the time wage type selection, the daily work schedule variants, the absence counting, etc. for groups of holidays and normal days.The entry of a holiday class is optional.You can enter a holiday class according to the rules defined in HR."
+        },
+        "Isnonworkingday": {
+"type": "boolean",
+"default": "null",
+          "title": "Non working day",
+          "description": "Indicator: Employee does not need to work  \nThis indicator is activated if an employee does not have to work on a given calendar day, for one of the following reasons:  \nCalendar day is a weekend day,Calendar day is a public holiday,Calendar day is defined in the employee's shift plan as a non-working shift (day off)."
+        },
+        "Absencehours": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Absence hours",
+          "description": "Absence hours of an employee on one day  \nThe total of all employee absence hours on a given calendar day. If an external application is entered, then only the absence hours that do not come from this external application are totalled."
+        },
+        "Attendancehours": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Attendance hours",
+          "description": "Attendance hours of an employee on one day  \nThe total of all employee attendance hours on a given calendar day. If an external application is entered, then only the attendance hours that do not come from this external application are totalled."
+        },
+        "Overtimehours": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Overtime hours",
+          "description": "Overtime hours of an employee on one day  \nAn employee's total hours on a given calendar day that have be entered as special overtime."
+        }
+      },
+      "title": "Time Overview"
+    },
+    "SHCM.API_MANAGE_WF_AVAILABILITY.TimeOverview-create": {
+      "type": "object",
+      "properties": {
+        "Personworkagreementexternalid": {
+          "type": "string",
+          "maxLength": 20,
+          "title": "Work Agreement Ext ID",
+          "description": "Work Agreement External ID"
+        },
+        "Companycode": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Company Code",
+          "description": "The company code is an organizational unit within financial accounting."
+        },
+        "Personworkagreement": {
+"type": "string",
+"default": "null",
+          "maxLength": 8,
+          "example": "string",
+          "title": "Person Work Agreement",
+          "description": "Object ID  \nContains a unique eight-digit numerical code, that represents a specific object (for example, an organizational unit, qualification or business event).  \nWhen you work with infotype records, this field allows you to use the Fast entry feature. Fast entry enables you to create numerous infotype records without having to exit and re-enter the infotype window.To select the object that the infotype record should belong to, either:Enter the object's eight-digit codeUse the matchcode feature to search for the object"
+        },
+        "Calendardate": {
+          "type": "string",
+          "example": "/Date(1492098664000)/",
+          "title": "Calendar Date",
+          "description": "Validity Date  \nThis field contains the date on which the corresponding data record is valid."
+        },
+        "Plannedworkinghours": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Working hours",
+          "description": "Normal working hours of an employee on one day  \nThe entire number of an employee's working hours on a given calendar day. The number of actual hours worked can differ from the hours entered here, however."
+        },
+        "Plannedstarttime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Work Start",
+          "description": "Normal start of employee's working time  \nThe starting time of an employee's regular working time on a given calendar day. The actual starting time can differ from the time entered here, however."
+        },
+        "Plannedendtime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "End of Work",
+          "description": "Normal End of an Employee's Working Time  \nThe end time of an employee's regular working time on any given calendar day. The actual end of working time can differ from the time entered here, however."
+        },
+        "Publicholidayclass": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Holiday class",
+          "description": "The holiday class specifies the holiday type (optional).  \nHoliday classes are only used in Human Resources Management. They can be used to determine the time wage type selection, the daily work schedule variants, the absence counting, etc. for groups of holidays and normal days.The entry of a holiday class is optional.You can enter a holiday class according to the rules defined in HR."
+        },
+        "Isnonworkingday": {
+"type": "boolean",
+"default": "null",
+          "title": "Non working day",
+          "description": "Indicator: Employee does not need to work  \nThis indicator is activated if an employee does not have to work on a given calendar day, for one of the following reasons:  \nCalendar day is a weekend day,Calendar day is a public holiday,Calendar day is defined in the employee's shift plan as a non-working shift (day off)."
+        },
+        "Absencehours": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Absence hours",
+          "description": "Absence hours of an employee on one day  \nThe total of all employee absence hours on a given calendar day. If an external application is entered, then only the absence hours that do not come from this external application are totalled."
+        },
+        "Attendancehours": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Attendance hours",
+          "description": "Attendance hours of an employee on one day  \nThe total of all employee attendance hours on a given calendar day. If an external application is entered, then only the attendance hours that do not come from this external application are totalled."
+        },
+        "Overtimehours": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Overtime hours",
+          "description": "Overtime hours of an employee on one day  \nAn employee's total hours on a given calendar day that have be entered as special overtime."
+        }
+      },
+      "required": [
+        "Personworkagreementexternalid",
+        "Companycode",
+        "Calendardate"
+      ],
+      "title": "Time Overview (for create)"
+    },
+    "SHCM.API_MANAGE_WF_AVAILABILITY.TimeOverview-update": {
+      "type": "object",
+      "properties": {
+        "Plannedworkinghours": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Working hours",
+          "description": "Normal working hours of an employee on one day  \nThe entire number of an employee's working hours on a given calendar day. The number of actual hours worked can differ from the hours entered here, however."
+        },
+        "Plannedstarttime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "Work Start",
+          "description": "Normal start of employee's working time  \nThe starting time of an employee's regular working time on a given calendar day. The actual starting time can differ from the time entered here, however."
+        },
+        "Plannedendtime": {
+"type": "string",
+"default": "null",
+          "example": "PT15H51M04S",
+          "title": "End of Work",
+          "description": "Normal End of an Employee's Working Time  \nThe end time of an employee's regular working time on any given calendar day. The actual end of working time can differ from the time entered here, however."
+        },
+        "Publicholidayclass": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Holiday class",
+          "description": "The holiday class specifies the holiday type (optional).  \nHoliday classes are only used in Human Resources Management. They can be used to determine the time wage type selection, the daily work schedule variants, the absence counting, etc. for groups of holidays and normal days.The entry of a holiday class is optional.You can enter a holiday class according to the rules defined in HR."
+        },
+        "Isnonworkingday": {
+"type": "boolean",
+"default": "null",
+          "title": "Non working day",
+          "description": "Indicator: Employee does not need to work  \nThis indicator is activated if an employee does not have to work on a given calendar day, for one of the following reasons:  \nCalendar day is a weekend day,Calendar day is a public holiday,Calendar day is defined in the employee's shift plan as a non-working shift (day off)."
+        },
+        "Absencehours": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Absence hours",
+          "description": "Absence hours of an employee on one day  \nThe total of all employee absence hours on a given calendar day. If an external application is entered, then only the absence hours that do not come from this external application are totalled."
+        },
+        "Attendancehours": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Attendance hours",
+          "description": "Attendance hours of an employee on one day  \nThe total of all employee attendance hours on a given calendar day. If an external application is entered, then only the attendance hours that do not come from this external application are totalled."
+        },
+        "Overtimehours": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "minimum": -999.99,
+          "maximum": 999.99,
+          "example": "0",
+          "title": "Overtime hours",
+          "description": "Overtime hours of an employee on one day  \nAn employee's total hours on a given calendar day that have be entered as special overtime."
+        }
+      },
+      "title": "Time Overview (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

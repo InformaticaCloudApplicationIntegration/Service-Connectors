@@ -1,0 +1,3181 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Process Physical Inventory Documents",
+    "version": "1 ",
+    "description": " It can  be consumed by external systems and  user interfaces."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/58/361658745b1f60e10000000a44147b/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "This service enables you to retrieve and create physical inventory documents, as well as count items and post differences on both document and item level",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Physical Inventory Document Integration (SAP_COM_0107)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Physical Inventory - Inventory Count and Adjustment (BML)](https://rapid.sap.com/bp/#/scopeitems/BML \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_PHYSICAL_INVENTORY_DOC_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_PHYSICAL_INVENTORY_DOC_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_PhysInventoryDocHeader"
+    },
+    {
+      "name": "A_PhysInventoryDocItem"
+    }
+  ],
+  "paths": {
+    "/A_PhysInventoryDocHeader": {
+      "get": {
+        "summary": "Get entities from A_PhysInventoryDocHeader",
+        "tags": [
+          "A_PhysInventoryDocHeader"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "FiscalYear",
+                "FiscalYear desc",
+                "PhysicalInventoryDocument",
+                "PhysicalInventoryDocument desc",
+                "InventoryTransactionType",
+                "InventoryTransactionType desc",
+                "Plant",
+                "Plant desc",
+                "StorageLocation",
+                "StorageLocation desc",
+                "InventorySpecialStockType",
+                "InventorySpecialStockType desc",
+                "DocumentDate",
+                "DocumentDate desc",
+                "PhysInventoryPlannedCountDate",
+                "PhysInventoryPlannedCountDate desc",
+                "PhysicalInventoryLastCountDate",
+                "PhysicalInventoryLastCountDate desc",
+                "PostingDate",
+                "PostingDate desc",
+                "FiscalPeriod",
+                "FiscalPeriod desc",
+                "CreatedByUser",
+                "CreatedByUser desc",
+                "PostingIsBlockedForPhysInvtry",
+                "PostingIsBlockedForPhysInvtry desc",
+                "PhysicalInventoryCountStatus",
+                "PhysicalInventoryCountStatus desc",
+                "PhysInvtryAdjustmentPostingSts",
+                "PhysInvtryAdjustmentPostingSts desc",
+                "PhysInvtryDeletionStatus",
+                "PhysInvtryDeletionStatus desc",
+                "PhysInvtryDocHasQtySnapshot",
+                "PhysInvtryDocHasQtySnapshot desc",
+                "PhysicalInventoryGroupType",
+                "PhysicalInventoryGroupType desc",
+                "PhysicalInventoryGroup",
+                "PhysicalInventoryGroup desc",
+                "PhysicalInventoryNumber",
+                "PhysicalInventoryNumber desc",
+                "PhysInventoryReferenceNumber",
+                "PhysInventoryReferenceNumber desc",
+                "PhysicalInventoryDocumentDesc",
+                "PhysicalInventoryDocumentDesc desc",
+                "PhysicalInventoryType",
+                "PhysicalInventoryType desc",
+                "LastChangeDateTime",
+                "LastChangeDateTime desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "FiscalYear",
+                "PhysicalInventoryDocument",
+                "InventoryTransactionType",
+                "Plant",
+                "StorageLocation",
+                "InventorySpecialStockType",
+                "DocumentDate",
+                "PhysInventoryPlannedCountDate",
+                "PhysicalInventoryLastCountDate",
+                "PostingDate",
+                "FiscalPeriod",
+                "CreatedByUser",
+                "PostingIsBlockedForPhysInvtry",
+                "PhysicalInventoryCountStatus",
+                "PhysInvtryAdjustmentPostingSts",
+                "PhysInvtryDeletionStatus",
+                "PhysInvtryDocHasQtySnapshot",
+                "PhysicalInventoryGroupType",
+                "PhysicalInventoryGroup",
+                "PhysicalInventoryNumber",
+                "PhysInventoryReferenceNumber",
+                "PhysicalInventoryDocumentDesc",
+                "PhysicalInventoryType",
+                "LastChangeDateTime",
+                "to_PhysicalInventoryDocumentItem"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_PhysicalInventoryDocumentItem"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_PhysInventoryDocHeaderType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocHeaderType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to A_PhysInventoryDocHeader",
+        "tags": [
+          "A_PhysInventoryDocHeader"
+        ],
+        "parameters": [
+          {
+            "name": "A_PhysInventoryDocHeaderType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocHeaderType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_PhysInventoryDocHeaderType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocHeaderType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_PhysInventoryDocHeader(FiscalYear='{FiscalYear}',PhysicalInventoryDocument='{PhysicalInventoryDocument}')": {
+      "parameters": [
+        {
+          "name": "FiscalYear",
+          "in": "path",
+          "required": true,
+          "description": "Period, 12 months as a rule, for which the company is to create its inventory and balance sheet. The fiscal year can be the same as the calendar year, but does not have to be.",
+          "type": "string"
+        },
+        {
+          "name": "PhysicalInventoryDocument",
+          "in": "path",
+          "required": true,
+          "description": "Physical Inventory Document",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_PhysInventoryDocHeader by key",
+        "tags": [
+          "A_PhysInventoryDocHeader"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "FiscalYear",
+                "PhysicalInventoryDocument",
+                "InventoryTransactionType",
+                "Plant",
+                "StorageLocation",
+                "InventorySpecialStockType",
+                "DocumentDate",
+                "PhysInventoryPlannedCountDate",
+                "PhysicalInventoryLastCountDate",
+                "PostingDate",
+                "FiscalPeriod",
+                "CreatedByUser",
+                "PostingIsBlockedForPhysInvtry",
+                "PhysicalInventoryCountStatus",
+                "PhysInvtryAdjustmentPostingSts",
+                "PhysInvtryDeletionStatus",
+                "PhysInvtryDocHasQtySnapshot",
+                "PhysicalInventoryGroupType",
+                "PhysicalInventoryGroup",
+                "PhysicalInventoryNumber",
+                "PhysInventoryReferenceNumber",
+                "PhysicalInventoryDocumentDesc",
+                "PhysicalInventoryType",
+                "LastChangeDateTime",
+                "to_PhysicalInventoryDocumentItem"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_PhysicalInventoryDocumentItem"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_PhysInventoryDocHeaderType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocHeaderType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_PhysInventoryDocHeader(FiscalYear='{FiscalYear}',PhysicalInventoryDocument='{PhysicalInventoryDocument}')/to_PhysicalInventoryDocumentItem": {
+      "parameters": [
+        {
+          "name": "FiscalYear",
+          "in": "path",
+          "required": true,
+          "description": "Period, 12 months as a rule, for which the company is to create its inventory and balance sheet. The fiscal year can be the same as the calendar year, but does not have to be.",
+          "type": "string"
+        },
+        {
+          "name": "PhysicalInventoryDocument",
+          "in": "path",
+          "required": true,
+          "description": "Physical Inventory Document",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_PhysicalInventoryDocumentItem",
+        "tags": [
+          "A_PhysInventoryDocHeader",
+          "A_PhysInventoryDocItem"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "FiscalYear",
+                "FiscalYear desc",
+                "PhysicalInventoryDocument",
+                "PhysicalInventoryDocument desc",
+                "PhysicalInventoryDocumentItem",
+                "PhysicalInventoryDocumentItem desc",
+                "Plant",
+                "Plant desc",
+                "StorageLocation",
+                "StorageLocation desc",
+                "Material",
+                "Material desc",
+                "Batch",
+                "Batch desc",
+                "InventorySpecialStockType",
+                "InventorySpecialStockType desc",
+                "PhysicalInventoryStockType",
+                "PhysicalInventoryStockType desc",
+                "SalesOrder",
+                "SalesOrder desc",
+                "SalesOrderItem",
+                "SalesOrderItem desc",
+                "Supplier",
+                "Supplier desc",
+                "Customer",
+                "Customer desc",
+                "WBSElement",
+                "WBSElement desc",
+                "LastChangeUser",
+                "LastChangeUser desc",
+                "LastChangeDate",
+                "LastChangeDate desc",
+                "CountedByUser",
+                "CountedByUser desc",
+                "PhysicalInventoryLastCountDate",
+                "PhysicalInventoryLastCountDate desc",
+                "AdjustmentPostingMadeByUser",
+                "AdjustmentPostingMadeByUser desc",
+                "PostingDate",
+                "PostingDate desc",
+                "PhysicalInventoryItemIsCounted",
+                "PhysicalInventoryItemIsCounted desc",
+                "PhysInvtryDifferenceIsPosted",
+                "PhysInvtryDifferenceIsPosted desc",
+                "PhysInvtryItemIsRecounted",
+                "PhysInvtryItemIsRecounted desc",
+                "PhysInvtryItemIsDeleted",
+                "PhysInvtryItemIsDeleted desc",
+                "IsHandledInAltvUnitOfMsr",
+                "IsHandledInAltvUnitOfMsr desc",
+                "CycleCountType",
+                "CycleCountType desc",
+                "IsValueOnlyMaterial",
+                "IsValueOnlyMaterial desc",
+                "PhysInventoryReferenceNumber",
+                "PhysInventoryReferenceNumber desc",
+                "MaterialDocument",
+                "MaterialDocument desc",
+                "MaterialDocumentYear",
+                "MaterialDocumentYear desc",
+                "MaterialDocumentItem",
+                "MaterialDocumentItem desc",
+                "PhysInvtryRecountDocument",
+                "PhysInvtryRecountDocument desc",
+                "PhysicalInventoryItemIsZero",
+                "PhysicalInventoryItemIsZero desc",
+                "ReasonForPhysInvtryDifference",
+                "ReasonForPhysInvtryDifference desc",
+                "MaterialBaseUnit",
+                "MaterialBaseUnit desc",
+                "BookQtyBfrCountInMatlBaseUnit",
+                "BookQtyBfrCountInMatlBaseUnit desc",
+                "Quantity",
+                "Quantity desc",
+                "UnitOfEntry",
+                "UnitOfEntry desc",
+                "QuantityInUnitOfEntry",
+                "QuantityInUnitOfEntry desc",
+                "Currency",
+                "Currency desc",
+                "DifferenceAmountInCoCodeCrcy",
+                "DifferenceAmountInCoCodeCrcy desc",
+                "EnteredSlsAmtInCoCodeCrcy",
+                "EnteredSlsAmtInCoCodeCrcy desc",
+                "SlsPriceAmountInCoCodeCrcy",
+                "SlsPriceAmountInCoCodeCrcy desc",
+                "PhysInvtryCtAmtInCoCodeCrcy",
+                "PhysInvtryCtAmtInCoCodeCrcy desc",
+                "BookQtyAmountInCoCodeCrcy",
+                "BookQtyAmountInCoCodeCrcy desc",
+                "LastChangeDateTime",
+                "LastChangeDateTime desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "FiscalYear",
+                "PhysicalInventoryDocument",
+                "PhysicalInventoryDocumentItem",
+                "Plant",
+                "StorageLocation",
+                "Material",
+                "Batch",
+                "InventorySpecialStockType",
+                "PhysicalInventoryStockType",
+                "SalesOrder",
+                "SalesOrderItem",
+                "Supplier",
+                "Customer",
+                "WBSElement",
+                "LastChangeUser",
+                "LastChangeDate",
+                "CountedByUser",
+                "PhysicalInventoryLastCountDate",
+                "AdjustmentPostingMadeByUser",
+                "PostingDate",
+                "PhysicalInventoryItemIsCounted",
+                "PhysInvtryDifferenceIsPosted",
+                "PhysInvtryItemIsRecounted",
+                "PhysInvtryItemIsDeleted",
+                "IsHandledInAltvUnitOfMsr",
+                "CycleCountType",
+                "IsValueOnlyMaterial",
+                "PhysInventoryReferenceNumber",
+                "MaterialDocument",
+                "MaterialDocumentYear",
+                "MaterialDocumentItem",
+                "PhysInvtryRecountDocument",
+                "PhysicalInventoryItemIsZero",
+                "ReasonForPhysInvtryDifference",
+                "MaterialBaseUnit",
+                "BookQtyBfrCountInMatlBaseUnit",
+                "Quantity",
+                "UnitOfEntry",
+                "QuantityInUnitOfEntry",
+                "Currency",
+                "DifferenceAmountInCoCodeCrcy",
+                "EnteredSlsAmtInCoCodeCrcy",
+                "SlsPriceAmountInCoCodeCrcy",
+                "PhysInvtryCtAmtInCoCodeCrcy",
+                "BookQtyAmountInCoCodeCrcy",
+                "LastChangeDateTime",
+                "to_PhysicalInventoryDocument"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_PhysicalInventoryDocument"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_PhysInventoryDocItemType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocItemType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_PhysInventoryDocItem": {
+      "get": {
+        "summary": "Get entities from A_PhysInventoryDocItem",
+        "tags": [
+          "A_PhysInventoryDocItem"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "FiscalYear",
+                "FiscalYear desc",
+                "PhysicalInventoryDocument",
+                "PhysicalInventoryDocument desc",
+                "PhysicalInventoryDocumentItem",
+                "PhysicalInventoryDocumentItem desc",
+                "Plant",
+                "Plant desc",
+                "StorageLocation",
+                "StorageLocation desc",
+                "Material",
+                "Material desc",
+                "Batch",
+                "Batch desc",
+                "InventorySpecialStockType",
+                "InventorySpecialStockType desc",
+                "PhysicalInventoryStockType",
+                "PhysicalInventoryStockType desc",
+                "SalesOrder",
+                "SalesOrder desc",
+                "SalesOrderItem",
+                "SalesOrderItem desc",
+                "Supplier",
+                "Supplier desc",
+                "Customer",
+                "Customer desc",
+                "WBSElement",
+                "WBSElement desc",
+                "LastChangeUser",
+                "LastChangeUser desc",
+                "LastChangeDate",
+                "LastChangeDate desc",
+                "CountedByUser",
+                "CountedByUser desc",
+                "PhysicalInventoryLastCountDate",
+                "PhysicalInventoryLastCountDate desc",
+                "AdjustmentPostingMadeByUser",
+                "AdjustmentPostingMadeByUser desc",
+                "PostingDate",
+                "PostingDate desc",
+                "PhysicalInventoryItemIsCounted",
+                "PhysicalInventoryItemIsCounted desc",
+                "PhysInvtryDifferenceIsPosted",
+                "PhysInvtryDifferenceIsPosted desc",
+                "PhysInvtryItemIsRecounted",
+                "PhysInvtryItemIsRecounted desc",
+                "PhysInvtryItemIsDeleted",
+                "PhysInvtryItemIsDeleted desc",
+                "IsHandledInAltvUnitOfMsr",
+                "IsHandledInAltvUnitOfMsr desc",
+                "CycleCountType",
+                "CycleCountType desc",
+                "IsValueOnlyMaterial",
+                "IsValueOnlyMaterial desc",
+                "PhysInventoryReferenceNumber",
+                "PhysInventoryReferenceNumber desc",
+                "MaterialDocument",
+                "MaterialDocument desc",
+                "MaterialDocumentYear",
+                "MaterialDocumentYear desc",
+                "MaterialDocumentItem",
+                "MaterialDocumentItem desc",
+                "PhysInvtryRecountDocument",
+                "PhysInvtryRecountDocument desc",
+                "PhysicalInventoryItemIsZero",
+                "PhysicalInventoryItemIsZero desc",
+                "ReasonForPhysInvtryDifference",
+                "ReasonForPhysInvtryDifference desc",
+                "MaterialBaseUnit",
+                "MaterialBaseUnit desc",
+                "BookQtyBfrCountInMatlBaseUnit",
+                "BookQtyBfrCountInMatlBaseUnit desc",
+                "Quantity",
+                "Quantity desc",
+                "UnitOfEntry",
+                "UnitOfEntry desc",
+                "QuantityInUnitOfEntry",
+                "QuantityInUnitOfEntry desc",
+                "Currency",
+                "Currency desc",
+                "DifferenceAmountInCoCodeCrcy",
+                "DifferenceAmountInCoCodeCrcy desc",
+                "EnteredSlsAmtInCoCodeCrcy",
+                "EnteredSlsAmtInCoCodeCrcy desc",
+                "SlsPriceAmountInCoCodeCrcy",
+                "SlsPriceAmountInCoCodeCrcy desc",
+                "PhysInvtryCtAmtInCoCodeCrcy",
+                "PhysInvtryCtAmtInCoCodeCrcy desc",
+                "BookQtyAmountInCoCodeCrcy",
+                "BookQtyAmountInCoCodeCrcy desc",
+                "LastChangeDateTime",
+                "LastChangeDateTime desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "FiscalYear",
+                "PhysicalInventoryDocument",
+                "PhysicalInventoryDocumentItem",
+                "Plant",
+                "StorageLocation",
+                "Material",
+                "Batch",
+                "InventorySpecialStockType",
+                "PhysicalInventoryStockType",
+                "SalesOrder",
+                "SalesOrderItem",
+                "Supplier",
+                "Customer",
+                "WBSElement",
+                "LastChangeUser",
+                "LastChangeDate",
+                "CountedByUser",
+                "PhysicalInventoryLastCountDate",
+                "AdjustmentPostingMadeByUser",
+                "PostingDate",
+                "PhysicalInventoryItemIsCounted",
+                "PhysInvtryDifferenceIsPosted",
+                "PhysInvtryItemIsRecounted",
+                "PhysInvtryItemIsDeleted",
+                "IsHandledInAltvUnitOfMsr",
+                "CycleCountType",
+                "IsValueOnlyMaterial",
+                "PhysInventoryReferenceNumber",
+                "MaterialDocument",
+                "MaterialDocumentYear",
+                "MaterialDocumentItem",
+                "PhysInvtryRecountDocument",
+                "PhysicalInventoryItemIsZero",
+                "ReasonForPhysInvtryDifference",
+                "MaterialBaseUnit",
+                "BookQtyBfrCountInMatlBaseUnit",
+                "Quantity",
+                "UnitOfEntry",
+                "QuantityInUnitOfEntry",
+                "Currency",
+                "DifferenceAmountInCoCodeCrcy",
+                "EnteredSlsAmtInCoCodeCrcy",
+                "SlsPriceAmountInCoCodeCrcy",
+                "PhysInvtryCtAmtInCoCodeCrcy",
+                "BookQtyAmountInCoCodeCrcy",
+                "LastChangeDateTime",
+                "to_PhysicalInventoryDocument"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_PhysicalInventoryDocument"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_PhysInventoryDocItemType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocItemType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_PhysInventoryDocItem(FiscalYear='{FiscalYear}',PhysicalInventoryDocument='{PhysicalInventoryDocument}',PhysicalInventoryDocumentItem='{PhysicalInventoryDocumentItem}')": {
+      "parameters": [
+        {
+          "name": "FiscalYear",
+          "in": "path",
+          "required": true,
+          "description": "Period, 12 months as a rule, for which the company is to create its inventory and balance sheet. The fiscal year can be the same as the calendar year, but does not have to be.",
+          "type": "string"
+        },
+        {
+          "name": "PhysicalInventoryDocument",
+          "in": "path",
+          "required": true,
+          "description": "Physical Inventory Document",
+          "type": "string"
+        },
+        {
+          "name": "PhysicalInventoryDocumentItem",
+          "in": "path",
+          "required": true,
+          "description": "Physical Inventory Item Number",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_PhysInventoryDocItem by key",
+        "tags": [
+          "A_PhysInventoryDocItem"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "FiscalYear",
+                "PhysicalInventoryDocument",
+                "PhysicalInventoryDocumentItem",
+                "Plant",
+                "StorageLocation",
+                "Material",
+                "Batch",
+                "InventorySpecialStockType",
+                "PhysicalInventoryStockType",
+                "SalesOrder",
+                "SalesOrderItem",
+                "Supplier",
+                "Customer",
+                "WBSElement",
+                "LastChangeUser",
+                "LastChangeDate",
+                "CountedByUser",
+                "PhysicalInventoryLastCountDate",
+                "AdjustmentPostingMadeByUser",
+                "PostingDate",
+                "PhysicalInventoryItemIsCounted",
+                "PhysInvtryDifferenceIsPosted",
+                "PhysInvtryItemIsRecounted",
+                "PhysInvtryItemIsDeleted",
+                "IsHandledInAltvUnitOfMsr",
+                "CycleCountType",
+                "IsValueOnlyMaterial",
+                "PhysInventoryReferenceNumber",
+                "MaterialDocument",
+                "MaterialDocumentYear",
+                "MaterialDocumentItem",
+                "PhysInvtryRecountDocument",
+                "PhysicalInventoryItemIsZero",
+                "ReasonForPhysInvtryDifference",
+                "MaterialBaseUnit",
+                "BookQtyBfrCountInMatlBaseUnit",
+                "Quantity",
+                "UnitOfEntry",
+                "QuantityInUnitOfEntry",
+                "Currency",
+                "DifferenceAmountInCoCodeCrcy",
+                "EnteredSlsAmtInCoCodeCrcy",
+                "SlsPriceAmountInCoCodeCrcy",
+                "PhysInvtryCtAmtInCoCodeCrcy",
+                "BookQtyAmountInCoCodeCrcy",
+                "LastChangeDateTime",
+                "to_PhysicalInventoryDocument"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_PhysicalInventoryDocument"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_PhysInventoryDocItemType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocItemType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_PhysInventoryDocItem",
+        "tags": [
+          "A_PhysInventoryDocItem"
+        ],
+        "parameters": [
+          {
+            "name": "A_PhysInventoryDocItemType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_PhysInventoryDocItemType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocItemType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_PhysInventoryDocItem(FiscalYear='{FiscalYear}',PhysicalInventoryDocument='{PhysicalInventoryDocument}',PhysicalInventoryDocumentItem='{PhysicalInventoryDocumentItem}')/to_PhysicalInventoryDocument": {
+      "parameters": [
+        {
+          "name": "FiscalYear",
+          "in": "path",
+          "required": true,
+          "description": "Period, 12 months as a rule, for which the company is to create its inventory and balance sheet. The fiscal year can be the same as the calendar year, but does not have to be.",
+          "type": "string"
+        },
+        {
+          "name": "PhysicalInventoryDocument",
+          "in": "path",
+          "required": true,
+          "description": "Physical Inventory Document",
+          "type": "string"
+        },
+        {
+          "name": "PhysicalInventoryDocumentItem",
+          "in": "path",
+          "required": true,
+          "description": "Physical Inventory Item Number",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_PhysicalInventoryDocument",
+        "tags": [
+          "A_PhysInventoryDocItem",
+          "A_PhysInventoryDocHeader"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "FiscalYear",
+                "PhysicalInventoryDocument",
+                "InventoryTransactionType",
+                "Plant",
+                "StorageLocation",
+                "InventorySpecialStockType",
+                "DocumentDate",
+                "PhysInventoryPlannedCountDate",
+                "PhysicalInventoryLastCountDate",
+                "PostingDate",
+                "FiscalPeriod",
+                "CreatedByUser",
+                "PostingIsBlockedForPhysInvtry",
+                "PhysicalInventoryCountStatus",
+                "PhysInvtryAdjustmentPostingSts",
+                "PhysInvtryDeletionStatus",
+                "PhysInvtryDocHasQtySnapshot",
+                "PhysicalInventoryGroupType",
+                "PhysicalInventoryGroup",
+                "PhysicalInventoryNumber",
+                "PhysInventoryReferenceNumber",
+                "PhysicalInventoryDocumentDesc",
+                "PhysicalInventoryType",
+                "LastChangeDateTime",
+                "to_PhysicalInventoryDocumentItem"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_PhysicalInventoryDocumentItem"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_PhysInventoryDocHeaderType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocHeaderType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/PostDifferences": {
+      "post": {
+        "summary": "Post Differences",
+        "tags": [
+          "A_PhysInventoryDocHeader"
+        ],
+        "parameters": [
+          {
+            "name": "PostingThresholdValue",
+            "in": "query",
+            "description": "Threshold Value  \n(Value needs to be suffixed with `M`)",
+            "type": "string",
+            "pattern": "^[-]?[0-9]+(\\.[0-9]+)?[mM]$",
+            "multipleOf": 0.001,
+            "minimum": -99999999999.999,
+            "maximum": 99999999999.999
+          },
+          {
+            "name": "PostingDate",
+            "in": "query",
+            "description": "Posting Date  \n(Value needs to be enclosed in single quotes and prefixed with `datetime`, e.g. `datetime'2017-12-31T00:00'`)",
+            "type": "string",
+            "pattern": "^datetime'[0-9]{4}-[0-9]{2}-[0-9]{2}T00:00'$"
+          },
+          {
+            "name": "PhysicalInventoryDocument",
+            "in": "query",
+            "required": true,
+            "description": "Phys. Inventory Doc.  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "FiscalYear",
+            "in": "query",
+            "required": true,
+            "description": "Fiscal Year  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "A_PhysInventoryDocHeaderType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocHeaderType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/PostDifferencesOnItem": {
+      "post": {
+        "summary": "Post Difference on Item",
+        "tags": [
+          "A_PhysInventoryDocItem"
+        ],
+        "parameters": [
+          {
+            "name": "PhysicalInventoryDocumentItem",
+            "in": "query",
+            "required": true,
+            "description": "Item  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 5,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "Material",
+            "in": "query",
+            "required": true,
+            "description": "Material  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 42,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PhysicalInventoryDocument",
+            "in": "query",
+            "required": true,
+            "description": "Phys. Inventory Doc.  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "FiscalYear",
+            "in": "query",
+            "required": true,
+            "description": "Fiscal Year  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "Batch",
+            "in": "query",
+            "description": "Batch  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "ReasonForPhysInvtryDifference",
+            "in": "query",
+            "description": "Reason for Man. Val.  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PostingDate",
+            "in": "query",
+            "description": "Posting Date  \n(Value needs to be enclosed in single quotes and prefixed with `datetime`, e.g. `datetime'2017-12-31T00:00'`)",
+            "type": "string",
+            "pattern": "^datetime'[0-9]{4}-[0-9]{2}-[0-9]{2}T00:00'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "A_PhysInventoryDocItemType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocItemType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/InitiateRecount": {
+      "post": {
+        "summary": "Trigger Recount",
+        "tags": [
+          "A_PhysInventoryDocHeader"
+        ],
+        "parameters": [
+          {
+            "name": "PhysicalInventoryDocument",
+            "in": "query",
+            "required": true,
+            "description": "Phys. Inventory Doc.  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "FiscalYear",
+            "in": "query",
+            "required": true,
+            "description": "Fiscal Year  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PhysInventoryPlannedCountDate",
+            "in": "query",
+            "description": "Planned Count Date  \n(Value needs to be enclosed in single quotes and prefixed with `datetime`, e.g. `datetime'2017-12-31T00:00'`)",
+            "type": "string",
+            "pattern": "^datetime'[0-9]{4}-[0-9]{2}-[0-9]{2}T00:00'$"
+          },
+          {
+            "name": "DocumentDate",
+            "in": "query",
+            "description": "Document Date  \n(Value needs to be enclosed in single quotes and prefixed with `datetime`, e.g. `datetime'2017-12-31T00:00'`)",
+            "type": "string",
+            "pattern": "^datetime'[0-9]{4}-[0-9]{2}-[0-9]{2}T00:00'$"
+          },
+          {
+            "name": "PhysicalInventoryNumber",
+            "in": "query",
+            "description": "Phys. inventory no.  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 18,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PhysInventoryReferenceNumber",
+            "in": "query",
+            "description": "Phys. inventory ref.  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 18,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PhysicalInventoryDocumentDesc",
+            "in": "query",
+            "description": "Description  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 42,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PostingThresholdValue",
+            "in": "query",
+            "description": "Threshold Value  \n(Value needs to be suffixed with `M`)",
+            "type": "string",
+            "pattern": "^[-]?[0-9]+(\\.[0-9]+)?[mM]$",
+            "multipleOf": 0.001,
+            "minimum": -99999999999.999,
+            "maximum": 99999999999.999
+          },
+          {
+            "name": "PhysInvtryDocHasQtySnapshot",
+            "in": "query",
+            "description": "Freeze Book Invtry",
+            "type": "boolean"
+          },
+          {
+            "name": "PostingIsBlockedForPhysInvtry",
+            "in": "query",
+            "description": "Phys. Inv. Block",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "A_PhysInventoryDocHeaderType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocHeaderType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/InitiateRecountOnItem": {
+      "post": {
+        "summary": "Trigger Recount on Item",
+        "tags": [
+          "A_PhysInventoryDocItem"
+        ],
+        "parameters": [
+          {
+            "name": "PhysicalInventoryDocument",
+            "in": "query",
+            "required": true,
+            "description": "Phys. Inventory Doc.  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "FiscalYear",
+            "in": "query",
+            "required": true,
+            "description": "Fiscal Year  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PhysicalInventoryDocumentItem",
+            "in": "query",
+            "required": true,
+            "description": "Item  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 5,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PhysInventoryPlannedCountDate",
+            "in": "query",
+            "description": "Planned Count Date  \n(Value needs to be enclosed in single quotes and prefixed with `datetime`, e.g. `datetime'2017-12-31T00:00'`)",
+            "type": "string",
+            "pattern": "^datetime'[0-9]{4}-[0-9]{2}-[0-9]{2}T00:00'$"
+          },
+          {
+            "name": "DocumentDate",
+            "in": "query",
+            "description": "Document Date  \n(Value needs to be enclosed in single quotes and prefixed with `datetime`, e.g. `datetime'2017-12-31T00:00'`)",
+            "type": "string",
+            "pattern": "^datetime'[0-9]{4}-[0-9]{2}-[0-9]{2}T00:00'$"
+          },
+          {
+            "name": "PhysicalInventoryNumber",
+            "in": "query",
+            "description": "Phys. inventory no.  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 18,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PhysInventoryReferenceNumber",
+            "in": "query",
+            "description": "Phys. inventory ref.  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 18,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PhysicalInventoryDocumentDesc",
+            "in": "query",
+            "description": "Description  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 42,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "PhysInvtryDocHasQtySnapshot",
+            "in": "query",
+            "description": "Freeze Book Invtry",
+            "type": "boolean"
+          },
+          {
+            "name": "PostingIsBlockedForPhysInvtry",
+            "in": "query",
+            "description": "Phys. Inv. Block",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "A_PhysInventoryDocItemType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocItemType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET A_PhysInventoryDocHeader HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocHeaderType": {
+      "type": "object",
+      "properties": {
+        "FiscalYear": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Fiscal Year",
+          "description": "Period, 12 months as a rule, for which the company is to create its inventory and balance sheet. The fiscal year can be the same as the calendar year, but does not have to be."
+        },
+        "PhysicalInventoryDocument": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Physical Inventory Document"
+        },
+        "InventoryTransactionType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Inventory Transaction Type"
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location",
+          "description": "Number of the storage location in which the material is stored. A plant may contain one or more storage locations."
+        },
+        "InventorySpecialStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special Stock",
+          "description": "Special Stock Indicator  \nSpecifies the special stock type.  \nIf you need to separately manage certain stock (for example, consignment stock) of a material, the stock type in question is defined using this indicator."
+        },
+        "DocumentDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Document Date",
+          "description": "Document Date in Document  \nThe document date is the date on which the original document was issued."
+        },
+        "PhysInventoryPlannedCountDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Planned Count Date",
+          "description": "Planned Date of Inventory Count  \nIndicates the date on which the physical inventory count is to take place.  \nThe planned count date determines the fiscal year in which the  physical inventory document is posted. All other postings involving this document must be effected during this fiscal year."
+        },
+        "PhysicalInventoryLastCountDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Count Date",
+          "description": "Date of Last Count  \nSpecifies the date of the last physical inventory count.  \nThe actual count date must be in the same year as the planned count date.The date of the first entry of count results for a physical inventory document determines the posting period in which all further count results as well as the inventory differences relating to this physical inventory document must be posted."
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date",
+          "description": "Posting Date in the Document  \nDate which is used when entering the document in Financial Accounting or Controlling.  \nThe fiscal year and the period for which an update of the accounts specified in the document or cost elements is made, are derived from the posting date.When entering documents, the system checks whether the posting date entered is allowed by means of the posting period permitted.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        },
+        "FiscalPeriod": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Posting Period"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created By",
+          "description": "Physical Inventory Created by User"
+        },
+        "PostingIsBlockedForPhysInvtry": {
+"type": "boolean",
+"default": "null",
+          "title": "Posting Block",
+          "description": "Posting Block Due to Physical Inventory  \nIndicates that no goods movements involving the materials listed in the physical inventory document can be posted for the duration of a  physical inventory count.  \nThe indicator is set for the affected stocks in each case (storage location stock, batch stock, or special stock) for all associated stock types and is not cancelled until the count results are posted.The indicator remains in the physical document header even if the stock is unblocked through the posting of inventory differences. It then only indicates that a posting block was set for the documents.The blocking indicator can be set in one of two ways:Directly upon entry of the physical inventory document (if the count is to take place immediately)Shortly before the count (if the count is to take place later)You can set the indicator by choosing Physical inventory document -> Change in the header data of the physical inventory document or via batch input."
+        },
+        "PhysicalInventoryCountStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Count Status",
+          "description": "Indicates that items from this physical inventory document have been counted.  \nStatus A means that only some items have been counted.Status X means that all items have been counted."
+        },
+        "PhysInvtryAdjustmentPostingSts": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Adjustment Status",
+          "description": "Status of Adjustment Posting (Inventory Differences)  \nIndicates that differences have been posted for this physical inventory document.  \nStatus A means that inventory differences have been posted for some of the items of the physical inventory document only. For these items, the physical inventory has been completed.Status X means that differences have been posted for all items of the physical inventory document. The document can now be archived."
+        },
+        "PhysInvtryDeletionStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Deletion Status",
+          "description": "Status of Deletion  \nIndicates that items of this physical inventory document have been deleted.  \nStatus A means that only some items have been deleted.Status X means that all items of the document have been deleted. However, physical deletion of the document is not possible, because inventory differences have been posted for at least one item.The delete status (in conjunction with the adjustment status) is relevant to the archiving of the documents: A document can only be archived after all items have been deleted or all inventory differences have been posted.If an already counted item is still open, you must process this item before you can archive or delete the document."
+        },
+        "PhysInvtryDocHasQtySnapshot": {
+"type": "boolean",
+"default": "null",
+          "title": "Book Inventory Freeze"
+        },
+        "PhysicalInventoryGroupType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Grouping Type",
+          "description": "Type of Grouping Criterion  \nSpecifies the grouping type for the physical inventory document items.  \nPhysical inventory documents can be created so that all items in the document have one common characteristic. The field defines which characteristic this is.One of the values of this indicator defines that the materials of all items in a physical inventory document belong to the same material group."
+        },
+        "PhysicalInventoryGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Grouping Criterion",
+          "description": "Grouping Criterion of Physical Inventory Document Item  \nIndicates the grouping criterion of the items in a physical inventory document.  \nPhysical inventory documents can be created so that all items in a document have one common characteristic.The materials of all items in a document belong to material group '001'. The grouping characteristic stored in the document header then has the value '001'."
+        },
+        "PhysicalInventoryNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Physical Inventory Number"
+        },
+        "PhysInventoryReferenceNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Physical Inventory Reference"
+        },
+        "PhysicalInventoryDocumentDesc": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description",
+          "description": "Description of Physical Inventory Document"
+        },
+        "PhysicalInventoryType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Physical Inventory Type"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Last Change",
+          "description": "Last Change Timestamp"
+        },
+        "to_PhysicalInventoryDocumentItem": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocItemType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API Physical Inventory Document Header"
+    },
+    "API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocHeaderType-create": {
+      "type": "object",
+      "properties": {
+        "FiscalYear": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Fiscal Year",
+          "description": "Period, 12 months as a rule, for which the company is to create its inventory and balance sheet. The fiscal year can be the same as the calendar year, but does not have to be."
+        },
+        "PhysicalInventoryDocument": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Physical Inventory Document"
+        },
+        "InventoryTransactionType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Inventory Transaction Type"
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location",
+          "description": "Number of the storage location in which the material is stored. A plant may contain one or more storage locations."
+        },
+        "InventorySpecialStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special Stock",
+          "description": "Special Stock Indicator  \nSpecifies the special stock type.  \nIf you need to separately manage certain stock (for example, consignment stock) of a material, the stock type in question is defined using this indicator."
+        },
+        "DocumentDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Document Date",
+          "description": "Document Date in Document  \nThe document date is the date on which the original document was issued."
+        },
+        "PhysInventoryPlannedCountDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Planned Count Date",
+          "description": "Planned Date of Inventory Count  \nIndicates the date on which the physical inventory count is to take place.  \nThe planned count date determines the fiscal year in which the  physical inventory document is posted. All other postings involving this document must be effected during this fiscal year."
+        },
+        "PhysicalInventoryLastCountDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Count Date",
+          "description": "Date of Last Count  \nSpecifies the date of the last physical inventory count.  \nThe actual count date must be in the same year as the planned count date.The date of the first entry of count results for a physical inventory document determines the posting period in which all further count results as well as the inventory differences relating to this physical inventory document must be posted."
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date",
+          "description": "Posting Date in the Document  \nDate which is used when entering the document in Financial Accounting or Controlling.  \nThe fiscal year and the period for which an update of the accounts specified in the document or cost elements is made, are derived from the posting date.When entering documents, the system checks whether the posting date entered is allowed by means of the posting period permitted.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        },
+        "FiscalPeriod": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Posting Period"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created By",
+          "description": "Physical Inventory Created by User"
+        },
+        "PostingIsBlockedForPhysInvtry": {
+"type": "boolean",
+"default": "null",
+          "title": "Posting Block",
+          "description": "Posting Block Due to Physical Inventory  \nIndicates that no goods movements involving the materials listed in the physical inventory document can be posted for the duration of a  physical inventory count.  \nThe indicator is set for the affected stocks in each case (storage location stock, batch stock, or special stock) for all associated stock types and is not cancelled until the count results are posted.The indicator remains in the physical document header even if the stock is unblocked through the posting of inventory differences. It then only indicates that a posting block was set for the documents.The blocking indicator can be set in one of two ways:Directly upon entry of the physical inventory document (if the count is to take place immediately)Shortly before the count (if the count is to take place later)You can set the indicator by choosing Physical inventory document -> Change in the header data of the physical inventory document or via batch input."
+        },
+        "PhysicalInventoryCountStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Count Status",
+          "description": "Indicates that items from this physical inventory document have been counted.  \nStatus A means that only some items have been counted.Status X means that all items have been counted."
+        },
+        "PhysInvtryAdjustmentPostingSts": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Adjustment Status",
+          "description": "Status of Adjustment Posting (Inventory Differences)  \nIndicates that differences have been posted for this physical inventory document.  \nStatus A means that inventory differences have been posted for some of the items of the physical inventory document only. For these items, the physical inventory has been completed.Status X means that differences have been posted for all items of the physical inventory document. The document can now be archived."
+        },
+        "PhysInvtryDeletionStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Deletion Status",
+          "description": "Status of Deletion  \nIndicates that items of this physical inventory document have been deleted.  \nStatus A means that only some items have been deleted.Status X means that all items of the document have been deleted. However, physical deletion of the document is not possible, because inventory differences have been posted for at least one item.The delete status (in conjunction with the adjustment status) is relevant to the archiving of the documents: A document can only be archived after all items have been deleted or all inventory differences have been posted.If an already counted item is still open, you must process this item before you can archive or delete the document."
+        },
+        "PhysInvtryDocHasQtySnapshot": {
+"type": "boolean",
+"default": "null",
+          "title": "Book Inventory Freeze"
+        },
+        "PhysicalInventoryGroupType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Grouping Type",
+          "description": "Type of Grouping Criterion  \nSpecifies the grouping type for the physical inventory document items.  \nPhysical inventory documents can be created so that all items in the document have one common characteristic. The field defines which characteristic this is.One of the values of this indicator defines that the materials of all items in a physical inventory document belong to the same material group."
+        },
+        "PhysicalInventoryGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Grouping Criterion",
+          "description": "Grouping Criterion of Physical Inventory Document Item  \nIndicates the grouping criterion of the items in a physical inventory document.  \nPhysical inventory documents can be created so that all items in a document have one common characteristic.The materials of all items in a document belong to material group '001'. The grouping characteristic stored in the document header then has the value '001'."
+        },
+        "PhysicalInventoryNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Physical Inventory Number"
+        },
+        "PhysInventoryReferenceNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Physical Inventory Reference"
+        },
+        "PhysicalInventoryDocumentDesc": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description",
+          "description": "Description of Physical Inventory Document"
+        },
+        "PhysicalInventoryType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Physical Inventory Type"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Last Change",
+          "description": "Last Change Timestamp"
+        },
+        "to_PhysicalInventoryDocumentItem": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocItemType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "FiscalYear",
+        "PhysicalInventoryDocument"
+      ],
+      "title": "API Physical Inventory Document Header (for create)"
+    },
+    "API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocHeaderType-update": {
+      "type": "object",
+      "properties": {
+        "InventoryTransactionType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Inventory Transaction Type"
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location",
+          "description": "Number of the storage location in which the material is stored. A plant may contain one or more storage locations."
+        },
+        "InventorySpecialStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special Stock",
+          "description": "Special Stock Indicator  \nSpecifies the special stock type.  \nIf you need to separately manage certain stock (for example, consignment stock) of a material, the stock type in question is defined using this indicator."
+        },
+        "DocumentDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Document Date",
+          "description": "Document Date in Document  \nThe document date is the date on which the original document was issued."
+        },
+        "PhysInventoryPlannedCountDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Planned Count Date",
+          "description": "Planned Date of Inventory Count  \nIndicates the date on which the physical inventory count is to take place.  \nThe planned count date determines the fiscal year in which the  physical inventory document is posted. All other postings involving this document must be effected during this fiscal year."
+        },
+        "PhysicalInventoryLastCountDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Count Date",
+          "description": "Date of Last Count  \nSpecifies the date of the last physical inventory count.  \nThe actual count date must be in the same year as the planned count date.The date of the first entry of count results for a physical inventory document determines the posting period in which all further count results as well as the inventory differences relating to this physical inventory document must be posted."
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date",
+          "description": "Posting Date in the Document  \nDate which is used when entering the document in Financial Accounting or Controlling.  \nThe fiscal year and the period for which an update of the accounts specified in the document or cost elements is made, are derived from the posting date.When entering documents, the system checks whether the posting date entered is allowed by means of the posting period permitted.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        },
+        "FiscalPeriod": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Posting Period"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Created By",
+          "description": "Physical Inventory Created by User"
+        },
+        "PostingIsBlockedForPhysInvtry": {
+"type": "boolean",
+"default": "null",
+          "title": "Posting Block",
+          "description": "Posting Block Due to Physical Inventory  \nIndicates that no goods movements involving the materials listed in the physical inventory document can be posted for the duration of a  physical inventory count.  \nThe indicator is set for the affected stocks in each case (storage location stock, batch stock, or special stock) for all associated stock types and is not cancelled until the count results are posted.The indicator remains in the physical document header even if the stock is unblocked through the posting of inventory differences. It then only indicates that a posting block was set for the documents.The blocking indicator can be set in one of two ways:Directly upon entry of the physical inventory document (if the count is to take place immediately)Shortly before the count (if the count is to take place later)You can set the indicator by choosing Physical inventory document -> Change in the header data of the physical inventory document or via batch input."
+        },
+        "PhysicalInventoryCountStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Count Status",
+          "description": "Indicates that items from this physical inventory document have been counted.  \nStatus A means that only some items have been counted.Status X means that all items have been counted."
+        },
+        "PhysInvtryAdjustmentPostingSts": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Adjustment Status",
+          "description": "Status of Adjustment Posting (Inventory Differences)  \nIndicates that differences have been posted for this physical inventory document.  \nStatus A means that inventory differences have been posted for some of the items of the physical inventory document only. For these items, the physical inventory has been completed.Status X means that differences have been posted for all items of the physical inventory document. The document can now be archived."
+        },
+        "PhysInvtryDeletionStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Deletion Status",
+          "description": "Status of Deletion  \nIndicates that items of this physical inventory document have been deleted.  \nStatus A means that only some items have been deleted.Status X means that all items of the document have been deleted. However, physical deletion of the document is not possible, because inventory differences have been posted for at least one item.The delete status (in conjunction with the adjustment status) is relevant to the archiving of the documents: A document can only be archived after all items have been deleted or all inventory differences have been posted.If an already counted item is still open, you must process this item before you can archive or delete the document."
+        },
+        "PhysInvtryDocHasQtySnapshot": {
+"type": "boolean",
+"default": "null",
+          "title": "Book Inventory Freeze"
+        },
+        "PhysicalInventoryGroupType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Grouping Type",
+          "description": "Type of Grouping Criterion  \nSpecifies the grouping type for the physical inventory document items.  \nPhysical inventory documents can be created so that all items in the document have one common characteristic. The field defines which characteristic this is.One of the values of this indicator defines that the materials of all items in a physical inventory document belong to the same material group."
+        },
+        "PhysicalInventoryGroup": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Grouping Criterion",
+          "description": "Grouping Criterion of Physical Inventory Document Item  \nIndicates the grouping criterion of the items in a physical inventory document.  \nPhysical inventory documents can be created so that all items in a document have one common characteristic.The materials of all items in a document belong to material group '001'. The grouping characteristic stored in the document header then has the value '001'."
+        },
+        "PhysicalInventoryNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Physical Inventory Number"
+        },
+        "PhysInventoryReferenceNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Physical Inventory Reference"
+        },
+        "PhysicalInventoryDocumentDesc": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description",
+          "description": "Description of Physical Inventory Document"
+        },
+        "PhysicalInventoryType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Physical Inventory Type"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Last Change",
+          "description": "Last Change Timestamp"
+        }
+      },
+      "title": "API Physical Inventory Document Header (for update)"
+    },
+    "API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocItemType": {
+      "type": "object",
+      "properties": {
+        "FiscalYear": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Fiscal Year",
+          "description": "Period, 12 months as a rule, for which the company is to create its inventory and balance sheet. The fiscal year can be the same as the calendar year, but does not have to be."
+        },
+        "PhysicalInventoryDocument": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Physical Inventory Document"
+        },
+        "PhysicalInventoryDocumentItem": {
+          "type": "string",
+          "maxLength": 3,
+          "title": "Physical Inventory Document Item",
+          "description": "Physical Inventory Item Number"
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location",
+          "description": "Number of the storage location in which the material is stored. A plant may contain one or more storage locations."
+        },
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material."
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch",
+          "description": "Batch Number  \nAssigns a material that is manufactured in batches or production lots to a specific batch."
+        },
+        "InventorySpecialStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special Stock Type"
+        },
+        "PhysicalInventoryStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Stock Type",
+          "description": "Stock Type (Physical Inventory)  \nShows the stock type for which a physical inventory is to be carried out.  \nIt is possible to carry out a physical inventory for the following material stock types:Unrestricted-useQuality inspectionBlocked"
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order",
+          "description": "Sales Order Number  \nUniquely identifies a sales order.  \nThe selection of postprocessing records via the sales order number is only possible for non-valuated sales order stock."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales Order Item",
+          "description": "Item Number in Sales Order"
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "Customer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Account number of customer  \nUniquely identifies a customer.  \nThis customer number is used for managing customer special stocks."
+        },
+        "WBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        },
+        "LastChangeUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Changed By",
+          "description": "Name of the user who last changed this physical inventory item."
+        },
+        "LastChangeDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Changed On",
+          "description": "Date of Last Change"
+        },
+        "CountedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Counted By",
+          "description": "Name of the user who last entered the count results for this physical inventory item."
+        },
+        "PhysicalInventoryLastCountDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Count Date",
+          "description": "Date of Last Count  \nSpecifies the date of the last physical inventory count.  \nThe actual count date must be in the same year as the planned count date.The date of the first entry of count results for a physical inventory document determines the posting period in which all further count results as well as the inventory differences relating to this physical inventory document must be posted."
+        },
+        "AdjustmentPostingMadeByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Adjustment Posting Made By"
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date",
+          "description": "Posting Date in the Document  \nDate which is used when entering the document in Financial Accounting or Controlling.  \nThe fiscal year and the period for which an update of the accounts specified in the document or cost elements is made, are derived from the posting date.When entering documents, the system checks whether the posting date entered is allowed by means of the posting period permitted.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        },
+        "PhysicalInventoryItemIsCounted": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Counted",
+          "description": "Item is Counted"
+        },
+        "PhysInvtryDifferenceIsPosted": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Difference Posted",
+          "description": "Difference of Item is Posted"
+        },
+        "PhysInvtryItemIsRecounted": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Recounted",
+          "description": "Item is Recounted"
+        },
+        "PhysInvtryItemIsDeleted": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Deleted",
+          "description": "Item is Deleted"
+        },
+        "IsHandledInAltvUnitOfMsr": {
+"type": "boolean",
+"default": "null",
+          "title": "Without Unit of Measure Proposal"
+        },
+        "CycleCountType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Cycle Count Type"
+        },
+        "IsValueOnlyMaterial": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Value-Only Material"
+        },
+        "PhysInventoryReferenceNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Physical Inventory Reference"
+        },
+        "MaterialDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Material Document",
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed."
+        },
+        "MaterialDocumentYear": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Material Document Year"
+        },
+        "MaterialDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Material Document Item"
+        },
+        "PhysInvtryRecountDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Recount Document",
+          "description": "Number of Recount Document  \nIndicates the number of the physical inventory document in which the item to be recounted was recorded. The corresponding item in the original physical inventory document is no longer active."
+        },
+        "PhysicalInventoryItemIsZero": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Zero Count"
+        },
+        "ReasonForPhysInvtryDifference": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Difference Reason"
+        },
+        "MaterialBaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit of Measure",
+          "description": "Unit of measure in which stocks of the material are managed. The system converts all the quantities you enter in other units of measure (alternative units of measure) to the base unit of measure.  \nYou define the base unit of measure and also alternative units of measure and their conversion factors in the material master record.Since all data is updated in the base unit of measure, your entry is particularly important for the conversion of alternative units of measure. A quantity in the alternative unit of measure can only be shown precisely if its value can be shown with the decimal places available. To ensure this, please note the following:The base unit of measure is the unit satisfying the highest necessary requirement for precision.The conversion of alternative units of measure to the base unit should result in simple decimal fractions (not, for example, 1/3 = 0.333...).Inventory ManagementIn Inventory Management, the base unit of measure is the same as the stockkeeping unit.ServicesServices have units of measure of their own, including the following:Service unitUnit of measure at the higher item level. The precise quantities of the individual services are each at the detailed service line level.BlanketUnit of measure at service line level for services to be provided once only, and for which no precise quantities can or are to be specified."
+        },
+        "BookQtyBfrCountInMatlBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Book Quantity",
+          "description": "Book Quantity Immediately Prior to Count  \nIndicates the book inventory of this physical inventory item at the time of the count.  \nThe quantity counted is not adopted as the new book inventory balance until any differences have been corrected by means of an inventory adjustment posting."
+        },
+        "Quantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Counted Quantity"
+        },
+        "UnitOfEntry": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Entry Unit"
+        },
+        "QuantityInUnitOfEntry": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Counted Quantity in Entry Unit"
+        },
+        "Currency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Company Code Currency"
+        },
+        "DifferenceAmountInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Difference Value",
+          "description": "Value of Difference"
+        },
+        "EnteredSlsAmtInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Sales Price Counted Value",
+          "description": "Externally Entered Value Based on Sales Price"
+        },
+        "SlsPriceAmountInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Sales Price Book Value"
+        },
+        "PhysInvtryCtAmtInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Counted Quantity Value"
+        },
+        "BookQtyAmountInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Book Value"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Last Change",
+          "description": "Last Change Timestamp"
+        },
+        "to_PhysicalInventoryDocument": {
+          "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocHeaderType"
+        }
+      },
+      "title": "API Physical Inventory Document Item"
+    },
+    "API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocItemType-create": {
+      "type": "object",
+      "properties": {
+        "FiscalYear": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Fiscal Year",
+          "description": "Period, 12 months as a rule, for which the company is to create its inventory and balance sheet. The fiscal year can be the same as the calendar year, but does not have to be."
+        },
+        "PhysicalInventoryDocument": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Physical Inventory Document"
+        },
+        "PhysicalInventoryDocumentItem": {
+          "type": "string",
+          "maxLength": 3,
+          "title": "Physical Inventory Document Item",
+          "description": "Physical Inventory Item Number"
+        },
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location",
+          "description": "Number of the storage location in which the material is stored. A plant may contain one or more storage locations."
+        },
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material."
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch",
+          "description": "Batch Number  \nAssigns a material that is manufactured in batches or production lots to a specific batch."
+        },
+        "InventorySpecialStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special Stock Type"
+        },
+        "PhysicalInventoryStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Stock Type",
+          "description": "Stock Type (Physical Inventory)  \nShows the stock type for which a physical inventory is to be carried out.  \nIt is possible to carry out a physical inventory for the following material stock types:Unrestricted-useQuality inspectionBlocked"
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order",
+          "description": "Sales Order Number  \nUniquely identifies a sales order.  \nThe selection of postprocessing records via the sales order number is only possible for non-valuated sales order stock."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales Order Item",
+          "description": "Item Number in Sales Order"
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "Customer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Account number of customer  \nUniquely identifies a customer.  \nThis customer number is used for managing customer special stocks."
+        },
+        "WBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        },
+        "LastChangeUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Changed By",
+          "description": "Name of the user who last changed this physical inventory item."
+        },
+        "LastChangeDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Changed On",
+          "description": "Date of Last Change"
+        },
+        "CountedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Counted By",
+          "description": "Name of the user who last entered the count results for this physical inventory item."
+        },
+        "PhysicalInventoryLastCountDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Count Date",
+          "description": "Date of Last Count  \nSpecifies the date of the last physical inventory count.  \nThe actual count date must be in the same year as the planned count date.The date of the first entry of count results for a physical inventory document determines the posting period in which all further count results as well as the inventory differences relating to this physical inventory document must be posted."
+        },
+        "AdjustmentPostingMadeByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Adjustment Posting Made By"
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date",
+          "description": "Posting Date in the Document  \nDate which is used when entering the document in Financial Accounting or Controlling.  \nThe fiscal year and the period for which an update of the accounts specified in the document or cost elements is made, are derived from the posting date.When entering documents, the system checks whether the posting date entered is allowed by means of the posting period permitted.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        },
+        "PhysicalInventoryItemIsCounted": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Counted",
+          "description": "Item is Counted"
+        },
+        "PhysInvtryDifferenceIsPosted": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Difference Posted",
+          "description": "Difference of Item is Posted"
+        },
+        "PhysInvtryItemIsRecounted": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Recounted",
+          "description": "Item is Recounted"
+        },
+        "PhysInvtryItemIsDeleted": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Deleted",
+          "description": "Item is Deleted"
+        },
+        "IsHandledInAltvUnitOfMsr": {
+"type": "boolean",
+"default": "null",
+          "title": "Without Unit of Measure Proposal"
+        },
+        "CycleCountType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Cycle Count Type"
+        },
+        "IsValueOnlyMaterial": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Value-Only Material"
+        },
+        "PhysInventoryReferenceNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Physical Inventory Reference"
+        },
+        "MaterialDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Material Document",
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed."
+        },
+        "MaterialDocumentYear": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Material Document Year"
+        },
+        "MaterialDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Material Document Item"
+        },
+        "PhysInvtryRecountDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Recount Document",
+          "description": "Number of Recount Document  \nIndicates the number of the physical inventory document in which the item to be recounted was recorded. The corresponding item in the original physical inventory document is no longer active."
+        },
+        "PhysicalInventoryItemIsZero": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Zero Count"
+        },
+        "ReasonForPhysInvtryDifference": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Difference Reason"
+        },
+        "MaterialBaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit of Measure",
+          "description": "Unit of measure in which stocks of the material are managed. The system converts all the quantities you enter in other units of measure (alternative units of measure) to the base unit of measure.  \nYou define the base unit of measure and also alternative units of measure and their conversion factors in the material master record.Since all data is updated in the base unit of measure, your entry is particularly important for the conversion of alternative units of measure. A quantity in the alternative unit of measure can only be shown precisely if its value can be shown with the decimal places available. To ensure this, please note the following:The base unit of measure is the unit satisfying the highest necessary requirement for precision.The conversion of alternative units of measure to the base unit should result in simple decimal fractions (not, for example, 1/3 = 0.333...).Inventory ManagementIn Inventory Management, the base unit of measure is the same as the stockkeeping unit.ServicesServices have units of measure of their own, including the following:Service unitUnit of measure at the higher item level. The precise quantities of the individual services are each at the detailed service line level.BlanketUnit of measure at service line level for services to be provided once only, and for which no precise quantities can or are to be specified."
+        },
+        "BookQtyBfrCountInMatlBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Book Quantity",
+          "description": "Book Quantity Immediately Prior to Count  \nIndicates the book inventory of this physical inventory item at the time of the count.  \nThe quantity counted is not adopted as the new book inventory balance until any differences have been corrected by means of an inventory adjustment posting."
+        },
+        "Quantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Counted Quantity"
+        },
+        "UnitOfEntry": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Entry Unit"
+        },
+        "QuantityInUnitOfEntry": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Counted Quantity in Entry Unit"
+        },
+        "Currency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Company Code Currency"
+        },
+        "DifferenceAmountInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Difference Value",
+          "description": "Value of Difference"
+        },
+        "EnteredSlsAmtInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Sales Price Counted Value",
+          "description": "Externally Entered Value Based on Sales Price"
+        },
+        "SlsPriceAmountInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Sales Price Book Value"
+        },
+        "PhysInvtryCtAmtInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Counted Quantity Value"
+        },
+        "BookQtyAmountInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Book Value"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Last Change",
+          "description": "Last Change Timestamp"
+        },
+        "to_PhysicalInventoryDocument": {
+          "$ref": "#/definitions/API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocHeaderType-create"
+        }
+      },
+      "required": [
+        "FiscalYear",
+        "PhysicalInventoryDocument",
+        "PhysicalInventoryDocumentItem"
+      ],
+      "title": "API Physical Inventory Document Item (for create)"
+    },
+    "API_PHYSICAL_INVENTORY_DOC_SRV.A_PhysInventoryDocItemType-update": {
+      "type": "object",
+      "properties": {
+        "Plant": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Plant",
+          "description": "Key uniquely identifying a plant."
+        },
+        "StorageLocation": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Storage Location",
+          "description": "Number of the storage location in which the material is stored. A plant may contain one or more storage locations."
+        },
+        "Material": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Material",
+          "description": "Material Number  \nAlphanumeric key uniquely identifying the material."
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch",
+          "description": "Batch Number  \nAssigns a material that is manufactured in batches or production lots to a specific batch."
+        },
+        "InventorySpecialStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Special Stock Type"
+        },
+        "PhysicalInventoryStockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Stock Type",
+          "description": "Stock Type (Physical Inventory)  \nShows the stock type for which a physical inventory is to be carried out.  \nIt is possible to carry out a physical inventory for the following material stock types:Unrestricted-useQuality inspectionBlocked"
+        },
+        "SalesOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order",
+          "description": "Sales Order Number  \nUniquely identifies a sales order.  \nThe selection of postprocessing records via the sales order number is only possible for non-valuated sales order stock."
+        },
+        "SalesOrderItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales Order Item",
+          "description": "Item Number in Sales Order"
+        },
+        "Supplier": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Supplier",
+          "description": "Supplier's Account Number  \nAlphanumeric key uniquely identifying the document.  \nWith the supplier number, information from the supplier master record (such as the supplier's address and bank details) is copied into a purchasing document (such as a request for quotation or a purchase order).You can use the supplier number to keep track of requests for quotation, purchase orders and outline agreements."
+        },
+        "Customer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Customer",
+          "description": "Account number of customer  \nUniquely identifies a customer.  \nThis customer number is used for managing customer special stocks."
+        },
+        "WBSElement": {
+"type": "string",
+"default": "null",
+          "maxLength": 24,
+          "example": "string",
+          "title": "WBS Element",
+          "description": "Work Breakdown Structure Element (WBS Element)  \nKey identifying a  WBS element."
+        },
+        "LastChangeUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Changed By",
+          "description": "Name of the user who last changed this physical inventory item."
+        },
+        "LastChangeDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Changed On",
+          "description": "Date of Last Change"
+        },
+        "CountedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Counted By",
+          "description": "Name of the user who last entered the count results for this physical inventory item."
+        },
+        "PhysicalInventoryLastCountDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Count Date",
+          "description": "Date of Last Count  \nSpecifies the date of the last physical inventory count.  \nThe actual count date must be in the same year as the planned count date.The date of the first entry of count results for a physical inventory document determines the posting period in which all further count results as well as the inventory differences relating to this physical inventory document must be posted."
+        },
+        "AdjustmentPostingMadeByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Adjustment Posting Made By"
+        },
+        "PostingDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date",
+          "description": "Posting Date in the Document  \nDate which is used when entering the document in Financial Accounting or Controlling.  \nThe fiscal year and the period for which an update of the accounts specified in the document or cost elements is made, are derived from the posting date.When entering documents, the system checks whether the posting date entered is allowed by means of the posting period permitted.The posting date can differ from both the entry date (day of entry into the system) and the document date (day of creation of the original document)."
+        },
+        "PhysicalInventoryItemIsCounted": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Counted",
+          "description": "Item is Counted"
+        },
+        "PhysInvtryDifferenceIsPosted": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Difference Posted",
+          "description": "Difference of Item is Posted"
+        },
+        "PhysInvtryItemIsRecounted": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Recounted",
+          "description": "Item is Recounted"
+        },
+        "PhysInvtryItemIsDeleted": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Deleted",
+          "description": "Item is Deleted"
+        },
+        "IsHandledInAltvUnitOfMsr": {
+"type": "boolean",
+"default": "null",
+          "title": "Without Unit of Measure Proposal"
+        },
+        "CycleCountType": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Cycle Count Type"
+        },
+        "IsValueOnlyMaterial": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Value-Only Material"
+        },
+        "PhysInventoryReferenceNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 16,
+          "example": "string",
+          "title": "Physical Inventory Reference"
+        },
+        "MaterialDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Material Document",
+          "description": "Number of Material Document  \nAlphanumeric key uniquely identifying the document.  \nNumber of the material document with which a goods movement was posted.Together with the material document year, the document number constitutes the key via which a material document is accessed."
+        },
+        "MaterialDocumentYear": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Material Document Year"
+        },
+        "MaterialDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Material Document Item"
+        },
+        "PhysInvtryRecountDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Recount Document",
+          "description": "Number of Recount Document  \nIndicates the number of the physical inventory document in which the item to be recounted was recorded. The corresponding item in the original physical inventory document is no longer active."
+        },
+        "PhysicalInventoryItemIsZero": {
+"type": "boolean",
+"default": "null",
+          "title": "Is Zero Count"
+        },
+        "ReasonForPhysInvtryDifference": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Difference Reason"
+        },
+        "MaterialBaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit of Measure",
+          "description": "Unit of measure in which stocks of the material are managed. The system converts all the quantities you enter in other units of measure (alternative units of measure) to the base unit of measure.  \nYou define the base unit of measure and also alternative units of measure and their conversion factors in the material master record.Since all data is updated in the base unit of measure, your entry is particularly important for the conversion of alternative units of measure. A quantity in the alternative unit of measure can only be shown precisely if its value can be shown with the decimal places available. To ensure this, please note the following:The base unit of measure is the unit satisfying the highest necessary requirement for precision.The conversion of alternative units of measure to the base unit should result in simple decimal fractions (not, for example, 1/3 = 0.333...).Inventory ManagementIn Inventory Management, the base unit of measure is the same as the stockkeeping unit.ServicesServices have units of measure of their own, including the following:Service unitUnit of measure at the higher item level. The precise quantities of the individual services are each at the detailed service line level.BlanketUnit of measure at service line level for services to be provided once only, and for which no precise quantities can or are to be specified."
+        },
+        "BookQtyBfrCountInMatlBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Book Quantity",
+          "description": "Book Quantity Immediately Prior to Count  \nIndicates the book inventory of this physical inventory item at the time of the count.  \nThe quantity counted is not adopted as the new book inventory balance until any differences have been corrected by means of an inventory adjustment posting."
+        },
+        "Quantity": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Counted Quantity"
+        },
+        "UnitOfEntry": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Entry Unit"
+        },
+        "QuantityInUnitOfEntry": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -9999999999.999,
+          "maximum": 9999999999.999,
+          "example": "0",
+          "title": "Counted Quantity in Entry Unit"
+        },
+        "Currency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Company Code Currency"
+        },
+        "DifferenceAmountInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Difference Value",
+          "description": "Value of Difference"
+        },
+        "EnteredSlsAmtInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Sales Price Counted Value",
+          "description": "Externally Entered Value Based on Sales Price"
+        },
+        "SlsPriceAmountInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Sales Price Book Value"
+        },
+        "PhysInvtryCtAmtInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Counted Quantity Value"
+        },
+        "BookQtyAmountInCoCodeCrcy": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -99999999999.999,
+          "maximum": 99999999999.999,
+          "example": "0",
+          "title": "Book Value"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Last Change",
+          "description": "Last Change Timestamp"
+        }
+      },
+      "title": "API Physical Inventory Document Item (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

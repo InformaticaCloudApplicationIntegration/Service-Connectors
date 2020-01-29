@@ -1,0 +1,4482 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Read Trial Balance",
+    "version": "1 ",
+    "description": "This service enables you to read trial  balance data in an API call. It is based on the  OData protocol, and can be consumed in Fiori apps  and on other user interfaces."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com/viewer/ac7c34576d0b4c728ca3fb8099ef0802/latest/en-US/d820dadbeafa46b68d006eb2c922506b.html"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "This service enables you to read trial  balance data in an API call.",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Finance - Accounting Analytics Integration (SAP_COM_0303)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Accounting and Financial Close (J58)](https://rapid.sap.com/bp/#/scopeitems/J58 \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/C_TRIALBALANCE_CDS",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/C_TRIALBALANCE_CDS",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "Ledger"
+    },
+    {
+      "name": "CompanyCode"
+    },
+    {
+      "name": "GLAccount"
+    },
+    {
+      "name": "Project"
+    },
+    {
+      "name": "AdditionalMetadata"
+    },
+    {
+      "name": "C_TRIALBALANCEResults"
+    },
+    {
+      "name": "C_TRIALBALANCE"
+    }
+  ],
+  "paths": {
+    "/Ledger": {
+      "get": {
+        "summary": "Get entities from Ledger",
+        "tags": [
+          "Ledger"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Ledger",
+                "LedgerText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of Ledger",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/C_TRIALBALANCE_CDS.Ledger"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/Ledger('{Ledger}')": {
+      "get": {
+        "summary": "Get entity from Ledger by key",
+        "tags": [
+          "Ledger"
+        ],
+        "parameters": [
+          {
+            "name": "Ledger",
+            "in": "path",
+            "required": true,
+            "description": "Ledger",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Ledger",
+                "LedgerText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "Ledger",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/C_TRIALBALANCE_CDS.Ledger"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/CompanyCode": {
+      "get": {
+        "summary": "Get entities from CompanyCode",
+        "tags": [
+          "CompanyCode"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CompanyCode",
+                "CompanyCodeText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of CompanyCode",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/C_TRIALBALANCE_CDS.CompanyCode"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/CompanyCode('{CompanyCode}')": {
+      "get": {
+        "summary": "Get entity from CompanyCode by key",
+        "tags": [
+          "CompanyCode"
+        ],
+        "parameters": [
+          {
+            "name": "CompanyCode",
+            "in": "path",
+            "required": true,
+            "description": "Company Code",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CompanyCode",
+                "CompanyCodeText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "CompanyCode",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/C_TRIALBALANCE_CDS.CompanyCode"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/GLAccount": {
+      "get": {
+        "summary": "Get entities from GLAccount",
+        "tags": [
+          "GLAccount"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "GLAccount",
+                "GLAccountText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of GLAccount",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/C_TRIALBALANCE_CDS.GLAccount"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/GLAccount('{GLAccount}')": {
+      "get": {
+        "summary": "Get entity from GLAccount by key",
+        "tags": [
+          "GLAccount"
+        ],
+        "parameters": [
+          {
+            "name": "GLAccount",
+            "in": "path",
+            "required": true,
+            "description": "G/L Account",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "GLAccount",
+                "GLAccountText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "GLAccount",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/C_TRIALBALANCE_CDS.GLAccount"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/Project": {
+      "get": {
+        "summary": "Get entities from Project",
+        "tags": [
+          "Project"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Project",
+                "ProjectText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of Project",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/C_TRIALBALANCE_CDS.Project"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/Project('{Project}')": {
+      "get": {
+        "summary": "Get entity from Project by key",
+        "tags": [
+          "Project"
+        ],
+        "parameters": [
+          {
+            "name": "Project",
+            "in": "path",
+            "required": true,
+            "description": "Project Definition",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Project",
+                "ProjectText"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "Project",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/C_TRIALBALANCE_CDS.Project"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/AdditionalMetadata": {
+      "get": {
+        "summary": "Get entities from AdditionalMetadata",
+        "tags": [
+          "AdditionalMetadata"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ODataQueryMetadata",
+                "ODataQueryMetadataValue_Current",
+                "ODataQueryMetadataValueAtDefine"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of ODataQueryAdditionalMetadata",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/C_TRIALBALANCE_CDS.ODataQueryAdditionalMetadata"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/AdditionalMetadata('{ODataQueryMetadata}')": {
+      "get": {
+        "summary": "Get entity from AdditionalMetadata by key",
+        "tags": [
+          "AdditionalMetadata"
+        ],
+        "parameters": [
+          {
+            "name": "ODataQueryMetadata",
+            "in": "path",
+            "required": true,
+            "description": "key: ODataQueryMetadata",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ODataQueryMetadata",
+                "ODataQueryMetadataValue_Current",
+                "ODataQueryMetadataValueAtDefine"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "ODataQueryAdditionalMetadata",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/C_TRIALBALANCE_CDS.ODataQueryAdditionalMetadata"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/C_TRIALBALANCE(P_FromPostingDate={P_FromPostingDate},P_ToPostingDate={P_ToPostingDate})/Results": {
+      "get": {
+        "summary": "Get Results",
+        "tags": [
+          "C_TRIALBALANCE"
+        ],
+        "parameters": [
+          {
+            "name": "P_FromPostingDate",
+            "in": "path",
+            "required": true,
+            "description": "Posting Date From",
+            "type": "string"
+          },
+          {
+            "name": "P_ToPostingDate",
+            "in": "path",
+            "required": true,
+            "description": "Posting Date To",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)\n\nRequired filter properties:\n- CompanyCode\n- Ledger",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [OData Sorting](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374629)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "CompanyCode",
+                "CompanyCode desc",
+                "CompanyCodeName",
+                "CompanyCodeName desc",
+                "GLAccount",
+                "GLAccount desc",
+                "GLAccountHierarchyName",
+                "GLAccountHierarchyName desc",
+                "BusinessProcess",
+                "BusinessProcess desc",
+                "FreeDefinedCurrency8",
+                "FreeDefinedCurrency8 desc",
+                "PartnerCostObject",
+                "PartnerCostObject desc",
+                "AssetValueDate",
+                "AssetValueDate desc",
+                "AssetValueDate_T",
+                "AssetValueDate_T desc",
+                "FiscalYearPeriod",
+                "FiscalYearPeriod desc",
+                "QuantityIsIncomplete",
+                "QuantityIsIncomplete desc",
+                "IsOpenItemManaged",
+                "IsOpenItemManaged desc",
+                "CorporateGroupAccount",
+                "CorporateGroupAccount desc",
+                "CorporateGroupAccount_T",
+                "CorporateGroupAccount_T desc",
+                "BillingDocumentType",
+                "BillingDocumentType desc",
+                "FiscalQuarter",
+                "FiscalQuarter desc",
+                "CorporateGroupChartOfAccounts",
+                "CorporateGroupChartOfAccounts desc",
+                "ClearingDocFiscalYear",
+                "ClearingDocFiscalYear desc",
+                "PartnerWBSElement",
+                "PartnerWBSElement desc",
+                "FreeDefinedCurrency2",
+                "FreeDefinedCurrency2 desc",
+                "PartnerProfitCenter",
+                "PartnerProfitCenter desc",
+                "PartnerProfitCenterName",
+                "PartnerProfitCenterName desc",
+                "PartnerControllingObjectClass",
+                "PartnerControllingObjectClass desc",
+                "GLAccountType",
+                "GLAccountType desc",
+                "AccountingDocumentCategory",
+                "AccountingDocumentCategory desc",
+                "BusinessTransactionType",
+                "BusinessTransactionType desc",
+                "CalendarMonth",
+                "CalendarMonth desc",
+                "CalendarQuarter",
+                "CalendarQuarter desc",
+                "ClearingAccountingDocument",
+                "ClearingAccountingDocument desc",
+                "AccountingDocumentType",
+                "AccountingDocumentType desc",
+                "AccountingDocumentTypeName",
+                "AccountingDocumentTypeName desc",
+                "FinancialAccountType",
+                "FinancialAccountType desc",
+                "FinancialAccountTypeName",
+                "FinancialAccountTypeName desc",
+                "BusinessArea",
+                "BusinessArea desc",
+                "BusinessAreaName",
+                "BusinessAreaName desc",
+                "OriginCostCtrActivityType",
+                "OriginCostCtrActivityType desc",
+                "ChartOfAccounts",
+                "ChartOfAccounts desc",
+                "ControllingArea",
+                "ControllingArea desc",
+                "ControllingAreaName",
+                "ControllingAreaName desc",
+                "ControllingObjectClass",
+                "ControllingObjectClass desc",
+                "PartnerCostCenter",
+                "PartnerCostCenter desc",
+                "SenderCostCenterName",
+                "SenderCostCenterName desc",
+                "DebitCreditCode",
+                "DebitCreditCode desc",
+                "DebitCreditCodeName",
+                "DebitCreditCodeName desc",
+                "PostingDate",
+                "PostingDate desc",
+                "PostingDate_T",
+                "PostingDate_T desc",
+                "FiscalYearVariant",
+                "FiscalYearVariant desc",
+                "FunctionalArea",
+                "FunctionalArea desc",
+                "FunctionalAreaName",
+                "FunctionalAreaName desc",
+                "FiscalYear",
+                "FiscalYear desc",
+                "BudgetPeriod",
+                "BudgetPeriod desc",
+                "CalendarWeek",
+                "CalendarWeek desc",
+                "CalendarYear",
+                "CalendarYear desc",
+                "ClearingDate",
+                "ClearingDate desc",
+                "ClearingDate_T",
+                "ClearingDate_T desc",
+                "CostCenter",
+                "CostCenter desc",
+                "CostCenterName",
+                "CostCenterName desc",
+                "CostObject",
+                "CostObject desc",
+                "FiscalWeek",
+                "FiscalWeek desc",
+                "Fund",
+                "Fund desc",
+                "GrantID",
+                "GrantID desc",
+                "IsReversal",
+                "IsReversal desc",
+                "IsReversed",
+                "IsReversed desc",
+                "IsSettled",
+                "IsSettled desc",
+                "IsSettlement",
+                "IsSettlement desc",
+                "JointVenture",
+                "JointVenture desc",
+                "OrderID",
+                "OrderID desc",
+                "PartnerFund",
+                "PartnerFund desc",
+                "PartnerGrant",
+                "PartnerGrant desc",
+                "PartnerOrder",
+                "PartnerOrder desc",
+                "SalesOrder",
+                "SalesOrder desc",
+                "SoldMaterial",
+                "SoldMaterial desc",
+                "TaxCode",
+                "TaxCode desc",
+                "WBSElement",
+                "WBSElement desc",
+                "HouseBank",
+                "HouseBank desc",
+                "InventorySpecialStockValnType",
+                "InventorySpecialStockValnType desc",
+                "Ledger",
+                "Ledger desc",
+                "MasterFixedAsset",
+                "MasterFixedAsset desc",
+                "PostingKey",
+                "PostingKey desc",
+                "PostingKeyName",
+                "PostingKeyName desc",
+                "ProfitCenter",
+                "ProfitCenter desc",
+                "ProfitCenterName",
+                "ProfitCenterName desc",
+                "Segment",
+                "Segment desc",
+                "SegmentName",
+                "SegmentName desc",
+                "SpecialGLCode",
+                "SpecialGLCode desc",
+                "FixedAsset",
+                "FixedAsset desc",
+                "JointVentureEquityType",
+                "JointVentureEquityType desc",
+                "HouseBankAccount",
+                "HouseBankAccount desc",
+                "InventorySpecialStockType",
+                "InventorySpecialStockType desc",
+                "AlternativeGLAccount",
+                "AlternativeGLAccount desc",
+                "AlternativeGLAccount_T",
+                "AlternativeGLAccount_T desc",
+                "Material",
+                "Material desc",
+                "MaterialName",
+                "MaterialName desc",
+                "MaterialGroup",
+                "MaterialGroup desc",
+                "Plant",
+                "Plant desc",
+                "PlantName",
+                "PlantName desc",
+                "OrderCategory",
+                "OrderCategory desc",
+                "MaterialGroupName",
+                "MaterialGroupName desc",
+                "MaterialGroupName_T",
+                "MaterialGroupName_T desc",
+                "Project",
+                "Project desc",
+                "ValuationArea",
+                "ValuationArea desc",
+                "CustomerGroup",
+                "CustomerGroup desc",
+                "CustomerGroupName",
+                "CustomerGroupName desc",
+                "InventorySpclStkSalesDocument",
+                "InventorySpclStkSalesDocument desc",
+                "InventorySpclStkSalesDocItm",
+                "InventorySpclStkSalesDocItm desc",
+                "InventorySpclStockWBSElement",
+                "InventorySpclStockWBSElement desc",
+                "CalendarYearMonth",
+                "CalendarYearMonth desc",
+                "Customer",
+                "Customer desc",
+                "CustomerName",
+                "CustomerName desc",
+                "Supplier",
+                "Supplier desc",
+                "SupplierName",
+                "SupplierName desc",
+                "BalanceTransactionCurrency",
+                "BalanceTransactionCurrency desc",
+                "AssignmentReference",
+                "AssignmentReference desc",
+                "OrganizationDivision",
+                "OrganizationDivision desc",
+                "PartnerProjectNetworkActivity",
+                "PartnerProjectNetworkActivity desc",
+                "CalendarYearQuarter",
+                "CalendarYearQuarter desc",
+                "IsBalanceSheetAccount",
+                "IsBalanceSheetAccount desc",
+                "PartnerAccountAssignmentType",
+                "PartnerAccountAssignmentType desc",
+                "FiscalYearWeek",
+                "FiscalYearWeek desc",
+                "JointVentureEquityGroup",
+                "JointVentureEquityGroup desc",
+                "FinancialManagementArea",
+                "FinancialManagementArea desc",
+                "CostCtrActivityType",
+                "CostCtrActivityType desc",
+                "SenderAccountAssignment",
+                "SenderAccountAssignment desc",
+                "FiscalYearQuarter",
+                "FiscalYearQuarter desc",
+                "ReferenceDocumentType",
+                "ReferenceDocumentType desc",
+                "GroupFixedAsset",
+                "GroupFixedAsset desc",
+                "ReferenceDocumentItemGroup",
+                "ReferenceDocumentItemGroup desc",
+                "AssetDepreciationArea",
+                "AssetDepreciationArea desc",
+                "PartnerSegment",
+                "PartnerSegment desc",
+                "PartnerSegmentName",
+                "PartnerSegmentName desc",
+                "OperatingConcern",
+                "OperatingConcern desc",
+                "CountryChartOfAccounts",
+                "CountryChartOfAccounts desc",
+                "FreeDefinedCurrency6",
+                "FreeDefinedCurrency6 desc",
+                "TransactionCurrency",
+                "TransactionCurrency desc",
+                "AccountAssignment",
+                "AccountAssignment desc",
+                "PartnerCostCtrActivityType",
+                "PartnerCostCtrActivityType desc",
+                "PartnerBusinessProcess",
+                "PartnerBusinessProcess desc",
+                "RelatedNetworkActivity",
+                "RelatedNetworkActivity desc",
+                "SalesDocument",
+                "SalesDocument desc",
+                "FreeDefinedCurrency1",
+                "FreeDefinedCurrency1 desc",
+                "FiscalPeriodDate",
+                "FiscalPeriodDate desc",
+                "FreeDefinedCurrency3",
+                "FreeDefinedCurrency3 desc",
+                "AssetTransactionType",
+                "AssetTransactionType desc",
+                "PurchasingDocument",
+                "PurchasingDocument desc",
+                "EliminationProfitCenter",
+                "EliminationProfitCenter desc",
+                "EliminationProfitCenterName",
+                "EliminationProfitCenterName desc",
+                "GlobalCurrency",
+                "GlobalCurrency desc",
+                "PredecessorReferenceDocType",
+                "PredecessorReferenceDocType desc",
+                "LedgerFiscalYear",
+                "LedgerFiscalYear desc",
+                "PartnerSalesDocument",
+                "PartnerSalesDocument desc",
+                "PartnerAccountAssignment",
+                "PartnerAccountAssignment desc",
+                "OffsettingAccount",
+                "OffsettingAccount desc",
+                "PartnerBudgetPeriod",
+                "PartnerBudgetPeriod desc",
+                "AccountingDocCreatedByUser",
+                "AccountingDocCreatedByUser desc",
+                "FreeDefinedCurrency4",
+                "FreeDefinedCurrency4 desc",
+                "ProjectNetwork",
+                "ProjectNetwork desc",
+                "LineItemIsCompleted",
+                "LineItemIsCompleted desc",
+                "JointVentureCostRecoveryCode",
+                "JointVentureCostRecoveryCode desc",
+                "InventorySpecialStockSupplier",
+                "InventorySpecialStockSupplier desc",
+                "InvtrySpecialStockSupplierName",
+                "InvtrySpecialStockSupplierName desc",
+                "AccountAssignmentType",
+                "AccountAssignmentType desc",
+                "PartnerProject",
+                "PartnerProject desc",
+                "PartnerCompany",
+                "PartnerCompany desc",
+                "LogicalSystem",
+                "LogicalSystem desc",
+                "PersonnelNumber",
+                "PersonnelNumber desc",
+                "GroupMasterFixedAsset",
+                "GroupMasterFixedAsset desc",
+                "SalesDocumentItem",
+                "SalesDocumentItem desc",
+                "PartnerOrderCategory",
+                "PartnerOrderCategory desc",
+                "PartnerBusinessArea",
+                "PartnerBusinessArea desc",
+                "PartnerBusinessAreaName",
+                "PartnerBusinessAreaName desc",
+                "PartnerFunctionalArea",
+                "PartnerFunctionalArea desc",
+                "PartnerFunctionalAreaName",
+                "PartnerFunctionalAreaName desc",
+                "OriginCostCenter",
+                "OriginCostCenter desc",
+                "FreeDefinedCurrency5",
+                "FreeDefinedCurrency5 desc",
+                "CompanyCodeCurrency",
+                "CompanyCodeCurrency desc",
+                "OriginObjectType",
+                "OriginObjectType desc",
+                "ControllingObjectDebitType",
+                "ControllingObjectDebitType desc",
+                "GLAccountHierarchy",
+                "GLAccountHierarchy desc",
+                "CustomerServiceNotification",
+                "CustomerServiceNotification desc",
+                "FreeDefinedCurrency7",
+                "FreeDefinedCurrency7 desc",
+                "AccountAssignmentNumber",
+                "AccountAssignmentNumber desc",
+                "SalesOrganization",
+                "SalesOrganization desc",
+                "TransactionTypeDetermination",
+                "TransactionTypeDetermination desc",
+                "PartnerProjectNetwork",
+                "PartnerProjectNetwork desc",
+                "PartnerCompanyCode",
+                "PartnerCompanyCode desc",
+                "SalesOrderItem",
+                "SalesOrderItem desc",
+                "OffsettingAccountType",
+                "OffsettingAccountType desc",
+                "CalendarYearWeek",
+                "CalendarYearWeek desc",
+                "FinancialTransactionType",
+                "FinancialTransactionType desc",
+                "SenderAccountAssignmentType",
+                "SenderAccountAssignmentType desc",
+                "PurchasingDocumentItem",
+                "PurchasingDocumentItem desc",
+                "SenderGLAccount",
+                "SenderGLAccount desc",
+                "PartnerSalesDocumentItem",
+                "PartnerSalesDocumentItem desc",
+                "InventoryValuationType",
+                "InventoryValuationType desc",
+                "SettlementReferenceDate",
+                "SettlementReferenceDate desc",
+                "SettlementReferenceDate_T",
+                "SettlementReferenceDate_T desc",
+                "DistributionChannel",
+                "DistributionChannel desc",
+                "StartingBalanceAmtInCoCodeCrcy",
+                "StartingBalanceAmtInCoCodeCrcy desc",
+                "StartingBalanceAmtInCoCodeCrcy_F",
+                "StartingBalanceAmtInCoCodeCrcy_F desc",
+                "StartingBalanceAmtInCoCodeCrcy_E",
+                "StartingBalanceAmtInCoCodeCrcy_E desc",
+                "DebitAmountInCoCodeCrcy",
+                "DebitAmountInCoCodeCrcy desc",
+                "DebitAmountInCoCodeCrcy_F",
+                "DebitAmountInCoCodeCrcy_F desc",
+                "DebitAmountInCoCodeCrcy_E",
+                "DebitAmountInCoCodeCrcy_E desc",
+                "CreditAmountInCoCodeCrcy",
+                "CreditAmountInCoCodeCrcy desc",
+                "CreditAmountInCoCodeCrcy_F",
+                "CreditAmountInCoCodeCrcy_F desc",
+                "CreditAmountInCoCodeCrcy_E",
+                "CreditAmountInCoCodeCrcy_E desc",
+                "EndingBalanceAmtInCoCodeCrcy",
+                "EndingBalanceAmtInCoCodeCrcy desc",
+                "EndingBalanceAmtInCoCodeCrcy_F",
+                "EndingBalanceAmtInCoCodeCrcy_F desc",
+                "EndingBalanceAmtInCoCodeCrcy_E",
+                "EndingBalanceAmtInCoCodeCrcy_E desc",
+                "StartingBalanceAmtInGlobalCrcy",
+                "StartingBalanceAmtInGlobalCrcy desc",
+                "StartingBalanceAmtInGlobalCrcy_F",
+                "StartingBalanceAmtInGlobalCrcy_F desc",
+                "StartingBalanceAmtInGlobalCrcy_E",
+                "StartingBalanceAmtInGlobalCrcy_E desc",
+                "DebitAmountInGlobalCrcy",
+                "DebitAmountInGlobalCrcy desc",
+                "DebitAmountInGlobalCrcy_F",
+                "DebitAmountInGlobalCrcy_F desc",
+                "DebitAmountInGlobalCrcy_E",
+                "DebitAmountInGlobalCrcy_E desc",
+                "CreditAmountInGlobalCrcy",
+                "CreditAmountInGlobalCrcy desc",
+                "CreditAmountInGlobalCrcy_F",
+                "CreditAmountInGlobalCrcy_F desc",
+                "CreditAmountInGlobalCrcy_E",
+                "CreditAmountInGlobalCrcy_E desc",
+                "EndingBalanceAmtInGlobalCrcy",
+                "EndingBalanceAmtInGlobalCrcy desc",
+                "EndingBalanceAmtInGlobalCrcy_F",
+                "EndingBalanceAmtInGlobalCrcy_F desc",
+                "EndingBalanceAmtInGlobalCrcy_E",
+                "EndingBalanceAmtInGlobalCrcy_E desc",
+                "StrtgBalAmtInFreeDfndCrcy1",
+                "StrtgBalAmtInFreeDfndCrcy1 desc",
+                "StrtgBalAmtInFreeDfndCrcy1_F",
+                "StrtgBalAmtInFreeDfndCrcy1_F desc",
+                "StrtgBalAmtInFreeDfndCrcy1_E",
+                "StrtgBalAmtInFreeDfndCrcy1_E desc",
+                "DebitAmountInFreeDfndCrcy1",
+                "DebitAmountInFreeDfndCrcy1 desc",
+                "DebitAmountInFreeDfndCrcy1_F",
+                "DebitAmountInFreeDfndCrcy1_F desc",
+                "DebitAmountInFreeDfndCrcy1_E",
+                "DebitAmountInFreeDfndCrcy1_E desc",
+                "CreditAmountInFreeDfndCrcy1",
+                "CreditAmountInFreeDfndCrcy1 desc",
+                "CreditAmountInFreeDfndCrcy1_F",
+                "CreditAmountInFreeDfndCrcy1_F desc",
+                "CreditAmountInFreeDfndCrcy1_E",
+                "CreditAmountInFreeDfndCrcy1_E desc",
+                "EndingBalAmtInFreeDfndCrcy1",
+                "EndingBalAmtInFreeDfndCrcy1 desc",
+                "EndingBalAmtInFreeDfndCrcy1_F",
+                "EndingBalAmtInFreeDfndCrcy1_F desc",
+                "EndingBalAmtInFreeDfndCrcy1_E",
+                "EndingBalAmtInFreeDfndCrcy1_E desc",
+                "StrtgBalAmtInFreeDfndCrcy2",
+                "StrtgBalAmtInFreeDfndCrcy2 desc",
+                "StrtgBalAmtInFreeDfndCrcy2_F",
+                "StrtgBalAmtInFreeDfndCrcy2_F desc",
+                "StrtgBalAmtInFreeDfndCrcy2_E",
+                "StrtgBalAmtInFreeDfndCrcy2_E desc",
+                "DebitAmountInFreeDfndCrcy2",
+                "DebitAmountInFreeDfndCrcy2 desc",
+                "DebitAmountInFreeDfndCrcy2_F",
+                "DebitAmountInFreeDfndCrcy2_F desc",
+                "DebitAmountInFreeDfndCrcy2_E",
+                "DebitAmountInFreeDfndCrcy2_E desc",
+                "CreditAmountInFreeDfndCrcy2",
+                "CreditAmountInFreeDfndCrcy2 desc",
+                "CreditAmountInFreeDfndCrcy2_F",
+                "CreditAmountInFreeDfndCrcy2_F desc",
+                "CreditAmountInFreeDfndCrcy2_E",
+                "CreditAmountInFreeDfndCrcy2_E desc",
+                "EndingBalAmtInFreeDfndCrcy2",
+                "EndingBalAmtInFreeDfndCrcy2 desc",
+                "EndingBalAmtInFreeDfndCrcy2_F",
+                "EndingBalAmtInFreeDfndCrcy2_F desc",
+                "EndingBalAmtInFreeDfndCrcy2_E",
+                "EndingBalAmtInFreeDfndCrcy2_E desc",
+                "StrtgBalAmtInFreeDfndCrcy3",
+                "StrtgBalAmtInFreeDfndCrcy3 desc",
+                "StrtgBalAmtInFreeDfndCrcy3_F",
+                "StrtgBalAmtInFreeDfndCrcy3_F desc",
+                "StrtgBalAmtInFreeDfndCrcy3_E",
+                "StrtgBalAmtInFreeDfndCrcy3_E desc",
+                "DebitAmountInFreeDfndCrcy3",
+                "DebitAmountInFreeDfndCrcy3 desc",
+                "DebitAmountInFreeDfndCrcy3_F",
+                "DebitAmountInFreeDfndCrcy3_F desc",
+                "DebitAmountInFreeDfndCrcy3_E",
+                "DebitAmountInFreeDfndCrcy3_E desc",
+                "CreditAmountInFreeDfndCrcy3",
+                "CreditAmountInFreeDfndCrcy3 desc",
+                "CreditAmountInFreeDfndCrcy3_F",
+                "CreditAmountInFreeDfndCrcy3_F desc",
+                "CreditAmountInFreeDfndCrcy3_E",
+                "CreditAmountInFreeDfndCrcy3_E desc",
+                "EndingBalAmtInFreeDfndCrcy3",
+                "EndingBalAmtInFreeDfndCrcy3 desc",
+                "EndingBalAmtInFreeDfndCrcy3_F",
+                "EndingBalAmtInFreeDfndCrcy3_F desc",
+                "EndingBalAmtInFreeDfndCrcy3_E",
+                "EndingBalAmtInFreeDfndCrcy3_E desc",
+                "StrtgBalAmtInFreeDfndCrcy4",
+                "StrtgBalAmtInFreeDfndCrcy4 desc",
+                "StrtgBalAmtInFreeDfndCrcy4_F",
+                "StrtgBalAmtInFreeDfndCrcy4_F desc",
+                "StrtgBalAmtInFreeDfndCrcy4_E",
+                "StrtgBalAmtInFreeDfndCrcy4_E desc",
+                "DebitAmountInFreeDfndCrcy4",
+                "DebitAmountInFreeDfndCrcy4 desc",
+                "DebitAmountInFreeDfndCrcy4_F",
+                "DebitAmountInFreeDfndCrcy4_F desc",
+                "DebitAmountInFreeDfndCrcy4_E",
+                "DebitAmountInFreeDfndCrcy4_E desc",
+                "CreditAmountInFreeDfndCrcy4",
+                "CreditAmountInFreeDfndCrcy4 desc",
+                "CreditAmountInFreeDfndCrcy4_F",
+                "CreditAmountInFreeDfndCrcy4_F desc",
+                "CreditAmountInFreeDfndCrcy4_E",
+                "CreditAmountInFreeDfndCrcy4_E desc",
+                "EndingBalAmtInFreeDfndCrcy4",
+                "EndingBalAmtInFreeDfndCrcy4 desc",
+                "EndingBalAmtInFreeDfndCrcy4_F",
+                "EndingBalAmtInFreeDfndCrcy4_F desc",
+                "EndingBalAmtInFreeDfndCrcy4_E",
+                "EndingBalAmtInFreeDfndCrcy4_E desc",
+                "StrtgBalAmtInFreeDfndCrcy5",
+                "StrtgBalAmtInFreeDfndCrcy5 desc",
+                "StrtgBalAmtInFreeDfndCrcy5_F",
+                "StrtgBalAmtInFreeDfndCrcy5_F desc",
+                "StrtgBalAmtInFreeDfndCrcy5_E",
+                "StrtgBalAmtInFreeDfndCrcy5_E desc",
+                "DebitAmountInFreeDfndCrcy5",
+                "DebitAmountInFreeDfndCrcy5 desc",
+                "DebitAmountInFreeDfndCrcy5_F",
+                "DebitAmountInFreeDfndCrcy5_F desc",
+                "DebitAmountInFreeDfndCrcy5_E",
+                "DebitAmountInFreeDfndCrcy5_E desc",
+                "CreditAmountInFreeDfndCrcy5",
+                "CreditAmountInFreeDfndCrcy5 desc",
+                "CreditAmountInFreeDfndCrcy5_F",
+                "CreditAmountInFreeDfndCrcy5_F desc",
+                "CreditAmountInFreeDfndCrcy5_E",
+                "CreditAmountInFreeDfndCrcy5_E desc",
+                "EndingBalAmtInFreeDfndCrcy5",
+                "EndingBalAmtInFreeDfndCrcy5 desc",
+                "EndingBalAmtInFreeDfndCrcy5_F",
+                "EndingBalAmtInFreeDfndCrcy5_F desc",
+                "EndingBalAmtInFreeDfndCrcy5_E",
+                "EndingBalAmtInFreeDfndCrcy5_E desc",
+                "StrtgBalAmtInFreeDfndCrcy6",
+                "StrtgBalAmtInFreeDfndCrcy6 desc",
+                "StrtgBalAmtInFreeDfndCrcy6_F",
+                "StrtgBalAmtInFreeDfndCrcy6_F desc",
+                "StrtgBalAmtInFreeDfndCrcy6_E",
+                "StrtgBalAmtInFreeDfndCrcy6_E desc",
+                "DebitAmountInFreeDfndCrcy6",
+                "DebitAmountInFreeDfndCrcy6 desc",
+                "DebitAmountInFreeDfndCrcy6_F",
+                "DebitAmountInFreeDfndCrcy6_F desc",
+                "DebitAmountInFreeDfndCrcy6_E",
+                "DebitAmountInFreeDfndCrcy6_E desc",
+                "CreditAmountInFreeDfndCrcy6",
+                "CreditAmountInFreeDfndCrcy6 desc",
+                "CreditAmountInFreeDfndCrcy6_F",
+                "CreditAmountInFreeDfndCrcy6_F desc",
+                "CreditAmountInFreeDfndCrcy6_E",
+                "CreditAmountInFreeDfndCrcy6_E desc",
+                "EndingBalAmtInFreeDfndCrcy6",
+                "EndingBalAmtInFreeDfndCrcy6 desc",
+                "EndingBalAmtInFreeDfndCrcy6_F",
+                "EndingBalAmtInFreeDfndCrcy6_F desc",
+                "EndingBalAmtInFreeDfndCrcy6_E",
+                "EndingBalAmtInFreeDfndCrcy6_E desc",
+                "StrtgBalAmtInFreeDfndCrcy7",
+                "StrtgBalAmtInFreeDfndCrcy7 desc",
+                "StrtgBalAmtInFreeDfndCrcy7_F",
+                "StrtgBalAmtInFreeDfndCrcy7_F desc",
+                "StrtgBalAmtInFreeDfndCrcy7_E",
+                "StrtgBalAmtInFreeDfndCrcy7_E desc",
+                "DebitAmountInFreeDfndCrcy7",
+                "DebitAmountInFreeDfndCrcy7 desc",
+                "DebitAmountInFreeDfndCrcy7_F",
+                "DebitAmountInFreeDfndCrcy7_F desc",
+                "DebitAmountInFreeDfndCrcy7_E",
+                "DebitAmountInFreeDfndCrcy7_E desc",
+                "CreditAmountInFreeDfndCrcy7",
+                "CreditAmountInFreeDfndCrcy7 desc",
+                "CreditAmountInFreeDfndCrcy7_F",
+                "CreditAmountInFreeDfndCrcy7_F desc",
+                "CreditAmountInFreeDfndCrcy7_E",
+                "CreditAmountInFreeDfndCrcy7_E desc",
+                "EndingBalAmtInFreeDfndCrcy7",
+                "EndingBalAmtInFreeDfndCrcy7 desc",
+                "EndingBalAmtInFreeDfndCrcy7_F",
+                "EndingBalAmtInFreeDfndCrcy7_F desc",
+                "EndingBalAmtInFreeDfndCrcy7_E",
+                "EndingBalAmtInFreeDfndCrcy7_E desc",
+                "StrtgBalAmtInFreeDfndCrcy8",
+                "StrtgBalAmtInFreeDfndCrcy8 desc",
+                "StrtgBalAmtInFreeDfndCrcy8_F",
+                "StrtgBalAmtInFreeDfndCrcy8_F desc",
+                "StrtgBalAmtInFreeDfndCrcy8_E",
+                "StrtgBalAmtInFreeDfndCrcy8_E desc",
+                "DebitAmountInFreeDfndCrcy8",
+                "DebitAmountInFreeDfndCrcy8 desc",
+                "DebitAmountInFreeDfndCrcy8_F",
+                "DebitAmountInFreeDfndCrcy8_F desc",
+                "DebitAmountInFreeDfndCrcy8_E",
+                "DebitAmountInFreeDfndCrcy8_E desc",
+                "CreditAmountInFreeDfndCrcy8",
+                "CreditAmountInFreeDfndCrcy8 desc",
+                "CreditAmountInFreeDfndCrcy8_F",
+                "CreditAmountInFreeDfndCrcy8_F desc",
+                "CreditAmountInFreeDfndCrcy8_E",
+                "CreditAmountInFreeDfndCrcy8_E desc",
+                "EndingBalAmtInFreeDfndCrcy8",
+                "EndingBalAmtInFreeDfndCrcy8 desc",
+                "EndingBalAmtInFreeDfndCrcy8_F",
+                "EndingBalAmtInFreeDfndCrcy8_F desc",
+                "EndingBalAmtInFreeDfndCrcy8_E",
+                "EndingBalAmtInFreeDfndCrcy8_E desc",
+                "StartingBalAmtInBalTransCrcy",
+                "StartingBalAmtInBalTransCrcy desc",
+                "StartingBalAmtInBalTransCrcy_F",
+                "StartingBalAmtInBalTransCrcy_F desc",
+                "StartingBalAmtInBalTransCrcy_E",
+                "StartingBalAmtInBalTransCrcy_E desc",
+                "DebitAmountInBalanceTransCrcy",
+                "DebitAmountInBalanceTransCrcy desc",
+                "DebitAmountInBalanceTransCrcy_F",
+                "DebitAmountInBalanceTransCrcy_F desc",
+                "DebitAmountInBalanceTransCrcy_E",
+                "DebitAmountInBalanceTransCrcy_E desc",
+                "CreditAmountInBalanceTransCrcy",
+                "CreditAmountInBalanceTransCrcy desc",
+                "CreditAmountInBalanceTransCrcy_F",
+                "CreditAmountInBalanceTransCrcy_F desc",
+                "CreditAmountInBalanceTransCrcy_E",
+                "CreditAmountInBalanceTransCrcy_E desc",
+                "EndingBalanceAmtInBalTransCrcy",
+                "EndingBalanceAmtInBalTransCrcy desc",
+                "EndingBalanceAmtInBalTransCrcy_F",
+                "EndingBalanceAmtInBalTransCrcy_F desc",
+                "EndingBalanceAmtInBalTransCrcy_E",
+                "EndingBalanceAmtInBalTransCrcy_E desc",
+                "StartingBalanceAmtInTransCrcy",
+                "StartingBalanceAmtInTransCrcy desc",
+                "StartingBalanceAmtInTransCrcy_F",
+                "StartingBalanceAmtInTransCrcy_F desc",
+                "StartingBalanceAmtInTransCrcy_E",
+                "StartingBalanceAmtInTransCrcy_E desc",
+                "DebitAmountInTransCrcy",
+                "DebitAmountInTransCrcy desc",
+                "DebitAmountInTransCrcy_F",
+                "DebitAmountInTransCrcy_F desc",
+                "DebitAmountInTransCrcy_E",
+                "DebitAmountInTransCrcy_E desc",
+                "CreditAmountInTransCrcy",
+                "CreditAmountInTransCrcy desc",
+                "CreditAmountInTransCrcy_F",
+                "CreditAmountInTransCrcy_F desc",
+                "CreditAmountInTransCrcy_E",
+                "CreditAmountInTransCrcy_E desc",
+                "EndingBalanceAmtInTransCrcy",
+                "EndingBalanceAmtInTransCrcy desc",
+                "EndingBalanceAmtInTransCrcy_F",
+                "EndingBalanceAmtInTransCrcy_F desc",
+                "EndingBalanceAmtInTransCrcy_E",
+                "EndingBalanceAmtInTransCrcy_E desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [OData Select](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374620)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "ID",
+                "TotaledProperties",
+                "CompanyCode",
+                "CompanyCodeName",
+                "GLAccount",
+                "GLAccountHierarchyName",
+                "BusinessProcess",
+                "FreeDefinedCurrency8",
+                "PartnerCostObject",
+                "AssetValueDate",
+                "AssetValueDate_T",
+                "FiscalYearPeriod",
+                "QuantityIsIncomplete",
+                "IsOpenItemManaged",
+                "CorporateGroupAccount",
+                "CorporateGroupAccount_T",
+                "BillingDocumentType",
+                "FiscalQuarter",
+                "CorporateGroupChartOfAccounts",
+                "ClearingDocFiscalYear",
+                "PartnerWBSElement",
+                "FreeDefinedCurrency2",
+                "PartnerProfitCenter",
+                "PartnerProfitCenterName",
+                "PartnerControllingObjectClass",
+                "GLAccountType",
+                "AccountingDocumentCategory",
+                "BusinessTransactionType",
+                "CalendarMonth",
+                "CalendarQuarter",
+                "ClearingAccountingDocument",
+                "AccountingDocumentType",
+                "AccountingDocumentTypeName",
+                "FinancialAccountType",
+                "FinancialAccountTypeName",
+                "BusinessArea",
+                "BusinessAreaName",
+                "OriginCostCtrActivityType",
+                "ChartOfAccounts",
+                "ControllingArea",
+                "ControllingAreaName",
+                "ControllingObjectClass",
+                "PartnerCostCenter",
+                "SenderCostCenterName",
+                "DebitCreditCode",
+                "DebitCreditCodeName",
+                "PostingDate",
+                "PostingDate_T",
+                "FiscalYearVariant",
+                "FunctionalArea",
+                "FunctionalAreaName",
+                "FiscalYear",
+                "BudgetPeriod",
+                "CalendarWeek",
+                "CalendarYear",
+                "ClearingDate",
+                "ClearingDate_T",
+                "CostCenter",
+                "CostCenterName",
+                "CostObject",
+                "FiscalWeek",
+                "Fund",
+                "GrantID",
+                "IsReversal",
+                "IsReversed",
+                "IsSettled",
+                "IsSettlement",
+                "JointVenture",
+                "OrderID",
+                "PartnerFund",
+                "PartnerGrant",
+                "PartnerOrder",
+                "SalesOrder",
+                "SoldMaterial",
+                "TaxCode",
+                "WBSElement",
+                "HouseBank",
+                "InventorySpecialStockValnType",
+                "Ledger",
+                "MasterFixedAsset",
+                "PostingKey",
+                "PostingKeyName",
+                "ProfitCenter",
+                "ProfitCenterName",
+                "Segment",
+                "SegmentName",
+                "SpecialGLCode",
+                "FixedAsset",
+                "JointVentureEquityType",
+                "HouseBankAccount",
+                "InventorySpecialStockType",
+                "AlternativeGLAccount",
+                "AlternativeGLAccount_T",
+                "Material",
+                "MaterialName",
+                "MaterialGroup",
+                "Plant",
+                "PlantName",
+                "OrderCategory",
+                "MaterialGroupName",
+                "MaterialGroupName_T",
+                "Project",
+                "ValuationArea",
+                "CustomerGroup",
+                "CustomerGroupName",
+                "InventorySpclStkSalesDocument",
+                "InventorySpclStkSalesDocItm",
+                "InventorySpclStockWBSElement",
+                "CalendarYearMonth",
+                "Customer",
+                "CustomerName",
+                "Supplier",
+                "SupplierName",
+                "BalanceTransactionCurrency",
+                "AssignmentReference",
+                "OrganizationDivision",
+                "PartnerProjectNetworkActivity",
+                "CalendarYearQuarter",
+                "IsBalanceSheetAccount",
+                "PartnerAccountAssignmentType",
+                "FiscalYearWeek",
+                "JointVentureEquityGroup",
+                "FinancialManagementArea",
+                "CostCtrActivityType",
+                "SenderAccountAssignment",
+                "FiscalYearQuarter",
+                "ReferenceDocumentType",
+                "GroupFixedAsset",
+                "ReferenceDocumentItemGroup",
+                "AssetDepreciationArea",
+                "PartnerSegment",
+                "PartnerSegmentName",
+                "OperatingConcern",
+                "CountryChartOfAccounts",
+                "FreeDefinedCurrency6",
+                "TransactionCurrency",
+                "AccountAssignment",
+                "PartnerCostCtrActivityType",
+                "PartnerBusinessProcess",
+                "RelatedNetworkActivity",
+                "SalesDocument",
+                "FreeDefinedCurrency1",
+                "FiscalPeriodDate",
+                "FreeDefinedCurrency3",
+                "AssetTransactionType",
+                "PurchasingDocument",
+                "EliminationProfitCenter",
+                "EliminationProfitCenterName",
+                "GlobalCurrency",
+                "PredecessorReferenceDocType",
+                "LedgerFiscalYear",
+                "PartnerSalesDocument",
+                "PartnerAccountAssignment",
+                "OffsettingAccount",
+                "PartnerBudgetPeriod",
+                "AccountingDocCreatedByUser",
+                "FreeDefinedCurrency4",
+                "ProjectNetwork",
+                "LineItemIsCompleted",
+                "JointVentureCostRecoveryCode",
+                "InventorySpecialStockSupplier",
+                "InvtrySpecialStockSupplierName",
+                "AccountAssignmentType",
+                "PartnerProject",
+                "PartnerCompany",
+                "LogicalSystem",
+                "PersonnelNumber",
+                "GroupMasterFixedAsset",
+                "SalesDocumentItem",
+                "PartnerOrderCategory",
+                "PartnerBusinessArea",
+                "PartnerBusinessAreaName",
+                "PartnerFunctionalArea",
+                "PartnerFunctionalAreaName",
+                "OriginCostCenter",
+                "FreeDefinedCurrency5",
+                "CompanyCodeCurrency",
+                "OriginObjectType",
+                "ControllingObjectDebitType",
+                "GLAccountHierarchy",
+                "CustomerServiceNotification",
+                "FreeDefinedCurrency7",
+                "AccountAssignmentNumber",
+                "SalesOrganization",
+                "TransactionTypeDetermination",
+                "PartnerProjectNetwork",
+                "PartnerCompanyCode",
+                "SalesOrderItem",
+                "OffsettingAccountType",
+                "CalendarYearWeek",
+                "FinancialTransactionType",
+                "SenderAccountAssignmentType",
+                "PurchasingDocumentItem",
+                "SenderGLAccount",
+                "PartnerSalesDocumentItem",
+                "InventoryValuationType",
+                "SettlementReferenceDate",
+                "SettlementReferenceDate_T",
+                "DistributionChannel",
+                "StartingBalanceAmtInCoCodeCrcy",
+                "StartingBalanceAmtInCoCodeCrcy_F",
+                "StartingBalanceAmtInCoCodeCrcy_E",
+                "DebitAmountInCoCodeCrcy",
+                "DebitAmountInCoCodeCrcy_F",
+                "DebitAmountInCoCodeCrcy_E",
+                "CreditAmountInCoCodeCrcy",
+                "CreditAmountInCoCodeCrcy_F",
+                "CreditAmountInCoCodeCrcy_E",
+                "EndingBalanceAmtInCoCodeCrcy",
+                "EndingBalanceAmtInCoCodeCrcy_F",
+                "EndingBalanceAmtInCoCodeCrcy_E",
+                "StartingBalanceAmtInGlobalCrcy",
+                "StartingBalanceAmtInGlobalCrcy_F",
+                "StartingBalanceAmtInGlobalCrcy_E",
+                "DebitAmountInGlobalCrcy",
+                "DebitAmountInGlobalCrcy_F",
+                "DebitAmountInGlobalCrcy_E",
+                "CreditAmountInGlobalCrcy",
+                "CreditAmountInGlobalCrcy_F",
+                "CreditAmountInGlobalCrcy_E",
+                "EndingBalanceAmtInGlobalCrcy",
+                "EndingBalanceAmtInGlobalCrcy_F",
+                "EndingBalanceAmtInGlobalCrcy_E",
+                "StrtgBalAmtInFreeDfndCrcy1",
+                "StrtgBalAmtInFreeDfndCrcy1_F",
+                "StrtgBalAmtInFreeDfndCrcy1_E",
+                "DebitAmountInFreeDfndCrcy1",
+                "DebitAmountInFreeDfndCrcy1_F",
+                "DebitAmountInFreeDfndCrcy1_E",
+                "CreditAmountInFreeDfndCrcy1",
+                "CreditAmountInFreeDfndCrcy1_F",
+                "CreditAmountInFreeDfndCrcy1_E",
+                "EndingBalAmtInFreeDfndCrcy1",
+                "EndingBalAmtInFreeDfndCrcy1_F",
+                "EndingBalAmtInFreeDfndCrcy1_E",
+                "StrtgBalAmtInFreeDfndCrcy2",
+                "StrtgBalAmtInFreeDfndCrcy2_F",
+                "StrtgBalAmtInFreeDfndCrcy2_E",
+                "DebitAmountInFreeDfndCrcy2",
+                "DebitAmountInFreeDfndCrcy2_F",
+                "DebitAmountInFreeDfndCrcy2_E",
+                "CreditAmountInFreeDfndCrcy2",
+                "CreditAmountInFreeDfndCrcy2_F",
+                "CreditAmountInFreeDfndCrcy2_E",
+                "EndingBalAmtInFreeDfndCrcy2",
+                "EndingBalAmtInFreeDfndCrcy2_F",
+                "EndingBalAmtInFreeDfndCrcy2_E",
+                "StrtgBalAmtInFreeDfndCrcy3",
+                "StrtgBalAmtInFreeDfndCrcy3_F",
+                "StrtgBalAmtInFreeDfndCrcy3_E",
+                "DebitAmountInFreeDfndCrcy3",
+                "DebitAmountInFreeDfndCrcy3_F",
+                "DebitAmountInFreeDfndCrcy3_E",
+                "CreditAmountInFreeDfndCrcy3",
+                "CreditAmountInFreeDfndCrcy3_F",
+                "CreditAmountInFreeDfndCrcy3_E",
+                "EndingBalAmtInFreeDfndCrcy3",
+                "EndingBalAmtInFreeDfndCrcy3_F",
+                "EndingBalAmtInFreeDfndCrcy3_E",
+                "StrtgBalAmtInFreeDfndCrcy4",
+                "StrtgBalAmtInFreeDfndCrcy4_F",
+                "StrtgBalAmtInFreeDfndCrcy4_E",
+                "DebitAmountInFreeDfndCrcy4",
+                "DebitAmountInFreeDfndCrcy4_F",
+                "DebitAmountInFreeDfndCrcy4_E",
+                "CreditAmountInFreeDfndCrcy4",
+                "CreditAmountInFreeDfndCrcy4_F",
+                "CreditAmountInFreeDfndCrcy4_E",
+                "EndingBalAmtInFreeDfndCrcy4",
+                "EndingBalAmtInFreeDfndCrcy4_F",
+                "EndingBalAmtInFreeDfndCrcy4_E",
+                "StrtgBalAmtInFreeDfndCrcy5",
+                "StrtgBalAmtInFreeDfndCrcy5_F",
+                "StrtgBalAmtInFreeDfndCrcy5_E",
+                "DebitAmountInFreeDfndCrcy5",
+                "DebitAmountInFreeDfndCrcy5_F",
+                "DebitAmountInFreeDfndCrcy5_E",
+                "CreditAmountInFreeDfndCrcy5",
+                "CreditAmountInFreeDfndCrcy5_F",
+                "CreditAmountInFreeDfndCrcy5_E",
+                "EndingBalAmtInFreeDfndCrcy5",
+                "EndingBalAmtInFreeDfndCrcy5_F",
+                "EndingBalAmtInFreeDfndCrcy5_E",
+                "StrtgBalAmtInFreeDfndCrcy6",
+                "StrtgBalAmtInFreeDfndCrcy6_F",
+                "StrtgBalAmtInFreeDfndCrcy6_E",
+                "DebitAmountInFreeDfndCrcy6",
+                "DebitAmountInFreeDfndCrcy6_F",
+                "DebitAmountInFreeDfndCrcy6_E",
+                "CreditAmountInFreeDfndCrcy6",
+                "CreditAmountInFreeDfndCrcy6_F",
+                "CreditAmountInFreeDfndCrcy6_E",
+                "EndingBalAmtInFreeDfndCrcy6",
+                "EndingBalAmtInFreeDfndCrcy6_F",
+                "EndingBalAmtInFreeDfndCrcy6_E",
+                "StrtgBalAmtInFreeDfndCrcy7",
+                "StrtgBalAmtInFreeDfndCrcy7_F",
+                "StrtgBalAmtInFreeDfndCrcy7_E",
+                "DebitAmountInFreeDfndCrcy7",
+                "DebitAmountInFreeDfndCrcy7_F",
+                "DebitAmountInFreeDfndCrcy7_E",
+                "CreditAmountInFreeDfndCrcy7",
+                "CreditAmountInFreeDfndCrcy7_F",
+                "CreditAmountInFreeDfndCrcy7_E",
+                "EndingBalAmtInFreeDfndCrcy7",
+                "EndingBalAmtInFreeDfndCrcy7_F",
+                "EndingBalAmtInFreeDfndCrcy7_E",
+                "StrtgBalAmtInFreeDfndCrcy8",
+                "StrtgBalAmtInFreeDfndCrcy8_F",
+                "StrtgBalAmtInFreeDfndCrcy8_E",
+                "DebitAmountInFreeDfndCrcy8",
+                "DebitAmountInFreeDfndCrcy8_F",
+                "DebitAmountInFreeDfndCrcy8_E",
+                "CreditAmountInFreeDfndCrcy8",
+                "CreditAmountInFreeDfndCrcy8_F",
+                "CreditAmountInFreeDfndCrcy8_E",
+                "EndingBalAmtInFreeDfndCrcy8",
+                "EndingBalAmtInFreeDfndCrcy8_F",
+                "EndingBalAmtInFreeDfndCrcy8_E",
+                "StartingBalAmtInBalTransCrcy",
+                "StartingBalAmtInBalTransCrcy_F",
+                "StartingBalAmtInBalTransCrcy_E",
+                "DebitAmountInBalanceTransCrcy",
+                "DebitAmountInBalanceTransCrcy_F",
+                "DebitAmountInBalanceTransCrcy_E",
+                "CreditAmountInBalanceTransCrcy",
+                "CreditAmountInBalanceTransCrcy_F",
+                "CreditAmountInBalanceTransCrcy_E",
+                "EndingBalanceAmtInBalTransCrcy",
+                "EndingBalanceAmtInBalTransCrcy_F",
+                "EndingBalanceAmtInBalTransCrcy_E",
+                "StartingBalanceAmtInTransCrcy",
+                "StartingBalanceAmtInTransCrcy_F",
+                "StartingBalanceAmtInTransCrcy_E",
+                "DebitAmountInTransCrcy",
+                "DebitAmountInTransCrcy_F",
+                "DebitAmountInTransCrcy_E",
+                "CreditAmountInTransCrcy",
+                "CreditAmountInTransCrcy_F",
+                "CreditAmountInTransCrcy_E",
+                "EndingBalanceAmtInTransCrcy",
+                "EndingBalanceAmtInTransCrcy_F",
+                "EndingBalanceAmtInTransCrcy_E",
+                "Parameters",
+                "LedgerDetails",
+                "CompanyCodeDetails",
+                "GLAccountDetails",
+                "ProjectDetails"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [OData Expand](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374621)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Parameters",
+                "LedgerDetails",
+                "CompanyCodeDetails",
+                "GLAccountDetails",
+                "ProjectDetails"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of C_TRIALBALANCEResult",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/C_TRIALBALANCE_CDS.C_TRIALBALANCEResult"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "C_TRIALBALANCE_CDS.C_TRIALBALANCEResult": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "TotaledProperties": {
+          "type": "string",
+"default": "null"
+        },
+        "CompanyCode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Company Code",
+          "description": "Company Code"
+        },
+        "CompanyCodeName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Company Code (Description)",
+          "description": "Company Code (Description)"
+        },
+        "GLAccount": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "G/L Account",
+          "description": "G/L Account"
+        },
+        "GLAccountHierarchyName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "title": "G/L Account (Description)",
+          "description": "G/L Account (Description)"
+        },
+        "BusinessProcess": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "title": "Business Process",
+          "description": "Business Process"
+        },
+        "FreeDefinedCurrency8": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Free Defined Crcy 8",
+          "description": "Free Defined Crcy 8"
+        },
+        "PartnerCostObject": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "title": "Partner Cost Object",
+          "description": "Partner Cost Object"
+        },
+        "AssetValueDate": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Asset Value Date",
+          "description": "Asset Value Date"
+        },
+        "AssetValueDate_T": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Asset Value Date (Description)",
+          "description": "Asset Value Date (Description)"
+        },
+        "FiscalYearPeriod": {
+          "type": "string",
+"default": "null",
+          "maxLength": 8,
+          "title": "Fiscal Year Period",
+          "description": "Fiscal Year Period"
+        },
+        "QuantityIsIncomplete": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Qty Is Incomplete",
+          "description": "Qty Is Incomplete"
+        },
+        "IsOpenItemManaged": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Open Item Management",
+          "description": "Open Item Management"
+        },
+        "CorporateGroupAccount": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Group Account Number",
+          "description": "Group Account Number"
+        },
+        "CorporateGroupAccount_T": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "title": "Group Account Number (Description)",
+          "description": "Group Account Number (Description)"
+        },
+        "BillingDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Billing Type",
+          "description": "Billing Type"
+        },
+        "FiscalQuarter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Fiscal Quarter",
+          "description": "Fiscal Quarter"
+        },
+        "CorporateGroupChartOfAccounts": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Group Chart of Accts",
+          "description": "Group Chart of Accts"
+        },
+        "ClearingDocFiscalYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Clearing Fisc. Year",
+          "description": "Clearing Fisc. Year"
+        },
+        "PartnerWBSElement": {
+          "type": "string",
+"default": "null",
+          "maxLength": 24,
+          "title": "Partner WBS Element",
+          "description": "Partner WBS Element"
+        },
+        "FreeDefinedCurrency2": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Free Defined Crcy 2",
+          "description": "Free Defined Crcy 2"
+        },
+        "PartnerProfitCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Partner Profit Ctr.",
+          "description": "Partner Profit Ctr."
+        },
+        "PartnerProfitCenterName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "title": "Partner Profit Ctr. (Description)",
+          "description": "Partner Profit Ctr. (Description)"
+        },
+        "PartnerControllingObjectClass": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Partner Object Class",
+          "description": "Partner Object Class"
+        },
+        "GLAccountType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "G/L Account Type",
+          "description": "G/L Account Type"
+        },
+        "AccountingDocumentCategory": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Jrnl. Entry Category",
+          "description": "Jrnl. Entry Category"
+        },
+        "BusinessTransactionType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Bus. Transac. Type",
+          "description": "Bus. Transac. Type"
+        },
+        "CalendarMonth": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Calendar Month",
+          "description": "Calendar Month"
+        },
+        "CalendarQuarter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Calendar Quarter",
+          "description": "Calendar Quarter"
+        },
+        "ClearingAccountingDocument": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Clearing Entry",
+          "description": "Clearing Entry"
+        },
+        "AccountingDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Journal Entry Type",
+          "description": "Journal Entry Type"
+        },
+        "AccountingDocumentTypeName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Journal Entry Type (Description)",
+          "description": "Journal Entry Type (Description)"
+        },
+        "FinancialAccountType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Account Type",
+          "description": "Account Type"
+        },
+        "FinancialAccountTypeName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Account Type (Description)",
+          "description": "Account Type (Description)"
+        },
+        "BusinessArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Business Area",
+          "description": "Business Area"
+        },
+        "BusinessAreaName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Business Area (Description)",
+          "description": "Business Area (Description)"
+        },
+        "OriginCostCtrActivityType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "OrignCostCtrActyType",
+          "description": "OrignCostCtrActyType"
+        },
+        "ChartOfAccounts": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Chart of Accounts",
+          "description": "Chart of Accounts"
+        },
+        "ControllingArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Controlling Area",
+          "description": "Controlling Area"
+        },
+        "ControllingAreaName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Controlling Area (Description)",
+          "description": "Controlling Area (Description)"
+        },
+        "ControllingObjectClass": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Object Class",
+          "description": "Object Class"
+        },
+        "PartnerCostCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Partner Cost Center",
+          "description": "Partner Cost Center"
+        },
+        "SenderCostCenterName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "title": "Partner Cost Center (Description)",
+          "description": "Partner Cost Center (Description)"
+        },
+        "DebitCreditCode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Debit/Credit Code",
+          "description": "Debit/Credit Code"
+        },
+        "DebitCreditCodeName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Debit/Credit Code (Description)",
+          "description": "Debit/Credit Code (Description)"
+        },
+        "PostingDate": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Posting Date",
+          "description": "Posting Date"
+        },
+        "PostingDate_T": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Posting Date (Description)",
+          "description": "Posting Date (Description)"
+        },
+        "FiscalYearVariant": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Fiscal Year Variant",
+          "description": "Fiscal Year Variant"
+        },
+        "FunctionalArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 16,
+          "title": "Functional Area",
+          "description": "Functional Area"
+        },
+        "FunctionalAreaName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Functional Area (Description)",
+          "description": "Functional Area (Description)"
+        },
+        "FiscalYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Fiscal Year",
+          "description": "Fiscal Year"
+        },
+        "BudgetPeriod": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Budget Period",
+          "description": "Budget Period"
+        },
+        "CalendarWeek": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Calendar Week",
+          "description": "Calendar Week"
+        },
+        "CalendarYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Calendar Year",
+          "description": "Calendar Year"
+        },
+        "ClearingDate": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Clearing Date",
+          "description": "Clearing Date"
+        },
+        "ClearingDate_T": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Clearing Date (Description)",
+          "description": "Clearing Date (Description)"
+        },
+        "CostCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Cost Center",
+          "description": "Cost Center"
+        },
+        "CostCenterName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "title": "Cost Center (Description)",
+          "description": "Cost Center (Description)"
+        },
+        "CostObject": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "title": "Cost Object",
+          "description": "Cost Object"
+        },
+        "FiscalWeek": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Fiscal Week",
+          "description": "Fiscal Week"
+        },
+        "Fund": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Fund",
+          "description": "Fund"
+        },
+        "GrantID": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "title": "Grant",
+          "description": "Grant"
+        },
+        "IsReversal": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Is reversing",
+          "description": "Is reversing"
+        },
+        "IsReversed": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Is reversed",
+          "description": "Is reversed"
+        },
+        "IsSettled": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Is settled",
+          "description": "Is settled"
+        },
+        "IsSettlement": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Is settling",
+          "description": "Is settling"
+        },
+        "JointVenture": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "Joint venture",
+          "description": "Joint venture"
+        },
+        "OrderID": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "title": "Order ID",
+          "description": "Order ID"
+        },
+        "PartnerFund": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Partner Fund",
+          "description": "Partner Fund"
+        },
+        "PartnerGrant": {
+          "type": "string",
+"default": "null",
+          "maxLength": 20,
+          "title": "Partner Grant",
+          "description": "Partner Grant"
+        },
+        "PartnerOrder": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "title": "Partner Order",
+          "description": "Partner Order"
+        },
+        "SalesOrder": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Sales Order",
+          "description": "Sales Order"
+        },
+        "SoldMaterial": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "title": "Product Sold",
+          "description": "Product Sold"
+        },
+        "TaxCode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Tax Code",
+          "description": "Tax Code"
+        },
+        "WBSElement": {
+          "type": "string",
+"default": "null",
+          "maxLength": 24,
+          "title": "WBS Element",
+          "description": "WBS Element"
+        },
+        "HouseBank": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "House Bank",
+          "description": "House Bank"
+        },
+        "InventorySpecialStockValnType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Spcl Stk Valn Type",
+          "description": "Spcl Stk Valn Type"
+        },
+        "Ledger": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Ledger",
+          "description": "Ledger"
+        },
+        "MasterFixedAsset": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "title": "Fixed Asset",
+          "description": "Fixed Asset"
+        },
+        "PostingKey": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Posting Key",
+          "description": "Posting Key"
+        },
+        "PostingKeyName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Posting Key (Description)",
+          "description": "Posting Key (Description)"
+        },
+        "ProfitCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Profit Center",
+          "description": "Profit Center"
+        },
+        "ProfitCenterName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "title": "Profit Center (Description)",
+          "description": "Profit Center (Description)"
+        },
+        "Segment": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Segment",
+          "description": "Segment"
+        },
+        "SegmentName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Segment (Description)",
+          "description": "Segment (Description)"
+        },
+        "SpecialGLCode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Special G/L",
+          "description": "Special G/L"
+        },
+        "FixedAsset": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Asset Subnumber",
+          "description": "Asset Subnumber"
+        },
+        "JointVentureEquityType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "title": "Equity type",
+          "description": "Equity type"
+        },
+        "HouseBankAccount": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "House Bank Account",
+          "description": "House Bank Account"
+        },
+        "InventorySpecialStockType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Special Stock Type",
+          "description": "Special Stock Type"
+        },
+        "AlternativeGLAccount": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Altern. G/L Account",
+          "description": "Altern. G/L Account"
+        },
+        "AlternativeGLAccount_T": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "title": "Altern. G/L Account (Description)",
+          "description": "Altern. G/L Account (Description)"
+        },
+        "Material": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "title": "Material",
+          "description": "Material"
+        },
+        "MaterialName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Material (Description)",
+          "description": "Material (Description)"
+        },
+        "MaterialGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 9,
+          "title": "Product Sold Group",
+          "description": "Product Sold Group"
+        },
+        "Plant": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Plant",
+          "description": "Plant"
+        },
+        "PlantName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Plant (Description)",
+          "description": "Plant (Description)"
+        },
+        "OrderCategory": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Order Category",
+          "description": "Order Category"
+        },
+        "MaterialGroupName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 9,
+          "title": "Product Group",
+          "description": "Product Group"
+        },
+        "MaterialGroupName_T": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "title": "Product Group (Description)",
+          "description": "Product Group (Description)"
+        },
+        "Project": {
+          "type": "string",
+"default": "null",
+          "maxLength": 24,
+          "title": "Project Definition",
+          "description": "Project Definition"
+        },
+        "ValuationArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Valuation Area",
+          "description": "Valuation Area"
+        },
+        "CustomerGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Customer Group",
+          "description": "Customer Group"
+        },
+        "CustomerGroupName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Customer Group (Description)",
+          "description": "Customer Group (Description)"
+        },
+        "InventorySpclStkSalesDocument": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "SD Doc of Inventory",
+          "description": "SD Doc of Inventory"
+        },
+        "InventorySpclStkSalesDocItm": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "SD Item of Inventory",
+          "description": "SD Item of Inventory"
+        },
+        "InventorySpclStockWBSElement": {
+          "type": "string",
+"default": "null",
+          "maxLength": 24,
+          "title": "WBSElem of Inventory",
+          "description": "WBSElem of Inventory"
+        },
+        "CalendarYearMonth": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "Year Month",
+          "description": "Year Month"
+        },
+        "Customer": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Customer",
+          "description": "Customer"
+        },
+        "CustomerName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Customer (Description)",
+          "description": "Customer (Description)"
+        },
+        "Supplier": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Supplier",
+          "description": "Supplier"
+        },
+        "SupplierName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Supplier (Description)",
+          "description": "Supplier (Description)"
+        },
+        "BalanceTransactionCurrency": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Balance Trans Crcy",
+          "description": "Balance Trans Crcy"
+        },
+        "AssignmentReference": {
+          "type": "string",
+"default": "null",
+          "maxLength": 18,
+          "title": "Assignment Reference",
+          "description": "Assignment Reference"
+        },
+        "OrganizationDivision": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Division",
+          "description": "Division"
+        },
+        "PartnerProjectNetworkActivity": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Part.Proj.Ntwk.Acty",
+          "description": "Part.Proj.Ntwk.Acty"
+        },
+        "CalendarYearQuarter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Year Quarter",
+          "description": "Year Quarter"
+        },
+        "IsBalanceSheetAccount": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Balance sheet acct",
+          "description": "Balance sheet acct"
+        },
+        "PartnerAccountAssignmentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Part.AcctAssgmtType",
+          "description": "Part.AcctAssgmtType"
+        },
+        "FiscalYearWeek": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "Fiscal Year Week",
+          "description": "Fiscal Year Week"
+        },
+        "JointVentureEquityGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "title": "Equity group",
+          "description": "Equity group"
+        },
+        "FinancialManagementArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "FM Area",
+          "description": "FM Area"
+        },
+        "CostCtrActivityType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "Activity Type",
+          "description": "Activity Type"
+        },
+        "SenderAccountAssignment": {
+          "type": "string",
+"default": "null",
+          "maxLength": 30,
+          "title": "Sender Acct Assgmt",
+          "description": "Sender Acct Assgmt"
+        },
+        "FiscalYearQuarter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "Fiscal Year Quarter",
+          "description": "Fiscal Year Quarter"
+        },
+        "ReferenceDocumentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Ref. Document Type",
+          "description": "Ref. Document Type"
+        },
+        "GroupFixedAsset": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Group Asset Subnmbr",
+          "description": "Group Asset Subnmbr"
+        },
+        "ReferenceDocumentItemGroup": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "Ref. Doc. Item Group",
+          "description": "Ref. Doc. Item Group"
+        },
+        "AssetDepreciationArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Depreciation Area",
+          "description": "Depreciation Area"
+        },
+        "PartnerSegment": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Partner Segment",
+          "description": "Partner Segment"
+        },
+        "PartnerSegmentName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Partner Segment (Description)",
+          "description": "Partner Segment (Description)"
+        },
+        "OperatingConcern": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Operating concern",
+          "description": "Operating concern"
+        },
+        "CountryChartOfAccounts": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Country CoA",
+          "description": "Country CoA"
+        },
+        "FreeDefinedCurrency6": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Free Defined Crcy 6",
+          "description": "Free Defined Crcy 6"
+        },
+        "TransactionCurrency": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Transaction Currency",
+          "description": "Transaction Currency"
+        },
+        "AccountAssignment": {
+          "type": "string",
+"default": "null",
+          "maxLength": 30,
+          "title": "Account Assignment",
+          "description": "Account Assignment"
+        },
+        "PartnerCostCtrActivityType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "Part CC ActivityType",
+          "description": "Part CC ActivityType"
+        },
+        "PartnerBusinessProcess": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "title": "Part. Bus. Process",
+          "description": "Part. Bus. Process"
+        },
+        "RelatedNetworkActivity": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Network activity",
+          "description": "Network activity"
+        },
+        "SalesDocument": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Sales Document",
+          "description": "Sales Document"
+        },
+        "FreeDefinedCurrency1": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Free Defined Crcy 1",
+          "description": "Free Defined Crcy 1"
+        },
+        "FiscalPeriodDate": {
+          "type": "string",
+"default": "null",
+          "maxLength": 11,
+          "title": "Fiscal Period Date",
+          "description": "Fiscal Period Date"
+        },
+        "FreeDefinedCurrency3": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Free Defined Crcy 3",
+          "description": "Free Defined Crcy 3"
+        },
+        "AssetTransactionType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "title": "Ast Transaction Type",
+          "description": "Ast Transaction Type"
+        },
+        "PurchasingDocument": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Purchasing Document",
+          "description": "Purchasing Document"
+        },
+        "EliminationProfitCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Elimination PrCtr",
+          "description": "Elimination PrCtr"
+        },
+        "EliminationProfitCenterName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 40,
+          "title": "Elimination PrCtr (Description)",
+          "description": "Elimination PrCtr (Description)"
+        },
+        "GlobalCurrency": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Global Currency",
+          "description": "Global Currency"
+        },
+        "PredecessorReferenceDocType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Preced. RefTransact",
+          "description": "Preced. RefTransact"
+        },
+        "LedgerFiscalYear": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Ledger Fiscal Year",
+          "description": "Ledger Fiscal Year"
+        },
+        "PartnerSalesDocument": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Partner Sales Doc.",
+          "description": "Partner Sales Doc."
+        },
+        "PartnerAccountAssignment": {
+          "type": "string",
+"default": "null",
+          "maxLength": 30,
+          "title": "Part. Acct. Assgmt.",
+          "description": "Part. Acct. Assgmt."
+        },
+        "OffsettingAccount": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Offsetting Account",
+          "description": "Offsetting Account"
+        },
+        "PartnerBudgetPeriod": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Par. Budget Per.",
+          "description": "Par. Budget Per."
+        },
+        "AccountingDocCreatedByUser": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "title": "JE Created By",
+          "description": "JE Created By"
+        },
+        "FreeDefinedCurrency4": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Free Defined Crcy 4",
+          "description": "Free Defined Crcy 4"
+        },
+        "ProjectNetwork": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "title": "Network",
+          "description": "Network"
+        },
+        "LineItemIsCompleted": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "LineItm Is Completed",
+          "description": "LineItm Is Completed"
+        },
+        "JointVentureCostRecoveryCode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Recovery Indicator",
+          "description": "Recovery Indicator"
+        },
+        "InventorySpecialStockSupplier": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Supplier of Inv.",
+          "description": "Supplier of Inv."
+        },
+        "InvtrySpecialStockSupplierName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Supplier of Inv. (Description)",
+          "description": "Supplier of Inv. (Description)"
+        },
+        "AccountAssignmentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Object Type",
+          "description": "Object Type"
+        },
+        "PartnerProject": {
+          "type": "string",
+"default": "null",
+          "maxLength": 24,
+          "title": "Partner Project",
+          "description": "Partner Project"
+        },
+        "PartnerCompany": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "Trading Partner",
+          "description": "Trading Partner"
+        },
+        "LogicalSystem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Logical System",
+          "description": "Logical System"
+        },
+        "PersonnelNumber": {
+          "type": "string",
+"default": "null",
+          "maxLength": 8,
+          "title": "Personnel Number",
+          "description": "Personnel Number"
+        },
+        "GroupMasterFixedAsset": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "title": "Group Asset",
+          "description": "Group Asset"
+        },
+        "SalesDocumentItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "Sales Document Item",
+          "description": "Sales Document Item"
+        },
+        "PartnerOrderCategory": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Partner Order Cat.",
+          "description": "Partner Order Cat."
+        },
+        "PartnerBusinessArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Partner Bus. Area",
+          "description": "Partner Bus. Area"
+        },
+        "PartnerBusinessAreaName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Partner Bus. Area (Description)",
+          "description": "Partner Bus. Area (Description)"
+        },
+        "PartnerFunctionalArea": {
+          "type": "string",
+"default": "null",
+          "maxLength": 16,
+          "title": "Partner Func. Area",
+          "description": "Partner Func. Area"
+        },
+        "PartnerFunctionalAreaName": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1333,
+          "title": "Partner Func. Area (Description)",
+          "description": "Partner Func. Area (Description)"
+        },
+        "OriginCostCenter": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Origin CCtr",
+          "description": "Origin CCtr"
+        },
+        "FreeDefinedCurrency5": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Free Defined Crcy 5",
+          "description": "Free Defined Crcy 5"
+        },
+        "CompanyCodeCurrency": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Company Code Crcy",
+          "description": "Company Code Crcy"
+        },
+        "OriginObjectType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Origin Object Type",
+          "description": "Origin Object Type"
+        },
+        "ControllingObjectDebitType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Debit type",
+          "description": "Debit type"
+        },
+        "GLAccountHierarchy": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "G/L Account",
+          "description": "G/L Account"
+        },
+        "CustomerServiceNotification": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "title": "Notification",
+          "description": "Notification"
+        },
+        "FreeDefinedCurrency7": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Free Defined Crcy 7",
+          "description": "Free Defined Crcy 7"
+        },
+        "AccountAssignmentNumber": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Account Assgmt No.",
+          "description": "Account Assgmt No."
+        },
+        "SalesOrganization": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Sales Organization",
+          "description": "Sales Organization"
+        },
+        "TransactionTypeDetermination": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "title": "Transaction Key",
+          "description": "Transaction Key"
+        },
+        "PartnerProjectNetwork": {
+          "type": "string",
+"default": "null",
+          "maxLength": 12,
+          "title": "Part. Proj. Network",
+          "description": "Part. Proj. Network"
+        },
+        "PartnerCompanyCode": {
+          "type": "string",
+"default": "null",
+          "maxLength": 4,
+          "title": "Partner CoCode",
+          "description": "Partner CoCode"
+        },
+        "SalesOrderItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "Sales Order Item",
+          "description": "Sales Order Item"
+        },
+        "OffsettingAccountType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 1,
+          "title": "Offst.Acct Type",
+          "description": "Offst.Acct Type"
+        },
+        "CalendarYearWeek": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "Year Week",
+          "description": "Year Week"
+        },
+        "FinancialTransactionType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 3,
+          "title": "Fin.Transaction Type",
+          "description": "Fin.Transaction Type"
+        },
+        "SenderAccountAssignmentType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Sndr AcctAssgmt Type",
+          "description": "Sndr AcctAssgmt Type"
+        },
+        "PurchasingDocumentItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Purchasing Doc. Item",
+          "description": "Purchasing Doc. Item"
+        },
+        "SenderGLAccount": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Sender G/L Account",
+          "description": "Sender G/L Account"
+        },
+        "PartnerSalesDocumentItem": {
+          "type": "string",
+"default": "null",
+          "maxLength": 6,
+          "title": "Part. Sales Doc. Itm",
+          "description": "Part. Sales Doc. Itm"
+        },
+        "InventoryValuationType": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Valuation Type",
+          "description": "Valuation Type"
+        },
+        "SettlementReferenceDate": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Reference Date",
+          "description": "Reference Date"
+        },
+        "SettlementReferenceDate_T": {
+          "type": "string",
+"default": "null",
+          "maxLength": 10,
+          "title": "Reference Date (Description)",
+          "description": "Reference Date (Description)"
+        },
+        "DistributionChannel": {
+          "type": "string",
+"default": "null",
+          "maxLength": 2,
+          "title": "Distribution Channel",
+          "description": "Distribution Channel"
+        },
+        "StartingBalanceAmtInCoCodeCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Starting Balance in Company Code Crcy",
+          "description": "Starting Balance in Company Code Crcy"
+        },
+        "StartingBalanceAmtInCoCodeCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Starting Balance in Company Code Crcy (Formatted)",
+          "description": "Starting Balance in Company Code Crcy (Formatted)"
+        },
+        "StartingBalanceAmtInCoCodeCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Starting Balance in Company Code Crcy (Currency)",
+          "description": "Starting Balance in Company Code Crcy (Currency)"
+        },
+        "DebitAmountInCoCodeCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Debit Balance in Company Code Currency",
+          "description": "Debit Balance in Company Code Currency"
+        },
+        "DebitAmountInCoCodeCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Debit Balance in Company Code Currency (Formatted)",
+          "description": "Debit Balance in Company Code Currency (Formatted)"
+        },
+        "DebitAmountInCoCodeCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Debit Balance in Company Code Currency (Currency)",
+          "description": "Debit Balance in Company Code Currency (Currency)"
+        },
+        "CreditAmountInCoCodeCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Credit Balance in Company Code Currency",
+          "description": "Credit Balance in Company Code Currency"
+        },
+        "CreditAmountInCoCodeCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Credit Balance in Company Code Currency (Formatted)",
+          "description": "Credit Balance in Company Code Currency (Formatted)"
+        },
+        "CreditAmountInCoCodeCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Credit Balance in Company Code Currency (Currency)",
+          "description": "Credit Balance in Company Code Currency (Currency)"
+        },
+        "EndingBalanceAmtInCoCodeCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Ending Balance in Company Code Currency",
+          "description": "Ending Balance in Company Code Currency"
+        },
+        "EndingBalanceAmtInCoCodeCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Ending Balance in Company Code Currency (Formatted)",
+          "description": "Ending Balance in Company Code Currency (Formatted)"
+        },
+        "EndingBalanceAmtInCoCodeCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Ending Balance in Company Code Currency (Currency)",
+          "description": "Ending Balance in Company Code Currency (Currency)"
+        },
+        "StartingBalanceAmtInGlobalCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Starting Balance in Global Currency",
+          "description": "Starting Balance in Global Currency"
+        },
+        "StartingBalanceAmtInGlobalCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Starting Balance in Global Currency (Formatted)",
+          "description": "Starting Balance in Global Currency (Formatted)"
+        },
+        "StartingBalanceAmtInGlobalCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Starting Balance in Global Currency (Currency)",
+          "description": "Starting Balance in Global Currency (Currency)"
+        },
+        "DebitAmountInGlobalCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Debit Balance in Global Currency",
+          "description": "Debit Balance in Global Currency"
+        },
+        "DebitAmountInGlobalCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Debit Balance in Global Currency (Formatted)",
+          "description": "Debit Balance in Global Currency (Formatted)"
+        },
+        "DebitAmountInGlobalCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Debit Balance in Global Currency (Currency)",
+          "description": "Debit Balance in Global Currency (Currency)"
+        },
+        "CreditAmountInGlobalCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Credit Balance in Global Currency",
+          "description": "Credit Balance in Global Currency"
+        },
+        "CreditAmountInGlobalCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Credit Balance in Global Currency (Formatted)",
+          "description": "Credit Balance in Global Currency (Formatted)"
+        },
+        "CreditAmountInGlobalCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Credit Balance in Global Currency (Currency)",
+          "description": "Credit Balance in Global Currency (Currency)"
+        },
+        "EndingBalanceAmtInGlobalCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Ending Balance in Global Currency",
+          "description": "Ending Balance in Global Currency"
+        },
+        "EndingBalanceAmtInGlobalCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Ending Balance in Global Currency (Formatted)",
+          "description": "Ending Balance in Global Currency (Formatted)"
+        },
+        "EndingBalanceAmtInGlobalCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Ending Balance in Global Currency (Currency)",
+          "description": "Ending Balance in Global Currency (Currency)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy1": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Starting Balance in Currency 1",
+          "description": "Starting Balance in Currency 1"
+        },
+        "StrtgBalAmtInFreeDfndCrcy1_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Starting Balance in Currency 1 (Formatted)",
+          "description": "Starting Balance in Currency 1 (Formatted)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy1_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Starting Balance in Currency 1 (Currency)",
+          "description": "Starting Balance in Currency 1 (Currency)"
+        },
+        "DebitAmountInFreeDfndCrcy1": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Debit Balance in Currency 1",
+          "description": "Debit Balance in Currency 1"
+        },
+        "DebitAmountInFreeDfndCrcy1_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Debit Balance in Currency 1 (Formatted)",
+          "description": "Debit Balance in Currency 1 (Formatted)"
+        },
+        "DebitAmountInFreeDfndCrcy1_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Debit Balance in Currency 1 (Currency)",
+          "description": "Debit Balance in Currency 1 (Currency)"
+        },
+        "CreditAmountInFreeDfndCrcy1": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Credit Balance in Currency 1",
+          "description": "Credit Balance in Currency 1"
+        },
+        "CreditAmountInFreeDfndCrcy1_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Credit Balance in Currency 1 (Formatted)",
+          "description": "Credit Balance in Currency 1 (Formatted)"
+        },
+        "CreditAmountInFreeDfndCrcy1_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Credit Balance in Currency 1 (Currency)",
+          "description": "Credit Balance in Currency 1 (Currency)"
+        },
+        "EndingBalAmtInFreeDfndCrcy1": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Ending Balance in Currency 1",
+          "description": "Ending Balance in Currency 1"
+        },
+        "EndingBalAmtInFreeDfndCrcy1_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Ending Balance in Currency 1 (Formatted)",
+          "description": "Ending Balance in Currency 1 (Formatted)"
+        },
+        "EndingBalAmtInFreeDfndCrcy1_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Ending Balance in Currency 1 (Currency)",
+          "description": "Ending Balance in Currency 1 (Currency)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy2": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Starting Balance in Currency 2",
+          "description": "Starting Balance in Currency 2"
+        },
+        "StrtgBalAmtInFreeDfndCrcy2_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Starting Balance in Currency 2 (Formatted)",
+          "description": "Starting Balance in Currency 2 (Formatted)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy2_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Starting Balance in Currency 2 (Currency)",
+          "description": "Starting Balance in Currency 2 (Currency)"
+        },
+        "DebitAmountInFreeDfndCrcy2": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Debit Balance in Currency 2",
+          "description": "Debit Balance in Currency 2"
+        },
+        "DebitAmountInFreeDfndCrcy2_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Debit Balance in Currency 2 (Formatted)",
+          "description": "Debit Balance in Currency 2 (Formatted)"
+        },
+        "DebitAmountInFreeDfndCrcy2_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Debit Balance in Currency 2 (Currency)",
+          "description": "Debit Balance in Currency 2 (Currency)"
+        },
+        "CreditAmountInFreeDfndCrcy2": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Credit Balance in Currency 2",
+          "description": "Credit Balance in Currency 2"
+        },
+        "CreditAmountInFreeDfndCrcy2_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Credit Balance in Currency 2 (Formatted)",
+          "description": "Credit Balance in Currency 2 (Formatted)"
+        },
+        "CreditAmountInFreeDfndCrcy2_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Credit Balance in Currency 2 (Currency)",
+          "description": "Credit Balance in Currency 2 (Currency)"
+        },
+        "EndingBalAmtInFreeDfndCrcy2": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Ending Balance in Currency 2",
+          "description": "Ending Balance in Currency 2"
+        },
+        "EndingBalAmtInFreeDfndCrcy2_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Ending Balance in Currency 2 (Formatted)",
+          "description": "Ending Balance in Currency 2 (Formatted)"
+        },
+        "EndingBalAmtInFreeDfndCrcy2_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Ending Balance in Currency 2 (Currency)",
+          "description": "Ending Balance in Currency 2 (Currency)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy3": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Starting Balance in Currency 3",
+          "description": "Starting Balance in Currency 3"
+        },
+        "StrtgBalAmtInFreeDfndCrcy3_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Starting Balance in Currency 3 (Formatted)",
+          "description": "Starting Balance in Currency 3 (Formatted)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy3_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Starting Balance in Currency 3 (Currency)",
+          "description": "Starting Balance in Currency 3 (Currency)"
+        },
+        "DebitAmountInFreeDfndCrcy3": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Debit Balance in Currency 3",
+          "description": "Debit Balance in Currency 3"
+        },
+        "DebitAmountInFreeDfndCrcy3_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Debit Balance in Currency 3 (Formatted)",
+          "description": "Debit Balance in Currency 3 (Formatted)"
+        },
+        "DebitAmountInFreeDfndCrcy3_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Debit Balance in Currency 3 (Currency)",
+          "description": "Debit Balance in Currency 3 (Currency)"
+        },
+        "CreditAmountInFreeDfndCrcy3": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Credit Balance in Currency 3",
+          "description": "Credit Balance in Currency 3"
+        },
+        "CreditAmountInFreeDfndCrcy3_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Credit Balance in Currency 3 (Formatted)",
+          "description": "Credit Balance in Currency 3 (Formatted)"
+        },
+        "CreditAmountInFreeDfndCrcy3_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Credit Balance in Currency 3 (Currency)",
+          "description": "Credit Balance in Currency 3 (Currency)"
+        },
+        "EndingBalAmtInFreeDfndCrcy3": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Ending Balance in Currency 3",
+          "description": "Ending Balance in Currency 3"
+        },
+        "EndingBalAmtInFreeDfndCrcy3_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Ending Balance in Currency 3 (Formatted)",
+          "description": "Ending Balance in Currency 3 (Formatted)"
+        },
+        "EndingBalAmtInFreeDfndCrcy3_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Ending Balance in Currency 3 (Currency)",
+          "description": "Ending Balance in Currency 3 (Currency)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy4": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Starting Balance in Currency 4",
+          "description": "Starting Balance in Currency 4"
+        },
+        "StrtgBalAmtInFreeDfndCrcy4_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Starting Balance in Currency 4 (Formatted)",
+          "description": "Starting Balance in Currency 4 (Formatted)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy4_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Starting Balance in Currency 4 (Currency)",
+          "description": "Starting Balance in Currency 4 (Currency)"
+        },
+        "DebitAmountInFreeDfndCrcy4": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Debit Balance in Currency 4",
+          "description": "Debit Balance in Currency 4"
+        },
+        "DebitAmountInFreeDfndCrcy4_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Debit Balance in Currency 4 (Formatted)",
+          "description": "Debit Balance in Currency 4 (Formatted)"
+        },
+        "DebitAmountInFreeDfndCrcy4_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Debit Balance in Currency 4 (Currency)",
+          "description": "Debit Balance in Currency 4 (Currency)"
+        },
+        "CreditAmountInFreeDfndCrcy4": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Credit Balance in Currency 4",
+          "description": "Credit Balance in Currency 4"
+        },
+        "CreditAmountInFreeDfndCrcy4_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Credit Balance in Currency 4 (Formatted)",
+          "description": "Credit Balance in Currency 4 (Formatted)"
+        },
+        "CreditAmountInFreeDfndCrcy4_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Credit Balance in Currency 4 (Currency)",
+          "description": "Credit Balance in Currency 4 (Currency)"
+        },
+        "EndingBalAmtInFreeDfndCrcy4": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Ending Balance in Currency 4",
+          "description": "Ending Balance in Currency 4"
+        },
+        "EndingBalAmtInFreeDfndCrcy4_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Ending Balance in Currency 4 (Formatted)",
+          "description": "Ending Balance in Currency 4 (Formatted)"
+        },
+        "EndingBalAmtInFreeDfndCrcy4_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Ending Balance in Currency 4 (Currency)",
+          "description": "Ending Balance in Currency 4 (Currency)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy5": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Starting Balance in Currency 5",
+          "description": "Starting Balance in Currency 5"
+        },
+        "StrtgBalAmtInFreeDfndCrcy5_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Starting Balance in Currency 5 (Formatted)",
+          "description": "Starting Balance in Currency 5 (Formatted)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy5_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Starting Balance in Currency 5 (Currency)",
+          "description": "Starting Balance in Currency 5 (Currency)"
+        },
+        "DebitAmountInFreeDfndCrcy5": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Debit Balance in Currency 5",
+          "description": "Debit Balance in Currency 5"
+        },
+        "DebitAmountInFreeDfndCrcy5_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Debit Balance in Currency 5 (Formatted)",
+          "description": "Debit Balance in Currency 5 (Formatted)"
+        },
+        "DebitAmountInFreeDfndCrcy5_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Debit Balance in Currency 5 (Currency)",
+          "description": "Debit Balance in Currency 5 (Currency)"
+        },
+        "CreditAmountInFreeDfndCrcy5": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Credit Balance in Currency 5",
+          "description": "Credit Balance in Currency 5"
+        },
+        "CreditAmountInFreeDfndCrcy5_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Credit Balance in Currency 5 (Formatted)",
+          "description": "Credit Balance in Currency 5 (Formatted)"
+        },
+        "CreditAmountInFreeDfndCrcy5_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Credit Balance in Currency 5 (Currency)",
+          "description": "Credit Balance in Currency 5 (Currency)"
+        },
+        "EndingBalAmtInFreeDfndCrcy5": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Ending Balance in Currency 5",
+          "description": "Ending Balance in Currency 5"
+        },
+        "EndingBalAmtInFreeDfndCrcy5_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Ending Balance in Currency 5 (Formatted)",
+          "description": "Ending Balance in Currency 5 (Formatted)"
+        },
+        "EndingBalAmtInFreeDfndCrcy5_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Ending Balance in Currency 5 (Currency)",
+          "description": "Ending Balance in Currency 5 (Currency)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy6": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Starting Balance in Currency 6",
+          "description": "Starting Balance in Currency 6"
+        },
+        "StrtgBalAmtInFreeDfndCrcy6_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Starting Balance in Currency 6 (Formatted)",
+          "description": "Starting Balance in Currency 6 (Formatted)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy6_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Starting Balance in Currency 6 (Currency)",
+          "description": "Starting Balance in Currency 6 (Currency)"
+        },
+        "DebitAmountInFreeDfndCrcy6": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Debit Balance in Currency 6",
+          "description": "Debit Balance in Currency 6"
+        },
+        "DebitAmountInFreeDfndCrcy6_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Debit Balance in Currency 6 (Formatted)",
+          "description": "Debit Balance in Currency 6 (Formatted)"
+        },
+        "DebitAmountInFreeDfndCrcy6_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Debit Balance in Currency 6 (Currency)",
+          "description": "Debit Balance in Currency 6 (Currency)"
+        },
+        "CreditAmountInFreeDfndCrcy6": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Credit Balance in Currency 6",
+          "description": "Credit Balance in Currency 6"
+        },
+        "CreditAmountInFreeDfndCrcy6_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Credit Balance in Currency 6 (Formatted)",
+          "description": "Credit Balance in Currency 6 (Formatted)"
+        },
+        "CreditAmountInFreeDfndCrcy6_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Credit Balance in Currency 6 (Currency)",
+          "description": "Credit Balance in Currency 6 (Currency)"
+        },
+        "EndingBalAmtInFreeDfndCrcy6": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Ending Balance in Currency 6",
+          "description": "Ending Balance in Currency 6"
+        },
+        "EndingBalAmtInFreeDfndCrcy6_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Ending Balance in Currency 6 (Formatted)",
+          "description": "Ending Balance in Currency 6 (Formatted)"
+        },
+        "EndingBalAmtInFreeDfndCrcy6_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Ending Balance in Currency 6 (Currency)",
+          "description": "Ending Balance in Currency 6 (Currency)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy7": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Starting Balance in Currency 7",
+          "description": "Starting Balance in Currency 7"
+        },
+        "StrtgBalAmtInFreeDfndCrcy7_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Starting Balance in Currency 7 (Formatted)",
+          "description": "Starting Balance in Currency 7 (Formatted)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy7_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Starting Balance in Currency 7 (Currency)",
+          "description": "Starting Balance in Currency 7 (Currency)"
+        },
+        "DebitAmountInFreeDfndCrcy7": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Debit Balance in Currency 7",
+          "description": "Debit Balance in Currency 7"
+        },
+        "DebitAmountInFreeDfndCrcy7_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Debit Balance in Currency 7 (Formatted)",
+          "description": "Debit Balance in Currency 7 (Formatted)"
+        },
+        "DebitAmountInFreeDfndCrcy7_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Debit Balance in Currency 7 (Currency)",
+          "description": "Debit Balance in Currency 7 (Currency)"
+        },
+        "CreditAmountInFreeDfndCrcy7": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Credit Balance in Currency 7",
+          "description": "Credit Balance in Currency 7"
+        },
+        "CreditAmountInFreeDfndCrcy7_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Credit Balance in Currency 7 (Formatted)",
+          "description": "Credit Balance in Currency 7 (Formatted)"
+        },
+        "CreditAmountInFreeDfndCrcy7_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Credit Balance in Currency 7 (Currency)",
+          "description": "Credit Balance in Currency 7 (Currency)"
+        },
+        "EndingBalAmtInFreeDfndCrcy7": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Ending Balance in Currency 7",
+          "description": "Ending Balance in Currency 7"
+        },
+        "EndingBalAmtInFreeDfndCrcy7_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Ending Balance in Currency 7 (Formatted)",
+          "description": "Ending Balance in Currency 7 (Formatted)"
+        },
+        "EndingBalAmtInFreeDfndCrcy7_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Ending Balance in Currency 7 (Currency)",
+          "description": "Ending Balance in Currency 7 (Currency)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy8": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Starting Balance in Currency 8",
+          "description": "Starting Balance in Currency 8"
+        },
+        "StrtgBalAmtInFreeDfndCrcy8_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Starting Balance in Currency 8 (Formatted)",
+          "description": "Starting Balance in Currency 8 (Formatted)"
+        },
+        "StrtgBalAmtInFreeDfndCrcy8_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Starting Balance in Currency 8 (Currency)",
+          "description": "Starting Balance in Currency 8 (Currency)"
+        },
+        "DebitAmountInFreeDfndCrcy8": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Debit Balance in Currency 8",
+          "description": "Debit Balance in Currency 8"
+        },
+        "DebitAmountInFreeDfndCrcy8_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Debit Balance in Currency 8 (Formatted)",
+          "description": "Debit Balance in Currency 8 (Formatted)"
+        },
+        "DebitAmountInFreeDfndCrcy8_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Debit Balance in Currency 8 (Currency)",
+          "description": "Debit Balance in Currency 8 (Currency)"
+        },
+        "CreditAmountInFreeDfndCrcy8": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Credit Balance in Currency 8",
+          "description": "Credit Balance in Currency 8"
+        },
+        "CreditAmountInFreeDfndCrcy8_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Credit Balance in Currency 8 (Formatted)",
+          "description": "Credit Balance in Currency 8 (Formatted)"
+        },
+        "CreditAmountInFreeDfndCrcy8_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Credit Balance in Currency 8 (Currency)",
+          "description": "Credit Balance in Currency 8 (Currency)"
+        },
+        "EndingBalAmtInFreeDfndCrcy8": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Ending Balance in Currency 8",
+          "description": "Ending Balance in Currency 8"
+        },
+        "EndingBalAmtInFreeDfndCrcy8_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Ending Balance in Currency 8 (Formatted)",
+          "description": "Ending Balance in Currency 8 (Formatted)"
+        },
+        "EndingBalAmtInFreeDfndCrcy8_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Ending Balance in Currency 8 (Currency)",
+          "description": "Ending Balance in Currency 8 (Currency)"
+        },
+        "StartingBalAmtInBalTransCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Starting Balance in Balance Currency",
+          "description": "Starting Balance in Balance Currency"
+        },
+        "StartingBalAmtInBalTransCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Starting Balance in Balance Currency (Formatted)",
+          "description": "Starting Balance in Balance Currency (Formatted)"
+        },
+        "StartingBalAmtInBalTransCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Starting Balance in Balance Currency (Currency)",
+          "description": "Starting Balance in Balance Currency (Currency)"
+        },
+        "DebitAmountInBalanceTransCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Debit Balance in Balance Currency",
+          "description": "Debit Balance in Balance Currency"
+        },
+        "DebitAmountInBalanceTransCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Debit Balance in Balance Currency (Formatted)",
+          "description": "Debit Balance in Balance Currency (Formatted)"
+        },
+        "DebitAmountInBalanceTransCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Debit Balance in Balance Currency (Currency)",
+          "description": "Debit Balance in Balance Currency (Currency)"
+        },
+        "CreditAmountInBalanceTransCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Credit Balance in Balance Currency",
+          "description": "Credit Balance in Balance Currency"
+        },
+        "CreditAmountInBalanceTransCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Credit Balance in Balance Currency (Formatted)",
+          "description": "Credit Balance in Balance Currency (Formatted)"
+        },
+        "CreditAmountInBalanceTransCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Credit Balance in Balance Currency (Currency)",
+          "description": "Credit Balance in Balance Currency (Currency)"
+        },
+        "EndingBalanceAmtInBalTransCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Ending Balance in Balance Currency",
+          "description": "Ending Balance in Balance Currency"
+        },
+        "EndingBalanceAmtInBalTransCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Ending Balance in Balance Currency (Formatted)",
+          "description": "Ending Balance in Balance Currency (Formatted)"
+        },
+        "EndingBalanceAmtInBalTransCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Ending Balance in Balance Currency (Currency)",
+          "description": "Ending Balance in Balance Currency (Currency)"
+        },
+        "StartingBalanceAmtInTransCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Starting Balance in Transaction Currency",
+          "description": "Starting Balance in Transaction Currency"
+        },
+        "StartingBalanceAmtInTransCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Starting Balance in Transaction Currency (Formatted)",
+          "description": "Starting Balance in Transaction Currency (Formatted)"
+        },
+        "StartingBalanceAmtInTransCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Starting Balance in Transaction Currency (Currency)",
+          "description": "Starting Balance in Transaction Currency (Currency)"
+        },
+        "DebitAmountInTransCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Debit Balance in Transaction Currency",
+          "description": "Debit Balance in Transaction Currency"
+        },
+        "DebitAmountInTransCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Debit Balance in Transaction Currency (Formatted)",
+          "description": "Debit Balance in Transaction Currency (Formatted)"
+        },
+        "DebitAmountInTransCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Debit Balance in Transaction Currency (Currency)",
+          "description": "Debit Balance in Transaction Currency (Currency)"
+        },
+        "CreditAmountInTransCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Credit Balance in Transaction Currency",
+          "description": "Credit Balance in Transaction Currency"
+        },
+        "CreditAmountInTransCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Credit Balance in Transaction Currency (Formatted)",
+          "description": "Credit Balance in Transaction Currency (Formatted)"
+        },
+        "CreditAmountInTransCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Credit Balance in Transaction Currency (Currency)",
+          "description": "Credit Balance in Transaction Currency (Currency)"
+        },
+        "EndingBalanceAmtInTransCrcy": {
+          "type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.01,
+          "title": "Ending Balance in Transaction Currency",
+          "description": "Ending Balance in Transaction Currency"
+        },
+        "EndingBalanceAmtInTransCrcy_F": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Ending Balance in Transaction Currency (Formatted)",
+          "description": "Ending Balance in Transaction Currency (Formatted)"
+        },
+        "EndingBalanceAmtInTransCrcy_E": {
+          "type": "string",
+"default": "null",
+          "maxLength": 5,
+          "title": "Ending Balance in Transaction Currency (Currency)",
+          "description": "Ending Balance in Transaction Currency (Currency)"
+        },
+        "Parameters": {
+          "$ref": "#/definitions/C_TRIALBALANCE_CDS.C_TRIALBALANCEParameters"
+        },
+        "LedgerDetails": {
+          "$ref": "#/definitions/C_TRIALBALANCE_CDS.Ledger"
+        },
+        "CompanyCodeDetails": {
+          "$ref": "#/definitions/C_TRIALBALANCE_CDS.CompanyCode"
+        },
+        "GLAccountDetails": {
+          "$ref": "#/definitions/C_TRIALBALANCE_CDS.GLAccount"
+        },
+        "ProjectDetails": {
+          "$ref": "#/definitions/C_TRIALBALANCE_CDS.Project"
+        }
+      },
+      "title": "Trial Balance",
+      "description": "Trial Balance"
+    },
+    "C_TRIALBALANCE_CDS.C_TRIALBALANCEParameters": {
+      "type": "object",
+      "properties": {
+        "P_FromPostingDate": {
+          "type": "string",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date From",
+          "description": "Posting Date From"
+        },
+        "P_FromPostingDateText": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Posting Date From",
+          "description": "Posting Date From"
+        },
+        "P_ToPostingDate": {
+          "type": "string",
+          "example": "/Date(1492041600000)/",
+          "title": "Posting Date To",
+          "description": "Posting Date To"
+        },
+        "P_ToPostingDateText": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Posting Date To",
+          "description": "Posting Date To"
+        },
+        "Results": {
+          "title": "Collection of C_TRIALBALANCEResult",
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/C_TRIALBALANCE_CDS.C_TRIALBALANCEResult"
+              }
+            }
+          }
+        }
+      },
+      "title": "C_TRIALBALANCEParameters"
+    },
+    "C_TRIALBALANCE_CDS.Ledger": {
+      "type": "object",
+      "properties": {
+        "Ledger": {
+          "type": "string",
+          "title": "Ledger",
+          "description": "Ledger"
+        },
+        "LedgerText": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Ledger",
+          "description": "Ledger"
+        }
+      },
+      "title": "Ledger"
+    },
+    "C_TRIALBALANCE_CDS.CompanyCode": {
+      "type": "object",
+      "properties": {
+        "CompanyCode": {
+          "type": "string",
+          "title": "Company Code",
+          "description": "Company Code"
+        },
+        "CompanyCodeText": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Company Code",
+          "description": "Company Code"
+        }
+      },
+      "title": "CompanyCode"
+    },
+    "C_TRIALBALANCE_CDS.GLAccount": {
+      "type": "object",
+      "properties": {
+        "GLAccount": {
+          "type": "string",
+          "title": "G/L Account",
+          "description": "G/L Account"
+        },
+        "GLAccountText": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "G/L Account",
+          "description": "G/L Account"
+        }
+      },
+      "title": "GLAccount"
+    },
+    "C_TRIALBALANCE_CDS.Project": {
+      "type": "object",
+      "properties": {
+        "Project": {
+          "type": "string",
+          "title": "Project Definition",
+          "description": "Project Definition"
+        },
+        "ProjectText": {
+          "type": "string",
+"default": "null",
+          "maxLength": 60,
+          "title": "Project Definition",
+          "description": "Project Definition"
+        }
+      },
+      "title": "Project"
+    },
+    "C_TRIALBALANCE_CDS.ODataQueryAdditionalMetadata": {
+      "type": "object",
+      "properties": {
+        "ODataQueryMetadata": {
+          "type": "string"
+        },
+        "ODataQueryMetadataValue_Current": {
+          "type": "string",
+"default": "null"
+        },
+        "ODataQueryMetadataValueAtDefine": {
+          "type": "string",
+"default": "null"
+        }
+      },
+      "title": "ODataQueryAdditionalMetadata"
+    },
+    "odata.error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/odata.error.main"
+        }
+      }
+    },
+    "odata.error.main": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "$ref": "#/definitions/odata.error.message"
+        },
+        "innererror": {
+          "type": "object",
+          "description": "The structure of this object is service-specific"
+        }
+      }
+    },
+    "odata.error.message": {
+      "type": "object",
+      "required": [
+        "lang",
+        "value"
+      ],
+      "properties": {
+        "lang": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [OData Paging - Top](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374630)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [OData Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374631)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [OData Count](http://www.odata.org/documentation/odata-version-2-0/uri-conventions/#InlinecountSystemQueryOption)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    },
+    "filter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Filter items by property values, see [OData Filtering](http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html#_Toc445374625)",
+      "type": "string"
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/odata.error"
+      }
+    }
+  }
+}

@@ -1,0 +1,2185 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Procurement-Related Activity",
+    "version": "1 ",
+    "description": " This service enables you to  create, read, update and delete  procurement-related activities from or  within the SAP S/4HANA system through  an API call."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/f0/decab112af49d3825253d442dbc253/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Create, read, update and delete procurement-related activities from or in the SAP S/4HANA system using this service",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Supplier Activity Integration (SAP_COM_0137)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Activity Management in Procurement (19C)](https://rapid.sap.com/bp/#/scopeitems/19C \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Business Object",
+      "values": [
+        {
+          "text": "SupplierActivity",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_SUPPLIER_ACTIVITY_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_SUPPLIER_ACTIVITY_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_SuplrActyDescription"
+    },
+    {
+      "name": "A_SuplrActyParticipant"
+    },
+    {
+      "name": "A_SuplrActyPurchaserResp"
+    },
+    {
+      "name": "A_SuplrActySupplier"
+    },
+    {
+      "name": "A_SupplierActivity"
+    }
+  ],
+  "paths": {
+    "/A_SuplrActyDescription": {
+      "get": {
+        "summary": "Get entities from A_SuplrActyDescription",
+        "tags": [
+          "A_SuplrActyDescription"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyUUID",
+                "SuplrActyUUID desc",
+                "Language",
+                "Language desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyUUID",
+                "Language",
+                "SuplrActyDescription"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SuplrActyDescriptionType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyDescriptionType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to A_SuplrActyDescription",
+        "tags": [
+          "A_SuplrActyDescription"
+        ],
+        "parameters": [
+          {
+            "name": "A_SuplrActyDescriptionType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyDescriptionType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_SuplrActyDescriptionType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyDescriptionType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyDescription(SuplrActyUUID={SuplrActyUUID},Language='{Language}')": {
+      "parameters": [
+        {
+          "name": "SuplrActyUUID",
+          "in": "path",
+          "required": true,
+          "description": "Activity UUID",
+          "type": "string"
+        },
+        {
+          "name": "Language",
+          "in": "path",
+          "required": true,
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SuplrActyDescription by key",
+        "tags": [
+          "A_SuplrActyDescription"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyUUID",
+                "Language",
+                "SuplrActyDescription"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyDescriptionType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyDescriptionType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_SuplrActyDescription",
+        "tags": [
+          "A_SuplrActyDescription"
+        ],
+        "parameters": [
+          {
+            "name": "A_SuplrActyDescriptionType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_SuplrActyDescriptionType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyDescriptionType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete entity from A_SuplrActyDescription",
+        "tags": [
+          "A_SuplrActyDescription"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyParticipant": {
+      "get": {
+        "summary": "Get entities from A_SuplrActyParticipant",
+        "tags": [
+          "A_SuplrActyParticipant"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyPartyUUID",
+                "SuplrActyPartyUUID desc",
+                "SuplrActyUUID",
+                "SuplrActyUUID desc",
+                "UserID",
+                "UserID desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyPartyUUID",
+                "SuplrActyUUID",
+                "UserID"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SuplrActyParticipantType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyParticipantType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to A_SuplrActyParticipant",
+        "tags": [
+          "A_SuplrActyParticipant"
+        ],
+        "parameters": [
+          {
+            "name": "A_SuplrActyParticipantType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyParticipantType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_SuplrActyParticipantType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyParticipantType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyParticipant({SuplrActyPartyUUID})": {
+      "parameters": [
+        {
+          "name": "SuplrActyPartyUUID",
+          "in": "path",
+          "required": true,
+          "description": "Activity Party UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SuplrActyParticipant by key",
+        "tags": [
+          "A_SuplrActyParticipant"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyPartyUUID",
+                "SuplrActyUUID",
+                "UserID"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyParticipantType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyParticipantType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_SuplrActyParticipant",
+        "tags": [
+          "A_SuplrActyParticipant"
+        ],
+        "parameters": [
+          {
+            "name": "A_SuplrActyParticipantType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_SuplrActyParticipantType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyParticipantType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete entity from A_SuplrActyParticipant",
+        "tags": [
+          "A_SuplrActyParticipant"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyPurchaserResp": {
+      "get": {
+        "summary": "Get entities from A_SuplrActyPurchaserResp",
+        "tags": [
+          "A_SuplrActyPurchaserResp"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyPartyUUID",
+                "SuplrActyPartyUUID desc",
+                "SuplrActyUUID",
+                "SuplrActyUUID desc",
+                "UserID",
+                "UserID desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyPartyUUID",
+                "SuplrActyUUID",
+                "UserID"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SuplrActyPurchaserRespType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyPurchaserRespType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActyPurchaserResp({SuplrActyPartyUUID})": {
+      "parameters": [
+        {
+          "name": "SuplrActyPartyUUID",
+          "in": "path",
+          "required": true,
+          "description": "Activity Party UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SuplrActyPurchaserResp by key",
+        "tags": [
+          "A_SuplrActyPurchaserResp"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyPartyUUID",
+                "SuplrActyUUID",
+                "UserID"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyPurchaserRespType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyPurchaserRespType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_SuplrActyPurchaserResp",
+        "tags": [
+          "A_SuplrActyPurchaserResp"
+        ],
+        "parameters": [
+          {
+            "name": "A_SuplrActyPurchaserRespType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_SuplrActyPurchaserRespType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyPurchaserRespType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActySupplier": {
+      "get": {
+        "summary": "Get entities from A_SuplrActySupplier",
+        "tags": [
+          "A_SuplrActySupplier"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyPartyUUID",
+                "SuplrActyPartyUUID desc",
+                "SuplrActyUUID",
+                "SuplrActyUUID desc",
+                "BusinessPartner",
+                "BusinessPartner desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyPartyUUID",
+                "SuplrActyUUID",
+                "BusinessPartner"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SuplrActySupplierType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActySupplierType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to A_SuplrActySupplier",
+        "tags": [
+          "A_SuplrActySupplier"
+        ],
+        "parameters": [
+          {
+            "name": "A_SuplrActySupplierType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActySupplierType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_SuplrActySupplierType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActySupplierType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SuplrActySupplier({SuplrActyPartyUUID})": {
+      "parameters": [
+        {
+          "name": "SuplrActyPartyUUID",
+          "in": "path",
+          "required": true,
+          "description": "Activity Party UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SuplrActySupplier by key",
+        "tags": [
+          "A_SuplrActySupplier"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyPartyUUID",
+                "SuplrActyUUID",
+                "BusinessPartner"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActySupplierType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActySupplierType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_SuplrActySupplier",
+        "tags": [
+          "A_SuplrActySupplier"
+        ],
+        "parameters": [
+          {
+            "name": "A_SuplrActySupplierType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_SuplrActySupplierType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActySupplierType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete entity from A_SuplrActySupplier",
+        "tags": [
+          "A_SuplrActySupplier"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivity": {
+      "get": {
+        "summary": "Get entities from A_SupplierActivity",
+        "tags": [
+          "A_SupplierActivity"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyUUID",
+                "SuplrActyUUID desc",
+                "SupplierActivity",
+                "SupplierActivity desc",
+                "PurgCatUUID",
+                "PurgCatUUID desc",
+                "SuplrActyName",
+                "SuplrActyName desc",
+                "StartDate",
+                "StartDate desc",
+                "EndDate",
+                "EndDate desc",
+                "SuplrActyPriority",
+                "SuplrActyPriority desc",
+                "SuplrActyType",
+                "SuplrActyType desc",
+                "CreatedByUser",
+                "CreatedByUser desc",
+                "CreationDateTime",
+                "CreationDateTime desc",
+                "LastChangedByUser",
+                "LastChangedByUser desc",
+                "LastChangeDateTime",
+                "LastChangeDateTime desc",
+                "SuplrActyLifecycleStatus",
+                "SuplrActyLifecycleStatus desc",
+                "Language",
+                "Language desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyUUID",
+                "SupplierActivity",
+                "PurgCatUUID",
+                "SuplrActyName",
+                "StartDate",
+                "EndDate",
+                "SuplrActyPriority",
+                "SuplrActyType",
+                "CreatedByUser",
+                "CreationDateTime",
+                "LastChangedByUser",
+                "LastChangeDateTime",
+                "SuplrActyLifecycleStatus",
+                "Language",
+                "to_SuplrActyDescription",
+                "to_SuplrActyParticipant",
+                "to_SuplrActyPurchaserResp",
+                "to_SuplrActySupplier"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_SuplrActyDescription",
+                "to_SuplrActyParticipant",
+                "to_SuplrActyPurchaserResp",
+                "to_SuplrActySupplier"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SupplierActivityType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SupplierActivityType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to A_SupplierActivity",
+        "tags": [
+          "A_SupplierActivity"
+        ],
+        "parameters": [
+          {
+            "name": "A_SupplierActivityType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SupplierActivityType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_SupplierActivityType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SupplierActivityType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivity({SuplrActyUUID})": {
+      "parameters": [
+        {
+          "name": "SuplrActyUUID",
+          "in": "path",
+          "required": true,
+          "description": "Activity UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SupplierActivity by key",
+        "tags": [
+          "A_SupplierActivity"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyUUID",
+                "SupplierActivity",
+                "PurgCatUUID",
+                "SuplrActyName",
+                "StartDate",
+                "EndDate",
+                "SuplrActyPriority",
+                "SuplrActyType",
+                "CreatedByUser",
+                "CreationDateTime",
+                "LastChangedByUser",
+                "LastChangeDateTime",
+                "SuplrActyLifecycleStatus",
+                "Language",
+                "to_SuplrActyDescription",
+                "to_SuplrActyParticipant",
+                "to_SuplrActyPurchaserResp",
+                "to_SuplrActySupplier"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_SuplrActyDescription",
+                "to_SuplrActyParticipant",
+                "to_SuplrActyPurchaserResp",
+                "to_SuplrActySupplier"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SupplierActivityType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SupplierActivityType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_SupplierActivity",
+        "tags": [
+          "A_SupplierActivity"
+        ],
+        "parameters": [
+          {
+            "name": "A_SupplierActivityType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_SupplierActivityType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SupplierActivityType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete entity from A_SupplierActivity",
+        "tags": [
+          "A_SupplierActivity"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivity({SuplrActyUUID})/to_SuplrActyDescription": {
+      "parameters": [
+        {
+          "name": "SuplrActyUUID",
+          "in": "path",
+          "required": true,
+          "description": "Activity UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_SuplrActyDescription",
+        "tags": [
+          "A_SupplierActivity",
+          "A_SuplrActyDescription"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyUUID",
+                "SuplrActyUUID desc",
+                "Language",
+                "Language desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyUUID",
+                "Language",
+                "SuplrActyDescription"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SuplrActyDescriptionType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyDescriptionType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to related to_SuplrActyDescription",
+        "tags": [
+          "A_SupplierActivity",
+          "A_SuplrActyDescription"
+        ],
+        "parameters": [
+          {
+            "name": "A_SuplrActyDescriptionType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyDescriptionType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_SuplrActyDescriptionType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyDescriptionType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivity({SuplrActyUUID})/to_SuplrActyParticipant": {
+      "parameters": [
+        {
+          "name": "SuplrActyUUID",
+          "in": "path",
+          "required": true,
+          "description": "Activity UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_SuplrActyParticipant",
+        "tags": [
+          "A_SupplierActivity",
+          "A_SuplrActyParticipant"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyPartyUUID",
+                "SuplrActyUUID",
+                "UserID"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyParticipantType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyParticipantType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivity({SuplrActyUUID})/to_SuplrActyPurchaserResp": {
+      "parameters": [
+        {
+          "name": "SuplrActyUUID",
+          "in": "path",
+          "required": true,
+          "description": "Activity UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_SuplrActyPurchaserResp",
+        "tags": [
+          "A_SupplierActivity",
+          "A_SuplrActyPurchaserResp"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyPartyUUID",
+                "SuplrActyUUID",
+                "UserID"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SuplrActyPurchaserRespType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyPurchaserRespType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SupplierActivity({SuplrActyUUID})/to_SuplrActySupplier": {
+      "parameters": [
+        {
+          "name": "SuplrActyUUID",
+          "in": "path",
+          "required": true,
+          "description": "Activity UUID",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_SuplrActySupplier",
+        "tags": [
+          "A_SupplierActivity",
+          "A_SuplrActySupplier"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyPartyUUID",
+                "SuplrActyPartyUUID desc",
+                "SuplrActyUUID",
+                "SuplrActyUUID desc",
+                "BusinessPartner",
+                "BusinessPartner desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SuplrActyPartyUUID",
+                "SuplrActyUUID",
+                "BusinessPartner"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SuplrActySupplierType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActySupplierType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to related to_SuplrActySupplier",
+        "tags": [
+          "A_SupplierActivity",
+          "A_SuplrActySupplier"
+        ],
+        "parameters": [
+          {
+            "name": "A_SuplrActySupplierType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActySupplierType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_SuplrActySupplierType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActySupplierType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET A_SuplrActyDescription HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyDescriptionType": {
+      "type": "object",
+      "properties": {
+        "SuplrActyUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Activity UUID"
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "SuplrActyDescription": {
+"type": "string",
+"default": "null",
+          "example": "string",
+          "title": "Content",
+          "description": "Text Content"
+        }
+      },
+      "title": "API for Procurement Related Activity Description"
+    },
+    "API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyDescriptionType-create": {
+      "type": "object",
+      "properties": {
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "SuplrActyDescription": {
+"type": "string",
+"default": "null",
+          "example": "string",
+          "title": "Content",
+          "description": "Text Content"
+        }
+      },
+      "required": [
+        "Language"
+      ],
+      "title": "API for Procurement Related Activity Description (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyDescriptionType-update": {
+      "type": "object",
+      "properties": {
+        "SuplrActyDescription": {
+"type": "string",
+"default": "null",
+          "example": "string",
+          "title": "Content",
+          "description": "Text Content"
+        }
+      },
+      "title": "API for Procurement Related Activity Description (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyParticipantType": {
+      "type": "object",
+      "properties": {
+        "SuplrActyPartyUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Activity Party UUID"
+        },
+        "SuplrActyUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Activity UUID"
+        },
+        "UserID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User",
+          "description": "User ID"
+        }
+      },
+      "title": "API for Procurement Related Activity Participant"
+    },
+    "API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyParticipantType-create": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User",
+          "description": "User ID"
+        }
+      },
+      "title": "API for Procurement Related Activity Participant (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyParticipantType-update": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User",
+          "description": "User ID"
+        }
+      },
+      "title": "API for Procurement Related Activity Participant (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyPurchaserRespType": {
+      "type": "object",
+      "properties": {
+        "SuplrActyPartyUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Activity Party UUID"
+        },
+        "SuplrActyUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Activity UUID"
+        },
+        "UserID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User",
+          "description": "User ID"
+        }
+      },
+      "title": "API for Procurement Related Activity Purchaser Responsible"
+    },
+    "API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyPurchaserRespType-create": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User",
+          "description": "User ID"
+        }
+      },
+      "title": "API for Procurement Related Activity Purchaser Responsible (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyPurchaserRespType-update": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "User",
+          "description": "User ID"
+        }
+      },
+      "title": "API for Procurement Related Activity Purchaser Responsible (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_SRV.A_SuplrActySupplierType": {
+      "type": "object",
+      "properties": {
+        "SuplrActyPartyUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Activity Party UUID"
+        },
+        "SuplrActyUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Activity UUID"
+        },
+        "BusinessPartner": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Business Partner",
+          "description": "Business Partner Number  \nKey identifying a business partner in the SAP system. The key is unique within a client."
+        }
+      },
+      "title": "API for Procurement Related Supplier Party"
+    },
+    "API_SUPPLIER_ACTIVITY_SRV.A_SuplrActySupplierType-create": {
+      "type": "object",
+      "properties": {
+        "BusinessPartner": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Business Partner",
+          "description": "Business Partner Number  \nKey identifying a business partner in the SAP system. The key is unique within a client."
+        }
+      },
+      "title": "API for Procurement Related Supplier Party (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_SRV.A_SuplrActySupplierType-update": {
+      "type": "object",
+      "properties": {
+        "BusinessPartner": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Business Partner",
+          "description": "Business Partner Number  \nKey identifying a business partner in the SAP system. The key is unique within a client."
+        }
+      },
+      "title": "API for Procurement Related Supplier Party (for update)"
+    },
+    "API_SUPPLIER_ACTIVITY_SRV.A_SupplierActivityType": {
+      "type": "object",
+      "properties": {
+        "SuplrActyUUID": {
+          "type": "string",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Activity UUID"
+        },
+        "SupplierActivity": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Activity"
+        },
+        "PurgCatUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Purchasing Cat. UUID",
+          "description": "Purchasing Category UUID"
+        },
+        "SuplrActyName": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Activity Name",
+          "description": "Name of Activity"
+        },
+        "StartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Start Date"
+        },
+        "EndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "End Date"
+        },
+        "SuplrActyPriority": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Priority",
+          "description": "Priority of an activity"
+        },
+        "SuplrActyType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Activity Type",
+          "description": "Activity type"
+        },
+        "CreatedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Created By",
+          "description": "Created-By Name"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Created On"
+        },
+        "LastChangedByUser": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Changed By",
+          "description": "Changed-By Name"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Last Changed On"
+        },
+        "SuplrActyLifecycleStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Lifecycle Status",
+          "description": "Lifecycle Status Code for Activities"
+        },
+        "Language": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Language"
+        },
+        "to_SuplrActyDescription": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyDescriptionType"
+              }
+            }
+          }
+        },
+        "to_SuplrActyParticipant": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyParticipantType"
+        },
+        "to_SuplrActyPurchaserResp": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyPurchaserRespType"
+        },
+        "to_SuplrActySupplier": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActySupplierType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API for Procurement Related Activity"
+    },
+    "API_SUPPLIER_ACTIVITY_SRV.A_SupplierActivityType-create": {
+      "type": "object",
+      "properties": {
+        "PurgCatUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Purchasing Cat. UUID",
+          "description": "Purchasing Category UUID"
+        },
+        "SuplrActyName": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Activity Name",
+          "description": "Name of Activity"
+        },
+        "StartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Start Date"
+        },
+        "EndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "End Date"
+        },
+        "SuplrActyPriority": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Priority",
+          "description": "Priority of an activity"
+        },
+        "SuplrActyType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Activity Type",
+          "description": "Activity type"
+        },
+        "Language": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Language"
+        },
+        "to_SuplrActyDescription": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyDescriptionType-create"
+              }
+            }
+          }
+        },
+        "to_SuplrActyParticipant": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyParticipantType-create"
+        },
+        "to_SuplrActyPurchaserResp": {
+          "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActyPurchaserRespType-create"
+        },
+        "to_SuplrActySupplier": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SUPPLIER_ACTIVITY_SRV.A_SuplrActySupplierType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "SuplrActyName",
+        "Language"
+      ],
+      "title": "API for Procurement Related Activity (for create)"
+    },
+    "API_SUPPLIER_ACTIVITY_SRV.A_SupplierActivityType-update": {
+      "type": "object",
+      "properties": {
+        "PurgCatUUID": {
+"type": "string",
+"default": "null",
+          "format": "uuid",
+          "example": "01234567-89ab-cdef-0123-456789abcdef",
+          "title": "Purchasing Cat. UUID",
+          "description": "Purchasing Category UUID"
+        },
+        "SuplrActyName": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Activity Name",
+          "description": "Name of Activity"
+        },
+        "StartDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "Start Date"
+        },
+        "EndDate": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492041600000)/",
+          "title": "End Date"
+        },
+        "SuplrActyPriority": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Priority",
+          "description": "Priority of an activity"
+        },
+        "SuplrActyType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Activity Type",
+          "description": "Activity type"
+        },
+        "Language": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Language"
+        }
+      },
+      "title": "API for Procurement Related Activity (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

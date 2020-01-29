@@ -1,0 +1,1138 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Statistical Key Figure (A2X)",
+    "version": "1 ",
+    "description": "\n\nThis service enables you  to create, read, update, or delete (CRUD) master  data for statistical key figures. The service provides  the data in an API call based on the open data  protocol (OData). This service also supports you to  create deep entity operation and batch processing."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/78/c9f90d79654fdc85e2f34f404a278c/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Create, read, update, or delete master data of statistical key figures",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Finance - Statistical Key Figure Integration (SAP_COM_0130)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Overhead Cost Accounting (J54)](https://rapid.sap.com/bp/#/scopeitems/J54 \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_STATISTICALKEYFIGURE_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_STATISTICALKEYFIGURE_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_StatisticalKeyFigure"
+    },
+    {
+      "name": "A_StatisticalKeyFigureText"
+    }
+  ],
+  "paths": {
+    "/A_StatisticalKeyFigure": {
+      "get": {
+        "summary": "Get entities from A_StatisticalKeyFigure",
+        "tags": [
+          "A_StatisticalKeyFigure"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "StatisticalKeyFigure",
+                "StatisticalKeyFigure desc",
+                "ControllingArea",
+                "ControllingArea desc",
+                "StstcKeyFigQuantityUnit",
+                "StstcKeyFigQuantityUnit desc",
+                "StstcKeyFigCategory",
+                "StstcKeyFigCategory desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "StatisticalKeyFigure",
+                "ControllingArea",
+                "StstcKeyFigQuantityUnit",
+                "StstcKeyFigCategory",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_StatisticalKeyFigureType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to A_StatisticalKeyFigure",
+        "tags": [
+          "A_StatisticalKeyFigure"
+        ],
+        "parameters": [
+          {
+            "name": "A_StatisticalKeyFigureType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_StatisticalKeyFigureType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_StatisticalKeyFigure(StatisticalKeyFigure='{StatisticalKeyFigure}',ControllingArea='{ControllingArea}')": {
+      "parameters": [
+        {
+          "name": "StatisticalKeyFigure",
+          "in": "path",
+          "required": true,
+          "description": "Statistical Key Figure",
+          "type": "string"
+        },
+        {
+          "name": "ControllingArea",
+          "in": "path",
+          "required": true,
+          "description": "Controlling Area",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_StatisticalKeyFigure by key",
+        "tags": [
+          "A_StatisticalKeyFigure"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "StatisticalKeyFigure",
+                "ControllingArea",
+                "StstcKeyFigQuantityUnit",
+                "StstcKeyFigCategory",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_StatisticalKeyFigureType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_StatisticalKeyFigure",
+        "tags": [
+          "A_StatisticalKeyFigure"
+        ],
+        "parameters": [
+          {
+            "name": "A_StatisticalKeyFigureType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_StatisticalKeyFigureType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete entity from A_StatisticalKeyFigure",
+        "tags": [
+          "A_StatisticalKeyFigure"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_StatisticalKeyFigure(StatisticalKeyFigure='{StatisticalKeyFigure}',ControllingArea='{ControllingArea}')/to_Text": {
+      "parameters": [
+        {
+          "name": "StatisticalKeyFigure",
+          "in": "path",
+          "required": true,
+          "description": "Statistical Key Figure",
+          "type": "string"
+        },
+        {
+          "name": "ControllingArea",
+          "in": "path",
+          "required": true,
+          "description": "Controlling Area",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_Text",
+        "tags": [
+          "A_StatisticalKeyFigure",
+          "A_StatisticalKeyFigureText"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Language",
+                "Language desc",
+                "ControllingArea",
+                "ControllingArea desc",
+                "StatisticalKeyFigure",
+                "StatisticalKeyFigure desc",
+                "StatisticalKeyFigureName",
+                "StatisticalKeyFigureName desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Language",
+                "ControllingArea",
+                "StatisticalKeyFigure",
+                "StatisticalKeyFigureName",
+                "to_StatisticalKeyFigure"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_StatisticalKeyFigure"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_StatisticalKeyFigureTextType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureTextType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to related to_Text",
+        "tags": [
+          "A_StatisticalKeyFigure",
+          "A_StatisticalKeyFigureText"
+        ],
+        "parameters": [
+          {
+            "name": "A_StatisticalKeyFigureTextType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureTextType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_StatisticalKeyFigureTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureTextType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_StatisticalKeyFigureText": {
+      "get": {
+        "summary": "Get entities from A_StatisticalKeyFigureText",
+        "tags": [
+          "A_StatisticalKeyFigureText"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Language",
+                "Language desc",
+                "ControllingArea",
+                "ControllingArea desc",
+                "StatisticalKeyFigure",
+                "StatisticalKeyFigure desc",
+                "StatisticalKeyFigureName",
+                "StatisticalKeyFigureName desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Language",
+                "ControllingArea",
+                "StatisticalKeyFigure",
+                "StatisticalKeyFigureName",
+                "to_StatisticalKeyFigure"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_StatisticalKeyFigure"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_StatisticalKeyFigureTextType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureTextType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new entity to A_StatisticalKeyFigureText",
+        "tags": [
+          "A_StatisticalKeyFigureText"
+        ],
+        "parameters": [
+          {
+            "name": "A_StatisticalKeyFigureTextType",
+            "in": "body",
+            "description": "New entity",
+            "schema": {
+              "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureTextType-create"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "title": "A_StatisticalKeyFigureTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureTextType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_StatisticalKeyFigureText(Language='{Language}',ControllingArea='{ControllingArea}',StatisticalKeyFigure='{StatisticalKeyFigure}')": {
+      "parameters": [
+        {
+          "name": "Language",
+          "in": "path",
+          "required": true,
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+          "type": "string"
+        },
+        {
+          "name": "ControllingArea",
+          "in": "path",
+          "required": true,
+          "description": "Controlling Area",
+          "type": "string"
+        },
+        {
+          "name": "StatisticalKeyFigure",
+          "in": "path",
+          "required": true,
+          "description": "Statistical Key Figure",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_StatisticalKeyFigureText by key",
+        "tags": [
+          "A_StatisticalKeyFigureText"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Language",
+                "ControllingArea",
+                "StatisticalKeyFigure",
+                "StatisticalKeyFigureName",
+                "to_StatisticalKeyFigure"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_StatisticalKeyFigure"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_StatisticalKeyFigureTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureTextType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update entity in A_StatisticalKeyFigureText",
+        "tags": [
+          "A_StatisticalKeyFigureText"
+        ],
+        "parameters": [
+          {
+            "name": "A_StatisticalKeyFigureTextType",
+            "in": "body",
+            "description": "New property values",
+            "schema": {
+              "title": "Modified A_StatisticalKeyFigureTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureTextType-update"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete entity from A_StatisticalKeyFigureText",
+        "tags": [
+          "A_StatisticalKeyFigureText"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_StatisticalKeyFigureText(Language='{Language}',ControllingArea='{ControllingArea}',StatisticalKeyFigure='{StatisticalKeyFigure}')/to_StatisticalKeyFigure": {
+      "parameters": [
+        {
+          "name": "Language",
+          "in": "path",
+          "required": true,
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+          "type": "string"
+        },
+        {
+          "name": "ControllingArea",
+          "in": "path",
+          "required": true,
+          "description": "Controlling Area",
+          "type": "string"
+        },
+        {
+          "name": "StatisticalKeyFigure",
+          "in": "path",
+          "required": true,
+          "description": "Statistical Key Figure",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_StatisticalKeyFigure",
+        "tags": [
+          "A_StatisticalKeyFigureText",
+          "A_StatisticalKeyFigure"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "StatisticalKeyFigure",
+                "ControllingArea",
+                "StstcKeyFigQuantityUnit",
+                "StstcKeyFigCategory",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_StatisticalKeyFigureType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET A_StatisticalKeyFigure HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureType": {
+      "type": "object",
+      "properties": {
+        "StatisticalKeyFigure": {
+          "type": "string",
+          "maxLength": 6,
+          "title": "Statistical Key Figure"
+        },
+        "ControllingArea": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Controlling Area"
+        },
+        "StstcKeyFigQuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Stat. Key Fig. Unit",
+          "description": "Unit for Statistical Key Figure  \nUnit of quantity or time with which the tracing factors of the statistical key figures are posted.  \nThe unit with which the statistical key figure is recorded in the database is defined in the master data and cannot be changed."
+        },
+        "StstcKeyFigCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Key figure category",
+          "description": "Statistical Key Figure Category  \nField defining whether values are fixed in one of two ways:  \nFrom the initial month for all subsequent months of the current fiscal year (Type 1 = fixed value)For the respective month and not carried forward to the subsequent months (Type 2 = totals value)The number of employees is entered as type 1 (fixed value) and the number of long-distance calls is entered as type 2 (totals value).To correct quantities after entering them as statistical key figures, cancel type 2 values by entering the value with a reversed +/- sign. Then enter the correct value.To change key figures of type 1, enter a new fixed value. This value will then be valid for all subsequent periods until you enter new value."
+        },
+        "to_Text": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureTextType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API Statistical Key Figure"
+    },
+    "API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureType-create": {
+      "type": "object",
+      "properties": {
+        "StatisticalKeyFigure": {
+          "type": "string",
+          "maxLength": 6,
+          "title": "Statistical Key Figure"
+        },
+        "ControllingArea": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Controlling Area"
+        },
+        "StstcKeyFigQuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Stat. Key Fig. Unit",
+          "description": "Unit for Statistical Key Figure  \nUnit of quantity or time with which the tracing factors of the statistical key figures are posted.  \nThe unit with which the statistical key figure is recorded in the database is defined in the master data and cannot be changed."
+        },
+        "StstcKeyFigCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Key figure category",
+          "description": "Statistical Key Figure Category  \nField defining whether values are fixed in one of two ways:  \nFrom the initial month for all subsequent months of the current fiscal year (Type 1 = fixed value)For the respective month and not carried forward to the subsequent months (Type 2 = totals value)The number of employees is entered as type 1 (fixed value) and the number of long-distance calls is entered as type 2 (totals value).To correct quantities after entering them as statistical key figures, cancel type 2 values by entering the value with a reversed +/- sign. Then enter the correct value.To change key figures of type 1, enter a new fixed value. This value will then be valid for all subsequent periods until you enter new value."
+        },
+        "to_Text": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureTextType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "StatisticalKeyFigure",
+        "ControllingArea"
+      ],
+      "title": "API Statistical Key Figure (for create)"
+    },
+    "API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureType-update": {
+      "type": "object",
+      "properties": {
+        "StstcKeyFigQuantityUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Stat. Key Fig. Unit",
+          "description": "Unit for Statistical Key Figure  \nUnit of quantity or time with which the tracing factors of the statistical key figures are posted.  \nThe unit with which the statistical key figure is recorded in the database is defined in the master data and cannot be changed."
+        },
+        "StstcKeyFigCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Key figure category",
+          "description": "Statistical Key Figure Category  \nField defining whether values are fixed in one of two ways:  \nFrom the initial month for all subsequent months of the current fiscal year (Type 1 = fixed value)For the respective month and not carried forward to the subsequent months (Type 2 = totals value)The number of employees is entered as type 1 (fixed value) and the number of long-distance calls is entered as type 2 (totals value).To correct quantities after entering them as statistical key figures, cancel type 2 values by entering the value with a reversed +/- sign. Then enter the correct value.To change key figures of type 1, enter a new fixed value. This value will then be valid for all subsequent periods until you enter new value."
+        }
+      },
+      "title": "API Statistical Key Figure (for update)"
+    },
+    "API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureTextType": {
+      "type": "object",
+      "properties": {
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "ControllingArea": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Controlling Area"
+        },
+        "StatisticalKeyFigure": {
+          "type": "string",
+          "maxLength": 6,
+          "title": "Statistical Key Figure"
+        },
+        "StatisticalKeyFigureName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Statistical Key Figure Name"
+        },
+        "to_StatisticalKeyFigure": {
+          "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureType"
+        }
+      },
+      "title": "API Statistical Key Figure Text"
+    },
+    "API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureTextType-create": {
+      "type": "object",
+      "properties": {
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "ControllingArea": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Controlling Area"
+        },
+        "StatisticalKeyFigure": {
+          "type": "string",
+          "maxLength": 6,
+          "title": "Statistical Key Figure"
+        },
+        "StatisticalKeyFigureName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Statistical Key Figure Name"
+        },
+        "to_StatisticalKeyFigure": {
+          "$ref": "#/definitions/API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureType-create"
+        }
+      },
+      "required": [
+        "Language",
+        "ControllingArea",
+        "StatisticalKeyFigure"
+      ],
+      "title": "API Statistical Key Figure Text (for create)"
+    },
+    "API_STATISTICALKEYFIGURE_SRV.A_StatisticalKeyFigureTextType-update": {
+      "type": "object",
+      "properties": {
+        "StatisticalKeyFigureName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Statistical Key Figure Name"
+        }
+      },
+      "title": "API Statistical Key Figure Text (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

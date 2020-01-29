@@ -1,0 +1,883 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Sales Organization - Read",
+    "version": "1 ",
+    "description": " The service contains  sales organization and sales organization text  nodes."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/24/18326d6009458ab7acb72b2b747cca/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "Read sales organization master data using this inbound service",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "SAP Analytics Cloud for Planning Integration (SAP_COM_0087)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Import Connection setup with SAP Analytics Cloud (1YB)](https://rapid.sap.com/bp/#/scopeitems/1YB \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_SALESORGANIZATION_SRV",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_SALESORGANIZATION_SRV",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "A_SalesOrganization"
+    },
+    {
+      "name": "A_SalesOrganizationText"
+    }
+  ],
+  "paths": {
+    "/A_SalesOrganization": {
+      "get": {
+        "summary": "Get entities from A_SalesOrganization",
+        "tags": [
+          "A_SalesOrganization"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesOrganization",
+                "SalesOrganization desc",
+                "SalesOrganizationCurrency",
+                "SalesOrganizationCurrency desc",
+                "CompanyCode",
+                "CompanyCode desc",
+                "IntercompanyBillingCustomer",
+                "IntercompanyBillingCustomer desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesOrganization",
+                "SalesOrganizationCurrency",
+                "CompanyCode",
+                "IntercompanyBillingCustomer",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SalesOrganizationType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SALESORGANIZATION_SRV.A_SalesOrganizationType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SalesOrganization('{SalesOrganization}')": {
+      "parameters": [
+        {
+          "name": "SalesOrganization",
+          "in": "path",
+          "required": true,
+          "description": "An organizational unit responsible for the sale of certain products or services. The responsibility of a sales organization may include legal liability for products and customer claims.  \nYou can assign any number of distribution channels and divisions to a sales organization. A particular combination of sales organization, distribution channel, and division is known as a sales area.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SalesOrganization by key",
+        "tags": [
+          "A_SalesOrganization"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesOrganization",
+                "SalesOrganizationCurrency",
+                "CompanyCode",
+                "IntercompanyBillingCustomer",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SalesOrganizationType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SALESORGANIZATION_SRV.A_SalesOrganizationType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SalesOrganization('{SalesOrganization}')/to_Text": {
+      "parameters": [
+        {
+          "name": "SalesOrganization",
+          "in": "path",
+          "required": true,
+          "description": "An organizational unit responsible for the sale of certain products or services. The responsibility of a sales organization may include legal liability for products and customer claims.  \nYou can assign any number of distribution channels and divisions to a sales organization. A particular combination of sales organization, distribution channel, and division is known as a sales area.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_Text",
+        "tags": [
+          "A_SalesOrganization",
+          "A_SalesOrganizationText"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesOrganization",
+                "SalesOrganization desc",
+                "Language",
+                "Language desc",
+                "SalesOrganizationName",
+                "SalesOrganizationName desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesOrganization",
+                "Language",
+                "SalesOrganizationName",
+                "to_SalesOrganization"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_SalesOrganization"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SalesOrganizationTextType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SALESORGANIZATION_SRV.A_SalesOrganizationTextType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SalesOrganizationText": {
+      "get": {
+        "summary": "Get entities from A_SalesOrganizationText",
+        "tags": [
+          "A_SalesOrganizationText"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesOrganization",
+                "SalesOrganization desc",
+                "Language",
+                "Language desc",
+                "SalesOrganizationName",
+                "SalesOrganizationName desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesOrganization",
+                "Language",
+                "SalesOrganizationName",
+                "to_SalesOrganization"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_SalesOrganization"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of A_SalesOrganizationTextType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/API_SALESORGANIZATION_SRV.A_SalesOrganizationTextType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SalesOrganizationText(SalesOrganization='{SalesOrganization}',Language='{Language}')": {
+      "parameters": [
+        {
+          "name": "SalesOrganization",
+          "in": "path",
+          "required": true,
+          "description": "An organizational unit responsible for the sale of certain products or services. The responsibility of a sales organization may include legal liability for products and customer claims.  \nYou can assign any number of distribution channels and divisions to a sales organization. A particular combination of sales organization, distribution channel, and division is known as a sales area.",
+          "type": "string"
+        },
+        {
+          "name": "Language",
+          "in": "path",
+          "required": true,
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from A_SalesOrganizationText by key",
+        "tags": [
+          "A_SalesOrganizationText"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesOrganization",
+                "Language",
+                "SalesOrganizationName",
+                "to_SalesOrganization"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_SalesOrganization"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SalesOrganizationTextType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SALESORGANIZATION_SRV.A_SalesOrganizationTextType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/A_SalesOrganizationText(SalesOrganization='{SalesOrganization}',Language='{Language}')/to_SalesOrganization": {
+      "parameters": [
+        {
+          "name": "SalesOrganization",
+          "in": "path",
+          "required": true,
+          "description": "An organizational unit responsible for the sale of certain products or services. The responsibility of a sales organization may include legal liability for products and customer claims.  \nYou can assign any number of distribution channels and divisions to a sales organization. A particular combination of sales organization, distribution channel, and division is known as a sales area.",
+          "type": "string"
+        },
+        {
+          "name": "Language",
+          "in": "path",
+          "required": true,
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts.",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_SalesOrganization",
+        "tags": [
+          "A_SalesOrganizationText",
+          "A_SalesOrganization"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "SalesOrganization",
+                "SalesOrganizationCurrency",
+                "CompanyCode",
+                "IntercompanyBillingCustomer",
+                "to_Text"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_Text"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "A_SalesOrganizationType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/API_SALESORGANIZATION_SRV.A_SalesOrganizationType"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "API_SALESORGANIZATION_SRV.A_SalesOrganizationType": {
+      "type": "object",
+      "properties": {
+        "SalesOrganization": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Sales Organization",
+          "description": "An organizational unit responsible for the sale of certain products or services. The responsibility of a sales organization may include legal liability for products and customer claims.  \nYou can assign any number of distribution channels and divisions to a sales organization. A particular combination of sales organization, distribution channel, and division is known as a sales area."
+        },
+        "SalesOrganizationCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Statistics Currency",
+          "description": "Statistics currency  \nThe currency that the system automatically proposes for statistics that you generate for a particular sales organization.  \nYou can define a default currency for each sales organization. When you generate sales statistics, the system automatically proposes the default. You can overwrite the default."
+        },
+        "CompanyCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Company Code",
+          "description": "Company code of the sales organization  \nThe company code to which the sales organization is assigned. The company is legally responsible for the sales organization."
+        },
+        "IntercompanyBillingCustomer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cust.Inter-Co.Bill.",
+          "description": "Customer number for intercompany billing  \nThe number assigned to the master record which has been created to represent:  \nAn internal customer (sales organization) in intercompany billingYour own sales organization in opportunity management"
+        },
+        "to_Text": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SALESORGANIZATION_SRV.A_SalesOrganizationTextType"
+              }
+            }
+          }
+        }
+      },
+      "title": "API Sales Organization"
+    },
+    "API_SALESORGANIZATION_SRV.A_SalesOrganizationType-create": {
+      "type": "object",
+      "properties": {
+        "SalesOrganization": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Sales Organization",
+          "description": "An organizational unit responsible for the sale of certain products or services. The responsibility of a sales organization may include legal liability for products and customer claims.  \nYou can assign any number of distribution channels and divisions to a sales organization. A particular combination of sales organization, distribution channel, and division is known as a sales area."
+        },
+        "SalesOrganizationCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Statistics Currency",
+          "description": "Statistics currency  \nThe currency that the system automatically proposes for statistics that you generate for a particular sales organization.  \nYou can define a default currency for each sales organization. When you generate sales statistics, the system automatically proposes the default. You can overwrite the default."
+        },
+        "CompanyCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Company Code",
+          "description": "Company code of the sales organization  \nThe company code to which the sales organization is assigned. The company is legally responsible for the sales organization."
+        },
+        "IntercompanyBillingCustomer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cust.Inter-Co.Bill.",
+          "description": "Customer number for intercompany billing  \nThe number assigned to the master record which has been created to represent:  \nAn internal customer (sales organization) in intercompany billingYour own sales organization in opportunity management"
+        },
+        "to_Text": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/API_SALESORGANIZATION_SRV.A_SalesOrganizationTextType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "SalesOrganization"
+      ],
+      "title": "API Sales Organization (for create)"
+    },
+    "API_SALESORGANIZATION_SRV.A_SalesOrganizationType-update": {
+      "type": "object",
+      "properties": {
+        "SalesOrganizationCurrency": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Statistics Currency",
+          "description": "Statistics currency  \nThe currency that the system automatically proposes for statistics that you generate for a particular sales organization.  \nYou can define a default currency for each sales organization. When you generate sales statistics, the system automatically proposes the default. You can overwrite the default."
+        },
+        "CompanyCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Company Code",
+          "description": "Company code of the sales organization  \nThe company code to which the sales organization is assigned. The company is legally responsible for the sales organization."
+        },
+        "IntercompanyBillingCustomer": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Cust.Inter-Co.Bill.",
+          "description": "Customer number for intercompany billing  \nThe number assigned to the master record which has been created to represent:  \nAn internal customer (sales organization) in intercompany billingYour own sales organization in opportunity management"
+        }
+      },
+      "title": "API Sales Organization (for update)"
+    },
+    "API_SALESORGANIZATION_SRV.A_SalesOrganizationTextType": {
+      "type": "object",
+      "properties": {
+        "SalesOrganization": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Sales Organization",
+          "description": "An organizational unit responsible for the sale of certain products or services. The responsibility of a sales organization may include legal liability for products and customer claims.  \nYou can assign any number of distribution channels and divisions to a sales organization. A particular combination of sales organization, distribution channel, and division is known as a sales area."
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "SalesOrganizationName": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Sales Organization Description"
+        },
+        "to_SalesOrganization": {
+          "$ref": "#/definitions/API_SALESORGANIZATION_SRV.A_SalesOrganizationType"
+        }
+      },
+      "title": "API Sales Organization Text"
+    },
+    "API_SALESORGANIZATION_SRV.A_SalesOrganizationTextType-create": {
+      "type": "object",
+      "properties": {
+        "SalesOrganization": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Sales Organization",
+          "description": "An organizational unit responsible for the sale of certain products or services. The responsibility of a sales organization may include legal liability for products and customer claims.  \nYou can assign any number of distribution channels and divisions to a sales organization. A particular combination of sales organization, distribution channel, and division is known as a sales area."
+        },
+        "Language": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Language Key",
+          "description": "The language key indicates  \n- the language in which texts are displayed,- the language in which you enter texts,- the language in which the system prints texts."
+        },
+        "SalesOrganizationName": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Sales Organization Description"
+        },
+        "to_SalesOrganization": {
+          "$ref": "#/definitions/API_SALESORGANIZATION_SRV.A_SalesOrganizationType-create"
+        }
+      },
+      "required": [
+        "SalesOrganization",
+        "Language"
+      ],
+      "title": "API Sales Organization Text (for create)"
+    },
+    "API_SALESORGANIZATION_SRV.A_SalesOrganizationTextType-update": {
+      "type": "object",
+      "properties": {
+        "SalesOrganizationName": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Sales Organization Description"
+        }
+      },
+      "title": "API Sales Organization Text (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

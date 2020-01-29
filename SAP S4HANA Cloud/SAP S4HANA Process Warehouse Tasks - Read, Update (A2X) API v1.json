@@ -1,0 +1,3929 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Process Warehouse Tasks - Read, Update (A2X)",
+    "version": "1 ",
+    "description": " In every API call, you can  make use of the following operations:\n - You can  retrieve warehouse orders and warehouse tasks. Apply  any of the filters provided or retrieve all existing data.\n  - For existing warehouse orders, you can update the  corresponding warehouse tasks.\n - You can update  existing warehouse tasks (confirm, confirm with  exceptions, cancel).\n - You can update existing  warehouse orders (assign or unassign warehouse  order to warehouse resource)."
+  },
+  "externalDocs": {
+    "description": "Business Documentation",
+    "url": "https://help.sap.com:00443/http.svc/ahp2/SAP_S4HANA_CLOUD/1911.500/EN/90/419cedc18a471889c4388de49ad9dc/frameset.htm"
+  },
+  "x-sap-api-type": "ODATA",
+  "x-sap-shortText": "You can use this service to integrate external applications with warehouse orders and warehouse tasks in SAP S/4HANA Cloud",
+  "x-sap-api-deprecated": "No",
+  "x-sap-ext-overview": [
+    {
+      "name": "Communication Scenario",
+      "values": [
+        {
+          "text": "Warehousing - Process Warehouse Task Integration (SAP_COM_0353)",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Scope Items",
+      "values": [
+        {
+          "text": "[Resource Management in Warehousing (3W0)](https://rapid.sap.com/bp/#/scopeitems/3W0 \" Link To BP \")",
+          "format": "markdown"
+        }
+      ]
+    },
+    {
+      "name": "Authentication Methods",
+      "values": [
+        {
+          "text": "Basic, x509, OAuth2",
+          "format": "plain"
+        }
+      ]
+    },
+    {
+      "name": "Business Object",
+      "values": [
+        {
+          "text": "WarehouseOrder",
+          "format": "plain"
+        }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "basicAuthentication": []
+    }
+  ],
+  "securityDefinitions": {
+    "basicAuthentication": {
+      "type": "basic"
+    }
+  },
+  "x-servers": [
+    {
+      "url": "https://{host}:{port}/sap/opu/odata/sap/API_WAREHOUSE_ORDER_TASK",
+      "description": "S/4HANA Cloud OData EndPoint",
+      "templates": {
+        "host": {
+          "description": "S/4HANA Cloud system host"
+        },
+        "port": {
+          "description": "S/4HANA Cloud system port"
+        }
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "sandbox.api.sap.com",
+  "basePath": "/s4hanacloud/sap/opu/odata/sap/API_WAREHOUSE_ORDER_TASK",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "WarehouseOrder"
+    },
+    {
+      "name": "WarehouseTask"
+    },
+    {
+      "name": "WarehouseTaskExceptionCode"
+    }
+  ],
+  "paths": {
+    "/WarehouseOrder": {
+      "get": {
+        "summary": "Get entities from WarehouseOrder",
+        "tags": [
+          "WarehouseOrder"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "Warehouse desc",
+                "WarehouseOrder",
+                "WarehouseOrder desc",
+                "WarehouseOrderStatus",
+                "WarehouseOrderStatus desc",
+                "WarehouseOrderStatusName",
+                "WarehouseOrderStatusName desc",
+                "CreationDateTime",
+                "CreationDateTime desc",
+                "WarehouseOrderStartDateTime",
+                "WarehouseOrderStartDateTime desc",
+                "WhseOrderConfirmedDateTime",
+                "WhseOrderConfirmedDateTime desc",
+                "LastChangeDateTime",
+                "LastChangeDateTime desc",
+                "WhseOrderLatestStartDateTime",
+                "WhseOrderLatestStartDateTime desc",
+                "ExecutingResource",
+                "ExecutingResource desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "WarehouseOrder",
+                "WarehouseOrderStatus",
+                "WarehouseOrderStatusName",
+                "CreationDateTime",
+                "WarehouseOrderStartDateTime",
+                "WhseOrderConfirmedDateTime",
+                "LastChangeDateTime",
+                "WhseOrderLatestStartDateTime",
+                "ExecutingResource",
+                "to_WarehouseTask"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_WarehouseTask"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of WarehouseOrderType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseOrderType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/WarehouseOrder(Warehouse='{Warehouse}',WarehouseOrder='{WarehouseOrder}')": {
+      "parameters": [
+        {
+          "name": "Warehouse",
+          "in": "path",
+          "required": true,
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number.",
+          "type": "string"
+        },
+        {
+          "name": "WarehouseOrder",
+          "in": "path",
+          "required": true,
+          "description": "Warehouse Order Number",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from WarehouseOrder by key",
+        "tags": [
+          "WarehouseOrder"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "WarehouseOrder",
+                "WarehouseOrderStatus",
+                "WarehouseOrderStatusName",
+                "CreationDateTime",
+                "WarehouseOrderStartDateTime",
+                "WhseOrderConfirmedDateTime",
+                "LastChangeDateTime",
+                "WhseOrderLatestStartDateTime",
+                "ExecutingResource",
+                "to_WarehouseTask"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_WarehouseTask"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "WarehouseOrderType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseOrderType"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/WarehouseOrder(Warehouse='{Warehouse}',WarehouseOrder='{WarehouseOrder}')/to_WarehouseTask": {
+      "parameters": [
+        {
+          "name": "Warehouse",
+          "in": "path",
+          "required": true,
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number.",
+          "type": "string"
+        },
+        {
+          "name": "WarehouseOrder",
+          "in": "path",
+          "required": true,
+          "description": "Warehouse Order Number",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_WarehouseTask",
+        "tags": [
+          "WarehouseOrder",
+          "WarehouseTask"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "Warehouse desc",
+                "WarehouseTask",
+                "WarehouseTask desc",
+                "WarehouseTaskItem",
+                "WarehouseTaskItem desc",
+                "WarehouseOrder",
+                "WarehouseOrder desc",
+                "CreationDateTime",
+                "CreationDateTime desc",
+                "LastChangeDateTime",
+                "LastChangeDateTime desc",
+                "ConfirmationUTCDateTime",
+                "ConfirmationUTCDateTime desc",
+                "WhseTaskPlannedClosingDateTime",
+                "WhseTaskPlannedClosingDateTime desc",
+                "WhseTaskGoodsReceiptDateTime",
+                "WhseTaskGoodsReceiptDateTime desc",
+                "WarehouseTaskStatus",
+                "WarehouseTaskStatus desc",
+                "WarehouseTaskStatusName",
+                "WarehouseTaskStatusName desc",
+                "WarehouseProcessType",
+                "WarehouseProcessType desc",
+                "WarehouseProcessTypeName",
+                "WarehouseProcessTypeName desc",
+                "IsHandlingUnitWarehouseTask",
+                "IsHandlingUnitWarehouseTask desc",
+                "ProductName",
+                "ProductName desc",
+                "ProductDescription",
+                "ProductDescription desc",
+                "Batch",
+                "Batch desc",
+                "BatchChangeIsNotAllowed",
+                "BatchChangeIsNotAllowed desc",
+                "StockType",
+                "StockType desc",
+                "StockTypeName",
+                "StockTypeName desc",
+                "StockOwner",
+                "StockOwner desc",
+                "EntitledToDisposeParty",
+                "EntitledToDisposeParty desc",
+                "StockDocumentCategory",
+                "StockDocumentCategory desc",
+                "StockDocumentNumber",
+                "StockDocumentNumber desc",
+                "StockItemNumber",
+                "StockItemNumber desc",
+                "ExecutingResource",
+                "ExecutingResource desc",
+                "ProductionOrder",
+                "ProductionOrder desc",
+                "ProductionSupplyArea",
+                "ProductionSupplyArea desc",
+                "Delivery",
+                "Delivery desc",
+                "DeliveryItem",
+                "DeliveryItem desc",
+                "PurchasingDocument",
+                "PurchasingDocument desc",
+                "PurchasingDocumentItem",
+                "PurchasingDocumentItem desc",
+                "SalesDocument",
+                "SalesDocument desc",
+                "SalesDocumentItem",
+                "SalesDocumentItem desc",
+                "BaseUnit",
+                "BaseUnit desc",
+                "AlternativeUnit",
+                "AlternativeUnit desc",
+                "TargetQuantityInBaseUnit",
+                "TargetQuantityInBaseUnit desc",
+                "TargetQuantityInAltvUnit",
+                "TargetQuantityInAltvUnit desc",
+                "ActualQuantityInBaseUnit",
+                "ActualQuantityInBaseUnit desc",
+                "ActualQuantityInAltvUnit",
+                "ActualQuantityInAltvUnit desc",
+                "DifferenceQuantityInBaseUnit",
+                "DifferenceQuantityInBaseUnit desc",
+                "DifferenceQuantityInAltvUnit",
+                "DifferenceQuantityInAltvUnit desc",
+                "WhseTaskNetWeightUnitOfMeasure",
+                "WhseTaskNetWeightUnitOfMeasure desc",
+                "NetWeight",
+                "NetWeight desc",
+                "WhseTaskNetVolumeUnitOfMeasure",
+                "WhseTaskNetVolumeUnitOfMeasure desc",
+                "WhseTaskNetVolume",
+                "WhseTaskNetVolume desc",
+                "SourceStorageType",
+                "SourceStorageType desc",
+                "SourceStorageTypeName",
+                "SourceStorageTypeName desc",
+                "SourceStorageSection",
+                "SourceStorageSection desc",
+                "SourceStorageBin",
+                "SourceStorageBin desc",
+                "DestinationStorageType",
+                "DestinationStorageType desc",
+                "DestinationStorageTypeName",
+                "DestinationStorageTypeName desc",
+                "DestinationStorageSection",
+                "DestinationStorageSection desc",
+                "DestinationStorageBin",
+                "DestinationStorageBin desc",
+                "DestinationResource",
+                "DestinationResource desc",
+                "ActivityArea",
+                "ActivityArea desc",
+                "ActivityAreaName",
+                "ActivityAreaName desc",
+                "SourceHandlingUnit",
+                "SourceHandlingUnit desc",
+                "DestinationHandlingUnit",
+                "DestinationHandlingUnit desc",
+                "WarehouseTaskExceptionCode",
+                "WarehouseTaskExceptionCode desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "WarehouseTask",
+                "WarehouseTaskItem",
+                "WarehouseOrder",
+                "CreationDateTime",
+                "LastChangeDateTime",
+                "ConfirmationUTCDateTime",
+                "WhseTaskPlannedClosingDateTime",
+                "WhseTaskGoodsReceiptDateTime",
+                "WarehouseTaskStatus",
+                "WarehouseTaskStatusName",
+                "WarehouseProcessType",
+                "WarehouseProcessTypeName",
+                "IsHandlingUnitWarehouseTask",
+                "ProductName",
+                "ProductDescription",
+                "Batch",
+                "BatchChangeIsNotAllowed",
+                "StockType",
+                "StockTypeName",
+                "StockOwner",
+                "EntitledToDisposeParty",
+                "StockDocumentCategory",
+                "StockDocumentNumber",
+                "StockItemNumber",
+                "ExecutingResource",
+                "ProductionOrder",
+                "ProductionSupplyArea",
+                "Delivery",
+                "DeliveryItem",
+                "PurchasingDocument",
+                "PurchasingDocumentItem",
+                "SalesDocument",
+                "SalesDocumentItem",
+                "BaseUnit",
+                "AlternativeUnit",
+                "TargetQuantityInBaseUnit",
+                "TargetQuantityInAltvUnit",
+                "ActualQuantityInBaseUnit",
+                "ActualQuantityInAltvUnit",
+                "DifferenceQuantityInBaseUnit",
+                "DifferenceQuantityInAltvUnit",
+                "WhseTaskNetWeightUnitOfMeasure",
+                "NetWeight",
+                "WhseTaskNetVolumeUnitOfMeasure",
+                "WhseTaskNetVolume",
+                "SourceStorageType",
+                "SourceStorageTypeName",
+                "SourceStorageSection",
+                "SourceStorageBin",
+                "DestinationStorageType",
+                "DestinationStorageTypeName",
+                "DestinationStorageSection",
+                "DestinationStorageBin",
+                "DestinationResource",
+                "ActivityArea",
+                "ActivityAreaName",
+                "SourceHandlingUnit",
+                "DestinationHandlingUnit",
+                "WarehouseTaskExceptionCode",
+                "to_WarehouseOrder",
+                "to_WarehouseTaskExceptionCode"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_WarehouseOrder",
+                "to_WarehouseTaskExceptionCode"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of WarehouseTaskType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseTaskType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/WarehouseTask": {
+      "get": {
+        "summary": "Get entities from WarehouseTask",
+        "tags": [
+          "WarehouseTask"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "Warehouse desc",
+                "WarehouseTask",
+                "WarehouseTask desc",
+                "WarehouseTaskItem",
+                "WarehouseTaskItem desc",
+                "WarehouseOrder",
+                "WarehouseOrder desc",
+                "CreationDateTime",
+                "CreationDateTime desc",
+                "LastChangeDateTime",
+                "LastChangeDateTime desc",
+                "ConfirmationUTCDateTime",
+                "ConfirmationUTCDateTime desc",
+                "WhseTaskPlannedClosingDateTime",
+                "WhseTaskPlannedClosingDateTime desc",
+                "WhseTaskGoodsReceiptDateTime",
+                "WhseTaskGoodsReceiptDateTime desc",
+                "WarehouseTaskStatus",
+                "WarehouseTaskStatus desc",
+                "WarehouseTaskStatusName",
+                "WarehouseTaskStatusName desc",
+                "WarehouseProcessType",
+                "WarehouseProcessType desc",
+                "WarehouseProcessTypeName",
+                "WarehouseProcessTypeName desc",
+                "IsHandlingUnitWarehouseTask",
+                "IsHandlingUnitWarehouseTask desc",
+                "ProductName",
+                "ProductName desc",
+                "ProductDescription",
+                "ProductDescription desc",
+                "Batch",
+                "Batch desc",
+                "BatchChangeIsNotAllowed",
+                "BatchChangeIsNotAllowed desc",
+                "StockType",
+                "StockType desc",
+                "StockTypeName",
+                "StockTypeName desc",
+                "StockOwner",
+                "StockOwner desc",
+                "EntitledToDisposeParty",
+                "EntitledToDisposeParty desc",
+                "StockDocumentCategory",
+                "StockDocumentCategory desc",
+                "StockDocumentNumber",
+                "StockDocumentNumber desc",
+                "StockItemNumber",
+                "StockItemNumber desc",
+                "ExecutingResource",
+                "ExecutingResource desc",
+                "ProductionOrder",
+                "ProductionOrder desc",
+                "ProductionSupplyArea",
+                "ProductionSupplyArea desc",
+                "Delivery",
+                "Delivery desc",
+                "DeliveryItem",
+                "DeliveryItem desc",
+                "PurchasingDocument",
+                "PurchasingDocument desc",
+                "PurchasingDocumentItem",
+                "PurchasingDocumentItem desc",
+                "SalesDocument",
+                "SalesDocument desc",
+                "SalesDocumentItem",
+                "SalesDocumentItem desc",
+                "BaseUnit",
+                "BaseUnit desc",
+                "AlternativeUnit",
+                "AlternativeUnit desc",
+                "TargetQuantityInBaseUnit",
+                "TargetQuantityInBaseUnit desc",
+                "TargetQuantityInAltvUnit",
+                "TargetQuantityInAltvUnit desc",
+                "ActualQuantityInBaseUnit",
+                "ActualQuantityInBaseUnit desc",
+                "ActualQuantityInAltvUnit",
+                "ActualQuantityInAltvUnit desc",
+                "DifferenceQuantityInBaseUnit",
+                "DifferenceQuantityInBaseUnit desc",
+                "DifferenceQuantityInAltvUnit",
+                "DifferenceQuantityInAltvUnit desc",
+                "WhseTaskNetWeightUnitOfMeasure",
+                "WhseTaskNetWeightUnitOfMeasure desc",
+                "NetWeight",
+                "NetWeight desc",
+                "WhseTaskNetVolumeUnitOfMeasure",
+                "WhseTaskNetVolumeUnitOfMeasure desc",
+                "WhseTaskNetVolume",
+                "WhseTaskNetVolume desc",
+                "SourceStorageType",
+                "SourceStorageType desc",
+                "SourceStorageTypeName",
+                "SourceStorageTypeName desc",
+                "SourceStorageSection",
+                "SourceStorageSection desc",
+                "SourceStorageBin",
+                "SourceStorageBin desc",
+                "DestinationStorageType",
+                "DestinationStorageType desc",
+                "DestinationStorageTypeName",
+                "DestinationStorageTypeName desc",
+                "DestinationStorageSection",
+                "DestinationStorageSection desc",
+                "DestinationStorageBin",
+                "DestinationStorageBin desc",
+                "DestinationResource",
+                "DestinationResource desc",
+                "ActivityArea",
+                "ActivityArea desc",
+                "ActivityAreaName",
+                "ActivityAreaName desc",
+                "SourceHandlingUnit",
+                "SourceHandlingUnit desc",
+                "DestinationHandlingUnit",
+                "DestinationHandlingUnit desc",
+                "WarehouseTaskExceptionCode",
+                "WarehouseTaskExceptionCode desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "WarehouseTask",
+                "WarehouseTaskItem",
+                "WarehouseOrder",
+                "CreationDateTime",
+                "LastChangeDateTime",
+                "ConfirmationUTCDateTime",
+                "WhseTaskPlannedClosingDateTime",
+                "WhseTaskGoodsReceiptDateTime",
+                "WarehouseTaskStatus",
+                "WarehouseTaskStatusName",
+                "WarehouseProcessType",
+                "WarehouseProcessTypeName",
+                "IsHandlingUnitWarehouseTask",
+                "ProductName",
+                "ProductDescription",
+                "Batch",
+                "BatchChangeIsNotAllowed",
+                "StockType",
+                "StockTypeName",
+                "StockOwner",
+                "EntitledToDisposeParty",
+                "StockDocumentCategory",
+                "StockDocumentNumber",
+                "StockItemNumber",
+                "ExecutingResource",
+                "ProductionOrder",
+                "ProductionSupplyArea",
+                "Delivery",
+                "DeliveryItem",
+                "PurchasingDocument",
+                "PurchasingDocumentItem",
+                "SalesDocument",
+                "SalesDocumentItem",
+                "BaseUnit",
+                "AlternativeUnit",
+                "TargetQuantityInBaseUnit",
+                "TargetQuantityInAltvUnit",
+                "ActualQuantityInBaseUnit",
+                "ActualQuantityInAltvUnit",
+                "DifferenceQuantityInBaseUnit",
+                "DifferenceQuantityInAltvUnit",
+                "WhseTaskNetWeightUnitOfMeasure",
+                "NetWeight",
+                "WhseTaskNetVolumeUnitOfMeasure",
+                "WhseTaskNetVolume",
+                "SourceStorageType",
+                "SourceStorageTypeName",
+                "SourceStorageSection",
+                "SourceStorageBin",
+                "DestinationStorageType",
+                "DestinationStorageTypeName",
+                "DestinationStorageSection",
+                "DestinationStorageBin",
+                "DestinationResource",
+                "ActivityArea",
+                "ActivityAreaName",
+                "SourceHandlingUnit",
+                "DestinationHandlingUnit",
+                "WarehouseTaskExceptionCode",
+                "to_WarehouseOrder",
+                "to_WarehouseTaskExceptionCode"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_WarehouseOrder",
+                "to_WarehouseTaskExceptionCode"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of WarehouseTaskType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseTaskType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/WarehouseTask(Warehouse='{Warehouse}',WarehouseTask='{WarehouseTask}',WarehouseTaskItem='{WarehouseTaskItem}')": {
+      "parameters": [
+        {
+          "name": "Warehouse",
+          "in": "path",
+          "required": true,
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number.",
+          "type": "string"
+        },
+        {
+          "name": "WarehouseTask",
+          "in": "path",
+          "required": true,
+          "description": "Number that uniquely identifies the warehouse task within a warehouse.  \nAll movements in a warehouse are processed in the system via warehouse tasks.",
+          "type": "string"
+        },
+        {
+          "name": "WarehouseTaskItem",
+          "in": "path",
+          "required": true,
+          "description": "Warehouse Task Item  \nUniquely identifes a movement within a warehouse task (WT)  \nEvery WT item moves a product in a particular attribute and quantity from a storage bin (possibly cross-storage type) to a different storage bin (and if necessary, a remaining quantity to a third storage bin).",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from WarehouseTask by key",
+        "tags": [
+          "WarehouseTask"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "WarehouseTask",
+                "WarehouseTaskItem",
+                "WarehouseOrder",
+                "CreationDateTime",
+                "LastChangeDateTime",
+                "ConfirmationUTCDateTime",
+                "WhseTaskPlannedClosingDateTime",
+                "WhseTaskGoodsReceiptDateTime",
+                "WarehouseTaskStatus",
+                "WarehouseTaskStatusName",
+                "WarehouseProcessType",
+                "WarehouseProcessTypeName",
+                "IsHandlingUnitWarehouseTask",
+                "ProductName",
+                "ProductDescription",
+                "Batch",
+                "BatchChangeIsNotAllowed",
+                "StockType",
+                "StockTypeName",
+                "StockOwner",
+                "EntitledToDisposeParty",
+                "StockDocumentCategory",
+                "StockDocumentNumber",
+                "StockItemNumber",
+                "ExecutingResource",
+                "ProductionOrder",
+                "ProductionSupplyArea",
+                "Delivery",
+                "DeliveryItem",
+                "PurchasingDocument",
+                "PurchasingDocumentItem",
+                "SalesDocument",
+                "SalesDocumentItem",
+                "BaseUnit",
+                "AlternativeUnit",
+                "TargetQuantityInBaseUnit",
+                "TargetQuantityInAltvUnit",
+                "ActualQuantityInBaseUnit",
+                "ActualQuantityInAltvUnit",
+                "DifferenceQuantityInBaseUnit",
+                "DifferenceQuantityInAltvUnit",
+                "WhseTaskNetWeightUnitOfMeasure",
+                "NetWeight",
+                "WhseTaskNetVolumeUnitOfMeasure",
+                "WhseTaskNetVolume",
+                "SourceStorageType",
+                "SourceStorageTypeName",
+                "SourceStorageSection",
+                "SourceStorageBin",
+                "DestinationStorageType",
+                "DestinationStorageTypeName",
+                "DestinationStorageSection",
+                "DestinationStorageBin",
+                "DestinationResource",
+                "ActivityArea",
+                "ActivityAreaName",
+                "SourceHandlingUnit",
+                "DestinationHandlingUnit",
+                "WarehouseTaskExceptionCode",
+                "to_WarehouseOrder",
+                "to_WarehouseTaskExceptionCode"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_WarehouseOrder",
+                "to_WarehouseTaskExceptionCode"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "WarehouseTaskType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseTaskType"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/WarehouseTask(Warehouse='{Warehouse}',WarehouseTask='{WarehouseTask}',WarehouseTaskItem='{WarehouseTaskItem}')/to_WarehouseOrder": {
+      "parameters": [
+        {
+          "name": "Warehouse",
+          "in": "path",
+          "required": true,
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number.",
+          "type": "string"
+        },
+        {
+          "name": "WarehouseTask",
+          "in": "path",
+          "required": true,
+          "description": "Number that uniquely identifies the warehouse task within a warehouse.  \nAll movements in a warehouse are processed in the system via warehouse tasks.",
+          "type": "string"
+        },
+        {
+          "name": "WarehouseTaskItem",
+          "in": "path",
+          "required": true,
+          "description": "Warehouse Task Item  \nUniquely identifes a movement within a warehouse task (WT)  \nEvery WT item moves a product in a particular attribute and quantity from a storage bin (possibly cross-storage type) to a different storage bin (and if necessary, a remaining quantity to a third storage bin).",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_WarehouseOrder",
+        "tags": [
+          "WarehouseTask",
+          "WarehouseOrder"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "WarehouseOrder",
+                "WarehouseOrderStatus",
+                "WarehouseOrderStatusName",
+                "CreationDateTime",
+                "WarehouseOrderStartDateTime",
+                "WhseOrderConfirmedDateTime",
+                "LastChangeDateTime",
+                "WhseOrderLatestStartDateTime",
+                "ExecutingResource",
+                "to_WarehouseTask"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_WarehouseTask"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "WarehouseOrderType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseOrderType"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/WarehouseTask(Warehouse='{Warehouse}',WarehouseTask='{WarehouseTask}',WarehouseTaskItem='{WarehouseTaskItem}')/to_WarehouseTaskExceptionCode": {
+      "parameters": [
+        {
+          "name": "Warehouse",
+          "in": "path",
+          "required": true,
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number.",
+          "type": "string"
+        },
+        {
+          "name": "WarehouseTask",
+          "in": "path",
+          "required": true,
+          "description": "Number that uniquely identifies the warehouse task within a warehouse.  \nAll movements in a warehouse are processed in the system via warehouse tasks.",
+          "type": "string"
+        },
+        {
+          "name": "WarehouseTaskItem",
+          "in": "path",
+          "required": true,
+          "description": "Warehouse Task Item  \nUniquely identifes a movement within a warehouse task (WT)  \nEvery WT item moves a product in a particular attribute and quantity from a storage bin (possibly cross-storage type) to a different storage bin (and if necessary, a remaining quantity to a third storage bin).",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entities from related to_WarehouseTaskExceptionCode",
+        "tags": [
+          "WarehouseTask",
+          "WarehouseTaskExceptionCode"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "Warehouse desc",
+                "WarehouseTask",
+                "WarehouseTask desc",
+                "WarehouseTaskItem",
+                "WarehouseTaskItem desc",
+                "WarehouseTaskExceptionCode",
+                "WarehouseTaskExceptionCode desc",
+                "BusinessContext",
+                "BusinessContext desc",
+                "BusinessContextExecutionStep",
+                "BusinessContextExecutionStep desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "WarehouseTask",
+                "WarehouseTaskItem",
+                "WarehouseTaskExceptionCode",
+                "BusinessContext",
+                "BusinessContextExecutionStep",
+                "to_WarehouseTask"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_WarehouseTask"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of WarehouseTaskExceptionCodeType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseTaskExceptionCodeType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/WarehouseTaskExceptionCode": {
+      "get": {
+        "summary": "Get entities from WarehouseTaskExceptionCode",
+        "tags": [
+          "WarehouseTaskExceptionCode"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/top"
+          },
+          {
+            "$ref": "#/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter items by property values, see [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values, see [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "Warehouse desc",
+                "WarehouseTask",
+                "WarehouseTask desc",
+                "WarehouseTaskItem",
+                "WarehouseTaskItem desc",
+                "WarehouseTaskExceptionCode",
+                "WarehouseTaskExceptionCode desc",
+                "BusinessContext",
+                "BusinessContext desc",
+                "BusinessContextExecutionStep",
+                "BusinessContextExecutionStep desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "WarehouseTask",
+                "WarehouseTaskItem",
+                "WarehouseTaskExceptionCode",
+                "BusinessContext",
+                "BusinessContextExecutionStep",
+                "to_WarehouseTask"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_WarehouseTask"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "title": "Wrapper",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "title": "Collection of WarehouseTaskExceptionCodeType",
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseTaskExceptionCodeType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/WarehouseTaskExceptionCode(Warehouse='{Warehouse}',WarehouseTask='{WarehouseTask}',WarehouseTaskItem='{WarehouseTaskItem}',WarehouseTaskExceptionCode='{WarehouseTaskExceptionCode}',BusinessContext='{BusinessContext}',BusinessContextExecutionStep='{BusinessContextExecutionStep}')": {
+      "parameters": [
+        {
+          "name": "Warehouse",
+          "in": "path",
+          "required": true,
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number.",
+          "type": "string"
+        },
+        {
+          "name": "WarehouseTask",
+          "in": "path",
+          "required": true,
+          "description": "Number that uniquely identifies the warehouse task within a warehouse.  \nAll movements in a warehouse are processed in the system via warehouse tasks.",
+          "type": "string"
+        },
+        {
+          "name": "WarehouseTaskItem",
+          "in": "path",
+          "required": true,
+          "description": "Warehouse Task Item  \nUniquely identifes a movement within a warehouse task (WT)  \nEvery WT item moves a product in a particular attribute and quantity from a storage bin (possibly cross-storage type) to a different storage bin (and if necessary, a remaining quantity to a third storage bin).",
+          "type": "string"
+        },
+        {
+          "name": "WarehouseTaskExceptionCode",
+          "in": "path",
+          "required": true,
+          "description": "Code with which an exception situation in the warehouse can be documented.  \nStorage bin is empty, storage bin is not accessible",
+          "type": "string"
+        },
+        {
+          "name": "BusinessContext",
+          "in": "path",
+          "required": true,
+          "description": "Context in which special exception codes can be made available.  \nConfirm warehouse task and count physical inventory.",
+          "type": "string"
+        },
+        {
+          "name": "BusinessContextExecutionStep",
+          "in": "path",
+          "required": true,
+          "description": "Execution Step in Business Context",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get entity from WarehouseTaskExceptionCode by key",
+        "tags": [
+          "WarehouseTaskExceptionCode"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "WarehouseTask",
+                "WarehouseTaskItem",
+                "WarehouseTaskExceptionCode",
+                "BusinessContext",
+                "BusinessContextExecutionStep",
+                "to_WarehouseTask"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_WarehouseTask"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "WarehouseTaskExceptionCodeType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseTaskExceptionCodeType"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/WarehouseTaskExceptionCode(Warehouse='{Warehouse}',WarehouseTask='{WarehouseTask}',WarehouseTaskItem='{WarehouseTaskItem}',WarehouseTaskExceptionCode='{WarehouseTaskExceptionCode}',BusinessContext='{BusinessContext}',BusinessContextExecutionStep='{BusinessContextExecutionStep}')/to_WarehouseTask": {
+      "parameters": [
+        {
+          "name": "Warehouse",
+          "in": "path",
+          "required": true,
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number.",
+          "type": "string"
+        },
+        {
+          "name": "WarehouseTask",
+          "in": "path",
+          "required": true,
+          "description": "Number that uniquely identifies the warehouse task within a warehouse.  \nAll movements in a warehouse are processed in the system via warehouse tasks.",
+          "type": "string"
+        },
+        {
+          "name": "WarehouseTaskItem",
+          "in": "path",
+          "required": true,
+          "description": "Warehouse Task Item  \nUniquely identifes a movement within a warehouse task (WT)  \nEvery WT item moves a product in a particular attribute and quantity from a storage bin (possibly cross-storage type) to a different storage bin (and if necessary, a remaining quantity to a third storage bin).",
+          "type": "string"
+        },
+        {
+          "name": "WarehouseTaskExceptionCode",
+          "in": "path",
+          "required": true,
+          "description": "Code with which an exception situation in the warehouse can be documented.  \nStorage bin is empty, storage bin is not accessible",
+          "type": "string"
+        },
+        {
+          "name": "BusinessContext",
+          "in": "path",
+          "required": true,
+          "description": "Context in which special exception codes can be made available.  \nConfirm warehouse task and count physical inventory.",
+          "type": "string"
+        },
+        {
+          "name": "BusinessContextExecutionStep",
+          "in": "path",
+          "required": true,
+          "description": "Execution Step in Business Context",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "Get related to_WarehouseTask",
+        "tags": [
+          "WarehouseTaskExceptionCode",
+          "WarehouseTask"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned, see [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "Warehouse",
+                "WarehouseTask",
+                "WarehouseTaskItem",
+                "WarehouseOrder",
+                "CreationDateTime",
+                "LastChangeDateTime",
+                "ConfirmationUTCDateTime",
+                "WhseTaskPlannedClosingDateTime",
+                "WhseTaskGoodsReceiptDateTime",
+                "WarehouseTaskStatus",
+                "WarehouseTaskStatusName",
+                "WarehouseProcessType",
+                "WarehouseProcessTypeName",
+                "IsHandlingUnitWarehouseTask",
+                "ProductName",
+                "ProductDescription",
+                "Batch",
+                "BatchChangeIsNotAllowed",
+                "StockType",
+                "StockTypeName",
+                "StockOwner",
+                "EntitledToDisposeParty",
+                "StockDocumentCategory",
+                "StockDocumentNumber",
+                "StockItemNumber",
+                "ExecutingResource",
+                "ProductionOrder",
+                "ProductionSupplyArea",
+                "Delivery",
+                "DeliveryItem",
+                "PurchasingDocument",
+                "PurchasingDocumentItem",
+                "SalesDocument",
+                "SalesDocumentItem",
+                "BaseUnit",
+                "AlternativeUnit",
+                "TargetQuantityInBaseUnit",
+                "TargetQuantityInAltvUnit",
+                "ActualQuantityInBaseUnit",
+                "ActualQuantityInAltvUnit",
+                "DifferenceQuantityInBaseUnit",
+                "DifferenceQuantityInAltvUnit",
+                "WhseTaskNetWeightUnitOfMeasure",
+                "NetWeight",
+                "WhseTaskNetVolumeUnitOfMeasure",
+                "WhseTaskNetVolume",
+                "SourceStorageType",
+                "SourceStorageTypeName",
+                "SourceStorageSection",
+                "SourceStorageBin",
+                "DestinationStorageType",
+                "DestinationStorageTypeName",
+                "DestinationStorageSection",
+                "DestinationStorageBin",
+                "DestinationResource",
+                "ActivityArea",
+                "ActivityAreaName",
+                "SourceHandlingUnit",
+                "DestinationHandlingUnit",
+                "WarehouseTaskExceptionCode",
+                "to_WarehouseOrder",
+                "to_WarehouseTaskExceptionCode"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities, see [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "to_WarehouseOrder",
+                "to_WarehouseTaskExceptionCode"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "title": "WarehouseTaskType",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseTaskType"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/AssignWarehouseOrder": {
+      "post": {
+        "summary": "Invoke action AssignWarehouseOrder",
+        "tags": [
+          "WarehouseOrder"
+        ],
+        "parameters": [
+          {
+            "name": "Warehouse",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Number  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WarehouseOrder",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Order  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WarehouseResource",
+            "in": "query",
+            "description": "Resource  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "DummyFunctionImportResult",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "type": "object",
+                  "properties": {
+                    "AssignWarehouseOrder": {
+                      "$ref": "#/definitions/cds_api_warehouse_order_task.DummyFunctionImportResult"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/SetInProcessWarehouseOrder": {
+      "post": {
+        "summary": "Invoke action SetInProcessWarehouseOrder",
+        "tags": [
+          "WarehouseOrder"
+        ],
+        "parameters": [
+          {
+            "name": "Warehouse",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Number  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WarehouseOrder",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Order  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "DummyFunctionImportResult",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "type": "object",
+                  "properties": {
+                    "SetInProcessWarehouseOrder": {
+                      "$ref": "#/definitions/cds_api_warehouse_order_task.DummyFunctionImportResult"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/UnassignWarehouseOrder": {
+      "post": {
+        "summary": "Invoke action UnassignWarehouseOrder",
+        "tags": [
+          "WarehouseOrder"
+        ],
+        "parameters": [
+          {
+            "name": "Warehouse",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Number  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WarehouseOrder",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Order  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "DummyFunctionImportResult",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "type": "object",
+                  "properties": {
+                    "UnassignWarehouseOrder": {
+                      "$ref": "#/definitions/cds_api_warehouse_order_task.DummyFunctionImportResult"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/CancelWarehouseTask": {
+      "post": {
+        "summary": "Invoke action CancelWarehouseTask",
+        "tags": [
+          "WarehouseTask"
+        ],
+        "parameters": [
+          {
+            "name": "Warehouse",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Number  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WarehouseTask",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Task  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 14,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WarehouseTaskItem",
+            "in": "query",
+            "required": true,
+            "description": "WT Item  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "DummyFunctionImportResult",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "type": "object",
+                  "properties": {
+                    "CancelWarehouseTask": {
+                      "$ref": "#/definitions/cds_api_warehouse_order_task.DummyFunctionImportResult"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/ConfirmWarehouseTaskExact": {
+      "post": {
+        "summary": "Invoke action ConfirmWarehouseTaskExact",
+        "tags": [
+          "WarehouseTask"
+        ],
+        "parameters": [
+          {
+            "name": "Warehouse",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Number  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WarehouseTask",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Task  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 14,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WarehouseTaskItem",
+            "in": "query",
+            "required": true,
+            "description": "WT Item  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "DummyFunctionImportResult",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "type": "object",
+                  "properties": {
+                    "ConfirmWarehouseTaskExact": {
+                      "$ref": "#/definitions/cds_api_warehouse_order_task.DummyFunctionImportResult"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/ConfirmWarehouseTaskHU": {
+      "post": {
+        "summary": "Invoke action ConfirmWarehouseTaskHU",
+        "tags": [
+          "WarehouseTask"
+        ],
+        "parameters": [
+          {
+            "name": "Warehouse",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Number  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WarehouseTask",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Task  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 14,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WarehouseTaskItem",
+            "in": "query",
+            "required": true,
+            "description": "WT Item  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "DestinationStorageBin",
+            "in": "query",
+            "description": "Destination Bin  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WhseTaskExCodeDestStorageBin",
+            "in": "query",
+            "description": "Exception Code  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "DummyFunctionImportResult",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "type": "object",
+                  "properties": {
+                    "ConfirmWarehouseTaskHU": {
+                      "$ref": "#/definitions/cds_api_warehouse_order_task.DummyFunctionImportResult"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/ConfirmWarehouseTaskProduct": {
+      "post": {
+        "summary": "Invoke action ConfirmWarehouseTaskProduct",
+        "tags": [
+          "WarehouseTask"
+        ],
+        "parameters": [
+          {
+            "name": "Warehouse",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Number  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WarehouseTask",
+            "in": "query",
+            "required": true,
+            "description": "Warehouse Task  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 14,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WarehouseTaskItem",
+            "in": "query",
+            "required": true,
+            "description": "WT Item  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "AlternativeUnit",
+            "in": "query",
+            "description": "Alt. Unit of Measure  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 5,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "ActualQuantityInAltvUnit",
+            "in": "query",
+            "description": "Actual Quantity  \n(Value needs to be suffixed with `M`)",
+            "type": "string",
+            "pattern": "^[-]?[0-9]+(\\.[0-9]+)?[mM]$",
+            "multipleOf": 1e-14
+          },
+          {
+            "name": "DifferenceQuantityInAltvUnit",
+            "in": "query",
+            "description": "Difference Quantity  \n(Value needs to be suffixed with `M`)",
+            "type": "string",
+            "pattern": "^[-]?[0-9]+(\\.[0-9]+)?[mM]$",
+            "multipleOf": 1e-14
+          },
+          {
+            "name": "WhseTaskExceptionCodeQtyDiff",
+            "in": "query",
+            "description": "Exception Code  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "DestinationStorageBin",
+            "in": "query",
+            "description": "Destination Bin  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "WhseTaskExCodeDestStorageBin",
+            "in": "query",
+            "description": "Exception Code  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          },
+          {
+            "name": "SourceHandlingUnit",
+            "in": "query",
+            "description": "Source Handling Unit  \n(Value needs to be enclosed in single quotes)",
+            "type": "string",
+            "maxLength": 22,
+            "pattern": "^'[^']*(''[^']*)*'$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "title": "DummyFunctionImportResult",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "type": "object",
+                  "properties": {
+                    "ConfirmWarehouseTaskProduct": {
+                      "$ref": "#/definitions/cds_api_warehouse_order_task.DummyFunctionImportResult"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    },
+    "/$batch": {
+      "post": {
+        "summary": "Send a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=152).",
+        "tags": [
+          "Batch Requests"
+        ],
+        "consumes": [
+          "multipart/mixed;boundary=request-separator"
+        ],
+        "produces": [
+          "multipart/mixed"
+        ],
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Batch request",
+            "schema": {
+              "type": "string",
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET WarehouseOrder HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Batch response",
+            "schema": {
+              "type": "string",
+              "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "cds_api_warehouse_order_task.WarehouseOrderType": {
+      "type": "object",
+      "properties": {
+        "Warehouse": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Warehouse Number",
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number."
+        },
+        "WarehouseOrder": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Warehouse Order",
+          "description": "Warehouse Order Number"
+        },
+        "WarehouseOrderStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Whse Order Status",
+          "description": "Warehouse Order Status"
+        },
+        "WarehouseOrderStatusName": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Short Descript.",
+          "description": "Short Text for Fixed Values  \nThis text appears when fixed values are displayed in the F4 help. It explains the possible input values.  \nSeeTask-Oriented InstructionsReference Documentation for Semantic Properties of Domains"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Creation Time"
+        },
+        "WarehouseOrderStartDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Start Time"
+        },
+        "WhseOrderConfirmedDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Confirmation Time",
+          "description": "Time of Confirmation"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time of Change"
+        },
+        "WhseOrderLatestStartDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Latest Starting Date",
+          "description": "Latest Starting Date (LSD)"
+        },
+        "ExecutingResource": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Resource",
+          "description": "Resource (Means of Transportation or User)"
+        },
+        "to_WarehouseTask": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseTaskType"
+              }
+            }
+          }
+        }
+      },
+      "title": "WO root node API_WM_ORDER_TASK"
+    },
+    "cds_api_warehouse_order_task.WarehouseOrderType-create": {
+      "type": "object",
+      "properties": {
+        "Warehouse": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Warehouse Number",
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number."
+        },
+        "WarehouseOrder": {
+          "type": "string",
+          "maxLength": 10,
+          "title": "Warehouse Order",
+          "description": "Warehouse Order Number"
+        },
+        "WarehouseOrderStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Whse Order Status",
+          "description": "Warehouse Order Status"
+        },
+        "WarehouseOrderStatusName": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Short Descript.",
+          "description": "Short Text for Fixed Values  \nThis text appears when fixed values are displayed in the F4 help. It explains the possible input values.  \nSeeTask-Oriented InstructionsReference Documentation for Semantic Properties of Domains"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Creation Time"
+        },
+        "WarehouseOrderStartDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Start Time"
+        },
+        "WhseOrderConfirmedDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Confirmation Time",
+          "description": "Time of Confirmation"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time of Change"
+        },
+        "WhseOrderLatestStartDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Latest Starting Date",
+          "description": "Latest Starting Date (LSD)"
+        },
+        "ExecutingResource": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Resource",
+          "description": "Resource (Means of Transportation or User)"
+        },
+        "to_WarehouseTask": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseTaskType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "Warehouse",
+        "WarehouseOrder"
+      ],
+      "title": "WO root node API_WM_ORDER_TASK (for create)"
+    },
+    "cds_api_warehouse_order_task.WarehouseOrderType-update": {
+      "type": "object",
+      "properties": {
+        "WarehouseOrderStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "Whse Order Status",
+          "description": "Warehouse Order Status"
+        },
+        "WarehouseOrderStatusName": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Short Descript.",
+          "description": "Short Text for Fixed Values  \nThis text appears when fixed values are displayed in the F4 help. It explains the possible input values.  \nSeeTask-Oriented InstructionsReference Documentation for Semantic Properties of Domains"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Creation Time"
+        },
+        "WarehouseOrderStartDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Start Time"
+        },
+        "WhseOrderConfirmedDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Confirmation Time",
+          "description": "Time of Confirmation"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time of Change"
+        },
+        "WhseOrderLatestStartDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Latest Starting Date",
+          "description": "Latest Starting Date (LSD)"
+        },
+        "ExecutingResource": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Resource",
+          "description": "Resource (Means of Transportation or User)"
+        }
+      },
+      "title": "WO root node API_WM_ORDER_TASK (for update)"
+    },
+    "cds_api_warehouse_order_task.WarehouseTaskType": {
+      "type": "object",
+      "properties": {
+        "Warehouse": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Warehouse Number",
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number."
+        },
+        "WarehouseTask": {
+          "type": "string",
+          "maxLength": 12,
+          "title": "Warehouse Task",
+          "description": "Number that uniquely identifies the warehouse task within a warehouse.  \nAll movements in a warehouse are processed in the system via warehouse tasks."
+        },
+        "WarehouseTaskItem": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "WT Item",
+          "description": "Warehouse Task Item  \nUniquely identifes a movement within a warehouse task (WT)  \nEvery WT item moves a product in a particular attribute and quantity from a storage bin (possibly cross-storage type) to a different storage bin (and if necessary, a remaining quantity to a third storage bin)."
+        },
+        "WarehouseOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Warehouse Order",
+          "description": "Warehouse Order Number"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Creation Time"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time of Change"
+        },
+        "ConfirmationUTCDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)  \nThe UTC timestamp is the date and time relative to the UTC (Universal coordinated time).  \nTo normalize local times in a UTC time stamp and make them comparable, they must be converted using their time zone and the ABAP command convert.Although the time zone for the conversion can be fetched from customizing or master data, you should save it redundantly.The internal structure of the UTC time stamp is logically divided into a date and time part in packed number format <YYYYMMDDhhmmss>. There is also a high resolution UTC time stamp (10^-7 seconds)."
+        },
+        "WhseTaskPlannedClosingDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Planned Closing Time",
+          "description": "Planned Closing Date/Time"
+        },
+        "WhseTaskGoodsReceiptDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "GR Date",
+          "description": "Date and Time of Goods Receipt  \nSpecifies the date and time of the goods receipt of a product."
+        },
+        "WarehouseTaskStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "WT Status",
+          "description": "Warehouse Task Status"
+        },
+        "WarehouseTaskStatusName": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Short Descript.",
+          "description": "Short Text for Fixed Values  \nThis text appears when fixed values are displayed in the F4 help. It explains the possible input values.  \nSeeTask-Oriented InstructionsReference Documentation for Semantic Properties of Domains"
+        },
+        "WarehouseProcessType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Whse Process Type",
+          "description": "Warehouse Process Type  \nThe system processes each warehouse process (such as goods receipt, goods issue, posting change, and repacking) using a warehouse process type. The warehouse process type has various effects on the creation of warehouse tasks."
+        },
+        "WarehouseProcessTypeName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description"
+        },
+        "IsHandlingUnitWarehouseTask": {
+"type": "boolean",
+"default": "null",
+          "title": "HU Warehouse Task",
+          "description": "Handling Unit Warehouse Task"
+        },
+        "ProductName": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Product",
+          "description": "Product Number  \nAlphanumeric key uniquely identifying the product."
+        },
+        "ProductDescription": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Product Description",
+          "description": "Text containing up to 40 characters that describes the product in detail.  \nYou can enter one product description in each of any number of languages.In principle, you enter the product description on the data screen of the first user department for which you enter data, and in your logon language. You can overwrite the product description on the Basic Data screen."
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch"
+        },
+        "BatchChangeIsNotAllowed": {
+"type": "boolean",
+"default": "null",
+          "title": "Change Batch",
+          "description": "Changing the Batch is not Allowed"
+        },
+        "StockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Stock Type"
+        },
+        "StockTypeName": {
+"type": "string",
+"default": "null",
+          "maxLength": 30,
+          "example": "string",
+          "title": "Descr. of Stock Type",
+          "description": "Description of Stock Type"
+        },
+        "StockOwner": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string"
+        },
+        "EntitledToDisposeParty": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Disposal Party",
+          "description": "Party Entitled to Dispose  \nAn organization, defined as a business partner, that is entitled to dispose of stock. Usually this is the plant in which the stocks are planned, and in which the ATP check is performed.  \nEach stock in the warehouse must be assigned to a party entitled to dispose.For each plant, there is exactly one partner master record with plant assignment in the vendor partner role."
+        },
+        "StockDocumentCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Type",
+          "description": "Type: Sales Order Stock or Project Stock"
+        },
+        "StockDocumentNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 35,
+          "example": "string",
+          "title": "Sales Order/Project",
+          "description": "Number of the Sales Order or Project for Special Stock"
+        },
+        "StockItemNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order Item",
+          "description": "Sales Order Item for Sales Order Stock"
+        },
+        "ExecutingResource": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Resource",
+          "description": "Executing Resource (Means of Transport or User)"
+        },
+        "ProductionOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Manufacturing Order"
+        },
+        "ProductionSupplyArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 15,
+          "example": "string",
+          "title": "Supply Area",
+          "description": "Production Supply Area  \nDefines the location that is used to stage products for use in production.  \nThe production supply area (PSA) is assigned to a warehouse number. You can also define bins within a PSA or common bins for multiple PSAs. When a delivery for production supply is being processed, the system assigns the bin to a product and a party entitled to dispose for the staging in the PSA."
+        },
+        "Delivery": {
+"type": "string",
+"default": "null",
+          "maxLength": 35,
+          "example": "string",
+          "title": "Document Number"
+        },
+        "DeliveryItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Item Number"
+        },
+        "PurchasingDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Purchasing Document",
+          "description": "Purchasing Document Number  \nAlphanumeric key uniquely identifying the document."
+        },
+        "PurchasingDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Item",
+          "description": "Item Number of Purchasing Document  \nSpecifies the number that uniquely identifies an item in ."
+        },
+        "SalesDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "SD Document",
+          "description": "Sales and Distribution Document Number  \nThe number that uniquely identifies the sales, delivery, or billing document."
+        },
+        "SalesDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales Document Item",
+          "description": "The number that uniquely identifies the item in the sales document."
+        },
+        "BaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit of Measure"
+        },
+        "AlternativeUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Alt. Unit of Measure",
+          "description": "Alternative Unit of Measure for Stockkeeping Unit  \nUnit of measure that you can use to enter quantities as an alternative to the base unit of measure."
+        },
+        "TargetQuantityInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0",
+          "title": "Target Quantity Base",
+          "description": "Target Quantity in Base Unit of Measure  \nTarget quantity in stockkeeping unit that is being removed from the source storage bin."
+        },
+        "TargetQuantityInAltvUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0",
+          "title": "Target Quantity Altn",
+          "description": "Target Quantity in Alternative Unit of Measure  \nTarget quantity in alternative unit of measure that is to be removed from the source storage bin."
+        },
+        "ActualQuantityInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0"
+        },
+        "ActualQuantityInAltvUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0"
+        },
+        "DifferenceQuantityInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0"
+        },
+        "DifferenceQuantityInAltvUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0"
+        },
+        "WhseTaskNetWeightUnitOfMeasure": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Weight Unit",
+          "description": "The weight unit is used, for example, for the maximum allowed weight and the weight of products in storage bins."
+        },
+        "NetWeight": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Loading Weight",
+          "description": "Loading or Net Weight"
+        },
+        "WhseTaskNetVolumeUnitOfMeasure": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Volume Unit",
+          "description": "The volume unit is used, for example, for the maximum allowed volume and the volume of products in storage bins."
+        },
+        "WhseTaskNetVolume": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Loading Volume",
+          "description": "Loading or Net Volume"
+        },
+        "SourceStorageType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Source Storage Type",
+          "description": "Storage type from where the product to be transported is removed from storage."
+        },
+        "SourceStorageTypeName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description"
+        },
+        "SourceStorageSection": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Source Stor. Section",
+          "description": "Source Storage Section  \nStorage section of the storage bin from where the material to be transferred is to be or was removed<."
+        },
+        "SourceStorageBin": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Source Storage Bin",
+          "description": "Storage bin from where the product to be transferred is removed."
+        },
+        "DestinationStorageType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Dest. Storage Type",
+          "description": "Destination Storage Type"
+        },
+        "DestinationStorageTypeName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description"
+        },
+        "DestinationStorageSection": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Dest. Stor. Section",
+          "description": "Destination Storage Section  \nStorage section of storage bin to which the product is to be put away or is being put away."
+        },
+        "DestinationStorageBin": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Destination Bin",
+          "description": "Destination Storage Bin  \nStorage bin into which the product is put away."
+        },
+        "DestinationResource": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Dest.Resource",
+          "description": "Destination Resource (Means of Transport or User)"
+        },
+        "ActivityArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Activity Area",
+          "description": "Defines an activity area."
+        },
+        "ActivityAreaName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description"
+        },
+        "SourceHandlingUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Source Handling Unit",
+          "description": "Handling unit from which product is being removed within the warehouse task, or which itself is being transferred for the warehouse task."
+        },
+        "DestinationHandlingUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Dest. HU",
+          "description": "Destination Handling Unit  \nNumber of the handling unit into which material or handling units are packed in an activity."
+        },
+        "WarehouseTaskExceptionCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string"
+        },
+        "to_WarehouseOrder": {
+          "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseOrderType"
+        },
+        "to_WarehouseTaskExceptionCode": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseTaskExceptionCodeType"
+              }
+            }
+          }
+        }
+      },
+      "title": "WT node API_WM_ORDER_TASK"
+    },
+    "cds_api_warehouse_order_task.WarehouseTaskType-create": {
+      "type": "object",
+      "properties": {
+        "Warehouse": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Warehouse Number",
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number."
+        },
+        "WarehouseTask": {
+          "type": "string",
+          "maxLength": 12,
+          "title": "Warehouse Task",
+          "description": "Number that uniquely identifies the warehouse task within a warehouse.  \nAll movements in a warehouse are processed in the system via warehouse tasks."
+        },
+        "WarehouseTaskItem": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "WT Item",
+          "description": "Warehouse Task Item  \nUniquely identifes a movement within a warehouse task (WT)  \nEvery WT item moves a product in a particular attribute and quantity from a storage bin (possibly cross-storage type) to a different storage bin (and if necessary, a remaining quantity to a third storage bin)."
+        },
+        "WarehouseOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Warehouse Order",
+          "description": "Warehouse Order Number"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Creation Time"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time of Change"
+        },
+        "ConfirmationUTCDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)  \nThe UTC timestamp is the date and time relative to the UTC (Universal coordinated time).  \nTo normalize local times in a UTC time stamp and make them comparable, they must be converted using their time zone and the ABAP command convert.Although the time zone for the conversion can be fetched from customizing or master data, you should save it redundantly.The internal structure of the UTC time stamp is logically divided into a date and time part in packed number format <YYYYMMDDhhmmss>. There is also a high resolution UTC time stamp (10^-7 seconds)."
+        },
+        "WhseTaskPlannedClosingDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Planned Closing Time",
+          "description": "Planned Closing Date/Time"
+        },
+        "WhseTaskGoodsReceiptDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "GR Date",
+          "description": "Date and Time of Goods Receipt  \nSpecifies the date and time of the goods receipt of a product."
+        },
+        "WarehouseTaskStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "WT Status",
+          "description": "Warehouse Task Status"
+        },
+        "WarehouseTaskStatusName": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Short Descript.",
+          "description": "Short Text for Fixed Values  \nThis text appears when fixed values are displayed in the F4 help. It explains the possible input values.  \nSeeTask-Oriented InstructionsReference Documentation for Semantic Properties of Domains"
+        },
+        "WarehouseProcessType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Whse Process Type",
+          "description": "Warehouse Process Type  \nThe system processes each warehouse process (such as goods receipt, goods issue, posting change, and repacking) using a warehouse process type. The warehouse process type has various effects on the creation of warehouse tasks."
+        },
+        "WarehouseProcessTypeName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description"
+        },
+        "IsHandlingUnitWarehouseTask": {
+"type": "boolean",
+"default": "null",
+          "title": "HU Warehouse Task",
+          "description": "Handling Unit Warehouse Task"
+        },
+        "ProductName": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Product",
+          "description": "Product Number  \nAlphanumeric key uniquely identifying the product."
+        },
+        "ProductDescription": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Product Description",
+          "description": "Text containing up to 40 characters that describes the product in detail.  \nYou can enter one product description in each of any number of languages.In principle, you enter the product description on the data screen of the first user department for which you enter data, and in your logon language. You can overwrite the product description on the Basic Data screen."
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch"
+        },
+        "BatchChangeIsNotAllowed": {
+"type": "boolean",
+"default": "null",
+          "title": "Change Batch",
+          "description": "Changing the Batch is not Allowed"
+        },
+        "StockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Stock Type"
+        },
+        "StockTypeName": {
+"type": "string",
+"default": "null",
+          "maxLength": 30,
+          "example": "string",
+          "title": "Descr. of Stock Type",
+          "description": "Description of Stock Type"
+        },
+        "StockOwner": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string"
+        },
+        "EntitledToDisposeParty": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Disposal Party",
+          "description": "Party Entitled to Dispose  \nAn organization, defined as a business partner, that is entitled to dispose of stock. Usually this is the plant in which the stocks are planned, and in which the ATP check is performed.  \nEach stock in the warehouse must be assigned to a party entitled to dispose.For each plant, there is exactly one partner master record with plant assignment in the vendor partner role."
+        },
+        "StockDocumentCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Type",
+          "description": "Type: Sales Order Stock or Project Stock"
+        },
+        "StockDocumentNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 35,
+          "example": "string",
+          "title": "Sales Order/Project",
+          "description": "Number of the Sales Order or Project for Special Stock"
+        },
+        "StockItemNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order Item",
+          "description": "Sales Order Item for Sales Order Stock"
+        },
+        "ExecutingResource": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Resource",
+          "description": "Executing Resource (Means of Transport or User)"
+        },
+        "ProductionOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Manufacturing Order"
+        },
+        "ProductionSupplyArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 15,
+          "example": "string",
+          "title": "Supply Area",
+          "description": "Production Supply Area  \nDefines the location that is used to stage products for use in production.  \nThe production supply area (PSA) is assigned to a warehouse number. You can also define bins within a PSA or common bins for multiple PSAs. When a delivery for production supply is being processed, the system assigns the bin to a product and a party entitled to dispose for the staging in the PSA."
+        },
+        "Delivery": {
+"type": "string",
+"default": "null",
+          "maxLength": 35,
+          "example": "string",
+          "title": "Document Number"
+        },
+        "DeliveryItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Item Number"
+        },
+        "PurchasingDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Purchasing Document",
+          "description": "Purchasing Document Number  \nAlphanumeric key uniquely identifying the document."
+        },
+        "PurchasingDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Item",
+          "description": "Item Number of Purchasing Document  \nSpecifies the number that uniquely identifies an item in ."
+        },
+        "SalesDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "SD Document",
+          "description": "Sales and Distribution Document Number  \nThe number that uniquely identifies the sales, delivery, or billing document."
+        },
+        "SalesDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales Document Item",
+          "description": "The number that uniquely identifies the item in the sales document."
+        },
+        "BaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit of Measure"
+        },
+        "AlternativeUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Alt. Unit of Measure",
+          "description": "Alternative Unit of Measure for Stockkeeping Unit  \nUnit of measure that you can use to enter quantities as an alternative to the base unit of measure."
+        },
+        "TargetQuantityInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0",
+          "title": "Target Quantity Base",
+          "description": "Target Quantity in Base Unit of Measure  \nTarget quantity in stockkeeping unit that is being removed from the source storage bin."
+        },
+        "TargetQuantityInAltvUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0",
+          "title": "Target Quantity Altn",
+          "description": "Target Quantity in Alternative Unit of Measure  \nTarget quantity in alternative unit of measure that is to be removed from the source storage bin."
+        },
+        "ActualQuantityInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0"
+        },
+        "ActualQuantityInAltvUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0"
+        },
+        "DifferenceQuantityInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0"
+        },
+        "DifferenceQuantityInAltvUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0"
+        },
+        "WhseTaskNetWeightUnitOfMeasure": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Weight Unit",
+          "description": "The weight unit is used, for example, for the maximum allowed weight and the weight of products in storage bins."
+        },
+        "NetWeight": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Loading Weight",
+          "description": "Loading or Net Weight"
+        },
+        "WhseTaskNetVolumeUnitOfMeasure": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Volume Unit",
+          "description": "The volume unit is used, for example, for the maximum allowed volume and the volume of products in storage bins."
+        },
+        "WhseTaskNetVolume": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Loading Volume",
+          "description": "Loading or Net Volume"
+        },
+        "SourceStorageType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Source Storage Type",
+          "description": "Storage type from where the product to be transported is removed from storage."
+        },
+        "SourceStorageTypeName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description"
+        },
+        "SourceStorageSection": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Source Stor. Section",
+          "description": "Source Storage Section  \nStorage section of the storage bin from where the material to be transferred is to be or was removed<."
+        },
+        "SourceStorageBin": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Source Storage Bin",
+          "description": "Storage bin from where the product to be transferred is removed."
+        },
+        "DestinationStorageType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Dest. Storage Type",
+          "description": "Destination Storage Type"
+        },
+        "DestinationStorageTypeName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description"
+        },
+        "DestinationStorageSection": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Dest. Stor. Section",
+          "description": "Destination Storage Section  \nStorage section of storage bin to which the product is to be put away or is being put away."
+        },
+        "DestinationStorageBin": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Destination Bin",
+          "description": "Destination Storage Bin  \nStorage bin into which the product is put away."
+        },
+        "DestinationResource": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Dest.Resource",
+          "description": "Destination Resource (Means of Transport or User)"
+        },
+        "ActivityArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Activity Area",
+          "description": "Defines an activity area."
+        },
+        "ActivityAreaName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description"
+        },
+        "SourceHandlingUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Source Handling Unit",
+          "description": "Handling unit from which product is being removed within the warehouse task, or which itself is being transferred for the warehouse task."
+        },
+        "DestinationHandlingUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Dest. HU",
+          "description": "Destination Handling Unit  \nNumber of the handling unit into which material or handling units are packed in an activity."
+        },
+        "WarehouseTaskExceptionCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string"
+        },
+        "to_WarehouseOrder": {
+          "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseOrderType-create"
+        },
+        "to_WarehouseTaskExceptionCode": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseTaskExceptionCodeType-create"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "Warehouse",
+        "WarehouseTask",
+        "WarehouseTaskItem"
+      ],
+      "title": "WT node API_WM_ORDER_TASK (for create)"
+    },
+    "cds_api_warehouse_order_task.WarehouseTaskType-update": {
+      "type": "object",
+      "properties": {
+        "WarehouseOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Warehouse Order",
+          "description": "Warehouse Order Number"
+        },
+        "CreationDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Creation Time"
+        },
+        "LastChangeDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time of Change"
+        },
+        "ConfirmationUTCDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Time Stamp",
+          "description": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)  \nThe UTC timestamp is the date and time relative to the UTC (Universal coordinated time).  \nTo normalize local times in a UTC time stamp and make them comparable, they must be converted using their time zone and the ABAP command convert.Although the time zone for the conversion can be fetched from customizing or master data, you should save it redundantly.The internal structure of the UTC time stamp is logically divided into a date and time part in packed number format <YYYYMMDDhhmmss>. There is also a high resolution UTC time stamp (10^-7 seconds)."
+        },
+        "WhseTaskPlannedClosingDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "Planned Closing Time",
+          "description": "Planned Closing Date/Time"
+        },
+        "WhseTaskGoodsReceiptDateTime": {
+"type": "string",
+"default": "null",
+          "example": "/Date(1492098664000)/",
+          "title": "GR Date",
+          "description": "Date and Time of Goods Receipt  \nSpecifies the date and time of the goods receipt of a product."
+        },
+        "WarehouseTaskStatus": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string",
+          "title": "WT Status",
+          "description": "Warehouse Task Status"
+        },
+        "WarehouseTaskStatusName": {
+"type": "string",
+"default": "null",
+          "maxLength": 60,
+          "example": "string",
+          "title": "Short Descript.",
+          "description": "Short Text for Fixed Values  \nThis text appears when fixed values are displayed in the F4 help. It explains the possible input values.  \nSeeTask-Oriented InstructionsReference Documentation for Semantic Properties of Domains"
+        },
+        "WarehouseProcessType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Whse Process Type",
+          "description": "Warehouse Process Type  \nThe system processes each warehouse process (such as goods receipt, goods issue, posting change, and repacking) using a warehouse process type. The warehouse process type has various effects on the creation of warehouse tasks."
+        },
+        "WarehouseProcessTypeName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description"
+        },
+        "IsHandlingUnitWarehouseTask": {
+"type": "boolean",
+"default": "null",
+          "title": "HU Warehouse Task",
+          "description": "Handling Unit Warehouse Task"
+        },
+        "ProductName": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Product",
+          "description": "Product Number  \nAlphanumeric key uniquely identifying the product."
+        },
+        "ProductDescription": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Product Description",
+          "description": "Text containing up to 40 characters that describes the product in detail.  \nYou can enter one product description in each of any number of languages.In principle, you enter the product description on the data screen of the first user department for which you enter data, and in your logon language. You can overwrite the product description on the Basic Data screen."
+        },
+        "Batch": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Batch"
+        },
+        "BatchChangeIsNotAllowed": {
+"type": "boolean",
+"default": "null",
+          "title": "Change Batch",
+          "description": "Changing the Batch is not Allowed"
+        },
+        "StockType": {
+"type": "string",
+"default": "null",
+          "maxLength": 2,
+          "example": "string",
+          "title": "Stock Type"
+        },
+        "StockTypeName": {
+"type": "string",
+"default": "null",
+          "maxLength": 30,
+          "example": "string",
+          "title": "Descr. of Stock Type",
+          "description": "Description of Stock Type"
+        },
+        "StockOwner": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string"
+        },
+        "EntitledToDisposeParty": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Disposal Party",
+          "description": "Party Entitled to Dispose  \nAn organization, defined as a business partner, that is entitled to dispose of stock. Usually this is the plant in which the stocks are planned, and in which the ATP check is performed.  \nEach stock in the warehouse must be assigned to a party entitled to dispose.For each plant, there is exactly one partner master record with plant assignment in the vendor partner role."
+        },
+        "StockDocumentCategory": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Type",
+          "description": "Type: Sales Order Stock or Project Stock"
+        },
+        "StockDocumentNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 35,
+          "example": "string",
+          "title": "Sales Order/Project",
+          "description": "Number of the Sales Order or Project for Special Stock"
+        },
+        "StockItemNumber": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Sales Order Item",
+          "description": "Sales Order Item for Sales Order Stock"
+        },
+        "ExecutingResource": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Resource",
+          "description": "Executing Resource (Means of Transport or User)"
+        },
+        "ProductionOrder": {
+"type": "string",
+"default": "null",
+          "maxLength": 12,
+          "example": "string",
+          "title": "Manufacturing Order"
+        },
+        "ProductionSupplyArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 15,
+          "example": "string",
+          "title": "Supply Area",
+          "description": "Production Supply Area  \nDefines the location that is used to stage products for use in production.  \nThe production supply area (PSA) is assigned to a warehouse number. You can also define bins within a PSA or common bins for multiple PSAs. When a delivery for production supply is being processed, the system assigns the bin to a product and a party entitled to dispose for the staging in the PSA."
+        },
+        "Delivery": {
+"type": "string",
+"default": "null",
+          "maxLength": 35,
+          "example": "string",
+          "title": "Document Number"
+        },
+        "DeliveryItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Item Number"
+        },
+        "PurchasingDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "Purchasing Document",
+          "description": "Purchasing Document Number  \nAlphanumeric key uniquely identifying the document."
+        },
+        "PurchasingDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 5,
+          "example": "string",
+          "title": "Item",
+          "description": "Item Number of Purchasing Document  \nSpecifies the number that uniquely identifies an item in ."
+        },
+        "SalesDocument": {
+"type": "string",
+"default": "null",
+          "maxLength": 10,
+          "example": "string",
+          "title": "SD Document",
+          "description": "Sales and Distribution Document Number  \nThe number that uniquely identifies the sales, delivery, or billing document."
+        },
+        "SalesDocumentItem": {
+"type": "string",
+"default": "null",
+          "maxLength": 6,
+          "example": "string",
+          "title": "Sales Document Item",
+          "description": "The number that uniquely identifies the item in the sales document."
+        },
+        "BaseUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Base Unit of Measure"
+        },
+        "AlternativeUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Alt. Unit of Measure",
+          "description": "Alternative Unit of Measure for Stockkeeping Unit  \nUnit of measure that you can use to enter quantities as an alternative to the base unit of measure."
+        },
+        "TargetQuantityInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0",
+          "title": "Target Quantity Base",
+          "description": "Target Quantity in Base Unit of Measure  \nTarget quantity in stockkeeping unit that is being removed from the source storage bin."
+        },
+        "TargetQuantityInAltvUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0",
+          "title": "Target Quantity Altn",
+          "description": "Target Quantity in Alternative Unit of Measure  \nTarget quantity in alternative unit of measure that is to be removed from the source storage bin."
+        },
+        "ActualQuantityInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0"
+        },
+        "ActualQuantityInAltvUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0"
+        },
+        "DifferenceQuantityInBaseUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0"
+        },
+        "DifferenceQuantityInAltvUnit": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 1e-14,
+          "example": "0"
+        },
+        "WhseTaskNetWeightUnitOfMeasure": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Weight Unit",
+          "description": "The weight unit is used, for example, for the maximum allowed weight and the weight of products in storage bins."
+        },
+        "NetWeight": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Loading Weight",
+          "description": "Loading or Net Weight"
+        },
+        "WhseTaskNetVolumeUnitOfMeasure": {
+"type": "string",
+"default": "null",
+          "maxLength": 3,
+          "example": "string",
+          "title": "Volume Unit",
+          "description": "The volume unit is used, for example, for the maximum allowed volume and the volume of products in storage bins."
+        },
+        "WhseTaskNetVolume": {
+"type": "string",
+"default": "null",
+          "format": "decimal",
+          "multipleOf": 0.001,
+          "minimum": -999999999999.999,
+          "maximum": 999999999999.999,
+          "example": "0",
+          "title": "Loading Volume",
+          "description": "Loading or Net Volume"
+        },
+        "SourceStorageType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Source Storage Type",
+          "description": "Storage type from where the product to be transported is removed from storage."
+        },
+        "SourceStorageTypeName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description"
+        },
+        "SourceStorageSection": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Source Stor. Section",
+          "description": "Source Storage Section  \nStorage section of the storage bin from where the material to be transferred is to be or was removed<."
+        },
+        "SourceStorageBin": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Source Storage Bin",
+          "description": "Storage bin from where the product to be transferred is removed."
+        },
+        "DestinationStorageType": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Dest. Storage Type",
+          "description": "Destination Storage Type"
+        },
+        "DestinationStorageTypeName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description"
+        },
+        "DestinationStorageSection": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Dest. Stor. Section",
+          "description": "Destination Storage Section  \nStorage section of storage bin to which the product is to be put away or is being put away."
+        },
+        "DestinationStorageBin": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Destination Bin",
+          "description": "Destination Storage Bin  \nStorage bin into which the product is put away."
+        },
+        "DestinationResource": {
+"type": "string",
+"default": "null",
+          "maxLength": 18,
+          "example": "string",
+          "title": "Dest.Resource",
+          "description": "Destination Resource (Means of Transport or User)"
+        },
+        "ActivityArea": {
+"type": "string",
+"default": "null",
+          "maxLength": 4,
+          "example": "string",
+          "title": "Activity Area",
+          "description": "Defines an activity area."
+        },
+        "ActivityAreaName": {
+"type": "string",
+"default": "null",
+          "maxLength": 40,
+          "example": "string",
+          "title": "Description"
+        },
+        "SourceHandlingUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Source Handling Unit",
+          "description": "Handling unit from which product is being removed within the warehouse task, or which itself is being transferred for the warehouse task."
+        },
+        "DestinationHandlingUnit": {
+"type": "string",
+"default": "null",
+          "maxLength": 20,
+          "example": "string",
+          "title": "Dest. HU",
+          "description": "Destination Handling Unit  \nNumber of the handling unit into which material or handling units are packed in an activity."
+        },
+        "WarehouseTaskExceptionCode": {
+"type": "string",
+"default": "null",
+          "maxLength": 1,
+          "example": "string"
+        }
+      },
+      "title": "WT node API_WM_ORDER_TASK (for update)"
+    },
+    "cds_api_warehouse_order_task.WarehouseTaskExceptionCodeType": {
+      "type": "object",
+      "properties": {
+        "Warehouse": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Warehouse Number",
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number."
+        },
+        "WarehouseTask": {
+          "type": "string",
+          "maxLength": 12,
+          "title": "Warehouse Task",
+          "description": "Number that uniquely identifies the warehouse task within a warehouse.  \nAll movements in a warehouse are processed in the system via warehouse tasks."
+        },
+        "WarehouseTaskItem": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "WT Item",
+          "description": "Warehouse Task Item  \nUniquely identifes a movement within a warehouse task (WT)  \nEvery WT item moves a product in a particular attribute and quantity from a storage bin (possibly cross-storage type) to a different storage bin (and if necessary, a remaining quantity to a third storage bin)."
+        },
+        "WarehouseTaskExceptionCode": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Exception Code",
+          "description": "Code with which an exception situation in the warehouse can be documented.  \nStorage bin is empty, storage bin is not accessible"
+        },
+        "BusinessContext": {
+          "type": "string",
+          "maxLength": 3,
+          "title": "Business Context",
+          "description": "Context in which special exception codes can be made available.  \nConfirm warehouse task and count physical inventory."
+        },
+        "BusinessContextExecutionStep": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Exec. Step",
+          "description": "Execution Step in Business Context"
+        },
+        "to_WarehouseTask": {
+          "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseTaskType"
+        }
+      },
+      "title": "WT exception code node API_WM_ORDER_TASK"
+    },
+    "cds_api_warehouse_order_task.WarehouseTaskExceptionCodeType-create": {
+      "type": "object",
+      "properties": {
+        "Warehouse": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Warehouse Number",
+          "description": "Warehouse Number/Warehouse Complex  \nAlphanumeric key that identifies a complex, physical warehouse within the warehouse management system.  \nAll activities within a warehouse, for example, goods movements and physical inventory, are assigned to a specific warehouse number. The physical warehouse where these activities take place is identified by the warehouse number."
+        },
+        "WarehouseTask": {
+          "type": "string",
+          "maxLength": 12,
+          "title": "Warehouse Task",
+          "description": "Number that uniquely identifies the warehouse task within a warehouse.  \nAll movements in a warehouse are processed in the system via warehouse tasks."
+        },
+        "WarehouseTaskItem": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "WT Item",
+          "description": "Warehouse Task Item  \nUniquely identifes a movement within a warehouse task (WT)  \nEvery WT item moves a product in a particular attribute and quantity from a storage bin (possibly cross-storage type) to a different storage bin (and if necessary, a remaining quantity to a third storage bin)."
+        },
+        "WarehouseTaskExceptionCode": {
+          "type": "string",
+          "maxLength": 4,
+          "title": "Exception Code",
+          "description": "Code with which an exception situation in the warehouse can be documented.  \nStorage bin is empty, storage bin is not accessible"
+        },
+        "BusinessContext": {
+          "type": "string",
+          "maxLength": 3,
+          "title": "Business Context",
+          "description": "Context in which special exception codes can be made available.  \nConfirm warehouse task and count physical inventory."
+        },
+        "BusinessContextExecutionStep": {
+          "type": "string",
+          "maxLength": 2,
+          "title": "Exec. Step",
+          "description": "Execution Step in Business Context"
+        },
+        "to_WarehouseTask": {
+          "$ref": "#/definitions/cds_api_warehouse_order_task.WarehouseTaskType-create"
+        }
+      },
+      "required": [
+        "Warehouse",
+        "WarehouseTask",
+        "WarehouseTaskItem",
+        "WarehouseTaskExceptionCode",
+        "BusinessContext",
+        "BusinessContextExecutionStep"
+      ],
+      "title": "WT exception code node API_WM_ORDER_TASK (for create)"
+    },
+    "cds_api_warehouse_order_task.WarehouseTaskExceptionCodeType-update": {
+      "type": "object",
+      "title": "WT exception code node API_WM_ORDER_TASK (for update)"
+    },
+    "cds_api_warehouse_order_task.DummyFunctionImportResult": {
+      "type": "object",
+      "properties": {
+        "IsInvalid": {
+"type": "boolean",
+"default": "null",
+          "title": "TRUE",
+          "description": "Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"
+        }
+      },
+      "title": "DummyFunctionImportResult"
+    },
+    "cds_api_warehouse_order_task.DummyFunctionImportResult-create": {
+      "type": "object",
+      "properties": {
+        "IsInvalid": {
+"type": "boolean",
+"default": "null",
+          "title": "TRUE",
+          "description": "Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"
+        }
+      },
+      "title": "DummyFunctionImportResult (for create)"
+    },
+    "cds_api_warehouse_order_task.DummyFunctionImportResult-update": {
+      "type": "object",
+      "properties": {
+        "IsInvalid": {
+"type": "boolean",
+"default": "null",
+          "title": "TRUE",
+          "description": "Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"
+        }
+      },
+      "title": "DummyFunctionImportResult (for update)"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "object",
+              "required": [
+                "lang",
+                "value"
+              ],
+              "properties": {
+                "lang": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "innererror": {
+              "type": "object",
+              "description": "The structure of this object is service-specific"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Show only the first n items, see [Paging - Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Skip the first n items, see [Paging - Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)",
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "name": "$inlinecount",
+      "in": "query",
+      "description": "Include count of items, see [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)",
+      "type": "string",
+      "enum": [
+        "allpages",
+        "none"
+      ]
+    }
+  },
+  "responses": {
+    "error": {
+      "description": "Error",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}
