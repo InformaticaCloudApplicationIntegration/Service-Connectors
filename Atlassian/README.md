@@ -1,6 +1,6 @@
 # Atlassian
 
-Atlassian helps teams work smarter and faster, together..
+Atlassian helps teams work smarter and faster, together.
 
 General information on Atlassian can be found [here](https://www.atlassian.com/).
 
